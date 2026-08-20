@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -239,7 +238,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   33</span>    m_textCtrlName-&gt;SetValue(bus-&gt;GetElectricalData().name);</div>
 <div class="line"><span class="lineno">   34</span>    m_textCtrlNomVoltage-&gt;SetValue(bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(bus-&gt;GetElectricalData().nominalVoltage));</div>
 <div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">if</span>(bus-&gt;GetElectricalData().nominalVoltageUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a>)</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">if</span>(bus-&gt;GetElectricalData().nominalVoltageUnit == ElectricalUnit::UNIT_V)</div>
 <div class="line"><span class="lineno">   37</span>        m_choiceNomVoltage-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">   38</span>    <span class="keywordflow">else</span></div>
 <div class="line"><span class="lineno">   39</span>        m_choiceNomVoltage-&gt;SetSelection(1);</div>
@@ -295,7 +294,6 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   89</span>    </div>
 <div class="line"><span class="lineno">   90</span>    m_checkBoxPlotPQData-&gt;SetValue(bus-&gt;GetElectricalData().plotPQData);</div>
 <div class="line"><span class="lineno">   91</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a></div><div class="ttdeci">@ UNIT_V</div></div>
 <div class="ttc" id="a_power_element_8h_html_a70fd34766a0e92aa6761f871a3d1f0dfa0abc9f277f73496a3a0e81647a5f0502"><div class="ttname"><a href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa0abc9f277f73496a3a0e81647a5f0502">FaultData::FAULT_LINE_GROUND</a></div><div class="ttdeci">@ FAULT_LINE_GROUND</div></div>
 <div class="ttc" id="a_power_element_8h_html_a70fd34766a0e92aa6761f871a3d1f0dfa0cd5954a19395d37bad445e1b608b393"><div class="ttname"><a href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa0cd5954a19395d37bad445e1b608b393">FaultData::FAULT_LINE_B</a></div><div class="ttdeci">@ FAULT_LINE_B</div></div>
 <div class="ttc" id="a_power_element_8h_html_a70fd34766a0e92aa6761f871a3d1f0dfa132d629383b198a56a6b2d35f4d490cb"><div class="ttname"><a href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa132d629383b198a56a6b2d35f4d490cb">FaultData::FAULT_2LINE_GROUND</a></div><div class="ttdeci">@ FAULT_2LINE_GROUND</div></div>
@@ -303,7 +301,7 @@ Protected Attributes</h2></td></tr>
 <div class="ttc" id="a_power_element_8h_html_a70fd34766a0e92aa6761f871a3d1f0dfa82d0aae13e9f92f669e79b7746fbff48"><div class="ttname"><a href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa82d0aae13e9f92f669e79b7746fbff48">FaultData::FAULT_2LINE</a></div><div class="ttdeci">@ FAULT_2LINE</div></div>
 <div class="ttc" id="a_power_element_8h_html_a70fd34766a0e92aa6761f871a3d1f0dfa8712714ce4dce004864c37682dba8fde"><div class="ttname"><a href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa8712714ce4dce004864c37682dba8fde">FaultData::FAULT_LINE_C</a></div><div class="ttdeci">@ FAULT_LINE_C</div></div>
 <div class="ttc" id="a_power_element_8h_html_a70fd34766a0e92aa6761f871a3d1f0dfad49281a8cad4dffab20e01a650e0fea4"><div class="ttname"><a href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfad49281a8cad4dffab20e01a650e0fea4">FaultData::FAULT_LINE_A</a></div><div class="ttdeci">@ FAULT_LINE_A</div></div>
-<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00461">Element.cpp:461</a></div></div>
+<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00466">Element.cpp:466</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -506,7 +504,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   99</span>    <span class="keywordflow">if</span>(!m_bus-&gt;<a class="code hl_function" href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">DoubleFromString</a>(m_parent, m_textCtrlNomVoltage-&gt;GetValue(), data.nominalVoltage,</div>
 <div class="line"><span class="lineno">  100</span>                                _(<span class="stringliteral">&quot;Value entered incorrectly in the field \&quot;Rated voltage\&quot;.&quot;</span>)))</div>
 <div class="line"><span class="lineno">  101</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  102</span>    data.nominalVoltageUnit = m_choiceNomVoltage-&gt;GetSelection() == 0 ? <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a> : <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>;</div>
+<div class="line"><span class="lineno">  102</span>    data.nominalVoltageUnit = m_choiceNomVoltage-&gt;GetSelection() == 0 ? ElectricalUnit::UNIT_V : ElectricalUnit::UNIT_kV;</div>
 <div class="line"><span class="lineno">  103</span>    data.isVoltageControlled = m_checkBoxCtrlVoltage-&gt;GetValue();</div>
 <div class="line"><span class="lineno">  104</span>    <span class="keywordflow">if</span>(data.isVoltageControlled) {</div>
 <div class="line"><span class="lineno">  105</span>        <span class="keywordflow">if</span>(!m_bus-&gt;<a class="code hl_function" href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">DoubleFromString</a>(m_parent, m_textCtrlCtrlVoltage-&gt;GetValue(), data.controlledVoltage,</div>
@@ -582,9 +580,8 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  175</span> </div>
 <div class="line"><span class="lineno">  176</span>    EndModal(wxID_OK);</div>
 <div class="line"><span class="lineno">  177</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a></div><div class="ttdeci">@ UNIT_kV</div></div>
-<div class="ttc" id="aclass_element_html_acfd2c0fe1af5a8ad6da393fb711fd69a"><div class="ttname"><a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">Element::DoubleFromString</a></div><div class="ttdeci">static bool DoubleFromString(wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</div><div class="ttdoc">Get a double value from a string. Show a error message if the conversion fail.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00433">Element.cpp:433</a></div></div>
-<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00229">PowerElement.h:229</a></div></div>
+<div class="ttc" id="aclass_element_html_acfd2c0fe1af5a8ad6da393fb711fd69a"><div class="ttname"><a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">Element::DoubleFromString</a></div><div class="ttdeci">static bool DoubleFromString(wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</div><div class="ttdoc">Get a double value from a string. Show a error message if the conversion fail.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00438">Element.cpp:438</a></div></div>
+<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00201">PowerElement.h:201</a></div></div>
 <div class="ttc" id="astruct_bus_electrical_data_html"><div class="ttname"><a href="struct_bus_electrical_data.html">BusElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00024">Bus.h:24</a></div></div>
 </div><!-- fragment -->
 </div>

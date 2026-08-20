@@ -1,9 +1,29 @@
 <map id="ControlEditor" name="ControlEditor">
-<area shape="rect" id="Node000001" title=" " alt="" coords="152,93,259,119"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,144,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,36,189,91,186,95,102,40"/>
-<area shape="rect" id="Node000003" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="169,5,242,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,45,208,93,203,93,203,45"/>
-<area shape="rect" id="Node000004" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="267,5,453,31"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="335,41,285,72,235,96,232,91,283,67,332,36"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="317,357,424,383"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="40,269,179,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,300,198,331,259,349,318,360,317,365,258,354,196,336,137,305"/>
+<area shape="rect" id="Node000003" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="347,93,421,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="385,132,374,357,369,357,380,132"/>
+<area shape="rect" id="Node000011" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="472,181,565,207"/>
+<area shape="poly" id="edge12_Node000011_Node000003" title=" " alt="" coords="406,126,441,155,489,179,486,184,439,160,403,131"/>
+<area shape="rect" id="Node000004" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="187,93,306,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="253,132,263,185,284,244,302,277,323,308,362,355,357,358,319,312,297,280,279,246,258,186,247,133"/>
+<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="273,124,298,141,326,155,402,176,472,187,472,192,401,181,324,160,295,145,270,129"/>
+<area shape="rect" id="Node000005" href="$struct_g_u_i_colour.html" title=" " alt="" coords="5,5,93,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="67,40,81,55,97,67,142,86,188,96,187,102,140,91,95,72,77,59,63,43"/>
+<area shape="rect" id="Node000006" href="$struct_simulation_data.html" title=" " alt="" coords="117,5,240,31"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="186,43,197,68,210,81,225,91,222,96,206,85,192,71,181,45"/>
+<area shape="rect" id="Node000007" href="$struct_general_data.html" title=" " alt="" coords="264,5,368,31"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="307,44,289,71,264,95,260,91,285,68,302,41"/>
+<area shape="rect" id="Node000008" href="$struct_freq_response_data.html" title=" " alt="" coords="392,5,536,31"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="439,41,384,72,307,96,305,91,382,67,436,36"/>
+<area shape="rect" id="Node000009" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="408,269,595,295"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="474,304,390,359,387,355,471,300"/>
+<area shape="rect" id="Node000010" href="$class_control_editor_manager.html" title="This class is responsible to manage the ControlEditor instances in the application." alt="" coords="619,269,783,295"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="661,302,558,336,425,363,424,358,557,331,659,297"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="557,210,678,267,675,271,555,215"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="583,93,708,119"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="633,132,607,159,584,173,559,184,557,179,581,169,604,155,629,128"/>
+<area shape="rect" id="Node000013" href="$class_h_m_plane.html" title=" " alt="" coords="479,93,559,119"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="521,133,521,181,516,181,516,133"/>
 </map>

@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -123,32 +122,35 @@ $(document).ready(function(){initNavTree('_e_m_t_element_form_8h_source.html',''
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">class </span><a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span><a class="code hl_class" href="class_properties_data.html">PropertiesData</a>;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_e_m_t_element_form.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="class_e_m_t_element_form.html">EMTElementForm</a> : <span class="keyword">public</span> EMTElementFormBase</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_class" href="class_e_m_t_element_form.html">EMTElementForm</a>(wxWindow* parent, <a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* emtElement);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="class_e_m_t_element_form.html">~EMTElementForm</a>();</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> ValidateData();</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnATPFileChange(wxFileDirPickerEvent&amp; event);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnTestClick(wxCommandEvent&amp; event);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnEditATPFileClick(wxCommandEvent&amp; event);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnCancelClick(wxCommandEvent&amp; event);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnOKClick(wxCommandEvent&amp; event);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> LoadNodes(wxString atpFilePath);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    wxWindow* m_parent;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* m_emtElement = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>* m_properties = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span><a class="code hl_class" href="class_workspace.html">Workspace</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_e_m_t_element_form.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="class_e_m_t_element_form.html">EMTElementForm</a> : <span class="keyword">public</span> EMTElementFormBase</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_class" href="class_e_m_t_element_form.html">EMTElementForm</a>(wxWindow* parent, <a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* emtElement, <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="class_e_m_t_element_form.html">~EMTElementForm</a>();</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> ValidateData();</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnATPFileChange(wxFileDirPickerEvent&amp; event);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnTestClick(wxCommandEvent&amp; event);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnEditATPFileClick(wxCommandEvent&amp; event);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnCancelClick(wxCommandEvent&amp; event);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnOKClick(wxCommandEvent&amp; event);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> LoadNodes(wxString atpFilePath);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    wxWindow* m_parent;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* m_emtElement = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* m_workspace = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>* m_properties = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif </span><span class="comment">// EMTELEMENTFORM_H</span></div>
-<div class="ttc" id="aclass_e_m_t_element_form_html"><div class="ttname"><a href="class_e_m_t_element_form.html">EMTElementForm</a></div><div class="ttdef"><b>Definition</b> <a href="_e_m_t_element_form_8h_source.html#l00008">EMTElementForm.h:9</a></div></div>
-<div class="ttc" id="aclass_e_m_t_element_html"><div class="ttname"><a href="class_e_m_t_element.html">EMTElement</a></div><div class="ttdoc">Element to connect ATP-EMTP.</div><div class="ttdef"><b>Definition</b> <a href="_e_m_t_element_8h_source.html#l00064">EMTElement.h:65</a></div></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif </span><span class="comment">// EMTELEMENTFORM_H</span></div>
+<div class="ttc" id="aclass_e_m_t_element_form_html"><div class="ttname"><a href="class_e_m_t_element_form.html">EMTElementForm</a></div><div class="ttdef"><b>Definition</b> <a href="_e_m_t_element_form_8h_source.html#l00009">EMTElementForm.h:10</a></div></div>
+<div class="ttc" id="aclass_e_m_t_element_html"><div class="ttname"><a href="class_e_m_t_element.html">EMTElement</a></div><div class="ttdoc">Element to connect ATP-EMTP.</div><div class="ttdef"><b>Definition</b> <a href="_e_m_t_element_8h_source.html#l00082">EMTElement.h:83</a></div></div>
 <div class="ttc" id="aclass_properties_data_html"><div class="ttname"><a href="class_properties_data.html">PropertiesData</a></div><div class="ttdoc">General and simulation data manager.</div><div class="ttdef"><b>Definition</b> <a href="_properties_data_8h_source.html#l00102">PropertiesData.h:103</a></div></div>
+<div class="ttc" id="aclass_workspace_html"><div class="ttname"><a href="class_workspace.html">Workspace</a></div><div class="ttdoc">This class manages the graphical and power elements. It is responsible for handling the user's intera...</div><div class="ttdef"><b>Definition</b> <a href="_workspace_8h_source.html#l00104">Workspace.h:105</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

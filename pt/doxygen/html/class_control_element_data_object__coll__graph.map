@@ -1,0 +1,7 @@
+<map id="ControlElementDataObject" name="ControlElementDataObject">
+<area shape="rect" id="Node000001" title="Clipboard payload for ControlEditor copy/paste (control elements + connection lines)." alt="" coords="79,93,275,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,164,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,38,166,91,162,95,105,42"/>
+<area shape="rect" id="Node000003" href="$struct_control_elements_lists.html" title=" " alt="" coords="189,5,349,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,42,191,95,188,91,244,38"/>
+</map>

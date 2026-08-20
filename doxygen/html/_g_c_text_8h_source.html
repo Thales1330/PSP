@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -159,30 +158,24 @@ $(document).ready(function(){initNavTree('_g_c_text_8h_source.html',''); initRes
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> GetHeight()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_size.GetHeight(); }</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> SetFontSize(<span class="keywordtype">int</span> fontSize) { m_fontSize = fontSize; }</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> GetFontSize() { <span class="keywordflow">return</span> m_fontSize; }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="comment">//virtual void SetFontWeight(wxFontWeight fontWeight) { m_fontWeight = fontWeight; }</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">//virtual void SetFontStyle(wxFontStyle fontStyle) { m_fontStyle = fontStyle; }</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">//virtual void SetFontFamily(wxFontFamily fontFamily) { m_fontFamily = fontFamily; }</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> SetFont(wxFont font);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">virtual</span> wxFont GetFont() { <span class="keywordflow">return</span> m_font; }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">//virtual wxSize CalculateTextExtend();</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    wxString m_text = _(<span class="stringliteral">&quot;Text&quot;</span>);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">int</span> m_fontSize = 10;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="comment">//wxFontWeight m_fontWeight = wxFONTWEIGHT_NORMAL;</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">//wxFontStyle m_fontStyle = wxFONTSTYLE_NORMAL;</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="comment">//wxFontFamily m_fontFamily = wxFONTFAMILY_DEFAULT;</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    wxFont m_font;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">bool</span> m_customFont = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    wxSize m_size;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>};</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> SetFont(wxFont font);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">virtual</span> wxFont GetFont() { <span class="keywordflow">return</span> m_font; }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">//virtual wxSize CalculateTextExtend();</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    wxString m_text = _(<span class="stringliteral">&quot;Text&quot;</span>);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">int</span> m_fontSize = 10;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    wxFont m_font;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">bool</span> m_customFont = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    wxSize m_size;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>};</div>
 </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#endif  </span><span class="comment">// GCTEXT_H</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#endif  </span><span class="comment">// GCTEXT_H</span></div>
 <div class="ttc" id="aclass_g_c_text_html"><div class="ttname"><a href="class_g_c_text.html">GCText</a></div><div class="ttdoc">Class to draw text on Graphics Context using wxWidgets.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8h_source.html#l00031">GCText.h:32</a></div></div>
-<div class="ttc" id="aclass_g_c_text_html_aaf81b82ffd02807c933947ed89a09406"><div class="ttname"><a href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GCText::GetCopy</a></div><div class="ttdeci">virtual GCText * GetCopy()</div><div class="ttdoc">Get a deep text copy.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00167">GCText.cpp:167</a></div></div>
+<div class="ttc" id="aclass_g_c_text_html_aaf81b82ffd02807c933947ed89a09406"><div class="ttname"><a href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GCText::GetCopy</a></div><div class="ttdeci">virtual GCText * GetCopy()</div><div class="ttdoc">Get a deep text copy.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00099">GCText.cpp:99</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html_ac5c116072e505e28b726bdf4b8b249a8"><div class="ttname"><a href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">GCText::Draw</a></div><div class="ttdeci">virtual void Draw(wxPoint2DDouble position, wxGraphicsContext *gc, double angle=0.0, wxColour colour= *wxBLACK) const</div><div class="ttdoc">Draw the text in wxGraphicsContext.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00035">GCText.cpp:35</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html_aff3fa347bf6cab992c5768c88210a085"><div class="ttname"><a href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085">GCText::SetText</a></div><div class="ttdeci">virtual void SetText(wxString text)</div><div class="ttdoc">Set correctly a new text string.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00068">GCText.cpp:68</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -149,7 +148,7 @@ $(document).ready(function(){initNavTree('_divider_8h_source.html',''); initResi
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_class" href="class_divider.html">~Divider</a>();</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">//virtual void DrawSymbol() const;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawDCSymbol(wxGraphicsContext* gc) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawDCSymbol(<a class="code hl_struct" href="struct_g_u_i_colour.html">GUIColour</a>* guiColour, wxGraphicsContext* gc) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> Solve(<span class="keywordtype">double</span>* input, <span class="keywordtype">double</span> timeStep);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">virtual</span> rapidxml::xml_node&lt;&gt;* SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode);</div>
@@ -163,9 +162,10 @@ $(document).ready(function(){initNavTree('_divider_8h_source.html',''); initResi
 <div class="ttc" id="a_math_operation_8h_html"><div class="ttname"><a href="_math_operation_8h.html">MathOperation.h</a></div></div>
 <div class="ttc" id="aclass_connection_line_html"><div class="ttname"><a href="class_connection_line.html">ConnectionLine</a></div><div class="ttdoc">Connection between two control elements or other connection line and an element.</div><div class="ttdef"><b>Definition</b> <a href="_connection_line_8h_source.html#l00030">ConnectionLine.h:31</a></div></div>
 <div class="ttc" id="aclass_divider_html"><div class="ttname"><a href="class_divider.html">Divider</a></div><div class="ttdoc">Control element that divides two inputs.</div><div class="ttdef"><b>Definition</b> <a href="_divider_8h_source.html#l00032">Divider.h:33</a></div></div>
-<div class="ttc" id="aclass_divider_html_ad169c8c5659d4ffba40091282c58dec7"><div class="ttname"><a href="class_divider.html#ad169c8c5659d4ffba40091282c58dec7">Divider::GetCopy</a></div><div class="ttdeci">virtual Element * GetCopy()</div><div class="ttdoc">Get a the element copy.</div><div class="ttdef"><b>Definition</b> <a href="_divider_8cpp_source.html#l00095">Divider.cpp:95</a></div></div>
-<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00111">Element.h:112</a></div></div>
+<div class="ttc" id="aclass_divider_html_ad169c8c5659d4ffba40091282c58dec7"><div class="ttname"><a href="class_divider.html#ad169c8c5659d4ffba40091282c58dec7">Divider::GetCopy</a></div><div class="ttdeci">virtual Element * GetCopy()</div><div class="ttdoc">Get a the element copy.</div><div class="ttdef"><b>Definition</b> <a href="_divider_8cpp_source.html#l00082">Divider.cpp:82</a></div></div>
+<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00113">Element.h:114</a></div></div>
 <div class="ttc" id="aclass_math_operation_html"><div class="ttname"><a href="class_math_operation.html">MathOperation</a></div><div class="ttdoc">Abstract class that define the general behavior of math operation control block.</div><div class="ttdef"><b>Definition</b> <a href="_math_operation_8h_source.html#l00032">MathOperation.h:33</a></div></div>
+<div class="ttc" id="astruct_g_u_i_colour_html"><div class="ttname"><a href="struct_g_u_i_colour.html">GUIColour</a></div><div class="ttdef"><b>Definition</b> <a href="_commom_types_8h_source.html#l00006">CommomTypes.h:6</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

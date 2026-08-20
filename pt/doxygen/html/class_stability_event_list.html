@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -218,18 +217,35 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   11</span>{</div>
 <div class="line"><span class="lineno">   12</span>    m_elementList = elementList;</div>
 <div class="line"><span class="lineno">   13</span> </div>
-<div class="line"><span class="lineno">   14</span>    m_time.clear();</div>
-<div class="line"><span class="lineno">   15</span>    m_eventType.clear();</div>
-<div class="line"><span class="lineno">   16</span>    m_eventDescription.clear();</div>
-<div class="line"><span class="lineno">   17</span>    m_eventColour.clear();</div>
-<div class="line"><span class="lineno">   18</span> </div>
-<div class="line"><span class="lineno">   19</span>    GetTimeEventsList();</div>
-<div class="line"><span class="lineno">   20</span>    SortEvents();</div>
-<div class="line"><span class="lineno">   21</span>    FillGrid();</div>
-<div class="line"><span class="lineno">   22</span>    SetRowsColours(m_gridStabEventList);</div>
-<div class="line"><span class="lineno">   23</span> </div>
-<div class="line"><span class="lineno">   24</span>    SetSize(GetBestSize());</div>
-<div class="line"><span class="lineno">   25</span>}</div>
+<div class="line"><span class="lineno">   14</span>    <span class="keywordflow">if</span> (wxSystemSettings::GetAppearance().IsDark())</div>
+<div class="line"><span class="lineno">   15</span>    {</div>
+<div class="line"><span class="lineno">   16</span>        m_headerColour = wxColour(50, 50, 50);</div>
+<div class="line"><span class="lineno">   17</span>        m_oddRowColour = wxColour(70, 70, 70);</div>
+<div class="line"><span class="lineno">   18</span>        m_evenRowColour = wxColour(40, 40, 40);</div>
+<div class="line"><span class="lineno">   19</span>        m_redColour = wxColour(255, 110, 110);</div>
+<div class="line"><span class="lineno">   20</span>        m_blueColour = wxColour(120, 170, 255);</div>
+<div class="line"><span class="lineno">   21</span>    }</div>
+<div class="line"><span class="lineno">   22</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   23</span>    {</div>
+<div class="line"><span class="lineno">   24</span>        m_headerColour = wxColour(191, 223, 255);</div>
+<div class="line"><span class="lineno">   25</span>        m_oddRowColour = wxColour(220, 220, 220);</div>
+<div class="line"><span class="lineno">   26</span>        m_evenRowColour = wxColour(255, 255, 255);</div>
+<div class="line"><span class="lineno">   27</span>        m_redColour = wxColour(210, 35, 35);</div>
+<div class="line"><span class="lineno">   28</span>        m_blueColour = wxColour(25, 90, 220);</div>
+<div class="line"><span class="lineno">   29</span>    }</div>
+<div class="line"><span class="lineno">   30</span> </div>
+<div class="line"><span class="lineno">   31</span>    m_time.clear();</div>
+<div class="line"><span class="lineno">   32</span>    m_eventType.clear();</div>
+<div class="line"><span class="lineno">   33</span>    m_eventDescription.clear();</div>
+<div class="line"><span class="lineno">   34</span>    m_eventColour.clear();</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>    GetTimeEventsList();</div>
+<div class="line"><span class="lineno">   37</span>    SortEvents();</div>
+<div class="line"><span class="lineno">   38</span>    FillGrid();</div>
+<div class="line"><span class="lineno">   39</span>    SetRowsColours(m_gridStabEventList);</div>
+<div class="line"><span class="lineno">   40</span> </div>
+<div class="line"><span class="lineno">   41</span>    SetSize(GetBestSize());</div>
+<div class="line"><span class="lineno">   42</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -256,8 +272,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00027">27</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   27</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00044">44</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   44</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -308,13 +324,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00092">92</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   93</span>{</div>
-<div class="line"><span class="lineno">   94</span>    m_time.emplace_back(eventTime);</div>
-<div class="line"><span class="lineno">   95</span>    m_eventType.emplace_back(eventType);</div>
-<div class="line"><span class="lineno">   96</span>    m_eventDescription.emplace_back(eventDescription);</div>
-<div class="line"><span class="lineno">   97</span>    m_eventColour.emplace_back(eventColour);</div>
-<div class="line"><span class="lineno">   98</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00109">109</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  110</span>{</div>
+<div class="line"><span class="lineno">  111</span>    m_time.emplace_back(eventTime);</div>
+<div class="line"><span class="lineno">  112</span>    m_eventType.emplace_back(eventType);</div>
+<div class="line"><span class="lineno">  113</span>    m_eventDescription.emplace_back(eventDescription);</div>
+<div class="line"><span class="lineno">  114</span>    m_eventColour.emplace_back(eventColour);</div>
+<div class="line"><span class="lineno">  115</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -341,42 +357,42 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00100">100</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  101</span>{</div>
-<div class="line"><span class="lineno">  102</span>    wxFont headerFont = m_gridStabEventList-&gt;GetLabelFont();</div>
-<div class="line"><span class="lineno">  103</span>    headerFont.SetWeight(wxFONTWEIGHT_BOLD);</div>
-<div class="line"><span class="lineno">  104</span> </div>
-<div class="line"><span class="lineno">  105</span>    <span class="comment">// Create Grid</span></div>
-<div class="line"><span class="lineno">  106</span>    <span class="comment">// Header</span></div>
-<div class="line"><span class="lineno">  107</span>    m_gridStabEventList-&gt;AppendCols(3);</div>
-<div class="line"><span class="lineno">  108</span>    m_gridStabEventList-&gt;AppendRows();</div>
-<div class="line"><span class="lineno">  109</span>    m_gridStabEventList-&gt;HideColLabels();</div>
-<div class="line"><span class="lineno">  110</span>    m_gridStabEventList-&gt;HideRowLabels();</div>
-<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 7; ++i) {</div>
-<div class="line"><span class="lineno">  112</span>        m_gridStabEventList-&gt;SetCellBackgroundColour(0, i, m_headerColour);</div>
-<div class="line"><span class="lineno">  113</span>        m_gridStabEventList-&gt;SetCellFont(0, i, headerFont);</div>
-<div class="line"><span class="lineno">  114</span>    }</div>
-<div class="line"><span class="lineno">  115</span>    m_gridStabEventList-&gt;SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);</div>
-<div class="line"><span class="lineno">  116</span>    <span class="comment">// Values</span></div>
-<div class="line"><span class="lineno">  117</span>    m_gridStabEventList-&gt;AppendRows(m_time.size());</div>
-<div class="line"><span class="lineno">  118</span> </div>
-<div class="line"><span class="lineno">  119</span>    <span class="comment">// Set headers</span></div>
-<div class="line"><span class="lineno">  120</span>    m_gridStabEventList-&gt;SetCellValue(0, 0, _(<span class="stringliteral">&quot;Event time&quot;</span>));</div>
-<div class="line"><span class="lineno">  121</span>    m_gridStabEventList-&gt;SetCellValue(0, 1, _(<span class="stringliteral">&quot;Type&quot;</span>));</div>
-<div class="line"><span class="lineno">  122</span>    m_gridStabEventList-&gt;SetCellValue(0, 2, _(<span class="stringliteral">&quot;Description&quot;</span>));</div>
-<div class="line"><span class="lineno">  123</span> </div>
-<div class="line"><span class="lineno">  124</span>    <span class="comment">// Fill Values</span></div>
-<div class="line"><span class="lineno">  125</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_time.size(); ++i) {</div>
-<div class="line"><span class="lineno">  126</span>        m_gridStabEventList-&gt;SetCellValue(i + 1, 0, <a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a>(m_time[i]) + wxT(<span class="stringliteral">&quot; s&quot;</span>));</div>
-<div class="line"><span class="lineno">  127</span>        m_gridStabEventList-&gt;SetCellValue(i + 1, 1, m_eventType[i]);</div>
-<div class="line"><span class="lineno">  128</span>        m_gridStabEventList-&gt;SetCellValue(i + 1, 2, m_eventDescription[i]);</div>
-<div class="line"><span class="lineno">  129</span>        m_gridStabEventList-&gt;SetCellAlignment(i + 1, 2, wxALIGN_LEFT, wxALIGN_CENTRE);</div>
-<div class="line"><span class="lineno">  130</span>        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; 3; ++j) { m_gridStabEventList-&gt;SetCellTextColour(i + 1, j, m_eventColour[i]); }</div>
+<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00117">117</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  118</span>{</div>
+<div class="line"><span class="lineno">  119</span>    wxFont headerFont = m_gridStabEventList-&gt;GetLabelFont();</div>
+<div class="line"><span class="lineno">  120</span>    headerFont.SetWeight(wxFONTWEIGHT_BOLD);</div>
+<div class="line"><span class="lineno">  121</span> </div>
+<div class="line"><span class="lineno">  122</span>    <span class="comment">// Create Grid</span></div>
+<div class="line"><span class="lineno">  123</span>    <span class="comment">// Header</span></div>
+<div class="line"><span class="lineno">  124</span>    m_gridStabEventList-&gt;AppendCols(3);</div>
+<div class="line"><span class="lineno">  125</span>    m_gridStabEventList-&gt;AppendRows();</div>
+<div class="line"><span class="lineno">  126</span>    m_gridStabEventList-&gt;HideColLabels();</div>
+<div class="line"><span class="lineno">  127</span>    m_gridStabEventList-&gt;HideRowLabels();</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 7; ++i) {</div>
+<div class="line"><span class="lineno">  129</span>        m_gridStabEventList-&gt;SetCellBackgroundColour(0, i, m_headerColour);</div>
+<div class="line"><span class="lineno">  130</span>        m_gridStabEventList-&gt;SetCellFont(0, i, headerFont);</div>
 <div class="line"><span class="lineno">  131</span>    }</div>
-<div class="line"><span class="lineno">  132</span> </div>
-<div class="line"><span class="lineno">  133</span>    m_gridStabEventList-&gt;AutoSize();</div>
-<div class="line"><span class="lineno">  134</span>}</div>
-<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00461">Element.cpp:461</a></div></div>
+<div class="line"><span class="lineno">  132</span>    m_gridStabEventList-&gt;SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);</div>
+<div class="line"><span class="lineno">  133</span>    <span class="comment">// Values</span></div>
+<div class="line"><span class="lineno">  134</span>    m_gridStabEventList-&gt;AppendRows(m_time.size());</div>
+<div class="line"><span class="lineno">  135</span> </div>
+<div class="line"><span class="lineno">  136</span>    <span class="comment">// Set headers</span></div>
+<div class="line"><span class="lineno">  137</span>    m_gridStabEventList-&gt;SetCellValue(0, 0, _(<span class="stringliteral">&quot;Event time&quot;</span>));</div>
+<div class="line"><span class="lineno">  138</span>    m_gridStabEventList-&gt;SetCellValue(0, 1, _(<span class="stringliteral">&quot;Type&quot;</span>));</div>
+<div class="line"><span class="lineno">  139</span>    m_gridStabEventList-&gt;SetCellValue(0, 2, _(<span class="stringliteral">&quot;Description&quot;</span>));</div>
+<div class="line"><span class="lineno">  140</span> </div>
+<div class="line"><span class="lineno">  141</span>    <span class="comment">// Fill Values</span></div>
+<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_time.size(); ++i) {</div>
+<div class="line"><span class="lineno">  143</span>        m_gridStabEventList-&gt;SetCellValue(i + 1, 0, <a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a>(m_time[i]) + wxT(<span class="stringliteral">&quot; s&quot;</span>));</div>
+<div class="line"><span class="lineno">  144</span>        m_gridStabEventList-&gt;SetCellValue(i + 1, 1, m_eventType[i]);</div>
+<div class="line"><span class="lineno">  145</span>        m_gridStabEventList-&gt;SetCellValue(i + 1, 2, m_eventDescription[i]);</div>
+<div class="line"><span class="lineno">  146</span>        m_gridStabEventList-&gt;SetCellAlignment(i + 1, 2, wxALIGN_LEFT, wxALIGN_CENTRE);</div>
+<div class="line"><span class="lineno">  147</span>        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; 3; ++j) { m_gridStabEventList-&gt;SetCellTextColour(i + 1, j, m_eventColour[i]); }</div>
+<div class="line"><span class="lineno">  148</span>    }</div>
+<div class="line"><span class="lineno">  149</span> </div>
+<div class="line"><span class="lineno">  150</span>    m_gridStabEventList-&gt;AutoSize();</div>
+<div class="line"><span class="lineno">  151</span>}</div>
+<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00466">Element.cpp:466</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -403,68 +419,68 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00029">29</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   30</span>{</div>
-<div class="line"><span class="lineno">   31</span>    <a class="code hl_class" href="class_electric_calculation.html">ElectricCalculation</a> eCalc;</div>
-<div class="line"><span class="lineno">   32</span>    eCalc.<a class="code hl_function" href="class_electric_calculation.html#acfcaa3ac1917e250734abccc2d0c7f02">GetElementsFromList</a>(m_elementList);</div>
-<div class="line"><span class="lineno">   33</span>    <span class="keyword">auto</span> busList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#abf058074f18c5115a85e0d6ed472d858">GetBusList</a>();</div>
-<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; busList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   35</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = busList[i];</div>
-<div class="line"><span class="lineno">   36</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno">   37</span>        <span class="keywordflow">if</span>(data.stabHasFault) {</div>
-<div class="line"><span class="lineno">   38</span>            AddEvent(data.stabFaultTime, _(<span class="stringliteral">&quot;Fault&quot;</span>),</div>
-<div class="line"><span class="lineno">   39</span>                     _(<span class="stringliteral">&quot;Fault insertion at \&quot;&quot;</span>) + data.name + _(<span class="stringliteral">&quot;\&quot; (Zf = &quot;</span>) +</div>
-<div class="line"><span class="lineno">   40</span>                         bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.stabFaultResistance) + wxT(<span class="stringliteral">&quot; +j&quot;</span>) +</div>
-<div class="line"><span class="lineno">   41</span>                         bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.stabFaultReactance) + wxT(<span class="stringliteral">&quot; p.u.)&quot;</span>),</div>
-<div class="line"><span class="lineno">   42</span>                     m_redColour);</div>
-<div class="line"><span class="lineno">   43</span>            AddEvent(data.stabFaultTime + data.stabFaultLength, _(<span class="stringliteral">&quot;Fault&quot;</span>),</div>
-<div class="line"><span class="lineno">   44</span>                     _(<span class="stringliteral">&quot;Fault removal at \&quot;&quot;</span>) + data.name + _(<span class="stringliteral">&quot;\&quot; (Zf = &quot;</span>) +</div>
-<div class="line"><span class="lineno">   45</span>                         bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.stabFaultResistance) + wxT(<span class="stringliteral">&quot; +j&quot;</span>) +</div>
-<div class="line"><span class="lineno">   46</span>                         bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.stabFaultReactance) + wxT(<span class="stringliteral">&quot; p.u.)&quot;</span>),</div>
-<div class="line"><span class="lineno">   47</span>                     m_blueColour);</div>
-<div class="line"><span class="lineno">   48</span>        }</div>
-<div class="line"><span class="lineno">   49</span>    }</div>
-<div class="line"><span class="lineno">   50</span>    <span class="keyword">auto</span> capacitorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a862ff8ad26563a600a4e2210f2e5b5bc">GetCapacitorList</a>();</div>
-<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; capacitorList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   52</span>        <a class="code hl_class" href="class_capacitor.html">Capacitor</a>* capacitor = capacitorList[i];</div>
-<div class="line"><span class="lineno">   53</span>        SetPowerElementSwitchingEvent(capacitor, capacitor-&gt;GetElectricalData().name);</div>
-<div class="line"><span class="lineno">   54</span>    }</div>
-<div class="line"><span class="lineno">   55</span>    <span class="keyword">auto</span> indMotorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a0f3897dd498266cf6114ed3b2e284a24">GetIndMotorList</a>();</div>
-<div class="line"><span class="lineno">   56</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; indMotorList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   57</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* indMotor = indMotorList[i];</div>
-<div class="line"><span class="lineno">   58</span>        SetPowerElementSwitchingEvent(indMotor, indMotor-&gt;GetElectricalData().name);</div>
-<div class="line"><span class="lineno">   59</span>    }</div>
-<div class="line"><span class="lineno">   60</span>    <span class="keyword">auto</span> inductorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a86905e3b92f69ad0a2d0f3029c00d805">GetInductorList</a>();</div>
-<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; inductorList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   62</span>        <a class="code hl_class" href="class_inductor.html">Inductor</a>* inductor = inductorList[i];</div>
-<div class="line"><span class="lineno">   63</span>        SetPowerElementSwitchingEvent(inductor, inductor-&gt;GetElectricalData().name);</div>
-<div class="line"><span class="lineno">   64</span>    }</div>
-<div class="line"><span class="lineno">   65</span>    <span class="keyword">auto</span> lineList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a92edbf1803eb34b145743b00b14380f4">GetLineList</a>();</div>
-<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; lineList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   67</span>        <a class="code hl_class" href="class_line.html">Line</a>* line = lineList[i];</div>
-<div class="line"><span class="lineno">   68</span>        SetPowerElementSwitchingEvent(line, line-&gt;GetElectricalData().name);</div>
-<div class="line"><span class="lineno">   69</span>    }</div>
-<div class="line"><span class="lineno">   70</span>    <span class="keyword">auto</span> loadList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a5e7f7b4554e25d3da7d24bf9233d0ef4">GetLoadList</a>();</div>
-<div class="line"><span class="lineno">   71</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; loadList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   72</span>        <a class="code hl_class" href="class_load.html">Load</a>* load = loadList[i];</div>
-<div class="line"><span class="lineno">   73</span>        SetPowerElementSwitchingEvent(load, load-&gt;GetElectricalData().name);</div>
-<div class="line"><span class="lineno">   74</span>    }</div>
-<div class="line"><span class="lineno">   75</span>    <span class="keyword">auto</span> syncGeneratorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a706fde73baa5ce9394856b3e28ae47a1">GetSyncGeneratorList</a>();</div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; syncGeneratorList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   77</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = syncGeneratorList[i];</div>
-<div class="line"><span class="lineno">   78</span>        SetPowerElementSwitchingEvent(syncGenerator, syncGenerator-&gt;GetElectricalData().name);</div>
-<div class="line"><span class="lineno">   79</span>    }</div>
-<div class="line"><span class="lineno">   80</span>    <span class="keyword">auto</span> syncMotorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a5fa7b811a894616e83406a57b7a3981e">GetSyncMotorList</a>();</div>
-<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; syncMotorList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   82</span>        <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* syncMotor = syncMotorList[i];</div>
-<div class="line"><span class="lineno">   83</span>        SetPowerElementSwitchingEvent(syncMotor, syncMotor-&gt;GetElectricalData().name);</div>
-<div class="line"><span class="lineno">   84</span>    }</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keyword">auto</span> transformerList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a72c5fdfb2b05d7e6b344216cca40a3b8">GetTransformerList</a>();</div>
-<div class="line"><span class="lineno">   86</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; transformerList.size(); ++i) {</div>
-<div class="line"><span class="lineno">   87</span>        <a class="code hl_class" href="class_transformer.html">Transformer</a>* transformer = transformerList[i];</div>
-<div class="line"><span class="lineno">   88</span>        SetPowerElementSwitchingEvent(transformer, transformer-&gt;GetElectricalData().name);</div>
-<div class="line"><span class="lineno">   89</span>    }</div>
-<div class="line"><span class="lineno">   90</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00046">46</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>{</div>
+<div class="line"><span class="lineno">   48</span>    <a class="code hl_class" href="class_electric_calculation.html">ElectricCalculation</a> eCalc;</div>
+<div class="line"><span class="lineno">   49</span>    eCalc.<a class="code hl_function" href="class_electric_calculation.html#acfcaa3ac1917e250734abccc2d0c7f02">GetElementsFromList</a>(m_elementList);</div>
+<div class="line"><span class="lineno">   50</span>    <span class="keyword">auto</span> busList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#abf058074f18c5115a85e0d6ed472d858">GetBusList</a>();</div>
+<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; busList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   52</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = busList[i];</div>
+<div class="line"><span class="lineno">   53</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">   54</span>        <span class="keywordflow">if</span>(data.stabHasFault) {</div>
+<div class="line"><span class="lineno">   55</span>            AddEvent(data.stabFaultTime, _(<span class="stringliteral">&quot;Fault&quot;</span>),</div>
+<div class="line"><span class="lineno">   56</span>                     _(<span class="stringliteral">&quot;Fault insertion at \&quot;&quot;</span>) + data.name + _(<span class="stringliteral">&quot;\&quot; (Zf = &quot;</span>) +</div>
+<div class="line"><span class="lineno">   57</span>                         bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.stabFaultResistance) + wxT(<span class="stringliteral">&quot; +j&quot;</span>) +</div>
+<div class="line"><span class="lineno">   58</span>                         bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.stabFaultReactance) + wxT(<span class="stringliteral">&quot; p.u.)&quot;</span>),</div>
+<div class="line"><span class="lineno">   59</span>                     m_redColour);</div>
+<div class="line"><span class="lineno">   60</span>            AddEvent(data.stabFaultTime + data.stabFaultLength, _(<span class="stringliteral">&quot;Fault&quot;</span>),</div>
+<div class="line"><span class="lineno">   61</span>                     _(<span class="stringliteral">&quot;Fault removal at \&quot;&quot;</span>) + data.name + _(<span class="stringliteral">&quot;\&quot; (Zf = &quot;</span>) +</div>
+<div class="line"><span class="lineno">   62</span>                         bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.stabFaultResistance) + wxT(<span class="stringliteral">&quot; +j&quot;</span>) +</div>
+<div class="line"><span class="lineno">   63</span>                         bus-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.stabFaultReactance) + wxT(<span class="stringliteral">&quot; p.u.)&quot;</span>),</div>
+<div class="line"><span class="lineno">   64</span>                     m_blueColour);</div>
+<div class="line"><span class="lineno">   65</span>        }</div>
+<div class="line"><span class="lineno">   66</span>    }</div>
+<div class="line"><span class="lineno">   67</span>    <span class="keyword">auto</span> capacitorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a862ff8ad26563a600a4e2210f2e5b5bc">GetCapacitorList</a>();</div>
+<div class="line"><span class="lineno">   68</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; capacitorList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   69</span>        <a class="code hl_class" href="class_capacitor.html">Capacitor</a>* capacitor = capacitorList[i];</div>
+<div class="line"><span class="lineno">   70</span>        SetPowerElementSwitchingEvent(capacitor, capacitor-&gt;GetElectricalData().name);</div>
+<div class="line"><span class="lineno">   71</span>    }</div>
+<div class="line"><span class="lineno">   72</span>    <span class="keyword">auto</span> indMotorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a0f3897dd498266cf6114ed3b2e284a24">GetIndMotorList</a>();</div>
+<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; indMotorList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   74</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* indMotor = indMotorList[i];</div>
+<div class="line"><span class="lineno">   75</span>        SetPowerElementSwitchingEvent(indMotor, indMotor-&gt;GetElectricalData().name);</div>
+<div class="line"><span class="lineno">   76</span>    }</div>
+<div class="line"><span class="lineno">   77</span>    <span class="keyword">auto</span> inductorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a86905e3b92f69ad0a2d0f3029c00d805">GetInductorList</a>();</div>
+<div class="line"><span class="lineno">   78</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; inductorList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   79</span>        <a class="code hl_class" href="class_inductor.html">Inductor</a>* inductor = inductorList[i];</div>
+<div class="line"><span class="lineno">   80</span>        SetPowerElementSwitchingEvent(inductor, inductor-&gt;GetElectricalData().name);</div>
+<div class="line"><span class="lineno">   81</span>    }</div>
+<div class="line"><span class="lineno">   82</span>    <span class="keyword">auto</span> lineList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a92edbf1803eb34b145743b00b14380f4">GetLineList</a>();</div>
+<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; lineList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   84</span>        <a class="code hl_class" href="class_line.html">Line</a>* line = lineList[i];</div>
+<div class="line"><span class="lineno">   85</span>        SetPowerElementSwitchingEvent(line, line-&gt;GetElectricalData().name);</div>
+<div class="line"><span class="lineno">   86</span>    }</div>
+<div class="line"><span class="lineno">   87</span>    <span class="keyword">auto</span> loadList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a5e7f7b4554e25d3da7d24bf9233d0ef4">GetLoadList</a>();</div>
+<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; loadList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   89</span>        <a class="code hl_class" href="class_load.html">Load</a>* load = loadList[i];</div>
+<div class="line"><span class="lineno">   90</span>        SetPowerElementSwitchingEvent(load, load-&gt;GetElectricalData().name);</div>
+<div class="line"><span class="lineno">   91</span>    }</div>
+<div class="line"><span class="lineno">   92</span>    <span class="keyword">auto</span> syncGeneratorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a706fde73baa5ce9394856b3e28ae47a1">GetSyncGeneratorList</a>();</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; syncGeneratorList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   94</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = syncGeneratorList[i];</div>
+<div class="line"><span class="lineno">   95</span>        SetPowerElementSwitchingEvent(syncGenerator, syncGenerator-&gt;GetElectricalData().name);</div>
+<div class="line"><span class="lineno">   96</span>    }</div>
+<div class="line"><span class="lineno">   97</span>    <span class="keyword">auto</span> syncMotorList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a5fa7b811a894616e83406a57b7a3981e">GetSyncMotorList</a>();</div>
+<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; syncMotorList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   99</span>        <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* syncMotor = syncMotorList[i];</div>
+<div class="line"><span class="lineno">  100</span>        SetPowerElementSwitchingEvent(syncMotor, syncMotor-&gt;GetElectricalData().name);</div>
+<div class="line"><span class="lineno">  101</span>    }</div>
+<div class="line"><span class="lineno">  102</span>    <span class="keyword">auto</span> transformerList = eCalc.<a class="code hl_function" href="class_electric_calculation.html#a72c5fdfb2b05d7e6b344216cca40a3b8">GetTransformerList</a>();</div>
+<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; transformerList.size(); ++i) {</div>
+<div class="line"><span class="lineno">  104</span>        <a class="code hl_class" href="class_transformer.html">Transformer</a>* transformer = transformerList[i];</div>
+<div class="line"><span class="lineno">  105</span>        SetPowerElementSwitchingEvent(transformer, transformer-&gt;GetElectricalData().name);</div>
+<div class="line"><span class="lineno">  106</span>    }</div>
+<div class="line"><span class="lineno">  107</span>}</div>
 <div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
 <div class="ttc" id="aclass_capacitor_html"><div class="ttname"><a href="class_capacitor.html">Capacitor</a></div><div class="ttdoc">Shunt capactior power element.</div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00038">Capacitor.h:39</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html"><div class="ttname"><a href="class_electric_calculation.html">ElectricCalculation</a></div><div class="ttdoc">Base class for electrical calculations providing general utility methods.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00115">ElectricCalculation.h:116</a></div></div>
@@ -513,7 +529,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_stability_event_list_8h_source.html#l00017">17</a> of file <a class="el" href="_stability_event_list_8h_source.html">StabilityEventList.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   17</span>{ EndModal(wxID_OK); };</div>
+<div class="fragment"><div class="line"><span class="lineno">   17</span>{ EndModal(wxID_OK); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -551,22 +567,22 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00148">148</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  149</span>{</div>
-<div class="line"><span class="lineno">  150</span>    <a class="code hl_class" href="struct_switching_data.html">SwitchingData</a> swData = element-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
-<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size(); ++i) {</div>
-<div class="line"><span class="lineno">  152</span>        <span class="keywordflow">if</span>(swData.<a class="code hl_variable" href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">swType</a>[i] == <a class="code hl_enumvalue" href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a>) {</div>
-<div class="line"><span class="lineno">  153</span>            AddEvent(swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>[i], _(<span class="stringliteral">&quot;Switching&quot;</span>), _(<span class="stringliteral">&quot;Insertion of \&quot;&quot;</span>) + elementName + _(<span class="stringliteral">&quot;\&quot;&quot;</span>), m_blueColour);</div>
-<div class="line"><span class="lineno">  154</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  155</span>            AddEvent(swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>[i], _(<span class="stringliteral">&quot;Switching&quot;</span>), _(<span class="stringliteral">&quot;Removal of \&quot;&quot;</span>) + elementName + _(<span class="stringliteral">&quot;\&quot;&quot;</span>), m_redColour);</div>
-<div class="line"><span class="lineno">  156</span>        }</div>
-<div class="line"><span class="lineno">  157</span>    }</div>
-<div class="line"><span class="lineno">  158</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00165">165</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  166</span>{</div>
+<div class="line"><span class="lineno">  167</span>    <a class="code hl_class" href="struct_switching_data.html">SwitchingData</a> swData = element-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
+<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size(); ++i) {</div>
+<div class="line"><span class="lineno">  169</span>        <span class="keywordflow">if</span>(swData.<a class="code hl_variable" href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">swType</a>[i] == <a class="code hl_enumvalue" href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a>) {</div>
+<div class="line"><span class="lineno">  170</span>            AddEvent(swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>[i], _(<span class="stringliteral">&quot;Switching&quot;</span>), _(<span class="stringliteral">&quot;Insertion of \&quot;&quot;</span>) + elementName + _(<span class="stringliteral">&quot;\&quot;&quot;</span>), m_blueColour);</div>
+<div class="line"><span class="lineno">  171</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  172</span>            AddEvent(swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>[i], _(<span class="stringliteral">&quot;Switching&quot;</span>), _(<span class="stringliteral">&quot;Removal of \&quot;&quot;</span>) + elementName + _(<span class="stringliteral">&quot;\&quot;&quot;</span>), m_redColour);</div>
+<div class="line"><span class="lineno">  173</span>        }</div>
+<div class="line"><span class="lineno">  174</span>    }</div>
+<div class="line"><span class="lineno">  175</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95"><div class="ttname"><a href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a></div><div class="ttdeci">@ SW_INSERT</div></div>
-<div class="ttc" id="aclass_power_element_html_ab78269f9b66fbf90ae09050083e9dbe1"><div class="ttname"><a href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">PowerElement::GetSwitchingData</a></div><div class="ttdeci">virtual SwitchingData GetSwitchingData()</div><div class="ttdoc">Returns the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00203">PowerElement.h:203</a></div></div>
-<div class="ttc" id="astruct_switching_data_html"><div class="ttname"><a href="struct_switching_data.html">SwitchingData</a></div><div class="ttdoc">Switching data of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00099">PowerElement.h:99</a></div></div>
-<div class="ttc" id="astruct_switching_data_html_a3323745bf0a3f6461fbc19bc76a189df"><div class="ttname"><a href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">SwitchingData::swTime</a></div><div class="ttdeci">std::vector&lt; double &gt; swTime</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00101">PowerElement.h:101</a></div></div>
-<div class="ttc" id="astruct_switching_data_html_af78fb958137a0532ea2a584810708574"><div class="ttname"><a href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">SwitchingData::swType</a></div><div class="ttdeci">std::vector&lt; SwitchingType &gt; swType</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00100">PowerElement.h:100</a></div></div>
+<div class="ttc" id="aclass_power_element_html_ab78269f9b66fbf90ae09050083e9dbe1"><div class="ttname"><a href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">PowerElement::GetSwitchingData</a></div><div class="ttdeci">virtual SwitchingData GetSwitchingData()</div><div class="ttdoc">Returns the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00175">PowerElement.h:175</a></div></div>
+<div class="ttc" id="astruct_switching_data_html"><div class="ttname"><a href="struct_switching_data.html">SwitchingData</a></div><div class="ttdoc">Switching data of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00071">PowerElement.h:71</a></div></div>
+<div class="ttc" id="astruct_switching_data_html_a3323745bf0a3f6461fbc19bc76a189df"><div class="ttname"><a href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">SwitchingData::swTime</a></div><div class="ttdeci">std::vector&lt; double &gt; swTime</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00073">PowerElement.h:73</a></div></div>
+<div class="ttc" id="astruct_switching_data_html_af78fb958137a0532ea2a584810708574"><div class="ttname"><a href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">SwitchingData::swType</a></div><div class="ttdeci">std::vector&lt; SwitchingType &gt; swType</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00072">PowerElement.h:72</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -604,17 +620,17 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00136">136</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  137</span>{</div>
-<div class="line"><span class="lineno">  138</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = rowStart; i &lt; grid-&gt;GetNumberRows(); ++i) {</div>
-<div class="line"><span class="lineno">  139</span>        wxGridCellAttr* attr = grid-&gt;GetOrCreateCellAttr(i, 0);</div>
-<div class="line"><span class="lineno">  140</span>        <span class="keywordflow">if</span>((i - rowStart) % 2 == 0)</div>
-<div class="line"><span class="lineno">  141</span>            attr-&gt;SetBackgroundColour(m_evenRowColour);</div>
-<div class="line"><span class="lineno">  142</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  143</span>            attr-&gt;SetBackgroundColour(m_oddRowColour);</div>
-<div class="line"><span class="lineno">  144</span>        grid-&gt;SetRowAttr(i, attr);</div>
-<div class="line"><span class="lineno">  145</span>    }</div>
-<div class="line"><span class="lineno">  146</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00153">153</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  154</span>{</div>
+<div class="line"><span class="lineno">  155</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = rowStart; i &lt; grid-&gt;GetNumberRows(); ++i) {</div>
+<div class="line"><span class="lineno">  156</span>        wxGridCellAttr* attr = grid-&gt;GetOrCreateCellAttr(i, 0);</div>
+<div class="line"><span class="lineno">  157</span>        <span class="keywordflow">if</span>((i - rowStart) % 2 == 0)</div>
+<div class="line"><span class="lineno">  158</span>            attr-&gt;SetBackgroundColour(m_evenRowColour);</div>
+<div class="line"><span class="lineno">  159</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  160</span>            attr-&gt;SetBackgroundColour(m_oddRowColour);</div>
+<div class="line"><span class="lineno">  161</span>        grid-&gt;SetRowAttr(i, attr);</div>
+<div class="line"><span class="lineno">  162</span>    }</div>
+<div class="line"><span class="lineno">  163</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -641,27 +657,27 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00160">160</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  161</span>{</div>
-<div class="line"><span class="lineno">  162</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_time.size(); ++i) {</div>
-<div class="line"><span class="lineno">  163</span>        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; m_time.size(); ++j) {</div>
-<div class="line"><span class="lineno">  164</span>            <span class="keywordflow">if</span>(m_time[i] &lt; m_time[j]) {</div>
-<div class="line"><span class="lineno">  165</span>                <span class="keywordtype">double</span> time = m_time[i];</div>
-<div class="line"><span class="lineno">  166</span>                wxString type = m_eventType[i];</div>
-<div class="line"><span class="lineno">  167</span>                wxString description = m_eventDescription[i];</div>
-<div class="line"><span class="lineno">  168</span>                wxColour colour = m_eventColour[i];</div>
-<div class="line"><span class="lineno">  169</span>                m_time[i] = m_time[j];</div>
-<div class="line"><span class="lineno">  170</span>                m_eventType[i] = m_eventType[j];</div>
-<div class="line"><span class="lineno">  171</span>                m_eventDescription[i] = m_eventDescription[j];</div>
-<div class="line"><span class="lineno">  172</span>                m_eventColour[i] = m_eventColour[j];</div>
-<div class="line"><span class="lineno">  173</span>                m_time[j] = time;</div>
-<div class="line"><span class="lineno">  174</span>                m_eventType[j] = type;</div>
-<div class="line"><span class="lineno">  175</span>                m_eventDescription[j] = description;</div>
-<div class="line"><span class="lineno">  176</span>                m_eventColour[j] = colour;</div>
-<div class="line"><span class="lineno">  177</span>            }</div>
-<div class="line"><span class="lineno">  178</span>        }</div>
-<div class="line"><span class="lineno">  179</span>    }</div>
-<div class="line"><span class="lineno">  180</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_stability_event_list_8cpp_source.html#l00177">177</a> of file <a class="el" href="_stability_event_list_8cpp_source.html">StabilityEventList.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  178</span>{</div>
+<div class="line"><span class="lineno">  179</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_time.size(); ++i) {</div>
+<div class="line"><span class="lineno">  180</span>        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; m_time.size(); ++j) {</div>
+<div class="line"><span class="lineno">  181</span>            <span class="keywordflow">if</span>(m_time[i] &lt; m_time[j]) {</div>
+<div class="line"><span class="lineno">  182</span>                <span class="keywordtype">double</span> time = m_time[i];</div>
+<div class="line"><span class="lineno">  183</span>                wxString type = m_eventType[i];</div>
+<div class="line"><span class="lineno">  184</span>                wxString description = m_eventDescription[i];</div>
+<div class="line"><span class="lineno">  185</span>                wxColour colour = m_eventColour[i];</div>
+<div class="line"><span class="lineno">  186</span>                m_time[i] = m_time[j];</div>
+<div class="line"><span class="lineno">  187</span>                m_eventType[i] = m_eventType[j];</div>
+<div class="line"><span class="lineno">  188</span>                m_eventDescription[i] = m_eventDescription[j];</div>
+<div class="line"><span class="lineno">  189</span>                m_eventColour[i] = m_eventColour[j];</div>
+<div class="line"><span class="lineno">  190</span>                m_time[j] = time;</div>
+<div class="line"><span class="lineno">  191</span>                m_eventType[j] = type;</div>
+<div class="line"><span class="lineno">  192</span>                m_eventDescription[j] = description;</div>
+<div class="line"><span class="lineno">  193</span>                m_eventColour[j] = colour;</div>
+<div class="line"><span class="lineno">  194</span>            }</div>
+<div class="line"><span class="lineno">  195</span>        }</div>
+<div class="line"><span class="lineno">  196</span>    }</div>
+<div class="line"><span class="lineno">  197</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

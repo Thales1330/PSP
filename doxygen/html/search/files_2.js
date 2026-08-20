@@ -7,8 +7,9 @@ var searchData=
   ['constant_2eh_4',['Constant.h',['../_constant_8h.html',1,'']]],
   ['constantform_2eh_5',['ConstantForm.h',['../_constant_form_8h.html',1,'']]],
   ['controleditor_2eh_6',['ControlEditor.h',['../_control_editor_8h.html',1,'']]],
-  ['controlelement_2eh_7',['ControlElement.h',['../_control_element_8h.html',1,'']]],
-  ['controlelementcontainer_2eh_8',['ControlElementContainer.h',['../_control_element_container_8h.html',1,'']]],
-  ['controlelementsolver_2eh_9',['ControlElementSolver.h',['../_control_element_solver_8h.html',1,'']]],
-  ['controlsystemtest_2eh_10',['ControlSystemTest.h',['../_control_system_test_8h.html',1,'']]]
+  ['controleditormanager_2eh_7',['ControlEditorManager.h',['../_control_editor_manager_8h.html',1,'']]],
+  ['controlelement_2eh_8',['ControlElement.h',['../_control_element_8h.html',1,'']]],
+  ['controlelementcontainer_2eh_9',['ControlElementContainer.h',['../_control_element_container_8h.html',1,'']]],
+  ['controlelementsolver_2eh_10',['ControlElementSolver.h',['../_control_element_solver_8h.html',1,'']]],
+  ['controlsystemtest_2eh_11',['ControlSystemTest.h',['../_control_system_test_8h.html',1,'']]]
 ];

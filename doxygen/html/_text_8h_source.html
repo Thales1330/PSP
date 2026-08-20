@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -190,8 +189,8 @@ $(document).ready(function(){initNavTree('_text_8h_source.html',''); initResizab
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="class_text.html#a4f273ea7008c72533327c25caff2e917">   77</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_text.html#a4f273ea7008c72533327c25caff2e917">AddParent</a>(<a class="code hl_class" href="class_element.html">Element</a>* parent, wxPoint2DDouble position) { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_text.html#a51c55b9272f653cfc3cdafe665d5dde0">Contains</a>(wxPoint2DDouble position) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">//virtual void Draw(wxPoint2DDouble translation, double scale);</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawDC(wxPoint2DDouble translation, <span class="keywordtype">double</span> scale, wxGraphicsContext* gc);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawDC(wxPoint2DDouble translation, <span class="keywordtype">double</span> scale, wxDC&amp; dc);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawDC(<a class="code hl_struct" href="struct_g_u_i_colour.html">GUIColour</a>* guiColour, wxPoint2DDouble translation, <span class="keywordtype">double</span> scale, wxGraphicsContext* gc);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawDC(<a class="code hl_struct" href="struct_g_u_i_colour.html">GUIColour</a>* guiColour, wxPoint2DDouble translation, <span class="keywordtype">double</span> scale, wxDC&amp; dc);</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_text.html#a9923c820cd77b411257ba48beceafeaa">Intersects</a>(wxRect2DDouble rect) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_text.html#afe1f86a497f34cee4809cbd7fda24dc3">Rotate</a>(<span class="keywordtype">bool</span> clockwise = <span class="keyword">true</span>);</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> ShowForm(wxWindow* parent, std::vector&lt;Element*&gt; elementList);</div>
@@ -209,14 +208,14 @@ $(document).ready(function(){initNavTree('_text_8h_source.html',''); initResizab
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">void</span> SetElement(<a class="code hl_class" href="class_element.html">Element</a>* element) { m_element = element; }</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">void</span> SetElementNumber(<span class="keywordtype">int</span> elementNumber) { m_elementNumber = elementNumber; }</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordtype">void</span> SetElementTypeText(<span class="keyword">const</span> ElementType elementType) { m_elementTypeText = elementType; }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">void</span> SetUnit(<span class="keyword">const</span> <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> unit) { m_unit = unit; }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">void</span> SetUnit(<span class="keyword">const</span> ElectricalUnit unit) { m_unit = unit; }</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">void</span> SetDecimalPlaces(<span class="keywordtype">int</span> decimalPlaces) { m_decimalPlaces = decimalPlaces; }</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">const</span> DataType GetDataType()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dataType; }</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">int</span> GetDirection()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_direction; }</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_class" href="class_element.html">Element</a>* GetElement() { <span class="keywordflow">return</span> m_element; }</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">int</span> GetElementNumber()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_elementNumber; }</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">const</span> ElementType GetElementTypeText()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_elementTypeText; }</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">const</span> <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> GetUnit()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_unit; }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">const</span> ElectricalUnit GetUnit()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_unit; }</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">int</span> GetDecimalPlaces()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_decimalPlaces; }</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">virtual</span> rapidxml::xml_node&lt;&gt;* SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode);</div>
@@ -238,7 +237,7 @@ $(document).ready(function(){initNavTree('_text_8h_source.html',''); initResizab
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    ElementType m_elementTypeText = TYPE_NONE;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordtype">int</span> m_elementNumber;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    DataType m_dataType;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> m_unit;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    ElectricalUnit m_unit;</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordtype">int</span> m_direction = 0;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordtype">int</span> m_decimalPlaces = 2;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>};</div>
@@ -248,11 +247,10 @@ $(document).ready(function(){initNavTree('_text_8h_source.html',''); initResizab
 <div class="ttc" id="a_g_c_text_8h_html"><div class="ttname"><a href="_g_c_text_8h.html">GCText.h</a></div></div>
 <div class="ttc" id="a_graphical_element_8h_html"><div class="ttname"><a href="_graphical_element_8h.html">GraphicalElement.h</a></div></div>
 <div class="ttc" id="a_power_element_8h_html"><div class="ttname"><a href="_power_element_8h.html">PowerElement.h</a></div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a></div><div class="ttdeci">ElectricalUnit</div><div class="ttdoc">Electrical units.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
 <div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
 <div class="ttc" id="aclass_capacitor_html"><div class="ttname"><a href="class_capacitor.html">Capacitor</a></div><div class="ttdoc">Shunt capactior power element.</div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00038">Capacitor.h:39</a></div></div>
-<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00111">Element.h:112</a></div></div>
-<div class="ttc" id="aclass_graphical_element_html"><div class="ttname"><a href="class_graphical_element.html">GraphicalElement</a></div><div class="ttdoc">Abstract class for graphical elements shown with power elements in workspace.</div><div class="ttdef"><b>Definition</b> <a href="_graphical_element_8h_source.html#l00030">GraphicalElement.h:31</a></div></div>
+<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00113">Element.h:114</a></div></div>
+<div class="ttc" id="aclass_graphical_element_html"><div class="ttname"><a href="class_graphical_element.html">GraphicalElement</a></div><div class="ttdoc">Abstract class for graphical elements shown with graphical elements in workspace.</div><div class="ttdef"><b>Definition</b> <a href="_graphical_element_8h_source.html#l00030">GraphicalElement.h:31</a></div></div>
 <div class="ttc" id="aclass_harm_current_html"><div class="ttname"><a href="class_harm_current.html">HarmCurrent</a></div><div class="ttdoc">Shunt Harmonic Corrent Source.</div><div class="ttdef"><b>Definition</b> <a href="_harm_current_8h_source.html#l00023">HarmCurrent.h:24</a></div></div>
 <div class="ttc" id="aclass_ind_motor_html"><div class="ttname"><a href="class_ind_motor.html">IndMotor</a></div><div class="ttdoc">Induction motor power element.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00118">IndMotor.h:119</a></div></div>
 <div class="ttc" id="aclass_inductor_html"><div class="ttname"><a href="class_inductor.html">Inductor</a></div><div class="ttdoc">Inductor shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00038">Inductor.h:39</a></div></div>
@@ -268,6 +266,7 @@ $(document).ready(function(){initNavTree('_text_8h_source.html',''); initResizab
 <div class="ttc" id="aclass_text_html_a9923c820cd77b411257ba48beceafeaa"><div class="ttname"><a href="class_text.html#a9923c820cd77b411257ba48beceafeaa">Text::Intersects</a></div><div class="ttdeci">virtual bool Intersects(wxRect2DDouble rect) const</div><div class="ttdoc">Check if the element's rect intersects other rect.</div><div class="ttdef"><b>Definition</b> <a href="_text_8cpp_source.html#l00250">Text.cpp:250</a></div></div>
 <div class="ttc" id="aclass_text_html_afe1f86a497f34cee4809cbd7fda24dc3"><div class="ttname"><a href="class_text.html#afe1f86a497f34cee4809cbd7fda24dc3">Text::Rotate</a></div><div class="ttdeci">virtual void Rotate(bool clockwise=true)</div><div class="ttdoc">Rotate the element.</div><div class="ttdef"><b>Definition</b> <a href="_text_8cpp_source.html#l00264">Text.cpp:264</a></div></div>
 <div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00083">Transformer.h:84</a></div></div>
+<div class="ttc" id="astruct_g_u_i_colour_html"><div class="ttname"><a href="struct_g_u_i_colour.html">GUIColour</a></div><div class="ttdef"><b>Definition</b> <a href="_commom_types_8h_source.html#l00006">CommomTypes.h:6</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

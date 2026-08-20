@@ -16,6 +16,6 @@
 <area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="308,237,251,264,186,291,147,304,146,299,184,286,249,259,305,232"/>
 <area shape="rect" id="Node000009" href="$class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="8,351,183,376"/>
 <area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="322,240,264,290,226,317,187,340,155,353,153,348,184,336,223,313,260,286,319,236"/>
-<area shape="rect" id="Node000010" href="$class_line.html#a37f35cabf98de2806188cdf919d26e2a" title="Draw the element using GDI+." alt="" coords="40,400,151,425"/>
+<area shape="rect" id="Node000010" href="$class_line.html#a830ed5b95e29eebd7bb1769335e64164" title="Draw the element using GDI+." alt="" coords="40,400,151,425"/>
 <area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="330,241,273,315,232,355,187,390,152,405,150,400,184,385,229,351,269,311,326,238"/>
 </map>

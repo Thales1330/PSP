@@ -4,10 +4,12 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,131,135,180,130,181,118,133"/>
 <area shape="rect" id="Node000003" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="247,93,365,119"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="272,127,160,183,157,179,270,122"/>
-<area shape="rect" id="Node000004" href="$struct_simulation_data.html" title=" " alt="" coords="107,5,230,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="185,40,210,67,234,81,260,91,258,96,232,86,207,71,181,44"/>
-<area shape="rect" id="Node000005" href="$struct_general_data.html" title=" " alt="" coords="254,5,358,31"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="309,45,309,93,303,93,303,45"/>
-<area shape="rect" id="Node000006" href="$struct_freq_response_data.html" title=" " alt="" coords="382,5,526,31"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="433,42,393,72,341,96,338,91,390,67,430,38"/>
+<area shape="rect" id="Node000004" href="$struct_g_u_i_colour.html" title=" " alt="" coords="63,5,151,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="120,41,130,56,142,67,181,78,247,92,246,97,180,84,139,72,126,59,116,44"/>
+<area shape="rect" id="Node000005" href="$struct_simulation_data.html" title=" " alt="" coords="175,5,298,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="235,45,236,57,240,68,253,81,269,91,266,95,249,85,236,71,231,58,230,45"/>
+<area shape="rect" id="Node000006" href="$struct_general_data.html" title=" " alt="" coords="322,5,426,31"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="358,43,318,94,313,91,354,40"/>
+<area shape="rect" id="Node000007" href="$struct_freq_response_data.html" title=" " alt="" coords="450,5,594,31"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="493,40,430,72,355,96,354,91,428,67,490,35"/>
 </map>

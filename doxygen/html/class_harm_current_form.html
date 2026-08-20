@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -225,7 +224,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   16</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; data.harmonicOrder.size(); ++i) {</div>
 <div class="line"><span class="lineno">   17</span>        <span class="keywordtype">long</span> item = m_listCtrlHarmCurrentList-&gt;InsertItem(m_maxID, wxString::Format(<span class="stringliteral">&quot;%d&quot;</span>, data.harmonicOrder[i]));</div>
 <div class="line"><span class="lineno">   18</span>        m_listCtrlHarmCurrentList-&gt;SetItem(item, 1, m_harmCurrent-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.injHarmCurrent[i], 1));</div>
-<div class="line"><span class="lineno">   19</span>        m_listCtrlHarmCurrentList-&gt;SetItem(item, 2, data.injHarmCurrentUnit[i] == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a> ? _(<span class="stringliteral">&quot;A&quot;</span>) : _(<span class="stringliteral">&quot;p.u.&quot;</span>));</div>
+<div class="line"><span class="lineno">   19</span>        m_listCtrlHarmCurrentList-&gt;SetItem(item, 2, data.injHarmCurrentUnit[i] == ElectricalUnit::UNIT_A ? _(<span class="stringliteral">&quot;A&quot;</span>) : _(<span class="stringliteral">&quot;p.u.&quot;</span>));</div>
 <div class="line"><span class="lineno">   20</span>        m_listCtrlHarmCurrentList-&gt;SetItem(item, 3, m_harmCurrent-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(data.injHarmAngle[i], 1));</div>
 <div class="line"><span class="lineno">   21</span>        m_maxID++;</div>
 <div class="line"><span class="lineno">   22</span>    }</div>
@@ -233,8 +232,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   24</span>    SetSize(GetBestSize());</div>
 <div class="line"><span class="lineno">   25</span>    Layout();</div>
 <div class="line"><span class="lineno">   26</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a></div><div class="ttdeci">@ UNIT_A</div></div>
-<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00461">Element.cpp:461</a></div></div>
+<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00466">Element.cpp:466</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -459,9 +457,9 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  124</span>        <span class="keywordflow">if</span>(!m_listCtrlHarmCurrentList-&gt;GetItemText(item, 1).ToDouble(&amp;injCurrent)) <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  125</span>        injHarmCurrent.push_back(injCurrent);</div>
 <div class="line"><span class="lineno">  126</span>        <span class="keywordflow">if</span>(m_listCtrlHarmCurrentList-&gt;GetItemText(item, 2) == <span class="stringliteral">&quot;A&quot;</span>)</div>
-<div class="line"><span class="lineno">  127</span>            injHarmCurrentUnit.push_back(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>);</div>
+<div class="line"><span class="lineno">  127</span>            injHarmCurrentUnit.push_back(ElectricalUnit::UNIT_A);</div>
 <div class="line"><span class="lineno">  128</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  129</span>            injHarmCurrentUnit.push_back(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>);</div>
+<div class="line"><span class="lineno">  129</span>            injHarmCurrentUnit.push_back(ElectricalUnit::UNIT_PU);</div>
 <div class="line"><span class="lineno">  130</span>        <span class="keywordtype">double</span> injCAngle = 0.0;</div>
 <div class="line"><span class="lineno">  131</span>        <span class="keywordflow">if</span>(!m_listCtrlHarmCurrentList-&gt;GetItemText(item, 3).ToDouble(&amp;injCAngle)) <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  132</span>        injHarmAngle.push_back(injCAngle);</div>
@@ -500,12 +498,11 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  165</span>    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; harmonicOrder.size(); ++i) {</div>
 <div class="line"><span class="lineno">  166</span>        <span class="keywordtype">long</span> item = m_listCtrlHarmCurrentList-&gt;InsertItem(m_maxID, wxString::Format(<span class="stringliteral">&quot;%d&quot;</span>, harmonicOrder[i]));</div>
 <div class="line"><span class="lineno">  167</span>        m_listCtrlHarmCurrentList-&gt;SetItem(item, 1, m_harmCurrent-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(injHarmCurrent[i], 1));</div>
-<div class="line"><span class="lineno">  168</span>        m_listCtrlHarmCurrentList-&gt;SetItem(item, 2, injHarmCurrentUnit[i] == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a> ? _(<span class="stringliteral">&quot;A&quot;</span>) : _(<span class="stringliteral">&quot;p.u.&quot;</span>));</div>
+<div class="line"><span class="lineno">  168</span>        m_listCtrlHarmCurrentList-&gt;SetItem(item, 2, injHarmCurrentUnit[i] == ElectricalUnit::UNIT_A ? _(<span class="stringliteral">&quot;A&quot;</span>) : _(<span class="stringliteral">&quot;p.u.&quot;</span>));</div>
 <div class="line"><span class="lineno">  169</span>        m_listCtrlHarmCurrentList-&gt;SetItem(item, 3, m_harmCurrent-&gt;<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(injHarmAngle[i], 1));</div>
 <div class="line"><span class="lineno">  170</span>        m_maxID++;</div>
 <div class="line"><span class="lineno">  171</span>    }</div>
 <div class="line"><span class="lineno">  172</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -549,9 +546,9 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   50</span>        <span class="keywordflow">if</span>(!m_listCtrlHarmCurrentList-&gt;GetItemText(item, 1).ToDouble(&amp;injCurrent)) { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
 <div class="line"><span class="lineno">   51</span>        injHarmCurrent.push_back(injCurrent);</div>
 <div class="line"><span class="lineno">   52</span>        <span class="keywordflow">if</span>(m_listCtrlHarmCurrentList-&gt;GetItemText(item, 2) == <span class="stringliteral">&quot;A&quot;</span>)</div>
-<div class="line"><span class="lineno">   53</span>            injHarmCurrentUnit.push_back(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>);</div>
+<div class="line"><span class="lineno">   53</span>            injHarmCurrentUnit.push_back(ElectricalUnit::UNIT_A);</div>
 <div class="line"><span class="lineno">   54</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   55</span>            injHarmCurrentUnit.push_back(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>);</div>
+<div class="line"><span class="lineno">   55</span>            injHarmCurrentUnit.push_back(ElectricalUnit::UNIT_PU);</div>
 <div class="line"><span class="lineno">   56</span>        <span class="keywordtype">double</span> injCAngle = 0.0;</div>
 <div class="line"><span class="lineno">   57</span>        <span class="keywordflow">if</span>(!m_listCtrlHarmCurrentList-&gt;GetItemText(item, 3).ToDouble(&amp;injCAngle)) { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
 <div class="line"><span class="lineno">   58</span>        injHarmAngle.push_back(injCAngle);</div>

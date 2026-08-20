@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,121,31"/>
-<area shape="rect" id="Node000001" href="$class_sum_form.html" title="Form to edit the sum control data." alt="" coords="169,5,253,31"/>
-<area shape="poly" id="edge67_Node000000_Node000001" title=" " alt="" coords="135,15,169,15,169,21,135,21"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,168,31"/>
+<area shape="rect" id="Node000001" href="$class_rate_limiter_form.html" title="Form to edit the rate limit control data." alt="" coords="216,5,347,31"/>
+<area shape="poly" id="edge63_Node000000_Node000001" title=" " alt="" coords="182,15,216,15,216,21,182,21"/>
 </map>

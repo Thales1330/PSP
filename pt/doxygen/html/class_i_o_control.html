@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -167,7 +166,9 @@ Public Types</h2></td></tr>
 &#160;&#160;<b>IN_INITIAL_VELOCITY</b> = 1 &lt;&lt; 8
 , <b>IN_DELTA_VELOCITY</b> = 1 &lt;&lt; 9
 , <b>IN_DELTA_ACTIVE_POWER</b> = 1 &lt;&lt; 10
-, <b>IN_TEST</b> = 1 &lt;&lt; 11
+, <b>IN_IO</b> = 1 &lt;&lt; 11
+, <br />
+&#160;&#160;<b>IN_TEST</b> = 1 &lt;&lt; 12
 <br />
  }</td></tr>
 <tr class="separator:a84a11e53cc306b8f9f82e577923d4091"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,9 +177,9 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a3b4a8f356a5d1ab95fdc729b9e758d" id="r_a1a3b4a8f356a5d1ab95fdc729b9e758d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#a1a3b4a8f356a5d1ab95fdc729b9e758d">IOControl</a> (int ioFlags, int id)</td></tr>
 <tr class="separator:a1a3b4a8f356a5d1ab95fdc729b9e758d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7e36c345fba92199c745ffa8e1ffa7f" id="r_ad7e36c345fba92199c745ffa8e1ffa7f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#ad7e36c345fba92199c745ffa8e1ffa7f">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:ad7e36c345fba92199c745ffa8e1ffa7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
-<tr class="separator:ad7e36c345fba92199c745ffa8e1ffa7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac943dffd51a9bd467d5ea452aa078c59" id="r_ac943dffd51a9bd467d5ea452aa078c59"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#ac943dffd51a9bd467d5ea452aa078c59">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:ac943dffd51a9bd467d5ea452aa078c59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
+<tr class="separator:ac943dffd51a9bd467d5ea452aa078c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa064c5d70e562334e2b374f919f42ef1" id="r_aa064c5d70e562334e2b374f919f42ef1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#aa064c5d70e562334e2b374f919f42ef1">Contains</a> (wxPoint2DDouble position) const</td></tr>
 <tr class="memdesc:aa064c5d70e562334e2b374f919f42ef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <br /></td></tr>
 <tr class="separator:aa064c5d70e562334e2b374f919f42ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,6 +192,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a47a5633ed68ef0648623b9733dc5dab9" id="r_a47a5633ed68ef0648623b9733dc5dab9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#a47a5633ed68ef0648623b9733dc5dab9">Rotate</a> (bool clockwise=true)</td></tr>
 <tr class="memdesc:a47a5633ed68ef0648623b9733dc5dab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <br /></td></tr>
 <tr class="separator:a47a5633ed68ef0648623b9733dc5dab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15096811b9865e3d4d00d3c69d9fdf75" id="r_a15096811b9865e3d4d00d3c69d9fdf75"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#a15096811b9865e3d4d00d3c69d9fdf75">SetFont</a> (wxFont &amp;font)</td></tr>
+<tr class="separator:a15096811b9865e3d4d00d3c69d9fdf75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19372719e4f316f5cd49e2f289e3d4d9" id="r_a19372719e4f316f5cd49e2f289e3d4d9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">UpdateText</a> ()</td></tr>
 <tr class="memdesc:a19372719e4f316f5cd49e2f289e3d4d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the OpenGL text in the element (if present).  <br /></td></tr>
 <tr class="separator:a19372719e4f316f5cd49e2f289e3d4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -350,9 +353,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element" id="r_aa79db7f54ba9754e953b5059a1d79486"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">GetTipText</a> () const</td></tr>
 <tr class="memdesc:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element" id="r_a44877d44d6e548c24f466913d118f61b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a44877d44d6e548c24f466913d118f61b">DrawDC</a> (wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
-<tr class="memdesc:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
-<tr class="separator:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element" id="r_a8720b78213ff3a15b16e2f53a70c139c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a8720b78213ff3a15b16e2f53a70c139c">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
+<tr class="memdesc:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
+<tr class="separator:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a436b0497017a1c3d03dba5e59f037e inherit pub_methods_class_element" id="r_a2a436b0497017a1c3d03dba5e59f037e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a2a436b0497017a1c3d03dba5e59f037e">GetContextMenu</a> (wxMenu &amp;menu)</td></tr>
 <tr class="memdesc:a2a436b0497017a1c3d03dba5e59f037e inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the element contex menu.  <br /></td></tr>
 <tr class="separator:a2a436b0497017a1c3d03dba5e59f037e inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -535,8 +538,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5c1d43a226486a7a987bfb8c195ffac6 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element" id="r_a37ff451865d4852ffa8c54574a20cd0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a37ff451865d4852ffa8c54574a20cd0b">m_online</a> = true</td></tr>
 <tr class="separator:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element" id="r_a9692eec7ca16d6f81172788b4bf48072"><td class="memItemLeft" align="right" valign="top">wxColour&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9692eec7ca16d6f81172788b4bf48072">m_selectionColour</a></td></tr>
-<tr class="separator:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -591,8 +592,9 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">   54</span>        IN_INITIAL_VELOCITY = 1 &lt;&lt; 8,</div>
 <div class="line"><span class="lineno">   55</span>        IN_DELTA_VELOCITY = 1 &lt;&lt; 9,</div>
 <div class="line"><span class="lineno">   56</span>        IN_DELTA_ACTIVE_POWER = 1 &lt;&lt; 10,</div>
-<div class="line"><span class="lineno">   57</span>        IN_TEST = 1 &lt;&lt; 11,</div>
-<div class="line"><span class="lineno">   58</span>    };</div>
+<div class="line"><span class="lineno">   57</span>        IN_IO = 1 &lt;&lt; 11,</div>
+<div class="line"><span class="lineno">   58</span>        IN_TEST = 1 &lt;&lt; 12,</div>
+<div class="line"><span class="lineno">   59</span>    };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -702,13 +704,13 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00065">65</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   65</span>{ <span class="keywordflow">return</span> m_rect.Contains(position); }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00066">66</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>{ <span class="keywordflow">return</span> m_rect.Contains(position); }</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="ad7e36c345fba92199c745ffa8e1ffa7f" name="ad7e36c345fba92199c745ffa8e1ffa7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7e36c345fba92199c745ffa8e1ffa7f">&#9670;&#160;</a></span>DrawDC()</h2>
+<a id="ac943dffd51a9bd467d5ea452aa078c59" name="ac943dffd51a9bd467d5ea452aa078c59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac943dffd51a9bd467d5ea452aa078c59">&#9670;&#160;</a></span>DrawDC()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -719,6 +721,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void IOControl::DrawDC </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td>
+          <td class="paramname"><em>guiColour</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">wxPoint2DDouble&#160;</td>
           <td class="paramname"><em>translation</em>, </td>
         </tr>
@@ -750,6 +758,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Draw the element using GDI+. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">guiColour</td><td>Colours of the system defined in properties. </td></tr>
     <tr><td class="paramname">translation</td><td>Translation of the system. </td></tr>
     <tr><td class="paramname">scale</td><td>Scale of the system. </td></tr>
     <tr><td class="paramname">gc</td><td>Graphics context </td></tr>
@@ -757,104 +766,104 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#a6cca77f38afe3ade6d92294d0759427a">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a5ac0a5f9ca1299f06ed9979789340b70">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00126">126</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  127</span>{</div>
-<div class="line"><span class="lineno">  128</span>    std::vector&lt;wxPoint2DDouble&gt; pts;</div>
-<div class="line"><span class="lineno">  129</span>    <span class="keywordflow">if</span> (m_angle == 0.0) {</div>
-<div class="line"><span class="lineno">  130</span>        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize));</div>
-<div class="line"><span class="lineno">  131</span>        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize - 10, m_borderSize));</div>
-<div class="line"><span class="lineno">  132</span>        pts.push_back(m_position + wxPoint2DDouble(m_width / 2 - m_borderSize, 0));</div>
-<div class="line"><span class="lineno">  133</span>        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize - 10, -m_borderSize));</div>
-<div class="line"><span class="lineno">  134</span>        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize));</div>
-<div class="line"><span class="lineno">  135</span>    }</div>
-<div class="line"><span class="lineno">  136</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 90.0) {</div>
-<div class="line"><span class="lineno">  137</span>        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize));</div>
-<div class="line"><span class="lineno">  138</span>        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize));</div>
-<div class="line"><span class="lineno">  139</span>        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize - 10));</div>
-<div class="line"><span class="lineno">  140</span>        pts.push_back(m_position + wxPoint2DDouble(0, m_height / 2 - m_borderSize));</div>
-<div class="line"><span class="lineno">  141</span>        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize - 10));</div>
-<div class="line"><span class="lineno">  142</span>    }</div>
-<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 180.0) {</div>
-<div class="line"><span class="lineno">  144</span>        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize + 10, m_borderSize));</div>
-<div class="line"><span class="lineno">  145</span>        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize));</div>
-<div class="line"><span class="lineno">  146</span>        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize));</div>
-<div class="line"><span class="lineno">  147</span>        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize + 10, -m_borderSize));</div>
-<div class="line"><span class="lineno">  148</span>        pts.push_back(m_position + wxPoint2DDouble(-m_width / 2 + m_borderSize, 0));</div>
-<div class="line"><span class="lineno">  149</span>    }</div>
-<div class="line"><span class="lineno">  150</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 270.0) {</div>
-<div class="line"><span class="lineno">  151</span>        pts.push_back(m_position + wxPoint2DDouble(0, -m_height / 2 + m_borderSize));</div>
-<div class="line"><span class="lineno">  152</span>        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize + 10));</div>
-<div class="line"><span class="lineno">  153</span>        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize));</div>
-<div class="line"><span class="lineno">  154</span>        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize));</div>
-<div class="line"><span class="lineno">  155</span>        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize + 10));</div>
-<div class="line"><span class="lineno">  156</span>    }</div>
-<div class="line"><span class="lineno">  157</span>    pts.emplace_back(pts[0]);</div>
-<div class="line"><span class="lineno">  158</span> </div>
-<div class="line"><span class="lineno">  159</span>    <span class="keywordflow">if</span> (m_selected) {</div>
-<div class="line"><span class="lineno">  160</span>        gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  161</span>        gc-&gt;SetBrush(wxBrush(m_selectionColour));</div>
-<div class="line"><span class="lineno">  162</span>        <span class="keywordtype">double</span> borderSize = (m_borderSize * 2.0 + 1.0) / scale;</div>
-<div class="line"><span class="lineno">  163</span>        std::vector&lt;wxPoint2DDouble&gt; selPts = pts;</div>
-<div class="line"><span class="lineno">  164</span>        <span class="keywordflow">if</span> (m_angle == 0.0) {</div>
-<div class="line"><span class="lineno">  165</span>            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);</div>
-<div class="line"><span class="lineno">  166</span>            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);</div>
-<div class="line"><span class="lineno">  167</span>            selPts[2] += wxPoint2DDouble(1.5 * borderSize / 2, 0);</div>
-<div class="line"><span class="lineno">  168</span>            selPts[3] += wxPoint2DDouble(borderSize / 2, borderSize / 2);</div>
-<div class="line"><span class="lineno">  169</span>            selPts[4] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);</div>
-<div class="line"><span class="lineno">  170</span>        }</div>
-<div class="line"><span class="lineno">  171</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 90.0) {</div>
-<div class="line"><span class="lineno">  172</span>            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);</div>
-<div class="line"><span class="lineno">  173</span>            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);</div>
-<div class="line"><span class="lineno">  174</span>            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);</div>
-<div class="line"><span class="lineno">  175</span>            selPts[3] += wxPoint2DDouble(0, 1.5 * borderSize / 2);</div>
-<div class="line"><span class="lineno">  176</span>            selPts[4] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);</div>
-<div class="line"><span class="lineno">  177</span>        }</div>
-<div class="line"><span class="lineno">  178</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 180.0) {</div>
-<div class="line"><span class="lineno">  179</span>            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);</div>
-<div class="line"><span class="lineno">  180</span>            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);</div>
-<div class="line"><span class="lineno">  181</span>            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);</div>
-<div class="line"><span class="lineno">  182</span>            selPts[3] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);</div>
-<div class="line"><span class="lineno">  183</span>            selPts[4] += wxPoint2DDouble(-1.5 * borderSize / 2, 0);</div>
-<div class="line"><span class="lineno">  184</span>        }</div>
-<div class="line"><span class="lineno">  185</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 270.0) {</div>
-<div class="line"><span class="lineno">  186</span>            selPts[0] += wxPoint2DDouble(0, -1.5 * borderSize / 2);</div>
-<div class="line"><span class="lineno">  187</span>            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);</div>
-<div class="line"><span class="lineno">  188</span>            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);</div>
-<div class="line"><span class="lineno">  189</span>            selPts[3] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);</div>
-<div class="line"><span class="lineno">  190</span>            selPts[4] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);</div>
-<div class="line"><span class="lineno">  191</span>        }</div>
-<div class="line"><span class="lineno">  192</span>        gc-&gt;DrawLines(5, &amp;selPts[0]);</div>
-<div class="line"><span class="lineno">  193</span>    }</div>
-<div class="line"><span class="lineno">  194</span>    gc-&gt;SetPen(wxPen(wxColour(0, 0, 0, 255), 1));</div>
-<div class="line"><span class="lineno">  195</span>    gc-&gt;SetBrush(wxBrush(wxColour(255, 255, 255, 255)));</div>
-<div class="line"><span class="lineno">  196</span>    gc-&gt;DrawLines(6, &amp;pts[0]);</div>
-<div class="line"><span class="lineno">  197</span> </div>
-<div class="line"><span class="lineno">  198</span>    <span class="comment">// Plot number.</span></div>
-<div class="line"><span class="lineno">  199</span>    <span class="keywordflow">if</span> (m_angle == 0.0) {</div>
-<div class="line"><span class="lineno">  200</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">Draw</a>(m_position + wxPoint2DDouble(-5.0 - m_gcText-&gt;GetWidth() / 2, -m_gcText-&gt;GetHeight() / 2), gc);</div>
-<div class="line"><span class="lineno">  201</span>    }</div>
-<div class="line"><span class="lineno">  202</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 90.0) {</div>
-<div class="line"><span class="lineno">  203</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">Draw</a>(m_position + wxPoint2DDouble(-m_gcText-&gt;GetWidth() / 2, -5.0 - m_gcText-&gt;GetHeight() / 2), gc);</div>
-<div class="line"><span class="lineno">  204</span>    }</div>
-<div class="line"><span class="lineno">  205</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 180.0) {</div>
-<div class="line"><span class="lineno">  206</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">Draw</a>(m_position + wxPoint2DDouble(5.0 - m_gcText-&gt;GetWidth() / 2, -m_gcText-&gt;GetHeight() / 2), gc);</div>
-<div class="line"><span class="lineno">  207</span>    }</div>
-<div class="line"><span class="lineno">  208</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 270.0) {</div>
-<div class="line"><span class="lineno">  209</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">Draw</a>(m_position + wxPoint2DDouble(-m_gcText-&gt;GetWidth() / 2, 5.0 - m_gcText-&gt;GetHeight() / 2), gc);</div>
-<div class="line"><span class="lineno">  210</span>    }</div>
-<div class="line"><span class="lineno">  211</span> </div>
-<div class="line"><span class="lineno">  212</span>    gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  213</span>    gc-&gt;SetBrush(wxBrush(wxColour(0, 0, 0, 255)));</div>
-<div class="line"><span class="lineno">  214</span>    DrawDCNodes(gc);</div>
-<div class="line"><span class="lineno">  215</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00044">44</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   45</span>{</div>
+<div class="line"><span class="lineno">   46</span>    std::vector&lt;wxPoint2DDouble&gt; pts;</div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">if</span> (m_angle == 0.0) {</div>
+<div class="line"><span class="lineno">   48</span>        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize));</div>
+<div class="line"><span class="lineno">   49</span>        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize - 10, m_borderSize));</div>
+<div class="line"><span class="lineno">   50</span>        pts.push_back(m_position + wxPoint2DDouble(m_width / 2 - m_borderSize, 0));</div>
+<div class="line"><span class="lineno">   51</span>        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize - 10, -m_borderSize));</div>
+<div class="line"><span class="lineno">   52</span>        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize));</div>
+<div class="line"><span class="lineno">   53</span>    }</div>
+<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 90.0) {</div>
+<div class="line"><span class="lineno">   55</span>        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize));</div>
+<div class="line"><span class="lineno">   56</span>        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize));</div>
+<div class="line"><span class="lineno">   57</span>        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize - 10));</div>
+<div class="line"><span class="lineno">   58</span>        pts.push_back(m_position + wxPoint2DDouble(0, m_height / 2 - m_borderSize));</div>
+<div class="line"><span class="lineno">   59</span>        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize - 10));</div>
+<div class="line"><span class="lineno">   60</span>    }</div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 180.0) {</div>
+<div class="line"><span class="lineno">   62</span>        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize + 10, m_borderSize));</div>
+<div class="line"><span class="lineno">   63</span>        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize));</div>
+<div class="line"><span class="lineno">   64</span>        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize));</div>
+<div class="line"><span class="lineno">   65</span>        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize + 10, -m_borderSize));</div>
+<div class="line"><span class="lineno">   66</span>        pts.push_back(m_position + wxPoint2DDouble(-m_width / 2 + m_borderSize, 0));</div>
+<div class="line"><span class="lineno">   67</span>    }</div>
+<div class="line"><span class="lineno">   68</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 270.0) {</div>
+<div class="line"><span class="lineno">   69</span>        pts.push_back(m_position + wxPoint2DDouble(0, -m_height / 2 + m_borderSize));</div>
+<div class="line"><span class="lineno">   70</span>        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize + 10));</div>
+<div class="line"><span class="lineno">   71</span>        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize));</div>
+<div class="line"><span class="lineno">   72</span>        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize));</div>
+<div class="line"><span class="lineno">   73</span>        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize + 10));</div>
+<div class="line"><span class="lineno">   74</span>    }</div>
+<div class="line"><span class="lineno">   75</span>    pts.emplace_back(pts[0]);</div>
+<div class="line"><span class="lineno">   76</span> </div>
+<div class="line"><span class="lineno">   77</span>    <span class="keywordflow">if</span> (m_selected) {</div>
+<div class="line"><span class="lineno">   78</span>        gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
+<div class="line"><span class="lineno">   79</span>        gc-&gt;SetBrush(wxBrush(guiColour-&gt;selection));</div>
+<div class="line"><span class="lineno">   80</span>        <span class="keywordtype">double</span> borderSize = (m_borderSize * 2.0 + 1.0) / scale;</div>
+<div class="line"><span class="lineno">   81</span>        std::vector&lt;wxPoint2DDouble&gt; selPts = pts;</div>
+<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">if</span> (m_angle == 0.0) {</div>
+<div class="line"><span class="lineno">   83</span>            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);</div>
+<div class="line"><span class="lineno">   84</span>            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);</div>
+<div class="line"><span class="lineno">   85</span>            selPts[2] += wxPoint2DDouble(1.5 * borderSize / 2, 0);</div>
+<div class="line"><span class="lineno">   86</span>            selPts[3] += wxPoint2DDouble(borderSize / 2, borderSize / 2);</div>
+<div class="line"><span class="lineno">   87</span>            selPts[4] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);</div>
+<div class="line"><span class="lineno">   88</span>        }</div>
+<div class="line"><span class="lineno">   89</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 90.0) {</div>
+<div class="line"><span class="lineno">   90</span>            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);</div>
+<div class="line"><span class="lineno">   91</span>            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);</div>
+<div class="line"><span class="lineno">   92</span>            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);</div>
+<div class="line"><span class="lineno">   93</span>            selPts[3] += wxPoint2DDouble(0, 1.5 * borderSize / 2);</div>
+<div class="line"><span class="lineno">   94</span>            selPts[4] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);</div>
+<div class="line"><span class="lineno">   95</span>        }</div>
+<div class="line"><span class="lineno">   96</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 180.0) {</div>
+<div class="line"><span class="lineno">   97</span>            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);</div>
+<div class="line"><span class="lineno">   98</span>            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);</div>
+<div class="line"><span class="lineno">   99</span>            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);</div>
+<div class="line"><span class="lineno">  100</span>            selPts[3] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);</div>
+<div class="line"><span class="lineno">  101</span>            selPts[4] += wxPoint2DDouble(-1.5 * borderSize / 2, 0);</div>
+<div class="line"><span class="lineno">  102</span>        }</div>
+<div class="line"><span class="lineno">  103</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 270.0) {</div>
+<div class="line"><span class="lineno">  104</span>            selPts[0] += wxPoint2DDouble(0, -1.5 * borderSize / 2);</div>
+<div class="line"><span class="lineno">  105</span>            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);</div>
+<div class="line"><span class="lineno">  106</span>            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);</div>
+<div class="line"><span class="lineno">  107</span>            selPts[3] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);</div>
+<div class="line"><span class="lineno">  108</span>            selPts[4] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);</div>
+<div class="line"><span class="lineno">  109</span>        }</div>
+<div class="line"><span class="lineno">  110</span>        gc-&gt;DrawLines(5, &amp;selPts[0]);</div>
+<div class="line"><span class="lineno">  111</span>    }</div>
+<div class="line"><span class="lineno">  112</span>    gc-&gt;SetPen(wxPen(guiColour-&gt;enabled, 1));</div>
+<div class="line"><span class="lineno">  113</span>    gc-&gt;SetBrush(guiColour-&gt;background);</div>
+<div class="line"><span class="lineno">  114</span>    gc-&gt;DrawLines(6, &amp;pts[0]);</div>
+<div class="line"><span class="lineno">  115</span> </div>
+<div class="line"><span class="lineno">  116</span>    <span class="comment">// Plot number.</span></div>
+<div class="line"><span class="lineno">  117</span>    <span class="keywordflow">if</span> (m_angle == 0.0) {</div>
+<div class="line"><span class="lineno">  118</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">Draw</a>(m_position + wxPoint2DDouble(-5.0 - m_gcText-&gt;GetWidth() / 2, -m_gcText-&gt;GetHeight() / 2), gc, 0, guiColour-&gt;text);</div>
+<div class="line"><span class="lineno">  119</span>    }</div>
+<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 90.0) {</div>
+<div class="line"><span class="lineno">  121</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">Draw</a>(m_position + wxPoint2DDouble(-m_gcText-&gt;GetWidth() / 2, -5.0 - m_gcText-&gt;GetHeight() / 2), gc, 0, guiColour-&gt;text);</div>
+<div class="line"><span class="lineno">  122</span>    }</div>
+<div class="line"><span class="lineno">  123</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 180.0) {</div>
+<div class="line"><span class="lineno">  124</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">Draw</a>(m_position + wxPoint2DDouble(5.0 - m_gcText-&gt;GetWidth() / 2, -m_gcText-&gt;GetHeight() / 2), gc, 0, guiColour-&gt;text);</div>
+<div class="line"><span class="lineno">  125</span>    }</div>
+<div class="line"><span class="lineno">  126</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 270.0) {</div>
+<div class="line"><span class="lineno">  127</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">Draw</a>(m_position + wxPoint2DDouble(-m_gcText-&gt;GetWidth() / 2, 5.0 - m_gcText-&gt;GetHeight() / 2), gc, 0, guiColour-&gt;text);</div>
+<div class="line"><span class="lineno">  128</span>    }</div>
+<div class="line"><span class="lineno">  129</span> </div>
+<div class="line"><span class="lineno">  130</span>    gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
+<div class="line"><span class="lineno">  131</span>    gc-&gt;SetBrush(guiColour-&gt;enabled);</div>
+<div class="line"><span class="lineno">  132</span>    DrawDCNodes(gc);</div>
+<div class="line"><span class="lineno">  133</span>}</div>
 <div class="ttc" id="aclass_g_c_text_html_ac5c116072e505e28b726bdf4b8b249a8"><div class="ttname"><a href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">GCText::Draw</a></div><div class="ttdeci">virtual void Draw(wxPoint2DDouble position, wxGraphicsContext *gc, double angle=0.0, wxColour colour= *wxBLACK) const</div><div class="ttdoc">Draw the text in wxGraphicsContext.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00035">GCText.cpp:35</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_i_o_control_ad7e36c345fba92199c745ffa8e1ffa7f_cgraph.png" border="0" usemap="#aclass_i_o_control_ad7e36c345fba92199c745ffa8e1ffa7f_cgraph" alt=""/></div>
-<map name="aclass_i_o_control_ad7e36c345fba92199c745ffa8e1ffa7f_cgraph" id="aclass_i_o_control_ad7e36c345fba92199c745ffa8e1ffa7f_cgraph">
+<div class="center"><img src="class_i_o_control_ac943dffd51a9bd467d5ea452aa078c59_cgraph.png" border="0" usemap="#aclass_i_o_control_ac943dffd51a9bd467d5ea452aa078c59_cgraph" alt=""/></div>
+<map name="aclass_i_o_control_ac943dffd51a9bd467d5ea452aa078c59_cgraph" id="aclass_i_o_control_ac943dffd51a9bd467d5ea452aa078c59_cgraph">
 <area shape="rect" title="Draw the element using GDI+." alt="" coords="5,5,149,31"/>
 <area shape="rect" href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8" title="Draw the text in wxGraphicsContext." alt="" coords="197,5,308,31"/>
 <area shape="poly" title=" " alt="" coords="149,15,183,15,183,21,149,21"/>
@@ -886,60 +895,64 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00245">245</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  246</span>{</div>
-<div class="line"><span class="lineno">  247</span>    wxString omega = wxString::FromUTF8(<span class="stringliteral">&quot;\xCF\x89&quot;</span>);</div>
-<div class="line"><span class="lineno">  248</span>    wxString subZero = wxString::FromUTF8(<span class="stringliteral">&quot;\xE2\x82\x92&quot;</span>);</div>
-<div class="line"><span class="lineno">  249</span>    wxString capDelta = wxString::FromUTF8(<span class="stringliteral">&quot;\xCE\x94&quot;</span>);</div>
-<div class="line"><span class="lineno">  250</span> </div>
-<div class="line"><span class="lineno">  251</span>    <span class="keywordflow">switch</span> (m_value) {</div>
-<div class="line"><span class="lineno">  252</span>    <span class="keywordflow">case</span> IN_TERMINAL_VOLTAGE: {</div>
-<div class="line"><span class="lineno">  253</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  254</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Vt&quot;</span>);</div>
-<div class="line"><span class="lineno">  255</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  256</span>    <span class="keywordflow">case</span> IN_VELOCITY: {</div>
-<div class="line"><span class="lineno">  257</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  258</span>        <span class="keywordflow">return</span> omega;</div>
-<div class="line"><span class="lineno">  259</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  260</span>    <span class="keywordflow">case</span> IN_ACTIVE_POWER: {</div>
-<div class="line"><span class="lineno">  261</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  262</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;P&quot;</span>);</div>
-<div class="line"><span class="lineno">  263</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  264</span>    <span class="keywordflow">case</span> IN_REACTIVE_POWER: {</div>
-<div class="line"><span class="lineno">  265</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  266</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Q&quot;</span>);</div>
-<div class="line"><span class="lineno">  267</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  268</span>    <span class="keywordflow">case</span> OUT_FIELD_VOLTAGE: {</div>
-<div class="line"><span class="lineno">  269</span>        m_ioNodeType = Node::NodeType::NODE_IN;</div>
-<div class="line"><span class="lineno">  270</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Vf&quot;</span>);</div>
-<div class="line"><span class="lineno">  271</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  272</span>    <span class="keywordflow">case</span> OUT_MEC_POWER: {</div>
-<div class="line"><span class="lineno">  273</span>        m_ioNodeType = Node::NodeType::NODE_IN;</div>
-<div class="line"><span class="lineno">  274</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Pm&quot;</span>);</div>
-<div class="line"><span class="lineno">  275</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">case</span> IN_INITIAL_TERMINAL_VOLTAGE: {</div>
-<div class="line"><span class="lineno">  277</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  278</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Vt&quot;</span>) + subZero;</div>
-<div class="line"><span class="lineno">  279</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  280</span>    <span class="keywordflow">case</span> IN_INITIAL_MEC_POWER: {</div>
-<div class="line"><span class="lineno">  281</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  282</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Pm&quot;</span>) + subZero;</div>
-<div class="line"><span class="lineno">  283</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  284</span>    <span class="keywordflow">case</span> IN_INITIAL_VELOCITY: {</div>
-<div class="line"><span class="lineno">  285</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  286</span>        <span class="keywordflow">return</span> omega + subZero;</div>
-<div class="line"><span class="lineno">  287</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  288</span>    <span class="keywordflow">case</span> IN_DELTA_VELOCITY: {</div>
-<div class="line"><span class="lineno">  289</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  290</span>        <span class="keywordflow">return</span> capDelta + omega;</div>
-<div class="line"><span class="lineno">  291</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  292</span>    <span class="keywordflow">case</span> IN_DELTA_ACTIVE_POWER: {</div>
-<div class="line"><span class="lineno">  293</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
-<div class="line"><span class="lineno">  294</span>        <span class="keywordflow">return</span> capDelta + _(<span class="stringliteral">&quot;P&quot;</span>);</div>
-<div class="line"><span class="lineno">  295</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  296</span>    }</div>
-<div class="line"><span class="lineno">  297</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">  298</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00169">169</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  170</span>{</div>
+<div class="line"><span class="lineno">  171</span>    wxString omega = wxString::FromUTF8(<span class="stringliteral">&quot;\xCF\x89&quot;</span>);</div>
+<div class="line"><span class="lineno">  172</span>    wxString subZero = wxString::FromUTF8(<span class="stringliteral">&quot;\xE2\x82\x92&quot;</span>);</div>
+<div class="line"><span class="lineno">  173</span>    wxString capDelta = wxString::FromUTF8(<span class="stringliteral">&quot;\xCE\x94&quot;</span>);</div>
+<div class="line"><span class="lineno">  174</span> </div>
+<div class="line"><span class="lineno">  175</span>    <span class="keywordflow">switch</span> (m_value) {</div>
+<div class="line"><span class="lineno">  176</span>    <span class="keywordflow">case</span> IN_TERMINAL_VOLTAGE: {</div>
+<div class="line"><span class="lineno">  177</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  178</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Vt&quot;</span>);</div>
+<div class="line"><span class="lineno">  179</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  180</span>    <span class="keywordflow">case</span> IN_VELOCITY: {</div>
+<div class="line"><span class="lineno">  181</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  182</span>        <span class="keywordflow">return</span> omega;</div>
+<div class="line"><span class="lineno">  183</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  184</span>    <span class="keywordflow">case</span> IN_ACTIVE_POWER: {</div>
+<div class="line"><span class="lineno">  185</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;P&quot;</span>);</div>
+<div class="line"><span class="lineno">  187</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  188</span>    <span class="keywordflow">case</span> IN_REACTIVE_POWER: {</div>
+<div class="line"><span class="lineno">  189</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Q&quot;</span>);</div>
+<div class="line"><span class="lineno">  191</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">case</span> OUT_FIELD_VOLTAGE: {</div>
+<div class="line"><span class="lineno">  193</span>        m_ioNodeType = Node::NodeType::NODE_IN;</div>
+<div class="line"><span class="lineno">  194</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Vf&quot;</span>);</div>
+<div class="line"><span class="lineno">  195</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  196</span>    <span class="keywordflow">case</span> OUT_MEC_POWER: {</div>
+<div class="line"><span class="lineno">  197</span>        m_ioNodeType = Node::NodeType::NODE_IN;</div>
+<div class="line"><span class="lineno">  198</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Pm&quot;</span>);</div>
+<div class="line"><span class="lineno">  199</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  200</span>    <span class="keywordflow">case</span> IN_INITIAL_TERMINAL_VOLTAGE: {</div>
+<div class="line"><span class="lineno">  201</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  202</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Vt&quot;</span>) + subZero;</div>
+<div class="line"><span class="lineno">  203</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  204</span>    <span class="keywordflow">case</span> IN_INITIAL_MEC_POWER: {</div>
+<div class="line"><span class="lineno">  205</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  206</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Pm&quot;</span>) + subZero;</div>
+<div class="line"><span class="lineno">  207</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  208</span>    <span class="keywordflow">case</span> IN_INITIAL_VELOCITY: {</div>
+<div class="line"><span class="lineno">  209</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  210</span>        <span class="keywordflow">return</span> omega + subZero;</div>
+<div class="line"><span class="lineno">  211</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">case</span> IN_DELTA_VELOCITY: {</div>
+<div class="line"><span class="lineno">  213</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  214</span>        <span class="keywordflow">return</span> capDelta + omega;</div>
+<div class="line"><span class="lineno">  215</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  216</span>    <span class="keywordflow">case</span> IN_DELTA_ACTIVE_POWER: {</div>
+<div class="line"><span class="lineno">  217</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  218</span>        <span class="keywordflow">return</span> capDelta + _(<span class="stringliteral">&quot;P&quot;</span>);</div>
+<div class="line"><span class="lineno">  219</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  220</span>    <span class="keywordflow">case</span> IN_IO: {</div>
+<div class="line"><span class="lineno">  221</span>        m_ioNodeType = Node::NodeType::NODE_OUT;</div>
+<div class="line"><span class="lineno">  222</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;I/O&quot;</span>);</div>
+<div class="line"><span class="lineno">  223</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  224</span>    }</div>
+<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  226</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -971,13 +984,13 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a09cef76a09ba34330ede838eaddbc740">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00355">355</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  356</span>{</div>
-<div class="line"><span class="lineno">  357</span>    <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_i_o_control.html">IOControl</a>(*<span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  358</span>    copy-&gt;m_gcText = m_gcText ? m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GetCopy</a>() : <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  359</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><span class="lineno">  360</span>}</div>
-<div class="ttc" id="aclass_g_c_text_html_aaf81b82ffd02807c933947ed89a09406"><div class="ttname"><a href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GCText::GetCopy</a></div><div class="ttdeci">virtual GCText * GetCopy()</div><div class="ttdoc">Get a deep text copy.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00167">GCText.cpp:167</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00283">283</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  284</span>{</div>
+<div class="line"><span class="lineno">  285</span>    <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_i_o_control.html">IOControl</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  286</span>    copy-&gt;m_gcText = m_gcText ? m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GetCopy</a>() : <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  287</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><span class="lineno">  288</span>}</div>
+<div class="ttc" id="aclass_g_c_text_html_aaf81b82ffd02807c933947ed89a09406"><div class="ttname"><a href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GCText::GetCopy</a></div><div class="ttdeci">virtual GCText * GetCopy()</div><div class="ttdoc">Get a deep text copy.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00099">GCText.cpp:99</a></div></div>
 <div class="ttc" id="aclass_i_o_control_html"><div class="ttname"><a href="class_i_o_control.html">IOControl</a></div><div class="ttdoc">Provides the communication with the power element.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8h_source.html#l00042">IOControl.h:43</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1015,8 +1028,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00075">75</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>{ <span class="keywordflow">return</span> m_ioFlags; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00077">77</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   77</span>{ <span class="keywordflow">return</span> m_ioFlags; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1043,8 +1056,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00077">77</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   77</span>{ <span class="keywordflow">return</span> m_name; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00079">79</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>{ <span class="keywordflow">return</span> m_name; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1071,8 +1084,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00079">79</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   79</span>{ <span class="keywordflow">return</span> m_simTestData; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00081">81</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   81</span>{ <span class="keywordflow">return</span> m_simTestData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1099,8 +1112,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00081">81</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   81</span>{ <span class="keywordflow">return</span> m_testValue; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00083">83</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>{ <span class="keywordflow">return</span> m_testValue; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1127,8 +1140,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00076">76</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   76</span>{ <span class="keywordflow">return</span> m_ioNodeType; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00078">78</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>{ <span class="keywordflow">return</span> m_ioNodeType; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1155,8 +1168,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00073">73</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   73</span>{ <span class="keywordflow">return</span> m_value; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00075">75</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{ <span class="keywordflow">return</span> m_value; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1185,15 +1198,15 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00402">402</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  403</span>{</div>
-<div class="line"><span class="lineno">  404</span>    m_solved = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  405</span>    m_output = 0.0;</div>
-<div class="line"><span class="lineno">  406</span>    <span class="keywordflow">if</span>(m_value == IOControl::IN_TEST) {</div>
-<div class="line"><span class="lineno">  407</span>        m_output = m_testValue;</div>
-<div class="line"><span class="lineno">  408</span>    }</div>
-<div class="line"><span class="lineno">  409</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  410</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00330">330</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  331</span>{</div>
+<div class="line"><span class="lineno">  332</span>    m_solved = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  333</span>    m_output = 0.0;</div>
+<div class="line"><span class="lineno">  334</span>    <span class="keywordflow">if</span>(m_value == IOControl::IN_TEST) {</div>
+<div class="line"><span class="lineno">  335</span>        m_output = m_testValue;</div>
+<div class="line"><span class="lineno">  336</span>    }</div>
+<div class="line"><span class="lineno">  337</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  338</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1231,8 +1244,8 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00066">66</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   66</span>{ <span class="keywordflow">return</span> m_rect.Intersects(rect); }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00067">67</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>{ <span class="keywordflow">return</span> m_rect.Intersects(rect); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1262,19 +1275,19 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00388">388</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  389</span>{</div>
-<div class="line"><span class="lineno">  390</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  391</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  392</span> </div>
-<div class="line"><span class="lineno">  393</span>    <span class="comment">// Element properties</span></div>
-<div class="line"><span class="lineno">  394</span>    IOControl::IOFlags value = <span class="keyword">static_cast&lt;</span>IOControl::IOFlags<span class="keyword">&gt;</span>(XMLParser::GetNodeValueInt(elementNode, <span class="stringliteral">&quot;Value&quot;</span>));</div>
-<div class="line"><span class="lineno">  395</span>    SetValue(value);</div>
-<div class="line"><span class="lineno">  396</span>    <span class="keyword">auto</span> name = elementNode-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><span class="lineno">  397</span>    <span class="keywordflow">if</span> (name) m_name = name-&gt;value();</div>
-<div class="line"><span class="lineno">  398</span> </div>
-<div class="line"><span class="lineno">  399</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  400</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00316">316</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  317</span>{</div>
+<div class="line"><span class="lineno">  318</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  319</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  320</span> </div>
+<div class="line"><span class="lineno">  321</span>    <span class="comment">// Element properties</span></div>
+<div class="line"><span class="lineno">  322</span>    IOControl::IOFlags value = <span class="keyword">static_cast&lt;</span>IOControl::IOFlags<span class="keyword">&gt;</span>(XMLParser::GetNodeValueInt(elementNode, <span class="stringliteral">&quot;Value&quot;</span>));</div>
+<div class="line"><span class="lineno">  323</span>    SetValue(value);</div>
+<div class="line"><span class="lineno">  324</span>    <span class="keyword">auto</span> name = elementNode-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><span class="lineno">  325</span>    <span class="keywordflow">if</span> (name) m_name = name-&gt;value();</div>
+<div class="line"><span class="lineno">  326</span> </div>
+<div class="line"><span class="lineno">  327</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  328</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1312,24 +1325,24 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00226">226</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  227</span>{</div>
-<div class="line"><span class="lineno">  228</span>    <span class="keywordflow">if</span> (clockwise)</div>
-<div class="line"><span class="lineno">  229</span>        m_angle += 90.0;</div>
-<div class="line"><span class="lineno">  230</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  231</span>        m_angle -= 90.0;</div>
-<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">if</span> (m_angle &gt;= 360.0)</div>
-<div class="line"><span class="lineno">  233</span>        m_angle = 0.0;</div>
-<div class="line"><span class="lineno">  234</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle &lt; 0)</div>
-<div class="line"><span class="lineno">  235</span>        m_angle = 270.0;</div>
-<div class="line"><span class="lineno">  236</span> </div>
-<div class="line"><span class="lineno">  237</span>    UpdatePoints();</div>
-<div class="line"><span class="lineno">  238</span> </div>
-<div class="line"><span class="lineno">  239</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  240</span>        <a class="code hl_class" href="class_node.html">Node</a>* node = *it;</div>
-<div class="line"><span class="lineno">  241</span>        node-&gt;Rotate(clockwise);</div>
-<div class="line"><span class="lineno">  242</span>    }</div>
-<div class="line"><span class="lineno">  243</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00144">144</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  145</span>{</div>
+<div class="line"><span class="lineno">  146</span>    <span class="keywordflow">if</span> (clockwise)</div>
+<div class="line"><span class="lineno">  147</span>        m_angle += 90.0;</div>
+<div class="line"><span class="lineno">  148</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  149</span>        m_angle -= 90.0;</div>
+<div class="line"><span class="lineno">  150</span>    <span class="keywordflow">if</span> (m_angle &gt;= 360.0)</div>
+<div class="line"><span class="lineno">  151</span>        m_angle = 0.0;</div>
+<div class="line"><span class="lineno">  152</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle &lt; 0)</div>
+<div class="line"><span class="lineno">  153</span>        m_angle = 270.0;</div>
+<div class="line"><span class="lineno">  154</span> </div>
+<div class="line"><span class="lineno">  155</span>    UpdatePoints();</div>
+<div class="line"><span class="lineno">  156</span> </div>
+<div class="line"><span class="lineno">  157</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  158</span>        <a class="code hl_class" href="class_node.html">Node</a>* node = *it;</div>
+<div class="line"><span class="lineno">  159</span>        node-&gt;Rotate(clockwise);</div>
+<div class="line"><span class="lineno">  160</span>    }</div>
+<div class="line"><span class="lineno">  161</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1369,24 +1382,59 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00369">369</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  370</span>{</div>
-<div class="line"><span class="lineno">  371</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;IO&quot;</span>);</div>
-<div class="line"><span class="lineno">  372</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><span class="lineno">  373</span> </div>
-<div class="line"><span class="lineno">  374</span>    SaveCADProperties(doc, elementNode);</div>
-<div class="line"><span class="lineno">  375</span>    SaveControlNodes(doc, elementNode);</div>
-<div class="line"><span class="lineno">  376</span> </div>
-<div class="line"><span class="lineno">  377</span>    <span class="comment">// Element properties</span></div>
-<div class="line"><span class="lineno">  378</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><span class="lineno">  379</span>    XMLParser::SetNodeValue(doc, name, m_name);</div>
-<div class="line"><span class="lineno">  380</span>    <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
-<div class="line"><span class="lineno">  381</span>    XMLParser::SetNodeValue(doc, value, m_value);</div>
-<div class="line"><span class="lineno">  382</span>    <span class="keyword">auto</span> ioFlags = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;IOFlags&quot;</span>);</div>
-<div class="line"><span class="lineno">  383</span>    XMLParser::SetNodeValue(doc, ioFlags, m_ioFlags);</div>
-<div class="line"><span class="lineno">  384</span> </div>
-<div class="line"><span class="lineno">  385</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><span class="lineno">  386</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00297">297</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  298</span>{</div>
+<div class="line"><span class="lineno">  299</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;IO&quot;</span>);</div>
+<div class="line"><span class="lineno">  300</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><span class="lineno">  301</span> </div>
+<div class="line"><span class="lineno">  302</span>    SaveCADProperties(doc, elementNode);</div>
+<div class="line"><span class="lineno">  303</span>    SaveControlNodes(doc, elementNode);</div>
+<div class="line"><span class="lineno">  304</span> </div>
+<div class="line"><span class="lineno">  305</span>    <span class="comment">// Element properties</span></div>
+<div class="line"><span class="lineno">  306</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><span class="lineno">  307</span>    XMLParser::SetNodeValue(doc, name, m_name);</div>
+<div class="line"><span class="lineno">  308</span>    <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
+<div class="line"><span class="lineno">  309</span>    XMLParser::SetNodeValue(doc, value, m_value);</div>
+<div class="line"><span class="lineno">  310</span>    <span class="keyword">auto</span> ioFlags = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;IOFlags&quot;</span>);</div>
+<div class="line"><span class="lineno">  311</span>    XMLParser::SetNodeValue(doc, ioFlags, m_ioFlags);</div>
+<div class="line"><span class="lineno">  312</span> </div>
+<div class="line"><span class="lineno">  313</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><span class="lineno">  314</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a15096811b9865e3d4d00d3c69d9fdf75" name="a15096811b9865e3d4d00d3c69d9fdf75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15096811b9865e3d4d00d3c69d9fdf75">&#9670;&#160;</a></span>SetFont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IOControl::SetFont </td>
+          <td>(</td>
+          <td class="paramtype">wxFont &amp;&#160;</td>
+          <td class="paramname"><em>font</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00163">163</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  164</span>{</div>
+<div class="line"><span class="lineno">  165</span>    m_gcText-&gt;SetFont(font);</div>
+<div class="line"><span class="lineno">  166</span>    <a class="code hl_function" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">UpdateText</a>();</div>
+<div class="line"><span class="lineno">  167</span>}</div>
+<div class="ttc" id="aclass_i_o_control_html_a19372719e4f316f5cd49e2f289e3d4d9"><div class="ttname"><a href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl::UpdateText</a></div><div class="ttdeci">virtual bool UpdateText()</div><div class="ttdoc">Update the OpenGL text in the element (if present).</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8cpp_source.html#l00290">IOControl.cpp:290</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1414,8 +1462,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00078">78</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   78</span>{ m_name = name; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00080">80</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   80</span>{ m_name = name; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1443,8 +1491,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00080">80</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   80</span>{ m_simTestData = simTestData; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00082">82</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   82</span>{ m_simTestData = simTestData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1472,8 +1520,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00082">82</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   82</span>{ m_testValue = testValue; }</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00084">84</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   84</span>{ m_testValue = testValue; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1501,24 +1549,24 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00300">300</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  301</span>{</div>
-<div class="line"><span class="lineno">  302</span>    m_value = value;</div>
-<div class="line"><span class="lineno">  303</span>    wxString text = GenerateText();</div>
-<div class="line"><span class="lineno">  304</span> </div>
-<div class="line"><span class="lineno">  305</span>    <span class="keywordflow">if</span> (m_gcText)</div>
-<div class="line"><span class="lineno">  306</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085">SetText</a>(text);</div>
-<div class="line"><span class="lineno">  307</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  308</span>        m_gcText = <span class="keyword">new</span> <a class="code hl_class" href="class_g_c_text.html">GCText</a>(text);</div>
-<div class="line"><span class="lineno">  309</span> </div>
-<div class="line"><span class="lineno">  310</span>    m_width = m_gcText-&gt;GetWidth() + 10 + 2 * m_borderSize;</div>
-<div class="line"><span class="lineno">  311</span>    m_height = m_gcText-&gt;GetHeight() + 10 + 2 * m_borderSize;</div>
-<div class="line"><span class="lineno">  312</span> </div>
-<div class="line"><span class="lineno">  313</span>    <a class="code hl_function" href="class_element.html#a920fe7ba1563615857618f01e64b3284">SetPosition</a>(m_position);  <span class="comment">// Update rectangle.</span></div>
-<div class="line"><span class="lineno">  314</span> </div>
-<div class="line"><span class="lineno">  315</span>    UpdatePoints();</div>
-<div class="line"><span class="lineno">  316</span>}</div>
-<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00028">Element.cpp:28</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00228">228</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  229</span>{</div>
+<div class="line"><span class="lineno">  230</span>    m_value = value;</div>
+<div class="line"><span class="lineno">  231</span>    wxString text = GenerateText();</div>
+<div class="line"><span class="lineno">  232</span> </div>
+<div class="line"><span class="lineno">  233</span>    <span class="keywordflow">if</span> (m_gcText)</div>
+<div class="line"><span class="lineno">  234</span>        m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085">SetText</a>(text);</div>
+<div class="line"><span class="lineno">  235</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  236</span>        m_gcText = <span class="keyword">new</span> <a class="code hl_class" href="class_g_c_text.html">GCText</a>(text);</div>
+<div class="line"><span class="lineno">  237</span> </div>
+<div class="line"><span class="lineno">  238</span>    m_width = m_gcText-&gt;GetWidth() + 10 + 2 * m_borderSize;</div>
+<div class="line"><span class="lineno">  239</span>    m_height = m_gcText-&gt;GetHeight() + 10 + 2 * m_borderSize;</div>
+<div class="line"><span class="lineno">  240</span> </div>
+<div class="line"><span class="lineno">  241</span>    <a class="code hl_function" href="class_element.html#a920fe7ba1563615857618f01e64b3284">SetPosition</a>(m_position);  <span class="comment">// Update rectangle.</span></div>
+<div class="line"><span class="lineno">  242</span> </div>
+<div class="line"><span class="lineno">  243</span>    UpdatePoints();</div>
+<div class="line"><span class="lineno">  244</span>}</div>
+<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00033">Element.cpp:33</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html"><div class="ttname"><a href="class_g_c_text.html">GCText</a></div><div class="ttdoc">Class to draw text on Graphics Context using wxWidgets.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8h_source.html#l00031">GCText.h:32</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html_aff3fa347bf6cab992c5768c88210a085"><div class="ttname"><a href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085">GCText::SetText</a></div><div class="ttdeci">virtual void SetText(wxString text)</div><div class="ttdoc">Set correctly a new text string.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00068">GCText.cpp:68</a></div></div>
 </div><!-- fragment -->
@@ -1576,14 +1624,14 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00217">217</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  218</span>{</div>
-<div class="line"><span class="lineno">  219</span>    <a class="code hl_class" href="class_i_o_control_form.html">IOControlForm</a> form(parent, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  220</span>    <span class="keywordflow">if</span> (form.ShowModal() == wxID_OK) {</div>
-<div class="line"><span class="lineno">  221</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  222</span>    }</div>
-<div class="line"><span class="lineno">  223</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  224</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00135">135</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  136</span>{</div>
+<div class="line"><span class="lineno">  137</span>    <a class="code hl_class" href="class_i_o_control_form.html">IOControlForm</a> form(parent, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  138</span>    <span class="keywordflow">if</span> (form.ShowModal() == wxID_OK) {</div>
+<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  140</span>    }</div>
+<div class="line"><span class="lineno">  141</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  142</span>}</div>
 <div class="ttc" id="aclass_i_o_control_form_html"><div class="ttname"><a href="class_i_o_control_form.html">IOControlForm</a></div><div class="ttdoc">Form to edit the input/output control data.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_form_8h_source.html#l00031">IOControlForm.h:32</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1611,42 +1659,42 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00318">318</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  319</span>{</div>
-<div class="line"><span class="lineno">  320</span>    <span class="keywordflow">if</span> (m_nodeList.size() != 0) {</div>
-<div class="line"><span class="lineno">  321</span>        <a class="code hl_class" href="class_node.html">Node</a>* node = m_nodeList[0];</div>
-<div class="line"><span class="lineno">  322</span>        <span class="keywordflow">if</span> (node-&gt;GetNodeType() != m_ioNodeType) {</div>
-<div class="line"><span class="lineno">  323</span>            <span class="comment">// Rotate 180 degrees</span></div>
-<div class="line"><span class="lineno">  324</span>            node-&gt;Rotate();</div>
-<div class="line"><span class="lineno">  325</span>            node-&gt;Rotate();</div>
-<div class="line"><span class="lineno">  326</span>        }</div>
-<div class="line"><span class="lineno">  327</span>        node-&gt;SetNodeType(m_ioNodeType);</div>
-<div class="line"><span class="lineno">  328</span>        <span class="keywordflow">if</span> (m_angle == 0.0) {</div>
-<div class="line"><span class="lineno">  329</span>            <span class="keywordflow">if</span> (m_ioNodeType == Node::NodeType::NODE_IN)</div>
-<div class="line"><span class="lineno">  330</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));</div>
-<div class="line"><span class="lineno">  331</span>            <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  332</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(m_width / 2 - 2, 0));</div>
-<div class="line"><span class="lineno">  333</span>        }</div>
-<div class="line"><span class="lineno">  334</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 90.0) {</div>
-<div class="line"><span class="lineno">  335</span>            <span class="keywordflow">if</span> (m_ioNodeType == Node::NodeType::NODE_IN)</div>
-<div class="line"><span class="lineno">  336</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));</div>
-<div class="line"><span class="lineno">  337</span>            <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  338</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(0, m_height / 2 - 2));</div>
-<div class="line"><span class="lineno">  339</span>        }</div>
-<div class="line"><span class="lineno">  340</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 180.0) {</div>
-<div class="line"><span class="lineno">  341</span>            <span class="keywordflow">if</span> (m_ioNodeType == Node::NodeType::NODE_IN)</div>
-<div class="line"><span class="lineno">  342</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));</div>
-<div class="line"><span class="lineno">  343</span>            <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  344</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(2 - m_width / 2, 0));</div>
-<div class="line"><span class="lineno">  345</span>        }</div>
-<div class="line"><span class="lineno">  346</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 270.0) {</div>
-<div class="line"><span class="lineno">  347</span>            <span class="keywordflow">if</span> (m_ioNodeType == Node::NodeType::NODE_IN)</div>
-<div class="line"><span class="lineno">  348</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));</div>
-<div class="line"><span class="lineno">  349</span>            <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  350</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(0, 2 - m_height / 2));</div>
-<div class="line"><span class="lineno">  351</span>        }</div>
-<div class="line"><span class="lineno">  352</span>    }</div>
-<div class="line"><span class="lineno">  353</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00246">246</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  247</span>{</div>
+<div class="line"><span class="lineno">  248</span>    <span class="keywordflow">if</span> (m_nodeList.size() != 0) {</div>
+<div class="line"><span class="lineno">  249</span>        <a class="code hl_class" href="class_node.html">Node</a>* node = m_nodeList[0];</div>
+<div class="line"><span class="lineno">  250</span>        <span class="keywordflow">if</span> (node-&gt;GetNodeType() != m_ioNodeType) {</div>
+<div class="line"><span class="lineno">  251</span>            <span class="comment">// Rotate 180 degrees</span></div>
+<div class="line"><span class="lineno">  252</span>            node-&gt;Rotate();</div>
+<div class="line"><span class="lineno">  253</span>            node-&gt;Rotate();</div>
+<div class="line"><span class="lineno">  254</span>        }</div>
+<div class="line"><span class="lineno">  255</span>        node-&gt;SetNodeType(m_ioNodeType);</div>
+<div class="line"><span class="lineno">  256</span>        <span class="keywordflow">if</span> (m_angle == 0.0) {</div>
+<div class="line"><span class="lineno">  257</span>            <span class="keywordflow">if</span> (m_ioNodeType == Node::NodeType::NODE_IN)</div>
+<div class="line"><span class="lineno">  258</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));</div>
+<div class="line"><span class="lineno">  259</span>            <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  260</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(m_width / 2 - 2, 0));</div>
+<div class="line"><span class="lineno">  261</span>        }</div>
+<div class="line"><span class="lineno">  262</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 90.0) {</div>
+<div class="line"><span class="lineno">  263</span>            <span class="keywordflow">if</span> (m_ioNodeType == Node::NodeType::NODE_IN)</div>
+<div class="line"><span class="lineno">  264</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));</div>
+<div class="line"><span class="lineno">  265</span>            <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  266</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(0, m_height / 2 - 2));</div>
+<div class="line"><span class="lineno">  267</span>        }</div>
+<div class="line"><span class="lineno">  268</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 180.0) {</div>
+<div class="line"><span class="lineno">  269</span>            <span class="keywordflow">if</span> (m_ioNodeType == Node::NodeType::NODE_IN)</div>
+<div class="line"><span class="lineno">  270</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));</div>
+<div class="line"><span class="lineno">  271</span>            <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  272</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(2 - m_width / 2, 0));</div>
+<div class="line"><span class="lineno">  273</span>        }</div>
+<div class="line"><span class="lineno">  274</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_angle == 270.0) {</div>
+<div class="line"><span class="lineno">  275</span>            <span class="keywordflow">if</span> (m_ioNodeType == Node::NodeType::NODE_IN)</div>
+<div class="line"><span class="lineno">  276</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));</div>
+<div class="line"><span class="lineno">  277</span>            <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  278</span>                node-&gt;SetPosition(m_position + wxPoint2DDouble(0, 2 - m_height / 2));</div>
+<div class="line"><span class="lineno">  279</span>        }</div>
+<div class="line"><span class="lineno">  280</span>    }</div>
+<div class="line"><span class="lineno">  281</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1678,12 +1726,12 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00362">362</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  363</span>{</div>
-<div class="line"><span class="lineno">  364</span>    SetValue(m_value);</div>
-<div class="line"><span class="lineno">  365</span>    <span class="comment">//if (!m_glText-&gt;IsTextureOK()) return false;</span></div>
-<div class="line"><span class="lineno">  366</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  367</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00290">290</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  291</span>{</div>
+<div class="line"><span class="lineno">  292</span>    SetValue(m_value);</div>
+<div class="line"><span class="lineno">  293</span>    <span class="comment">//if (!m_glText-&gt;IsTextureOK()) return false;</span></div>
+<div class="line"><span class="lineno">  294</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  295</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1708,7 +1756,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00100">100</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00102">102</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>
@@ -1732,7 +1780,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00092">92</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00094">94</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>
@@ -1756,7 +1804,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00097">97</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00099">99</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>
@@ -1780,7 +1828,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00093">93</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00095">95</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>
@@ -1804,7 +1852,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00094">94</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00096">96</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>
@@ -1828,7 +1876,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00095">95</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00097">97</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>
@@ -1852,7 +1900,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00091">91</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00093">93</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>

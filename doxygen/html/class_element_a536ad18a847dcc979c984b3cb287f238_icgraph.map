@@ -16,9 +16,9 @@
 <area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="504,351,401,329,402,324,505,345"/>
 <area shape="rect" id="Node000009" href="$class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="250,351,425,376"/>
 <area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="489,366,425,366,425,361,489,361"/>
-<area shape="rect" id="Node000010" href="$class_math_expression.html#afb7fb407a28c1e6862f9be1e68b2d36d" title="Draw the element using GDI+." alt="" coords="244,400,431,425"/>
+<area shape="rect" id="Node000010" href="$class_math_expression.html#a4c4324f8df94555f5e12efdf68a92e02" title="Draw the element using GDI+." alt="" coords="244,400,431,425"/>
 <area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="505,381,402,403,401,397,504,376"/>
-<area shape="rect" id="Node000011" href="$class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6" title="Draw switch." alt="" coords="220,449,455,475"/>
+<area shape="rect" id="Node000011" href="$class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024" title="Draw switch." alt="" coords="220,449,455,475"/>
 <area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="553,386,508,414,456,439,414,452,413,447,454,434,506,409,550,381"/>
 <area shape="rect" id="Node000028" href="$class_branch.html#aaf64ea58631438e3a16b1b2ede793875" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="252,499,423,524"/>
 <area shape="poly" id="edge27_Node000001_Node000028" title=" " alt="" coords="565,389,520,440,490,466,456,488,424,501,422,496,453,484,486,462,516,436,561,385"/>
@@ -30,36 +30,36 @@
 <area shape="poly" id="edge30_Node000001_Node000031" title=" " alt="" coords="579,390,567,443,544,509,528,544,508,578,484,609,456,636,439,647,420,654,418,649,437,642,453,632,480,606,504,575,523,542,539,507,562,441,574,389"/>
 <area shape="rect" id="Node000032" href="$class_transformer.html#a4f9137e6190fb630167f671a0da51ab6" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="235,696,439,721"/>
 <area shape="poly" id="edge31_Node000001_Node000032" title=" " alt="" coords="581,390,572,451,551,531,535,573,514,614,488,652,456,685,436,698,433,694,453,681,484,649,510,612,530,571,546,529,567,450,576,389"/>
-<area shape="rect" id="Node000012" href="$class_capacitor.html#ab50aa5dc3a345da6a47906924805e225" title="Draw the element using wxDC." alt="" coords="16,79,161,104"/>
+<area shape="rect" id="Node000012" href="$class_capacitor.html#a404a0c839a7f23e4d466e41971529e15" title="Draw the element using wxDC." alt="" coords="16,79,161,104"/>
 <area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="223,443,218,438,202,418,191,398,182,358,184,317,192,277,200,237,203,197,195,157,185,137,170,117,157,106,160,102,174,113,189,134,200,155,208,196,206,237,197,278,189,318,187,357,196,396,206,415,222,435,226,439"/>
-<area shape="rect" id="Node000013" href="$class_e_m_t_element.html#a7366ae456a7b5d9d2a54d6f6eefce057" title="Draw the element using wxDC." alt="" coords="6,128,171,153"/>
+<area shape="rect" id="Node000013" href="$class_e_m_t_element.html#a8408c8d2151a3dd8b05c381a89bda1f9" title="Draw the element using wxDC." alt="" coords="6,128,171,153"/>
 <area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="223,444,218,438,194,404,185,370,186,336,192,301,198,267,199,234,192,200,170,166,156,156,159,151,174,163,197,198,205,233,203,268,197,302,192,336,191,369,199,402,222,435,227,440"/>
-<area shape="rect" id="Node000014" href="$class_harm_current.html#a554bcbdd29eec40149abb7c1fffaea2a" title="Draw the element using wxDC." alt="" coords="5,177,172,203"/>
+<area shape="rect" id="Node000014" href="$class_harm_current.html#a1a7c670d574a0e119b5340e0a00344dc" title="Draw the element using wxDC." alt="" coords="5,177,172,203"/>
 <area shape="poly" id="edge13_Node000011_Node000014" title=" " alt="" coords="224,443,218,438,198,411,189,382,189,354,192,326,196,298,196,270,189,243,170,216,156,205,159,201,174,212,193,241,201,270,201,298,198,327,194,354,195,382,203,408,222,435,227,439"/>
-<area shape="rect" id="Node000015" href="$class_inductor.html#a381941e5405e50dd99fbbbb5c090a6ee" title="Draw the element using wxDC." alt="" coords="21,227,157,252"/>
+<area shape="rect" id="Node000015" href="$class_inductor.html#a101c63e0fde35180aa3591fe7774e57c" title="Draw the element using wxDC." alt="" coords="21,227,157,252"/>
 <area shape="poly" id="edge14_Node000011_Node000015" title=" " alt="" coords="225,444,218,439,201,417,193,395,193,351,192,307,185,286,170,265,155,254,158,250,174,261,190,284,198,306,198,351,199,394,206,414,222,435,228,440"/>
-<area shape="rect" id="Node000016" href="$class_line.html#a293a77e65a9d48afc2e1350cd5abc69c" title="Draw the element using wxDC." alt="" coords="33,276,144,301"/>
+<area shape="rect" id="Node000016" href="$class_line.html#a13265d21166981e4ab26983de56c110c" title="Draw the element using wxDC." alt="" coords="33,276,144,301"/>
 <area shape="poly" id="edge15_Node000011_Node000016" title=" " alt="" coords="226,445,218,439,205,423,197,407,193,376,189,344,182,329,170,315,143,299,145,295,174,311,187,326,194,343,198,375,202,406,209,420,222,435,229,440"/>
-<area shape="rect" id="Node000017" href="$class_load.html#a37877b9d7b829262b0928cbf864653b0" title="Draw the element using wxDC." alt="" coords="31,325,146,351"/>
+<area shape="rect" id="Node000017" href="$class_load.html#a461f593383c9d386a45189f1100b663c" title="Draw the element using wxDC." alt="" coords="31,325,146,351"/>
 <area shape="poly" id="edge16_Node000011_Node000017" title=" " alt="" coords="231,446,218,439,201,420,193,401,186,382,170,364,145,351,148,346,174,360,191,379,198,399,206,417,222,435,234,442"/>
-<area shape="rect" id="Node000018" href="$class_machines.html#a154f53dfa581a4445538a6a8304dcc1c" title="Draw the element using wxDC." alt="" coords="16,375,161,400"/>
+<area shape="rect" id="Node000018" href="$class_machines.html#a386f94efcf9afdb3c0e00e5cefd8a84d" title="Draw the element using wxDC." alt="" coords="16,375,161,400"/>
 <area shape="poly" id="edge17_Node000011_Node000018" title=" " alt="" coords="250,449,219,439,195,427,171,414,139,403,140,398,173,409,197,422,221,434,251,443"/>
-<area shape="rect" id="Node000019" href="$class_transformer.html#aca87f3ff72aae2f4657d431140015b0f" title="Draw the element using wxDC." alt="" coords="8,424,169,449"/>
+<area shape="rect" id="Node000019" href="$class_transformer.html#ae0c0875b54171924b7c2b61fd0ae1674" title="Draw the element using wxDC." alt="" coords="8,424,169,449"/>
 <area shape="poly" id="edge18_Node000011_Node000019" title=" " alt="" coords="206,451,169,448,170,442,207,446"/>
-<area shape="rect" id="Node000020" href="$class_capacitor.html#ae9e0bb1d7f7b46ce5dfaa897472a1d28" title="Draw the element using GDI+." alt="" coords="16,473,161,499"/>
+<area shape="rect" id="Node000020" href="$class_capacitor.html#ad3a58870d34555b75259e9ad599fcbc6" title="Draw the element using GDI+." alt="" coords="16,473,161,499"/>
 <area shape="poly" id="edge19_Node000011_Node000020" title=" " alt="" coords="207,477,162,482,161,476,206,472"/>
-<area shape="rect" id="Node000021" href="$class_e_m_t_element.html#a3a829ba212370c5ad41cc309ac5cd1b7" title="Draw the element using GDI+." alt="" coords="6,523,171,548"/>
+<area shape="rect" id="Node000021" href="$class_e_m_t_element.html#a95a5e14ca6717e914e440caaefe30a15" title="Draw the element using GDI+." alt="" coords="6,523,171,548"/>
 <area shape="poly" id="edge20_Node000011_Node000021" title=" " alt="" coords="248,481,221,488,197,500,173,512,137,525,135,520,171,508,195,495,219,484,246,475"/>
-<area shape="rect" id="Node000022" href="$class_harm_current.html#a9ef9a2a2003c1cdaebe8d2bffd196baa" title="Draw the element using GDI+." alt="" coords="5,572,172,597"/>
+<area shape="rect" id="Node000022" href="$class_harm_current.html#ae1846f75552ae821af22149129c4f459" title="Draw the element using GDI+." alt="" coords="5,572,172,597"/>
 <area shape="poly" id="edge21_Node000011_Node000022" title=" " alt="" coords="231,483,222,488,206,505,198,523,190,542,174,561,150,574,148,570,170,557,186,540,193,521,201,502,218,484,228,478"/>
-<area shape="rect" id="Node000023" href="$class_inductor.html#ae210fe04d5b7ebe5a16683f9283fb19b" title="Draw the element using GDI+." alt="" coords="21,621,157,647"/>
+<area shape="rect" id="Node000023" href="$class_inductor.html#ad8a1636c55dda31577a37c8ff11d0b02" title="Draw the element using GDI+." alt="" coords="21,621,157,647"/>
 <area shape="poly" id="edge22_Node000011_Node000023" title=" " alt="" coords="227,484,222,488,209,502,202,516,198,547,194,579,187,595,174,611,154,623,151,619,170,607,182,592,189,577,193,546,197,515,205,499,218,484,224,480"/>
-<area shape="rect" id="Node000024" href="$class_line.html#a37f35cabf98de2806188cdf919d26e2a" title="Draw the element using GDI+." alt="" coords="33,671,144,696"/>
+<area shape="rect" id="Node000024" href="$class_line.html#a830ed5b95e29eebd7bb1769335e64164" title="Draw the element using GDI+." alt="" coords="33,671,144,696"/>
 <area shape="poly" id="edge23_Node000011_Node000024" title=" " alt="" coords="226,485,222,488,206,508,198,528,198,571,197,615,190,638,174,660,160,670,145,677,143,673,158,666,170,656,185,635,192,614,192,571,193,527,201,505,218,484,222,480"/>
-<area shape="rect" id="Node000025" href="$class_load.html#afbce4e5b08ade4c4eaa19f1ea6a9b359" title="Draw the element using GDI+." alt="" coords="31,720,146,745"/>
+<area shape="rect" id="Node000025" href="$class_load.html#a1f07bb58d943234e04207573ce3af9a3" title="Draw the element using GDI+." alt="" coords="31,720,146,745"/>
 <area shape="poly" id="edge24_Node000011_Node000025" title=" " alt="" coords="225,485,222,488,203,514,195,540,194,567,197,595,201,623,201,652,193,681,174,709,148,726,145,722,170,705,188,678,196,651,196,624,192,596,189,568,189,540,198,512,218,484,222,481"/>
-<area shape="rect" id="Node000026" href="$class_machines.html#a4d8259faa01d5f9cec09c84f326820aa" title="Draw the element using GDI+." alt="" coords="16,769,161,795"/>
+<area shape="rect" id="Node000026" href="$class_machines.html#a8f31214a9cbedd715525caa2b63b310d" title="Draw the element using GDI+." alt="" coords="16,769,161,795"/>
 <area shape="poly" id="edge25_Node000011_Node000026" title=" " alt="" coords="225,485,222,488,199,520,191,553,191,586,197,619,203,654,204,688,196,723,174,758,157,771,154,767,170,755,191,721,199,688,198,654,192,620,186,586,185,552,194,518,218,484,221,481"/>
-<area shape="rect" id="Node000027" href="$class_transformer.html#aa3bef2ffe2f57b1943b621d9052d1458" title="Draw the element using GDI+." alt="" coords="8,819,169,844"/>
+<area shape="rect" id="Node000027" href="$class_transformer.html#a1fa6bf2898e581a4745e996e3d0b2d49" title="Draw the element using GDI+." alt="" coords="8,819,169,844"/>
 <area shape="poly" id="edge26_Node000011_Node000027" title=" " alt="" coords="225,485,222,488,206,507,196,526,187,565,189,604,197,644,205,684,208,725,199,766,189,787,174,808,158,821,154,817,170,804,185,784,194,764,202,725,200,685,191,645,183,605,181,564,191,524,202,504,218,484,221,481"/>
 </map>

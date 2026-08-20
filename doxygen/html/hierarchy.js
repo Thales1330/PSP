@@ -6,6 +6,8 @@ var hierarchy =
     [ "ATPFileEditorFormBase", null, [
       [ "ATPFileEditorForm", "class_a_t_p_file_editor_form.html", null ]
     ] ],
+    [ "ATPPSPBridge", "class_a_t_p_p_s_p_bridge.html", null ],
+    [ "ATPSample", "struct_a_t_p_sample.html", null ],
     [ "ParseAnarede::BranchData", "struct_parse_anarede_1_1_branch_data.html", null ],
     [ "ParseMatpower::BranchData", "struct_parse_matpower_1_1_branch_data.html", null ],
     [ "BufferMeshCoords", "struct_buffer_mesh_coords.html", null ],
@@ -20,6 +22,7 @@ var hierarchy =
     [ "ChartViewBase", null, [
       [ "ChartView", "class_chart_view.html", null ]
     ] ],
+    [ "ChartWindowManager", "class_chart_window_manager.html", null ],
     [ "ParseAnarede::Component", "struct_parse_anarede_1_1_component.html", null ],
     [ "ConstantFormBase", null, [
       [ "ConstantForm", "class_constant_form.html", null ]
@@ -27,7 +30,9 @@ var hierarchy =
     [ "ControlEditorBase", null, [
       [ "ControlEditor", "class_control_editor.html", null ]
     ] ],
+    [ "ControlEditorManager", "class_control_editor_manager.html", null ],
     [ "ControlElementContainer", "class_control_element_container.html", null ],
+    [ "ControlElementsLists", "struct_control_elements_lists.html", null ],
     [ "ControlElementSolver", "class_control_element_solver.html", null ],
     [ "ControlSystemTestBase", null, [
       [ "ControlSystemTest", "class_control_system_test.html", null ]
@@ -116,6 +121,7 @@ var hierarchy =
     [ "GraphAutoLayout", "class_graph_auto_layout.html", null ],
     [ "GraphAutoLayout::GraphLayoutEdge", "struct_graph_auto_layout_1_1_graph_layout_edge.html", null ],
     [ "GraphAutoLayout::GraphLayoutNode", "struct_graph_auto_layout_1_1_graph_layout_node.html", null ],
+    [ "GUIColour", "struct_g_u_i_colour.html", null ],
     [ "HarmCurrentElectricalData", "struct_harm_current_electrical_data.html", null ],
     [ "HarmCurrentFormBase", null, [
       [ "HarmCurrentForm", "class_harm_current_form.html", null ]
@@ -158,6 +164,8 @@ var hierarchy =
     [ "ParseAnarede", "class_parse_anarede.html", null ],
     [ "ParseMatpower", "class_parse_matpower.html", null ],
     [ "Paths", "class_paths.html", null ],
+    [ "Phasor", "struct_phasor.html", null ],
+    [ "PhasorEstimator", "class_phasor_estimator.html", null ],
     [ "ParseAnarede::PowerLine", "struct_parse_anarede_1_1_power_line.html", null ],
     [ "ProjectPropertiesFormBase", null, [
       [ "ProjectPropertiesForm", "class_project_properties_form.html", null ]
@@ -171,6 +179,8 @@ var hierarchy =
     [ "ReactiveShuntElementFormBase", null, [
       [ "ReactiveShuntElementForm", "class_reactive_shunt_element_form.html", null ]
     ] ],
+    [ "Sample", "struct_sample.html", null ],
+    [ "SharedData", "struct_shared_data.html", null ],
     [ "SimTestData", "struct_sim_test_data.html", null ],
     [ "SimulationData", "struct_simulation_data.html", null ],
     [ "SimulationsSettingsFormBase", null, [
@@ -210,6 +220,7 @@ var hierarchy =
       [ "MainApp", "class_main_app.html", null ]
     ] ],
     [ "wxDataObjectSimple", null, [
+      [ "ControlElementDataObject", "class_control_element_data_object.html", null ],
       [ "ElementDataObject", "class_element_data_object.html", null ]
     ] ],
     [ "wxFrame", null, [

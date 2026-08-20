@@ -1,5 +1,5 @@
 <map id="Element::DrawDCRectangle" name="Element::DrawDCRectangle">
 <area shape="rect" id="Node000001" title="Draw a circle." alt="" coords="160,5,363,31"/>
-<area shape="rect" id="Node000002" href="$class_bus.html#a2ad52f49760139090d3576b8015f7536" title="Draw the element using wxDC." alt="" coords="5,5,112,31"/>
+<area shape="rect" id="Node000002" href="$class_bus.html#a840b27bdcfd376e50ef41f76a4a4d221" title="Draw the element using wxDC." alt="" coords="5,5,112,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,21,112,21,112,15,146,15"/>
 </map>

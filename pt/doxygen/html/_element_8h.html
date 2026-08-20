@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -125,6 +124,7 @@ $(document).ready(function(){initNavTree('_element_8h.html',''); initResizable()
 <code>#include &lt;wx/dc.h&gt;</code><br />
 <code>#include &lt;complex&gt;</code><br />
 <code>#include &quot;<a class="el" href="_x_m_l_parser_8h_source.html">../utils/XMLParser.h</a>&quot;</code><br />
+<code>#include &quot;../utils/CommomTypes.h&quot;</code><br />
 </div>
 <p><a href="_element_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -235,21 +235,21 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00074">74</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   74</span>                   {</div>
-<div class="line"><span class="lineno">   75</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a> = 0,    </div>
-<div class="line"><span class="lineno">   76</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049af05f38a3b3fea5d6da036dce48e9d960">ID_LINE_ADD_NODE</a>,       </div>
-<div class="line"><span class="lineno">   77</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a1a8f8c62fc201993f6a605ff06314803">ID_LINE_REMOVE_NODE</a>,    </div>
-<div class="line"><span class="lineno">   78</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a9d58b2fe374676b88029d401da0d77a8">ID_ROTATE_CLOCK</a>,        </div>
-<div class="line"><span class="lineno">   79</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049adeee9ba1a6f37ff0622ca94a52e40551">ID_ROTATE_COUNTERCLOCK</a>, </div>
-<div class="line"><span class="lineno">   80</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a80c989d88bc686137e96564dfad6166a">ID_DELETE</a>              </div>
-<div class="line"><span class="lineno">   81</span>};</div>
-<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049a1a8f8c62fc201993f6a605ff06314803"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a1a8f8c62fc201993f6a605ff06314803">ID_LINE_REMOVE_NODE</a></div><div class="ttdeci">@ ID_LINE_REMOVE_NODE</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00077">Element.h:77</a></div></div>
-<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049a80c989d88bc686137e96564dfad6166a"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a80c989d88bc686137e96564dfad6166a">ID_DELETE</a></div><div class="ttdeci">@ ID_DELETE</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00081">Element.h:80</a></div></div>
-<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049a9d58b2fe374676b88029d401da0d77a8"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a9d58b2fe374676b88029d401da0d77a8">ID_ROTATE_CLOCK</a></div><div class="ttdeci">@ ID_ROTATE_CLOCK</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00078">Element.h:78</a></div></div>
-<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00075">Element.h:75</a></div></div>
-<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049adeee9ba1a6f37ff0622ca94a52e40551"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049adeee9ba1a6f37ff0622ca94a52e40551">ID_ROTATE_COUNTERCLOCK</a></div><div class="ttdeci">@ ID_ROTATE_COUNTERCLOCK</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00079">Element.h:79</a></div></div>
-<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049af05f38a3b3fea5d6da036dce48e9d960"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049af05f38a3b3fea5d6da036dce48e9d960">ID_LINE_ADD_NODE</a></div><div class="ttdeci">@ ID_LINE_ADD_NODE</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00076">Element.h:76</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00076">76</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   76</span>                   {</div>
+<div class="line"><span class="lineno">   77</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a> = 0,    </div>
+<div class="line"><span class="lineno">   78</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049af05f38a3b3fea5d6da036dce48e9d960">ID_LINE_ADD_NODE</a>,       </div>
+<div class="line"><span class="lineno">   79</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a1a8f8c62fc201993f6a605ff06314803">ID_LINE_REMOVE_NODE</a>,    </div>
+<div class="line"><span class="lineno">   80</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a9d58b2fe374676b88029d401da0d77a8">ID_ROTATE_CLOCK</a>,        </div>
+<div class="line"><span class="lineno">   81</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049adeee9ba1a6f37ff0622ca94a52e40551">ID_ROTATE_COUNTERCLOCK</a>, </div>
+<div class="line"><span class="lineno">   82</span>    <a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a80c989d88bc686137e96564dfad6166a">ID_DELETE</a>              </div>
+<div class="line"><span class="lineno">   83</span>};</div>
+<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049a1a8f8c62fc201993f6a605ff06314803"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a1a8f8c62fc201993f6a605ff06314803">ID_LINE_REMOVE_NODE</a></div><div class="ttdeci">@ ID_LINE_REMOVE_NODE</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00079">Element.h:79</a></div></div>
+<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049a80c989d88bc686137e96564dfad6166a"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a80c989d88bc686137e96564dfad6166a">ID_DELETE</a></div><div class="ttdeci">@ ID_DELETE</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00083">Element.h:82</a></div></div>
+<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049a9d58b2fe374676b88029d401da0d77a8"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a9d58b2fe374676b88029d401da0d77a8">ID_ROTATE_CLOCK</a></div><div class="ttdeci">@ ID_ROTATE_CLOCK</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00080">Element.h:80</a></div></div>
+<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00077">Element.h:77</a></div></div>
+<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049adeee9ba1a6f37ff0622ca94a52e40551"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049adeee9ba1a6f37ff0622ca94a52e40551">ID_ROTATE_COUNTERCLOCK</a></div><div class="ttdeci">@ ID_ROTATE_COUNTERCLOCK</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00081">Element.h:81</a></div></div>
+<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049af05f38a3b3fea5d6da036dce48e9d960"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049af05f38a3b3fea5d6da036dce48e9d960">ID_LINE_ADD_NODE</a></div><div class="ttdeci">@ ID_LINE_ADD_NODE</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00078">Element.h:78</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -265,21 +265,21 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00041">41</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span>                 {</div>
-<div class="line"><span class="lineno">   42</span>    TYPE_NONE = 0,</div>
-<div class="line"><span class="lineno">   43</span>    TYPE_BUS,</div>
-<div class="line"><span class="lineno">   44</span>    TYPE_CAPACITOR,</div>
-<div class="line"><span class="lineno">   45</span>    TYPE_IND_MOTOR,</div>
-<div class="line"><span class="lineno">   46</span>    TYPE_INDUCTOR,</div>
-<div class="line"><span class="lineno">   47</span>    TYPE_LINE,</div>
-<div class="line"><span class="lineno">   48</span>    TYPE_LOAD,</div>
-<div class="line"><span class="lineno">   49</span>    TYPE_SYNC_GENERATOR,</div>
-<div class="line"><span class="lineno">   50</span>    TYPE_SYNC_MOTOR,</div>
-<div class="line"><span class="lineno">   51</span>    TYPE_TRANSFORMER,</div>
-<div class="line"><span class="lineno">   52</span>    TYPE_HARMCURRENT,</div>
-<div class="line"><span class="lineno">   53</span>    TYPE_TEXT</div>
-<div class="line"><span class="lineno">   54</span>};</div>
+<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00043">43</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   43</span>                 {</div>
+<div class="line"><span class="lineno">   44</span>    TYPE_NONE = 0,</div>
+<div class="line"><span class="lineno">   45</span>    TYPE_BUS,</div>
+<div class="line"><span class="lineno">   46</span>    TYPE_CAPACITOR,</div>
+<div class="line"><span class="lineno">   47</span>    TYPE_IND_MOTOR,</div>
+<div class="line"><span class="lineno">   48</span>    TYPE_INDUCTOR,</div>
+<div class="line"><span class="lineno">   49</span>    TYPE_LINE,</div>
+<div class="line"><span class="lineno">   50</span>    TYPE_LOAD,</div>
+<div class="line"><span class="lineno">   51</span>    TYPE_SYNC_GENERATOR,</div>
+<div class="line"><span class="lineno">   52</span>    TYPE_SYNC_MOTOR,</div>
+<div class="line"><span class="lineno">   53</span>    TYPE_TRANSFORMER,</div>
+<div class="line"><span class="lineno">   54</span>    TYPE_HARMCURRENT,</div>
+<div class="line"><span class="lineno">   55</span>    TYPE_TEXT</div>
+<div class="line"><span class="lineno">   56</span>};</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -313,23 +313,23 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00060">60</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   60</span>               {</div>
-<div class="line"><span class="lineno">   61</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a2efa051c0a3f23f2324cef5bc930f433">ID_PB_NONE</a> = 0,     </div>
-<div class="line"><span class="lineno">   62</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316af6c9b66260adb71ded1407f62d5eceb0">ID_PB_RIGHT</a>,        </div>
-<div class="line"><span class="lineno">   63</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa8b70955f3c623a35fb64e0d95531721">ID_PB_LEFT</a>,         </div>
-<div class="line"><span class="lineno">   64</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a982b811b9fa895eb15a3f8400ffa385d">ID_PB_RIGHT_BOTTOM</a>, </div>
-<div class="line"><span class="lineno">   65</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a34118762cdb912e35698c4550edf470c">ID_PB_RIGHT_TOP</a>,    </div>
-<div class="line"><span class="lineno">   66</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa962fdbb47309de8b6f16025e2d46b2f">ID_PB_LEFT_BOTTOM</a>,  </div>
-<div class="line"><span class="lineno">   67</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a49b276646725b598a6b3a24ee74e8afb">ID_PB_LEFT_TOP</a>      </div>
-<div class="line"><span class="lineno">   68</span>};</div>
-<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316a2efa051c0a3f23f2324cef5bc930f433"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a2efa051c0a3f23f2324cef5bc930f433">ID_PB_NONE</a></div><div class="ttdeci">@ ID_PB_NONE</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00061">Element.h:61</a></div></div>
-<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316a34118762cdb912e35698c4550edf470c"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a34118762cdb912e35698c4550edf470c">ID_PB_RIGHT_TOP</a></div><div class="ttdeci">@ ID_PB_RIGHT_TOP</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00065">Element.h:65</a></div></div>
-<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316a49b276646725b598a6b3a24ee74e8afb"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a49b276646725b598a6b3a24ee74e8afb">ID_PB_LEFT_TOP</a></div><div class="ttdeci">@ ID_PB_LEFT_TOP</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00068">Element.h:67</a></div></div>
-<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316a982b811b9fa895eb15a3f8400ffa385d"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a982b811b9fa895eb15a3f8400ffa385d">ID_PB_RIGHT_BOTTOM</a></div><div class="ttdeci">@ ID_PB_RIGHT_BOTTOM</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00064">Element.h:64</a></div></div>
-<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316aa8b70955f3c623a35fb64e0d95531721"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa8b70955f3c623a35fb64e0d95531721">ID_PB_LEFT</a></div><div class="ttdeci">@ ID_PB_LEFT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00063">Element.h:63</a></div></div>
-<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316aa962fdbb47309de8b6f16025e2d46b2f"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa962fdbb47309de8b6f16025e2d46b2f">ID_PB_LEFT_BOTTOM</a></div><div class="ttdeci">@ ID_PB_LEFT_BOTTOM</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00066">Element.h:66</a></div></div>
-<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316af6c9b66260adb71ded1407f62d5eceb0"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316af6c9b66260adb71ded1407f62d5eceb0">ID_PB_RIGHT</a></div><div class="ttdeci">@ ID_PB_RIGHT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00062">Element.h:62</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00062">62</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>               {</div>
+<div class="line"><span class="lineno">   63</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a2efa051c0a3f23f2324cef5bc930f433">ID_PB_NONE</a> = 0,     </div>
+<div class="line"><span class="lineno">   64</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316af6c9b66260adb71ded1407f62d5eceb0">ID_PB_RIGHT</a>,        </div>
+<div class="line"><span class="lineno">   65</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa8b70955f3c623a35fb64e0d95531721">ID_PB_LEFT</a>,         </div>
+<div class="line"><span class="lineno">   66</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a982b811b9fa895eb15a3f8400ffa385d">ID_PB_RIGHT_BOTTOM</a>, </div>
+<div class="line"><span class="lineno">   67</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a34118762cdb912e35698c4550edf470c">ID_PB_RIGHT_TOP</a>,    </div>
+<div class="line"><span class="lineno">   68</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa962fdbb47309de8b6f16025e2d46b2f">ID_PB_LEFT_BOTTOM</a>,  </div>
+<div class="line"><span class="lineno">   69</span>    <a class="code hl_enumvalue" href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a49b276646725b598a6b3a24ee74e8afb">ID_PB_LEFT_TOP</a>      </div>
+<div class="line"><span class="lineno">   70</span>};</div>
+<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316a2efa051c0a3f23f2324cef5bc930f433"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a2efa051c0a3f23f2324cef5bc930f433">ID_PB_NONE</a></div><div class="ttdeci">@ ID_PB_NONE</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00063">Element.h:63</a></div></div>
+<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316a34118762cdb912e35698c4550edf470c"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a34118762cdb912e35698c4550edf470c">ID_PB_RIGHT_TOP</a></div><div class="ttdeci">@ ID_PB_RIGHT_TOP</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00067">Element.h:67</a></div></div>
+<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316a49b276646725b598a6b3a24ee74e8afb"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a49b276646725b598a6b3a24ee74e8afb">ID_PB_LEFT_TOP</a></div><div class="ttdeci">@ ID_PB_LEFT_TOP</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00070">Element.h:69</a></div></div>
+<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316a982b811b9fa895eb15a3f8400ffa385d"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316a982b811b9fa895eb15a3f8400ffa385d">ID_PB_RIGHT_BOTTOM</a></div><div class="ttdeci">@ ID_PB_RIGHT_BOTTOM</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00066">Element.h:66</a></div></div>
+<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316aa8b70955f3c623a35fb64e0d95531721"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa8b70955f3c623a35fb64e0d95531721">ID_PB_LEFT</a></div><div class="ttdeci">@ ID_PB_LEFT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00065">Element.h:65</a></div></div>
+<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316aa962fdbb47309de8b6f16025e2d46b2f"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa962fdbb47309de8b6f16025e2d46b2f">ID_PB_LEFT_BOTTOM</a></div><div class="ttdeci">@ ID_PB_LEFT_BOTTOM</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00068">Element.h:68</a></div></div>
+<div class="ttc" id="a_element_8h_html_a7b88da333c092757d91d7492dfa8e316af6c9b66260adb71ded1407f62d5eceb0"><div class="ttname"><a href="_element_8h.html#a7b88da333c092757d91d7492dfa8e316af6c9b66260adb71ded1407f62d5eceb0">ID_PB_RIGHT</a></div><div class="ttdeci">@ ID_PB_RIGHT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00064">Element.h:64</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -345,27 +345,27 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00083">83</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   83</span>            {</div>
-<div class="line"><span class="lineno">   84</span>    ID_TXT_NAME = 1000,</div>
-<div class="line"><span class="lineno">   85</span>    ID_TXT_VOLTAGE,</div>
-<div class="line"><span class="lineno">   86</span>    ID_TXT_ANGLE,</div>
-<div class="line"><span class="lineno">   87</span>    ID_TXT_FAULTCURRENT,</div>
-<div class="line"><span class="lineno">   88</span>    ID_TXT_FAULTVOLTAGE,</div>
-<div class="line"><span class="lineno">   89</span>    ID_TXT_SCC,</div>
-<div class="line"><span class="lineno">   90</span>    ID_TXT_THD,</div>
-<div class="line"><span class="lineno">   91</span>    ID_TXT_ACTIVE_POWER,</div>
-<div class="line"><span class="lineno">   92</span>    ID_TXT_REACTIVE_POWER,</div>
-<div class="line"><span class="lineno">   93</span>    ID_TXT_BRANCH_ACTIVE_POWER_1_2,</div>
-<div class="line"><span class="lineno">   94</span>    ID_TXT_BRANCH_ACTIVE_POWER_2_1,</div>
-<div class="line"><span class="lineno">   95</span>    ID_TXT_BRANCH_REACTIVE_POWER_1_2,</div>
-<div class="line"><span class="lineno">   96</span>    ID_TXT_BRANCH_REACTIVE_POWER_2_1,</div>
-<div class="line"><span class="lineno">   97</span>    ID_TXT_BRANCH_LOSSES,</div>
-<div class="line"><span class="lineno">   98</span>    ID_TXT_BRANCH_CURRENT_1_2,</div>
-<div class="line"><span class="lineno">   99</span>    ID_TXT_BRANCH_CURRENT_2_1,</div>
-<div class="line"><span class="lineno">  100</span>    ID_TXT_BRANCH_FAULT_CURRENT_1_2,</div>
-<div class="line"><span class="lineno">  101</span>    ID_TXT_BRANCH_FAULT_CURRENT_2_1</div>
-<div class="line"><span class="lineno">  102</span>};</div>
+<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00085">85</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   85</span>            {</div>
+<div class="line"><span class="lineno">   86</span>    ID_TXT_NAME = 1000,</div>
+<div class="line"><span class="lineno">   87</span>    ID_TXT_VOLTAGE,</div>
+<div class="line"><span class="lineno">   88</span>    ID_TXT_ANGLE,</div>
+<div class="line"><span class="lineno">   89</span>    ID_TXT_FAULTCURRENT,</div>
+<div class="line"><span class="lineno">   90</span>    ID_TXT_FAULTVOLTAGE,</div>
+<div class="line"><span class="lineno">   91</span>    ID_TXT_SCC,</div>
+<div class="line"><span class="lineno">   92</span>    ID_TXT_THD,</div>
+<div class="line"><span class="lineno">   93</span>    ID_TXT_ACTIVE_POWER,</div>
+<div class="line"><span class="lineno">   94</span>    ID_TXT_REACTIVE_POWER,</div>
+<div class="line"><span class="lineno">   95</span>    ID_TXT_BRANCH_ACTIVE_POWER_1_2,</div>
+<div class="line"><span class="lineno">   96</span>    ID_TXT_BRANCH_ACTIVE_POWER_2_1,</div>
+<div class="line"><span class="lineno">   97</span>    ID_TXT_BRANCH_REACTIVE_POWER_1_2,</div>
+<div class="line"><span class="lineno">   98</span>    ID_TXT_BRANCH_REACTIVE_POWER_2_1,</div>
+<div class="line"><span class="lineno">   99</span>    ID_TXT_BRANCH_LOSSES,</div>
+<div class="line"><span class="lineno">  100</span>    ID_TXT_BRANCH_CURRENT_1_2,</div>
+<div class="line"><span class="lineno">  101</span>    ID_TXT_BRANCH_CURRENT_2_1,</div>
+<div class="line"><span class="lineno">  102</span>    ID_TXT_BRANCH_FAULT_CURRENT_1_2,</div>
+<div class="line"><span class="lineno">  103</span>    ID_TXT_BRANCH_FAULT_CURRENT_2_1</div>
+<div class="line"><span class="lineno">  104</span>};</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -2,8 +2,8 @@ var class_capacitor =
 [
     [ "AddParent", "class_capacitor.html#ace755e5bc3cc72b491ce31c24c54a5cf", null ],
     [ "Contains", "class_capacitor.html#a994039e59a8ae0ec3fe7cf7f5b66e4e5", null ],
-    [ "DrawDC", "class_capacitor.html#ab50aa5dc3a345da6a47906924805e225", null ],
-    [ "DrawDC", "class_capacitor.html#ae9e0bb1d7f7b46ce5dfaa897472a1d28", null ],
+    [ "DrawDC", "class_capacitor.html#a404a0c839a7f23e4d466e41971529e15", null ],
+    [ "DrawDC", "class_capacitor.html#ad3a58870d34555b75259e9ad599fcbc6", null ],
     [ "GetContextMenu", "class_capacitor.html#a05d5517b64dd8a8888817ca28b72294d", null ],
     [ "GetCopy", "class_capacitor.html#a422e353b594ac6e4ef34e1f613f7d580", null ],
     [ "GetTipText", "class_capacitor.html#a00e808708e16b87c80fc650e5710b84e", null ],

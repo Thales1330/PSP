@@ -1,26 +1,26 @@
 <map id="Element::DrawDCTriangle" name="Element::DrawDCTriangle">
 <area shape="rect" id="Node000001" title="Draw rectangle." alt="" coords="480,80,668,105"/>
-<area shape="rect" id="Node000002" href="$class_gain.html#a898cd2ab01825f1221bab99d76f672c5" title="Draw the element using GDI+." alt="" coords="267,5,380,31"/>
+<area shape="rect" id="Node000002" href="$class_gain.html#a93b42d90976f8ea73daffd70e63a3270" title="Draw the element using GDI+." alt="" coords="267,5,380,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="527,77,431,45,380,32,381,26,433,39,529,72"/>
-<area shape="rect" id="Node000003" href="$class_harm_current.html#a9ef9a2a2003c1cdaebe8d2bffd196baa" title="Draw the element using GDI+." alt="" coords="240,55,407,80"/>
+<area shape="rect" id="Node000003" href="$class_harm_current.html#ae1846f75552ae821af22149129c4f459" title="Draw the element using GDI+." alt="" coords="240,55,407,80"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="466,84,407,78,407,73,467,79"/>
-<area shape="rect" id="Node000004" href="$class_load.html#afbce4e5b08ade4c4eaa19f1ea6a9b359" title="Draw the element using GDI+." alt="" coords="29,60,143,85"/>
+<area shape="rect" id="Node000004" href="$class_load.html#a1f07bb58d943234e04207573ce3af9a3" title="Draw the element using GDI+." alt="" coords="29,60,143,85"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="466,99,345,99,214,94,143,85,144,80,215,89,345,94,466,94"/>
-<area shape="rect" id="Node000005" href="$class_power_element.html#ae3aaa8bf4f030ba75e63c843e07bdefb" title="Draw power flow arrows." alt="" coords="215,201,432,241"/>
+<area shape="rect" id="Node000005" href="$class_power_element.html#a97c5d3482c58bc2f88a320ce2497b97f" title="Draw power flow arrows." alt="" coords="215,201,432,241"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="537,114,365,203,363,198,535,109"/>
 <area shape="poly" id="edge10_Node000005_Node000004" title=" " alt="" coords="283,194,213,139,190,117,165,99,139,88,141,83,168,94,193,113,216,135,287,190"/>
-<area shape="rect" id="Node000006" href="$class_line.html#a293a77e65a9d48afc2e1350cd5abc69c" title="Draw the element using wxDC." alt="" coords="31,109,141,135"/>
+<area shape="rect" id="Node000006" href="$class_line.html#a13265d21166981e4ab26983de56c110c" title="Draw the element using wxDC." alt="" coords="31,109,141,135"/>
 <area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="271,197,166,148,133,137,135,132,168,144,274,192"/>
-<area shape="rect" id="Node000007" href="$class_load.html#a37877b9d7b829262b0928cbf864653b0" title="Draw the element using wxDC." alt="" coords="29,159,143,184"/>
+<area shape="rect" id="Node000007" href="$class_load.html#a461f593383c9d386a45189f1100b663c" title="Draw the element using wxDC." alt="" coords="29,159,143,184"/>
 <area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="213,200,143,186,144,181,214,195"/>
-<area shape="rect" id="Node000008" href="$class_machines.html#a154f53dfa581a4445538a6a8304dcc1c" title="Draw the element using wxDC." alt="" coords="13,208,159,233"/>
+<area shape="rect" id="Node000008" href="$class_machines.html#a386f94efcf9afdb3c0e00e5cefd8a84d" title="Draw the element using wxDC." alt="" coords="13,208,159,233"/>
 <area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="201,223,159,223,159,218,201,218"/>
-<area shape="rect" id="Node000009" href="$class_transformer.html#aca87f3ff72aae2f4657d431140015b0f" title="Draw the element using wxDC." alt="" coords="5,257,167,283"/>
+<area shape="rect" id="Node000009" href="$class_transformer.html#ae0c0875b54171924b7c2b61fd0ae1674" title="Draw the element using wxDC." alt="" coords="5,257,167,283"/>
 <area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="214,246,148,260,147,255,213,241"/>
-<area shape="rect" id="Node000010" href="$class_line.html#a37f35cabf98de2806188cdf919d26e2a" title="Draw the element using GDI+." alt="" coords="31,307,141,332"/>
+<area shape="rect" id="Node000010" href="$class_line.html#a830ed5b95e29eebd7bb1769335e64164" title="Draw the element using GDI+." alt="" coords="31,307,141,332"/>
 <area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="272,249,168,296,132,309,130,304,166,292,270,245"/>
-<area shape="rect" id="Node000011" href="$class_machines.html#a4d8259faa01d5f9cec09c84f326820aa" title="Draw the element using GDI+." alt="" coords="13,356,159,381"/>
+<area shape="rect" id="Node000011" href="$class_machines.html#a8f31214a9cbedd715525caa2b63b310d" title="Draw the element using GDI+." alt="" coords="13,356,159,381"/>
 <area shape="poly" id="edge11_Node000005_Node000011" title=" " alt="" coords="293,252,237,300,168,346,138,358,136,353,165,341,234,295,290,248"/>
-<area shape="rect" id="Node000012" href="$class_transformer.html#aa3bef2ffe2f57b1943b621d9052d1458" title="Draw the element using GDI+." alt="" coords="5,405,167,431"/>
+<area shape="rect" id="Node000012" href="$class_transformer.html#a1fa6bf2898e581a4745e996e3d0b2d49" title="Draw the element using GDI+." alt="" coords="5,405,167,431"/>
 <area shape="poly" id="edge12_Node000005_Node000012" title=" " alt="" coords="304,254,248,325,211,364,168,396,145,408,142,403,165,392,207,360,244,322,300,251"/>
 </map>

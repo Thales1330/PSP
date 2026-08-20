@@ -1,6 +1,6 @@
 <map id="GCText::SetText" name="GCText::SetText">
 <area shape="rect" id="Node000001" title="Set correctly a new text string." alt="" coords="261,31,385,56"/>
-<area shape="rect" id="Node000002" href="$class_e_m_t_element.html#a7366ae456a7b5d9d2a54d6f6eefce057" title="Draw the element using wxDC." alt="" coords="27,5,192,31"/>
+<area shape="rect" id="Node000002" href="$class_e_m_t_element.html#a8408c8d2151a3dd8b05c381a89bda1f9" title="Draw the element using wxDC." alt="" coords="27,5,192,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="247,37,192,30,192,25,248,32"/>
 <area shape="rect" id="Node000003" href="$class_math_expression.html#a7430d1f92978843de5f1bd171f09def6" title="Update the OpenGL text in the element (if present)." alt="" coords="5,55,213,80"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,54,214,58,213,53,247,49"/>

@@ -1,0 +1,9 @@
+<map id="EMTElement::DrawDC" name="EMTElement::DrawDC">
+<area shape="rect" id="Node000001" title="Draw the element using GDI+." alt="" coords="5,31,171,56"/>
+<area shape="rect" id="Node000002" href="$class_element.html#af1fd54d12f61f461111697d11cf10b9c" title="Draw a circle using device context." alt="" coords="249,5,423,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,32,234,26,235,31,171,38"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024" title="Draw switch." alt="" coords="219,55,453,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,49,206,52,205,57,170,54"/>
+<area shape="rect" id="Node000004" href="$class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="501,55,660,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="453,65,488,65,488,70,453,70"/>
+</map>

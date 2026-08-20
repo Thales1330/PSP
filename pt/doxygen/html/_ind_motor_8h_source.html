@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -145,11 +144,11 @@ $(document).ready(function(){initNavTree('_ind_motor_8h_source.html',''); initRe
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="struct_ind_motor_electrical_data.html">   25</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_ind_motor_electrical_data.html">IndMotorElectricalData</a> {</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    wxString name;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">double</span> ratedPower = 100.0;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> ratedPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    ElectricalUnit ratedPowerUnit = ElectricalUnit::UNIT_MVA;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">double</span> activePower = 100.0;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    ElectricalUnit activePowerUnit = ElectricalUnit::UNIT_MW;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">double</span> reactivePower = 0.0;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ElectricalUnit reactivePowerUnit = ElectricalUnit::UNIT_Mvar;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">bool</span> useMachinePowerAsBase = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">bool</span> calcQInPowerFlow = <span class="keyword">true</span>;</div>
@@ -263,13 +262,9 @@ $(document).ready(function(){initNavTree('_ind_motor_8h_source.html',''); initRe
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="preprocessor">#endif  </span><span class="comment">// INDMOTOR_H</span></div>
 <div class="ttc" id="a_machines_8h_html"><div class="ttname"><a href="_machines_8h.html">Machines.h</a></div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a></div><div class="ttdeci">ElectricalUnit</div><div class="ttdoc">Electrical units.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a></div><div class="ttdeci">@ UNIT_Mvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a></div><div class="ttdeci">@ UNIT_MVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a></div><div class="ttdeci">@ UNIT_MW</div></div>
-<div class="ttc" id="a_power_element_8h_html_aa6ba1b31b31a1cc802b6b3b3051a83a4"><div class="ttname"><a href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4">PlotStudy</a></div><div class="ttdeci">PlotStudy</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00087">PowerElement.h:87</a></div></div>
+<div class="ttc" id="a_power_element_8h_html_aa6ba1b31b31a1cc802b6b3b3051a83a4"><div class="ttname"><a href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4">PlotStudy</a></div><div class="ttdeci">PlotStudy</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00059">PowerElement.h:59</a></div></div>
 <div class="ttc" id="a_power_element_8h_html_aa6ba1b31b31a1cc802b6b3b3051a83a4a0bd879a71322c110d9221f9e548fd1b9"><div class="ttname"><a href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a0bd879a71322c110d9221f9e548fd1b9">PlotStudy::STABILITY</a></div><div class="ttdeci">@ STABILITY</div></div>
-<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00111">Element.h:112</a></div></div>
+<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00113">Element.h:114</a></div></div>
 <div class="ttc" id="aclass_element_plot_data_html"><div class="ttname"><a href="class_element_plot_data.html">ElementPlotData</a></div><div class="ttdef"><b>Definition</b> <a href="_element_plot_data_8h_source.html#l00067">ElementPlotData.h:68</a></div></div>
 <div class="ttc" id="aclass_ind_motor_form_html"><div class="ttname"><a href="class_ind_motor_form.html">IndMotorForm</a></div><div class="ttdoc">Form to edit the induction motor power data.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_form_8h_source.html#l00031">IndMotorForm.h:32</a></div></div>
 <div class="ttc" id="aclass_ind_motor_html"><div class="ttname"><a href="class_ind_motor.html">IndMotor</a></div><div class="ttdoc">Induction motor power element.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00118">IndMotor.h:119</a></div></div>
@@ -280,7 +275,7 @@ $(document).ready(function(){initNavTree('_ind_motor_8h_source.html',''); initRe
 <div class="ttc" id="aclass_ind_motor_html_ae785c4055db23b4ae1ef03f00468a532"><div class="ttname"><a href="class_ind_motor.html#ae785c4055db23b4ae1ef03f00468a532">IndMotor::GetTipText</a></div><div class="ttdeci">virtual wxString GetTipText() const</div><div class="ttdoc">Get the tip text.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8cpp_source.html#l00148">IndMotor.cpp:148</a></div></div>
 <div class="ttc" id="aclass_machines_html"><div class="ttname"><a href="class_machines.html">Machines</a></div><div class="ttdoc">Abstract class for rotary machines power elements.</div><div class="ttdef"><b>Definition</b> <a href="_machines_8h_source.html#l00033">Machines.h:34</a></div></div>
 <div class="ttc" id="astruct_ind_motor_electrical_data_html"><div class="ttname"><a href="struct_ind_motor_electrical_data.html">IndMotorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00025">IndMotor.h:25</a></div></div>
-<div class="ttc" id="astruct_integration_constant_html"><div class="ttname"><a href="struct_integration_constant.html">IntegrationConstant</a></div><div class="ttdoc">Integration constants to calculate dynamic elements through trapezoidal integration method.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00111">PowerElement.h:111</a></div></div>
+<div class="ttc" id="astruct_integration_constant_html"><div class="ttname"><a href="struct_integration_constant.html">IntegrationConstant</a></div><div class="ttdoc">Integration constants to calculate dynamic elements through trapezoidal integration method.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00083">PowerElement.h:83</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

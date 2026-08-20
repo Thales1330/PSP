@@ -1,8 +1,8 @@
 var class_load =
 [
     [ "AddParent", "class_load.html#ac9f449be9b919b36924a844324bf37ee", null ],
-    [ "DrawDC", "class_load.html#a37877b9d7b829262b0928cbf864653b0", null ],
-    [ "DrawDC", "class_load.html#afbce4e5b08ade4c4eaa19f1ea6a9b359", null ],
+    [ "DrawDC", "class_load.html#a461f593383c9d386a45189f1100b663c", null ],
+    [ "DrawDC", "class_load.html#a1f07bb58d943234e04207573ce3af9a3", null ],
     [ "GetContextMenu", "class_load.html#a25b4a3e553f8400114ac8effa11287da", null ],
     [ "GetCopy", "class_load.html#a27309c24b2c70bde37ba6afbb9679da2", null ],
     [ "GetPlotData", "class_load.html#a6d508be2bbf3910956bba7c86013414c", null ],

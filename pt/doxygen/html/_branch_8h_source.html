@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -148,7 +147,7 @@ $(document).ready(function(){initNavTree('_branch_8h_source.html',''); initResiz
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_class" href="class_branch.html">~Branch</a>();</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_branch.html#a691f94c3cd2abe1274e870d2882634d8">   37</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_branch.html#a691f94c3cd2abe1274e870d2882634d8">Contains</a>(wxPoint2DDouble position)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Draw(wxPoint2DDouble translation, <span class="keywordtype">double</span> scale)<span class="keyword"> const </span>{}</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">//virtual void Draw(wxPoint2DDouble translation, double scale) const {}</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_branch.html#a7cf4b117f43f49bb76cce3df5521fb70">   39</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_branch.html#a7cf4b117f43f49bb76cce3df5521fb70">Move</a>(wxPoint2DDouble position) {}</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_branch.html#a947cec45fcdc78d01eaabe19d23daf64">   40</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_branch.html#a947cec45fcdc78d01eaabe19d23daf64">StartMove</a>(wxPoint2DDouble position) {}</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="class_branch.html#aef2ffe79c9b239fb5a1ad175555a9f5a">   41</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_branch.html#aef2ffe79c9b239fb5a1ad175555a9f5a">MoveNode</a>(<a class="code hl_class" href="class_element.html">Element</a>* parent, wxPoint2DDouble position) {}</div>
@@ -191,8 +190,8 @@ $(document).ready(function(){initNavTree('_branch_8h_source.html',''); initResiz
 <div class="ttc" id="aclass_branch_html_aaf64ea58631438e3a16b1b2ede793875"><div class="ttname"><a href="class_branch.html#aaf64ea58631438e3a16b1b2ede793875">Branch::SetNodeParent</a></div><div class="ttdeci">virtual bool SetNodeParent(Element *parent)</div><div class="ttdoc">Set a perent to the node. If all conditions are met, a new parent are added to the element and the po...</div><div class="ttdef"><b>Definition</b> <a href="_branch_8cpp_source.html#l00043">Branch.cpp:43</a></div></div>
 <div class="ttc" id="aclass_branch_html_aef2ffe79c9b239fb5a1ad175555a9f5a"><div class="ttname"><a href="class_branch.html#aef2ffe79c9b239fb5a1ad175555a9f5a">Branch::MoveNode</a></div><div class="ttdeci">virtual void MoveNode(Element *parent, wxPoint2DDouble position)</div><div class="ttdoc">Move a node. StartMove(wxPoint2DDouble position) before start moving.</div><div class="ttdef"><b>Definition</b> <a href="_branch_8h_source.html#l00041">Branch.h:41</a></div></div>
 <div class="ttc" id="aclass_branch_html_af7879ee138170b1421f745f1c942ea05"><div class="ttname"><a href="class_branch.html#af7879ee138170b1421f745f1c942ea05">Branch::MovePickbox</a></div><div class="ttdeci">virtual void MovePickbox(wxPoint2DDouble position)</div><div class="ttdoc">Move the pickbox.</div><div class="ttdef"><b>Definition</b> <a href="_branch_8h_source.html#l00048">Branch.h:48</a></div></div>
-<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00111">Element.h:112</a></div></div>
-<div class="ttc" id="aclass_power_element_html"><div class="ttname"><a href="class_power_element.html">PowerElement</a></div><div class="ttdoc">Abstract class of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00123">PowerElement.h:124</a></div></div>
+<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00113">Element.h:114</a></div></div>
+<div class="ttc" id="aclass_power_element_html"><div class="ttname"><a href="class_power_element.html">PowerElement</a></div><div class="ttdoc">Abstract class of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00095">PowerElement.h:96</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

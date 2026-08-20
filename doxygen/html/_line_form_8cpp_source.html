@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -166,10 +165,10 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    wxString nominalVoltageStr = <a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Line::StringFromDouble</a>(data.nominalVoltage);</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">switch</span>(data.nominalVoltageUnit) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a>: {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_V: {</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            nominalVoltageStr += <span class="stringliteral">&quot; V&quot;</span>;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>: {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_kV: {</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            nominalVoltageStr += <span class="stringliteral">&quot; kV&quot;</span>;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">default</span>:</div>
@@ -179,13 +178,13 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    m_textCtrlNominalPower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Line::StringFromDouble</a>(data.nominalPower));</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">switch</span>(data.nominalPowerUnit) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>: {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_VA: {</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            m_choiceNominalPower-&gt;SetSelection(0);</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>: {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_kVA: {</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            m_choiceNominalPower-&gt;SetSelection(1);</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>: {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_MVA: {</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            m_choiceNominalPower-&gt;SetSelection(2);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">default</span>:</div>
@@ -194,13 +193,13 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    m_textCtrlResistance-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Line::StringFromDouble</a>(data.resistance));</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">switch</span>(data.resistanceUnit) {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            m_choiceResistance-&gt;SetSelection(0);</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6acf39c5263ab2ce199c73552a96fa8540">ElectricalUnit::UNIT_OHM</a>: {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_OHM: {</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            m_choiceResistance-&gt;SetSelection(1);</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a888f89596e881f1432ad15efb1a29e30">ElectricalUnit::UNIT_OHM_km</a>: {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_OHM_km: {</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            m_choiceResistance-&gt;SetSelection(2);</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">default</span>:</div>
@@ -209,13 +208,13 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    m_textCtrlReactance-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Line::StringFromDouble</a>(data.indReactance));</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordflow">switch</span>(data.indReactanceUnit) {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            m_choiceReactance-&gt;SetSelection(0);</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6acf39c5263ab2ce199c73552a96fa8540">ElectricalUnit::UNIT_OHM</a>: {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_OHM: {</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            m_choiceReactance-&gt;SetSelection(1);</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a888f89596e881f1432ad15efb1a29e30">ElectricalUnit::UNIT_OHM_km</a>: {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_OHM_km: {</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            m_choiceReactance-&gt;SetSelection(2);</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">default</span>:</div>
@@ -224,13 +223,13 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    m_textCtrlSusceptance-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Line::StringFromDouble</a>(data.capSusceptance));</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">switch</span>(data.capSusceptanceUnit) {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            m_choiceSusceptance-&gt;SetSelection(0);</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a78a88fba8df3c248d316b122b2796643">ElectricalUnit::UNIT_S</a>: {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_S: {</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            m_choiceSusceptance-&gt;SetSelection(1);</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aaf10cf4a7763255f30b4f9c3a06d2223">ElectricalUnit::UNIT_S_km</a>: {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">case</span> ElectricalUnit::UNIT_S_km: {</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            m_choiceSusceptance-&gt;SetSelection(2);</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">default</span>:</div>
@@ -280,13 +279,13 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">switch</span>(m_choiceNominalPower-&gt;GetSelection()) {</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_VA;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_kVA;</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_MVA;</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    }</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
@@ -295,13 +294,13 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">switch</span>(m_choiceResistance-&gt;GetSelection()) {</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            data.resistanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            data.resistanceUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            data.resistanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6acf39c5263ab2ce199c73552a96fa8540">ElectricalUnit::UNIT_OHM</a>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            data.resistanceUnit = ElectricalUnit::UNIT_OHM;</div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            data.resistanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a888f89596e881f1432ad15efb1a29e30">ElectricalUnit::UNIT_OHM_km</a>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            data.resistanceUnit = ElectricalUnit::UNIT_OHM_km;</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
@@ -310,13 +309,13 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">switch</span>(m_choiceReactance-&gt;GetSelection()) {</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            data.indReactanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            data.indReactanceUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            data.indReactanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6acf39c5263ab2ce199c73552a96fa8540">ElectricalUnit::UNIT_OHM</a>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            data.indReactanceUnit = ElectricalUnit::UNIT_OHM;</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            data.indReactanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a888f89596e881f1432ad15efb1a29e30">ElectricalUnit::UNIT_OHM_km</a>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            data.indReactanceUnit = ElectricalUnit::UNIT_OHM_km;</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    }</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
@@ -325,13 +324,13 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keywordflow">switch</span>(m_choiceSusceptance-&gt;GetSelection()) {</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            data.capSusceptanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            data.capSusceptanceUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            data.capSusceptanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a78a88fba8df3c248d316b122b2796643">ElectricalUnit::UNIT_S</a>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            data.capSusceptanceUnit = ElectricalUnit::UNIT_S;</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            data.capSusceptanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aaf10cf4a7763255f30b4f9c3a06d2223">ElectricalUnit::UNIT_S_km</a>;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            data.capSusceptanceUnit = ElectricalUnit::UNIT_S_km;</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
@@ -356,19 +355,9 @@ $(document).ready(function(){initNavTree('_line_form_8cpp_source.html',''); init
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>}</div>
 <div class="ttc" id="a_line_form_8h_html"><div class="ttname"><a href="_line_form_8h.html">LineForm.h</a></div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a></div><div class="ttdeci">@ UNIT_VA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a></div><div class="ttdeci">@ UNIT_MVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a></div><div class="ttdeci">@ UNIT_kVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a78a88fba8df3c248d316b122b2796643"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a78a88fba8df3c248d316b122b2796643">ElectricalUnit::UNIT_S</a></div><div class="ttdeci">@ UNIT_S</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a></div><div class="ttdeci">@ UNIT_kV</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a888f89596e881f1432ad15efb1a29e30"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a888f89596e881f1432ad15efb1a29e30">ElectricalUnit::UNIT_OHM_km</a></div><div class="ttdeci">@ UNIT_OHM_km</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aaf10cf4a7763255f30b4f9c3a06d2223"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aaf10cf4a7763255f30b4f9c3a06d2223">ElectricalUnit::UNIT_S_km</a></div><div class="ttdeci">@ UNIT_S_km</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6acf39c5263ab2ce199c73552a96fa8540"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6acf39c5263ab2ce199c73552a96fa8540">ElectricalUnit::UNIT_OHM</a></div><div class="ttdeci">@ UNIT_OHM</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a></div><div class="ttdeci">@ UNIT_V</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
 <div class="ttc" id="a_switching_form_8h_html"><div class="ttname"><a href="_switching_form_8h.html">SwitchingForm.h</a></div></div>
-<div class="ttc" id="aclass_element_html_acfd2c0fe1af5a8ad6da393fb711fd69a"><div class="ttname"><a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">Element::DoubleFromString</a></div><div class="ttdeci">static bool DoubleFromString(wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</div><div class="ttdoc">Get a double value from a string. Show a error message if the conversion fail.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00433">Element.cpp:433</a></div></div>
-<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00461">Element.cpp:461</a></div></div>
+<div class="ttc" id="aclass_element_html_acfd2c0fe1af5a8ad6da393fb711fd69a"><div class="ttname"><a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">Element::DoubleFromString</a></div><div class="ttdeci">static bool DoubleFromString(wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</div><div class="ttdoc">Get a double value from a string. Show a error message if the conversion fail.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00438">Element.cpp:438</a></div></div>
+<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00466">Element.cpp:466</a></div></div>
 <div class="ttc" id="aclass_line_html"><div class="ttname"><a href="class_line.html">Line</a></div><div class="ttdoc">Power line element.</div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00063">Line.h:64</a></div></div>
 <div class="ttc" id="aclass_switching_form_html"><div class="ttname"><a href="class_switching_form.html">SwitchingForm</a></div><div class="ttdoc">Form to edit the switching data of power elements for electromechanical transient studies.</div><div class="ttdef"><b>Definition</b> <a href="_switching_form_8h_source.html#l00032">SwitchingForm.h:33</a></div></div>
 <div class="ttc" id="astruct_line_electrical_data_html"><div class="ttname"><a href="struct_line_electrical_data.html">LineElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00024">Line.h:24</a></div></div>

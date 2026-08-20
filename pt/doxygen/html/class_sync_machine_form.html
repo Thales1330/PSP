@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -137,51 +136,69 @@ Collaboration diagram for SyncMachineForm:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_sync_machine_form__coll__graph.png" border="0" usemap="#a_sync_machine_form_coll__map" alt="Collaboration graph"/></div>
 <map name="a_sync_machine_form_coll__map" id="a_sync_machine_form_coll__map">
-<area shape="rect" title="Form to edit the synchronous machine power data." alt="" coords="189,612,331,637"/>
-<area shape="rect" title=" " alt="" coords="5,524,179,549"/>
-<area shape="poly" title=" " alt="" coords="128,553,238,609,236,614,126,558"/>
-<area shape="rect" href="class_sync_generator.html" title="Synchronous generator power element." alt="" coords="203,524,322,549"/>
-<area shape="poly" title=" " alt="" coords="264,564,264,573,263,612,258,612,259,573,259,563"/>
-<area shape="rect" href="class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="83,436,167,461"/>
-<area shape="poly" title=" " alt="" coords="157,466,245,521,243,526,154,471"/>
-<area shape="rect" href="class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element." alt="" coords="365,524,456,549"/>
-<area shape="poly" title=" " alt="" coords="181,458,295,463,350,469,372,475,390,483,404,502,411,523,406,525,400,505,386,487,371,480,349,474,294,469,181,464"/>
-<area shape="rect" href="class_power_element.html" title="Abstract class of power elements." alt="" coords="63,273,179,298"/>
-<area shape="poly" title=" " alt="" coords="125,312,128,436,122,436,119,312"/>
-<area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="173,5,249,31"/>
-<area shape="poly" title=" " alt="" coords="216,44,217,86,213,138,202,195,192,222,178,248,165,263,148,275,145,270,161,259,174,245,187,220,197,194,208,138,211,86,210,44"/>
-<area shape="rect" href="class_control_element.html" title=" " alt="" coords="535,80,657,105"/>
-<area shape="poly" title=" " alt="" coords="263,26,536,77,535,83,262,32"/>
-<area shape="rect" href="struct_switching_data.html" title="Switching data of power elements." alt="" coords="41,168,157,193"/>
-<area shape="poly" title=" " alt="" coords="101,207,105,246,116,271,111,273,100,247,95,208"/>
-<area shape="rect" href="struct_sync_generator_electrical_data.html" title=" " alt="" coords="191,436,401,461"/>
-<area shape="poly" title=" " alt="" coords="289,475,270,524,265,522,284,473"/>
-<area shape="rect" href="struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="318,273,469,298"/>
-<area shape="poly" title=" " alt="" coords="356,307,335,326,319,354,308,385,299,436,294,435,303,384,314,352,331,322,353,303"/>
-<area shape="rect" href="struct_sync_motor_electrical_data.html" title=" " alt="" coords="426,436,609,461"/>
-<area shape="poly" title=" " alt="" coords="400,311,416,360,429,387,446,410,463,424,482,434,480,438,460,428,442,414,424,390,411,362,395,312"/>
-<area shape="rect" href="class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="424,168,611,193"/>
-<area shape="poly" title=" " alt="" coords="411,189,364,199,318,214,276,238,242,272,232,293,230,315,233,338,241,361,265,404,288,434,284,437,261,406,237,363,228,339,225,315,227,291,238,269,273,234,316,210,363,193,410,184"/>
-<area shape="poly" title=" " alt="" coords="520,207,520,436,515,436,515,207"/>
-<area shape="rect" href="class_control_element_solver.html" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="607,273,771,298"/>
-<area shape="poly" title=" " alt="" coords="534,203,552,225,575,244,604,260,634,270,633,275,602,264,572,249,549,229,530,207"/>
-<area shape="poly" title=" " alt="" coords="403,564,395,578,383,590,359,605,332,615,330,610,356,600,380,586,391,574,399,561"/>
-<area shape="poly" title=" " alt="" coords="494,472,427,526,423,522,491,468"/>
-<area shape="poly" title=" " alt="" coords="669,309,531,438,528,434,665,305"/>
-<area shape="rect" href="class_i_o_control.html" title="Provides the communication with the power element." alt="" coords="647,168,729,193"/>
-<area shape="poly" title=" " alt="" coords="691,207,692,272,687,272,686,207"/>
-<area shape="poly" title=" " alt="" coords="620,113,677,166,673,169,617,117"/>
-<area shape="rect" href="struct_sim_test_data.html" title=" " alt="" coords="681,80,785,105"/>
-<area shape="poly" title=" " alt="" coords="723,119,697,169,692,166,718,117"/>
-<area shape="rect" href="class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="442,80,510,105"/>
-<area shape="poly" title=" " alt="" coords="507,111,565,142,647,168,646,173,563,146,504,115"/>
+<area shape="rect" title="Form to edit the synchronous machine power data." alt="" coords="1791,231,1932,256"/>
+<area shape="rect" title=" " alt="" coords="1449,157,1623,183"/>
+<area shape="poly" title=" " alt="" coords="1637,180,1702,191,1767,206,1831,228,1829,233,1766,211,1701,196,1636,185"/>
+<area shape="rect" href="class_sync_generator.html" title="Synchronous generator power element." alt="" coords="1477,207,1595,232"/>
+<area shape="poly" title=" " alt="" coords="1609,222,1791,236,1790,241,1609,227"/>
+<area shape="rect" href="class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="1139,139,1223,164"/>
+<area shape="poly" title=" " alt="" coords="1236,142,1279,141,1328,143,1378,151,1427,168,1439,180,1451,192,1479,204,1476,209,1448,196,1436,183,1424,172,1377,157,1327,148,1279,146,1237,148"/>
+<area shape="rect" href="class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element." alt="" coords="1491,256,1581,281"/>
+<area shape="poly" title=" " alt="" coords="1237,155,1343,173,1393,186,1427,201,1436,212,1440,222,1443,232,1451,241,1470,252,1491,260,1490,265,1468,257,1448,245,1439,235,1435,224,1432,214,1424,205,1391,191,1342,178,1236,160"/>
+<area shape="rect" href="class_power_element.html" title="Abstract class of power elements." alt="" coords="775,23,891,48"/>
+<area shape="poly" title=" " alt="" coords="905,43,977,58,1053,81,1113,108,1161,136,1158,141,1110,113,1051,86,976,63,904,48"/>
+<area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,143,81,168"/>
+<area shape="poly" title=" " alt="" coords="95,145,774,41,775,47,95,150"/>
+<area shape="rect" href="class_control_element.html" title=" " alt="" coords="131,228,253,253"/>
+<area shape="poly" title=" " alt="" coords="80,173,170,226,167,230,77,177"/>
+<area shape="rect" href="struct_switching_data.html" title="Switching data of power elements." alt="" coords="442,5,558,31"/>
+<area shape="poly" title=" " alt="" coords="572,19,774,30,774,35,572,24"/>
+<area shape="rect" href="struct_sync_generator_electrical_data.html" title=" " alt="" coords="1076,197,1285,223"/>
+<area shape="poly" title=" " alt="" coords="1299,210,1476,215,1476,220,1299,216"/>
+<area shape="rect" href="struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="757,239,908,264"/>
+<area shape="poly" title=" " alt="" coords="921,238,1076,220,1076,225,922,243"/>
+<area shape="rect" href="struct_sync_motor_electrical_data.html" title=" " alt="" coords="1089,339,1272,364"/>
+<area shape="poly" title=" " alt="" coords="857,272,894,303,940,329,976,340,1015,348,1089,353,1089,358,1014,353,975,345,938,334,891,307,854,276"/>
+<area shape="rect" href="class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="407,356,593,381"/>
+<area shape="poly" title=" " alt="" coords="526,345,594,296,693,234,750,203,811,174,874,149,938,130,997,116,1023,118,1053,130,1064,141,1067,152,1070,163,1078,173,1097,186,1118,195,1116,200,1094,190,1074,177,1065,166,1062,154,1059,143,1051,135,1022,123,998,121,939,135,876,154,813,178,752,207,695,239,597,301,530,350"/>
+<area shape="poly" title=" " alt="" coords="607,363,1089,351,1089,356,607,369"/>
+<area shape="rect" href="class_control_element_solver.html" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="751,417,915,443"/>
+<area shape="poly" title=" " alt="" coords="554,383,618,399,751,420,750,425,617,405,553,388"/>
+<area shape="poly" title=" " alt="" coords="1595,264,1766,254,1790,251,1791,257,1767,259,1595,270"/>
+<area shape="poly" title=" " alt="" coords="1249,333,1490,276,1491,282,1250,338"/>
+<area shape="poly" title=" " alt="" coords="928,434,990,431,1051,418,1063,411,1075,402,1151,362,1154,366,1077,407,1066,416,1053,423,991,436,929,440"/>
+<area shape="rect" href="class_i_o_control.html" title="Provides the communication with the power element." alt="" coords="459,428,541,453"/>
+<area shape="poly" title=" " alt="" coords="555,450,636,461,682,463,726,459,790,440,791,445,727,465,682,468,636,467,554,456"/>
+<area shape="poly" title=" " alt="" coords="222,260,304,321,408,390,473,426,471,430,405,395,301,325,219,264"/>
+<area shape="rect" href="struct_sim_test_data.html" title=" " alt="" coords="140,403,244,428"/>
+<area shape="poly" title=" " alt="" coords="258,418,459,435,458,440,258,423"/>
+<area shape="rect" href="class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="158,452,226,477"/>
+<area shape="poly" title=" " alt="" coords="240,462,382,457,458,446,459,451,383,462,240,468"/>
+<area shape="rect" href="class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="1489,467,1583,492"/>
+<area shape="poly" title=" " alt="" coords="1564,456,1841,254,1844,258,1567,461"/>
+<area shape="rect" title=" " alt="" coords="1118,417,1243,443"/>
+<area shape="poly" title=" " alt="" coords="1258,435,1426,457,1489,468,1489,473,1425,462,1257,441"/>
+<area shape="rect" href="class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="1144,467,1217,492"/>
+<area shape="poly" title=" " alt="" coords="1231,477,1489,477,1489,482,1231,482"/>
+<area shape="rect" href="class_properties_data.html" title="General and simulation data manager." alt="" coords="1121,516,1240,541"/>
+<area shape="poly" title=" " alt="" coords="1254,519,1425,497,1489,486,1489,491,1426,502,1254,524"/>
+<area shape="rect" href="struct_g_u_i_colour.html" title=" " alt="" coords="789,565,877,591"/>
+<area shape="poly" title=" " alt="" coords="890,568,1052,546,1121,535,1121,541,1052,551,891,573"/>
+<area shape="rect" href="struct_simulation_data.html" title=" " alt="" coords="771,615,894,640"/>
+<area shape="poly" title=" " alt="" coords="907,622,980,610,1016,598,1051,581,1058,575,1062,567,1066,560,1074,552,1097,541,1120,534,1122,539,1099,546,1078,556,1070,563,1066,570,1062,578,1053,586,1018,603,981,615,908,627"/>
+<area shape="rect" href="struct_general_data.html" title=" " alt="" coords="781,467,885,492"/>
+<area shape="poly" title=" " alt="" coords="899,485,1052,506,1121,517,1121,522,1052,511,898,490"/>
+<area shape="rect" href="struct_freq_response_data.html" title=" " alt="" coords="761,516,905,541"/>
+<area shape="poly" title=" " alt="" coords="918,526,1121,526,1121,531,918,531"/>
+<area shape="rect" href="class_h_m_plane.html" title=" " alt="" coords="1141,565,1221,591"/>
+<area shape="poly" title=" " alt="" coords="1234,570,1324,557,1424,531,1472,511,1512,490,1515,494,1475,516,1426,537,1325,562,1235,576"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae9d32e880e0b09ed387c3e3e19bd434a" id="r_ae9d32e880e0b09ed387c3e3e19bd434a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_machine_form.html#ae9d32e880e0b09ed387c3e3e19bd434a">SyncMachineForm</a> (wxWindow *parent, <a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncGenerator, int plotLib)</td></tr>
-<tr class="separator:ae9d32e880e0b09ed387c3e3e19bd434a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bd26aca5c3dc78af207328d48486803" id="r_a5bd26aca5c3dc78af207328d48486803"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_machine_form.html#a5bd26aca5c3dc78af207328d48486803">SyncMachineForm</a> (wxWindow *parent, <a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncGenerator, <a class="el" href="class_workspace.html">Workspace</a> *workspace)</td></tr>
+<tr class="separator:a5bd26aca5c3dc78af207328d48486803"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fea7ef16899f918e5cedad577f960e7" id="r_a9fea7ef16899f918e5cedad577f960e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_machine_form.html#a9fea7ef16899f918e5cedad577f960e7">SyncMachineForm</a> (wxWindow *parent, <a class="el" href="class_sync_motor.html">SyncMotor</a> *syncMotor)</td></tr>
 <tr class="separator:a9fea7ef16899f918e5cedad577f960e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -210,18 +227,18 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a61b60bfc52876775f74160ae9075c697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7899edef11e6c72782eeef5aecfec54" id="r_ad7899edef11e6c72782eeef5aecfec54"><td class="memItemLeft" align="right" valign="top">wxWindow *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_machine_form.html#ad7899edef11e6c72782eeef5aecfec54">m_parent</a> = nullptr</td></tr>
 <tr class="separator:ad7899edef11e6c72782eeef5aecfec54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54f95f1cd694723516690f98807daaaf" id="r_a54f95f1cd694723516690f98807daaaf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_machine_form.html#a54f95f1cd694723516690f98807daaaf">m_plotLib</a> = 0</td></tr>
-<tr class="separator:a54f95f1cd694723516690f98807daaaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08b224bec025b3ef819d9c58df4a0953" id="r_a08b224bec025b3ef819d9c58df4a0953"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_workspace.html">Workspace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_machine_form.html#a08b224bec025b3ef819d9c58df4a0953">m_workspace</a> = nullptr</td></tr>
+<tr class="separator:a08b224bec025b3ef819d9c58df4a0953"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Form to edit the synchronous machine power data. </p>
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span class="obfuscator">.nosp@m.</span>s@uf<span class="obfuscator">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00037">37</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00038">38</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae9d32e880e0b09ed387c3e3e19bd434a" name="ae9d32e880e0b09ed387c3e3e19bd434a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9d32e880e0b09ed387c3e3e19bd434a">&#9670;&#160;</a></span>SyncMachineForm() <span class="overload">[1/2]</span></h2>
+<a id="a5bd26aca5c3dc78af207328d48486803" name="a5bd26aca5c3dc78af207328d48486803"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bd26aca5c3dc78af207328d48486803">&#9670;&#160;</a></span>SyncMachineForm() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -241,8 +258,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>plotLib</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_workspace.html">Workspace</a> *&#160;</td>
+          <td class="paramname"><em>workspace</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -253,7 +270,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_sync_machine_form_8cpp_source.html#l00023">23</a> of file <a class="el" href="_sync_machine_form_8cpp_source.html">SyncMachineForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span>                                                                                            : SyncMachineFormBase(parent), m_parent(parent), m_syncGenerator(syncGenerator), m_plotLib(plotLib)</div>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>                                                                                                     : SyncMachineFormBase(parent), m_parent(parent), m_syncGenerator(syncGenerator), m_workspace(workspace)</div>
 <div class="line"><span class="lineno">   24</span>{</div>
 <div class="line"><span class="lineno">   25</span>    SetSize(GetBestSize());</div>
 <div class="line"><span class="lineno">   26</span>    ReplaceStaticTextLabelChar(m_staticTextPosResistance, L<span class="stringliteral">&#39;\u2081&#39;</span>);</div>
@@ -273,13 +290,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   40</span> </div>
 <div class="line"><span class="lineno">   41</span>    m_textCtrlnominalPower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncGenerator::StringFromDouble</a>(data.nominalPower));</div>
 <div class="line"><span class="lineno">   42</span>    <span class="keywordflow">switch</span> (data.nominalPowerUnit) {</div>
-<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>:</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_VA:</div>
 <div class="line"><span class="lineno">   44</span>        m_choiceNominalPower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">   45</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   46</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>:</div>
+<div class="line"><span class="lineno">   46</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kVA:</div>
 <div class="line"><span class="lineno">   47</span>        m_choiceNominalPower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">   48</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>:</div>
+<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_MVA:</div>
 <div class="line"><span class="lineno">   50</span>        m_choiceNominalPower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">   51</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">   52</span>    <span class="keywordflow">default</span>:</div>
@@ -288,16 +305,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   55</span> </div>
 <div class="line"><span class="lineno">   56</span>    m_textCtrlActivePower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncGenerator::StringFromDouble</a>(data.activePower));</div>
 <div class="line"><span class="lineno">   57</span>    <span class="keywordflow">switch</span> (data.activePowerUnit) {</div>
-<div class="line"><span class="lineno">   58</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>:</div>
+<div class="line"><span class="lineno">   58</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
 <div class="line"><span class="lineno">   59</span>        m_choiceActivePower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">   60</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>:</div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_W:</div>
 <div class="line"><span class="lineno">   62</span>        m_choiceActivePower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">   63</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   64</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>:</div>
+<div class="line"><span class="lineno">   64</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW:</div>
 <div class="line"><span class="lineno">   65</span>        m_choiceActivePower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">   66</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>:</div>
+<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW:</div>
 <div class="line"><span class="lineno">   68</span>        m_choiceActivePower-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">   69</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">   70</span>    <span class="keywordflow">default</span>:</div>
@@ -306,16 +323,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   73</span> </div>
 <div class="line"><span class="lineno">   74</span>    m_textCtrlReactivePower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncGenerator::StringFromDouble</a>(data.reactivePower));</div>
 <div class="line"><span class="lineno">   75</span>    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>:</div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
 <div class="line"><span class="lineno">   77</span>        m_choiceReactivePower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">   78</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>:</div>
+<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var:</div>
 <div class="line"><span class="lineno">   80</span>        m_choiceReactivePower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">   81</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   82</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>:</div>
+<div class="line"><span class="lineno">   82</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
 <div class="line"><span class="lineno">   83</span>        m_choiceReactivePower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">   84</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>:</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
 <div class="line"><span class="lineno">   86</span>        m_choiceReactivePower-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">   87</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">   88</span>    <span class="keywordflow">default</span>:</div>
@@ -325,16 +342,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   92</span> </div>
 <div class="line"><span class="lineno">   93</span>    m_textCtrlMaxRectivePower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncGenerator::StringFromDouble</a>(data.maxReactive));</div>
 <div class="line"><span class="lineno">   94</span>    <span class="keywordflow">switch</span> (data.maxReactiveUnit) {</div>
-<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>:</div>
+<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
 <div class="line"><span class="lineno">   96</span>        m_choiceMaxRectivePower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">   97</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>:</div>
+<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var:</div>
 <div class="line"><span class="lineno">   99</span>        m_choiceMaxRectivePower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  100</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>:</div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
 <div class="line"><span class="lineno">  102</span>        m_choiceMaxRectivePower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  103</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>:</div>
+<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
 <div class="line"><span class="lineno">  105</span>        m_choiceMaxRectivePower-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  106</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  107</span>    <span class="keywordflow">default</span>:</div>
@@ -346,16 +363,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  113</span>    m_checkBoxMinReactive-&gt;SetValue(data.haveMinReactive);</div>
 <div class="line"><span class="lineno">  114</span>    m_textCtrlMinRectivePower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncGenerator::StringFromDouble</a>(data.minReactive));</div>
 <div class="line"><span class="lineno">  115</span>    <span class="keywordflow">switch</span> (data.minReactiveUnit) {</div>
-<div class="line"><span class="lineno">  116</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>:</div>
+<div class="line"><span class="lineno">  116</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
 <div class="line"><span class="lineno">  117</span>        m_choiceMinRectivePower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  118</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>:</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var:</div>
 <div class="line"><span class="lineno">  120</span>        m_choiceMinRectivePower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  121</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>:</div>
+<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
 <div class="line"><span class="lineno">  123</span>        m_choiceMinRectivePower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  124</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  125</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>:</div>
+<div class="line"><span class="lineno">  125</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
 <div class="line"><span class="lineno">  126</span>        m_choiceMinRectivePower-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  127</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  128</span>    <span class="keywordflow">default</span>:</div>
@@ -376,17 +393,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  143</span>    m_textCtrlGrdReactance-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncGenerator::StringFromDouble</a>(data.groundReactance));</div>
 <div class="line"><span class="lineno">  144</span>    m_checkBoxGroundNeutral-&gt;SetValue(data.groundNeutral);</div>
 <div class="line"><span class="lineno">  145</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a></div><div class="ttdeci">@ UNIT_Mvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a></div><div class="ttdeci">@ UNIT_VA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a></div><div class="ttdeci">@ UNIT_var</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a></div><div class="ttdeci">@ UNIT_kW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a></div><div class="ttdeci">@ UNIT_MVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a></div><div class="ttdeci">@ UNIT_kVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a></div><div class="ttdeci">@ UNIT_W</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a></div><div class="ttdeci">@ UNIT_MW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a></div><div class="ttdeci">@ UNIT_kvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
-<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00461">Element.cpp:461</a></div></div>
+<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00466">Element.cpp:466</a></div></div>
 <div class="ttc" id="astruct_sync_generator_electrical_data_html"><div class="ttname"><a href="struct_sync_generator_electrical_data.html">SyncGeneratorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_sync_generator_8h_source.html#l00025">SyncGenerator.h:25</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -438,13 +445,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  164</span> </div>
 <div class="line"><span class="lineno">  165</span>    m_textCtrlnominalPower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncMotor::StringFromDouble</a>(data.nominalPower));</div>
 <div class="line"><span class="lineno">  166</span>    <span class="keywordflow">switch</span> (data.nominalPowerUnit) {</div>
-<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>:</div>
+<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_VA:</div>
 <div class="line"><span class="lineno">  168</span>        m_choiceNominalPower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  169</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  170</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>:</div>
+<div class="line"><span class="lineno">  170</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kVA:</div>
 <div class="line"><span class="lineno">  171</span>        m_choiceNominalPower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  172</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>:</div>
+<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_MVA:</div>
 <div class="line"><span class="lineno">  174</span>        m_choiceNominalPower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  175</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  176</span>    <span class="keywordflow">default</span>:</div>
@@ -453,16 +460,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  179</span> </div>
 <div class="line"><span class="lineno">  180</span>    m_textCtrlActivePower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncMotor::StringFromDouble</a>(data.activePower));</div>
 <div class="line"><span class="lineno">  181</span>    <span class="keywordflow">switch</span> (data.activePowerUnit) {</div>
-<div class="line"><span class="lineno">  182</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>:</div>
+<div class="line"><span class="lineno">  182</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
 <div class="line"><span class="lineno">  183</span>        m_choiceActivePower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  184</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>:</div>
+<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_W:</div>
 <div class="line"><span class="lineno">  186</span>        m_choiceActivePower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  187</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  188</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>:</div>
+<div class="line"><span class="lineno">  188</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW:</div>
 <div class="line"><span class="lineno">  189</span>        m_choiceActivePower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  190</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>:</div>
+<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW:</div>
 <div class="line"><span class="lineno">  192</span>        m_choiceActivePower-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  193</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  194</span>    <span class="keywordflow">default</span>:</div>
@@ -471,16 +478,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  197</span> </div>
 <div class="line"><span class="lineno">  198</span>    m_textCtrlReactivePower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncMotor::StringFromDouble</a>(data.reactivePower));</div>
 <div class="line"><span class="lineno">  199</span>    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
-<div class="line"><span class="lineno">  200</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>:</div>
+<div class="line"><span class="lineno">  200</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
 <div class="line"><span class="lineno">  201</span>        m_choiceReactivePower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  202</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  203</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>:</div>
+<div class="line"><span class="lineno">  203</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var:</div>
 <div class="line"><span class="lineno">  204</span>        m_choiceReactivePower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  205</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  206</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>:</div>
+<div class="line"><span class="lineno">  206</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
 <div class="line"><span class="lineno">  207</span>        m_choiceReactivePower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  208</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  209</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>:</div>
+<div class="line"><span class="lineno">  209</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
 <div class="line"><span class="lineno">  210</span>        m_choiceReactivePower-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  211</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  212</span>    <span class="keywordflow">default</span>:</div>
@@ -490,16 +497,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  216</span> </div>
 <div class="line"><span class="lineno">  217</span>    m_textCtrlMaxRectivePower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncMotor::StringFromDouble</a>(data.maxReactive));</div>
 <div class="line"><span class="lineno">  218</span>    <span class="keywordflow">switch</span> (data.maxReactiveUnit) {</div>
-<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>:</div>
+<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
 <div class="line"><span class="lineno">  220</span>        m_choiceMaxRectivePower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  221</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>:</div>
+<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var:</div>
 <div class="line"><span class="lineno">  223</span>        m_choiceMaxRectivePower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  224</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>:</div>
+<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
 <div class="line"><span class="lineno">  226</span>        m_choiceMaxRectivePower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  227</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  228</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>:</div>
+<div class="line"><span class="lineno">  228</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
 <div class="line"><span class="lineno">  229</span>        m_choiceMaxRectivePower-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  230</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  231</span>    <span class="keywordflow">default</span>:</div>
@@ -511,16 +518,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  237</span>    m_checkBoxMinReactive-&gt;SetValue(data.haveMinReactive);</div>
 <div class="line"><span class="lineno">  238</span>    m_textCtrlMinRectivePower-&gt;SetValue(<a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">SyncMotor::StringFromDouble</a>(data.minReactive));</div>
 <div class="line"><span class="lineno">  239</span>    <span class="keywordflow">switch</span> (data.minReactiveUnit) {</div>
-<div class="line"><span class="lineno">  240</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>:</div>
+<div class="line"><span class="lineno">  240</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
 <div class="line"><span class="lineno">  241</span>        m_choiceMinRectivePower-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  242</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  243</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>:</div>
+<div class="line"><span class="lineno">  243</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var:</div>
 <div class="line"><span class="lineno">  244</span>        m_choiceMinRectivePower-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  245</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  246</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>:</div>
+<div class="line"><span class="lineno">  246</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
 <div class="line"><span class="lineno">  247</span>        m_choiceMinRectivePower-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  248</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>:</div>
+<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
 <div class="line"><span class="lineno">  250</span>        m_choiceMinRectivePower-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  251</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  252</span>    <span class="keywordflow">default</span>:</div>
@@ -598,8 +605,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00045">45</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>{ EndModal(wxID_CANCEL); };</div>
+<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00046">46</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>{ EndModal(wxID_CANCEL); };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -726,7 +733,7 @@ Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  287</span>{</div>
 <div class="line"><span class="lineno">  288</span>    <span class="keywordflow">if</span> (ValidateData()) {</div>
 <div class="line"><span class="lineno">  289</span>        <span class="keywordflow">if</span> (m_syncGenerator) {</div>
-<div class="line"><span class="lineno">  290</span>            <a class="code hl_class" href="class_generator_stab_form.html">GeneratorStabForm</a> stabForm(m_parent, m_syncGenerator, m_plotLib);</div>
+<div class="line"><span class="lineno">  290</span>            <a class="code hl_class" href="class_generator_stab_form.html">GeneratorStabForm</a> stabForm(m_parent, m_syncGenerator, m_workspace);</div>
 <div class="line"><span class="lineno">  291</span>            stabForm.CenterOnParent();</div>
 <div class="line"><span class="lineno">  292</span>            <span class="keywordflow">if</span> (stabForm.ShowModal() == wxID_OK) {</div>
 <div class="line"><span class="lineno">  293</span>                EndModal(wxID_OK);</div>
@@ -735,7 +742,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  296</span>        }</div>
 <div class="line"><span class="lineno">  297</span>    }</div>
 <div class="line"><span class="lineno">  298</span>}</div>
-<div class="ttc" id="aclass_generator_stab_form_html"><div class="ttname"><a href="class_generator_stab_form.html">GeneratorStabForm</a></div><div class="ttdoc">Form to edit the synchronous generator data for electromechanical studies.</div><div class="ttdef"><b>Definition</b> <a href="_generator_stab_form_8h_source.html#l00038">GeneratorStabForm.h:39</a></div></div>
+<div class="ttc" id="aclass_generator_stab_form_html"><div class="ttname"><a href="class_generator_stab_form.html">GeneratorStabForm</a></div><div class="ttdoc">Form to edit the synchronous generator data for electromechanical studies.</div><div class="ttdef"><b>Definition</b> <a href="_generator_stab_form_8h_source.html#l00039">GeneratorStabForm.h:40</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -816,13 +823,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  308</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  309</span>        <span class="keywordflow">switch</span> (m_choiceNominalPower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  310</span>        <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  311</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>;</div>
+<div class="line"><span class="lineno">  311</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_VA;</div>
 <div class="line"><span class="lineno">  312</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  313</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  314</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>;</div>
+<div class="line"><span class="lineno">  314</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_kVA;</div>
 <div class="line"><span class="lineno">  315</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  316</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  317</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>;</div>
+<div class="line"><span class="lineno">  317</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_MVA;</div>
 <div class="line"><span class="lineno">  318</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  319</span>        }</div>
 <div class="line"><span class="lineno">  320</span> </div>
@@ -831,16 +838,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  323</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  324</span>        <span class="keywordflow">switch</span> (m_choiceActivePower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  325</span>        <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  326</span>            data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  326</span>            data.activePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  327</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  328</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  329</span>            data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>;</div>
+<div class="line"><span class="lineno">  329</span>            data.activePowerUnit = ElectricalUnit::UNIT_W;</div>
 <div class="line"><span class="lineno">  330</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  331</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  332</span>            data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>;</div>
+<div class="line"><span class="lineno">  332</span>            data.activePowerUnit = ElectricalUnit::UNIT_kW;</div>
 <div class="line"><span class="lineno">  333</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  334</span>        <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  335</span>            data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>;</div>
+<div class="line"><span class="lineno">  335</span>            data.activePowerUnit = ElectricalUnit::UNIT_MW;</div>
 <div class="line"><span class="lineno">  336</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  337</span>        }</div>
 <div class="line"><span class="lineno">  338</span> </div>
@@ -849,16 +856,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  341</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  342</span>        <span class="keywordflow">switch</span> (m_choiceReactivePower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  343</span>        <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  344</span>            data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  344</span>            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  345</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  346</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  347</span>            data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>;</div>
+<div class="line"><span class="lineno">  347</span>            data.reactivePowerUnit = ElectricalUnit::UNIT_var;</div>
 <div class="line"><span class="lineno">  348</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  349</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  350</span>            data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>;</div>
+<div class="line"><span class="lineno">  350</span>            data.reactivePowerUnit = ElectricalUnit::UNIT_kvar;</div>
 <div class="line"><span class="lineno">  351</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  352</span>        <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  353</span>            data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>;</div>
+<div class="line"><span class="lineno">  353</span>            data.reactivePowerUnit = ElectricalUnit::UNIT_Mvar;</div>
 <div class="line"><span class="lineno">  354</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  355</span>        }</div>
 <div class="line"><span class="lineno">  356</span> </div>
@@ -869,16 +876,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  361</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  362</span>            <span class="keywordflow">switch</span> (m_choiceMaxRectivePower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  363</span>            <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  364</span>                data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  364</span>                data.maxReactiveUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  365</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  366</span>            <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  367</span>                data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>;</div>
+<div class="line"><span class="lineno">  367</span>                data.maxReactiveUnit = ElectricalUnit::UNIT_var;</div>
 <div class="line"><span class="lineno">  368</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  369</span>            <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  370</span>                data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>;</div>
+<div class="line"><span class="lineno">  370</span>                data.maxReactiveUnit = ElectricalUnit::UNIT_kvar;</div>
 <div class="line"><span class="lineno">  371</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  372</span>            <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  373</span>                data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>;</div>
+<div class="line"><span class="lineno">  373</span>                data.maxReactiveUnit = ElectricalUnit::UNIT_Mvar;</div>
 <div class="line"><span class="lineno">  374</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  375</span>            }</div>
 <div class="line"><span class="lineno">  376</span>        }</div>
@@ -890,16 +897,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  382</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  383</span>            <span class="keywordflow">switch</span> (m_choiceMinRectivePower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  384</span>            <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  385</span>                data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  385</span>                data.minReactiveUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  386</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  387</span>            <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  388</span>                data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>;</div>
+<div class="line"><span class="lineno">  388</span>                data.minReactiveUnit = ElectricalUnit::UNIT_var;</div>
 <div class="line"><span class="lineno">  389</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  390</span>            <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  391</span>                data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>;</div>
+<div class="line"><span class="lineno">  391</span>                data.minReactiveUnit = ElectricalUnit::UNIT_kvar;</div>
 <div class="line"><span class="lineno">  392</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  393</span>            <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  394</span>                data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>;</div>
+<div class="line"><span class="lineno">  394</span>                data.minReactiveUnit = ElectricalUnit::UNIT_Mvar;</div>
 <div class="line"><span class="lineno">  395</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  396</span>            }</div>
 <div class="line"><span class="lineno">  397</span>        }</div>
@@ -951,13 +958,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  443</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  444</span>        <span class="keywordflow">switch</span> (m_choiceNominalPower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  445</span>        <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  446</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>;</div>
+<div class="line"><span class="lineno">  446</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_VA;</div>
 <div class="line"><span class="lineno">  447</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  448</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  449</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>;</div>
+<div class="line"><span class="lineno">  449</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_kVA;</div>
 <div class="line"><span class="lineno">  450</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  451</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  452</span>            data.nominalPowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>;</div>
+<div class="line"><span class="lineno">  452</span>            data.nominalPowerUnit = ElectricalUnit::UNIT_MVA;</div>
 <div class="line"><span class="lineno">  453</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  454</span>        }</div>
 <div class="line"><span class="lineno">  455</span> </div>
@@ -966,16 +973,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  458</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  459</span>        <span class="keywordflow">switch</span> (m_choiceActivePower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  460</span>        <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  461</span>            data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  461</span>            data.activePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  462</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  463</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  464</span>            data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>;</div>
+<div class="line"><span class="lineno">  464</span>            data.activePowerUnit = ElectricalUnit::UNIT_W;</div>
 <div class="line"><span class="lineno">  465</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  466</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  467</span>            data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>;</div>
+<div class="line"><span class="lineno">  467</span>            data.activePowerUnit = ElectricalUnit::UNIT_kW;</div>
 <div class="line"><span class="lineno">  468</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  469</span>        <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  470</span>            data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>;</div>
+<div class="line"><span class="lineno">  470</span>            data.activePowerUnit = ElectricalUnit::UNIT_MW;</div>
 <div class="line"><span class="lineno">  471</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  472</span>        }</div>
 <div class="line"><span class="lineno">  473</span> </div>
@@ -984,16 +991,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  476</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  477</span>        <span class="keywordflow">switch</span> (m_choiceReactivePower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  478</span>        <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  479</span>            data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  479</span>            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  480</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  481</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  482</span>            data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>;</div>
+<div class="line"><span class="lineno">  482</span>            data.reactivePowerUnit = ElectricalUnit::UNIT_var;</div>
 <div class="line"><span class="lineno">  483</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  484</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  485</span>            data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>;</div>
+<div class="line"><span class="lineno">  485</span>            data.reactivePowerUnit = ElectricalUnit::UNIT_kvar;</div>
 <div class="line"><span class="lineno">  486</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  487</span>        <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  488</span>            data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>;</div>
+<div class="line"><span class="lineno">  488</span>            data.reactivePowerUnit = ElectricalUnit::UNIT_Mvar;</div>
 <div class="line"><span class="lineno">  489</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  490</span>        }</div>
 <div class="line"><span class="lineno">  491</span> </div>
@@ -1004,16 +1011,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  496</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  497</span>            <span class="keywordflow">switch</span> (m_choiceMaxRectivePower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  498</span>            <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  499</span>                data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  499</span>                data.maxReactiveUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  500</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  501</span>            <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  502</span>                data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>;</div>
+<div class="line"><span class="lineno">  502</span>                data.maxReactiveUnit = ElectricalUnit::UNIT_var;</div>
 <div class="line"><span class="lineno">  503</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  504</span>            <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  505</span>                data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>;</div>
+<div class="line"><span class="lineno">  505</span>                data.maxReactiveUnit = ElectricalUnit::UNIT_kvar;</div>
 <div class="line"><span class="lineno">  506</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  507</span>            <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  508</span>                data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>;</div>
+<div class="line"><span class="lineno">  508</span>                data.maxReactiveUnit = ElectricalUnit::UNIT_Mvar;</div>
 <div class="line"><span class="lineno">  509</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  510</span>            }</div>
 <div class="line"><span class="lineno">  511</span>        }</div>
@@ -1025,16 +1032,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  517</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  518</span>            <span class="keywordflow">switch</span> (m_choiceMinRectivePower-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno">  519</span>            <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">  520</span>                data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  520</span>                data.minReactiveUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  521</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  522</span>            <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">  523</span>                data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>;</div>
+<div class="line"><span class="lineno">  523</span>                data.minReactiveUnit = ElectricalUnit::UNIT_var;</div>
 <div class="line"><span class="lineno">  524</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  525</span>            <span class="keywordflow">case</span> 2:</div>
-<div class="line"><span class="lineno">  526</span>                data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>;</div>
+<div class="line"><span class="lineno">  526</span>                data.minReactiveUnit = ElectricalUnit::UNIT_kvar;</div>
 <div class="line"><span class="lineno">  527</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  528</span>            <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  529</span>                data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>;</div>
+<div class="line"><span class="lineno">  529</span>                data.minReactiveUnit = ElectricalUnit::UNIT_Mvar;</div>
 <div class="line"><span class="lineno">  530</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  531</span>            }</div>
 <div class="line"><span class="lineno">  532</span>        }</div>
@@ -1079,7 +1086,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  571</span>    }</div>
 <div class="line"><span class="lineno">  572</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  573</span>}</div>
-<div class="ttc" id="aclass_element_html_acfd2c0fe1af5a8ad6da393fb711fd69a"><div class="ttname"><a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">Element::DoubleFromString</a></div><div class="ttdeci">static bool DoubleFromString(wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</div><div class="ttdoc">Get a double value from a string. Show a error message if the conversion fail.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00433">Element.cpp:433</a></div></div>
+<div class="ttc" id="aclass_element_html_acfd2c0fe1af5a8ad6da393fb711fd69a"><div class="ttname"><a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">Element::DoubleFromString</a></div><div class="ttdeci">static bool DoubleFromString(wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</div><div class="ttdoc">Get a double value from a string. Show a error message if the conversion fail.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00438">Element.cpp:438</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1095,30 +1102,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">wxWindow* SyncMachineForm::m_parent = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00057">57</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
-
-</div>
-</div>
-<a id="a54f95f1cd694723516690f98807daaaf" name="a54f95f1cd694723516690f98807daaaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54f95f1cd694723516690f98807daaaf">&#9670;&#160;</a></span>m_plotLib</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int SyncMachineForm::m_plotLib = 0</td>
         </tr>
       </table>
   </td>
@@ -1152,7 +1135,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00055">55</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00056">56</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
 
 </div>
 </div>
@@ -1176,7 +1159,31 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00056">56</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00057">57</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
+
+</div>
+</div>
+<a id="a08b224bec025b3ef819d9c58df4a0953" name="a08b224bec025b3ef819d9c58df4a0953"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08b224bec025b3ef819d9c58df4a0953">&#9670;&#160;</a></span>m_workspace</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_workspace.html">Workspace</a>* SyncMachineForm::m_workspace = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_sync_machine_form_8h_source.html#l00059">59</a> of file <a class="el" href="_sync_machine_form_8h_source.html">SyncMachineForm.h</a>.</p>
 
 </div>
 </div>

@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -137,16 +136,20 @@ Collaboration diagram for ControlElementButton:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_control_element_button__coll__graph.png" border="0" usemap="#a_control_element_button_coll__map" alt="Collaboration graph"/></div>
 <map name="a_control_element_button_coll__map" id="a_control_element_button_coll__map">
-<area shape="rect" title="This class is responsible to handle the user interaction with control elements." alt="" coords="5,79,172,104"/>
-<area shape="rect" title=" " alt="" coords="42,5,135,31"/>
-<area shape="poly" title=" " alt="" coords="91,44,91,79,86,79,86,44"/>
+<area shape="rect" title="This class is responsible to handle the user interaction with control elements." alt="" coords="26,93,193,119"/>
+<area shape="rect" title=" " alt="" coords="5,5,99,31"/>
+<area shape="poly" title=" " alt="" coords="70,41,104,91,99,94,65,44"/>
+<area shape="rect" href="struct_g_u_i_colour.html" title=" " alt="" coords="123,5,211,31"/>
+<area shape="poly" title=" " alt="" coords="154,44,120,94,115,91,149,41"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad45b776fd9046f11fe147e8145474478" id="r_ad45b776fd9046f11fe147e8145474478"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#ad45b776fd9046f11fe147e8145474478">ControlElementButton</a> (wxWindow *parent, wxString label, wxImage image, wxWindowID id=wxID_ANY)</td></tr>
-<tr class="separator:ad45b776fd9046f11fe147e8145474478"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ab16c3b56a0a146c9af022ba3d83fb5" id="r_a3ab16c3b56a0a146c9af022ba3d83fb5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#a3ab16c3b56a0a146c9af022ba3d83fb5">ControlElementButton</a> (wxWindow *parent, wxString label, wxImage image, wxWindowID id, <a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour)</td></tr>
+<tr class="separator:a3ab16c3b56a0a146c9af022ba3d83fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf1e696afc93d71095ce150e692c75d2" id="r_abf1e696afc93d71095ce150e692c75d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#abf1e696afc93d71095ce150e692c75d2">ControlElementButton</a> (wxWindow *parent, wxString label, std::unique_ptr&lt; <a class="el" href="class_control_element.html">ControlElement</a> &gt; iconElement, wxWindowID id, <a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, double buttonScale=1.0)</td></tr>
+<tr class="separator:abf1e696afc93d71095ce150e692c75d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -163,10 +166,16 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a955c58d54b173fff90a9bbfd02c80475" id="r_a955c58d54b173fff90a9bbfd02c80475"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#a955c58d54b173fff90a9bbfd02c80475">m_guiColour</a> = nullptr</td></tr>
+<tr class="separator:a955c58d54b173fff90a9bbfd02c80475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcdcd79290ca07c41b19aca394296ef1" id="r_adcdcd79290ca07c41b19aca394296ef1"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="class_control_element.html">ControlElement</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#adcdcd79290ca07c41b19aca394296ef1">m_iconElement</a></td></tr>
+<tr class="separator:adcdcd79290ca07c41b19aca394296ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0d011f5dc84d644c10709116c82d8bf" id="r_aa0d011f5dc84d644c10709116c82d8bf"><td class="memItemLeft" align="right" valign="top">wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#aa0d011f5dc84d644c10709116c82d8bf">m_label</a></td></tr>
 <tr class="separator:aa0d011f5dc84d644c10709116c82d8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac711aa61fe25de7f632a3f2f75fe4fae" id="r_ac711aa61fe25de7f632a3f2f75fe4fae"><td class="memItemLeft" align="right" valign="top">wxFont&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#ac711aa61fe25de7f632a3f2f75fe4fae">m_font</a></td></tr>
-<tr class="separator:ac711aa61fe25de7f632a3f2f75fe4fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae41279a89bbf96a4dcc37d5f5beb47b8" id="r_ae41279a89bbf96a4dcc37d5f5beb47b8"><td class="memItemLeft" align="right" valign="top">wxFont&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#ae41279a89bbf96a4dcc37d5f5beb47b8">m_buttonFont</a></td></tr>
+<tr class="separator:ae41279a89bbf96a4dcc37d5f5beb47b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5f1abc13fbacae43183ecda0d21363c" id="r_aa5f1abc13fbacae43183ecda0d21363c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#aa5f1abc13fbacae43183ecda0d21363c">m_buttonScale</a> = 1.0</td></tr>
+<tr class="separator:aa5f1abc13fbacae43183ecda0d21363c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a831ba4a73c4a8c281edb072f3f68eff8" id="r_a831ba4a73c4a8c281edb072f3f68eff8"><td class="memItemLeft" align="right" valign="top">wxPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#a831ba4a73c4a8c281edb072f3f68eff8">m_labelPosition</a></td></tr>
 <tr class="separator:a831ba4a73c4a8c281edb072f3f68eff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab87a13cd01a3ac7222a1df2e5252a2ac" id="r_ab87a13cd01a3ac7222a1df2e5252a2ac"><td class="memItemLeft" align="right" valign="top">wxImage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_button.html#ab87a13cd01a3ac7222a1df2e5252a2ac">m_image</a></td></tr>
@@ -189,10 +198,10 @@ Protected Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span class="obfuscator">.nosp@m.</span>s@uf<span class="obfuscator">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00081">81</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00087">87</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad45b776fd9046f11fe147e8145474478" name="ad45b776fd9046f11fe147e8145474478"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad45b776fd9046f11fe147e8145474478">&#9670;&#160;</a></span>ControlElementButton()</h2>
+<a id="a3ab16c3b56a0a146c9af022ba3d83fb5" name="a3ab16c3b56a0a146c9af022ba3d83fb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab16c3b56a0a146c9af022ba3d83fb5">&#9670;&#160;</a></span>ControlElementButton() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +228,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">wxWindowID&#160;</td>
-          <td class="paramname"><em>id</em> = <code>wxID_ANY</code>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td>
+          <td class="paramname"><em>guiColour</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -229,43 +244,139 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00046">46</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span>    : wxWindow(parent, <span class="keywordtype">id</span>)</div>
-<div class="line"><span class="lineno">   48</span>{</div>
-<div class="line"><span class="lineno">   49</span>    SetBackgroundColour(*wxWHITE);</div>
-<div class="line"><span class="lineno">   50</span>    m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);</div>
-<div class="line"><span class="lineno">   51</span>    m_label = label;</div>
-<div class="line"><span class="lineno">   52</span>    m_image = image;</div>
-<div class="line"><span class="lineno">   53</span>    m_imageSize = wxSize(image.GetWidth(), image.GetHeight());</div>
-<div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>    <span class="comment">// Calculate label size.</span></div>
-<div class="line"><span class="lineno">   56</span>    wxScreenDC dc;</div>
-<div class="line"><span class="lineno">   57</span>    dc.SetFont(m_font);</div>
-<div class="line"><span class="lineno">   58</span>    wxSize textSize = dc.GetTextExtent(label);</div>
-<div class="line"><span class="lineno">   59</span> </div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordtype">int</span> buttonWidth = 0;</div>
-<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">if</span> (textSize.GetWidth() &gt; m_imageSize.GetWidth()) {</div>
-<div class="line"><span class="lineno">   62</span>        buttonWidth = textSize.GetWidth();</div>
-<div class="line"><span class="lineno">   63</span>        m_imagePosition = wxPoint((buttonWidth - m_imageSize.GetWidth()) / 2 + m_borderSize, m_borderSize);</div>
-<div class="line"><span class="lineno">   64</span>        m_labelPosition = wxPoint(m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
-<div class="line"><span class="lineno">   65</span>    }</div>
-<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   67</span>        buttonWidth = m_imageSize.GetWidth();</div>
-<div class="line"><span class="lineno">   68</span>        m_imagePosition = wxPoint(m_borderSize, m_borderSize);</div>
-<div class="line"><span class="lineno">   69</span>        m_labelPosition =</div>
-<div class="line"><span class="lineno">   70</span>            wxPoint((buttonWidth - textSize.GetWidth()) / 2 + m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
-<div class="line"><span class="lineno">   71</span>    }</div>
-<div class="line"><span class="lineno">   72</span>    m_buttonSize =</div>
-<div class="line"><span class="lineno">   73</span>        wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);</div>
-<div class="line"><span class="lineno">   74</span>    SetMinSize(m_buttonSize + wxSize(m_borderSize, m_borderSize));</div>
-<div class="line"><span class="lineno">   75</span> </div>
-<div class="line"><span class="lineno">   76</span>    <span class="comment">// Events.</span></div>
-<div class="line"><span class="lineno">   77</span>    Bind(wxEVT_PAINT, &amp;ControlElementButton::OnPaint, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   78</span>    Bind(wxEVT_ENTER_WINDOW, &amp;ControlElementButton::OnMouseEnter, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   79</span>    Bind(wxEVT_LEAVE_WINDOW, &amp;ControlElementButton::OnMouseLeave, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   80</span>    Bind(wxEVT_LEFT_DOWN, &amp;ControlElementButton::OnLeftClickDown, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   81</span>    Bind(wxEVT_LEFT_UP, &amp;ControlElementButton::OnLeftClickUp, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   82</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00097">97</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   98</span>    : wxWindow(parent, <span class="keywordtype">id</span>), m_guiColour(guiColour)</div>
+<div class="line"><span class="lineno">   99</span>{</div>
+<div class="line"><span class="lineno">  100</span>    SetBackgroundColour(m_guiColour-&gt;background);</div>
+<div class="line"><span class="lineno">  101</span>    m_buttonFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);</div>
+<div class="line"><span class="lineno">  102</span>    m_label = label;</div>
+<div class="line"><span class="lineno">  103</span>    m_image = image;</div>
+<div class="line"><span class="lineno">  104</span>    m_imageSize = wxSize(image.GetWidth(), image.GetHeight());</div>
+<div class="line"><span class="lineno">  105</span> </div>
+<div class="line"><span class="lineno">  106</span>    <span class="comment">// Calculate label size.</span></div>
+<div class="line"><span class="lineno">  107</span>    wxScreenDC dc;</div>
+<div class="line"><span class="lineno">  108</span>    dc.SetFont(m_buttonFont);</div>
+<div class="line"><span class="lineno">  109</span>    wxSize textSize = dc.GetTextExtent(label);</div>
+<div class="line"><span class="lineno">  110</span> </div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordtype">int</span> buttonWidth = 0;</div>
+<div class="line"><span class="lineno">  112</span>    <span class="keywordflow">if</span> (textSize.GetWidth() &gt; m_imageSize.GetWidth()) {</div>
+<div class="line"><span class="lineno">  113</span>        buttonWidth = textSize.GetWidth();</div>
+<div class="line"><span class="lineno">  114</span>        m_imagePosition = wxPoint((buttonWidth - m_imageSize.GetWidth()) / 2 + m_borderSize, m_borderSize);</div>
+<div class="line"><span class="lineno">  115</span>        m_labelPosition = wxPoint(m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
+<div class="line"><span class="lineno">  116</span>    }</div>
+<div class="line"><span class="lineno">  117</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  118</span>        buttonWidth = m_imageSize.GetWidth();</div>
+<div class="line"><span class="lineno">  119</span>        m_imagePosition = wxPoint(m_borderSize, m_borderSize);</div>
+<div class="line"><span class="lineno">  120</span>        m_labelPosition =</div>
+<div class="line"><span class="lineno">  121</span>            wxPoint((buttonWidth - textSize.GetWidth()) / 2 + m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
+<div class="line"><span class="lineno">  122</span>    }</div>
+<div class="line"><span class="lineno">  123</span>    m_buttonSize =</div>
+<div class="line"><span class="lineno">  124</span>        wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);</div>
+<div class="line"><span class="lineno">  125</span>    SetMinSize(m_buttonSize + wxSize(m_borderSize, m_borderSize));</div>
+<div class="line"><span class="lineno">  126</span> </div>
+<div class="line"><span class="lineno">  127</span>    <span class="comment">// Events.</span></div>
+<div class="line"><span class="lineno">  128</span>    Bind(wxEVT_PAINT, &amp;ControlElementButton::OnPaint, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  129</span>    Bind(wxEVT_ENTER_WINDOW, &amp;ControlElementButton::OnMouseEnter, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  130</span>    Bind(wxEVT_LEAVE_WINDOW, &amp;ControlElementButton::OnMouseLeave, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  131</span>    Bind(wxEVT_LEFT_DOWN, &amp;ControlElementButton::OnLeftClickDown, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  132</span>    Bind(wxEVT_LEFT_UP, &amp;ControlElementButton::OnLeftClickUp, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  133</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abf1e696afc93d71095ce150e692c75d2" name="abf1e696afc93d71095ce150e692c75d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf1e696afc93d71095ce150e692c75d2">&#9670;&#160;</a></span>ControlElementButton() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ControlElementButton::ControlElementButton </td>
+          <td>(</td>
+          <td class="paramtype">wxWindow *&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxString&#160;</td>
+          <td class="paramname"><em>label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="class_control_element.html">ControlElement</a> &gt;&#160;</td>
+          <td class="paramname"><em>iconElement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxWindowID&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td>
+          <td class="paramname"><em>guiColour</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>buttonScale</em> = <code>1.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00135">135</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  136</span>                                                             :</div>
+<div class="line"><span class="lineno">  137</span>    wxWindow(parent, <span class="keywordtype">id</span>), m_guiColour(guiColour), m_iconElement(std::move(iconElement)), m_buttonScale(buttonScale)</div>
+<div class="line"><span class="lineno">  138</span>{</div>
+<div class="line"><span class="lineno">  139</span>    SetBackgroundColour(m_guiColour-&gt;background);</div>
+<div class="line"><span class="lineno">  140</span>    m_buttonFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);</div>
+<div class="line"><span class="lineno">  141</span>    <span class="comment">//m_buttonFont.SetPointSize(static_cast&lt;int&gt;(m_buttonFont.GetPointSize() * (1.0 / m_buttonScale)));</span></div>
+<div class="line"><span class="lineno">  142</span>    m_label = label;</div>
+<div class="line"><span class="lineno">  143</span> </div>
+<div class="line"><span class="lineno">  144</span>    <span class="comment">// Calculate label size.</span></div>
+<div class="line"><span class="lineno">  145</span>    wxScreenDC dc;</div>
+<div class="line"><span class="lineno">  146</span>    dc.SetFont(m_buttonFont);</div>
+<div class="line"><span class="lineno">  147</span>    <span class="comment">//wxSize textSize = dc.GetTextExtent(label) * m_buttonScale;</span></div>
+<div class="line"><span class="lineno">  148</span>    wxSize textSize = dc.GetTextExtent(label);</div>
+<div class="line"><span class="lineno">  149</span> </div>
+<div class="line"><span class="lineno">  150</span>    m_imageSize = wxSize(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_iconElement-&gt;GetWidth()), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_iconElement-&gt;GetHeight())) * m_buttonScale;</div>
+<div class="line"><span class="lineno">  151</span> </div>
+<div class="line"><span class="lineno">  152</span>    <span class="keywordtype">int</span> buttonWidth = 0;</div>
+<div class="line"><span class="lineno">  153</span>    <span class="keywordflow">if</span> (textSize.GetWidth() &gt; m_imageSize.GetWidth()) {</div>
+<div class="line"><span class="lineno">  154</span>        buttonWidth = textSize.GetWidth();</div>
+<div class="line"><span class="lineno">  155</span>        m_imagePosition = wxPoint((buttonWidth - m_imageSize.GetWidth()) / 2 + m_borderSize, m_borderSize);</div>
+<div class="line"><span class="lineno">  156</span>        m_labelPosition = wxPoint(m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
+<div class="line"><span class="lineno">  157</span>    }</div>
+<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  159</span>        buttonWidth = m_imageSize.GetWidth();</div>
+<div class="line"><span class="lineno">  160</span>        m_imagePosition = wxPoint(m_borderSize, m_borderSize);</div>
+<div class="line"><span class="lineno">  161</span>        m_labelPosition =</div>
+<div class="line"><span class="lineno">  162</span>            wxPoint((buttonWidth - textSize.GetWidth()) / 2 + m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
+<div class="line"><span class="lineno">  163</span>    }</div>
+<div class="line"><span class="lineno">  164</span>    m_buttonSize =</div>
+<div class="line"><span class="lineno">  165</span>        wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);</div>
+<div class="line"><span class="lineno">  166</span>    SetMinSize(m_buttonSize + wxSize(m_borderSize, m_borderSize));</div>
+<div class="line"><span class="lineno">  167</span> </div>
+<div class="line"><span class="lineno">  168</span>    m_iconElement-&gt;StartMove(m_iconElement-&gt;GetPosition());</div>
+<div class="line"><span class="lineno">  169</span>    m_iconElement-&gt;Move(wxPoint2DDouble(m_buttonSize.GetWidth() / 2.0, (m_buttonSize.GetHeight() - textSize.GetHeight()) / 2.0));</div>
+<div class="line"><span class="lineno">  170</span> </div>
+<div class="line"><span class="lineno">  171</span>    <span class="comment">// Events.</span></div>
+<div class="line"><span class="lineno">  172</span>    Bind(wxEVT_PAINT, &amp;ControlElementButton::OnPaint, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  173</span>    Bind(wxEVT_ENTER_WINDOW, &amp;ControlElementButton::OnMouseEnter, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  174</span>    Bind(wxEVT_LEAVE_WINDOW, &amp;ControlElementButton::OnMouseLeave, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  175</span>    Bind(wxEVT_LEFT_DOWN, &amp;ControlElementButton::OnLeftClickDown, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  176</span>    Bind(wxEVT_LEFT_UP, &amp;ControlElementButton::OnLeftClickUp, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  177</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -284,8 +395,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00084">84</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   84</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00179">179</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  179</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -314,12 +425,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00123">123</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  124</span>{</div>
-<div class="line"><span class="lineno">  125</span>    m_selected = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  126</span>    Refresh();</div>
-<div class="line"><span class="lineno">  127</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  128</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00230">230</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  231</span>{</div>
+<div class="line"><span class="lineno">  232</span>    m_selected = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  233</span>    Refresh();</div>
+<div class="line"><span class="lineno">  234</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  235</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -347,12 +458,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00130">130</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  131</span>{</div>
-<div class="line"><span class="lineno">  132</span>    m_selected = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  133</span>    Refresh();</div>
-<div class="line"><span class="lineno">  134</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  135</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00237">237</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  238</span>{</div>
+<div class="line"><span class="lineno">  239</span>    m_selected = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  240</span>    Refresh();</div>
+<div class="line"><span class="lineno">  241</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  242</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -380,12 +491,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00109">109</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  110</span>{</div>
-<div class="line"><span class="lineno">  111</span>    m_mouseAbove = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  112</span>    Refresh();</div>
-<div class="line"><span class="lineno">  113</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  114</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00216">216</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  217</span>{</div>
+<div class="line"><span class="lineno">  218</span>    m_mouseAbove = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  219</span>    Refresh();</div>
+<div class="line"><span class="lineno">  220</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  221</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -413,12 +524,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00116">116</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  117</span>{</div>
-<div class="line"><span class="lineno">  118</span>    m_mouseAbove = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  119</span>    Refresh();</div>
-<div class="line"><span class="lineno">  120</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  121</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00223">223</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  224</span>{</div>
+<div class="line"><span class="lineno">  225</span>    m_mouseAbove = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  226</span>    Refresh();</div>
+<div class="line"><span class="lineno">  227</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  228</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -446,29 +557,41 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00085">85</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   86</span>{</div>
-<div class="line"><span class="lineno">   87</span>    wxPaintDC dc(<span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   88</span>    wxGraphicsContext* gc = wxGraphicsContext::Create(dc);</div>
-<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> (gc) {</div>
-<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">if</span> (m_mouseAbove) {</div>
-<div class="line"><span class="lineno">   91</span>            <span class="keywordflow">if</span> (m_selected) {</div>
-<div class="line"><span class="lineno">   92</span>                gc-&gt;SetPen(wxPen(wxColour(0, 125, 255, 255), m_borderSize - 1));</div>
-<div class="line"><span class="lineno">   93</span>                gc-&gt;SetBrush(wxBrush(wxColour(0, 125, 255, 100)));</div>
-<div class="line"><span class="lineno">   94</span>            }</div>
-<div class="line"><span class="lineno">   95</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   96</span>                gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">   97</span>                gc-&gt;SetBrush(wxBrush(wxColour(0, 125, 255, 70)));</div>
-<div class="line"><span class="lineno">   98</span>            }</div>
-<div class="line"><span class="lineno">   99</span>            gc-&gt;DrawRectangle(m_borderSize / 2, m_borderSize / 2, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());</div>
-<div class="line"><span class="lineno">  100</span>        }</div>
-<div class="line"><span class="lineno">  101</span>        gc-&gt;DrawBitmap(gc-&gt;CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),</div>
-<div class="line"><span class="lineno">  102</span>            m_imageSize.GetHeight());</div>
-<div class="line"><span class="lineno">  103</span>        gc-&gt;SetFont(m_font, *wxBLACK);</div>
-<div class="line"><span class="lineno">  104</span>        gc-&gt;DrawText(m_label, m_labelPosition.x, m_labelPosition.y);</div>
-<div class="line"><span class="lineno">  105</span>        <span class="keyword">delete</span> gc;</div>
-<div class="line"><span class="lineno">  106</span>    }</div>
-<div class="line"><span class="lineno">  107</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00180">180</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  181</span>{</div>
+<div class="line"><span class="lineno">  182</span>    wxPaintDC dc(<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  183</span>    wxGraphicsContext* gc = wxGraphicsContext::Create(dc);</div>
+<div class="line"><span class="lineno">  184</span>    <span class="keywordflow">if</span> (gc) {</div>
+<div class="line"><span class="lineno">  185</span> </div>
+<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">if</span> (m_mouseAbove) {</div>
+<div class="line"><span class="lineno">  187</span>            <span class="keywordflow">if</span> (m_selected) {</div>
+<div class="line"><span class="lineno">  188</span>                gc-&gt;SetPen(wxPen(m_guiColour-&gt;altSelection, m_borderSize - 1));</div>
+<div class="line"><span class="lineno">  189</span>                gc-&gt;SetBrush(m_guiColour-&gt;altSelection);</div>
+<div class="line"><span class="lineno">  190</span>            }</div>
+<div class="line"><span class="lineno">  191</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  192</span>                gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
+<div class="line"><span class="lineno">  193</span>                gc-&gt;SetBrush(m_guiColour-&gt;selection);</div>
+<div class="line"><span class="lineno">  194</span>            }</div>
+<div class="line"><span class="lineno">  195</span>            gc-&gt;DrawRectangle(m_borderSize / 2, m_borderSize / 2, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());</div>
+<div class="line"><span class="lineno">  196</span>        }</div>
+<div class="line"><span class="lineno">  197</span> </div>
+<div class="line"><span class="lineno">  198</span>        gc-&gt;SetFont(m_buttonFont, m_guiColour-&gt;text);</div>
+<div class="line"><span class="lineno">  199</span>        gc-&gt;DrawText(m_label, m_labelPosition.x, m_labelPosition.y);</div>
+<div class="line"><span class="lineno">  200</span> </div>
+<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">if</span> (m_iconElement) {</div>
+<div class="line"><span class="lineno">  202</span>            gc-&gt;Translate(m_buttonSize.GetWidth() / 2.0, m_buttonSize.GetHeight() / 2.0);</div>
+<div class="line"><span class="lineno">  203</span>            gc-&gt;Scale(m_buttonScale, m_buttonScale);</div>
+<div class="line"><span class="lineno">  204</span>            gc-&gt;Translate(-m_buttonSize.GetWidth() / 2.0, -m_buttonSize.GetHeight() / 2.0);</div>
+<div class="line"><span class="lineno">  205</span>            m_iconElement-&gt;DrawDC(m_guiColour, wxPoint2DDouble(0, 0), 1.0, gc);</div>
+<div class="line"><span class="lineno">  206</span>        }</div>
+<div class="line"><span class="lineno">  207</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  208</span>            gc-&gt;DrawBitmap(gc-&gt;CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),</div>
+<div class="line"><span class="lineno">  209</span>                m_imageSize.GetHeight());</div>
+<div class="line"><span class="lineno">  210</span>        }</div>
+<div class="line"><span class="lineno">  211</span> </div>
+<div class="line"><span class="lineno">  212</span>        <span class="keyword">delete</span> gc;</div>
+<div class="line"><span class="lineno">  213</span>    }</div>
+<div class="line"><span class="lineno">  214</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -493,7 +616,55 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00102">102</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00114">114</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+
+</div>
+</div>
+<a id="ae41279a89bbf96a4dcc37d5f5beb47b8" name="ae41279a89bbf96a4dcc37d5f5beb47b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae41279a89bbf96a4dcc37d5f5beb47b8">&#9670;&#160;</a></span>m_buttonFont</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">wxFont ControlElementButton::m_buttonFont</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00106">106</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+
+</div>
+</div>
+<a id="aa5f1abc13fbacae43183ecda0d21363c" name="aa5f1abc13fbacae43183ecda0d21363c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5f1abc13fbacae43183ecda0d21363c">&#9670;&#160;</a></span>m_buttonScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ControlElementButton::m_buttonScale = 1.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00107">107</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
@@ -517,12 +688,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00106">106</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00118">118</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
-<a id="ac711aa61fe25de7f632a3f2f75fe4fae" name="ac711aa61fe25de7f632a3f2f75fe4fae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac711aa61fe25de7f632a3f2f75fe4fae">&#9670;&#160;</a></span>m_font</h2>
+<a id="a955c58d54b173fff90a9bbfd02c80475" name="a955c58d54b173fff90a9bbfd02c80475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a955c58d54b173fff90a9bbfd02c80475">&#9670;&#160;</a></span>m_guiColour</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -531,7 +702,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">wxFont ControlElementButton::m_font</td>
+          <td class="memname"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a>* ControlElementButton::m_guiColour = nullptr</td>
         </tr>
       </table>
   </td>
@@ -541,7 +712,31 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00095">95</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00101">101</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+
+</div>
+</div>
+<a id="adcdcd79290ca07c41b19aca394296ef1" name="adcdcd79290ca07c41b19aca394296ef1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcdcd79290ca07c41b19aca394296ef1">&#9670;&#160;</a></span>m_iconElement</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="class_control_element.html">ControlElement</a>&gt; ControlElementButton::m_iconElement</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00103">103</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
@@ -565,7 +760,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00098">98</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00110">110</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
@@ -589,7 +784,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00100">100</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00112">112</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
@@ -613,7 +808,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00099">99</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00111">111</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
@@ -637,7 +832,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00094">94</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00105">105</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
@@ -661,7 +856,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00096">96</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00108">108</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
@@ -685,7 +880,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00103">103</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00115">115</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>
@@ -709,7 +904,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00104">104</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00116">116</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 
 </div>
 </div>

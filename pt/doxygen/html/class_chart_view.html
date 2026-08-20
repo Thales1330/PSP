@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -154,6 +153,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a8ce38d89de0ba143787f248eaaa137ba" id="r_a8ce38d89de0ba143787f248eaaa137ba"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chart_view.html#a8ce38d89de0ba143787f248eaaa137ba">OnClose</a> (wxCloseEvent &amp;event)</td></tr>
+<tr class="separator:a8ce38d89de0ba143787f248eaaa137ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fca56b94c12da5b0293e676a1d7479d" id="r_a5fca56b94c12da5b0293e676a1d7479d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chart_view.html#a5fca56b94c12da5b0293e676a1d7479d">OnResize</a> (wxSizeEvent &amp;event)</td></tr>
 <tr class="separator:a5fca56b94c12da5b0293e676a1d7479d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fe6be1c5bf29fd058787f1a47325c1a" id="r_a0fe6be1c5bf29fd058787f1a47325c1a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chart_view.html#a0fe6be1c5bf29fd058787f1a47325c1a">OnMenuExpCSVClick</a> (wxCommandEvent &amp;event)</td></tr>
@@ -463,26 +464,26 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00578">578</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  579</span>{</div>
-<div class="line"><span class="lineno">  580</span>    wxTreeItemIdValue cookie;</div>
-<div class="line"><span class="lineno">  581</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
-<div class="line"><span class="lineno">  582</span>    wxTreeItemId child;</div>
-<div class="line"><span class="lineno">  583</span> </div>
-<div class="line"><span class="lineno">  584</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
-<div class="line"><span class="lineno">  585</span>        m_treeCtrl-&gt;SetItemTextColour(item, *wxBLACK);</div>
-<div class="line"><span class="lineno">  586</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) data-&gt;SetAxis(0);  <span class="comment">// X axis.</span></div>
-<div class="line"><span class="lineno">  587</span> </div>
-<div class="line"><span class="lineno">  588</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
-<div class="line"><span class="lineno">  589</span>            wxTreeItemId nextChild = AllToYAxis(item);</div>
-<div class="line"><span class="lineno">  590</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
-<div class="line"><span class="lineno">  591</span>        }</div>
-<div class="line"><span class="lineno">  592</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
-<div class="line"><span class="lineno">  593</span>    }</div>
-<div class="line"><span class="lineno">  594</span> </div>
-<div class="line"><span class="lineno">  595</span>    wxTreeItemId dummyID;</div>
-<div class="line"><span class="lineno">  596</span>    <span class="keywordflow">return</span> dummyID;</div>
-<div class="line"><span class="lineno">  597</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00583">583</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  584</span>{</div>
+<div class="line"><span class="lineno">  585</span>    wxTreeItemIdValue cookie;</div>
+<div class="line"><span class="lineno">  586</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
+<div class="line"><span class="lineno">  587</span>    wxTreeItemId child;</div>
+<div class="line"><span class="lineno">  588</span> </div>
+<div class="line"><span class="lineno">  589</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
+<div class="line"><span class="lineno">  590</span>        m_treeCtrl-&gt;SetItemTextColour(item, *wxBLACK);</div>
+<div class="line"><span class="lineno">  591</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) data-&gt;SetAxis(0);  <span class="comment">// X axis.</span></div>
+<div class="line"><span class="lineno">  592</span> </div>
+<div class="line"><span class="lineno">  593</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
+<div class="line"><span class="lineno">  594</span>            wxTreeItemId nextChild = AllToYAxis(item);</div>
+<div class="line"><span class="lineno">  595</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<div class="line"><span class="lineno">  596</span>        }</div>
+<div class="line"><span class="lineno">  597</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
+<div class="line"><span class="lineno">  598</span>    }</div>
+<div class="line"><span class="lineno">  599</span> </div>
+<div class="line"><span class="lineno">  600</span>    wxTreeItemId dummyID;</div>
+<div class="line"><span class="lineno">  601</span>    <span class="keywordflow">return</span> dummyID;</div>
+<div class="line"><span class="lineno">  602</span>}</div>
 <div class="ttc" id="aclass_plot_data_html"><div class="ttname"><a href="class_plot_data.html">PlotData</a></div><div class="ttdoc">This class is responsible to manage the graphical data of electromechanical result to be plotted on c...</div><div class="ttdef"><b>Definition</b> <a href="_element_plot_data_8h_source.html#l00035">ElementPlotData.h:36</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -510,25 +511,25 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00548">548</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  549</span>{</div>
-<div class="line"><span class="lineno">  550</span>    m_colourList.push_back(wxColour(255, 30, 0));</div>
-<div class="line"><span class="lineno">  551</span>    m_colourList.push_back(wxColour(0, 30, 255));</div>
-<div class="line"><span class="lineno">  552</span>    m_colourList.push_back(wxColour(0, 128, 0));</div>
-<div class="line"><span class="lineno">  553</span>    m_colourList.push_back(wxColour(100, 100, 100));</div>
-<div class="line"><span class="lineno">  554</span>    m_colourList.push_back(wxColour(255, 128, 0));</div>
-<div class="line"><span class="lineno">  555</span>    m_colourList.push_back(wxColour(128, 0, 255));</div>
-<div class="line"><span class="lineno">  556</span>    m_colourList.push_back(wxColour(0, 255, 128));</div>
-<div class="line"><span class="lineno">  557</span>    m_colourList.push_back(wxColour(255, 255, 0));</div>
-<div class="line"><span class="lineno">  558</span>    m_colourList.push_back(wxColour(255, 0, 255));</div>
-<div class="line"><span class="lineno">  559</span>    m_colourList.push_back(wxColour(0, 255, 255));</div>
-<div class="line"><span class="lineno">  560</span>    m_colourList.push_back(wxColour(128, 255, 0));</div>
-<div class="line"><span class="lineno">  561</span>    m_colourList.push_back(wxColour(255, 0, 128));</div>
-<div class="line"><span class="lineno">  562</span>    m_colourList.push_back(wxColour(0, 128, 255));</div>
-<div class="line"><span class="lineno">  563</span>    m_colourList.push_back(wxColour(128, 128, 128));</div>
-<div class="line"><span class="lineno">  564</span>    m_colourList.push_back(*wxBLACK);</div>
-<div class="line"><span class="lineno">  565</span>    m_itColourList = --m_colourList.end();</div>
-<div class="line"><span class="lineno">  566</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00553">553</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  554</span>{</div>
+<div class="line"><span class="lineno">  555</span>    m_colourList.push_back(wxColour(255, 30, 0));</div>
+<div class="line"><span class="lineno">  556</span>    m_colourList.push_back(wxColour(0, 30, 255));</div>
+<div class="line"><span class="lineno">  557</span>    m_colourList.push_back(wxColour(0, 128, 0));</div>
+<div class="line"><span class="lineno">  558</span>    m_colourList.push_back(wxColour(100, 100, 100));</div>
+<div class="line"><span class="lineno">  559</span>    m_colourList.push_back(wxColour(255, 128, 0));</div>
+<div class="line"><span class="lineno">  560</span>    m_colourList.push_back(wxColour(128, 0, 255));</div>
+<div class="line"><span class="lineno">  561</span>    m_colourList.push_back(wxColour(0, 255, 128));</div>
+<div class="line"><span class="lineno">  562</span>    m_colourList.push_back(wxColour(255, 255, 0));</div>
+<div class="line"><span class="lineno">  563</span>    m_colourList.push_back(wxColour(255, 0, 255));</div>
+<div class="line"><span class="lineno">  564</span>    m_colourList.push_back(wxColour(0, 255, 255));</div>
+<div class="line"><span class="lineno">  565</span>    m_colourList.push_back(wxColour(128, 255, 0));</div>
+<div class="line"><span class="lineno">  566</span>    m_colourList.push_back(wxColour(255, 0, 128));</div>
+<div class="line"><span class="lineno">  567</span>    m_colourList.push_back(wxColour(0, 128, 255));</div>
+<div class="line"><span class="lineno">  568</span>    m_colourList.push_back(wxColour(128, 128, 128));</div>
+<div class="line"><span class="lineno">  569</span>    m_colourList.push_back(*wxBLACK);</div>
+<div class="line"><span class="lineno">  570</span>    m_itColourList = --m_colourList.end();</div>
+<div class="line"><span class="lineno">  571</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -566,50 +567,50 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l01032">1032</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1033</span>{</div>
-<div class="line"><span class="lineno"> 1034</span>    wxTreeItemIdValue cookie;</div>
-<div class="line"><span class="lineno"> 1035</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
-<div class="line"><span class="lineno"> 1036</span>    wxTreeItemId child;</div>
-<div class="line"><span class="lineno"> 1037</span> </div>
-<div class="line"><span class="lineno"> 1038</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
-<div class="line"><span class="lineno"> 1039</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) {</div>
-<div class="line"><span class="lineno"> 1040</span>            <span class="keywordflow">if</span> (data-&gt;IsPlot()) {</div>
-<div class="line"><span class="lineno"> 1041</span>                wxString parentName = m_treeCtrl-&gt;GetItemText(m_treeCtrl-&gt;GetItemParent(item));</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l01037">1037</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1038</span>{</div>
+<div class="line"><span class="lineno"> 1039</span>    wxTreeItemIdValue cookie;</div>
+<div class="line"><span class="lineno"> 1040</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
+<div class="line"><span class="lineno"> 1041</span>    wxTreeItemId child;</div>
 <div class="line"><span class="lineno"> 1042</span> </div>
-<div class="line"><span class="lineno"> 1043</span>                std::vector&lt;double&gt; yValues = data-&gt;GetValues();</div>
-<div class="line"><span class="lineno"> 1044</span>                <span class="keywordflow">if</span> (yValues.size() == 0) {</div>
-<div class="line"><span class="lineno"> 1045</span>                    item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
-<div class="line"><span class="lineno"> 1046</span>                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1047</span>                }</div>
-<div class="line"><span class="lineno"> 1048</span> </div>
-<div class="line"><span class="lineno"> 1049</span>                <span class="keywordtype">double</span> minY = *std::min_element(yValues.begin(), yValues.end());</div>
-<div class="line"><span class="lineno"> 1050</span>                <span class="keywordtype">double</span> maxY = *std::max_element(yValues.begin(), yValues.end());</div>
-<div class="line"><span class="lineno"> 1051</span>                <span class="keywordflow">if</span> (m_firstPlot) {</div>
-<div class="line"><span class="lineno"> 1052</span>                    m_firstPlot = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1053</span>                    m_yMin = minY;</div>
-<div class="line"><span class="lineno"> 1054</span>                    m_yMax = maxY;</div>
-<div class="line"><span class="lineno"> 1055</span> </div>
-<div class="line"><span class="lineno"> 1056</span>                    m_xMin = *std::min_element(m_xAxisValues.begin(), m_xAxisValues.end());</div>
-<div class="line"><span class="lineno"> 1057</span>                    m_xMax = *std::max_element(m_xAxisValues.begin(), m_xAxisValues.end());</div>
-<div class="line"><span class="lineno"> 1058</span>                }</div>
-<div class="line"><span class="lineno"> 1059</span>                <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1060</span>                    <span class="keywordflow">if</span> (minY &lt; m_yMin) m_yMin = minY;</div>
-<div class="line"><span class="lineno"> 1061</span>                    <span class="keywordflow">if</span> (maxY &gt; m_yMax) m_yMax = maxY;</div>
-<div class="line"><span class="lineno"> 1062</span>                }</div>
-<div class="line"><span class="lineno"> 1063</span>            }</div>
-<div class="line"><span class="lineno"> 1064</span>        }</div>
-<div class="line"><span class="lineno"> 1065</span> </div>
-<div class="line"><span class="lineno"> 1066</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
-<div class="line"><span class="lineno"> 1067</span>            wxTreeItemId nextChild = CalcXYLimits(item, chartDir);</div>
-<div class="line"><span class="lineno"> 1068</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<div class="line"><span class="lineno"> 1043</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
+<div class="line"><span class="lineno"> 1044</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) {</div>
+<div class="line"><span class="lineno"> 1045</span>            <span class="keywordflow">if</span> (data-&gt;IsPlot()) {</div>
+<div class="line"><span class="lineno"> 1046</span>                wxString parentName = m_treeCtrl-&gt;GetItemText(m_treeCtrl-&gt;GetItemParent(item));</div>
+<div class="line"><span class="lineno"> 1047</span> </div>
+<div class="line"><span class="lineno"> 1048</span>                std::vector&lt;double&gt; yValues = data-&gt;GetValues();</div>
+<div class="line"><span class="lineno"> 1049</span>                <span class="keywordflow">if</span> (yValues.size() == 0) {</div>
+<div class="line"><span class="lineno"> 1050</span>                    item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
+<div class="line"><span class="lineno"> 1051</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno"> 1052</span>                }</div>
+<div class="line"><span class="lineno"> 1053</span> </div>
+<div class="line"><span class="lineno"> 1054</span>                <span class="keywordtype">double</span> minY = *std::min_element(yValues.begin(), yValues.end());</div>
+<div class="line"><span class="lineno"> 1055</span>                <span class="keywordtype">double</span> maxY = *std::max_element(yValues.begin(), yValues.end());</div>
+<div class="line"><span class="lineno"> 1056</span>                <span class="keywordflow">if</span> (m_firstPlot) {</div>
+<div class="line"><span class="lineno"> 1057</span>                    m_firstPlot = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1058</span>                    m_yMin = minY;</div>
+<div class="line"><span class="lineno"> 1059</span>                    m_yMax = maxY;</div>
+<div class="line"><span class="lineno"> 1060</span> </div>
+<div class="line"><span class="lineno"> 1061</span>                    m_xMin = *std::min_element(m_xAxisValues.begin(), m_xAxisValues.end());</div>
+<div class="line"><span class="lineno"> 1062</span>                    m_xMax = *std::max_element(m_xAxisValues.begin(), m_xAxisValues.end());</div>
+<div class="line"><span class="lineno"> 1063</span>                }</div>
+<div class="line"><span class="lineno"> 1064</span>                <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1065</span>                    <span class="keywordflow">if</span> (minY &lt; m_yMin) m_yMin = minY;</div>
+<div class="line"><span class="lineno"> 1066</span>                    <span class="keywordflow">if</span> (maxY &gt; m_yMax) m_yMax = maxY;</div>
+<div class="line"><span class="lineno"> 1067</span>                }</div>
+<div class="line"><span class="lineno"> 1068</span>            }</div>
 <div class="line"><span class="lineno"> 1069</span>        }</div>
-<div class="line"><span class="lineno"> 1070</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
-<div class="line"><span class="lineno"> 1071</span>    }</div>
-<div class="line"><span class="lineno"> 1072</span> </div>
-<div class="line"><span class="lineno"> 1073</span>    wxTreeItemId dummyID;</div>
-<div class="line"><span class="lineno"> 1074</span>    <span class="keywordflow">return</span> dummyID;</div>
-<div class="line"><span class="lineno"> 1075</span>}</div>
+<div class="line"><span class="lineno"> 1070</span> </div>
+<div class="line"><span class="lineno"> 1071</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
+<div class="line"><span class="lineno"> 1072</span>            wxTreeItemId nextChild = CalcXYLimits(item, chartDir);</div>
+<div class="line"><span class="lineno"> 1073</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<div class="line"><span class="lineno"> 1074</span>        }</div>
+<div class="line"><span class="lineno"> 1075</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
+<div class="line"><span class="lineno"> 1076</span>    }</div>
+<div class="line"><span class="lineno"> 1077</span> </div>
+<div class="line"><span class="lineno"> 1078</span>    wxTreeItemId dummyID;</div>
+<div class="line"><span class="lineno"> 1079</span>    <span class="keywordflow">return</span> dummyID;</div>
+<div class="line"><span class="lineno"> 1080</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -636,8 +637,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00085">85</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   85</span>{ <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.1f&quot;</span>, 0.1)[1]; };</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00086">86</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>{ <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.1f&quot;</span>, 0.1)[1]; };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -664,115 +665,115 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00805">805</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  806</span>{</div>
-<div class="line"><span class="lineno">  807</span>    <span class="keywordtype">int</span> gridColour = 0xEAEAEA;</div>
-<div class="line"><span class="lineno">  808</span>    <span class="keywordtype">int</span> bgColour = 0xFFFFFF;</div>
-<div class="line"><span class="lineno">  809</span>    <span class="keywordtype">int</span> labelColour = 0x000000;</div>
-<div class="line"><span class="lineno">  810</span>    <span class="keywordflow">if</span> (m_darkTheme) {</div>
-<div class="line"><span class="lineno">  811</span>        bgColour = 0x303030;</div>
-<div class="line"><span class="lineno">  812</span>        gridColour = 0x3D3D3D;</div>
-<div class="line"><span class="lineno">  813</span>        labelColour = 0xA0A0A0;</div>
-<div class="line"><span class="lineno">  814</span>    }</div>
-<div class="line"><span class="lineno">  815</span>    <span class="keywordflow">if</span> (m_hideGrid) gridColour = Chart::Transparent;</div>
-<div class="line"><span class="lineno">  816</span> </div>
-<div class="line"><span class="lineno">  817</span>    XYChart* chartDir = <span class="keyword">new</span> XYChart(std::max(400, m_chartViewerSize.GetWidth()), std::max(300, m_chartViewerSize.GetHeight()), bgColour);</div>
-<div class="line"><span class="lineno">  818</span> </div>
-<div class="line"><span class="lineno">  819</span>    wxString title = m_pgPropChartTitle-&gt;GetValueAsString();</div>
-<div class="line"><span class="lineno">  820</span>    <span class="keywordtype">int</span> titleSize = 0;</div>
-<div class="line"><span class="lineno">  821</span>    <span class="keywordflow">if</span> (!title.IsEmpty()) {</div>
-<div class="line"><span class="lineno">  822</span>        chartDir-&gt;addTitle(title, <span class="stringliteral">&quot;arial.ttf&quot;</span>, 12, labelColour);</div>
-<div class="line"><span class="lineno">  823</span>        titleSize = 12;</div>
-<div class="line"><span class="lineno">  824</span>    }</div>
-<div class="line"><span class="lineno">  825</span> </div>
-<div class="line"><span class="lineno">  826</span>    LegendBox* box = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  827</span>    <span class="keywordflow">if</span> (m_showLeg) {</div>
-<div class="line"><span class="lineno">  828</span>        box = chartDir-&gt;addLegend(0, 0, <span class="keyword">false</span>, <span class="stringliteral">&quot;arial.ttf&quot;</span>, 10);</div>
-<div class="line"><span class="lineno">  829</span>        box-&gt;setBackground(Chart::Transparent, Chart::Transparent);</div>
-<div class="line"><span class="lineno">  830</span>        box-&gt;setPos(m_pgPropMarginsLeft-&gt;GetValue().GetLong(), m_pgPropMarginsUp-&gt;GetValue().GetLong() + titleSize);</div>
-<div class="line"><span class="lineno">  831</span>        box-&gt;setFontColor(labelColour);</div>
-<div class="line"><span class="lineno">  832</span>        box-&gt;setLineStyleKey();</div>
-<div class="line"><span class="lineno">  833</span>    }</div>
-<div class="line"><span class="lineno">  834</span>    m_firstPlot = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  835</span>    CalcXYLimits(m_treeCtrl-&gt;GetRootItem(), chartDir);</div>
-<div class="line"><span class="lineno">  836</span>    m_firstPlot = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  837</span>    UpdateAllPlotsCharDir(m_treeCtrl-&gt;GetRootItem(), chartDir);</div>
-<div class="line"><span class="lineno">  838</span> </div>
-<div class="line"><span class="lineno">  839</span> </div>
-<div class="line"><span class="lineno">  840</span>    wxString xLabel = m_pgPropXLabel-&gt;GetValueAsString();</div>
-<div class="line"><span class="lineno">  841</span>    <span class="keywordflow">if</span> (xLabel == _(<span class="stringliteral">&quot;auto&quot;</span>)) xLabel = m_sugestXLabel;</div>
-<div class="line"><span class="lineno">  842</span>    wxString yLabel = m_pgPropYLabel-&gt;GetValueAsString();</div>
-<div class="line"><span class="lineno">  843</span>    <span class="keywordflow">if</span> (yLabel == _(<span class="stringliteral">&quot;auto&quot;</span>)) yLabel = m_sugestYLabel + GetUnitFromMagText(m_sugestYLabel);</div>
-<div class="line"><span class="lineno">  844</span>    <span class="keywordtype">int</span> xLabelSize = 10, yLabelSize = 10;</div>
-<div class="line"><span class="lineno">  845</span>    <span class="comment">// If the label is empty, the size is 0.</span></div>
-<div class="line"><span class="lineno">  846</span>    <span class="keywordflow">if</span> (xLabel.IsEmpty()) xLabelSize = 0;</div>
-<div class="line"><span class="lineno">  847</span>    <span class="keywordflow">if</span> (yLabel.IsEmpty()) yLabelSize = 0;</div>
-<div class="line"><span class="lineno">  848</span> </div>
-<div class="line"><span class="lineno">  849</span>    chartDir-&gt;setPlotArea(</div>
-<div class="line"><span class="lineno">  850</span>        yLabelSize + m_pgPropMarginsLeft-&gt;GetValue().GetLong(),</div>
-<div class="line"><span class="lineno">  851</span>        titleSize + m_legendHeight + m_pgPropMarginsUp-&gt;GetValue().GetLong(),</div>
-<div class="line"><span class="lineno">  852</span>        chartDir-&gt;getWidth() - m_pgPropMarginsRight-&gt;GetValue().GetLong() - m_pgPropMarginsLeft-&gt;GetValue().GetLong() - yLabelSize,</div>
-<div class="line"><span class="lineno">  853</span>        chartDir-&gt;getHeight() - m_pgPropMarginsBot-&gt;GetValue().GetLong() - m_pgPropMarginsUp-&gt;GetValue().GetLong() - m_legendHeight - titleSize - xLabelSize,</div>
-<div class="line"><span class="lineno">  854</span>        bgColour, -1, -1, gridColour, gridColour);</div>
-<div class="line"><span class="lineno">  855</span>    chartDir-&gt;setClipping();</div>
-<div class="line"><span class="lineno">  856</span> </div>
-<div class="line"><span class="lineno">  857</span>    <span class="comment">//DoubleArray timeArray(&amp;m_time[0], m_time.size());</span></div>
-<div class="line"><span class="lineno">  858</span>    <span class="keywordtype">double</span> xMin = 0, xMax = 0, yMin = 0, yMax = 0;</div>
-<div class="line"><span class="lineno">  859</span>    <span class="keywordflow">if</span> (m_forceAxisLimits) {</div>
-<div class="line"><span class="lineno">  860</span>        xMin = m_pgPropXMin-&gt;GetValue().GetDouble();</div>
-<div class="line"><span class="lineno">  861</span>        xMax = m_pgPropXMax-&gt;GetValue().GetDouble();</div>
-<div class="line"><span class="lineno">  862</span>        yMin = m_pgPropYMin-&gt;GetValue().GetDouble();</div>
-<div class="line"><span class="lineno">  863</span>        yMax = m_pgPropYMax-&gt;GetValue().GetDouble();</div>
-<div class="line"><span class="lineno">  864</span>    }</div>
-<div class="line"><span class="lineno">  865</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  866</span>        <span class="comment">//xMin = m_xAxisValues[0];</span></div>
-<div class="line"><span class="lineno">  867</span>        xMin = m_xMin;</div>
-<div class="line"><span class="lineno">  868</span>        <span class="comment">//xMax = m_time[m_time.size() - 1];</span></div>
-<div class="line"><span class="lineno">  869</span>        <span class="comment">//xMax = m_xAxisValues[m_xAxisValues.size() - 1];</span></div>
-<div class="line"><span class="lineno">  870</span>        xMax = m_xMax;</div>
-<div class="line"><span class="lineno">  871</span>        yMin = m_yMin - 0.05 * (m_yMax - m_yMin);</div>
-<div class="line"><span class="lineno">  872</span>        yMax = m_yMax + 0.05 * (m_yMax - m_yMin);</div>
-<div class="line"><span class="lineno">  873</span>        m_pgPropXMin-&gt;SetValue(xMin);</div>
-<div class="line"><span class="lineno">  874</span>        m_pgPropXMax-&gt;SetValue(xMax);</div>
-<div class="line"><span class="lineno">  875</span>        m_pgPropYMin-&gt;SetValue(yMin);</div>
-<div class="line"><span class="lineno">  876</span>        m_pgPropYMax-&gt;SetValue(yMax);</div>
-<div class="line"><span class="lineno">  877</span>    }</div>
-<div class="line"><span class="lineno">  878</span>    m_chartViewerDir-&gt;setFullRange(<span class="stringliteral">&quot;x&quot;</span>, xMin, xMax);</div>
-<div class="line"><span class="lineno">  879</span>    m_chartViewerDir-&gt;setFullRange(<span class="stringliteral">&quot;y&quot;</span>, yMin, yMax);</div>
-<div class="line"><span class="lineno">  880</span> </div>
-<div class="line"><span class="lineno">  881</span>    <span class="comment">// Get the start date and end date that are visible on the chart.</span></div>
-<div class="line"><span class="lineno">  882</span>    <span class="keywordtype">double</span> viewPortStartTime = m_chartViewerDir-&gt;getValueAtViewPort(<span class="stringliteral">&quot;x&quot;</span>, m_chartViewerDir-&gt;getViewPortLeft());</div>
-<div class="line"><span class="lineno">  883</span>    <span class="keywordtype">double</span> viewPortEndTime = m_chartViewerDir-&gt;getValueAtViewPort(<span class="stringliteral">&quot;x&quot;</span>, m_chartViewerDir-&gt;getViewPortLeft() + m_chartViewerDir-&gt;getViewPortWidth());</div>
-<div class="line"><span class="lineno">  884</span> </div>
-<div class="line"><span class="lineno">  885</span>    chartDir-&gt;xAxis()-&gt;setTickDensity(20);</div>
-<div class="line"><span class="lineno">  886</span>    chartDir-&gt;xAxis()-&gt;setLinearScale(viewPortStartTime, viewPortEndTime);</div>
-<div class="line"><span class="lineno">  887</span>    chartDir-&gt;xAxis()-&gt;setLabelFormat(wxString::Format(<span class="stringliteral">&quot;{value|2~%c}&quot;</span>, DotOrComma()));</div>
-<div class="line"><span class="lineno">  888</span>    chartDir-&gt;xAxis()-&gt;setColors(labelColour, labelColour);</div>
-<div class="line"><span class="lineno">  889</span>    chartDir-&gt;xAxis()-&gt;setTitle(xLabel, <span class="stringliteral">&quot;arial.ttf&quot;</span>, 10, labelColour);</div>
-<div class="line"><span class="lineno">  890</span> </div>
-<div class="line"><span class="lineno">  891</span>    chartDir-&gt;yAxis()-&gt;setLabelFormat(wxString::Format(<span class="stringliteral">&quot;{value|2~%c}&quot;</span>, DotOrComma()));</div>
-<div class="line"><span class="lineno">  892</span>    chartDir-&gt;yAxis()-&gt;setColors(labelColour, labelColour);</div>
-<div class="line"><span class="lineno">  893</span>    chartDir-&gt;yAxis()-&gt;setTitle(yLabel, <span class="stringliteral">&quot;arial.ttf&quot;</span>, 10, labelColour);</div>
-<div class="line"><span class="lineno">  894</span>    m_chartViewerDir-&gt;syncLinearAxisWithViewPort(<span class="stringliteral">&quot;y&quot;</span>, chartDir-&gt;yAxis());</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00810">810</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  811</span>{</div>
+<div class="line"><span class="lineno">  812</span>    <span class="keywordtype">int</span> gridColour = 0xEAEAEA;</div>
+<div class="line"><span class="lineno">  813</span>    <span class="keywordtype">int</span> bgColour = 0xFFFFFF;</div>
+<div class="line"><span class="lineno">  814</span>    <span class="keywordtype">int</span> labelColour = 0x000000;</div>
+<div class="line"><span class="lineno">  815</span>    <span class="keywordflow">if</span> (m_darkTheme) {</div>
+<div class="line"><span class="lineno">  816</span>        bgColour = 0x303030;</div>
+<div class="line"><span class="lineno">  817</span>        gridColour = 0x3D3D3D;</div>
+<div class="line"><span class="lineno">  818</span>        labelColour = 0xA0A0A0;</div>
+<div class="line"><span class="lineno">  819</span>    }</div>
+<div class="line"><span class="lineno">  820</span>    <span class="keywordflow">if</span> (m_hideGrid) gridColour = Chart::Transparent;</div>
+<div class="line"><span class="lineno">  821</span> </div>
+<div class="line"><span class="lineno">  822</span>    XYChart* chartDir = <span class="keyword">new</span> XYChart(std::max(400, m_chartViewerSize.GetWidth()), std::max(300, m_chartViewerSize.GetHeight()), bgColour);</div>
+<div class="line"><span class="lineno">  823</span> </div>
+<div class="line"><span class="lineno">  824</span>    wxString title = m_pgPropChartTitle-&gt;GetValueAsString();</div>
+<div class="line"><span class="lineno">  825</span>    <span class="keywordtype">int</span> titleSize = 0;</div>
+<div class="line"><span class="lineno">  826</span>    <span class="keywordflow">if</span> (!title.IsEmpty()) {</div>
+<div class="line"><span class="lineno">  827</span>        chartDir-&gt;addTitle(title, <span class="stringliteral">&quot;arial.ttf&quot;</span>, 12, labelColour);</div>
+<div class="line"><span class="lineno">  828</span>        titleSize = 12;</div>
+<div class="line"><span class="lineno">  829</span>    }</div>
+<div class="line"><span class="lineno">  830</span> </div>
+<div class="line"><span class="lineno">  831</span>    LegendBox* box = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  832</span>    <span class="keywordflow">if</span> (m_showLeg) {</div>
+<div class="line"><span class="lineno">  833</span>        box = chartDir-&gt;addLegend(0, 0, <span class="keyword">false</span>, <span class="stringliteral">&quot;arial.ttf&quot;</span>, 10);</div>
+<div class="line"><span class="lineno">  834</span>        box-&gt;setBackground(Chart::Transparent, Chart::Transparent);</div>
+<div class="line"><span class="lineno">  835</span>        box-&gt;setPos(m_pgPropMarginsLeft-&gt;GetValue().GetLong(), m_pgPropMarginsUp-&gt;GetValue().GetLong() + titleSize);</div>
+<div class="line"><span class="lineno">  836</span>        box-&gt;setFontColor(labelColour);</div>
+<div class="line"><span class="lineno">  837</span>        box-&gt;setLineStyleKey();</div>
+<div class="line"><span class="lineno">  838</span>    }</div>
+<div class="line"><span class="lineno">  839</span>    m_firstPlot = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  840</span>    CalcXYLimits(m_treeCtrl-&gt;GetRootItem(), chartDir);</div>
+<div class="line"><span class="lineno">  841</span>    m_firstPlot = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  842</span>    UpdateAllPlotsCharDir(m_treeCtrl-&gt;GetRootItem(), chartDir);</div>
+<div class="line"><span class="lineno">  843</span> </div>
+<div class="line"><span class="lineno">  844</span> </div>
+<div class="line"><span class="lineno">  845</span>    wxString xLabel = m_pgPropXLabel-&gt;GetValueAsString();</div>
+<div class="line"><span class="lineno">  846</span>    <span class="keywordflow">if</span> (xLabel == _(<span class="stringliteral">&quot;auto&quot;</span>)) xLabel = m_sugestXLabel;</div>
+<div class="line"><span class="lineno">  847</span>    wxString yLabel = m_pgPropYLabel-&gt;GetValueAsString();</div>
+<div class="line"><span class="lineno">  848</span>    <span class="keywordflow">if</span> (yLabel == _(<span class="stringliteral">&quot;auto&quot;</span>)) yLabel = m_sugestYLabel + GetUnitFromMagText(m_sugestYLabel);</div>
+<div class="line"><span class="lineno">  849</span>    <span class="keywordtype">int</span> xLabelSize = 10, yLabelSize = 10;</div>
+<div class="line"><span class="lineno">  850</span>    <span class="comment">// If the label is empty, the size is 0.</span></div>
+<div class="line"><span class="lineno">  851</span>    <span class="keywordflow">if</span> (xLabel.IsEmpty()) xLabelSize = 0;</div>
+<div class="line"><span class="lineno">  852</span>    <span class="keywordflow">if</span> (yLabel.IsEmpty()) yLabelSize = 0;</div>
+<div class="line"><span class="lineno">  853</span> </div>
+<div class="line"><span class="lineno">  854</span>    chartDir-&gt;setPlotArea(</div>
+<div class="line"><span class="lineno">  855</span>        yLabelSize + m_pgPropMarginsLeft-&gt;GetValue().GetLong(),</div>
+<div class="line"><span class="lineno">  856</span>        titleSize + m_legendHeight + m_pgPropMarginsUp-&gt;GetValue().GetLong(),</div>
+<div class="line"><span class="lineno">  857</span>        chartDir-&gt;getWidth() - m_pgPropMarginsRight-&gt;GetValue().GetLong() - m_pgPropMarginsLeft-&gt;GetValue().GetLong() - yLabelSize,</div>
+<div class="line"><span class="lineno">  858</span>        chartDir-&gt;getHeight() - m_pgPropMarginsBot-&gt;GetValue().GetLong() - m_pgPropMarginsUp-&gt;GetValue().GetLong() - m_legendHeight - titleSize - xLabelSize,</div>
+<div class="line"><span class="lineno">  859</span>        bgColour, -1, -1, gridColour, gridColour);</div>
+<div class="line"><span class="lineno">  860</span>    chartDir-&gt;setClipping();</div>
+<div class="line"><span class="lineno">  861</span> </div>
+<div class="line"><span class="lineno">  862</span>    <span class="comment">//DoubleArray timeArray(&amp;m_time[0], m_time.size());</span></div>
+<div class="line"><span class="lineno">  863</span>    <span class="keywordtype">double</span> xMin = 0, xMax = 0, yMin = 0, yMax = 0;</div>
+<div class="line"><span class="lineno">  864</span>    <span class="keywordflow">if</span> (m_forceAxisLimits) {</div>
+<div class="line"><span class="lineno">  865</span>        xMin = m_pgPropXMin-&gt;GetValue().GetDouble();</div>
+<div class="line"><span class="lineno">  866</span>        xMax = m_pgPropXMax-&gt;GetValue().GetDouble();</div>
+<div class="line"><span class="lineno">  867</span>        yMin = m_pgPropYMin-&gt;GetValue().GetDouble();</div>
+<div class="line"><span class="lineno">  868</span>        yMax = m_pgPropYMax-&gt;GetValue().GetDouble();</div>
+<div class="line"><span class="lineno">  869</span>    }</div>
+<div class="line"><span class="lineno">  870</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  871</span>        <span class="comment">//xMin = m_xAxisValues[0];</span></div>
+<div class="line"><span class="lineno">  872</span>        xMin = m_xMin;</div>
+<div class="line"><span class="lineno">  873</span>        <span class="comment">//xMax = m_time[m_time.size() - 1];</span></div>
+<div class="line"><span class="lineno">  874</span>        <span class="comment">//xMax = m_xAxisValues[m_xAxisValues.size() - 1];</span></div>
+<div class="line"><span class="lineno">  875</span>        xMax = m_xMax;</div>
+<div class="line"><span class="lineno">  876</span>        yMin = m_yMin - 0.05 * (m_yMax - m_yMin);</div>
+<div class="line"><span class="lineno">  877</span>        yMax = m_yMax + 0.05 * (m_yMax - m_yMin);</div>
+<div class="line"><span class="lineno">  878</span>        m_pgPropXMin-&gt;SetValue(xMin);</div>
+<div class="line"><span class="lineno">  879</span>        m_pgPropXMax-&gt;SetValue(xMax);</div>
+<div class="line"><span class="lineno">  880</span>        m_pgPropYMin-&gt;SetValue(yMin);</div>
+<div class="line"><span class="lineno">  881</span>        m_pgPropYMax-&gt;SetValue(yMax);</div>
+<div class="line"><span class="lineno">  882</span>    }</div>
+<div class="line"><span class="lineno">  883</span>    m_chartViewerDir-&gt;setFullRange(<span class="stringliteral">&quot;x&quot;</span>, xMin, xMax);</div>
+<div class="line"><span class="lineno">  884</span>    m_chartViewerDir-&gt;setFullRange(<span class="stringliteral">&quot;y&quot;</span>, yMin, yMax);</div>
+<div class="line"><span class="lineno">  885</span> </div>
+<div class="line"><span class="lineno">  886</span>    <span class="comment">// Get the start date and end date that are visible on the chart.</span></div>
+<div class="line"><span class="lineno">  887</span>    <span class="keywordtype">double</span> viewPortStartTime = m_chartViewerDir-&gt;getValueAtViewPort(<span class="stringliteral">&quot;x&quot;</span>, m_chartViewerDir-&gt;getViewPortLeft());</div>
+<div class="line"><span class="lineno">  888</span>    <span class="keywordtype">double</span> viewPortEndTime = m_chartViewerDir-&gt;getValueAtViewPort(<span class="stringliteral">&quot;x&quot;</span>, m_chartViewerDir-&gt;getViewPortLeft() + m_chartViewerDir-&gt;getViewPortWidth());</div>
+<div class="line"><span class="lineno">  889</span> </div>
+<div class="line"><span class="lineno">  890</span>    chartDir-&gt;xAxis()-&gt;setTickDensity(20);</div>
+<div class="line"><span class="lineno">  891</span>    chartDir-&gt;xAxis()-&gt;setLinearScale(viewPortStartTime, viewPortEndTime);</div>
+<div class="line"><span class="lineno">  892</span>    chartDir-&gt;xAxis()-&gt;setLabelFormat(wxString::Format(<span class="stringliteral">&quot;{value|2~%c}&quot;</span>, DotOrComma()));</div>
+<div class="line"><span class="lineno">  893</span>    chartDir-&gt;xAxis()-&gt;setColors(labelColour, labelColour);</div>
+<div class="line"><span class="lineno">  894</span>    chartDir-&gt;xAxis()-&gt;setTitle(xLabel, <span class="stringliteral">&quot;arial.ttf&quot;</span>, 10, labelColour);</div>
 <div class="line"><span class="lineno">  895</span> </div>
-<div class="line"><span class="lineno">  896</span>    <span class="keywordflow">if</span> (m_showCoords) {</div>
-<div class="line"><span class="lineno">  897</span>        DrawTrackLine(chartDir);</div>
-<div class="line"><span class="lineno">  898</span>    }</div>
-<div class="line"><span class="lineno">  899</span> </div>
-<div class="line"><span class="lineno">  900</span>    <span class="keywordflow">if</span> (m_chartViewerDir-&gt;getChart() != <span class="keyword">nullptr</span>)</div>
-<div class="line"><span class="lineno">  901</span>    {</div>
-<div class="line"><span class="lineno">  902</span>        <span class="keyword">delete</span> m_chartViewerDir-&gt;getChart();</div>
+<div class="line"><span class="lineno">  896</span>    chartDir-&gt;yAxis()-&gt;setLabelFormat(wxString::Format(<span class="stringliteral">&quot;{value|2~%c}&quot;</span>, DotOrComma()));</div>
+<div class="line"><span class="lineno">  897</span>    chartDir-&gt;yAxis()-&gt;setColors(labelColour, labelColour);</div>
+<div class="line"><span class="lineno">  898</span>    chartDir-&gt;yAxis()-&gt;setTitle(yLabel, <span class="stringliteral">&quot;arial.ttf&quot;</span>, 10, labelColour);</div>
+<div class="line"><span class="lineno">  899</span>    m_chartViewerDir-&gt;syncLinearAxisWithViewPort(<span class="stringliteral">&quot;y&quot;</span>, chartDir-&gt;yAxis());</div>
+<div class="line"><span class="lineno">  900</span> </div>
+<div class="line"><span class="lineno">  901</span>    <span class="keywordflow">if</span> (m_showCoords) {</div>
+<div class="line"><span class="lineno">  902</span>        DrawTrackLine(chartDir);</div>
 <div class="line"><span class="lineno">  903</span>    }</div>
-<div class="line"><span class="lineno">  904</span>    <span class="comment">// Set the chart image to the WinChartViewer</span></div>
-<div class="line"><span class="lineno">  905</span>    m_chartViewerDir-&gt;setChart(chartDir);</div>
-<div class="line"><span class="lineno">  906</span> </div>
-<div class="line"><span class="lineno">  907</span>    <span class="keywordflow">if</span> (m_showLeg &amp;&amp; box != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  908</span>        <span class="keywordflow">if</span> (std::abs(m_legendHeight - box-&gt;getHeight()) &gt; 1) {</div>
-<div class="line"><span class="lineno">  909</span>            m_legendHeight = box-&gt;getHeight();</div>
-<div class="line"><span class="lineno">  910</span>            DrawChartDir();</div>
-<div class="line"><span class="lineno">  911</span>        }</div>
-<div class="line"><span class="lineno">  912</span>    }</div>
-<div class="line"><span class="lineno">  913</span>}</div>
+<div class="line"><span class="lineno">  904</span> </div>
+<div class="line"><span class="lineno">  905</span>    <span class="keywordflow">if</span> (m_chartViewerDir-&gt;getChart() != <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  906</span>    {</div>
+<div class="line"><span class="lineno">  907</span>        <span class="keyword">delete</span> m_chartViewerDir-&gt;getChart();</div>
+<div class="line"><span class="lineno">  908</span>    }</div>
+<div class="line"><span class="lineno">  909</span>    <span class="comment">// Set the chart image to the WinChartViewer</span></div>
+<div class="line"><span class="lineno">  910</span>    m_chartViewerDir-&gt;setChart(chartDir);</div>
+<div class="line"><span class="lineno">  911</span> </div>
+<div class="line"><span class="lineno">  912</span>    <span class="keywordflow">if</span> (m_showLeg &amp;&amp; box != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  913</span>        <span class="keywordflow">if</span> (std::abs(m_legendHeight - box-&gt;getHeight()) &gt; 1) {</div>
+<div class="line"><span class="lineno">  914</span>            m_legendHeight = box-&gt;getHeight();</div>
+<div class="line"><span class="lineno">  915</span>            DrawChartDir();</div>
+<div class="line"><span class="lineno">  916</span>        }</div>
+<div class="line"><span class="lineno">  917</span>    }</div>
+<div class="line"><span class="lineno">  918</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -800,68 +801,68 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00957">957</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  958</span>{</div>
-<div class="line"><span class="lineno">  959</span>    chartDir-&gt;initDynamicLayer();</div>
-<div class="line"><span class="lineno">  960</span> </div>
-<div class="line"><span class="lineno">  961</span>    <span class="keywordtype">double</span> xValue = chartDir-&gt;getNearestXValue(m_trackLinePos);</div>
-<div class="line"><span class="lineno">  962</span>    <span class="keywordtype">int</span> xCoor = chartDir-&gt;getXCoor(xValue);</div>
-<div class="line"><span class="lineno">  963</span>    chartDir-&gt;getDrawArea()-&gt;line(xCoor, chartDir-&gt;getPlotArea()-&gt;getTopY(), xCoor, chartDir-&gt;getPlotArea()-&gt;getBottomY(), 0x888888, 3);</div>
-<div class="line"><span class="lineno">  964</span> </div>
-<div class="line"><span class="lineno">  965</span>    std::ostringstream xlabel;</div>
-<div class="line"><span class="lineno">  966</span> </div>
-<div class="line"><span class="lineno">  967</span>    <span class="comment">//xlabel &lt;&lt; &quot;&lt;*font,bgColor=000000*&gt; &quot; &lt;&lt; chartDir-&gt;xAxis()-&gt;getFormattedLabel(xValue) &lt;&lt; &quot; s &lt;*/font*&gt;&quot;;</span></div>
-<div class="line"><span class="lineno">  968</span>    xlabel &lt;&lt; <span class="stringliteral">&quot;&lt;*font,bgColor=000000*&gt; &quot;</span> &lt;&lt; chartDir-&gt;formatValue(xValue, wxString::Format(<span class="stringliteral">&quot;{value|P4~%c}&quot;</span>, DotOrComma())) &lt;&lt; <span class="stringliteral">&quot; &lt;*/font*&gt;&quot;</span>;</div>
-<div class="line"><span class="lineno">  969</span>    TTFText* text = chartDir-&gt;getDrawArea()-&gt;text(xlabel.str().c_str(), <span class="stringliteral">&quot;arialbd.ttf&quot;</span>, 10);</div>
-<div class="line"><span class="lineno">  970</span>    <span class="keywordtype">int</span> xLabelPos = std::max(0, std::min(xCoor - text-&gt;getWidth() / 2, chartDir-&gt;getWidth() - text-&gt;getWidth()));</div>
-<div class="line"><span class="lineno">  971</span>    text-&gt;draw(xLabelPos, chartDir-&gt;getPlotArea()-&gt;getBottomY() + 3, 0xffffff);</div>
-<div class="line"><span class="lineno">  972</span>    text-&gt;destroy();</div>
-<div class="line"><span class="lineno">  973</span> </div>
-<div class="line"><span class="lineno">  974</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; chartDir-&gt;getLayerCount(); ++i)</div>
-<div class="line"><span class="lineno">  975</span>    {</div>
-<div class="line"><span class="lineno">  976</span>        Layer* layer = chartDir-&gt;getLayerByZ(i);</div>
-<div class="line"><span class="lineno">  977</span> </div>
-<div class="line"><span class="lineno">  978</span>        <span class="comment">// The data array index of the x-value</span></div>
-<div class="line"><span class="lineno">  979</span>        <span class="keywordtype">int</span> xIndex = layer-&gt;getXIndexOf(xValue);</div>
-<div class="line"><span class="lineno">  980</span> </div>
-<div class="line"><span class="lineno">  981</span>        <span class="comment">// Iterate through all the data sets in the layer</span></div>
-<div class="line"><span class="lineno">  982</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; layer-&gt;getDataSetCount(); ++j)</div>
-<div class="line"><span class="lineno">  983</span>        {</div>
-<div class="line"><span class="lineno">  984</span>            DataSet* dataSet = layer-&gt;getDataSetByZ(j);</div>
-<div class="line"><span class="lineno">  985</span>            <span class="keyword">const</span> <span class="keywordtype">char</span>* dataSetName = dataSet-&gt;getDataName();</div>
-<div class="line"><span class="lineno">  986</span> </div>
-<div class="line"><span class="lineno">  987</span>            <span class="comment">// Get the color, name and position of the data label</span></div>
-<div class="line"><span class="lineno">  988</span>            <span class="keywordtype">int</span> color = dataSet-&gt;getDataColor();</div>
-<div class="line"><span class="lineno">  989</span>            <span class="keywordtype">int</span> yCoor = chartDir-&gt;getYCoor(dataSet-&gt;getPosition(xIndex), dataSet-&gt;getUseYAxis());</div>
-<div class="line"><span class="lineno">  990</span> </div>
-<div class="line"><span class="lineno">  991</span>            <span class="comment">// Draw a track dot with a label next to it for visible data points in the plot area</span></div>
-<div class="line"><span class="lineno">  992</span>            <span class="keywordflow">if</span> ((yCoor &gt;= chartDir-&gt;getPlotArea()-&gt;getTopY()) &amp;&amp; (yCoor &lt;= chartDir-&gt;getPlotArea()-&gt;getBottomY()) &amp;&amp;</div>
-<div class="line"><span class="lineno">  993</span>                (color != Chart::Transparent) &amp;&amp; dataSetName &amp;&amp; *dataSetName)</div>
-<div class="line"><span class="lineno">  994</span>            {</div>
-<div class="line"><span class="lineno">  995</span>                chartDir-&gt;getDrawArea()-&gt;circle(xCoor, yCoor, 4, 4, color, color);</div>
-<div class="line"><span class="lineno">  996</span> </div>
-<div class="line"><span class="lineno">  997</span>                std::ostringstream label;</div>
-<div class="line"><span class="lineno">  998</span> </div>
-<div class="line"><span class="lineno">  999</span>                <span class="comment">//wxMessageBox(wxString::Format(&quot;%d&quot;, i));</span></div>
-<div class="line"><span class="lineno"> 1000</span>                label &lt;&lt; <span class="stringliteral">&quot;&lt;*font,bgColor=&quot;</span> &lt;&lt; std::hex &lt;&lt; m_rawDataColour[color] &lt;&lt; <span class="stringliteral">&quot;*&gt; &quot;</span> &lt;&lt; chartDir-&gt;formatValue(dataSet-&gt;getValue(xIndex), wxString::Format(<span class="stringliteral">&quot;{value|P4~%c}&quot;</span>, DotOrComma())) &lt;&lt; <span class="stringliteral">&quot; &lt;*font*&gt;&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1001</span>                text = chartDir-&gt;getDrawArea()-&gt;text(label.str().c_str(), <span class="stringliteral">&quot;arialbd.ttf&quot;</span>, 10);</div>
-<div class="line"><span class="lineno"> 1002</span>                <span class="comment">//log[dataSetName] = dataSet-&gt;getValue(xIndex);</span></div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00962">962</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  963</span>{</div>
+<div class="line"><span class="lineno">  964</span>    chartDir-&gt;initDynamicLayer();</div>
+<div class="line"><span class="lineno">  965</span> </div>
+<div class="line"><span class="lineno">  966</span>    <span class="keywordtype">double</span> xValue = chartDir-&gt;getNearestXValue(m_trackLinePos);</div>
+<div class="line"><span class="lineno">  967</span>    <span class="keywordtype">int</span> xCoor = chartDir-&gt;getXCoor(xValue);</div>
+<div class="line"><span class="lineno">  968</span>    chartDir-&gt;getDrawArea()-&gt;line(xCoor, chartDir-&gt;getPlotArea()-&gt;getTopY(), xCoor, chartDir-&gt;getPlotArea()-&gt;getBottomY(), 0x888888, 3);</div>
+<div class="line"><span class="lineno">  969</span> </div>
+<div class="line"><span class="lineno">  970</span>    std::ostringstream xlabel;</div>
+<div class="line"><span class="lineno">  971</span> </div>
+<div class="line"><span class="lineno">  972</span>    <span class="comment">//xlabel &lt;&lt; &quot;&lt;*font,bgColor=000000*&gt; &quot; &lt;&lt; chartDir-&gt;xAxis()-&gt;getFormattedLabel(xValue) &lt;&lt; &quot; s &lt;*/font*&gt;&quot;;</span></div>
+<div class="line"><span class="lineno">  973</span>    xlabel &lt;&lt; <span class="stringliteral">&quot;&lt;*font,bgColor=000000*&gt; &quot;</span> &lt;&lt; chartDir-&gt;formatValue(xValue, wxString::Format(<span class="stringliteral">&quot;{value|P4~%c}&quot;</span>, DotOrComma())) &lt;&lt; <span class="stringliteral">&quot; &lt;*/font*&gt;&quot;</span>;</div>
+<div class="line"><span class="lineno">  974</span>    TTFText* text = chartDir-&gt;getDrawArea()-&gt;text(xlabel.str().c_str(), <span class="stringliteral">&quot;arialbd.ttf&quot;</span>, 10);</div>
+<div class="line"><span class="lineno">  975</span>    <span class="keywordtype">int</span> xLabelPos = std::max(0, std::min(xCoor - text-&gt;getWidth() / 2, chartDir-&gt;getWidth() - text-&gt;getWidth()));</div>
+<div class="line"><span class="lineno">  976</span>    text-&gt;draw(xLabelPos, chartDir-&gt;getPlotArea()-&gt;getBottomY() + 3, 0xffffff);</div>
+<div class="line"><span class="lineno">  977</span>    text-&gt;destroy();</div>
+<div class="line"><span class="lineno">  978</span> </div>
+<div class="line"><span class="lineno">  979</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; chartDir-&gt;getLayerCount(); ++i)</div>
+<div class="line"><span class="lineno">  980</span>    {</div>
+<div class="line"><span class="lineno">  981</span>        Layer* layer = chartDir-&gt;getLayerByZ(i);</div>
+<div class="line"><span class="lineno">  982</span> </div>
+<div class="line"><span class="lineno">  983</span>        <span class="comment">// The data array index of the x-value</span></div>
+<div class="line"><span class="lineno">  984</span>        <span class="keywordtype">int</span> xIndex = layer-&gt;getXIndexOf(xValue);</div>
+<div class="line"><span class="lineno">  985</span> </div>
+<div class="line"><span class="lineno">  986</span>        <span class="comment">// Iterate through all the data sets in the layer</span></div>
+<div class="line"><span class="lineno">  987</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; layer-&gt;getDataSetCount(); ++j)</div>
+<div class="line"><span class="lineno">  988</span>        {</div>
+<div class="line"><span class="lineno">  989</span>            DataSet* dataSet = layer-&gt;getDataSetByZ(j);</div>
+<div class="line"><span class="lineno">  990</span>            <span class="keyword">const</span> <span class="keywordtype">char</span>* dataSetName = dataSet-&gt;getDataName();</div>
+<div class="line"><span class="lineno">  991</span> </div>
+<div class="line"><span class="lineno">  992</span>            <span class="comment">// Get the color, name and position of the data label</span></div>
+<div class="line"><span class="lineno">  993</span>            <span class="keywordtype">int</span> color = dataSet-&gt;getDataColor();</div>
+<div class="line"><span class="lineno">  994</span>            <span class="keywordtype">int</span> yCoor = chartDir-&gt;getYCoor(dataSet-&gt;getPosition(xIndex), dataSet-&gt;getUseYAxis());</div>
+<div class="line"><span class="lineno">  995</span> </div>
+<div class="line"><span class="lineno">  996</span>            <span class="comment">// Draw a track dot with a label next to it for visible data points in the plot area</span></div>
+<div class="line"><span class="lineno">  997</span>            <span class="keywordflow">if</span> ((yCoor &gt;= chartDir-&gt;getPlotArea()-&gt;getTopY()) &amp;&amp; (yCoor &lt;= chartDir-&gt;getPlotArea()-&gt;getBottomY()) &amp;&amp;</div>
+<div class="line"><span class="lineno">  998</span>                (color != Chart::Transparent) &amp;&amp; dataSetName &amp;&amp; *dataSetName)</div>
+<div class="line"><span class="lineno">  999</span>            {</div>
+<div class="line"><span class="lineno"> 1000</span>                chartDir-&gt;getDrawArea()-&gt;circle(xCoor, yCoor, 4, 4, color, color);</div>
+<div class="line"><span class="lineno"> 1001</span> </div>
+<div class="line"><span class="lineno"> 1002</span>                std::ostringstream label;</div>
 <div class="line"><span class="lineno"> 1003</span> </div>
-<div class="line"><span class="lineno"> 1004</span>                <span class="comment">// Draw the label on the right side of the dot if the mouse is on the left side the</span></div>
-<div class="line"><span class="lineno"> 1005</span>                <span class="comment">// chart, and vice versa. This ensures the label will not go outside the chart image.</span></div>
-<div class="line"><span class="lineno"> 1006</span>                <span class="keywordflow">if</span> (xCoor &lt;= (chartDir-&gt;getPlotArea()-&gt;getLeftX() + chartDir-&gt;getPlotArea()-&gt;getRightX()) / 2)</div>
-<div class="line"><span class="lineno"> 1007</span>                {</div>
-<div class="line"><span class="lineno"> 1008</span>                    text-&gt;draw(xCoor + 6, yCoor, 0xffffff, Chart::Left);</div>
-<div class="line"><span class="lineno"> 1009</span>                }</div>
-<div class="line"><span class="lineno"> 1010</span>                <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno"> 1011</span>                {</div>
-<div class="line"><span class="lineno"> 1012</span>                    text-&gt;draw(xCoor - 6, yCoor, 0xffffff, Chart::Right);</div>
-<div class="line"><span class="lineno"> 1013</span>                }</div>
-<div class="line"><span class="lineno"> 1014</span>                text-&gt;destroy();</div>
-<div class="line"><span class="lineno"> 1015</span>            }</div>
-<div class="line"><span class="lineno"> 1016</span>        }</div>
-<div class="line"><span class="lineno"> 1017</span>    }</div>
-<div class="line"><span class="lineno"> 1018</span>}</div>
+<div class="line"><span class="lineno"> 1004</span>                <span class="comment">//wxMessageBox(wxString::Format(&quot;%d&quot;, i));</span></div>
+<div class="line"><span class="lineno"> 1005</span>                label &lt;&lt; <span class="stringliteral">&quot;&lt;*font,bgColor=&quot;</span> &lt;&lt; std::hex &lt;&lt; m_rawDataColour[color] &lt;&lt; <span class="stringliteral">&quot;*&gt; &quot;</span> &lt;&lt; chartDir-&gt;formatValue(dataSet-&gt;getValue(xIndex), wxString::Format(<span class="stringliteral">&quot;{value|P4~%c}&quot;</span>, DotOrComma())) &lt;&lt; <span class="stringliteral">&quot; &lt;*font*&gt;&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1006</span>                text = chartDir-&gt;getDrawArea()-&gt;text(label.str().c_str(), <span class="stringliteral">&quot;arialbd.ttf&quot;</span>, 10);</div>
+<div class="line"><span class="lineno"> 1007</span>                <span class="comment">//log[dataSetName] = dataSet-&gt;getValue(xIndex);</span></div>
+<div class="line"><span class="lineno"> 1008</span> </div>
+<div class="line"><span class="lineno"> 1009</span>                <span class="comment">// Draw the label on the right side of the dot if the mouse is on the left side the</span></div>
+<div class="line"><span class="lineno"> 1010</span>                <span class="comment">// chart, and vice versa. This ensures the label will not go outside the chart image.</span></div>
+<div class="line"><span class="lineno"> 1011</span>                <span class="keywordflow">if</span> (xCoor &lt;= (chartDir-&gt;getPlotArea()-&gt;getLeftX() + chartDir-&gt;getPlotArea()-&gt;getRightX()) / 2)</div>
+<div class="line"><span class="lineno"> 1012</span>                {</div>
+<div class="line"><span class="lineno"> 1013</span>                    text-&gt;draw(xCoor + 6, yCoor, 0xffffff, Chart::Left);</div>
+<div class="line"><span class="lineno"> 1014</span>                }</div>
+<div class="line"><span class="lineno"> 1015</span>                <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno"> 1016</span>                {</div>
+<div class="line"><span class="lineno"> 1017</span>                    text-&gt;draw(xCoor - 6, yCoor, 0xffffff, Chart::Right);</div>
+<div class="line"><span class="lineno"> 1018</span>                }</div>
+<div class="line"><span class="lineno"> 1019</span>                text-&gt;destroy();</div>
+<div class="line"><span class="lineno"> 1020</span>            }</div>
+<div class="line"><span class="lineno"> 1021</span>        }</div>
+<div class="line"><span class="lineno"> 1022</span>    }</div>
+<div class="line"><span class="lineno"> 1023</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -932,61 +933,61 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00721">721</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  722</span>{</div>
-<div class="line"><span class="lineno">  723</span>    std::vector&lt;PlotData*&gt; activePlotDataList;</div>
-<div class="line"><span class="lineno">  724</span>    GetActivePlotData(m_treeCtrl-&gt;GetRootItem(), activePlotDataList);</div>
-<div class="line"><span class="lineno">  725</span> </div>
-<div class="line"><span class="lineno">  726</span>    std::vector&lt;double&gt; xValues;</div>
-<div class="line"><span class="lineno">  727</span>    wxString xName = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">  728</span> </div>
-<div class="line"><span class="lineno">  729</span>    <span class="comment">// Find X axis curve, if none is found, X is the m_time.</span></div>
-<div class="line"><span class="lineno">  730</span>    <span class="keywordtype">bool</span> foundXAxis = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  731</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = activePlotDataList.begin(), itEnd = activePlotDataList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  732</span>        <a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = *it;</div>
-<div class="line"><span class="lineno">  733</span>        <span class="keywordflow">if</span> (data-&gt;GetAxis() == 1) {</div>
-<div class="line"><span class="lineno">  734</span>            xValues = data-&gt;GetValues();</div>
-<div class="line"><span class="lineno">  735</span>            xName = data-&gt;GetName();</div>
-<div class="line"><span class="lineno">  736</span>            foundXAxis = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  737</span>            activePlotDataList.erase(it);</div>
-<div class="line"><span class="lineno">  738</span>            <span class="keyword">delete</span> data;</div>
-<div class="line"><span class="lineno">  739</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  740</span>        }</div>
-<div class="line"><span class="lineno">  741</span>    }</div>
-<div class="line"><span class="lineno">  742</span>    <span class="keywordflow">if</span> (!foundXAxis) {</div>
-<div class="line"><span class="lineno">  743</span>        xValues = m_time;</div>
-<div class="line"><span class="lineno">  744</span>        xName = _(<span class="stringliteral">&quot;Time&quot;</span>);</div>
-<div class="line"><span class="lineno">  745</span>    }</div>
-<div class="line"><span class="lineno">  746</span> </div>
-<div class="line"><span class="lineno">  747</span>    <span class="comment">// Build CSV text.</span></div>
-<div class="line"><span class="lineno">  748</span>    wxString csvText = xName + <span class="stringliteral">&quot;;&quot;</span>;</div>
-<div class="line"><span class="lineno">  749</span>    <span class="comment">// Header</span></div>
-<div class="line"><span class="lineno">  750</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = activePlotDataList.begin(), itEnd = activePlotDataList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  751</span>        <a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = *it;</div>
-<div class="line"><span class="lineno">  752</span>        csvText += data-&gt;GetName() + <span class="stringliteral">&quot;;&quot;</span>;</div>
-<div class="line"><span class="lineno">  753</span>    }</div>
-<div class="line"><span class="lineno">  754</span>    csvText[csvText.length() - 1] = <span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><span class="lineno">  755</span>    <span class="comment">// Values</span></div>
-<div class="line"><span class="lineno">  756</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; xValues.size(); ++i) {</div>
-<div class="line"><span class="lineno">  757</span>        csvText += wxString::FromCDouble(xValues[i], 13) + <span class="stringliteral">&quot;;&quot;</span>;</div>
-<div class="line"><span class="lineno">  758</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; activePlotDataList.size(); ++j) {</div>
-<div class="line"><span class="lineno">  759</span>            <span class="keywordtype">double</span> value = 0.0;</div>
-<div class="line"><span class="lineno">  760</span>            <span class="keywordflow">if</span> (i &lt; activePlotDataList[j]-&gt;GetValues().size()) {</div>
-<div class="line"><span class="lineno">  761</span>                value = activePlotDataList[j]-&gt;GetValues()[i];</div>
-<div class="line"><span class="lineno">  762</span>            }</div>
-<div class="line"><span class="lineno">  763</span>            csvText += wxString::FromCDouble(value, 13) + <span class="stringliteral">&quot;;&quot;</span>;</div>
-<div class="line"><span class="lineno">  764</span>        }</div>
-<div class="line"><span class="lineno">  765</span>        csvText[csvText.length() - 1] = <span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><span class="lineno">  766</span>    }</div>
-<div class="line"><span class="lineno">  767</span> </div>
-<div class="line"><span class="lineno">  768</span>    <span class="comment">// Clear active plot data vector.</span></div>
-<div class="line"><span class="lineno">  769</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = activePlotDataList.begin(); it != activePlotDataList.end(); ++it) {</div>
-<div class="line"><span class="lineno">  770</span>        <span class="keyword">delete</span>(*it);</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00726">726</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  727</span>{</div>
+<div class="line"><span class="lineno">  728</span>    std::vector&lt;PlotData*&gt; activePlotDataList;</div>
+<div class="line"><span class="lineno">  729</span>    GetActivePlotData(m_treeCtrl-&gt;GetRootItem(), activePlotDataList);</div>
+<div class="line"><span class="lineno">  730</span> </div>
+<div class="line"><span class="lineno">  731</span>    std::vector&lt;double&gt; xValues;</div>
+<div class="line"><span class="lineno">  732</span>    wxString xName = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  733</span> </div>
+<div class="line"><span class="lineno">  734</span>    <span class="comment">// Find X axis curve, if none is found, X is the m_time.</span></div>
+<div class="line"><span class="lineno">  735</span>    <span class="keywordtype">bool</span> foundXAxis = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  736</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = activePlotDataList.begin(), itEnd = activePlotDataList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  737</span>        <a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = *it;</div>
+<div class="line"><span class="lineno">  738</span>        <span class="keywordflow">if</span> (data-&gt;GetAxis() == 1) {</div>
+<div class="line"><span class="lineno">  739</span>            xValues = data-&gt;GetValues();</div>
+<div class="line"><span class="lineno">  740</span>            xName = data-&gt;GetName();</div>
+<div class="line"><span class="lineno">  741</span>            foundXAxis = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  742</span>            activePlotDataList.erase(it);</div>
+<div class="line"><span class="lineno">  743</span>            <span class="keyword">delete</span> data;</div>
+<div class="line"><span class="lineno">  744</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  745</span>        }</div>
+<div class="line"><span class="lineno">  746</span>    }</div>
+<div class="line"><span class="lineno">  747</span>    <span class="keywordflow">if</span> (!foundXAxis) {</div>
+<div class="line"><span class="lineno">  748</span>        xValues = m_time;</div>
+<div class="line"><span class="lineno">  749</span>        xName = _(<span class="stringliteral">&quot;Time&quot;</span>);</div>
+<div class="line"><span class="lineno">  750</span>    }</div>
+<div class="line"><span class="lineno">  751</span> </div>
+<div class="line"><span class="lineno">  752</span>    <span class="comment">// Build CSV text.</span></div>
+<div class="line"><span class="lineno">  753</span>    wxString csvText = xName + <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><span class="lineno">  754</span>    <span class="comment">// Header</span></div>
+<div class="line"><span class="lineno">  755</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = activePlotDataList.begin(), itEnd = activePlotDataList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  756</span>        <a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = *it;</div>
+<div class="line"><span class="lineno">  757</span>        csvText += data-&gt;GetName() + <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><span class="lineno">  758</span>    }</div>
+<div class="line"><span class="lineno">  759</span>    csvText[csvText.length() - 1] = <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><span class="lineno">  760</span>    <span class="comment">// Values</span></div>
+<div class="line"><span class="lineno">  761</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; xValues.size(); ++i) {</div>
+<div class="line"><span class="lineno">  762</span>        csvText += wxString::FromCDouble(xValues[i], 13) + <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><span class="lineno">  763</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; activePlotDataList.size(); ++j) {</div>
+<div class="line"><span class="lineno">  764</span>            <span class="keywordtype">double</span> value = 0.0;</div>
+<div class="line"><span class="lineno">  765</span>            <span class="keywordflow">if</span> (i &lt; activePlotDataList[j]-&gt;GetValues().size()) {</div>
+<div class="line"><span class="lineno">  766</span>                value = activePlotDataList[j]-&gt;GetValues()[i];</div>
+<div class="line"><span class="lineno">  767</span>            }</div>
+<div class="line"><span class="lineno">  768</span>            csvText += wxString::FromCDouble(value, 13) + <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><span class="lineno">  769</span>        }</div>
+<div class="line"><span class="lineno">  770</span>        csvText[csvText.length() - 1] = <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line"><span class="lineno">  771</span>    }</div>
-<div class="line"><span class="lineno">  772</span>    activePlotDataList.clear();</div>
-<div class="line"><span class="lineno">  773</span> </div>
-<div class="line"><span class="lineno">  774</span>    <span class="keywordflow">return</span> csvText;</div>
-<div class="line"><span class="lineno">  775</span>}</div>
+<div class="line"><span class="lineno">  772</span> </div>
+<div class="line"><span class="lineno">  773</span>    <span class="comment">// Clear active plot data vector.</span></div>
+<div class="line"><span class="lineno">  774</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = activePlotDataList.begin(); it != activePlotDataList.end(); ++it) {</div>
+<div class="line"><span class="lineno">  775</span>        <span class="keyword">delete</span>(*it);</div>
+<div class="line"><span class="lineno">  776</span>    }</div>
+<div class="line"><span class="lineno">  777</span>    activePlotDataList.clear();</div>
+<div class="line"><span class="lineno">  778</span> </div>
+<div class="line"><span class="lineno">  779</span>    <span class="keywordflow">return</span> csvText;</div>
+<div class="line"><span class="lineno">  780</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1024,34 +1025,34 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00777">777</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  778</span>{</div>
-<div class="line"><span class="lineno">  779</span>    wxTreeItemIdValue cookie;</div>
-<div class="line"><span class="lineno">  780</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
-<div class="line"><span class="lineno">  781</span>    wxTreeItemId child;</div>
-<div class="line"><span class="lineno">  782</span> </div>
-<div class="line"><span class="lineno">  783</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
-<div class="line"><span class="lineno">  784</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) {</div>
-<div class="line"><span class="lineno">  785</span>            <span class="keywordflow">if</span> (data-&gt;IsPlot() || data-&gt;GetAxis() == 1) {</div>
-<div class="line"><span class="lineno">  786</span>                wxString parentName = m_treeCtrl-&gt;GetItemText(m_treeCtrl-&gt;GetItemParent(item));</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00782">782</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  783</span>{</div>
+<div class="line"><span class="lineno">  784</span>    wxTreeItemIdValue cookie;</div>
+<div class="line"><span class="lineno">  785</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
+<div class="line"><span class="lineno">  786</span>    wxTreeItemId child;</div>
 <div class="line"><span class="lineno">  787</span> </div>
-<div class="line"><span class="lineno">  788</span>                <a class="code hl_class" href="class_plot_data.html">PlotData</a>* dataCopy = <span class="keyword">new</span> <a class="code hl_class" href="class_plot_data.html">PlotData</a>();</div>
-<div class="line"><span class="lineno">  789</span>                *dataCopy = *data;</div>
-<div class="line"><span class="lineno">  790</span>                dataCopy-&gt;SetName(data-&gt;GetName() + <span class="stringliteral">&quot; (&quot;</span> + parentName + <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><span class="lineno">  791</span>                plotDataList.push_back(dataCopy);</div>
-<div class="line"><span class="lineno">  792</span>            }</div>
-<div class="line"><span class="lineno">  793</span>        }</div>
-<div class="line"><span class="lineno">  794</span> </div>
-<div class="line"><span class="lineno">  795</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
-<div class="line"><span class="lineno">  796</span>            wxTreeItemId nextChild = GetActivePlotData(item, plotDataList);</div>
-<div class="line"><span class="lineno">  797</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<div class="line"><span class="lineno">  788</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
+<div class="line"><span class="lineno">  789</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) {</div>
+<div class="line"><span class="lineno">  790</span>            <span class="keywordflow">if</span> (data-&gt;IsPlot() || data-&gt;GetAxis() == 1) {</div>
+<div class="line"><span class="lineno">  791</span>                wxString parentName = m_treeCtrl-&gt;GetItemText(m_treeCtrl-&gt;GetItemParent(item));</div>
+<div class="line"><span class="lineno">  792</span> </div>
+<div class="line"><span class="lineno">  793</span>                <a class="code hl_class" href="class_plot_data.html">PlotData</a>* dataCopy = <span class="keyword">new</span> <a class="code hl_class" href="class_plot_data.html">PlotData</a>();</div>
+<div class="line"><span class="lineno">  794</span>                *dataCopy = *data;</div>
+<div class="line"><span class="lineno">  795</span>                dataCopy-&gt;SetName(data-&gt;GetName() + <span class="stringliteral">&quot; (&quot;</span> + parentName + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><span class="lineno">  796</span>                plotDataList.push_back(dataCopy);</div>
+<div class="line"><span class="lineno">  797</span>            }</div>
 <div class="line"><span class="lineno">  798</span>        }</div>
-<div class="line"><span class="lineno">  799</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
-<div class="line"><span class="lineno">  800</span>    }</div>
-<div class="line"><span class="lineno">  801</span> </div>
-<div class="line"><span class="lineno">  802</span>    wxTreeItemId dummyID;</div>
-<div class="line"><span class="lineno">  803</span>    <span class="keywordflow">return</span> dummyID;</div>
-<div class="line"><span class="lineno">  804</span>}</div>
+<div class="line"><span class="lineno">  799</span> </div>
+<div class="line"><span class="lineno">  800</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
+<div class="line"><span class="lineno">  801</span>            wxTreeItemId nextChild = GetActivePlotData(item, plotDataList);</div>
+<div class="line"><span class="lineno">  802</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<div class="line"><span class="lineno">  803</span>        }</div>
+<div class="line"><span class="lineno">  804</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
+<div class="line"><span class="lineno">  805</span>    }</div>
+<div class="line"><span class="lineno">  806</span> </div>
+<div class="line"><span class="lineno">  807</span>    wxTreeItemId dummyID;</div>
+<div class="line"><span class="lineno">  808</span>    <span class="keywordflow">return</span> dummyID;</div>
+<div class="line"><span class="lineno">  809</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1078,15 +1079,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00568">568</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  569</span>{</div>
-<div class="line"><span class="lineno">  570</span>    <span class="keywordflow">if</span> (*m_itColourList == *wxBLACK)</div>
-<div class="line"><span class="lineno">  571</span>        m_itColourList = m_colourList.begin();</div>
-<div class="line"><span class="lineno">  572</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  573</span>        ++m_itColourList;</div>
-<div class="line"><span class="lineno">  574</span> </div>
-<div class="line"><span class="lineno">  575</span>    <span class="keywordflow">return</span> *m_itColourList;</div>
-<div class="line"><span class="lineno">  576</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00573">573</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  574</span>{</div>
+<div class="line"><span class="lineno">  575</span>    <span class="keywordflow">if</span> (*m_itColourList == *wxBLACK)</div>
+<div class="line"><span class="lineno">  576</span>        m_itColourList = m_colourList.begin();</div>
+<div class="line"><span class="lineno">  577</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  578</span>        ++m_itColourList;</div>
+<div class="line"><span class="lineno">  579</span> </div>
+<div class="line"><span class="lineno">  580</span>    <span class="keywordflow">return</span> *m_itColourList;</div>
+<div class="line"><span class="lineno">  581</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1114,17 +1115,48 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l01020">1020</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1021</span>{</div>
-<div class="line"><span class="lineno"> 1022</span>    wxString unitText = <span class="stringliteral">&quot; (p.u.)&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1023</span>    <span class="keywordflow">if</span> (magText.IsEmpty()) unitText = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1024</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Angle&quot;</span>)) unitText = <span class="stringliteral">&quot; (°)&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1025</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Delta&quot;</span>)) unitText = <span class="stringliteral">&quot; (°)&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1026</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Frequency&quot;</span>)) unitText = <span class="stringliteral">&quot; (Hz)&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1027</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Velocity&quot;</span>)) unitText = <span class="stringliteral">&quot; (rad/s)&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1028</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Slip&quot;</span>)) unitText = <span class="stringliteral">&quot; (%)&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1029</span>    <span class="keywordflow">return</span> unitText;</div>
-<div class="line"><span class="lineno"> 1030</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l01025">1025</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1026</span>{</div>
+<div class="line"><span class="lineno"> 1027</span>    wxString unitText = <span class="stringliteral">&quot; (p.u.)&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1028</span>    <span class="keywordflow">if</span> (magText.IsEmpty()) unitText = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1029</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Angle&quot;</span>)) unitText = <span class="stringliteral">&quot; (Â°)&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1030</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Delta&quot;</span>)) unitText = <span class="stringliteral">&quot; (Â°)&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1031</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Frequency&quot;</span>)) unitText = <span class="stringliteral">&quot; (Hz)&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1032</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Velocity&quot;</span>)) unitText = <span class="stringliteral">&quot; (rad/s)&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1033</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (magText == _(<span class="stringliteral">&quot;Slip&quot;</span>)) unitText = <span class="stringliteral">&quot; (%)&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1034</span>    <span class="keywordflow">return</span> unitText;</div>
+<div class="line"><span class="lineno"> 1035</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8ce38d89de0ba143787f248eaaa137ba" name="a8ce38d89de0ba143787f248eaaa137ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ce38d89de0ba143787f248eaaa137ba">&#9670;&#160;</a></span>OnClose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ChartView::OnClose </td>
+          <td>(</td>
+          <td class="paramtype">wxCloseEvent &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l01092">1092</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1093</span>{</div>
+<div class="line"><span class="lineno"> 1094</span>    Destroy();</div>
+<div class="line"><span class="lineno"> 1095</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1203,8 +1235,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00063">63</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>{ Close(); }</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00064">64</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>{ Close(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1232,29 +1264,29 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00697">697</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  698</span>{</div>
-<div class="line"><span class="lineno">  699</span>    wxFileDialog saveFileDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;Save CSV file&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;CSV file (*.csv)|*.csv&quot;</span>,</div>
-<div class="line"><span class="lineno">  700</span>        wxFD_SAVE | wxFD_OVERWRITE_PROMPT);</div>
-<div class="line"><span class="lineno">  701</span>    <span class="keywordflow">if</span> (saveFileDialog.ShowModal() == wxID_CANCEL) <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  702</span> </div>
-<div class="line"><span class="lineno">  703</span>    wxTextFile csvFile(saveFileDialog.GetPath());</div>
-<div class="line"><span class="lineno">  704</span>    <span class="keywordflow">if</span> (!csvFile.Create()) {</div>
-<div class="line"><span class="lineno">  705</span>        <span class="keywordflow">if</span> (!csvFile.Open()) {</div>
-<div class="line"><span class="lineno">  706</span>            wxMessageDialog msgDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;It was not possible to open or create the selected file.&quot;</span>), _(<span class="stringliteral">&quot;Error&quot;</span>),</div>
-<div class="line"><span class="lineno">  707</span>                wxOK | wxCENTRE | wxICON_ERROR);</div>
-<div class="line"><span class="lineno">  708</span>            msgDialog.ShowModal();</div>
-<div class="line"><span class="lineno">  709</span>        }</div>
-<div class="line"><span class="lineno">  710</span>    }</div>
-<div class="line"><span class="lineno">  711</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  712</span>        csvFile.Open();</div>
-<div class="line"><span class="lineno">  713</span>    <span class="keywordflow">if</span> (csvFile.IsOpened()) {</div>
-<div class="line"><span class="lineno">  714</span>        csvFile.Clear();</div>
-<div class="line"><span class="lineno">  715</span>        csvFile.AddLine(GetActiveCurvesCSV());</div>
-<div class="line"><span class="lineno">  716</span>        csvFile.Write();</div>
-<div class="line"><span class="lineno">  717</span>        csvFile.Close();</div>
-<div class="line"><span class="lineno">  718</span>    }</div>
-<div class="line"><span class="lineno">  719</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00702">702</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  703</span>{</div>
+<div class="line"><span class="lineno">  704</span>    wxFileDialog saveFileDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;Save CSV file&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;CSV file (*.csv)|*.csv&quot;</span>,</div>
+<div class="line"><span class="lineno">  705</span>        wxFD_SAVE | wxFD_OVERWRITE_PROMPT);</div>
+<div class="line"><span class="lineno">  706</span>    <span class="keywordflow">if</span> (saveFileDialog.ShowModal() == wxID_CANCEL) <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  707</span> </div>
+<div class="line"><span class="lineno">  708</span>    wxTextFile csvFile(saveFileDialog.GetPath());</div>
+<div class="line"><span class="lineno">  709</span>    <span class="keywordflow">if</span> (!csvFile.Create()) {</div>
+<div class="line"><span class="lineno">  710</span>        <span class="keywordflow">if</span> (!csvFile.Open()) {</div>
+<div class="line"><span class="lineno">  711</span>            wxMessageDialog msgDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;It was not possible to open or create the selected file.&quot;</span>), _(<span class="stringliteral">&quot;Error&quot;</span>),</div>
+<div class="line"><span class="lineno">  712</span>                wxOK | wxCENTRE | wxICON_ERROR);</div>
+<div class="line"><span class="lineno">  713</span>            msgDialog.ShowModal();</div>
+<div class="line"><span class="lineno">  714</span>        }</div>
+<div class="line"><span class="lineno">  715</span>    }</div>
+<div class="line"><span class="lineno">  716</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  717</span>        csvFile.Open();</div>
+<div class="line"><span class="lineno">  718</span>    <span class="keywordflow">if</span> (csvFile.IsOpened()) {</div>
+<div class="line"><span class="lineno">  719</span>        csvFile.Clear();</div>
+<div class="line"><span class="lineno">  720</span>        csvFile.AddLine(GetActiveCurvesCSV());</div>
+<div class="line"><span class="lineno">  721</span>        csvFile.Write();</div>
+<div class="line"><span class="lineno">  722</span>        csvFile.Close();</div>
+<div class="line"><span class="lineno">  723</span>    }</div>
+<div class="line"><span class="lineno">  724</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1282,8 +1314,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00064">64</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   64</span>{ Fit(); }</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00065">65</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span>{ Fit(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1575,41 +1607,41 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00921">921</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  922</span>{</div>
-<div class="line"><span class="lineno">  923</span>    <span class="keywordflow">if</span> (m_showCoords) {</div>
-<div class="line"><span class="lineno">  924</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> grabDist = 8;</div>
-<div class="line"><span class="lineno">  925</span> </div>
-<div class="line"><span class="lineno">  926</span>        <span class="keywordtype">int</span> mouseX = m_chartViewerDir-&gt;getChartMouseX();</div>
-<div class="line"><span class="lineno">  927</span>        PlotArea* plotArea = <span class="keyword">static_cast&lt;</span>XYChart*<span class="keyword">&gt;</span>(m_chartViewerDir-&gt;getChart())-&gt;getPlotArea();</div>
-<div class="line"><span class="lineno">  928</span>        <span class="comment">//m_trackLinePos = (std::min)(plotArea-&gt;getRightX(), (std::max)(plotArea-&gt;getLeftX(), mouseX - grabDist));</span></div>
-<div class="line"><span class="lineno">  929</span> </div>
-<div class="line"><span class="lineno">  930</span>        <span class="keywordtype">bool</span> moveTrackLine = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  931</span> </div>
-<div class="line"><span class="lineno">  932</span>        <span class="keywordflow">if</span> (m_chartViewerDir-&gt;getMouseUsage() == Chart::MouseUsageDefault &amp;&amp; wxGetMouseState().LeftIsDown()) {</div>
-<div class="line"><span class="lineno">  933</span>            <span class="comment">// Lock in move track line</span></div>
-<div class="line"><span class="lineno">  934</span>            SetCursor(wxCURSOR_SIZEWE);</div>
-<div class="line"><span class="lineno">  935</span>            moveTrackLine = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  936</span>        }</div>
-<div class="line"><span class="lineno">  937</span> </div>
-<div class="line"><span class="lineno">  938</span>        <span class="keywordflow">if</span> (std::abs(mouseX - m_trackLinePos) &lt;= grabDist &amp;&amp; !m_chartViewerDir-&gt;IsSelectionRectVisible()) {</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00926">926</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  927</span>{</div>
+<div class="line"><span class="lineno">  928</span>    <span class="keywordflow">if</span> (m_showCoords) {</div>
+<div class="line"><span class="lineno">  929</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> grabDist = 8;</div>
+<div class="line"><span class="lineno">  930</span> </div>
+<div class="line"><span class="lineno">  931</span>        <span class="keywordtype">int</span> mouseX = m_chartViewerDir-&gt;getChartMouseX();</div>
+<div class="line"><span class="lineno">  932</span>        PlotArea* plotArea = <span class="keyword">static_cast&lt;</span>XYChart*<span class="keyword">&gt;</span>(m_chartViewerDir-&gt;getChart())-&gt;getPlotArea();</div>
+<div class="line"><span class="lineno">  933</span>        <span class="comment">//m_trackLinePos = (std::min)(plotArea-&gt;getRightX(), (std::max)(plotArea-&gt;getLeftX(), mouseX - grabDist));</span></div>
+<div class="line"><span class="lineno">  934</span> </div>
+<div class="line"><span class="lineno">  935</span>        <span class="keywordtype">bool</span> moveTrackLine = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  936</span> </div>
+<div class="line"><span class="lineno">  937</span>        <span class="keywordflow">if</span> (m_chartViewerDir-&gt;getMouseUsage() == Chart::MouseUsageDefault &amp;&amp; wxGetMouseState().LeftIsDown()) {</div>
+<div class="line"><span class="lineno">  938</span>            <span class="comment">// Lock in move track line</span></div>
 <div class="line"><span class="lineno">  939</span>            SetCursor(wxCURSOR_SIZEWE);</div>
-<div class="line"><span class="lineno">  940</span>            m_chartViewerDir-&gt;setMouseUsage(Chart::MouseUsageDefault);</div>
+<div class="line"><span class="lineno">  940</span>            moveTrackLine = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  941</span>        }</div>
-<div class="line"><span class="lineno">  942</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!wxGetMouseState().LeftIsDown()) {</div>
-<div class="line"><span class="lineno">  943</span>            SetCursor(wxCURSOR_ARROW);</div>
-<div class="line"><span class="lineno">  944</span>            m_chartViewerDir-&gt;setMouseUsage(Chart::MouseUsageZoomIn);</div>
-<div class="line"><span class="lineno">  945</span>        }</div>
-<div class="line"><span class="lineno">  946</span> </div>
-<div class="line"><span class="lineno">  947</span>        <span class="keywordflow">if</span> (moveTrackLine) {</div>
-<div class="line"><span class="lineno">  948</span>            m_trackLinePos = mouseX;</div>
-<div class="line"><span class="lineno">  949</span>            DrawTrackLine(<span class="keyword">static_cast&lt;</span>XYChart*<span class="keyword">&gt;</span>(m_chartViewerDir-&gt;getChart()));</div>
-<div class="line"><span class="lineno">  950</span>            m_chartViewerDir-&gt;updateDisplay();</div>
-<div class="line"><span class="lineno">  951</span>        }</div>
-<div class="line"><span class="lineno">  952</span> </div>
-<div class="line"><span class="lineno">  953</span>    }</div>
-<div class="line"><span class="lineno">  954</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  955</span>}</div>
+<div class="line"><span class="lineno">  942</span> </div>
+<div class="line"><span class="lineno">  943</span>        <span class="keywordflow">if</span> (std::abs(mouseX - m_trackLinePos) &lt;= grabDist &amp;&amp; !m_chartViewerDir-&gt;IsSelectionRectVisible()) {</div>
+<div class="line"><span class="lineno">  944</span>            SetCursor(wxCURSOR_SIZEWE);</div>
+<div class="line"><span class="lineno">  945</span>            m_chartViewerDir-&gt;setMouseUsage(Chart::MouseUsageDefault);</div>
+<div class="line"><span class="lineno">  946</span>        }</div>
+<div class="line"><span class="lineno">  947</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!wxGetMouseState().LeftIsDown()) {</div>
+<div class="line"><span class="lineno">  948</span>            SetCursor(wxCURSOR_ARROW);</div>
+<div class="line"><span class="lineno">  949</span>            m_chartViewerDir-&gt;setMouseUsage(Chart::MouseUsageZoomIn);</div>
+<div class="line"><span class="lineno">  950</span>        }</div>
+<div class="line"><span class="lineno">  951</span> </div>
+<div class="line"><span class="lineno">  952</span>        <span class="keywordflow">if</span> (moveTrackLine) {</div>
+<div class="line"><span class="lineno">  953</span>            m_trackLinePos = mouseX;</div>
+<div class="line"><span class="lineno">  954</span>            DrawTrackLine(<span class="keyword">static_cast&lt;</span>XYChart*<span class="keyword">&gt;</span>(m_chartViewerDir-&gt;getChart()));</div>
+<div class="line"><span class="lineno">  955</span>            m_chartViewerDir-&gt;updateDisplay();</div>
+<div class="line"><span class="lineno">  956</span>        }</div>
+<div class="line"><span class="lineno">  957</span> </div>
+<div class="line"><span class="lineno">  958</span>    }</div>
+<div class="line"><span class="lineno">  959</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  960</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1737,16 +1769,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l01077">1077</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1078</span>{</div>
-<div class="line"><span class="lineno"> 1079</span>    <span class="keywordflow">if</span> (m_plotLib == PlotLib::wxCHART_DIR) {</div>
-<div class="line"><span class="lineno"> 1080</span>        m_chartViewerSize = <span class="keyword">event</span>.GetSize() - wxSize(m_treeCtrl-&gt;GetSize().GetWidth(), 60);</div>
-<div class="line"><span class="lineno"> 1081</span>        <span class="comment">//m_chartViewerDir-&gt;Layout();</span></div>
-<div class="line"><span class="lineno"> 1082</span>        m_chartViewerDir-&gt;updateViewPort(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno"> 1083</span>        <span class="comment">//DrawChartDir();</span></div>
-<div class="line"><span class="lineno"> 1084</span>    }</div>
-<div class="line"><span class="lineno"> 1085</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno"> 1086</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l01082">1082</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1083</span>{</div>
+<div class="line"><span class="lineno"> 1084</span>    <span class="keywordflow">if</span> (m_plotLib == PlotLib::wxCHART_DIR) {</div>
+<div class="line"><span class="lineno"> 1085</span>        m_chartViewerSize = <span class="keyword">event</span>.GetSize() - wxSize(m_treeCtrl-&gt;GetSize().GetWidth(), 60);</div>
+<div class="line"><span class="lineno"> 1086</span>        <span class="comment">//m_chartViewerDir-&gt;Layout();</span></div>
+<div class="line"><span class="lineno"> 1087</span>        m_chartViewerDir-&gt;updateViewPort(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno"> 1088</span>        <span class="comment">//DrawChartDir();</span></div>
+<div class="line"><span class="lineno"> 1089</span>    }</div>
+<div class="line"><span class="lineno"> 1090</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno"> 1091</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1862,26 +1894,31 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00525">525</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  526</span>{</div>
-<div class="line"><span class="lineno">  527</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(m_selectedItemID)))</div>
-<div class="line"><span class="lineno">  528</span>        data-&gt;SetHighlight(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  529</span> </div>
-<div class="line"><span class="lineno">  530</span>    m_selectedItemID = <span class="keyword">event</span>.GetItem();</div>
-<div class="line"><span class="lineno">  531</span> </div>
-<div class="line"><span class="lineno">  532</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(m_selectedItemID))) {</div>
-<div class="line"><span class="lineno">  533</span>        m_pgPropDraw-&gt;SetValue(data-&gt;IsPlot());</div>
-<div class="line"><span class="lineno">  534</span>        wxVariant colour;</div>
-<div class="line"><span class="lineno">  535</span>        colour &lt;&lt; data-&gt;GetColour();</div>
-<div class="line"><span class="lineno">  536</span>        m_pgPropColor-&gt;SetValue(colour);</div>
-<div class="line"><span class="lineno">  537</span>        m_pgProplineThick-&gt;SetValue(data-&gt;GetThick());</div>
-<div class="line"><span class="lineno">  538</span>        m_pgProplineType-&gt;SetValue(data-&gt;GetPenType());</div>
-<div class="line"><span class="lineno">  539</span>        m_pgProplineAxis-&gt;SetValue(data-&gt;GetAxis());</div>
-<div class="line"><span class="lineno">  540</span>        data-&gt;SetHighlight(<span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  541</span>    }</div>
-<div class="line"><span class="lineno">  542</span>    <span class="keywordflow">if</span> (m_plotLib == PlotLib::wxCHART_DIR) {</div>
-<div class="line"><span class="lineno">  543</span>        m_chartViewerDir-&gt;updateViewPort(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  544</span>    }</div>
-<div class="line"><span class="lineno">  545</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  546</span>}</div>
+<div class="line"><span class="lineno">  527</span>    <span class="comment">//if (PlotData* data = dynamic_cast&lt;PlotData*&gt;(m_treeCtrl-&gt;GetItemData(m_selectedItemID)))</span></div>
+<div class="line"><span class="lineno">  528</span>    <span class="comment">//  data-&gt;SetHighlight(false);</span></div>
+<div class="line"><span class="lineno">  529</span>    <span class="keywordflow">if</span> (m_selectedItemID.IsOk()) {</div>
+<div class="line"><span class="lineno">  530</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(m_selectedItemID))) {</div>
+<div class="line"><span class="lineno">  531</span>            data-&gt;SetHighlight(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  532</span>        }</div>
+<div class="line"><span class="lineno">  533</span>    }</div>
+<div class="line"><span class="lineno">  534</span> </div>
+<div class="line"><span class="lineno">  535</span>    m_selectedItemID = <span class="keyword">event</span>.GetItem();</div>
+<div class="line"><span class="lineno">  536</span> </div>
+<div class="line"><span class="lineno">  537</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(m_selectedItemID))) {</div>
+<div class="line"><span class="lineno">  538</span>        m_pgPropDraw-&gt;SetValue(data-&gt;IsPlot());</div>
+<div class="line"><span class="lineno">  539</span>        wxVariant colour;</div>
+<div class="line"><span class="lineno">  540</span>        colour &lt;&lt; data-&gt;GetColour();</div>
+<div class="line"><span class="lineno">  541</span>        m_pgPropColor-&gt;SetValue(colour);</div>
+<div class="line"><span class="lineno">  542</span>        m_pgProplineThick-&gt;SetValue(data-&gt;GetThick());</div>
+<div class="line"><span class="lineno">  543</span>        m_pgProplineType-&gt;SetValue(data-&gt;GetPenType());</div>
+<div class="line"><span class="lineno">  544</span>        m_pgProplineAxis-&gt;SetValue(data-&gt;GetAxis());</div>
+<div class="line"><span class="lineno">  545</span>        data-&gt;SetHighlight(<span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  546</span>    }</div>
+<div class="line"><span class="lineno">  547</span>    <span class="keywordflow">if</span> (m_plotLib == PlotLib::wxCHART_DIR) {</div>
+<div class="line"><span class="lineno">  548</span>        m_chartViewerDir-&gt;updateViewPort(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  549</span>    }</div>
+<div class="line"><span class="lineno">  550</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  551</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1909,11 +1946,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00915">915</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  916</span>{</div>
-<div class="line"><span class="lineno">  917</span>    <span class="keywordflow">if</span> (m_chartViewerDir-&gt;needUpdateChart()) DrawChartDir();</div>
-<div class="line"><span class="lineno">  918</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  919</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00920">920</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  921</span>{</div>
+<div class="line"><span class="lineno">  922</span>    <span class="keywordflow">if</span> (m_chartViewerDir-&gt;needUpdateChart()) DrawChartDir();</div>
+<div class="line"><span class="lineno">  923</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  924</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2065,38 +2102,38 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00599">599</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  600</span>{</div>
-<div class="line"><span class="lineno">  601</span>    wxTreeItemIdValue cookie;</div>
-<div class="line"><span class="lineno">  602</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
-<div class="line"><span class="lineno">  603</span>    wxTreeItemId child;</div>
-<div class="line"><span class="lineno">  604</span> </div>
-<div class="line"><span class="lineno">  605</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
-<div class="line"><span class="lineno">  606</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) {</div>
-<div class="line"><span class="lineno">  607</span>            <span class="keywordflow">if</span> (data-&gt;IsPlot()) {</div>
-<div class="line"><span class="lineno">  608</span>                wxString parentName = m_treeCtrl-&gt;GetItemText(m_treeCtrl-&gt;GetItemParent(item));</div>
-<div class="line"><span class="lineno">  609</span>                mpFXYVector* newLayer = <span class="keyword">new</span> mpFXYVector(data-&gt;GetName() + <span class="stringliteral">&quot; (&quot;</span> + parentName + <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><span class="lineno">  610</span>                newLayer-&gt;SetData(m_xAxisValues, data-&gt;GetValues());</div>
-<div class="line"><span class="lineno">  611</span>                newLayer-&gt;SetContinuity(<span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  612</span>                wxPen layerPen(data-&gt;GetColour(), data-&gt;GetThick(), data-&gt;GetPenType());</div>
-<div class="line"><span class="lineno">  613</span>                newLayer-&gt;SetPen(layerPen);</div>
-<div class="line"><span class="lineno">  614</span>                newLayer-&gt;SetDrawOutsideMargins(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  615</span>                newLayer-&gt;ShowName(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  616</span> </div>
-<div class="line"><span class="lineno">  617</span>                m_mpWindow-&gt;AddLayer(newLayer);</div>
-<div class="line"><span class="lineno">  618</span>            }</div>
-<div class="line"><span class="lineno">  619</span>        }</div>
-<div class="line"><span class="lineno">  620</span> </div>
-<div class="line"><span class="lineno">  621</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
-<div class="line"><span class="lineno">  622</span>            wxTreeItemId nextChild = UpdateAllPlots(item);</div>
-<div class="line"><span class="lineno">  623</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00604">604</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  605</span>{</div>
+<div class="line"><span class="lineno">  606</span>    wxTreeItemIdValue cookie;</div>
+<div class="line"><span class="lineno">  607</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
+<div class="line"><span class="lineno">  608</span>    wxTreeItemId child;</div>
+<div class="line"><span class="lineno">  609</span> </div>
+<div class="line"><span class="lineno">  610</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
+<div class="line"><span class="lineno">  611</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) {</div>
+<div class="line"><span class="lineno">  612</span>            <span class="keywordflow">if</span> (data-&gt;IsPlot()) {</div>
+<div class="line"><span class="lineno">  613</span>                wxString parentName = m_treeCtrl-&gt;GetItemText(m_treeCtrl-&gt;GetItemParent(item));</div>
+<div class="line"><span class="lineno">  614</span>                mpFXYVector* newLayer = <span class="keyword">new</span> mpFXYVector(data-&gt;GetName() + <span class="stringliteral">&quot; (&quot;</span> + parentName + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><span class="lineno">  615</span>                newLayer-&gt;SetData(m_xAxisValues, data-&gt;GetValues());</div>
+<div class="line"><span class="lineno">  616</span>                newLayer-&gt;SetContinuity(<span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  617</span>                wxPen layerPen(data-&gt;GetColour(), data-&gt;GetThick(), data-&gt;GetPenType());</div>
+<div class="line"><span class="lineno">  618</span>                newLayer-&gt;SetPen(layerPen);</div>
+<div class="line"><span class="lineno">  619</span>                newLayer-&gt;SetDrawOutsideMargins(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  620</span>                newLayer-&gt;ShowName(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  621</span> </div>
+<div class="line"><span class="lineno">  622</span>                m_mpWindow-&gt;AddLayer(newLayer);</div>
+<div class="line"><span class="lineno">  623</span>            }</div>
 <div class="line"><span class="lineno">  624</span>        }</div>
-<div class="line"><span class="lineno">  625</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
-<div class="line"><span class="lineno">  626</span>    }</div>
-<div class="line"><span class="lineno">  627</span> </div>
-<div class="line"><span class="lineno">  628</span>    wxTreeItemId dummyID;</div>
-<div class="line"><span class="lineno">  629</span>    <span class="keywordflow">return</span> dummyID;</div>
-<div class="line"><span class="lineno">  630</span>}</div>
+<div class="line"><span class="lineno">  625</span> </div>
+<div class="line"><span class="lineno">  626</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
+<div class="line"><span class="lineno">  627</span>            wxTreeItemId nextChild = UpdateAllPlots(item);</div>
+<div class="line"><span class="lineno">  628</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<div class="line"><span class="lineno">  629</span>        }</div>
+<div class="line"><span class="lineno">  630</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
+<div class="line"><span class="lineno">  631</span>    }</div>
+<div class="line"><span class="lineno">  632</span> </div>
+<div class="line"><span class="lineno">  633</span>    wxTreeItemId dummyID;</div>
+<div class="line"><span class="lineno">  634</span>    <span class="keywordflow">return</span> dummyID;</div>
+<div class="line"><span class="lineno">  635</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2134,70 +2171,70 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00632">632</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  633</span>{</div>
-<div class="line"><span class="lineno">  634</span>    wxTreeItemIdValue cookie;</div>
-<div class="line"><span class="lineno">  635</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
-<div class="line"><span class="lineno">  636</span>    wxTreeItemId child;</div>
-<div class="line"><span class="lineno">  637</span> </div>
-<div class="line"><span class="lineno">  638</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
-<div class="line"><span class="lineno">  639</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) {</div>
-<div class="line"><span class="lineno">  640</span>            <span class="keywordflow">if</span> (data-&gt;IsPlot()) {</div>
-<div class="line"><span class="lineno">  641</span>                wxString parentName = m_treeCtrl-&gt;GetItemText(m_treeCtrl-&gt;GetItemParent(item));</div>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8cpp_source.html#l00637">637</a> of file <a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  638</span>{</div>
+<div class="line"><span class="lineno">  639</span>    wxTreeItemIdValue cookie;</div>
+<div class="line"><span class="lineno">  640</span>    wxTreeItemId item = m_treeCtrl-&gt;GetFirstChild(root, cookie);</div>
+<div class="line"><span class="lineno">  641</span>    wxTreeItemId child;</div>
 <div class="line"><span class="lineno">  642</span> </div>
-<div class="line"><span class="lineno">  643</span>                std::vector&lt;double&gt; yValues = data-&gt;GetValues();</div>
-<div class="line"><span class="lineno">  644</span> </div>
-<div class="line"><span class="lineno">  645</span> </div>
-<div class="line"><span class="lineno">  646</span> </div>
-<div class="line"><span class="lineno">  647</span>                LineLayer* layer = chartDir-&gt;addLineLayer();</div>
-<div class="line"><span class="lineno">  648</span>                layer-&gt;setFastLineMode();</div>
-<div class="line"><span class="lineno">  649</span>                layer-&gt;setLineWidth(data-&gt;GetThick());</div>
-<div class="line"><span class="lineno">  650</span>                layer-&gt;setXData(DoubleArray(&amp;m_xAxisValues[0], m_xAxisValues.size()));</div>
+<div class="line"><span class="lineno">  643</span>    <span class="keywordflow">while</span> (item.IsOk()) {</div>
+<div class="line"><span class="lineno">  644</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_plot_data.html">PlotData</a>* data = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_plot_data.html">PlotData</a>*<span class="keyword">&gt;</span>(m_treeCtrl-&gt;GetItemData(item))) {</div>
+<div class="line"><span class="lineno">  645</span>            <span class="keywordflow">if</span> (data-&gt;IsPlot()) {</div>
+<div class="line"><span class="lineno">  646</span>                wxString parentName = m_treeCtrl-&gt;GetItemText(m_treeCtrl-&gt;GetItemParent(item));</div>
+<div class="line"><span class="lineno">  647</span> </div>
+<div class="line"><span class="lineno">  648</span>                std::vector&lt;double&gt; yValues = data-&gt;GetValues();</div>
+<div class="line"><span class="lineno">  649</span> </div>
+<div class="line"><span class="lineno">  650</span> </div>
 <div class="line"><span class="lineno">  651</span> </div>
-<div class="line"><span class="lineno">  652</span>                <span class="keywordflow">if</span> (m_firstPlot) m_rawDataColour.clear();</div>
-<div class="line"><span class="lineno">  653</span>                <span class="keywordtype">int</span> dataColour = (data-&gt;GetColour().Red() &lt;&lt; 16) + (data-&gt;GetColour().Green() &lt;&lt; 8) + data-&gt;GetColour().Blue();</div>
-<div class="line"><span class="lineno">  654</span>                <span class="keywordtype">int</span> rawColour = dataColour;</div>
-<div class="line"><span class="lineno">  655</span>                <span class="comment">//layer-&gt;addDataSet(DoubleArray(&amp;data-&gt;GetValues()[0] + startIndex, endIndex - startIndex + 1), dataColour, data-&gt;GetName() + &quot; (&quot; + parentName + &quot;)&quot;);</span></div>
-<div class="line"><span class="lineno">  656</span>                <span class="keywordflow">if</span> (data-&gt;GetPenType() == wxPENSTYLE_DOT)</div>
-<div class="line"><span class="lineno">  657</span>                    dataColour = chartDir-&gt;dashLineColor(dataColour, Chart::DotLine);</div>
-<div class="line"><span class="lineno">  658</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data-&gt;GetPenType() == wxPENSTYLE_SHORT_DASH)</div>
-<div class="line"><span class="lineno">  659</span>                    dataColour = chartDir-&gt;dashLineColor(dataColour, Chart::DashLine);</div>
-<div class="line"><span class="lineno">  660</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data-&gt;GetPenType() == wxPENSTYLE_DOT_DASH)</div>
-<div class="line"><span class="lineno">  661</span>                    dataColour = chartDir-&gt;dashLineColor(dataColour, Chart::DotDashLine);</div>
-<div class="line"><span class="lineno">  662</span>                m_rawDataColour[dataColour] = rawColour;</div>
-<div class="line"><span class="lineno">  663</span> </div>
-<div class="line"><span class="lineno">  664</span>                layer-&gt;addDataSet(DoubleArray(&amp;yValues[0], yValues.size()), dataColour, data-&gt;GetName() + <span class="stringliteral">&quot; (&quot;</span> + parentName + <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><span class="lineno">  665</span> </div>
-<div class="line"><span class="lineno">  666</span>                <span class="keywordflow">if</span> (data-&gt;IsHighlighted()) {</div>
-<div class="line"><span class="lineno">  667</span>                    <span class="keywordtype">int</span> hlColor = 0x80FFFF00;</div>
-<div class="line"><span class="lineno">  668</span>                    LineLayer* hlLayer = chartDir-&gt;addLineLayer();</div>
-<div class="line"><span class="lineno">  669</span>                    hlLayer-&gt;setFastLineMode();</div>
-<div class="line"><span class="lineno">  670</span>                    hlLayer-&gt;setLineWidth(data-&gt;GetThick() * 3);</div>
-<div class="line"><span class="lineno">  671</span>                    hlLayer-&gt;setXData(DoubleArray(&amp;m_xAxisValues[0], m_xAxisValues.size()));</div>
-<div class="line"><span class="lineno">  672</span>                    hlLayer-&gt;addDataSet(DoubleArray(&amp;yValues[0], yValues.size()), hlColor);</div>
-<div class="line"><span class="lineno">  673</span>                }</div>
-<div class="line"><span class="lineno">  674</span> </div>
-<div class="line"><span class="lineno">  675</span>                <span class="keywordflow">if</span> (m_firstPlot) {</div>
-<div class="line"><span class="lineno">  676</span>                    m_firstPlot = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  677</span>                    m_sugestYLabel = data-&gt;GetName();</div>
+<div class="line"><span class="lineno">  652</span>                LineLayer* layer = chartDir-&gt;addLineLayer();</div>
+<div class="line"><span class="lineno">  653</span>                layer-&gt;setFastLineMode();</div>
+<div class="line"><span class="lineno">  654</span>                layer-&gt;setLineWidth(data-&gt;GetThick());</div>
+<div class="line"><span class="lineno">  655</span>                layer-&gt;setXData(DoubleArray(&amp;m_xAxisValues[0], m_xAxisValues.size()));</div>
+<div class="line"><span class="lineno">  656</span> </div>
+<div class="line"><span class="lineno">  657</span>                <span class="keywordflow">if</span> (m_firstPlot) m_rawDataColour.clear();</div>
+<div class="line"><span class="lineno">  658</span>                <span class="keywordtype">int</span> dataColour = (data-&gt;GetColour().Red() &lt;&lt; 16) + (data-&gt;GetColour().Green() &lt;&lt; 8) + data-&gt;GetColour().Blue();</div>
+<div class="line"><span class="lineno">  659</span>                <span class="keywordtype">int</span> rawColour = dataColour;</div>
+<div class="line"><span class="lineno">  660</span>                <span class="comment">//layer-&gt;addDataSet(DoubleArray(&amp;data-&gt;GetValues()[0] + startIndex, endIndex - startIndex + 1), dataColour, data-&gt;GetName() + &quot; (&quot; + parentName + &quot;)&quot;);</span></div>
+<div class="line"><span class="lineno">  661</span>                <span class="keywordflow">if</span> (data-&gt;GetPenType() == wxPENSTYLE_DOT)</div>
+<div class="line"><span class="lineno">  662</span>                    dataColour = chartDir-&gt;dashLineColor(dataColour, Chart::DotLine);</div>
+<div class="line"><span class="lineno">  663</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data-&gt;GetPenType() == wxPENSTYLE_SHORT_DASH)</div>
+<div class="line"><span class="lineno">  664</span>                    dataColour = chartDir-&gt;dashLineColor(dataColour, Chart::DashLine);</div>
+<div class="line"><span class="lineno">  665</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data-&gt;GetPenType() == wxPENSTYLE_DOT_DASH)</div>
+<div class="line"><span class="lineno">  666</span>                    dataColour = chartDir-&gt;dashLineColor(dataColour, Chart::DotDashLine);</div>
+<div class="line"><span class="lineno">  667</span>                m_rawDataColour[dataColour] = rawColour;</div>
+<div class="line"><span class="lineno">  668</span> </div>
+<div class="line"><span class="lineno">  669</span>                layer-&gt;addDataSet(DoubleArray(&amp;yValues[0], yValues.size()), dataColour, data-&gt;GetName() + <span class="stringliteral">&quot; (&quot;</span> + parentName + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><span class="lineno">  670</span> </div>
+<div class="line"><span class="lineno">  671</span>                <span class="keywordflow">if</span> (data-&gt;IsHighlighted()) {</div>
+<div class="line"><span class="lineno">  672</span>                    <span class="keywordtype">int</span> hlColor = 0x80FFFF00;</div>
+<div class="line"><span class="lineno">  673</span>                    LineLayer* hlLayer = chartDir-&gt;addLineLayer();</div>
+<div class="line"><span class="lineno">  674</span>                    hlLayer-&gt;setFastLineMode();</div>
+<div class="line"><span class="lineno">  675</span>                    hlLayer-&gt;setLineWidth(data-&gt;GetThick() * 3);</div>
+<div class="line"><span class="lineno">  676</span>                    hlLayer-&gt;setXData(DoubleArray(&amp;m_xAxisValues[0], m_xAxisValues.size()));</div>
+<div class="line"><span class="lineno">  677</span>                    hlLayer-&gt;addDataSet(DoubleArray(&amp;yValues[0], yValues.size()), hlColor);</div>
 <div class="line"><span class="lineno">  678</span>                }</div>
-<div class="line"><span class="lineno">  679</span>                <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  680</span>                    <span class="keywordflow">if</span> (m_sugestYLabel.IsEmpty() || (m_sugestYLabel != data-&gt;GetName())) m_sugestYLabel = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">  681</span>                }</div>
-<div class="line"><span class="lineno">  682</span>            }</div>
-<div class="line"><span class="lineno">  683</span>        }</div>
-<div class="line"><span class="lineno">  684</span> </div>
-<div class="line"><span class="lineno">  685</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
-<div class="line"><span class="lineno">  686</span>            wxTreeItemId nextChild = UpdateAllPlotsCharDir(item, chartDir);</div>
-<div class="line"><span class="lineno">  687</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<div class="line"><span class="lineno">  679</span> </div>
+<div class="line"><span class="lineno">  680</span>                <span class="keywordflow">if</span> (m_firstPlot) {</div>
+<div class="line"><span class="lineno">  681</span>                    m_firstPlot = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  682</span>                    m_sugestYLabel = data-&gt;GetName();</div>
+<div class="line"><span class="lineno">  683</span>                }</div>
+<div class="line"><span class="lineno">  684</span>                <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  685</span>                    <span class="keywordflow">if</span> (m_sugestYLabel.IsEmpty() || (m_sugestYLabel != data-&gt;GetName())) m_sugestYLabel = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  686</span>                }</div>
+<div class="line"><span class="lineno">  687</span>            }</div>
 <div class="line"><span class="lineno">  688</span>        }</div>
-<div class="line"><span class="lineno">  689</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
-<div class="line"><span class="lineno">  690</span>    }</div>
-<div class="line"><span class="lineno">  691</span> </div>
-<div class="line"><span class="lineno">  692</span> </div>
-<div class="line"><span class="lineno">  693</span>    wxTreeItemId dummyID;</div>
-<div class="line"><span class="lineno">  694</span>    <span class="keywordflow">return</span> dummyID;</div>
-<div class="line"><span class="lineno">  695</span>}</div>
+<div class="line"><span class="lineno">  689</span> </div>
+<div class="line"><span class="lineno">  690</span>        <span class="keywordflow">if</span> (m_treeCtrl-&gt;ItemHasChildren(item)) {</div>
+<div class="line"><span class="lineno">  691</span>            wxTreeItemId nextChild = UpdateAllPlotsCharDir(item, chartDir);</div>
+<div class="line"><span class="lineno">  692</span>            <span class="keywordflow">if</span> (nextChild.IsOk()) <span class="keywordflow">return</span> nextChild;</div>
+<div class="line"><span class="lineno">  693</span>        }</div>
+<div class="line"><span class="lineno">  694</span>        item = m_treeCtrl-&gt;GetNextChild(root, cookie);</div>
+<div class="line"><span class="lineno">  695</span>    }</div>
+<div class="line"><span class="lineno">  696</span> </div>
+<div class="line"><span class="lineno">  697</span> </div>
+<div class="line"><span class="lineno">  698</span>    wxTreeItemId dummyID;</div>
+<div class="line"><span class="lineno">  699</span>    <span class="keywordflow">return</span> dummyID;</div>
+<div class="line"><span class="lineno">  700</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2293,7 +2330,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00103">103</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00104">104</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2317,7 +2354,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00107">107</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00108">108</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2341,7 +2378,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00109">109</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00110">110</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2365,7 +2402,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00127">127</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00128">128</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2389,7 +2426,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00104">104</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00105">105</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2413,7 +2450,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00125">125</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00126">126</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2437,7 +2474,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00094">94</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00095">95</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2461,7 +2498,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00116">116</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00117">117</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2485,7 +2522,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00117">117</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00118">118</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2509,7 +2546,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00122">122</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00123">123</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2533,7 +2570,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00128">128</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00129">129</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2557,7 +2594,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00105">105</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00106">106</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2581,7 +2618,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00110">110</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00111">111</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2605,7 +2642,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00100">100</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00101">101</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2629,7 +2666,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00089">89</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00090">90</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2653,7 +2690,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00098">98</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00099">99</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2677,7 +2714,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00120">120</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00121">121</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2701,7 +2738,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00092">92</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00093">93</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2725,7 +2762,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00124">124</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00125">125</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2749,7 +2786,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00123">123</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00124">124</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2773,7 +2810,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00108">108</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00109">109</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2797,7 +2834,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00118">118</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00119">119</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2821,7 +2858,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00119">119</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00120">120</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2845,7 +2882,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00095">95</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00096">96</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2869,7 +2906,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00111">111</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00112">112</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2893,7 +2930,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00091">91</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00092">92</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2917,7 +2954,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00101">101</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00102">102</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2941,7 +2978,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00096">96</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00097">97</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2965,7 +3002,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00113">113</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00114">114</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -2989,7 +3026,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00112">112</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00113">113</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -3013,7 +3050,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00102">102</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00103">103</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -3037,7 +3074,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00115">115</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00116">116</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>
@@ -3061,7 +3098,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00114">114</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00115">115</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 
 </div>
 </div>

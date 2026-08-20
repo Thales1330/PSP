@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -142,12 +141,14 @@ Collaboration diagram for GeneralPropertiesForm:</div>
 <area shape="poly" title=" " alt="" coords="116,131,128,180,123,181,111,133"/>
 <area shape="rect" href="class_properties_data.html" title="General and simulation data manager." alt="" coords="233,93,352,119"/>
 <area shape="poly" title=" " alt="" coords="260,127,152,183,150,179,257,123"/>
-<area shape="rect" href="struct_simulation_data.html" title=" " alt="" coords="94,5,217,31"/>
-<area shape="poly" title=" " alt="" coords="171,40,197,67,221,81,247,91,245,96,219,86,194,71,167,44"/>
-<area shape="rect" href="struct_general_data.html" title=" " alt="" coords="241,5,345,31"/>
-<area shape="poly" title=" " alt="" coords="295,45,295,93,290,93,290,45"/>
-<area shape="rect" href="struct_freq_response_data.html" title=" " alt="" coords="369,5,513,31"/>
-<area shape="poly" title=" " alt="" coords="420,42,379,72,327,96,325,91,377,67,417,38"/>
+<area shape="rect" href="struct_g_u_i_colour.html" title=" " alt="" coords="50,5,138,31"/>
+<area shape="poly" title=" " alt="" coords="107,41,116,56,129,67,168,78,234,92,233,97,167,84,126,72,112,59,102,44"/>
+<area shape="rect" href="struct_simulation_data.html" title=" " alt="" coords="162,5,285,31"/>
+<area shape="poly" title=" " alt="" coords="222,45,223,57,227,68,239,81,255,91,253,95,236,85,222,71,218,58,216,45"/>
+<area shape="rect" href="struct_general_data.html" title=" " alt="" coords="309,5,413,31"/>
+<area shape="poly" title=" " alt="" coords="345,43,304,94,300,91,341,40"/>
+<area shape="rect" href="struct_freq_response_data.html" title=" " alt="" coords="437,5,581,31"/>
+<area shape="poly" title=" " alt="" coords="480,40,416,72,342,96,340,91,414,67,477,35"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -158,6 +159,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac1ba5d6bde51e1a86c8631fd4654e16b" id="r_ac1ba5d6bde51e1a86c8631fd4654e16b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_general_properties_form.html#ac1ba5d6bde51e1a86c8631fd4654e16b">OnThemeSelected</a> (wxCommandEvent &amp;event)</td></tr>
+<tr class="separator:ac1ba5d6bde51e1a86c8631fd4654e16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe88daac9b9108fbba91f7b09b8aa437" id="r_afe88daac9b9108fbba91f7b09b8aa437"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_general_properties_form.html#afe88daac9b9108fbba91f7b09b8aa437">OnButtonCancelClick</a> (wxCommandEvent &amp;event)</td></tr>
 <tr class="separator:afe88daac9b9108fbba91f7b09b8aa437"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0c503dc8fd23faffe0af501f476677b" id="r_ac0c503dc8fd23faffe0af501f476677b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_general_properties_form.html#ac0c503dc8fd23faffe0af501f476677b">OnButtonOKClick</a> (wxCommandEvent &amp;event)</td></tr>
@@ -203,61 +206,61 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00024">24</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   25</span>    : GeneralPropertiesFormBase(parent)</div>
-<div class="line"><span class="lineno">   26</span>{</div>
-<div class="line"><span class="lineno">   27</span>    m_properties = properties;</div>
-<div class="line"><span class="lineno">   28</span>    <span class="keyword">auto</span> data = m_properties-&gt;GetGeneralPropertiesData();</div>
-<div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>    <span class="comment">// Clear the choices and rebuild to set the correct translations.</span></div>
-<div class="line"><span class="lineno">   31</span>    m_choiceLanguage-&gt;Clear();</div>
-<div class="line"><span class="lineno">   32</span>    m_choiceLanguage-&gt;Insert(_(<span class="stringliteral">&quot;English&quot;</span>), 0);</div>
-<div class="line"><span class="lineno">   33</span>    m_choiceLanguage-&gt;Insert(_(<span class="stringliteral">&quot;Portuguese&quot;</span>), 1);</div>
-<div class="line"><span class="lineno">   34</span>    m_choiceTheme-&gt;Clear();</div>
-<div class="line"><span class="lineno">   35</span>    m_choiceTheme-&gt;Insert(_(<span class="stringliteral">&quot;Light&quot;</span>), 0);</div>
-<div class="line"><span class="lineno">   36</span>    m_choiceTheme-&gt;Insert(_(<span class="stringliteral">&quot;Dark&quot;</span>), 1);</div>
-<div class="line"><span class="lineno">   37</span>    <span class="comment">//m_choiceRender-&gt;Clear();</span></div>
-<div class="line"><span class="lineno">   38</span>    <span class="comment">//m_choiceRender-&gt;Insert(_(&quot;OpenGL&quot;), 0);</span></div>
-<div class="line"><span class="lineno">   39</span>    <span class="comment">//m_choiceRender-&gt;Insert(_(&quot;Device Context&quot;), 0);</span></div>
-<div class="line"><span class="lineno">   40</span>    m_choicePlotLib-&gt;Clear();</div>
-<div class="line"><span class="lineno">   41</span>    m_choicePlotLib-&gt;Insert(_(<span class="stringliteral">&quot;Chart Director&quot;</span>), 0);</div>
-<div class="line"><span class="lineno">   42</span>    m_choicePlotLib-&gt;Insert(_(<span class="stringliteral">&quot;wxMathPlot&quot;</span>), 1);</div>
-<div class="line"><span class="lineno">   43</span>    </div>
-<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">switch</span> (data.language) {</div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">case</span> wxLANGUAGE_ENGLISH: {</div>
-<div class="line"><span class="lineno">   46</span>        m_choiceLanguage-&gt;SetSelection(0);</div>
-<div class="line"><span class="lineno">   47</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">case</span> wxLANGUAGE_PORTUGUESE_BRAZILIAN: {</div>
-<div class="line"><span class="lineno">   49</span>        m_choiceLanguage-&gt;SetSelection(1);</div>
-<div class="line"><span class="lineno">   50</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">default</span>: {</div>
-<div class="line"><span class="lineno">   52</span>        m_choiceLanguage-&gt;SetSelection(wxNOT_FOUND);</div>
-<div class="line"><span class="lineno">   53</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   54</span>    }</div>
-<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">switch</span> (data.plotLib) {</div>
-<div class="line"><span class="lineno">   56</span>    <span class="keywordflow">case</span> PlotLib::wxCHART_DIR: {</div>
-<div class="line"><span class="lineno">   57</span>        m_choicePlotLib-&gt;SetSelection(0);</div>
-<div class="line"><span class="lineno">   58</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   59</span>    <span class="keywordflow">case</span> PlotLib::wxMATH_PLOT: {</div>
-<div class="line"><span class="lineno">   60</span>        m_choicePlotLib-&gt;SetSelection(1);</div>
-<div class="line"><span class="lineno">   61</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   62</span>    }</div>
-<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">switch</span> (data.theme) {</div>
-<div class="line"><span class="lineno">   64</span>    <span class="keywordflow">case</span> THEME_LIGHT: {</div>
-<div class="line"><span class="lineno">   65</span>        m_choiceTheme-&gt;SetSelection(0);</div>
-<div class="line"><span class="lineno">   66</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">case</span> THEME_DARK: {</div>
-<div class="line"><span class="lineno">   68</span>        m_choiceTheme-&gt;SetSelection(1);</div>
-<div class="line"><span class="lineno">   69</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   70</span>    }</div>
-<div class="line"><span class="lineno">   71</span>    <span class="comment">//if (data.useOpenGL) m_choiceRender-&gt;SetSelection(0);</span></div>
-<div class="line"><span class="lineno">   72</span>    <span class="comment">//else m_choiceRender-&gt;SetSelection(1);</span></div>
-<div class="line"><span class="lineno">   73</span>    m_filePickerATPFolder-&gt;SetPath(data.atpPath.GetFullPath());</div>
-<div class="line"><span class="lineno">   74</span> </div>
-<div class="line"><span class="lineno">   75</span> </div>
-<div class="line"><span class="lineno">   76</span>    wxFont currentFont(data.labelFontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, <span class="keyword">false</span>, data.labelFont);</div>
-<div class="line"><span class="lineno">   77</span>    m_fontPickerText-&gt;SetSelectedFont(currentFont);</div>
-<div class="line"><span class="lineno">   78</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00026">26</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   27</span>    : GeneralPropertiesFormBase(parent)</div>
+<div class="line"><span class="lineno">   28</span>{</div>
+<div class="line"><span class="lineno">   29</span>    m_properties = properties;</div>
+<div class="line"><span class="lineno">   30</span>    <span class="keyword">auto</span> data = m_properties-&gt;GetGeneralPropertiesData();</div>
+<div class="line"><span class="lineno">   31</span> </div>
+<div class="line"><span class="lineno">   32</span>    <span class="comment">// Clear the choices and rebuild to set the correct translations.</span></div>
+<div class="line"><span class="lineno">   33</span>    m_choiceLanguage-&gt;Clear();</div>
+<div class="line"><span class="lineno">   34</span>    m_choiceLanguage-&gt;Insert(_(<span class="stringliteral">&quot;English&quot;</span>), 0);</div>
+<div class="line"><span class="lineno">   35</span>    m_choiceLanguage-&gt;Insert(_(<span class="stringliteral">&quot;Portuguese&quot;</span>), 1);</div>
+<div class="line"><span class="lineno">   36</span>    m_choiceTheme-&gt;Clear();</div>
+<div class="line"><span class="lineno">   37</span>    m_choiceTheme-&gt;Insert(_(<span class="stringliteral">&quot;Light&quot;</span>), 0);</div>
+<div class="line"><span class="lineno">   38</span>    m_choiceTheme-&gt;Insert(_(<span class="stringliteral">&quot;Dark&quot;</span>), 1);</div>
+<div class="line"><span class="lineno">   39</span>    <span class="comment">//m_choiceRender-&gt;Clear();</span></div>
+<div class="line"><span class="lineno">   40</span>    <span class="comment">//m_choiceRender-&gt;Insert(_(&quot;OpenGL&quot;), 0);</span></div>
+<div class="line"><span class="lineno">   41</span>    <span class="comment">//m_choiceRender-&gt;Insert(_(&quot;Device Context&quot;), 0);</span></div>
+<div class="line"><span class="lineno">   42</span>    m_choicePlotLib-&gt;Clear();</div>
+<div class="line"><span class="lineno">   43</span>    m_choicePlotLib-&gt;Insert(_(<span class="stringliteral">&quot;Chart Director&quot;</span>), 0);</div>
+<div class="line"><span class="lineno">   44</span>    m_choicePlotLib-&gt;Insert(_(<span class="stringliteral">&quot;wxMathPlot&quot;</span>), 1);</div>
+<div class="line"><span class="lineno">   45</span>    </div>
+<div class="line"><span class="lineno">   46</span>    <span class="keywordflow">switch</span> (data.language) {</div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">case</span> wxLANGUAGE_ENGLISH: {</div>
+<div class="line"><span class="lineno">   48</span>        m_choiceLanguage-&gt;SetSelection(0);</div>
+<div class="line"><span class="lineno">   49</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   50</span>    <span class="keywordflow">case</span> wxLANGUAGE_PORTUGUESE_BRAZILIAN: {</div>
+<div class="line"><span class="lineno">   51</span>        m_choiceLanguage-&gt;SetSelection(1);</div>
+<div class="line"><span class="lineno">   52</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   53</span>    <span class="keywordflow">default</span>: {</div>
+<div class="line"><span class="lineno">   54</span>        m_choiceLanguage-&gt;SetSelection(wxNOT_FOUND);</div>
+<div class="line"><span class="lineno">   55</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   56</span>    }</div>
+<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">switch</span> (data.plotLib) {</div>
+<div class="line"><span class="lineno">   58</span>    <span class="keywordflow">case</span> PlotLib::wxCHART_DIR: {</div>
+<div class="line"><span class="lineno">   59</span>        m_choicePlotLib-&gt;SetSelection(0);</div>
+<div class="line"><span class="lineno">   60</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">case</span> PlotLib::wxMATH_PLOT: {</div>
+<div class="line"><span class="lineno">   62</span>        m_choicePlotLib-&gt;SetSelection(1);</div>
+<div class="line"><span class="lineno">   63</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   64</span>    }</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keywordflow">switch</span> (data.theme) {</div>
+<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">case</span> THEME_LIGHT: {</div>
+<div class="line"><span class="lineno">   67</span>        m_choiceTheme-&gt;SetSelection(0);</div>
+<div class="line"><span class="lineno">   68</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   69</span>    <span class="keywordflow">case</span> THEME_DARK: {</div>
+<div class="line"><span class="lineno">   70</span>        m_choiceTheme-&gt;SetSelection(1);</div>
+<div class="line"><span class="lineno">   71</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   72</span>    }</div>
+<div class="line"><span class="lineno">   73</span>    <span class="comment">//if (data.useOpenGL) m_choiceRender-&gt;SetSelection(0);</span></div>
+<div class="line"><span class="lineno">   74</span>    <span class="comment">//else m_choiceRender-&gt;SetSelection(1);</span></div>
+<div class="line"><span class="lineno">   75</span>    m_filePickerATPFolder-&gt;SetPath(data.atpPath.GetFullPath());</div>
+<div class="line"><span class="lineno">   76</span> </div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span>    wxFont currentFont(data.labelFontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, <span class="keyword">false</span>, data.labelFont);</div>
+<div class="line"><span class="lineno">   79</span>    m_fontPickerText-&gt;SetSelectedFont(currentFont);</div>
+<div class="line"><span class="lineno">   80</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -284,8 +287,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00080">80</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   80</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00082">82</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   82</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -314,8 +317,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_general_properties_form_8h_source.html#l00044">44</a> of file <a class="el" href="_general_properties_form_8h_source.html">GeneralPropertiesForm.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   44</span>{ EndModal(wxID_CANCEL); }</div>
+<p class="definition">Definition at line <a class="el" href="_general_properties_form_8h_source.html#l00045">45</a> of file <a class="el" href="_general_properties_form_8h_source.html">GeneralPropertiesForm.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   45</span>{ EndModal(wxID_CANCEL); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -343,10 +346,49 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00081">81</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   82</span>{</div>
-<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">if</span> (ValidateData()) EndModal(wxID_OK);</div>
-<div class="line"><span class="lineno">   84</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00083">83</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   84</span>{</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">if</span> (ValidateData()) EndModal(wxID_OK);</div>
+<div class="line"><span class="lineno">   86</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac1ba5d6bde51e1a86c8631fd4654e16b" name="ac1ba5d6bde51e1a86c8631fd4654e16b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1ba5d6bde51e1a86c8631fd4654e16b">&#9670;&#160;</a></span>OnThemeSelected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GeneralPropertiesForm::OnThemeSelected </td>
+          <td>(</td>
+          <td class="paramtype">wxCommandEvent &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00181">181</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  182</span>{</div>
+<div class="line"><span class="lineno">  183</span>    <span class="keywordflow">switch</span> (event.GetSelection())</div>
+<div class="line"><span class="lineno">  184</span>    {</div>
+<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">case</span> 0:</div>
+<div class="line"><span class="lineno">  186</span>        wxTheApp-&gt;SetAppearance(wxApp::Appearance::Light);</div>
+<div class="line"><span class="lineno">  187</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  188</span>    <span class="keywordflow">case</span> 1:</div>
+<div class="line"><span class="lineno">  189</span>        wxTheApp-&gt;SetAppearance(wxApp::Appearance::Dark);</div>
+<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  191</span>    }</div>
+<div class="line"><span class="lineno">  192</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -373,110 +415,98 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00086">86</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   87</span>{</div>
-<div class="line"><span class="lineno">   88</span>    <span class="keyword">auto</span> data = m_properties-&gt;GetGeneralPropertiesData();</div>
-<div class="line"><span class="lineno">   89</span>    <span class="keyword">auto</span> checkData = m_properties-&gt;GetGeneralPropertiesData();</div>
-<div class="line"><span class="lineno">   90</span>    <span class="keywordtype">bool</span> needRestart = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   91</span>    data.atpPath = wxFileName(m_filePickerATPFolder-&gt;GetPath());</div>
-<div class="line"><span class="lineno">   92</span>    wxFont slectedFont = m_fontPickerText-&gt;GetSelectedFont();</div>
-<div class="line"><span class="lineno">   93</span>    data.labelFont = slectedFont.GetFaceName();</div>
-<div class="line"><span class="lineno">   94</span>    data.labelFontSize = slectedFont.GetPointSize();</div>
-<div class="line"><span class="lineno">   95</span> </div>
-<div class="line"><span class="lineno">   96</span>    <span class="comment">//wxTextFile file(&quot;config.ini&quot;);</span></div>
-<div class="line"><span class="lineno">   97</span>    wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;PSP-UFU&quot;</span> + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;config.ini&quot;</span>);</div>
-<div class="line"><span class="lineno">   98</span>    wxTextFile file(fn.GetFullPath());</div>
-<div class="line"><span class="lineno">   99</span>    <span class="keywordflow">if</span> (!file.Create()) {</div>
-<div class="line"><span class="lineno">  100</span>        <span class="keywordflow">if</span> (!file.Open()) {</div>
-<div class="line"><span class="lineno">  101</span>            <span class="comment">// Fail to access the file.</span></div>
-<div class="line"><span class="lineno">  102</span>            wxMessageDialog msgDialog(<span class="keyword">this</span>,</div>
-<div class="line"><span class="lineno">  103</span>                _(<span class="stringliteral">&quot;It was not possible to access the init file.\nThe settings won&#39;t be applied.&quot;</span>),</div>
-<div class="line"><span class="lineno">  104</span>                _(<span class="stringliteral">&quot;Error&quot;</span>), wxOK | wxCENTRE | wxICON_ERROR);</div>
-<div class="line"><span class="lineno">  105</span>            msgDialog.ShowModal();</div>
-<div class="line"><span class="lineno">  106</span>        }</div>
-<div class="line"><span class="lineno">  107</span>        file.Clear();</div>
-<div class="line"><span class="lineno">  108</span>    }</div>
-<div class="line"><span class="lineno">  109</span> </div>
-<div class="line"><span class="lineno">  110</span>    wxString line = <span class="stringliteral">&quot;lang=&quot;</span>;</div>
-<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">switch</span> (m_choiceLanguage-&gt;GetSelection()) {</div>
-<div class="line"><span class="lineno">  112</span>    <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">  113</span>        line += <span class="stringliteral">&quot;en&quot;</span>;</div>
-<div class="line"><span class="lineno">  114</span>        data.language = wxLANGUAGE_ENGLISH;</div>
-<div class="line"><span class="lineno">  115</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  116</span>    <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">  117</span>        line += <span class="stringliteral">&quot;pt-br&quot;</span>;</div>
-<div class="line"><span class="lineno">  118</span>        data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;</div>
-<div class="line"><span class="lineno">  119</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  120</span>    }</div>
-<div class="line"><span class="lineno">  121</span>    file.AddLine(line);</div>
-<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">if</span> (data.language != checkData.language) needRestart = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  123</span> </div>
-<div class="line"><span class="lineno">  124</span>    line = <span class="stringliteral">&quot;plotlib=&quot;</span>;</div>
-<div class="line"><span class="lineno">  125</span>    <span class="keywordflow">switch</span> (m_choicePlotLib-&gt;GetSelection()) {</div>
-<div class="line"><span class="lineno">  126</span>    <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">  127</span>        line += <span class="stringliteral">&quot;chartdir&quot;</span>;</div>
-<div class="line"><span class="lineno">  128</span>        data.plotLib = PlotLib::wxCHART_DIR;</div>
-<div class="line"><span class="lineno">  129</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  130</span>    <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">  131</span>        line += <span class="stringliteral">&quot;mathplot&quot;</span>;</div>
-<div class="line"><span class="lineno">  132</span>        data.plotLib = PlotLib::wxMATH_PLOT;</div>
-<div class="line"><span class="lineno">  133</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  134</span>    }</div>
-<div class="line"><span class="lineno">  135</span>    file.AddLine(line);</div>
-<div class="line"><span class="lineno">  136</span>    <span class="comment">//if (data.plotLib != checkData.plotLib) hasChanges = true;</span></div>
-<div class="line"><span class="lineno">  137</span> </div>
-<div class="line"><span class="lineno">  138</span>    line = <span class="stringliteral">&quot;theme=&quot;</span>;</div>
-<div class="line"><span class="lineno">  139</span>    <span class="keywordflow">switch</span> (m_choiceTheme-&gt;GetSelection()) {</div>
-<div class="line"><span class="lineno">  140</span>    <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">  141</span>        line += <span class="stringliteral">&quot;light&quot;</span>;</div>
-<div class="line"><span class="lineno">  142</span>        data.theme = THEME_LIGHT;</div>
-<div class="line"><span class="lineno">  143</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  144</span>    <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">  145</span>        line += <span class="stringliteral">&quot;dark&quot;</span>;</div>
-<div class="line"><span class="lineno">  146</span>        data.theme = THEME_DARK;</div>
-<div class="line"><span class="lineno">  147</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  148</span>    }</div>
-<div class="line"><span class="lineno">  149</span>    file.AddLine(line);</div>
-<div class="line"><span class="lineno">  150</span>    <span class="keywordflow">if</span> (data.theme != checkData.theme) needRestart = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  151</span> </div>
-<div class="line"><span class="lineno">  152</span>    <span class="comment">//line = &quot;useOpenGL=&quot;;</span></div>
-<div class="line"><span class="lineno">  153</span>    <span class="comment">//switch (m_choiceRender-&gt;GetSelection()) {</span></div>
-<div class="line"><span class="lineno">  154</span>    <span class="comment">//case 0: {</span></div>
-<div class="line"><span class="lineno">  155</span>    <span class="comment">//    line += &quot;yes&quot;;</span></div>
-<div class="line"><span class="lineno">  156</span>    <span class="comment">//    data.useOpenGL = true;</span></div>
-<div class="line"><span class="lineno">  157</span>    <span class="comment">//} break;</span></div>
-<div class="line"><span class="lineno">  158</span>    <span class="comment">//case 1: {</span></div>
-<div class="line"><span class="lineno">  159</span>    <span class="comment">//    line += &quot;no&quot;;</span></div>
-<div class="line"><span class="lineno">  160</span>    <span class="comment">//    data.useOpenGL = false;</span></div>
-<div class="line"><span class="lineno">  161</span>    <span class="comment">//} break;</span></div>
-<div class="line"><span class="lineno">  162</span>    <span class="comment">//}</span></div>
-<div class="line"><span class="lineno">  163</span>    <span class="comment">//file.AddLine(line);</span></div>
-<div class="line"><span class="lineno">  164</span>    <span class="comment">//if (data.useOpenGL != checkData.useOpenGL) hasChanges = true;</span></div>
-<div class="line"><span class="lineno">  165</span> </div>
-<div class="line"><span class="lineno">  166</span>    line = <span class="stringliteral">&quot;labelfont=&quot;</span>;</div>
-<div class="line"><span class="lineno">  167</span>    line += data.labelFont;</div>
-<div class="line"><span class="lineno">  168</span>    file.AddLine(line);</div>
-<div class="line"><span class="lineno">  169</span> </div>
-<div class="line"><span class="lineno">  170</span>    line = <span class="stringliteral">&quot;labelfontsize=&quot;</span>;</div>
-<div class="line"><span class="lineno">  171</span>    line += wxString::Format(<span class="stringliteral">&quot;%d&quot;</span>, data.labelFontSize);</div>
-<div class="line"><span class="lineno">  172</span>    file.AddLine(line);</div>
-<div class="line"><span class="lineno">  173</span> </div>
-<div class="line"><span class="lineno">  174</span> </div>
-<div class="line"><span class="lineno">  175</span>    line = <span class="stringliteral">&quot;atpfile=&quot;</span>;</div>
-<div class="line"><span class="lineno">  176</span>    line += data.atpPath.GetFullPath();</div>
-<div class="line"><span class="lineno">  177</span>    file.AddLine(line); </div>
-<div class="line"><span class="lineno">  178</span> </div>
-<div class="line"><span class="lineno">  179</span>    file.Write();</div>
-<div class="line"><span class="lineno">  180</span>    file.Close();</div>
-<div class="line"><span class="lineno">  181</span> </div>
-<div class="line"><span class="lineno">  182</span>    <span class="keywordflow">if</span> (needRestart) {</div>
-<div class="line"><span class="lineno">  183</span>        wxMessageDialog msgDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;The application must be restarted to settings changes be applied.&quot;</span>),</div>
-<div class="line"><span class="lineno">  184</span>            _(<span class="stringliteral">&quot;Info&quot;</span>), wxOK | wxCENTRE | wxICON_INFORMATION);</div>
-<div class="line"><span class="lineno">  185</span>        msgDialog.ShowModal();</div>
-<div class="line"><span class="lineno">  186</span>    }</div>
-<div class="line"><span class="lineno">  187</span>    m_properties-&gt;SetGeneralPropertiesData(data);</div>
-<div class="line"><span class="lineno">  188</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  189</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_general_properties_form_8cpp_source.html#l00088">88</a> of file <a class="el" href="_general_properties_form_8cpp_source.html">GeneralPropertiesForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   89</span>{</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keyword">auto</span> data = m_properties-&gt;GetGeneralPropertiesData();</div>
+<div class="line"><span class="lineno">   91</span>    <span class="keyword">auto</span> checkData = m_properties-&gt;GetGeneralPropertiesData();</div>
+<div class="line"><span class="lineno">   92</span>    <span class="keywordtype">bool</span> needRestart = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   93</span>    data.atpPath = wxFileName(m_filePickerATPFolder-&gt;GetPath());</div>
+<div class="line"><span class="lineno">   94</span>    wxFont slectedFont = m_fontPickerText-&gt;GetSelectedFont();</div>
+<div class="line"><span class="lineno">   95</span>    data.labelFont = slectedFont.GetFaceName();</div>
+<div class="line"><span class="lineno">   96</span>    data.labelFontSize = slectedFont.GetPointSize();</div>
+<div class="line"><span class="lineno">   97</span> </div>
+<div class="line"><span class="lineno">   98</span>    <span class="comment">//wxTextFile file(&quot;config.ini&quot;);</span></div>
+<div class="line"><span class="lineno">   99</span>    wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;PSP-UFU&quot;</span> + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;config.ini&quot;</span>);</div>
+<div class="line"><span class="lineno">  100</span>    wxTextFile file(fn.GetFullPath());</div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">if</span> (!file.Create()) {</div>
+<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">if</span> (!file.Open()) {</div>
+<div class="line"><span class="lineno">  103</span>            <span class="comment">// Fail to access the file.</span></div>
+<div class="line"><span class="lineno">  104</span>            wxMessageDialog msgDialog(<span class="keyword">this</span>,</div>
+<div class="line"><span class="lineno">  105</span>                _(<span class="stringliteral">&quot;It was not possible to access the init file.\nThe settings won&#39;t be applied.&quot;</span>),</div>
+<div class="line"><span class="lineno">  106</span>                _(<span class="stringliteral">&quot;Error&quot;</span>), wxOK | wxCENTRE | wxICON_ERROR);</div>
+<div class="line"><span class="lineno">  107</span>            msgDialog.ShowModal();</div>
+<div class="line"><span class="lineno">  108</span>        }</div>
+<div class="line"><span class="lineno">  109</span>        file.Clear();</div>
+<div class="line"><span class="lineno">  110</span>    }</div>
+<div class="line"><span class="lineno">  111</span> </div>
+<div class="line"><span class="lineno">  112</span>    wxString line = <span class="stringliteral">&quot;lang=&quot;</span>;</div>
+<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">switch</span> (m_choiceLanguage-&gt;GetSelection()) {</div>
+<div class="line"><span class="lineno">  114</span>    <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">  115</span>        line += <span class="stringliteral">&quot;en&quot;</span>;</div>
+<div class="line"><span class="lineno">  116</span>        data.language = wxLANGUAGE_ENGLISH;</div>
+<div class="line"><span class="lineno">  117</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  118</span>    <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">  119</span>        line += <span class="stringliteral">&quot;pt-br&quot;</span>;</div>
+<div class="line"><span class="lineno">  120</span>        data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;</div>
+<div class="line"><span class="lineno">  121</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  122</span>    }</div>
+<div class="line"><span class="lineno">  123</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">if</span> (data.language != checkData.language) needRestart = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  125</span> </div>
+<div class="line"><span class="lineno">  126</span>    line = <span class="stringliteral">&quot;plotlib=&quot;</span>;</div>
+<div class="line"><span class="lineno">  127</span>    <span class="keywordflow">switch</span> (m_choicePlotLib-&gt;GetSelection()) {</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">  129</span>        line += <span class="stringliteral">&quot;chartdir&quot;</span>;</div>
+<div class="line"><span class="lineno">  130</span>        data.plotLib = PlotLib::wxCHART_DIR;</div>
+<div class="line"><span class="lineno">  131</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">  133</span>        line += <span class="stringliteral">&quot;mathplot&quot;</span>;</div>
+<div class="line"><span class="lineno">  134</span>        data.plotLib = PlotLib::wxMATH_PLOT;</div>
+<div class="line"><span class="lineno">  135</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  136</span>    }</div>
+<div class="line"><span class="lineno">  137</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  138</span>    <span class="comment">//if (data.plotLib != checkData.plotLib) hasChanges = true;</span></div>
+<div class="line"><span class="lineno">  139</span> </div>
+<div class="line"><span class="lineno">  140</span>    line = <span class="stringliteral">&quot;theme=&quot;</span>;</div>
+<div class="line"><span class="lineno">  141</span>    <span class="keywordflow">switch</span> (m_choiceTheme-&gt;GetSelection()) {</div>
+<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">  143</span>        line += <span class="stringliteral">&quot;light&quot;</span>;</div>
+<div class="line"><span class="lineno">  144</span>        data.theme = THEME_LIGHT;</div>
+<div class="line"><span class="lineno">  145</span>        wxTheApp-&gt;SetAppearance(wxApp::Appearance::Light);</div>
+<div class="line"><span class="lineno">  146</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  147</span>    <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">  148</span>        line += <span class="stringliteral">&quot;dark&quot;</span>;</div>
+<div class="line"><span class="lineno">  149</span>        data.theme = THEME_DARK;</div>
+<div class="line"><span class="lineno">  150</span>        wxTheApp-&gt;SetAppearance(wxApp::Appearance::Dark);</div>
+<div class="line"><span class="lineno">  151</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  152</span>    }</div>
+<div class="line"><span class="lineno">  153</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">if</span> (data.theme != checkData.theme) needRestart = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  155</span> </div>
+<div class="line"><span class="lineno">  156</span>    line = <span class="stringliteral">&quot;labelfont=&quot;</span>;</div>
+<div class="line"><span class="lineno">  157</span>    line += data.labelFont;</div>
+<div class="line"><span class="lineno">  158</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  159</span> </div>
+<div class="line"><span class="lineno">  160</span>    line = <span class="stringliteral">&quot;labelfontsize=&quot;</span>;</div>
+<div class="line"><span class="lineno">  161</span>    line += wxString::Format(<span class="stringliteral">&quot;%d&quot;</span>, data.labelFontSize);</div>
+<div class="line"><span class="lineno">  162</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  163</span> </div>
+<div class="line"><span class="lineno">  164</span> </div>
+<div class="line"><span class="lineno">  165</span>    line = <span class="stringliteral">&quot;atpfile=&quot;</span>;</div>
+<div class="line"><span class="lineno">  166</span>    line += data.atpPath.GetFullPath();</div>
+<div class="line"><span class="lineno">  167</span>    file.AddLine(line); </div>
+<div class="line"><span class="lineno">  168</span> </div>
+<div class="line"><span class="lineno">  169</span>    file.Write();</div>
+<div class="line"><span class="lineno">  170</span>    file.Close();</div>
+<div class="line"><span class="lineno">  171</span> </div>
+<div class="line"><span class="lineno">  172</span>    <span class="keywordflow">if</span> (needRestart) {</div>
+<div class="line"><span class="lineno">  173</span>        wxMessageDialog msgDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;The application must be restarted to settings changes be applied.&quot;</span>),</div>
+<div class="line"><span class="lineno">  174</span>            _(<span class="stringliteral">&quot;Info&quot;</span>), wxOK | wxCENTRE | wxICON_INFORMATION);</div>
+<div class="line"><span class="lineno">  175</span>        msgDialog.ShowModal();</div>
+<div class="line"><span class="lineno">  176</span>    }</div>
+<div class="line"><span class="lineno">  177</span>    m_properties-&gt;SetGeneralPropertiesData(data);</div>
+<div class="line"><span class="lineno">  178</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  179</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -501,7 +531,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_general_properties_form_8h_source.html#l00048">48</a> of file <a class="el" href="_general_properties_form_8h_source.html">GeneralPropertiesForm.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_general_properties_form_8h_source.html#l00049">49</a> of file <a class="el" href="_general_properties_form_8h_source.html">GeneralPropertiesForm.h</a>.</p>
 
 </div>
 </div>

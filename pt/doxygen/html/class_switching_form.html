@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -253,19 +252,17 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   36</span>    Layout();</div>
 <div class="line"><span class="lineno">   37</span> </div>
 <div class="line"><span class="lineno">   38</span>    <a class="code hl_class" href="struct_switching_data.html">SwitchingData</a> data = element-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
-<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; (int)data.<a class="code hl_variable" href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">swType</a>.size(); i++) {</div>
-<div class="line"><span class="lineno">   40</span>        <span class="keywordtype">long</span> index = m_listCtrlSwitchings-&gt;InsertItem(m_maxID, data.<a class="code hl_variable" href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">swType</a>[i] == <a class="code hl_enumvalue" href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a> ? _(<span class="stringliteral">&quot;Insert&quot;</span>) : _(<span class="stringliteral">&quot;Remove&quot;</span>));</div>
-<div class="line"><span class="lineno">   41</span>        m_listCtrlSwitchings-&gt;SetItem(index, 1, wxString::FromDouble(data.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>[i]));</div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; (int)data.swType.size(); i++) {</div>
+<div class="line"><span class="lineno">   40</span>        <span class="keywordtype">long</span> index = m_listCtrlSwitchings-&gt;InsertItem(m_maxID, data.swType[i] == <a class="code hl_enumvalue" href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a> ? _(<span class="stringliteral">&quot;Insert&quot;</span>) : _(<span class="stringliteral">&quot;Remove&quot;</span>));</div>
+<div class="line"><span class="lineno">   41</span>        m_listCtrlSwitchings-&gt;SetItem(index, 1, wxString::FromDouble(data.swTime[i]));</div>
 <div class="line"><span class="lineno">   42</span>        m_maxID++;</div>
 <div class="line"><span class="lineno">   43</span>    }</div>
 <div class="line"><span class="lineno">   44</span> </div>
 <div class="line"><span class="lineno">   45</span>    m_element = element;</div>
 <div class="line"><span class="lineno">   46</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95"><div class="ttname"><a href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a></div><div class="ttdeci">@ SW_INSERT</div></div>
-<div class="ttc" id="aclass_power_element_html_ab78269f9b66fbf90ae09050083e9dbe1"><div class="ttname"><a href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">PowerElement::GetSwitchingData</a></div><div class="ttdeci">virtual SwitchingData GetSwitchingData()</div><div class="ttdoc">Returns the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00203">PowerElement.h:203</a></div></div>
-<div class="ttc" id="astruct_switching_data_html"><div class="ttname"><a href="struct_switching_data.html">SwitchingData</a></div><div class="ttdoc">Switching data of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00099">PowerElement.h:99</a></div></div>
-<div class="ttc" id="astruct_switching_data_html_a3323745bf0a3f6461fbc19bc76a189df"><div class="ttname"><a href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">SwitchingData::swTime</a></div><div class="ttdeci">std::vector&lt; double &gt; swTime</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00101">PowerElement.h:101</a></div></div>
-<div class="ttc" id="astruct_switching_data_html_af78fb958137a0532ea2a584810708574"><div class="ttname"><a href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">SwitchingData::swType</a></div><div class="ttdeci">std::vector&lt; SwitchingType &gt; swType</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00100">PowerElement.h:100</a></div></div>
+<div class="ttc" id="aclass_power_element_html_ab78269f9b66fbf90ae09050083e9dbe1"><div class="ttname"><a href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">PowerElement::GetSwitchingData</a></div><div class="ttdeci">virtual SwitchingData GetSwitchingData()</div><div class="ttdoc">Returns the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00175">PowerElement.h:175</a></div></div>
+<div class="ttc" id="astruct_switching_data_html"><div class="ttname"><a href="struct_switching_data.html">SwitchingData</a></div><div class="ttdoc">Switching data of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00071">PowerElement.h:71</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -495,17 +492,17 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   67</span>    <a class="code hl_class" href="struct_switching_data.html">SwitchingData</a> data;</div>
 <div class="line"><span class="lineno">   68</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; (int)itemList.size(); i++) {</div>
 <div class="line"><span class="lineno">   69</span>        <span class="keywordflow">if</span>(m_listCtrlSwitchings-&gt;GetItemText(itemList[i], 0) == _(<span class="stringliteral">&quot;Insert&quot;</span>))</div>
-<div class="line"><span class="lineno">   70</span>            data.<a class="code hl_variable" href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">swType</a>.push_back(<a class="code hl_enumvalue" href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a>);</div>
+<div class="line"><span class="lineno">   70</span>            data.swType.push_back(<a class="code hl_enumvalue" href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a>);</div>
 <div class="line"><span class="lineno">   71</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   72</span>            data.<a class="code hl_variable" href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">swType</a>.push_back(<a class="code hl_enumvalue" href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a67d6e621dc66064ab748f842899c6d3c">SwitchingType::SW_REMOVE</a>);</div>
+<div class="line"><span class="lineno">   72</span>            data.swType.push_back(<a class="code hl_enumvalue" href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a67d6e621dc66064ab748f842899c6d3c">SwitchingType::SW_REMOVE</a>);</div>
 <div class="line"><span class="lineno">   73</span> </div>
 <div class="line"><span class="lineno">   74</span>        <span class="keywordtype">double</span> swTime;</div>
 <div class="line"><span class="lineno">   75</span>        m_listCtrlSwitchings-&gt;GetItemText(itemList[i], 1).ToDouble(&amp;swTime);</div>
-<div class="line"><span class="lineno">   76</span>        data.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.push_back(swTime);</div>
+<div class="line"><span class="lineno">   76</span>        data.swTime.push_back(swTime);</div>
 <div class="line"><span class="lineno">   77</span>    }</div>
 <div class="line"><span class="lineno">   78</span>    m_element-&gt;<a class="code hl_function" href="class_power_element.html#a08d2e84b91ab7443b20a9d7eb6ab441f">SetSwitchingData</a>(data);</div>
 <div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">if</span>(data.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size() != 0)</div>
+<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">if</span>(data.swTime.size() != 0)</div>
 <div class="line"><span class="lineno">   81</span>        m_element-&gt;<a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">   82</span>    <span class="keywordflow">else</span></div>
 <div class="line"><span class="lineno">   83</span>        m_element-&gt;<a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">false</span>);</div>
@@ -513,8 +510,8 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   85</span>    EndModal(wxID_OK);</div>
 <div class="line"><span class="lineno">   86</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_ae3647532013a87e6261507e77a364581a67d6e621dc66064ab748f842899c6d3c"><div class="ttname"><a href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a67d6e621dc66064ab748f842899c6d3c">SwitchingType::SW_REMOVE</a></div><div class="ttdeci">@ SW_REMOVE</div></div>
-<div class="ttc" id="aclass_power_element_html_a08d2e84b91ab7443b20a9d7eb6ab441f"><div class="ttname"><a href="class_power_element.html#a08d2e84b91ab7443b20a9d7eb6ab441f">PowerElement::SetSwitchingData</a></div><div class="ttdeci">virtual void SetSwitchingData(SwitchingData data)</div><div class="ttdoc">Set the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00198">PowerElement.h:198</a></div></div>
-<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00229">PowerElement.h:229</a></div></div>
+<div class="ttc" id="aclass_power_element_html_a08d2e84b91ab7443b20a9d7eb6ab441f"><div class="ttname"><a href="class_power_element.html#a08d2e84b91ab7443b20a9d7eb6ab441f">PowerElement::SetSwitchingData</a></div><div class="ttdeci">virtual void SetSwitchingData(SwitchingData data)</div><div class="ttdoc">Set the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00170">PowerElement.h:170</a></div></div>
+<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00201">PowerElement.h:201</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

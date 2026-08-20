@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -142,7 +141,7 @@ Collaboration diagram for TextForm:</div>
 <area shape="poly" title=" " alt="" coords="87,187,159,255,155,259,83,191"/>
 <area shape="rect" href="class_text.html" title="Element that shows power element informations in workspace." alt="" coords="145,155,194,180"/>
 <area shape="poly" title=" " alt="" coords="172,194,172,257,167,257,167,194"/>
-<area shape="rect" href="class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace." alt="" coords="220,80,359,105"/>
+<area shape="rect" href="class_graphical_element.html" title="Abstract class for graphical elements shown with graphical elements in workspace." alt="" coords="220,80,359,105"/>
 <area shape="poly" title=" " alt="" coords="260,115,190,157,187,152,257,110"/>
 <area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="95,5,171,31"/>
 <area shape="poly" title=" " alt="" coords="131,44,128,74,132,105,145,131,161,153,157,156,140,134,127,106,123,74,125,44"/>
@@ -447,7 +446,7 @@ Protected Attributes</h2></td></tr>
 <div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a72c5fdfb2b05d7e6b344216cca40a3b8"><div class="ttname"><a href="class_electric_calculation.html#a72c5fdfb2b05d7e6b344216cca40a3b8">ElectricCalculation::GetTransformerList</a></div><div class="ttdeci">const std::vector&lt; Transformer * &gt; GetTransformerList() const</div><div class="ttdoc">Get the transformers of the system (use GetElementsFromList first).</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00338">ElectricCalculation.h:338</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a92edbf1803eb34b145743b00b14380f4"><div class="ttname"><a href="class_electric_calculation.html#a92edbf1803eb34b145743b00b14380f4">ElectricCalculation::GetLineList</a></div><div class="ttdeci">const std::vector&lt; Line * &gt; GetLineList() const</div><div class="ttdoc">Get the lines of the system (use GetElementsFromList first).</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00318">ElectricCalculation.h:318</a></div></div>
-<div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00559">Element.h:559</a></div></div>
+<div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00562">Element.h:562</a></div></div>
 <div class="ttc" id="aclass_line_html"><div class="ttname"><a href="class_line.html">Line</a></div><div class="ttdoc">Power line element.</div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00063">Line.h:64</a></div></div>
 <div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00083">Transformer.h:84</a></div></div>
 </div><!-- fragment -->
@@ -740,13 +739,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  230</span>        <span class="keywordflow">case</span> DATA_VOLTAGE: {</div>
 <div class="line"><span class="lineno">  231</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  232</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  233</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  233</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  234</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  235</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  236</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a>: {</div>
+<div class="line"><span class="lineno">  236</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_V: {</div>
 <div class="line"><span class="lineno">  237</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  238</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  239</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>: {</div>
+<div class="line"><span class="lineno">  239</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kV: {</div>
 <div class="line"><span class="lineno">  240</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  241</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  242</span>            <span class="keywordflow">default</span>:</div>
@@ -757,10 +756,10 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  247</span>        <span class="keywordflow">case</span> DATA_ANGLE: {</div>
 <div class="line"><span class="lineno">  248</span>            m_choiceTextType-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  249</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  250</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282">ElectricalUnit::UNIT_DEGREE</a>: {</div>
+<div class="line"><span class="lineno">  250</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_DEGREE: {</div>
 <div class="line"><span class="lineno">  251</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  252</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  253</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4">ElectricalUnit::UNIT_RADIAN</a>: {</div>
+<div class="line"><span class="lineno">  253</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_RADIAN: {</div>
 <div class="line"><span class="lineno">  254</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  255</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  256</span>            <span class="keywordflow">default</span>:</div>
@@ -770,13 +769,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  260</span>        <span class="keywordflow">case</span> DATA_SC_CURRENT: {</div>
 <div class="line"><span class="lineno">  261</span>            m_choiceTextType-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  262</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  263</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  263</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  264</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  265</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  266</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  266</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  267</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  268</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  269</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  269</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  270</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  271</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  272</span>            <span class="keywordflow">default</span>:</div>
@@ -786,13 +785,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  276</span>        <span class="keywordflow">case</span> DATA_SC_VOLTAGE: {</div>
 <div class="line"><span class="lineno">  277</span>            m_choiceTextType-&gt;SetSelection(4);</div>
 <div class="line"><span class="lineno">  278</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  279</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  279</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  280</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  281</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  282</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a>: {</div>
+<div class="line"><span class="lineno">  282</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_V: {</div>
 <div class="line"><span class="lineno">  283</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  284</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  285</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>: {</div>
+<div class="line"><span class="lineno">  285</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kV: {</div>
 <div class="line"><span class="lineno">  286</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  287</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  288</span>            <span class="keywordflow">default</span>:</div>
@@ -802,16 +801,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  292</span>        <span class="keywordflow">case</span> DATA_SC_POWER: {</div>
 <div class="line"><span class="lineno">  293</span>            m_choiceTextType-&gt;SetSelection(5);</div>
 <div class="line"><span class="lineno">  294</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  295</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  295</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  296</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  297</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  298</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>: {</div>
+<div class="line"><span class="lineno">  298</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_VA: {</div>
 <div class="line"><span class="lineno">  299</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  300</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  301</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>: {</div>
+<div class="line"><span class="lineno">  301</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kVA: {</div>
 <div class="line"><span class="lineno">  302</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  303</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  304</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>: {</div>
+<div class="line"><span class="lineno">  304</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MVA: {</div>
 <div class="line"><span class="lineno">  305</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  306</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  307</span>            <span class="keywordflow">default</span>:</div>
@@ -834,16 +833,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  324</span>        <span class="keywordflow">case</span> DATA_ACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  325</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  326</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  327</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  327</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  328</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  329</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  330</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  330</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  331</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  332</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  333</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  333</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  334</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  335</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  336</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  336</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  337</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  338</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  339</span>            <span class="keywordflow">default</span>:</div>
@@ -853,16 +852,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  343</span>        <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  344</span>            m_choiceTextType-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  345</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  346</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  346</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  347</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  348</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  349</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  349</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  350</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  351</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  352</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  352</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  353</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  354</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  355</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  355</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  356</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  357</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  358</span>            <span class="keywordflow">default</span>:</div>
@@ -872,13 +871,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  362</span>        <span class="keywordflow">case</span> DATA_SC_CURRENT: {</div>
 <div class="line"><span class="lineno">  363</span>            m_choiceTextType-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  364</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  365</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  365</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  366</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  367</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  368</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  368</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  369</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  370</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  371</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  371</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  372</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  373</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  374</span>            <span class="keywordflow">default</span>:</div>
@@ -898,16 +897,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  388</span>        <span class="keywordflow">case</span> DATA_PF_ACTIVE: {</div>
 <div class="line"><span class="lineno">  389</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  390</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  391</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  391</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  392</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  393</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  394</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  394</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  395</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  396</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  397</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  397</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  398</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  399</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  400</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  400</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  401</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  402</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  403</span>            <span class="keywordflow">default</span>:</div>
@@ -917,16 +916,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  407</span>        <span class="keywordflow">case</span> DATA_PF_REACTIVE: {</div>
 <div class="line"><span class="lineno">  408</span>            m_choiceTextType-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  409</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  410</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  410</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  411</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  412</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  413</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  413</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  414</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  415</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  416</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  416</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  417</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  418</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  419</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  419</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  420</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  421</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  422</span>            <span class="keywordflow">default</span>:</div>
@@ -936,16 +935,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  426</span>        <span class="keywordflow">case</span> DATA_PF_LOSSES: {</div>
 <div class="line"><span class="lineno">  427</span>            m_choiceTextType-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  428</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  429</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  429</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  430</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  431</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  432</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  432</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  433</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  434</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  435</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  435</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  436</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  437</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  438</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  438</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  439</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  440</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  441</span>            <span class="keywordflow">default</span>:</div>
@@ -955,13 +954,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  445</span>        <span class="keywordflow">case</span> DATA_PF_CURRENT: {</div>
 <div class="line"><span class="lineno">  446</span>            m_choiceTextType-&gt;SetSelection(4);</div>
 <div class="line"><span class="lineno">  447</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  448</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  448</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  449</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  450</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  451</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  451</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  452</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  453</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  454</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  454</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  455</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  456</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  457</span>            <span class="keywordflow">default</span>:</div>
@@ -971,16 +970,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  461</span>        <span class="keywordflow">case</span> DATA_SC_CURRENT: {</div>
 <div class="line"><span class="lineno">  462</span>            m_choiceTextType-&gt;SetSelection(5);</div>
 <div class="line"><span class="lineno">  463</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  464</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  464</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  465</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  466</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  467</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  467</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  468</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  469</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  470</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  470</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  471</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  472</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  473</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  473</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  474</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  475</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  476</span>            <span class="keywordflow">default</span>:</div>
@@ -1000,16 +999,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  490</span>        <span class="keywordflow">case</span> DATA_PF_ACTIVE: {</div>
 <div class="line"><span class="lineno">  491</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  492</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  493</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  493</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  494</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  495</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  496</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  496</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  497</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  498</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  499</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  499</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  500</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  501</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  502</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  502</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  503</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  504</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  505</span>            <span class="keywordflow">default</span>:</div>
@@ -1019,16 +1018,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  509</span>        <span class="keywordflow">case</span> DATA_PF_REACTIVE: {</div>
 <div class="line"><span class="lineno">  510</span>            m_choiceTextType-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  511</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  512</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  512</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  513</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  514</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  515</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  515</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  516</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  517</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  518</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  518</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  519</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  520</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  521</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  521</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  522</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  523</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  524</span>            <span class="keywordflow">default</span>:</div>
@@ -1038,16 +1037,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  528</span>        <span class="keywordflow">case</span> DATA_PF_LOSSES: {</div>
 <div class="line"><span class="lineno">  529</span>            m_choiceTextType-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  530</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  531</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  531</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  532</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  533</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  534</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  534</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  535</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  536</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  537</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  537</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  538</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  539</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  540</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  540</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  541</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  542</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  543</span>            <span class="keywordflow">default</span>:</div>
@@ -1057,13 +1056,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  547</span>        <span class="keywordflow">case</span> DATA_PF_CURRENT: {</div>
 <div class="line"><span class="lineno">  548</span>            m_choiceTextType-&gt;SetSelection(4);</div>
 <div class="line"><span class="lineno">  549</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  550</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  550</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  551</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  552</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  553</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  553</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  554</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  555</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  556</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  556</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  557</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  558</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  559</span>            <span class="keywordflow">default</span>:</div>
@@ -1073,13 +1072,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  563</span>        <span class="keywordflow">case</span> DATA_SC_CURRENT: {</div>
 <div class="line"><span class="lineno">  564</span>            m_choiceTextType-&gt;SetSelection(5);</div>
 <div class="line"><span class="lineno">  565</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  566</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  566</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  567</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  568</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  569</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  569</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  570</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  571</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  572</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  572</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  573</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  574</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  575</span>            <span class="keywordflow">default</span>:</div>
@@ -1099,16 +1098,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  589</span>        <span class="keywordflow">case</span> DATA_ACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  590</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  591</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  592</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  592</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  593</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  594</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  595</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  595</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  596</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  597</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  598</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  598</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  599</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  600</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  601</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  601</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  602</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  603</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  604</span>            <span class="keywordflow">default</span>:</div>
@@ -1118,16 +1117,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  608</span>        <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  609</span>            m_choiceTextType-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  610</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  611</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  611</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  612</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  613</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  614</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  614</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  615</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  616</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  617</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  617</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  618</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  619</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  620</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  620</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  621</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  622</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  623</span>            <span class="keywordflow">default</span>:</div>
@@ -1147,16 +1146,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  637</span>        <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  638</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  639</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  640</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  640</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  641</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  642</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  643</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  643</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  644</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  645</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  646</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  646</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  647</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  648</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  649</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  649</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  650</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  651</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  652</span>            <span class="keywordflow">default</span>:</div>
@@ -1176,16 +1175,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  666</span>        <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  667</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  668</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  669</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  669</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  670</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  671</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  672</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  672</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  673</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  674</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  675</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  675</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  676</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  677</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  678</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  678</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  679</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  680</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  681</span>            <span class="keywordflow">default</span>:</div>
@@ -1205,16 +1204,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  695</span>        <span class="keywordflow">case</span> DATA_ACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  696</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  697</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  698</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  698</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  699</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  700</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  701</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  701</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  702</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  703</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  704</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  704</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  705</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  706</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  707</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  707</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  708</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  709</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  710</span>            <span class="keywordflow">default</span>:</div>
@@ -1224,16 +1223,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  714</span>        <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  715</span>            m_choiceTextType-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  716</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  717</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  717</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  718</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  719</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  720</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  720</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  721</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  722</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  723</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  723</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  724</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  725</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  726</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  726</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  727</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  728</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  729</span>            <span class="keywordflow">default</span>:</div>
@@ -1253,16 +1252,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  743</span>        <span class="keywordflow">case</span> DATA_ACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  744</span>            m_choiceTextType-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  745</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  746</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  746</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  747</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  748</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  749</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  749</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  750</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  751</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  752</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  752</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  753</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  754</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  755</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  755</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  756</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  757</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  758</span>            <span class="keywordflow">default</span>:</div>
@@ -1272,16 +1271,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  762</span>        <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  763</span>            m_choiceTextType-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  764</span>            <span class="keywordflow">switch</span> (m_text-&gt;GetUnit()) {</div>
-<div class="line"><span class="lineno">  765</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  765</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  766</span>                m_choiceTextUnit-&gt;SetSelection(0);</div>
 <div class="line"><span class="lineno">  767</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  768</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  768</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  769</span>                m_choiceTextUnit-&gt;SetSelection(1);</div>
 <div class="line"><span class="lineno">  770</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  771</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  771</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  772</span>                m_choiceTextUnit-&gt;SetSelection(2);</div>
 <div class="line"><span class="lineno">  773</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  774</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  774</span>            <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  775</span>                m_choiceTextUnit-&gt;SetSelection(3);</div>
 <div class="line"><span class="lineno">  776</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  777</span>            <span class="keywordflow">default</span>:</div>
@@ -1304,22 +1303,6 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  794</span> </div>
 <div class="line"><span class="lineno">  795</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  796</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a></div><div class="ttdeci">@ UNIT_Mvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a></div><div class="ttdeci">@ UNIT_VA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a></div><div class="ttdeci">@ UNIT_var</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a></div><div class="ttdeci">@ UNIT_kW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a></div><div class="ttdeci">@ UNIT_MVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a></div><div class="ttdeci">@ UNIT_kVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a></div><div class="ttdeci">@ UNIT_kV</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a></div><div class="ttdeci">@ UNIT_W</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282">ElectricalUnit::UNIT_DEGREE</a></div><div class="ttdeci">@ UNIT_DEGREE</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a></div><div class="ttdeci">@ UNIT_kA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a></div><div class="ttdeci">@ UNIT_A</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4">ElectricalUnit::UNIT_RADIAN</a></div><div class="ttdeci">@ UNIT_RADIAN</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a></div><div class="ttdeci">@ UNIT_MW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a></div><div class="ttdeci">@ UNIT_V</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a></div><div class="ttdeci">@ UNIT_kvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1807,13 +1790,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1098</span>    <span class="keywordflow">case</span> DATA_SC_VOLTAGE: {</div>
 <div class="line"><span class="lineno"> 1099</span>        <span class="keywordflow">switch</span> (m_choiceTextUnit-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno"> 1100</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno"> 1101</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>);</div>
+<div class="line"><span class="lineno"> 1101</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_PU);</div>
 <div class="line"><span class="lineno"> 1102</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1103</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno"> 1104</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a>);</div>
+<div class="line"><span class="lineno"> 1104</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_V);</div>
 <div class="line"><span class="lineno"> 1105</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1106</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno"> 1107</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>);</div>
+<div class="line"><span class="lineno"> 1107</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_kV);</div>
 <div class="line"><span class="lineno"> 1108</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1109</span>        <span class="keywordflow">default</span>:</div>
 <div class="line"><span class="lineno"> 1110</span>            <span class="keywordflow">break</span>;</div>
@@ -1822,10 +1805,10 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1113</span>    <span class="keywordflow">case</span> DATA_ANGLE: {</div>
 <div class="line"><span class="lineno"> 1114</span>        <span class="keywordflow">switch</span> (m_choiceTextUnit-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno"> 1115</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno"> 1116</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282">ElectricalUnit::UNIT_DEGREE</a>);</div>
+<div class="line"><span class="lineno"> 1116</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_DEGREE);</div>
 <div class="line"><span class="lineno"> 1117</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1118</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno"> 1119</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4">ElectricalUnit::UNIT_RADIAN</a>);</div>
+<div class="line"><span class="lineno"> 1119</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_RADIAN);</div>
 <div class="line"><span class="lineno"> 1120</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1121</span>        <span class="keywordflow">default</span>:</div>
 <div class="line"><span class="lineno"> 1122</span>            <span class="keywordflow">break</span>;</div>
@@ -1835,13 +1818,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1126</span>    <span class="keywordflow">case</span> DATA_PF_CURRENT: {</div>
 <div class="line"><span class="lineno"> 1127</span>        <span class="keywordflow">switch</span> (m_choiceTextUnit-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno"> 1128</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno"> 1129</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>);</div>
+<div class="line"><span class="lineno"> 1129</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_PU);</div>
 <div class="line"><span class="lineno"> 1130</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1131</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno"> 1132</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>);</div>
+<div class="line"><span class="lineno"> 1132</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_A);</div>
 <div class="line"><span class="lineno"> 1133</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1134</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno"> 1135</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>);</div>
+<div class="line"><span class="lineno"> 1135</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_kA);</div>
 <div class="line"><span class="lineno"> 1136</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1137</span>        <span class="keywordflow">default</span>:</div>
 <div class="line"><span class="lineno"> 1138</span>            <span class="keywordflow">break</span>;</div>
@@ -1850,16 +1833,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1141</span>    <span class="keywordflow">case</span> DATA_SC_POWER: {</div>
 <div class="line"><span class="lineno"> 1142</span>        <span class="keywordflow">switch</span> (m_choiceTextUnit-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno"> 1143</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno"> 1144</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>);</div>
+<div class="line"><span class="lineno"> 1144</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_PU);</div>
 <div class="line"><span class="lineno"> 1145</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1146</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno"> 1147</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>);</div>
+<div class="line"><span class="lineno"> 1147</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_VA);</div>
 <div class="line"><span class="lineno"> 1148</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1149</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno"> 1150</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>);</div>
+<div class="line"><span class="lineno"> 1150</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_kVA);</div>
 <div class="line"><span class="lineno"> 1151</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1152</span>        <span class="keywordflow">case</span> 3: {</div>
-<div class="line"><span class="lineno"> 1153</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>);</div>
+<div class="line"><span class="lineno"> 1153</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_MVA);</div>
 <div class="line"><span class="lineno"> 1154</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1155</span>        <span class="keywordflow">default</span>:</div>
 <div class="line"><span class="lineno"> 1156</span>            <span class="keywordflow">break</span>;</div>
@@ -1870,16 +1853,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1161</span>    <span class="keywordflow">case</span> DATA_PF_LOSSES: {</div>
 <div class="line"><span class="lineno"> 1162</span>        <span class="keywordflow">switch</span> (m_choiceTextUnit-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno"> 1163</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno"> 1164</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>);</div>
+<div class="line"><span class="lineno"> 1164</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_PU);</div>
 <div class="line"><span class="lineno"> 1165</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1166</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno"> 1167</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>);</div>
+<div class="line"><span class="lineno"> 1167</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_W);</div>
 <div class="line"><span class="lineno"> 1168</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1169</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno"> 1170</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>);</div>
+<div class="line"><span class="lineno"> 1170</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_kW);</div>
 <div class="line"><span class="lineno"> 1171</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1172</span>        <span class="keywordflow">case</span> 3: {</div>
-<div class="line"><span class="lineno"> 1173</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>);</div>
+<div class="line"><span class="lineno"> 1173</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_MW);</div>
 <div class="line"><span class="lineno"> 1174</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1175</span>        <span class="keywordflow">default</span>:</div>
 <div class="line"><span class="lineno"> 1176</span>            <span class="keywordflow">break</span>;</div>
@@ -1889,16 +1872,16 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1180</span>    <span class="keywordflow">case</span> DATA_PF_REACTIVE: {</div>
 <div class="line"><span class="lineno"> 1181</span>        <span class="keywordflow">switch</span> (m_choiceTextUnit-&gt;GetSelection()) {</div>
 <div class="line"><span class="lineno"> 1182</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno"> 1183</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>);</div>
+<div class="line"><span class="lineno"> 1183</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_PU);</div>
 <div class="line"><span class="lineno"> 1184</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1185</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno"> 1186</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>);</div>
+<div class="line"><span class="lineno"> 1186</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_var);</div>
 <div class="line"><span class="lineno"> 1187</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1188</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno"> 1189</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>);</div>
+<div class="line"><span class="lineno"> 1189</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_kvar);</div>
 <div class="line"><span class="lineno"> 1190</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1191</span>        <span class="keywordflow">case</span> 3: {</div>
-<div class="line"><span class="lineno"> 1192</span>            m_text-&gt;SetUnit(<a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>);</div>
+<div class="line"><span class="lineno"> 1192</span>            m_text-&gt;SetUnit(ElectricalUnit::UNIT_Mvar);</div>
 <div class="line"><span class="lineno"> 1193</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1194</span>        <span class="keywordflow">default</span>:</div>
 <div class="line"><span class="lineno"> 1195</span>            <span class="keywordflow">break</span>;</div>

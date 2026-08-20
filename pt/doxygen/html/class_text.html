@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -127,7 +126,7 @@ Inheritance diagram for Text:</div>
 <div class="center"><img src="class_text__inherit__graph.png" border="0" usemap="#a_text_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_text_inherit__map" id="a_text_inherit__map">
 <area shape="rect" title="Element that shows power element informations in workspace." alt="" coords="50,152,99,177"/>
-<area shape="rect" href="class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace." alt="" coords="5,79,144,104"/>
+<area shape="rect" href="class_graphical_element.html" title="Abstract class for graphical elements shown with graphical elements in workspace." alt="" coords="5,79,144,104"/>
 <area shape="poly" title=" " alt="" coords="77,118,77,152,72,152,72,118"/>
 <area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="37,5,113,31"/>
 <area shape="poly" title=" " alt="" coords="77,44,77,79,72,79,72,44"/>
@@ -139,7 +138,7 @@ Collaboration diagram for Text:</div>
 <div class="center"><img src="class_text__coll__graph.png" border="0" usemap="#a_text_coll__map" alt="Collaboration graph"/></div>
 <map name="a_text_coll__map" id="a_text_coll__map">
 <area shape="rect" title="Element that shows power element informations in workspace." alt="" coords="53,155,103,180"/>
-<area shape="rect" href="class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace." alt="" coords="130,80,269,105"/>
+<area shape="rect" href="class_graphical_element.html" title="Abstract class for graphical elements shown with graphical elements in workspace." alt="" coords="130,80,269,105"/>
 <area shape="poly" title=" " alt="" coords="170,115,99,157,96,152,167,110"/>
 <area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,31"/>
 <area shape="poly" title=" " alt="" coords="41,44,38,74,42,105,54,131,70,153,66,156,50,134,37,106,33,74,35,44"/>
@@ -160,10 +159,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a51c55b9272f653cfc3cdafe665d5dde0" id="r_a51c55b9272f653cfc3cdafe665d5dde0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a51c55b9272f653cfc3cdafe665d5dde0">Contains</a> (wxPoint2DDouble position) const</td></tr>
 <tr class="memdesc:a51c55b9272f653cfc3cdafe665d5dde0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <br /></td></tr>
 <tr class="separator:a51c55b9272f653cfc3cdafe665d5dde0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0355638101f96418109e667dea4164e" id="r_af0355638101f96418109e667dea4164e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#af0355638101f96418109e667dea4164e">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc)</td></tr>
-<tr class="separator:af0355638101f96418109e667dea4164e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a698a0016063f80793110db1117867114" id="r_a698a0016063f80793110db1117867114"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a698a0016063f80793110db1117867114">DrawDC</a> (wxPoint2DDouble translation, double scale, wxDC &amp;dc)</td></tr>
-<tr class="separator:a698a0016063f80793110db1117867114"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab876f78da65f074f3778c02f9cb8c60f" id="r_ab876f78da65f074f3778c02f9cb8c60f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#ab876f78da65f074f3778c02f9cb8c60f">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc)</td></tr>
+<tr class="separator:ab876f78da65f074f3778c02f9cb8c60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af528c196229223d80331f5a457567f4b" id="r_af528c196229223d80331f5a457567f4b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#af528c196229223d80331f5a457567f4b">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxDC &amp;dc)</td></tr>
+<tr class="separator:af528c196229223d80331f5a457567f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9923c820cd77b411257ba48beceafeaa" id="r_a9923c820cd77b411257ba48beceafeaa"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a9923c820cd77b411257ba48beceafeaa">Intersects</a> (wxRect2DDouble rect) const</td></tr>
 <tr class="memdesc:a9923c820cd77b411257ba48beceafeaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the element's rect intersects other rect.  <br /></td></tr>
 <tr class="separator:a9923c820cd77b411257ba48beceafeaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,7 +195,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aef377b465f00fe9aec996e122c1bb23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f068c9f7b9c87b0010fdf51c3c67db9" id="r_a0f068c9f7b9c87b0010fdf51c3c67db9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a0f068c9f7b9c87b0010fdf51c3c67db9">SetElementTypeText</a> (const ElementType elementType)</td></tr>
 <tr class="separator:a0f068c9f7b9c87b0010fdf51c3c67db9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5eb67f2bf595a78858733c96a5bc05d6" id="r_a5eb67f2bf595a78858733c96a5bc05d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a5eb67f2bf595a78858733c96a5bc05d6">SetUnit</a> (const <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> unit)</td></tr>
+<tr class="memitem:a5eb67f2bf595a78858733c96a5bc05d6" id="r_a5eb67f2bf595a78858733c96a5bc05d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a5eb67f2bf595a78858733c96a5bc05d6">SetUnit</a> (const ElectricalUnit unit)</td></tr>
 <tr class="separator:a5eb67f2bf595a78858733c96a5bc05d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6743a08fc0d1d8b96db99eab48eadb8f" id="r_a6743a08fc0d1d8b96db99eab48eadb8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a6743a08fc0d1d8b96db99eab48eadb8f">SetDecimalPlaces</a> (int decimalPlaces)</td></tr>
 <tr class="separator:a6743a08fc0d1d8b96db99eab48eadb8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,7 +209,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a340b00ac7a17cd9a1f37f63275715638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0160bf1fdfbebf7790841460a57f1128" id="r_a0160bf1fdfbebf7790841460a57f1128"><td class="memItemLeft" align="right" valign="top">const ElementType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a0160bf1fdfbebf7790841460a57f1128">GetElementTypeText</a> () const</td></tr>
 <tr class="separator:a0160bf1fdfbebf7790841460a57f1128"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41eabb28f45124d5da3ec2d703ce9018" id="r_a41eabb28f45124d5da3ec2d703ce9018"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a41eabb28f45124d5da3ec2d703ce9018">GetUnit</a> () const</td></tr>
+<tr class="memitem:a41eabb28f45124d5da3ec2d703ce9018" id="r_a41eabb28f45124d5da3ec2d703ce9018"><td class="memItemLeft" align="right" valign="top">const ElectricalUnit&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a41eabb28f45124d5da3ec2d703ce9018">GetUnit</a> () const</td></tr>
 <tr class="separator:a41eabb28f45124d5da3ec2d703ce9018"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c67acf11b90374ded2a8cb8ec1088f" id="r_a03c67acf11b90374ded2a8cb8ec1088f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a03c67acf11b90374ded2a8cb8ec1088f">GetDecimalPlaces</a> () const</td></tr>
 <tr class="separator:a03c67acf11b90374ded2a8cb8ec1088f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -311,12 +310,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element" id="r_aa79db7f54ba9754e953b5059a1d79486"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">GetTipText</a> () const</td></tr>
 <tr class="memdesc:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element" id="r_a6cca77f38afe3ade6d92294d0759427a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a6cca77f38afe3ade6d92294d0759427a">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
-<tr class="separator:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element" id="r_a44877d44d6e548c24f466913d118f61b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a44877d44d6e548c24f466913d118f61b">DrawDC</a> (wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
-<tr class="memdesc:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
-<tr class="separator:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element" id="r_a5ac0a5f9ca1299f06ed9979789340b70"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a5ac0a5f9ca1299f06ed9979789340b70">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
+<tr class="separator:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element" id="r_a8720b78213ff3a15b16e2f53a70c139c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a8720b78213ff3a15b16e2f53a70c139c">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
+<tr class="memdesc:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
+<tr class="separator:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a436b0497017a1c3d03dba5e59f037e inherit pub_methods_class_element" id="r_a2a436b0497017a1c3d03dba5e59f037e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a2a436b0497017a1c3d03dba5e59f037e">GetContextMenu</a> (wxMenu &amp;menu)</td></tr>
 <tr class="memdesc:a2a436b0497017a1c3d03dba5e59f037e inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the element contex menu.  <br /></td></tr>
 <tr class="separator:a2a436b0497017a1c3d03dba5e59f037e inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -464,7 +463,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a8bab7377ac548d1883dcbbe2489c5ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e88aef941ba0b3dba303c4370b0bb7a" id="r_a7e88aef941ba0b3dba303c4370b0bb7a"><td class="memItemLeft" align="right" valign="top">DataType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a7e88aef941ba0b3dba303c4370b0bb7a">m_dataType</a></td></tr>
 <tr class="separator:a7e88aef941ba0b3dba303c4370b0bb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac19aa2e04d68965adadee0c67daca99e" id="r_ac19aa2e04d68965adadee0c67daca99e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#ac19aa2e04d68965adadee0c67daca99e">m_unit</a></td></tr>
+<tr class="memitem:ac19aa2e04d68965adadee0c67daca99e" id="r_ac19aa2e04d68965adadee0c67daca99e"><td class="memItemLeft" align="right" valign="top">ElectricalUnit&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#ac19aa2e04d68965adadee0c67daca99e">m_unit</a></td></tr>
 <tr class="separator:ac19aa2e04d68965adadee0c67daca99e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad251de30122437e2a311aa60e8ed390a" id="r_ad251de30122437e2a311aa60e8ed390a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#ad251de30122437e2a311aa60e8ed390a">m_direction</a> = 0</td></tr>
 <tr class="separator:ad251de30122437e2a311aa60e8ed390a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -519,8 +518,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5c1d43a226486a7a987bfb8c195ffac6 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element" id="r_a37ff451865d4852ffa8c54574a20cd0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a37ff451865d4852ffa8c54574a20cd0b">m_online</a> = true</td></tr>
 <tr class="separator:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element" id="r_a9692eec7ca16d6f81172788b4bf48072"><td class="memItemLeft" align="right" valign="top">wxColour&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9692eec7ca16d6f81172788b4bf48072">m_selectionColour</a></td></tr>
-<tr class="separator:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -564,7 +561,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">   41</span>    SetText(m_text);</div>
 <div class="line"><span class="lineno">   42</span>    m_inserted = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">   43</span>}</div>
-<div class="ttc" id="aclass_graphical_element_html"><div class="ttname"><a href="class_graphical_element.html">GraphicalElement</a></div><div class="ttdoc">Abstract class for graphical elements shown with power elements in workspace.</div><div class="ttdef"><b>Definition</b> <a href="_graphical_element_8h_source.html#l00030">GraphicalElement.h:31</a></div></div>
+<div class="ttc" id="aclass_graphical_element_html"><div class="ttname"><a href="class_graphical_element.html">GraphicalElement</a></div><div class="ttdoc">Abstract class for graphical elements shown with graphical elements in workspace.</div><div class="ttdef"><b>Definition</b> <a href="_graphical_element_8h_source.html#l00030">GraphicalElement.h:31</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -733,7 +730,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">   69</span>    wxPoint2DDouble ptR = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(position, -m_angle);</div>
 <div class="line"><span class="lineno">   70</span>    <span class="keywordflow">return</span> m_rect.Contains(ptR);</div>
 <div class="line"><span class="lineno">   71</span>}</div>
-<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00223">Element.cpp:223</a></div></div>
+<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00228">Element.cpp:228</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -747,8 +744,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a698a0016063f80793110db1117867114" name="a698a0016063f80793110db1117867114"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a698a0016063f80793110db1117867114">&#9670;&#160;</a></span>DrawDC() <span class="overload">[1/2]</span></h2>
+<a id="af528c196229223d80331f5a457567f4b" name="af528c196229223d80331f5a457567f4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af528c196229223d80331f5a457567f4b">&#9670;&#160;</a></span>DrawDC() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -759,6 +756,12 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void Text::DrawDC </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td>
+          <td class="paramname"><em>guiColour</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">wxPoint2DDouble&#160;</td>
           <td class="paramname"><em>translation</em>, </td>
         </tr>
@@ -831,8 +834,8 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  227</span>    <span class="comment">// Draw selection rectangle</span></div>
 <div class="line"><span class="lineno">  228</span>    <span class="keywordflow">if</span> (m_selected) {</div>
 <div class="line"><span class="lineno">  229</span>        dc.SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  230</span>        <span class="keywordflow">if</span> (m_useAltSelectionColour) dc.SetBrush(wxBrush(wxColour(0, 230, 0, 125)));</div>
-<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">else</span> dc.SetBrush(wxBrush(wxColour(0, 125, 255, 125)));</div>
+<div class="line"><span class="lineno">  230</span>        <span class="keywordflow">if</span> (m_useAltSelectionColour) dc.SetBrush(wxBrush(guiColour-&gt;altSelection));</div>
+<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">else</span> dc.SetBrush(wxBrush(guiColour-&gt;selection));</div>
 <div class="line"><span class="lineno">  232</span> </div>
 <div class="line"><span class="lineno">  233</span>        <a class="code hl_function" href="class_element.html#a79e18ae8f29cea9cec00bf11f21f5241">DrawDCRectangle</a>(m_position, m_rect.m_width, m_rect.m_height, m_angle, dc);</div>
 <div class="line"><span class="lineno">  234</span>    }</div>
@@ -847,18 +850,18 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  243</span>        }</div>
 <div class="line"><span class="lineno">  244</span>    }</div>
 <div class="line"><span class="lineno">  245</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_gcTextList.size() &gt; 0) {</div>
-<div class="line"><span class="lineno">  246</span>        m_gcTextList[0]-&gt;Draw(m_position, m_width, m_height, dc, m_angle);</div>
+<div class="line"><span class="lineno">  246</span>        m_gcTextList[0]-&gt;Draw(m_position, m_width, m_height, dc, m_angle, guiColour-&gt;text);</div>
 <div class="line"><span class="lineno">  247</span>    }</div>
 <div class="line"><span class="lineno">  248</span>}</div>
-<div class="ttc" id="aclass_element_html_a79e18ae8f29cea9cec00bf11f21f5241"><div class="ttname"><a href="class_element.html#a79e18ae8f29cea9cec00bf11f21f5241">Element::DrawDCRectangle</a></div><div class="ttdeci">virtual void DrawDCRectangle(wxPoint2DDouble position, double width, double height, double angle, wxDC &amp;dc) const</div><div class="ttdoc">Draw a circle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00036">Element.cpp:36</a></div></div>
-<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00028">Element.cpp:28</a></div></div>
+<div class="ttc" id="aclass_element_html_a79e18ae8f29cea9cec00bf11f21f5241"><div class="ttname"><a href="class_element.html#a79e18ae8f29cea9cec00bf11f21f5241">Element::DrawDCRectangle</a></div><div class="ttdeci">virtual void DrawDCRectangle(wxPoint2DDouble position, double width, double height, double angle, wxDC &amp;dc) const</div><div class="ttdoc">Draw a circle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00041">Element.cpp:41</a></div></div>
+<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00033">Element.cpp:33</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html"><div class="ttname"><a href="class_g_c_text.html">GCText</a></div><div class="ttdoc">Class to draw text on Graphics Context using wxWidgets.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8h_source.html#l00031">GCText.h:32</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html_aff3fa347bf6cab992c5768c88210a085"><div class="ttname"><a href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085">GCText::SetText</a></div><div class="ttdeci">virtual void SetText(wxString text)</div><div class="ttdoc">Set correctly a new text string.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00068">GCText.cpp:68</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="af0355638101f96418109e667dea4164e" name="af0355638101f96418109e667dea4164e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0355638101f96418109e667dea4164e">&#9670;&#160;</a></span>DrawDC() <span class="overload">[2/2]</span></h2>
+<a id="ab876f78da65f074f3778c02f9cb8c60f" name="ab876f78da65f074f3778c02f9cb8c60f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab876f78da65f074f3778c02f9cb8c60f">&#9670;&#160;</a></span>DrawDC() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -869,6 +872,12 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void Text::DrawDC </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td>
+          <td class="paramname"><em>guiColour</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">wxPoint2DDouble&#160;</td>
           <td class="paramname"><em>translation</em>, </td>
         </tr>
@@ -916,7 +925,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  124</span>            wxFONTWEIGHT_NORMAL,</div>
 <div class="line"><span class="lineno">  125</span>            <span class="keyword">false</span>,</div>
 <div class="line"><span class="lineno">  126</span>            m_fontName);</div>
-<div class="line"><span class="lineno">  127</span>        gc-&gt;SetFont(font, *wxBLACK);</div>
+<div class="line"><span class="lineno">  127</span>        gc-&gt;SetFont(font, guiColour-&gt;text);</div>
 <div class="line"><span class="lineno">  128</span> </div>
 <div class="line"><span class="lineno">  129</span>        wxString multText = m_text;</div>
 <div class="line"><span class="lineno">  130</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfLines; ++i) {</div>
@@ -951,8 +960,8 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  159</span>    <span class="keywordflow">if</span> (m_selected) {</div>
 <div class="line"><span class="lineno">  160</span>        <span class="comment">//glColor4d(0.0, 0.5, 1.0, 0.5);</span></div>
 <div class="line"><span class="lineno">  161</span>        gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  162</span>        <span class="keywordflow">if</span> (m_useAltSelectionColour) gc-&gt;SetBrush(wxBrush(wxColour(0, 230, 0, 125)));</div>
-<div class="line"><span class="lineno">  163</span>        <span class="keywordflow">else</span> gc-&gt;SetBrush(wxBrush(wxColour(0, 125, 255, 125)));</div>
+<div class="line"><span class="lineno">  162</span>        <span class="keywordflow">if</span> (m_useAltSelectionColour) gc-&gt;SetBrush(wxBrush(guiColour-&gt;altSelection));</div>
+<div class="line"><span class="lineno">  163</span>        <span class="keywordflow">else</span> gc-&gt;SetBrush(wxBrush(guiColour-&gt;selection));</div>
 <div class="line"><span class="lineno">  164</span> </div>
 <div class="line"><span class="lineno">  165</span>        wxPoint2DDouble pos = m_position - wxPoint2DDouble(m_borderSize / 2.0 + m_width / 2, m_borderSize / 2.0 + m_height / 2);</div>
 <div class="line"><span class="lineno">  166</span>        gc-&gt;DrawRectangle(pos.m_x, pos.m_y, m_rect.m_width, m_rect.m_height);</div>
@@ -966,11 +975,11 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  174</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_gcTextList.size(); ++i) {</div>
 <div class="line"><span class="lineno">  175</span>            m_gcTextList[i]-&gt;Draw(</div>
 <div class="line"><span class="lineno">  176</span>                pos +</div>
-<div class="line"><span class="lineno">  177</span>                wxPoint2DDouble(0.0, (m_height * <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(i) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(m_numberOfLines))), gc);</div>
+<div class="line"><span class="lineno">  177</span>                wxPoint2DDouble(0.0, (m_height * <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(i) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(m_numberOfLines))), gc, 0, guiColour-&gt;text);</div>
 <div class="line"><span class="lineno">  178</span>        }</div>
 <div class="line"><span class="lineno">  179</span>    }</div>
 <div class="line"><span class="lineno">  180</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_gcTextList.size() &gt; 0) {</div>
-<div class="line"><span class="lineno">  181</span>        m_gcTextList[0]-&gt;Draw(pos, gc);</div>
+<div class="line"><span class="lineno">  181</span>        m_gcTextList[0]-&gt;Draw(pos, gc, 0, guiColour-&gt;text);</div>
 <div class="line"><span class="lineno">  182</span>    }</div>
 <div class="line"><span class="lineno">  183</span>    gc-&gt;PopState();</div>
 <div class="line"><span class="lineno">  184</span>}</div>
@@ -1223,7 +1232,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> Text::GetUnit </td>
+          <td class="memname">const ElectricalUnit Text::GetUnit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1280,7 +1289,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  252</span>    <span class="keywordflow">if</span> (m_angle == 0.0 || m_angle == 180.0) <span class="keywordflow">return</span> m_rect.Intersects(rect);</div>
 <div class="line"><span class="lineno">  253</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a>(m_rect, rect, m_angle, 0.0);</div>
 <div class="line"><span class="lineno">  254</span>}</div>
-<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00290">Element.cpp:290</a></div></div>
+<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00295">Element.cpp:295</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1329,15 +1338,14 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno"> 1204</span> </div>
 <div class="line"><span class="lineno"> 1205</span>    SetElementTypeText(<span class="keyword">static_cast&lt;</span>ElementType<span class="keyword">&gt;</span>(XMLParser::GetNodeValueDouble(textProperties, <span class="stringliteral">&quot;ElementType&quot;</span>)));</div>
 <div class="line"><span class="lineno"> 1206</span>    SetDataType(<span class="keyword">static_cast&lt;</span>DataType<span class="keyword">&gt;</span>(XMLParser::GetNodeValueDouble(textProperties, <span class="stringliteral">&quot;DataType&quot;</span>)));</div>
-<div class="line"><span class="lineno"> 1207</span>    SetUnit(<span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetNodeValueDouble(textProperties, <span class="stringliteral">&quot;DataUnit&quot;</span>)));</div>
+<div class="line"><span class="lineno"> 1207</span>    SetUnit(<span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetNodeValueDouble(textProperties, <span class="stringliteral">&quot;DataUnit&quot;</span>)));</div>
 <div class="line"><span class="lineno"> 1208</span>    SetDirection(XMLParser::GetNodeValueDouble(textProperties, <span class="stringliteral">&quot;Direction&quot;</span>));</div>
 <div class="line"><span class="lineno"> 1209</span>    SetDecimalPlaces(XMLParser::GetNodeValueDouble(textProperties, <span class="stringliteral">&quot;DecimalPlaces&quot;</span>));</div>
 <div class="line"><span class="lineno"> 1210</span>    SetElementNumber(XMLParser::GetNodeValueInt(textProperties, <span class="stringliteral">&quot;ElementNumber&quot;</span>));</div>
 <div class="line"><span class="lineno"> 1211</span>    <a class="code hl_function" href="class_element.html#afe66b6b0104f3f54f402a3387ff61b38">SetInserted</a>();</div>
 <div class="line"><span class="lineno"> 1212</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno"> 1213</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a></div><div class="ttdeci">ElectricalUnit</div><div class="ttdoc">Electrical units.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
-<div class="ttc" id="aclass_element_html_afe66b6b0104f3f54f402a3387ff61b38"><div class="ttname"><a href="class_element.html#afe66b6b0104f3f54f402a3387ff61b38">Element::SetInserted</a></div><div class="ttdeci">void SetInserted(bool inserted=true)</div><div class="ttdoc">Set if the element is properly inserted in the workspace.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00631">Element.h:631</a></div></div>
+<div class="ttc" id="aclass_element_html_afe66b6b0104f3f54f402a3387ff61b38"><div class="ttname"><a href="class_element.html#afe66b6b0104f3f54f402a3387ff61b38">Element::SetInserted</a></div><div class="ttdeci">void SetInserted(bool inserted=true)</div><div class="ttdoc">Set if the element is properly inserted in the workspace.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00634">Element.h:634</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1786,7 +1794,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void Text::SetUnit </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a>&#160;</td>
+          <td class="paramtype">const ElectricalUnit&#160;</td>
           <td class="paramname"><em>unit</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1884,7 +1892,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  292</span>        <span class="keywordflow">if</span> (bus) {</div>
 <div class="line"><span class="lineno">  293</span>            <a class="code hl_struct" href="struct_bus_electrical_data.html">BusElectricalData</a> data = bus-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  294</span>            <span class="keywordtype">double</span> baseVoltage = data.nominalVoltage;</div>
-<div class="line"><span class="lineno">  295</span>            <span class="keywordflow">if</span> (data.nominalVoltageUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>) baseVoltage *= 1e3;</div>
+<div class="line"><span class="lineno">  295</span>            <span class="keywordflow">if</span> (data.nominalVoltageUnit == ElectricalUnit::UNIT_kV) baseVoltage *= 1e3;</div>
 <div class="line"><span class="lineno">  296</span>            <span class="keywordtype">double</span> baseCurrent = systemPowerBase / (std::sqrt(3.0) * baseVoltage);</div>
 <div class="line"><span class="lineno">  297</span> </div>
 <div class="line"><span class="lineno">  298</span>            <span class="keywordflow">switch</span> (m_dataType) {</div>
@@ -1894,13 +1902,13 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  302</span>            <span class="keywordflow">case</span> DATA_VOLTAGE: {</div>
 <div class="line"><span class="lineno">  303</span>                <span class="keywordtype">double</span> voltage = std::abs(data.voltage);</div>
 <div class="line"><span class="lineno">  304</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  305</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  305</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  306</span>                    SetText(wxString::FromDouble(voltage, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  307</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  308</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a>: {</div>
+<div class="line"><span class="lineno">  308</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_V: {</div>
 <div class="line"><span class="lineno">  309</span>                    SetText(wxString::FromDouble(voltage * baseVoltage, m_decimalPlaces) + <span class="stringliteral">&quot; V&quot;</span>);</div>
 <div class="line"><span class="lineno">  310</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  311</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>: {</div>
+<div class="line"><span class="lineno">  311</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kV: {</div>
 <div class="line"><span class="lineno">  312</span>                    SetText(wxString::FromDouble(voltage * baseVoltage / 1e3, m_decimalPlaces) + <span class="stringliteral">&quot; kV&quot;</span>);</div>
 <div class="line"><span class="lineno">  313</span>                } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  314</span>                <span class="keywordflow">default</span>:</div>
@@ -1910,10 +1918,10 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  318</span>            <span class="keywordflow">case</span> DATA_ANGLE: {</div>
 <div class="line"><span class="lineno">  319</span>                <span class="keywordtype">double</span> angle = std::arg(data.voltage);</div>
 <div class="line"><span class="lineno">  320</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  321</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4">ElectricalUnit::UNIT_RADIAN</a>: {</div>
+<div class="line"><span class="lineno">  321</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_RADIAN: {</div>
 <div class="line"><span class="lineno">  322</span>                    SetText(wxString::FromDouble(angle, m_decimalPlaces) + <span class="stringliteral">&quot; rad&quot;</span>);</div>
 <div class="line"><span class="lineno">  323</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  324</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282">ElectricalUnit::UNIT_DEGREE</a>: {</div>
+<div class="line"><span class="lineno">  324</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_DEGREE: {</div>
 <div class="line"><span class="lineno">  325</span>                    SetText(wxString::FromDouble(wxRadToDeg(angle), m_decimalPlaces) + (wxString)L<span class="stringliteral">&#39;\u00B0&#39;</span>);</div>
 <div class="line"><span class="lineno">  326</span>                } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  327</span>                <span class="keywordflow">default</span>:</div>
@@ -1924,14 +1932,14 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  332</span>                <span class="keywordtype">double</span> faultCurrent[3] = { std::abs(data.faultCurrent[0]), std::abs(data.faultCurrent[1]),</div>
 <div class="line"><span class="lineno">  333</span>                                          std::abs(data.faultCurrent[2]) };</div>
 <div class="line"><span class="lineno">  334</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  335</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  335</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  336</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  337</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> + wxString::FromDouble(faultCurrent[0], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  338</span>                    str += <span class="stringliteral">&quot;\nIb = &quot;</span> + wxString::FromDouble(faultCurrent[1], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  339</span>                    str += <span class="stringliteral">&quot;\nIc = &quot;</span> + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  340</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  341</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  342</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  342</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  343</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  344</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> + wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  345</span>                        <span class="stringliteral">&quot; A&quot;</span>;</div>
@@ -1941,7 +1949,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  349</span>                        wxString::FromDouble(faultCurrent[2] * baseCurrent, m_decimalPlaces) + <span class="stringliteral">&quot; A&quot;</span>;</div>
 <div class="line"><span class="lineno">  350</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  351</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  352</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  352</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  353</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  354</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> +</div>
 <div class="line"><span class="lineno">  355</span>                        wxString::FromDouble(faultCurrent[0] * baseCurrent / 1e3, m_decimalPlaces) + <span class="stringliteral">&quot; kA&quot;</span>;</div>
@@ -1961,14 +1969,14 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  369</span>                <span class="keywordtype">double</span> faultVoltage[3] = { std::abs(data.faultVoltage[0]), std::abs(data.faultVoltage[1]),</div>
 <div class="line"><span class="lineno">  370</span>                                          std::abs(data.faultVoltage[2]) };</div>
 <div class="line"><span class="lineno">  371</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  372</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  372</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  373</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  374</span>                        <span class="stringliteral">&quot;Va = &quot;</span> + wxString::FromDouble(faultVoltage[0], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  375</span>                    str += <span class="stringliteral">&quot;\nVb = &quot;</span> + wxString::FromDouble(faultVoltage[1], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  376</span>                    str += <span class="stringliteral">&quot;\nVc = &quot;</span> + wxString::FromDouble(faultVoltage[2], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  377</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  378</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  379</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a>: {</div>
+<div class="line"><span class="lineno">  379</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_V: {</div>
 <div class="line"><span class="lineno">  380</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  381</span>                        <span class="stringliteral">&quot;Va = &quot;</span> + wxString::FromDouble(faultVoltage[0] * baseVoltage, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  382</span>                        <span class="stringliteral">&quot; V&quot;</span>;</div>
@@ -1978,7 +1986,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  386</span>                        wxString::FromDouble(faultVoltage[2] * baseVoltage, m_decimalPlaces) + <span class="stringliteral">&quot; V&quot;</span>;</div>
 <div class="line"><span class="lineno">  387</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  388</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  389</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>: {</div>
+<div class="line"><span class="lineno">  389</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kV: {</div>
 <div class="line"><span class="lineno">  390</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  391</span>                        <span class="stringliteral">&quot;Va = &quot;</span> +</div>
 <div class="line"><span class="lineno">  392</span>                        wxString::FromDouble(faultVoltage[0] * baseVoltage / 1e3, m_decimalPlaces) + <span class="stringliteral">&quot; kV&quot;</span>;</div>
@@ -1998,17 +2006,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  406</span>                <span class="keywordtype">double</span> scPower = data.scPower;</div>
 <div class="line"><span class="lineno">  407</span>                <span class="keywordflow">if</span> (!data.isConnected) scPower = 0.0;</div>
 <div class="line"><span class="lineno">  408</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  409</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  409</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  410</span>                    SetText(wxString::FromDouble(scPower, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  411</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  412</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>: {</div>
+<div class="line"><span class="lineno">  412</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_VA: {</div>
 <div class="line"><span class="lineno">  413</span>                    SetText(wxString::FromDouble(scPower * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; VA&quot;</span>);</div>
 <div class="line"><span class="lineno">  414</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  415</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>: {</div>
+<div class="line"><span class="lineno">  415</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kVA: {</div>
 <div class="line"><span class="lineno">  416</span>                    SetText(wxString::FromDouble(scPower * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  417</span>                        <span class="stringliteral">&quot; kVA&quot;</span>);</div>
 <div class="line"><span class="lineno">  418</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  419</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a>: {</div>
+<div class="line"><span class="lineno">  419</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MVA: {</div>
 <div class="line"><span class="lineno">  420</span>                    SetText(wxString::FromDouble(scPower * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  421</span>                        <span class="stringliteral">&quot; MVA&quot;</span>);</div>
 <div class="line"><span class="lineno">  422</span>                } <span class="keywordflow">break</span>;</div>
@@ -2044,17 +2052,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  452</span>                <span class="keywordtype">double</span> activePower = data.activePower;</div>
 <div class="line"><span class="lineno">  453</span>                <span class="keywordflow">if</span> (!syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) activePower = 0.0;</div>
 <div class="line"><span class="lineno">  454</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  455</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  455</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  456</span>                    SetText(wxString::FromDouble(activePower, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  457</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  458</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  458</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  459</span>                    SetText(wxString::FromDouble(activePower * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno">  460</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  461</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  461</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  462</span>                    SetText(wxString::FromDouble(activePower * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  463</span>                        <span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno">  464</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  465</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  465</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  466</span>                    SetText(wxString::FromDouble(activePower * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  467</span>                        <span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno">  468</span>                } <span class="keywordflow">break</span>;</div>
@@ -2066,18 +2074,18 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  474</span>                <span class="keywordtype">double</span> reactivePower = data.reactivePower;</div>
 <div class="line"><span class="lineno">  475</span>                <span class="keywordflow">if</span> (!syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) reactivePower = 0.0;</div>
 <div class="line"><span class="lineno">  476</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  477</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  477</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  478</span>                    SetText(wxString::FromDouble(reactivePower, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  479</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  480</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  480</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  481</span>                    SetText(wxString::FromDouble(reactivePower * systemPowerBase, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  482</span>                        <span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno">  483</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  484</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  484</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  485</span>                    SetText(wxString::FromDouble(reactivePower * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  486</span>                        <span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  487</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  488</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  488</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  489</span>                    SetText(wxString::FromDouble(reactivePower * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  490</span>                        <span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  491</span>                } <span class="keywordflow">break</span>;</div>
@@ -2089,14 +2097,14 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  497</span>                <span class="keywordtype">double</span> faultCurrent[3] = { std::abs(data.faultCurrent[0]), std::abs(data.faultCurrent[1]),</div>
 <div class="line"><span class="lineno">  498</span>                                          std::abs(data.faultCurrent[2]) };</div>
 <div class="line"><span class="lineno">  499</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  500</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  500</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  501</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  502</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> + wxString::FromDouble(faultCurrent[0], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  503</span>                    str += <span class="stringliteral">&quot;\nIb = &quot;</span> + wxString::FromDouble(faultCurrent[1], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  504</span>                    str += <span class="stringliteral">&quot;\nIc = &quot;</span> + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  505</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  506</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  507</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  507</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  508</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  509</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> + wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  510</span>                        <span class="stringliteral">&quot; A&quot;</span>;</div>
@@ -2106,7 +2114,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  514</span>                        wxString::FromDouble(faultCurrent[2] * baseCurrent, m_decimalPlaces) + <span class="stringliteral">&quot; A&quot;</span>;</div>
 <div class="line"><span class="lineno">  515</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  516</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  517</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  517</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  518</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  519</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> +</div>
 <div class="line"><span class="lineno">  520</span>                        wxString::FromDouble(faultCurrent[0] * baseCurrent / 1e3, m_decimalPlaces) + <span class="stringliteral">&quot; kA&quot;</span>;</div>
@@ -2132,7 +2140,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  540</span>        <span class="keywordflow">if</span> (line) {</div>
 <div class="line"><span class="lineno">  541</span>            <a class="code hl_struct" href="struct_line_electrical_data.html">LineElectricalData</a> data = line-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  542</span>            <span class="keywordtype">double</span> baseVoltage = data.nominalVoltage;</div>
-<div class="line"><span class="lineno">  543</span>            <span class="keywordflow">if</span> (data.nominalVoltageUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>) baseVoltage *= 1e3;</div>
+<div class="line"><span class="lineno">  543</span>            <span class="keywordflow">if</span> (data.nominalVoltageUnit == ElectricalUnit::UNIT_kV) baseVoltage *= 1e3;</div>
 <div class="line"><span class="lineno">  544</span>            <span class="keywordtype">double</span> baseCurrent = systemPowerBase / (std::sqrt(3.0) * baseVoltage);</div>
 <div class="line"><span class="lineno">  545</span>            <span class="keywordtype">bool</span> busParentOnline = <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  546</span>            <span class="keyword">auto</span> parentList = line-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>();</div>
@@ -2152,17 +2160,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  560</span>                <span class="keywordtype">double</span> activePF = std::real(data.powerFlow[m_direction]);</div>
 <div class="line"><span class="lineno">  561</span>                <span class="keywordflow">if</span> (!line-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) activePF = 0.0;</div>
 <div class="line"><span class="lineno">  562</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  563</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  563</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  564</span>                    SetText(wxString::FromDouble(activePF, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  565</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  566</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  566</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  567</span>                    SetText(wxString::FromDouble(activePF * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno">  568</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  569</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  569</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  570</span>                    SetText(wxString::FromDouble(activePF * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  571</span>                        <span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno">  572</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  573</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  573</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  574</span>                    SetText(wxString::FromDouble(activePF * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  575</span>                        <span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno">  576</span>                } <span class="keywordflow">break</span>;</div>
@@ -2174,17 +2182,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  582</span>                <span class="keywordtype">double</span> reactivePF = std::imag(data.powerFlow[m_direction]);</div>
 <div class="line"><span class="lineno">  583</span>                <span class="keywordflow">if</span> (!line-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) reactivePF = 0.0;</div>
 <div class="line"><span class="lineno">  584</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  585</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  585</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  586</span>                    SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  587</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  588</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  588</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  589</span>                    SetText(wxString::FromDouble(reactivePF * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno">  590</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  591</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  591</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  592</span>                    SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  593</span>                        <span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  594</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  595</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  595</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  596</span>                    SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  597</span>                        <span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  598</span>                } <span class="keywordflow">break</span>;</div>
@@ -2196,16 +2204,16 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  604</span>                <span class="keywordtype">double</span> losses = std::abs(std::real(data.powerFlow[0]) + std::real(data.powerFlow[1]));</div>
 <div class="line"><span class="lineno">  605</span>                <span class="keywordflow">if</span> (!line-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) losses = 0.0;</div>
 <div class="line"><span class="lineno">  606</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  607</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  607</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  608</span>                    SetText(wxString::FromDouble(losses, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  609</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  610</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  610</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  611</span>                    SetText(wxString::FromDouble(losses * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno">  612</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  613</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  613</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  614</span>                    SetText(wxString::FromDouble(losses * systemPowerBase / 1e3, m_decimalPlaces) + <span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno">  615</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  616</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  616</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  617</span>                    SetText(wxString::FromDouble(losses * systemPowerBase / 1e6, m_decimalPlaces) + <span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno">  618</span>                } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  619</span>                <span class="keywordflow">default</span>:</div>
@@ -2216,13 +2224,13 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  624</span>                <span class="keywordtype">double</span> current = std::abs(data.current[m_direction]);</div>
 <div class="line"><span class="lineno">  625</span>                <span class="keywordflow">if</span> (!line-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) current = 0.0;</div>
 <div class="line"><span class="lineno">  626</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  627</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  627</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  628</span>                    SetText(wxString::FromDouble(current, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  629</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  630</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  630</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  631</span>                    SetText(wxString::FromDouble(current * baseCurrent, m_decimalPlaces) + <span class="stringliteral">&quot; A&quot;</span>);</div>
 <div class="line"><span class="lineno">  632</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  633</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  633</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  634</span>                    SetText(wxString::FromDouble(current * baseCurrent / 1e3, m_decimalPlaces) + <span class="stringliteral">&quot; kA&quot;</span>);</div>
 <div class="line"><span class="lineno">  635</span>                } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  636</span>                <span class="keywordflow">default</span>:</div>
@@ -2235,14 +2243,14 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  643</span>                                          std::abs(data.faultCurrent[m_direction][2]) };</div>
 <div class="line"><span class="lineno">  644</span>                <span class="keywordflow">if</span> (!line-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) faultCurrent[0] = faultCurrent[1] = faultCurrent[2] = 0.0;</div>
 <div class="line"><span class="lineno">  645</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  646</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  646</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  647</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  648</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> + wxString::FromDouble(faultCurrent[0], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  649</span>                    str += <span class="stringliteral">&quot;\nIb = &quot;</span> + wxString::FromDouble(faultCurrent[1], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  650</span>                    str += <span class="stringliteral">&quot;\nIc = &quot;</span> + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  651</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  652</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  653</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  653</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  654</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  655</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> + wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  656</span>                        <span class="stringliteral">&quot; A&quot;</span>;</div>
@@ -2252,7 +2260,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  660</span>                        wxString::FromDouble(faultCurrent[2] * baseCurrent, m_decimalPlaces) + <span class="stringliteral">&quot; A&quot;</span>;</div>
 <div class="line"><span class="lineno">  661</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  662</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  663</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  663</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  664</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  665</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> +</div>
 <div class="line"><span class="lineno">  666</span>                        wxString::FromDouble(faultCurrent[0] * baseCurrent / 1e3, m_decimalPlaces) + <span class="stringliteral">&quot; kA&quot;</span>;</div>
@@ -2289,8 +2297,8 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  697</span>                }</div>
 <div class="line"><span class="lineno">  698</span>            }</div>
 <div class="line"><span class="lineno">  699</span> </div>
-<div class="line"><span class="lineno">  700</span>            <span class="keywordflow">if</span> (data.primaryNominalVoltageUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>) baseVoltage[0] *= 1e3;</div>
-<div class="line"><span class="lineno">  701</span>            <span class="keywordflow">if</span> (data.secondaryNominalVoltageUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>) baseVoltage[1] *= 1e3;</div>
+<div class="line"><span class="lineno">  700</span>            <span class="keywordflow">if</span> (data.primaryNominalVoltageUnit == ElectricalUnit::UNIT_kV) baseVoltage[0] *= 1e3;</div>
+<div class="line"><span class="lineno">  701</span>            <span class="keywordflow">if</span> (data.secondaryNominalVoltageUnit == ElectricalUnit::UNIT_kV) baseVoltage[1] *= 1e3;</div>
 <div class="line"><span class="lineno">  702</span> </div>
 <div class="line"><span class="lineno">  703</span>            <span class="keywordtype">double</span> baseCurrent[2] = { systemPowerBase / (std::sqrt(3.0) * baseVoltage[0]),</div>
 <div class="line"><span class="lineno">  704</span>                                     systemPowerBase / (std::sqrt(3.0) * baseVoltage[1]) };</div>
@@ -2302,17 +2310,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  710</span>                <span class="keywordtype">double</span> activePF = std::real(data.powerFlow[m_direction]);</div>
 <div class="line"><span class="lineno">  711</span>                <span class="keywordflow">if</span> (!transformer-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) activePF = 0.0;</div>
 <div class="line"><span class="lineno">  712</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  713</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  713</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  714</span>                    SetText(wxString::FromDouble(activePF, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  715</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  716</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  716</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  717</span>                    SetText(wxString::FromDouble(activePF * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno">  718</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  719</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  719</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  720</span>                    SetText(wxString::FromDouble(activePF * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  721</span>                        <span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno">  722</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  723</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  723</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  724</span>                    SetText(wxString::FromDouble(activePF * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  725</span>                        <span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno">  726</span>                } <span class="keywordflow">break</span>;</div>
@@ -2324,17 +2332,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  732</span>                <span class="keywordtype">double</span> reactivePF = std::imag(data.powerFlow[m_direction]);</div>
 <div class="line"><span class="lineno">  733</span>                <span class="keywordflow">if</span> (!transformer-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) reactivePF = 0.0;</div>
 <div class="line"><span class="lineno">  734</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  735</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  735</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  736</span>                    SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  737</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  738</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  738</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  739</span>                    SetText(wxString::FromDouble(reactivePF * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno">  740</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  741</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  741</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  742</span>                    SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  743</span>                        <span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  744</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  745</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  745</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  746</span>                    SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  747</span>                        <span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  748</span>                } <span class="keywordflow">break</span>;</div>
@@ -2346,16 +2354,16 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  754</span>                <span class="keywordtype">double</span> losses = std::abs(std::real(data.powerFlow[0]) + std::real(data.powerFlow[1]));</div>
 <div class="line"><span class="lineno">  755</span>                <span class="keywordflow">if</span> (!transformer-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) losses = 0.0;</div>
 <div class="line"><span class="lineno">  756</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  757</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  757</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  758</span>                    SetText(wxString::FromDouble(losses, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  759</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  760</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  760</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  761</span>                    SetText(wxString::FromDouble(losses * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno">  762</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  763</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  763</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  764</span>                    SetText(wxString::FromDouble(losses * systemPowerBase / 1e3, m_decimalPlaces) + <span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno">  765</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  766</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  766</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  767</span>                    SetText(wxString::FromDouble(losses * systemPowerBase / 1e6, m_decimalPlaces) + <span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno">  768</span>                } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  769</span>                <span class="keywordflow">default</span>:</div>
@@ -2366,14 +2374,14 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  774</span>                <span class="keywordtype">double</span> current = std::abs(data.current[m_direction]);</div>
 <div class="line"><span class="lineno">  775</span>                <span class="keywordflow">if</span> (!transformer-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() || !busParentOnline) current = 0.0;</div>
 <div class="line"><span class="lineno">  776</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  777</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  777</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  778</span>                    SetText(wxString::FromDouble(current, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  779</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  780</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  780</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  781</span>                    SetText(wxString::FromDouble(current * baseCurrent[m_direction], m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  782</span>                        <span class="stringliteral">&quot; A&quot;</span>);</div>
 <div class="line"><span class="lineno">  783</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  784</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  784</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  785</span>                    SetText(</div>
 <div class="line"><span class="lineno">  786</span>                        wxString::FromDouble(current * baseCurrent[m_direction] / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  787</span>                        <span class="stringliteral">&quot; kA&quot;</span>);</div>
@@ -2388,14 +2396,14 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  796</span>                                          std::abs(data.faultCurrent[m_direction][2]) };</div>
 <div class="line"><span class="lineno">  797</span>                <span class="keywordflow">if</span> (!transformer-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) faultCurrent[0] = faultCurrent[1] = faultCurrent[2] = 0.0;</div>
 <div class="line"><span class="lineno">  798</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  799</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  799</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  800</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  801</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> + wxString::FromDouble(faultCurrent[0], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  802</span>                    str += <span class="stringliteral">&quot;\nIb = &quot;</span> + wxString::FromDouble(faultCurrent[1], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  803</span>                    str += <span class="stringliteral">&quot;\nIc = &quot;</span> + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>;</div>
 <div class="line"><span class="lineno">  804</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  805</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  806</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>: {</div>
+<div class="line"><span class="lineno">  806</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_A: {</div>
 <div class="line"><span class="lineno">  807</span>                    wxString str =</div>
 <div class="line"><span class="lineno">  808</span>                        <span class="stringliteral">&quot;Ia = &quot;</span> +</div>
 <div class="line"><span class="lineno">  809</span>                        wxString::FromDouble(faultCurrent[0] * baseCurrent[m_direction], m_decimalPlaces) +</div>
@@ -2410,7 +2418,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  818</span>                        <span class="stringliteral">&quot; A&quot;</span>;</div>
 <div class="line"><span class="lineno">  819</span>                    SetText(str);</div>
 <div class="line"><span class="lineno">  820</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  821</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a>: {</div>
+<div class="line"><span class="lineno">  821</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kA: {</div>
 <div class="line"><span class="lineno">  822</span>                    wxString str = <span class="stringliteral">&quot;Ia = &quot;</span> +</div>
 <div class="line"><span class="lineno">  823</span>                        wxString::FromDouble(faultCurrent[0] * baseCurrent[m_direction] / 1e3,</div>
 <div class="line"><span class="lineno">  824</span>                            m_decimalPlaces) +</div>
@@ -2458,17 +2466,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  866</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  867</span>            <span class="keywordflow">case</span> DATA_ACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  868</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  869</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  869</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  870</span>                    SetText(wxString::FromDouble(sPower.real(), m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  871</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  872</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  872</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  873</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno">  874</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  875</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  875</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  876</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  877</span>                        <span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno">  878</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  879</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  879</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  880</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  881</span>                        <span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno">  882</span>                } <span class="keywordflow">break</span>;</div>
@@ -2478,18 +2486,18 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  886</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  887</span>            <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  888</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  889</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  889</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  890</span>                    SetText(wxString::FromDouble(sPower.imag(), m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  891</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  892</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  892</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  893</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  894</span>                        <span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno">  895</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  896</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  896</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  897</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  898</span>                        <span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  899</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  900</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  900</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  901</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  902</span>                        <span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  903</span>                } <span class="keywordflow">break</span>;</div>
@@ -2522,17 +2530,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  930</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  931</span>            <span class="keywordflow">case</span> DATA_ACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  932</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  933</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  933</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  934</span>                    SetText(wxString::FromDouble(sPower.real(), m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  935</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  936</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  936</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  937</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno">  938</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  939</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  939</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  940</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  941</span>                        <span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno">  942</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  943</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  943</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  944</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  945</span>                        <span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno">  946</span>                } <span class="keywordflow">break</span>;</div>
@@ -2542,18 +2550,18 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  950</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  951</span>            <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  952</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  953</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  953</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  954</span>                    SetText(wxString::FromDouble(sPower.imag(), m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  955</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  956</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  956</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  957</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  958</span>                        <span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno">  959</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  960</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  960</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  961</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  962</span>                        <span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  963</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  964</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  964</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  965</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno">  966</span>                        <span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  967</span>                } <span class="keywordflow">break</span>;</div>
@@ -2585,17 +2593,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  993</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  994</span>            <span class="keywordflow">case</span> DATA_ACTIVE_POWER: {</div>
 <div class="line"><span class="lineno">  995</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno">  996</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  996</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  997</span>                    SetText(wxString::FromDouble(sPower.real(), m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  998</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  999</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  999</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno"> 1000</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1001</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1002</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno"> 1002</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno"> 1003</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1004</span>                        <span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1005</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1006</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno"> 1006</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno"> 1007</span>                    SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1008</span>                        <span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1009</span>                } <span class="keywordflow">break</span>;</div>
@@ -2605,18 +2613,18 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno"> 1013</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1014</span>            <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno"> 1015</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno"> 1016</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno"> 1016</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno"> 1017</span>                    SetText(wxString::FromDouble(sPower.imag(), m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1018</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1019</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno"> 1019</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno"> 1020</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1021</span>                        <span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1022</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1023</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno"> 1023</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno"> 1024</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1025</span>                        <span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1026</span>                } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1027</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno"> 1027</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno"> 1028</span>                    SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1029</span>                        <span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1030</span>                }<span class="keywordflow">break</span>;</div>
@@ -2656,17 +2664,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno"> 1064</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1065</span>            <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno"> 1066</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno"> 1067</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno"> 1067</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno"> 1068</span>                    SetText(wxString::FromDouble(reativePower, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1069</span>                }<span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1070</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno"> 1070</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno"> 1071</span>                    SetText(wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1072</span>                }<span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1073</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno"> 1073</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno"> 1074</span>                    SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1075</span>                        <span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1076</span>                }<span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1077</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno"> 1077</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno"> 1078</span>                    SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1079</span>                        <span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1080</span>                }<span class="keywordflow">break</span>;</div>
@@ -2706,17 +2714,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno"> 1114</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1115</span>            <span class="keywordflow">case</span> DATA_REACTIVE_POWER: {</div>
 <div class="line"><span class="lineno"> 1116</span>                <span class="keywordflow">switch</span> (m_unit) {</div>
-<div class="line"><span class="lineno"> 1117</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno"> 1117</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno"> 1118</span>                    SetText(wxString::FromDouble(reativePower, m_decimalPlaces) + <span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1119</span>                }<span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1120</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno"> 1120</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno"> 1121</span>                    SetText(wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + <span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1122</span>                }<span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1123</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno"> 1123</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno"> 1124</span>                    SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e3, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1125</span>                        <span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1126</span>                }<span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1127</span>                <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno"> 1127</span>                <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno"> 1128</span>                    SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e6, m_decimalPlaces) +</div>
 <div class="line"><span class="lineno"> 1129</span>                        <span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno"> 1130</span>                } <span class="keywordflow">break</span>;</div>
@@ -2744,26 +2752,10 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno"> 1152</span>    } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1153</span>    }</div>
 <div class="line"><span class="lineno"> 1154</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a></div><div class="ttdeci">@ UNIT_Mvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a></div><div class="ttdeci">@ UNIT_VA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a></div><div class="ttdeci">@ UNIT_var</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a></div><div class="ttdeci">@ UNIT_kW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a></div><div class="ttdeci">@ UNIT_MVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a></div><div class="ttdeci">@ UNIT_kVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a></div><div class="ttdeci">@ UNIT_kV</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a></div><div class="ttdeci">@ UNIT_W</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282">ElectricalUnit::UNIT_DEGREE</a></div><div class="ttdeci">@ UNIT_DEGREE</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a></div><div class="ttdeci">@ UNIT_kA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a></div><div class="ttdeci">@ UNIT_A</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4">ElectricalUnit::UNIT_RADIAN</a></div><div class="ttdeci">@ UNIT_RADIAN</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a></div><div class="ttdeci">@ UNIT_MW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a></div><div class="ttdeci">@ UNIT_V</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a></div><div class="ttdeci">@ UNIT_kvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
 <div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
 <div class="ttc" id="aclass_capacitor_html"><div class="ttname"><a href="class_capacitor.html">Capacitor</a></div><div class="ttdoc">Shunt capactior power element.</div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00038">Capacitor.h:39</a></div></div>
-<div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00559">Element.h:559</a></div></div>
-<div class="ttc" id="aclass_element_html_a57c84a8e6eb80f0fea6e23cdd439d5aa"><div class="ttname"><a href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">Element::IsOnline</a></div><div class="ttdeci">bool IsOnline() const</div><div class="ttdoc">Checks if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00226">Element.h:226</a></div></div>
+<div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00562">Element.h:562</a></div></div>
+<div class="ttc" id="aclass_element_html_a57c84a8e6eb80f0fea6e23cdd439d5aa"><div class="ttname"><a href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">Element::IsOnline</a></div><div class="ttdeci">bool IsOnline() const</div><div class="ttdoc">Checks if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00228">Element.h:228</a></div></div>
 <div class="ttc" id="aclass_harm_current_html"><div class="ttname"><a href="class_harm_current.html">HarmCurrent</a></div><div class="ttdoc">Shunt Harmonic Corrent Source.</div><div class="ttdef"><b>Definition</b> <a href="_harm_current_8h_source.html#l00023">HarmCurrent.h:24</a></div></div>
 <div class="ttc" id="aclass_ind_motor_html"><div class="ttname"><a href="class_ind_motor.html">IndMotor</a></div><div class="ttdoc">Induction motor power element.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00118">IndMotor.h:119</a></div></div>
 <div class="ttc" id="aclass_inductor_html"><div class="ttname"><a href="class_inductor.html">Inductor</a></div><div class="ttdoc">Inductor shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00038">Inductor.h:39</a></div></div>
@@ -3107,7 +3099,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> Text::m_unit</td>
+          <td class="memname">ElectricalUnit Text::m_unit</td>
         </tr>
       </table>
   </td>

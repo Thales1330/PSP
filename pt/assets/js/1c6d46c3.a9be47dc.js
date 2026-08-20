@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkpsp_ufu=globalThis.webpackChunkpsp_ufu||[]).push([[6617],{4574(p){p.exports=JSON.parse('{"metadata":{"permalink":"/PSP/pt/blog/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":11,"previousPage":"/PSP/pt/blog","blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

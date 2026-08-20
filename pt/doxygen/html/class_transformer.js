@@ -2,8 +2,8 @@ var class_transformer =
 [
     [ "AddParent", "class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6", null ],
     [ "Contains", "class_transformer.html#a327ff3cf9194c18049e4feac6761ebc0", null ],
-    [ "DrawDC", "class_transformer.html#aca87f3ff72aae2f4657d431140015b0f", null ],
-    [ "DrawDC", "class_transformer.html#aa3bef2ffe2f57b1943b621d9052d1458", null ],
+    [ "DrawDC", "class_transformer.html#ae0c0875b54171924b7c2b61fd0ae1674", null ],
+    [ "DrawDC", "class_transformer.html#a1fa6bf2898e581a4745e996e3d0b2d49", null ],
     [ "GetContextMenu", "class_transformer.html#adfe51a2198cfc10e1095af9c034681bd", null ],
     [ "GetCopy", "class_transformer.html#a286bcc94f7202a6ff81b66707424a9bd", null ],
     [ "GetTipText", "class_transformer.html#a169064f996341f8f8b6881c6a3909f0b", null ],

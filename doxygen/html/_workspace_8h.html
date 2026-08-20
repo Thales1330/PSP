@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -128,6 +127,8 @@ $(document).ready(function(){initNavTree('_workspace_8h.html',''); initResizable
 <code>#include &quot;WorkspaceBase.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_bus_8h_source.html">../elements/powerElement/Bus.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_control_editor_manager_8h_source.html">ControlEditorManager.h</a>&quot;</code><br />
+<code>#include &quot;ChartWindowManager.h&quot;</code><br />
 </div>
 <p><a href="_workspace_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -173,23 +174,23 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_workspace_8h_source.html#l00077">77</a> of file <a class="el" href="_workspace_8h_source.html">Workspace.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   77</span>               {</div>
-<div class="line"><span class="lineno">   78</span>    ID_BUS = 0,</div>
-<div class="line"><span class="lineno">   79</span>    ID_LINE,</div>
-<div class="line"><span class="lineno">   80</span>    ID_TRANSFORMER,</div>
-<div class="line"><span class="lineno">   81</span>    ID_SYNCGENERATOR,</div>
-<div class="line"><span class="lineno">   82</span>    ID_INDMOTOR,</div>
-<div class="line"><span class="lineno">   83</span>    ID_SYNCMOTOR,</div>
-<div class="line"><span class="lineno">   84</span>    ID_LOAD,</div>
-<div class="line"><span class="lineno">   85</span>    ID_CAPACITOR,</div>
-<div class="line"><span class="lineno">   86</span>    ID_INDUCTOR,</div>
-<div class="line"><span class="lineno">   87</span>    ID_HARMCURRENT,</div>
-<div class="line"><span class="lineno">   88</span>    ID_EMTELEMENT,</div>
-<div class="line"><span class="lineno">   89</span>    ID_TEXT,</div>
-<div class="line"><span class="lineno">   90</span> </div>
-<div class="line"><span class="lineno">   91</span>    NUM_ELEMENTS</div>
-<div class="line"><span class="lineno">   92</span>};</div>
+<p class="definition">Definition at line <a class="el" href="_workspace_8h_source.html#l00079">79</a> of file <a class="el" href="_workspace_8h_source.html">Workspace.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>               {</div>
+<div class="line"><span class="lineno">   80</span>    ID_BUS = 0,</div>
+<div class="line"><span class="lineno">   81</span>    ID_LINE,</div>
+<div class="line"><span class="lineno">   82</span>    ID_TRANSFORMER,</div>
+<div class="line"><span class="lineno">   83</span>    ID_SYNCGENERATOR,</div>
+<div class="line"><span class="lineno">   84</span>    ID_INDMOTOR,</div>
+<div class="line"><span class="lineno">   85</span>    ID_SYNCMOTOR,</div>
+<div class="line"><span class="lineno">   86</span>    ID_LOAD,</div>
+<div class="line"><span class="lineno">   87</span>    ID_CAPACITOR,</div>
+<div class="line"><span class="lineno">   88</span>    ID_INDUCTOR,</div>
+<div class="line"><span class="lineno">   89</span>    ID_HARMCURRENT,</div>
+<div class="line"><span class="lineno">   90</span>    ID_EMTELEMENT,</div>
+<div class="line"><span class="lineno">   91</span>    ID_TEXT,</div>
+<div class="line"><span class="lineno">   92</span> </div>
+<div class="line"><span class="lineno">   93</span>    NUM_ELEMENTS</div>
+<div class="line"><span class="lineno">   94</span>};</div>
 </div><!-- fragment -->
 </div>
 </div>

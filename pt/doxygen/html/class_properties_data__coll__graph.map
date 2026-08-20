@@ -1,9 +1,11 @@
 <map id="PropertiesData" name="PropertiesData">
-<area shape="rect" id="Node000001" title="General and simulation data manager." alt="" coords="145,93,263,119"/>
-<area shape="rect" id="Node000002" href="$struct_simulation_data.html" title=" " alt="" coords="5,5,128,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,40,108,67,132,81,158,91,156,96,130,86,105,71,79,44"/>
-<area shape="rect" id="Node000003" href="$struct_general_data.html" title=" " alt="" coords="152,5,256,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,45,207,93,201,93,201,45"/>
-<area shape="rect" id="Node000004" href="$struct_freq_response_data.html" title=" " alt="" coords="280,5,424,31"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="331,42,291,72,239,96,236,91,288,67,328,38"/>
+<area shape="rect" id="Node000001" title="General and simulation data manager." alt="" coords="187,93,306,119"/>
+<area shape="rect" id="Node000002" href="$struct_g_u_i_colour.html" title=" " alt="" coords="5,5,93,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,40,80,55,96,67,141,86,188,97,187,102,140,91,93,72,76,59,63,43"/>
+<area shape="rect" id="Node000003" href="$struct_simulation_data.html" title=" " alt="" coords="117,5,240,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,43,197,68,210,81,225,91,222,96,206,85,192,71,181,45"/>
+<area shape="rect" id="Node000004" href="$struct_general_data.html" title=" " alt="" coords="264,5,368,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="307,44,289,71,264,95,260,91,285,68,302,41"/>
+<area shape="rect" id="Node000005" href="$struct_freq_response_data.html" title=" " alt="" coords="392,5,536,31"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="438,41,382,72,306,96,304,91,380,67,436,36"/>
 </map>

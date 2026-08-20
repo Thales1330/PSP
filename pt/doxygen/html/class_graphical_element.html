@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -115,7 +114,7 @@ $(document).ready(function(){initNavTree('class_graphical_element.html',''); ini
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract class for graphical elements shown with power elements in workspace.  
+<p>Abstract class for graphical elements shown with graphical elements in workspace.  
  <a href="class_graphical_element.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_graphical_element_8h_source.html">GraphicalElement.h</a>&gt;</code></p>
@@ -124,7 +123,7 @@ Inheritance diagram for GraphicalElement:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_graphical_element__inherit__graph.png" border="0" usemap="#a_graphical_element_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_graphical_element_inherit__map" id="a_graphical_element_inherit__map">
-<area shape="rect" title="Abstract class for graphical elements shown with power elements in workspace." alt="" coords="5,79,144,104"/>
+<area shape="rect" title="Abstract class for graphical elements shown with graphical elements in workspace." alt="" coords="5,79,144,104"/>
 <area shape="rect" href="class_text.html" title="Element that shows power element informations in workspace." alt="" coords="50,152,99,177"/>
 <area shape="poly" title=" " alt="" coords="77,118,77,152,72,152,72,118"/>
 <area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="37,5,113,31"/>
@@ -136,7 +135,7 @@ Collaboration diagram for GraphicalElement:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_graphical_element__coll__graph.png" border="0" usemap="#a_graphical_element_coll__map" alt="Collaboration graph"/></div>
 <map name="a_graphical_element_coll__map" id="a_graphical_element_coll__map">
-<area shape="rect" title="Abstract class for graphical elements shown with power elements in workspace." alt="" coords="5,79,144,104"/>
+<area shape="rect" title="Abstract class for graphical elements shown with graphical elements in workspace." alt="" coords="5,79,144,104"/>
 <area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="37,5,113,31"/>
 <area shape="poly" title=" " alt="" coords="77,44,77,79,72,79,72,44"/>
 </map>
@@ -249,12 +248,12 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element" id="r_aa79db7f54ba9754e953b5059a1d79486"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">GetTipText</a> () const</td></tr>
 <tr class="memdesc:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element" id="r_a6cca77f38afe3ade6d92294d0759427a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a6cca77f38afe3ade6d92294d0759427a">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
-<tr class="separator:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element" id="r_a44877d44d6e548c24f466913d118f61b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a44877d44d6e548c24f466913d118f61b">DrawDC</a> (wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
-<tr class="memdesc:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
-<tr class="separator:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element" id="r_a5ac0a5f9ca1299f06ed9979789340b70"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a5ac0a5f9ca1299f06ed9979789340b70">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
+<tr class="separator:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element" id="r_a8720b78213ff3a15b16e2f53a70c139c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a8720b78213ff3a15b16e2f53a70c139c">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
+<tr class="memdesc:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
+<tr class="separator:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afab568cea0a7074bb9984e94bd2ba52e inherit pub_methods_class_element" id="r_afab568cea0a7074bb9984e94bd2ba52e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Rotate</a> (bool clockwise=true)</td></tr>
 <tr class="memdesc:afab568cea0a7074bb9984e94bd2ba52e inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <br /></td></tr>
 <tr class="separator:afab568cea0a7074bb9984e94bd2ba52e inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -439,11 +438,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a5c1d43a226486a7a987bfb8c195ffac6 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element" id="r_a37ff451865d4852ffa8c54574a20cd0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a37ff451865d4852ffa8c54574a20cd0b">m_online</a> = true</td></tr>
 <tr class="separator:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element" id="r_a9692eec7ca16d6f81172788b4bf48072"><td class="memItemLeft" align="right" valign="top">wxColour&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9692eec7ca16d6f81172788b4bf48072">m_selectionColour</a></td></tr>
-<tr class="separator:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract class for graphical elements shown with power elements in workspace. </p>
+<div class="textblock"><p>Abstract class for graphical elements shown with graphical elements in workspace. </p>
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span class="obfuscator">.nosp@m.</span>s@uf<span class="obfuscator">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
 
@@ -468,7 +465,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   20</span>                                   : <a class="code hl_function" href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element</a>()</div>
 <div class="line"><span class="lineno">   21</span>{</div>
 <div class="line"><span class="lineno">   22</span>}</div>
-<div class="ttc" id="aclass_element_html_ab0d0e20be9a36ae676202db753faeec9"><div class="ttname"><a href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element::Element</a></div><div class="ttdeci">Element()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00027">Element.cpp:27</a></div></div>
+<div class="ttc" id="aclass_element_html_ab0d0e20be9a36ae676202db753faeec9"><div class="ttname"><a href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element::Element</a></div><div class="ttdeci">Element()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00028">Element.cpp:28</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

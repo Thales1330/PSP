@@ -2,11 +2,68 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://thales1330.github.io/PSP/blog</id>
     <title>PSP-UFU Blog</title>
-    <updated>2026-06-06T00:00:00.000Z</updated>
+    <updated>2026-08-20T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://thales1330.github.io/PSP/blog"/>
     <subtitle>PSP-UFU Blog</subtitle>
     <icon>https://thales1330.github.io/PSP/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[2026w54a-beta]]></title>
+        <id>https://thales1330.github.io/PSP/blog/2026/08/20/2026w34a-beta</id>
+        <link href="https://thales1330.github.io/PSP/blog/2026/08/20/2026w34a-beta"/>
+        <updated>2026-08-20T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[🔥 Major Changes]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-major-changes">🔥 Major Changes<a href="https://thales1330.github.io/PSP/blog/2026/08/20/2026w34a-beta#-major-changes" class="hash-link" aria-label="Direct link to 🔥 Major Changes" title="Direct link to 🔥 Major Changes" translate="no">​</a></h2>
+<ul>
+<li class="">Implemented the <strong>ATP-PSP Bridge</strong> for EMT simulations, enabling real-time data exchange between ATP and PSP;</li>
+<li class="">Added <strong>Linux/POSIX support</strong> for the ATP-PSP Bridge, enabling EMT co-simulation on Linux;</li>
+<li class="">Major refactoring of <strong>EMTElement</strong>, including ATP sample storage, FFT-based phasor and harmonic extraction, and optional median filtering;</li>
+<li class="">Added a new <strong>Control Editor workflow</strong> with copy/paste, undo/redo and automatic view fitting;</li>
+<li class="">Introduced a centralized <strong>ControlEditorManager</strong> for managing multiple control editor windows;</li>
+<li class="">Added unified <strong>Light and Dark UI themes</strong> across the application.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-new-features-and-improvements">✔️ New Features and Improvements<a href="https://thales1330.github.io/PSP/blog/2026/08/20/2026w34a-beta#%EF%B8%8F-new-features-and-improvements" class="hash-link" aria-label="Direct link to ✔️ New Features and Improvements" title="Direct link to ✔️ New Features and Improvements" translate="no">​</a></h2>
+<ul>
+<li class="">Added three-phase current sample visualization for EMT simulations;</li>
+<li class="">Added FFT and harmonic analysis to EMT data processing;</li>
+<li class="">Improved EMT phasor estimation and ATP data handling;</li>
+<li class="">Added dark-mode support to stability and graphical components;</li>
+<li class="">Improved Control Editor icons and rendering using actual control elements;</li>
+<li class="">Added clipboard support for copying and pasting control diagrams;</li>
+<li class="">Added undo/redo history and automatic graph fitting to the Control Editor;</li>
+<li class="">Improved Data Report handling for harmonic data;</li>
+<li class="">Updated <strong>wxWidgets to v3.3.3</strong>;</li>
+<li class="">Improved cross-platform compatibility and Linux support.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-performance--architecture">⚡ Performance &amp; Architecture<a href="https://thales1330.github.io/PSP/blog/2026/08/20/2026w34a-beta#-performance--architecture" class="hash-link" aria-label="Direct link to ⚡ Performance &amp; Architecture" title="Direct link to ⚡ Performance &amp; Architecture" translate="no">​</a></h2>
+<ul>
+<li class="">Reduced unnecessary data copying in <strong>Power Quality</strong> calculations;</li>
+<li class="">Improved memory management and lifecycle handling of Control Editor windows;</li>
+<li class="">Refactored graphical rendering to use centralized theme colors;</li>
+<li class="">Simplified and cleaned up legacy OpenGL and rendering code;</li>
+<li class="">Improved ATP/PSP inter-process communication and resource management.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes">🐛 Bug Fixes<a href="https://thales1330.github.io/PSP/blog/2026/08/20/2026w34a-beta#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class="">Fixed transformer <strong>phase-shift and tap settings</strong> not being applied correctly in Power Flow;</li>
+<li class="">Fixed incorrect use of per-unit electrical data during harmonic calculations;</li>
+<li class="">Fixed <strong>induction motor T'0 calculation</strong> when using cage factor;</li>
+<li class="">Fixed harmonic data handling for lines and transformers;</li>
+<li class="">Fixed invalid tree-item access in ChartView;</li>
+<li class="">Fixed issues with empty harmonic data in Data Report;</li>
+<li class="">Fixed Control Editor modal behavior on GTK;</li>
+<li class="">Fixed various UI theme, rendering and workspace initialization issues.</li>
+</ul>]]></content>
+        <author>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
+            <uri>https://github.com/thales1330</uri>
+        </author>
+        <category label="psp-ufu" term="psp-ufu"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[2026w23a-beta]]></title>
         <id>https://thales1330.github.io/PSP/blog/2026/06/06/2026w23a-beta</id>

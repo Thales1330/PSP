@@ -1,0 +1,9 @@
+<map id="HarmCurrent::DrawDC" name="HarmCurrent::DrawDC">
+<area shape="rect" id="Node000001" title="Draw the element using wxDC." alt="" coords="5,31,172,56"/>
+<area shape="rect" id="Node000002" href="$class_element.html#af1fd54d12f61f461111697d11cf10b9c" title="Draw a circle using device context." alt="" coords="250,5,425,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,32,236,26,236,31,173,38"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024" title="Draw switch." alt="" coords="220,55,455,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,49,206,52,206,57,172,54"/>
+<area shape="rect" id="Node000004" href="$class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="503,55,661,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="455,65,489,65,489,70,455,70"/>
+</map>

@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -460,7 +459,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  193</span> </div>
 <div class="line"><span class="lineno">  194</span>                        <span class="comment">// Bus voltage</span></div>
 <div class="line"><span class="lineno">  195</span>                        <span class="keywordtype">double</span> voltage = busData.nominalVoltage;</div>
-<div class="line"><span class="lineno">  196</span>                        <span class="keywordflow">if</span> (busData.nominalVoltageUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>) voltage *= 1e3;</div>
+<div class="line"><span class="lineno">  196</span>                        <span class="keywordflow">if</span> (busData.nominalVoltageUnit == ElectricalUnit::UNIT_kV) voltage *= 1e3;</div>
 <div class="line"><span class="lineno">  197</span> </div>
 <div class="line"><span class="lineno">  198</span>                        <span class="keyword">auto</span> puData = harmCurrent-&gt;GetPUElectricalData(systemPowerBase, voltage);</div>
 <div class="line"><span class="lineno">  199</span> </div>
@@ -485,7 +484,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  218</span>                            <span class="keywordtype">int</span> j = busData.number;</div>
 <div class="line"><span class="lineno">  219</span> </div>
 <div class="line"><span class="lineno">  220</span>                            <span class="keywordtype">double</span> voltage = busData.nominalVoltage;</div>
-<div class="line"><span class="lineno">  221</span>                            <span class="keywordflow">if</span> (busData.nominalVoltageUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a>) voltage *= 1e3;</div>
+<div class="line"><span class="lineno">  221</span>                            <span class="keywordflow">if</span> (busData.nominalVoltageUnit == ElectricalUnit::UNIT_kV) voltage *= 1e3;</div>
 <div class="line"><span class="lineno">  222</span>                            <span class="keywordtype">double</span> baseCurrent = systemPowerBase / (std::sqrt(3.0) * voltage);</div>
 <div class="line"><span class="lineno">  223</span> </div>
 <div class="line"><span class="lineno">  224</span>                            iHarmInjList[i][j] += current / baseCurrent;</div>
@@ -523,7 +522,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  256</span>    <span class="comment">// Lines</span></div>
 <div class="line"><span class="lineno">  257</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* line : <a class="code hl_variable" href="class_electric_calculation.html#a06ce7fe37ee6cc2c786573f094493659">m_lineList</a>) {</div>
 <div class="line"><span class="lineno">  258</span>        <span class="keywordflow">if</span> (line-&gt;IsOnline()) {</div>
-<div class="line"><span class="lineno">  259</span>            <a class="code hl_struct" href="struct_line_electrical_data.html">LineElectricalData</a> data = line-&gt;GetPUElectricalData(systemPowerBase);</div>
+<div class="line"><span class="lineno">  259</span>            <span class="keyword">auto</span>&amp; data = line-&gt;GetElectricalDataRef();</div>
 <div class="line"><span class="lineno">  260</span> </div>
 <div class="line"><span class="lineno">  261</span>            <span class="keyword">auto</span> busData1 = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(line-&gt;GetParentList()[0])-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  262</span>            <span class="keyword">auto</span> busData2 = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(line-&gt;GetParentList()[1])-&gt;GetElectricalData();</div>
@@ -553,13 +552,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  286</span>                i++;</div>
 <div class="line"><span class="lineno">  287</span>            }</div>
 <div class="line"><span class="lineno">  288</span> </div>
-<div class="line"><span class="lineno">  289</span>            line-&gt;SetElectricalData(data);</div>
+<div class="line"><span class="lineno">  289</span>            <span class="comment">//line-&gt;SetElectricalData(data);</span></div>
 <div class="line"><span class="lineno">  290</span>        }</div>
 <div class="line"><span class="lineno">  291</span>    }</div>
 <div class="line"><span class="lineno">  292</span>    <span class="comment">// Transformers</span></div>
 <div class="line"><span class="lineno">  293</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* transformer : <a class="code hl_variable" href="class_electric_calculation.html#a6cca6be3c0b79741a49b1631e38fc3be">m_transformerList</a>) {</div>
 <div class="line"><span class="lineno">  294</span>        <span class="keywordflow">if</span> (transformer-&gt;IsOnline()) {</div>
-<div class="line"><span class="lineno">  295</span>            <a class="code hl_struct" href="struct_transformer_electrical_data.html">TransformerElectricalData</a> data = transformer-&gt;GetPUElectricalData(systemPowerBase);</div>
+<div class="line"><span class="lineno">  295</span>            <span class="keyword">auto</span>&amp; data = transformer-&gt;GetElectricalDataRef();</div>
 <div class="line"><span class="lineno">  296</span> </div>
 <div class="line"><span class="lineno">  297</span>            <span class="keyword">auto</span> busData1 = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(transformer-&gt;GetParentList()[0])-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  298</span>            <span class="keyword">auto</span> busData2 = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(transformer-&gt;GetParentList()[1])-&gt;GetElectricalData();</div>
@@ -590,14 +589,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  323</span>                i++;</div>
 <div class="line"><span class="lineno">  324</span>            }</div>
 <div class="line"><span class="lineno">  325</span> </div>
-<div class="line"><span class="lineno">  326</span>            transformer-&gt;SetElectricaData(data);</div>
+<div class="line"><span class="lineno">  326</span>            <span class="comment">//transformer-&gt;SetElectricaData(data);</span></div>
 <div class="line"><span class="lineno">  327</span> </div>
 <div class="line"><span class="lineno">  328</span>        }</div>
 <div class="line"><span class="lineno">  329</span>    }</div>
 <div class="line"><span class="lineno">  330</span> </div>
 <div class="line"><span class="lineno">  331</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  332</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a></div><div class="ttdeci">@ UNIT_kV</div></div>
 <div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a06ce7fe37ee6cc2c786573f094493659"><div class="ttname"><a href="class_electric_calculation.html#a06ce7fe37ee6cc2c786573f094493659">ElectricCalculation::m_lineList</a></div><div class="ttdeci">std::vector&lt; Line * &gt; m_lineList</div><div class="ttdoc">List of transmission lines in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00378">ElectricCalculation.h:378</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a0eeb4b5afc082617247351857af26c22"><div class="ttname"><a href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">ElectricCalculation::m_busList</a></div><div class="ttdeci">std::vector&lt; Bus * &gt; m_busList</div><div class="ttdoc">List of buses in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00370">ElectricCalculation.h:370</a></div></div>
@@ -605,11 +603,9 @@ Protected Attributes</h2></td></tr>
 <div class="ttc" id="aclass_electric_calculation_html_a776b2178a331b362a0ca3d379c1ec558"><div class="ttname"><a href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">ElectricCalculation::m_emtElementList</a></div><div class="ttdeci">std::vector&lt; EMTElement * &gt; m_emtElementList</div><div class="ttdoc">List of electromagnetic transient (EMT) elements in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00390">ElectricCalculation.h:390</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a7c01b0f6b2f656db999ff4933d86d19d"><div class="ttname"><a href="class_electric_calculation.html#a7c01b0f6b2f656db999ff4933d86d19d">ElectricCalculation::GaussianElimination</a></div><div class="ttdeci">std::vector&lt; std::complex&lt; double &gt; &gt; GaussianElimination(std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; matrix, std::vector&lt; std::complex&lt; double &gt; &gt; array)</div><div class="ttdoc">Solve a linear system using Gaussian elimination (complex version).</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00863">ElectricCalculation.cpp:863</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_acd2059f84b2c124b1400677d5adeea12"><div class="ttname"><a href="class_electric_calculation.html#acd2059f84b2c124b1400677d5adeea12">ElectricCalculation::m_harmCurrentList</a></div><div class="ttdeci">std::vector&lt; HarmCurrent * &gt; m_harmCurrentList</div><div class="ttdoc">List of harmonic current sources in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00388">ElectricCalculation.h:388</a></div></div>
-<div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00559">Element.h:559</a></div></div>
-<div class="ttc" id="aclass_element_html_a57c84a8e6eb80f0fea6e23cdd439d5aa"><div class="ttname"><a href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">Element::IsOnline</a></div><div class="ttdeci">bool IsOnline() const</div><div class="ttdoc">Checks if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00226">Element.h:226</a></div></div>
+<div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00562">Element.h:562</a></div></div>
+<div class="ttc" id="aclass_element_html_a57c84a8e6eb80f0fea6e23cdd439d5aa"><div class="ttname"><a href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">Element::IsOnline</a></div><div class="ttdeci">bool IsOnline() const</div><div class="ttdoc">Checks if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00228">Element.h:228</a></div></div>
 <div class="ttc" id="aclass_harm_current_html"><div class="ttname"><a href="class_harm_current.html">HarmCurrent</a></div><div class="ttdoc">Shunt Harmonic Corrent Source.</div><div class="ttdef"><b>Definition</b> <a href="_harm_current_8h_source.html#l00023">HarmCurrent.h:24</a></div></div>
-<div class="ttc" id="astruct_line_electrical_data_html"><div class="ttname"><a href="struct_line_electrical_data.html">LineElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00024">Line.h:24</a></div></div>
-<div class="ttc" id="astruct_transformer_electrical_data_html"><div class="ttname"><a href="struct_transformer_electrical_data.html">TransformerElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00037">Transformer.h:37</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -920,9 +916,11 @@ Protected Attributes</h2></td></tr>
 <div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00083">Transformer.h:84</a></div></div>
 <div class="ttc" id="astruct_capacitor_electrical_data_html"><div class="ttname"><a href="struct_capacitor_electrical_data.html">CapacitorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00025">Capacitor.h:25</a></div></div>
 <div class="ttc" id="astruct_inductor_electrical_data_html"><div class="ttname"><a href="struct_inductor_electrical_data.html">InductorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00025">Inductor.h:25</a></div></div>
+<div class="ttc" id="astruct_line_electrical_data_html"><div class="ttname"><a href="struct_line_electrical_data.html">LineElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00024">Line.h:24</a></div></div>
 <div class="ttc" id="astruct_load_electrical_data_html"><div class="ttname"><a href="struct_load_electrical_data.html">LoadElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_load_8h_source.html#l00026">Load.h:26</a></div></div>
 <div class="ttc" id="astruct_sync_generator_electrical_data_html"><div class="ttname"><a href="struct_sync_generator_electrical_data.html">SyncGeneratorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_sync_generator_8h_source.html#l00025">SyncGenerator.h:25</a></div></div>
 <div class="ttc" id="astruct_sync_motor_electrical_data_html"><div class="ttname"><a href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00025">SyncMotor.h:25</a></div></div>
+<div class="ttc" id="astruct_transformer_electrical_data_html"><div class="ttname"><a href="struct_transformer_electrical_data.html">TransformerElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00037">Transformer.h:37</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

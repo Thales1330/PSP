@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -122,7 +121,9 @@ $(document).ready(function(){initNavTree('_control_editor_8h.html',''); initResi
 <code>#include &lt;wx/graphics.h&gt;</code><br />
 <code>#include &lt;wx/progdlg.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_i_o_control_8h_source.html">../elements/controlElement/IOControl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_properties_data_8h_source.html">../utils/PropertiesData.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_control_system_test_8h_source.html">ControlSystemTest.h</a>&quot;</code><br />
+<code>#include &lt;unordered_set&gt;</code><br />
 </div>
 <p><a href="_control_editor_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -175,20 +176,20 @@ Enumerations</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00060">60</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   60</span>                                  : <span class="keywordtype">int</span> {</div>
-<div class="line"><span class="lineno">   61</span>    ID_IO = 0,</div>
-<div class="line"><span class="lineno">   62</span>    ID_TF,</div>
-<div class="line"><span class="lineno">   63</span>    ID_SUM,</div>
-<div class="line"><span class="lineno">   64</span>    ID_CONST,</div>
-<div class="line"><span class="lineno">   65</span>    ID_LIMITER,</div>
-<div class="line"><span class="lineno">   66</span>    ID_GAIN,</div>
-<div class="line"><span class="lineno">   67</span>    ID_MULT,</div>
-<div class="line"><span class="lineno">   68</span>    ID_EXP,</div>
-<div class="line"><span class="lineno">   69</span>    ID_RATELIM,</div>
-<div class="line"><span class="lineno">   70</span>    ID_MATH_DIV,</div>
-<div class="line"><span class="lineno">   71</span>    ID_MATH_EXPR</div>
-<div class="line"><span class="lineno">   72</span>};</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00066">66</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>                                  : <span class="keywordtype">int</span> {</div>
+<div class="line"><span class="lineno">   67</span>    ID_IO = 0,</div>
+<div class="line"><span class="lineno">   68</span>    ID_TF,</div>
+<div class="line"><span class="lineno">   69</span>    ID_SUM,</div>
+<div class="line"><span class="lineno">   70</span>    ID_CONST,</div>
+<div class="line"><span class="lineno">   71</span>    ID_LIMITER,</div>
+<div class="line"><span class="lineno">   72</span>    ID_GAIN,</div>
+<div class="line"><span class="lineno">   73</span>    ID_MULT,</div>
+<div class="line"><span class="lineno">   74</span>    ID_EXP,</div>
+<div class="line"><span class="lineno">   75</span>    ID_RATELIM,</div>
+<div class="line"><span class="lineno">   76</span>    ID_MATH_DIV,</div>
+<div class="line"><span class="lineno">   77</span>    ID_MATH_EXPR</div>
+<div class="line"><span class="lineno">   78</span>};</div>
 </div><!-- fragment -->
 </div>
 </div>

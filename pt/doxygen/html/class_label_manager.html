@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -143,12 +142,14 @@ Collaboration diagram for LabelManager:</div>
 <area shape="poly" title=" " alt="" coords="196,132,204,156,215,169,228,179,225,183,211,173,199,159,191,134"/>
 <area shape="rect" href="class_properties_data.html" title="General and simulation data manager." alt="" coords="253,93,371,119"/>
 <area shape="poly" title=" " alt="" coords="298,131,277,159,259,183,255,179,273,156,293,128"/>
-<area shape="rect" href="struct_simulation_data.html" title=" " alt="" coords="113,5,236,31"/>
-<area shape="poly" title=" " alt="" coords="191,40,216,67,240,81,266,91,264,96,238,86,213,71,187,44"/>
-<area shape="rect" href="struct_general_data.html" title=" " alt="" coords="260,5,364,31"/>
-<area shape="poly" title=" " alt="" coords="315,45,315,93,309,93,309,45"/>
-<area shape="rect" href="struct_freq_response_data.html" title=" " alt="" coords="388,5,532,31"/>
-<area shape="poly" title=" " alt="" coords="439,42,399,72,347,96,344,91,396,67,436,38"/>
+<area shape="rect" href="struct_g_u_i_colour.html" title=" " alt="" coords="69,5,157,31"/>
+<area shape="poly" title=" " alt="" coords="126,41,136,56,148,67,187,78,253,92,252,97,186,84,145,72,132,59,122,44"/>
+<area shape="rect" href="struct_simulation_data.html" title=" " alt="" coords="181,5,304,31"/>
+<area shape="poly" title=" " alt="" coords="241,45,242,57,246,68,259,81,275,91,272,95,255,85,242,71,237,58,236,45"/>
+<area shape="rect" href="struct_general_data.html" title=" " alt="" coords="328,5,432,31"/>
+<area shape="poly" title=" " alt="" coords="364,43,324,94,319,91,360,40"/>
+<area shape="rect" href="struct_freq_response_data.html" title=" " alt="" coords="456,5,600,31"/>
+<area shape="poly" title=" " alt="" coords="499,40,436,72,361,96,360,91,434,67,496,35"/>
 <area shape="rect" href="class_h_m_plane.html" title=" " alt="" coords="395,93,475,119"/>
 <area shape="poly" title=" " alt="" coords="417,131,381,160,338,177,296,188,295,183,337,172,379,155,414,127"/>
 </map>
@@ -994,19 +995,19 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  499</span>    <span class="keywordflow">if</span> (m_checkBoxReplace-&gt;GetValue()) {</div>
 <div class="line"><span class="lineno">  500</span>        m_workspace-&gt;RemoveAllTextElements();</div>
 <div class="line"><span class="lineno">  501</span>    }</div>
-<div class="line"><span class="lineno">  502</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> voltageUnitList[3] = { <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a> };</div>
-<div class="line"><span class="lineno">  503</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> currentUnitList[3] = { <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a> };</div>
-<div class="line"><span class="lineno">  504</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> sUnitList[4] = { <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a> };</div>
-<div class="line"><span class="lineno">  505</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> pUnitList[4] = { <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a> };</div>
-<div class="line"><span class="lineno">  506</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> qUnitList[4] = { <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a> };</div>
-<div class="line"><span class="lineno">  507</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> angleUnitList[2] = { <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282">ElectricalUnit::UNIT_DEGREE</a>, <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4">ElectricalUnit::UNIT_RADIAN</a> };</div>
+<div class="line"><span class="lineno">  502</span>    ElectricalUnit voltageUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_V, ElectricalUnit::UNIT_kV };</div>
+<div class="line"><span class="lineno">  503</span>    ElectricalUnit currentUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_A, ElectricalUnit::UNIT_kA };</div>
+<div class="line"><span class="lineno">  504</span>    ElectricalUnit sUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_VA, ElectricalUnit::UNIT_kVA, ElectricalUnit::UNIT_MVA };</div>
+<div class="line"><span class="lineno">  505</span>    ElectricalUnit pUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_W, ElectricalUnit::UNIT_kW, ElectricalUnit::UNIT_MW };</div>
+<div class="line"><span class="lineno">  506</span>    ElectricalUnit qUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_var, ElectricalUnit::UNIT_kvar, ElectricalUnit::UNIT_Mvar };</div>
+<div class="line"><span class="lineno">  507</span>    ElectricalUnit angleUnitList[2] = { ElectricalUnit::UNIT_DEGREE, ElectricalUnit::UNIT_RADIAN };</div>
 <div class="line"><span class="lineno">  508</span> </div>
-<div class="line"><span class="lineno">  509</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> voltageUnit = voltageUnitList[m_radioBoxVoltage-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  510</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> currentUnit = currentUnitList[m_radioBoxCurrent-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  511</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> sUnit = sUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  512</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> pUnit = pUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  513</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> qUnit = qUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  514</span>    <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> angleUnit = angleUnitList[m_radioBoxAngle-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  509</span>    ElectricalUnit voltageUnit = voltageUnitList[m_radioBoxVoltage-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  510</span>    ElectricalUnit currentUnit = currentUnitList[m_radioBoxCurrent-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  511</span>    ElectricalUnit sUnit = sUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  512</span>    ElectricalUnit pUnit = pUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  513</span>    ElectricalUnit qUnit = qUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  514</span>    ElectricalUnit angleUnit = angleUnitList[m_radioBoxAngle-&gt;GetSelection()];</div>
 <div class="line"><span class="lineno">  515</span> </div>
 <div class="line"><span class="lineno">  516</span>    <span class="keyword">auto</span> elementList = m_workspace-&gt;GetElementList();</div>
 <div class="line"><span class="lineno">  517</span>    <span class="keywordtype">int</span> numTxtElements = 0;</div>
@@ -1017,7 +1018,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  522</span>        {</div>
 <div class="line"><span class="lineno">  523</span>        <span class="keywordflow">case</span> TYPE_BUS: {</div>
 <div class="line"><span class="lineno">  524</span>            TextID textOptions[7] = { ID_TXT_NAME, ID_TXT_VOLTAGE, ID_TXT_ANGLE, ID_TXT_FAULTCURRENT, ID_TXT_FAULTVOLTAGE, ID_TXT_SCC, ID_TXT_THD };</div>
-<div class="line"><span class="lineno">  525</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[7] = { ElectricalUnit::UNIT_NONE, voltageUnit, angleUnit, currentUnit, voltageUnit, sUnit, ElectricalUnit::UNIT_NONE };</div>
+<div class="line"><span class="lineno">  525</span>            ElectricalUnit textUnits[7] = { ElectricalUnit::UNIT_NONE, voltageUnit, angleUnit, currentUnit, voltageUnit, sUnit, ElectricalUnit::UNIT_NONE };</div>
 <div class="line"><span class="lineno">  526</span>            m_checkListBoxBus-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  527</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  528</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
@@ -1026,7 +1027,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  531</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  532</span>        <span class="keywordflow">case</span> TYPE_CAPACITOR: {</div>
 <div class="line"><span class="lineno">  533</span>            TextID textOptions[2] = { ID_TXT_NAME, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  534</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };</div>
+<div class="line"><span class="lineno">  534</span>            ElectricalUnit textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };</div>
 <div class="line"><span class="lineno">  535</span>            m_checkListBoxCapacitor-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  536</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  537</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
@@ -1035,7 +1036,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  540</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  541</span>        <span class="keywordflow">case</span> TYPE_IND_MOTOR: {</div>
 <div class="line"><span class="lineno">  542</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  543</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
+<div class="line"><span class="lineno">  543</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
 <div class="line"><span class="lineno">  544</span>            m_checkListBoxIndMotor-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  545</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  546</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
@@ -1044,7 +1045,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  549</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  550</span>        <span class="keywordflow">case</span> TYPE_INDUCTOR: {</div>
 <div class="line"><span class="lineno">  551</span>            TextID textOptions[2] = { ID_TXT_NAME, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  552</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };</div>
+<div class="line"><span class="lineno">  552</span>            ElectricalUnit textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };</div>
 <div class="line"><span class="lineno">  553</span>            m_checkListBoxInductor-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  554</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  555</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
@@ -1055,7 +1056,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  560</span>            TextID lineTextOptions[10] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,</div>
 <div class="line"><span class="lineno">  561</span>                ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,</div>
 <div class="line"><span class="lineno">  562</span>                ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1 };</div>
-<div class="line"><span class="lineno">  563</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };</div>
+<div class="line"><span class="lineno">  563</span>            ElectricalUnit textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };</div>
 <div class="line"><span class="lineno">  564</span>            m_checkListBoxLine-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  565</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  566</span>                m_workspace-&gt;InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);</div>
@@ -1064,7 +1065,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  569</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  570</span>        <span class="keywordflow">case</span> TYPE_LOAD: {</div>
 <div class="line"><span class="lineno">  571</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  572</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
+<div class="line"><span class="lineno">  572</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
 <div class="line"><span class="lineno">  573</span>            m_checkListBoxLoad-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  574</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  575</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
@@ -1073,7 +1074,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  578</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  579</span>        <span class="keywordflow">case</span> TYPE_SYNC_GENERATOR: {</div>
 <div class="line"><span class="lineno">  580</span>            TextID textOptions[4] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER, ID_TXT_FAULTCURRENT };</div>
-<div class="line"><span class="lineno">  581</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[4] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit, currentUnit };</div>
+<div class="line"><span class="lineno">  581</span>            ElectricalUnit textUnits[4] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit, currentUnit };</div>
 <div class="line"><span class="lineno">  582</span>            m_checkListBoxGenerator-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  583</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  584</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
@@ -1082,7 +1083,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  587</span>        } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  588</span>        <span class="keywordflow">case</span> TYPE_SYNC_MOTOR: {</div>
 <div class="line"><span class="lineno">  589</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  590</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
+<div class="line"><span class="lineno">  590</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
 <div class="line"><span class="lineno">  591</span>            m_checkListBoxSyncMotor-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  592</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  593</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
@@ -1093,7 +1094,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  598</span>            TextID lineTextOptions[10] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,</div>
 <div class="line"><span class="lineno">  599</span>                ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,</div>
 <div class="line"><span class="lineno">  600</span>                ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1 };</div>
-<div class="line"><span class="lineno">  601</span>            <a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };</div>
+<div class="line"><span class="lineno">  601</span>            ElectricalUnit textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };</div>
 <div class="line"><span class="lineno">  602</span>            m_checkListBoxTransformer-&gt;GetCheckedItems(checked);</div>
 <div class="line"><span class="lineno">  603</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
 <div class="line"><span class="lineno">  604</span>                m_workspace-&gt;InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);</div>
@@ -1110,23 +1111,6 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  615</span>    }</div>
 <div class="line"><span class="lineno">  616</span>    EndModal(wxID_OK);</div>
 <div class="line"><span class="lineno">  617</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a></div><div class="ttdeci">ElectricalUnit</div><div class="ttdoc">Electrical units.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a></div><div class="ttdeci">@ UNIT_Mvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a3b8018501a5a9407ecc0987641f88c73">ElectricalUnit::UNIT_VA</a></div><div class="ttdeci">@ UNIT_VA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a></div><div class="ttdeci">@ UNIT_var</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a></div><div class="ttdeci">@ UNIT_kW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a53cb3b8d39e1508c7336785b19fd6471">ElectricalUnit::UNIT_MVA</a></div><div class="ttdeci">@ UNIT_MVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a596470df9e4c0617dc60417063cf932d">ElectricalUnit::UNIT_kVA</a></div><div class="ttdeci">@ UNIT_kVA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a></div><div class="ttdeci">@ UNIT_kV</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a></div><div class="ttdeci">@ UNIT_W</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282">ElectricalUnit::UNIT_DEGREE</a></div><div class="ttdeci">@ UNIT_DEGREE</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6abf8e348176800c95809f1968078365c9">ElectricalUnit::UNIT_kA</a></div><div class="ttdeci">@ UNIT_kA</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6ace5ae617b7a277d02a8dccc786c7e4e7">ElectricalUnit::UNIT_A</a></div><div class="ttdeci">@ UNIT_A</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4">ElectricalUnit::UNIT_RADIAN</a></div><div class="ttdeci">@ UNIT_RADIAN</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a></div><div class="ttdeci">@ UNIT_MW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee622b2ebeb2cfe2386a8b7a4e83f2e8">ElectricalUnit::UNIT_V</a></div><div class="ttdeci">@ UNIT_V</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a></div><div class="ttdeci">@ UNIT_kvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
 </div><!-- fragment -->
 </div>
 </div>

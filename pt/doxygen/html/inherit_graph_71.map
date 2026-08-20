@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,223,31"/>
-<area shape="rect" id="Node000001" href="$class_simulations_settings_form.html" title="Form to edit the simulation data." alt="" coords="271,5,456,31"/>
-<area shape="poly" id="edge65_Node000000_Node000001" title=" " alt="" coords="236,15,270,15,270,21,236,21"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,204,31"/>
+<area shape="rect" id="Node000001" href="$class_project_properties_form.html" title=" " alt="" coords="252,5,419,31"/>
+<area shape="poly" id="edge62_Node000000_Node000001" title=" " alt="" coords="218,15,252,15,252,21,218,21"/>
 </map>

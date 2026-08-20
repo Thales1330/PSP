@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -191,7 +190,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0fedd06ef0833ce4d17869343b0810cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae04da3b89a530e1457ff490b22b9f028" id="r_ae04da3b89a530e1457ff490b22b9f028"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#ae04da3b89a530e1457ff490b22b9f028">GetPUElectricalData</a> (double systemPowerBase)</td></tr>
 <tr class="separator:ae04da3b89a530e1457ff490b22b9f028"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a038162c828595f58782fe97dea2c864d" id="r_a038162c828595f58782fe97dea2c864d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#a038162c828595f58782fe97dea2c864d">SetNominalVoltage</a> (std::vector&lt; double &gt; nominalVoltage, std::vector&lt; <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> &gt; nominalVoltageUnit)</td></tr>
+<tr class="memitem:a038162c828595f58782fe97dea2c864d" id="r_a038162c828595f58782fe97dea2c864d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#a038162c828595f58782fe97dea2c864d">SetNominalVoltage</a> (std::vector&lt; double &gt; nominalVoltage, std::vector&lt; ElectricalUnit &gt; nominalVoltageUnit)</td></tr>
 <tr class="memdesc:a038162c828595f58782fe97dea2c864d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set nominal voltage of the element.  <br /></td></tr>
 <tr class="separator:a038162c828595f58782fe97dea2c864d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca41191da8383d577e3717d3e38cdf2b" id="r_aca41191da8383d577e3717d3e38cdf2b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#aca41191da8383d577e3717d3e38cdf2b">SetElectricalData</a> (<a class="el" href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a> electricalData)</td></tr>
@@ -210,12 +209,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acda27b0ea8a7b0fb00d647d8744f346e inherit pub_methods_class_machines" id="r_acda27b0ea8a7b0fb00d647d8744f346e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_machines.html#acda27b0ea8a7b0fb00d647d8744f346e">Contains</a> (wxPoint2DDouble position) const</td></tr>
 <tr class="memdesc:acda27b0ea8a7b0fb00d647d8744f346e inherit pub_methods_class_machines"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <br /></td></tr>
 <tr class="separator:acda27b0ea8a7b0fb00d647d8744f346e inherit pub_methods_class_machines"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d8259faa01d5f9cec09c84f326820aa inherit pub_methods_class_machines" id="r_a4d8259faa01d5f9cec09c84f326820aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_machines.html#a4d8259faa01d5f9cec09c84f326820aa">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a4d8259faa01d5f9cec09c84f326820aa inherit pub_methods_class_machines"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
-<tr class="separator:a4d8259faa01d5f9cec09c84f326820aa inherit pub_methods_class_machines"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a154f53dfa581a4445538a6a8304dcc1c inherit pub_methods_class_machines" id="r_a154f53dfa581a4445538a6a8304dcc1c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_machines.html#a154f53dfa581a4445538a6a8304dcc1c">DrawDC</a> (wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
-<tr class="memdesc:a154f53dfa581a4445538a6a8304dcc1c inherit pub_methods_class_machines"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
-<tr class="separator:a154f53dfa581a4445538a6a8304dcc1c inherit pub_methods_class_machines"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f31214a9cbedd715525caa2b63b310d inherit pub_methods_class_machines" id="r_a8f31214a9cbedd715525caa2b63b310d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_machines.html#a8f31214a9cbedd715525caa2b63b310d">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:a8f31214a9cbedd715525caa2b63b310d inherit pub_methods_class_machines"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
+<tr class="separator:a8f31214a9cbedd715525caa2b63b310d inherit pub_methods_class_machines"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a386f94efcf9afdb3c0e00e5cefd8a84d inherit pub_methods_class_machines" id="r_a386f94efcf9afdb3c0e00e5cefd8a84d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_machines.html#a386f94efcf9afdb3c0e00e5cefd8a84d">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
+<tr class="memdesc:a386f94efcf9afdb3c0e00e5cefd8a84d inherit pub_methods_class_machines"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
+<tr class="separator:a386f94efcf9afdb3c0e00e5cefd8a84d inherit pub_methods_class_machines"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a825ccdbd5059f9ae9f869d4b6e3ec4 inherit pub_methods_class_machines" id="r_a0a825ccdbd5059f9ae9f869d4b6e3ec4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_machines.html#a0a825ccdbd5059f9ae9f869d4b6e3ec4">Intersects</a> (wxRect2DDouble rect) const</td></tr>
 <tr class="memdesc:a0a825ccdbd5059f9ae9f869d4b6e3ec4 inherit pub_methods_class_machines"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the element's rect intersects other rect.  <br /></td></tr>
 <tr class="separator:a0a825ccdbd5059f9ae9f869d4b6e3ec4 inherit pub_methods_class_machines"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -265,19 +264,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element" id="r_abd2cee52270374e17951782bdb571dce"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#abd2cee52270374e17951782bdb571dce">UpdateSwitches</a> ()</td></tr>
 <tr class="memdesc:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the switch position.  <br /></td></tr>
 <tr class="separator:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element" id="r_a6e3940470ff76662ca7e4c552b12a9a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6">DrawDCSwitches</a> (wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw switch.  <br /></td></tr>
-<tr class="separator:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac603055a40392c377703203235e5e658 inherit pub_methods_class_power_element" id="r_ac603055a40392c377703203235e5e658"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#ac603055a40392c377703203235e5e658">DrawDCSwitches</a> (wxDC &amp;dc) const</td></tr>
-<tr class="separator:ac603055a40392c377703203235e5e658 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element" id="r_acaa2c9e5736ac6e38c4c6a9ebca78024"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">DrawDCSwitches</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw switch.  <br /></td></tr>
+<tr class="separator:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ffb8c51f0e8dbdfdf7c02c75719089b inherit pub_methods_class_power_element" id="r_a6ffb8c51f0e8dbdfdf7c02c75719089b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6ffb8c51f0e8dbdfdf7c02c75719089b">DrawDCSwitches</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxDC &amp;dc) const</td></tr>
+<tr class="separator:a6ffb8c51f0e8dbdfdf7c02c75719089b inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element" id="r_a6c656ef223d36e96b19b0a9ec2115e9e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6c656ef223d36e96b19b0a9ec2115e9e">CalculatePowerFlowPts</a> (std::vector&lt; wxPoint2DDouble &gt; edges)</td></tr>
 <tr class="memdesc:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the points of the power flow arrows.  <br /></td></tr>
 <tr class="separator:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element" id="r_ae3aaa8bf4f030ba75e63c843e07bdefb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#ae3aaa8bf4f030ba75e63c843e07bdefb">DrawDCPowerFlowPts</a> (wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw power flow arrows.  <br /></td></tr>
-<tr class="separator:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9653b32340f9f6769c3185edc2beb8b6 inherit pub_methods_class_power_element" id="r_a9653b32340f9f6769c3185edc2beb8b6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a9653b32340f9f6769c3185edc2beb8b6">DrawDCPowerFlowPts</a> (wxDC &amp;dc) const</td></tr>
-<tr class="separator:a9653b32340f9f6769c3185edc2beb8b6 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97c5d3482c58bc2f88a320ce2497b97f inherit pub_methods_class_power_element" id="r_a97c5d3482c58bc2f88a320ce2497b97f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a97c5d3482c58bc2f88a320ce2497b97f">DrawDCPowerFlowPts</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:a97c5d3482c58bc2f88a320ce2497b97f inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw power flow arrows.  <br /></td></tr>
+<tr class="separator:a97c5d3482c58bc2f88a320ce2497b97f inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71cff7fea289dee67ba610858075fa02 inherit pub_methods_class_power_element" id="r_a71cff7fea289dee67ba610858075fa02"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a71cff7fea289dee67ba610858075fa02">DrawDCPowerFlowPts</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxDC &amp;dc) const</td></tr>
+<tr class="separator:a71cff7fea289dee67ba610858075fa02 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d2e84b91ab7443b20a9d7eb6ab441f inherit pub_methods_class_power_element" id="r_a08d2e84b91ab7443b20a9d7eb6ab441f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a08d2e84b91ab7443b20a9d7eb6ab441f">SetSwitchingData</a> (<a class="el" href="struct_switching_data.html">SwitchingData</a> data)</td></tr>
 <tr class="memdesc:a08d2e84b91ab7443b20a9d7eb6ab441f inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the switching data of the element.  <br /></td></tr>
 <tr class="separator:a08d2e84b91ab7443b20a9d7eb6ab441f inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -296,8 +295,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4dbd26d0a7987c30729efffa860debc4 inherit pub_methods_class_power_element" id="r_a4dbd26d0a7987c30729efffa860debc4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a> (bool dynEvent=true)</td></tr>
 <tr class="memdesc:a4dbd26d0a7987c30729efffa860debc4 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set if the power element have dynamic event.  <br /></td></tr>
 <tr class="separator:a4dbd26d0a7987c30729efffa860debc4 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad57d3eb59a91d1ae45c5416f7bc5d896 inherit pub_methods_class_power_element" id="r_ad57d3eb59a91d1ae45c5416f7bc5d896"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#ad57d3eb59a91d1ae45c5416f7bc5d896">GetValueFromUnit</a> (double value, <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> valueUnit)</td></tr>
-<tr class="separator:ad57d3eb59a91d1ae45c5416f7bc5d896 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1154808b9a09e5920cad3ee32c8c4736 inherit pub_methods_class_power_element" id="r_a1154808b9a09e5920cad3ee32c8c4736"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a1154808b9a09e5920cad3ee32c8c4736">GetValueFromUnit</a> (double value, ElectricalUnit valueUnit) const</td></tr>
+<tr class="separator:a1154808b9a09e5920cad3ee32c8c4736 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a396c3e0e3d9a7b9255567e9692feaaa6 inherit pub_methods_class_power_element" id="r_a396c3e0e3d9a7b9255567e9692feaaa6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a396c3e0e3d9a7b9255567e9692feaaa6">SaveCADProperties</a> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
 <tr class="separator:a396c3e0e3d9a7b9255567e9692feaaa6 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5dba245ecbf31a460207a0e9176fde2 inherit pub_methods_class_power_element" id="r_af5dba245ecbf31a460207a0e9176fde2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#af5dba245ecbf31a460207a0e9176fde2">SaveSwitchingData</a> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *electricalNode)</td></tr>
@@ -563,8 +562,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5c1d43a226486a7a987bfb8c195ffac6 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element" id="r_a37ff451865d4852ffa8c54574a20cd0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a37ff451865d4852ffa8c54574a20cd0b">m_online</a> = true</td></tr>
 <tr class="separator:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element" id="r_a9692eec7ca16d6f81172788b4bf48072"><td class="memItemLeft" align="right" valign="top">wxColour&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9692eec7ca16d6f81172788b4bf48072">m_selectionColour</a></td></tr>
-<tr class="separator:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -794,8 +791,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">   66</span> </div>
 <div class="line"><span class="lineno">   67</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">   68</span>}</div>
-<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00075">Element.h:75</a></div></div>
-<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00388">Element.cpp:388</a></div></div>
+<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00077">Element.h:77</a></div></div>
+<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00393">Element.cpp:393</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -945,44 +942,44 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">   87</span>    <span class="comment">// Active power</span></div>
 <div class="line"><span class="lineno">   88</span>    <span class="keywordtype">double</span> activePower = GetValueFromUnit(data.activePower, data.activePowerUnit);</div>
 <div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> (!m_online) activePower = 0.0;</div>
-<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">if</span> (data.activePowerUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">if</span> (data.activePowerUnit == ElectricalUnit::UNIT_PU) {</div>
 <div class="line"><span class="lineno">   91</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.activePower = (activePower * machineBasePower) / systemPowerBase;</div>
 <div class="line"><span class="lineno">   92</span>    }</div>
 <div class="line"><span class="lineno">   93</span>    <span class="keywordflow">else</span> {</div>
 <div class="line"><span class="lineno">   94</span>        data.activePower = activePower / systemPowerBase;</div>
 <div class="line"><span class="lineno">   95</span>    }</div>
-<div class="line"><span class="lineno">   96</span>    data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">   96</span>    data.activePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">   97</span> </div>
 <div class="line"><span class="lineno">   98</span>    <span class="comment">// Reactive power</span></div>
 <div class="line"><span class="lineno">   99</span>    <span class="keywordtype">double</span> reactivePower = GetValueFromUnit(data.reactivePower, data.reactivePowerUnit);</div>
 <div class="line"><span class="lineno">  100</span>    <span class="keywordflow">if</span> (!m_online) reactivePower = 0.0;</div>
-<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">if</span> (data.reactivePowerUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">if</span> (data.reactivePowerUnit == ElectricalUnit::UNIT_PU) {</div>
 <div class="line"><span class="lineno">  102</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.reactivePower = (reactivePower * machineBasePower) / systemPowerBase;</div>
 <div class="line"><span class="lineno">  103</span>    }</div>
 <div class="line"><span class="lineno">  104</span>    <span class="keywordflow">else</span> {</div>
 <div class="line"><span class="lineno">  105</span>        data.reactivePower = reactivePower / systemPowerBase;</div>
 <div class="line"><span class="lineno">  106</span>    }</div>
-<div class="line"><span class="lineno">  107</span>    data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  107</span>    data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  108</span> </div>
 <div class="line"><span class="lineno">  109</span>    <span class="comment">// Max reactive power</span></div>
 <div class="line"><span class="lineno">  110</span>    <span class="keywordtype">double</span> maxReactive = GetValueFromUnit(data.maxReactive, data.maxReactiveUnit);</div>
-<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">if</span> (data.maxReactiveUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">if</span> (data.maxReactiveUnit == ElectricalUnit::UNIT_PU) {</div>
 <div class="line"><span class="lineno">  112</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.maxReactive = (maxReactive * machineBasePower) / systemPowerBase;</div>
 <div class="line"><span class="lineno">  113</span>    }</div>
 <div class="line"><span class="lineno">  114</span>    <span class="keywordflow">else</span> {</div>
 <div class="line"><span class="lineno">  115</span>        data.maxReactive = maxReactive / systemPowerBase;</div>
 <div class="line"><span class="lineno">  116</span>    }</div>
-<div class="line"><span class="lineno">  117</span>    data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  117</span>    data.maxReactiveUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  118</span> </div>
 <div class="line"><span class="lineno">  119</span>    <span class="comment">// Min reactive power</span></div>
 <div class="line"><span class="lineno">  120</span>    <span class="keywordtype">double</span> minReactive = GetValueFromUnit(data.minReactive, data.minReactiveUnit);</div>
-<div class="line"><span class="lineno">  121</span>    <span class="keywordflow">if</span> (data.minReactiveUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keywordflow">if</span> (data.minReactiveUnit == ElectricalUnit::UNIT_PU) {</div>
 <div class="line"><span class="lineno">  122</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.minReactive = (minReactive * machineBasePower) / systemPowerBase;</div>
 <div class="line"><span class="lineno">  123</span>    }</div>
 <div class="line"><span class="lineno">  124</span>    <span class="keywordflow">else</span> {</div>
 <div class="line"><span class="lineno">  125</span>        data.minReactive = minReactive / systemPowerBase;</div>
 <div class="line"><span class="lineno">  126</span>    }</div>
-<div class="line"><span class="lineno">  127</span>    data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  127</span>    data.minReactiveUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  128</span> </div>
 <div class="line"><span class="lineno">  129</span>    <span class="keywordtype">double</span> baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);</div>
 <div class="line"><span class="lineno">  130</span>    <span class="keywordtype">double</span> systemBaseImpedance = (baseVoltage * baseVoltage) / systemPowerBase;</div>
@@ -1008,7 +1005,6 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  150</span> </div>
 <div class="line"><span class="lineno">  151</span>    <span class="keywordflow">return</span> data;</div>
 <div class="line"><span class="lineno">  152</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
 <div class="ttc" id="astruct_sync_motor_electrical_data_html"><div class="ttname"><a href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00025">SyncMotor.h:25</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1049,16 +1045,16 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  210</span>    <span class="keywordflow">if</span> (!m_online) activePower = 0.0;</div>
 <div class="line"><span class="lineno">  211</span>    tipText += _(<span class="stringliteral">&quot;\nP = &quot;</span>) + wxString::FromDouble(activePower, 5);</div>
 <div class="line"><span class="lineno">  212</span>    <span class="keywordflow">switch</span> (m_electricalData.activePowerUnit) {</div>
-<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  214</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  215</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  216</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  216</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_W: {</div>
 <div class="line"><span class="lineno">  217</span>        tipText += _(<span class="stringliteral">&quot; W&quot;</span>);</div>
 <div class="line"><span class="lineno">  218</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW: {</div>
 <div class="line"><span class="lineno">  220</span>        tipText += _(<span class="stringliteral">&quot; kW&quot;</span>);</div>
 <div class="line"><span class="lineno">  221</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW: {</div>
 <div class="line"><span class="lineno">  223</span>        tipText += _(<span class="stringliteral">&quot; MW&quot;</span>);</div>
 <div class="line"><span class="lineno">  224</span>    } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  225</span>    <span class="keywordflow">default</span>:</div>
@@ -1068,16 +1064,16 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  229</span>    <span class="keywordflow">if</span> (!m_online) reactivePower = 0.0;</div>
 <div class="line"><span class="lineno">  230</span>    tipText += _(<span class="stringliteral">&quot;\nQ = &quot;</span>) + wxString::FromDouble(reactivePower, 5);</div>
 <div class="line"><span class="lineno">  231</span>    <span class="keywordflow">switch</span> (m_electricalData.reactivePowerUnit) {</div>
-<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  233</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  234</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  235</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  235</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  236</span>        tipText += _(<span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno">  237</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  239</span>        tipText += _(<span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  240</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  242</span>        tipText += _(<span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  243</span>    } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  244</span>    <span class="keywordflow">default</span>:</div>
@@ -1086,12 +1082,6 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  247</span> </div>
 <div class="line"><span class="lineno">  248</span>    <span class="keywordflow">return</span> tipText;</div>
 <div class="line"><span class="lineno">  249</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a></div><div class="ttdeci">@ UNIT_Mvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a></div><div class="ttdeci">@ UNIT_var</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a></div><div class="ttdeci">@ UNIT_kW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a></div><div class="ttdeci">@ UNIT_W</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a></div><div class="ttdeci">@ UNIT_MW</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a></div><div class="ttdeci">@ UNIT_kvar</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1142,21 +1132,21 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  316</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
 <div class="line"><span class="lineno">  317</span>    m_electricalData.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
 <div class="line"><span class="lineno">  318</span>    m_electricalData.nominalPowerUnit =</div>
-<div class="line"><span class="lineno">  319</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  319</span>        <span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
 <div class="line"><span class="lineno">  320</span>    m_electricalData.activePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>);</div>
 <div class="line"><span class="lineno">  321</span>    m_electricalData.activePowerUnit =</div>
-<div class="line"><span class="lineno">  322</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  322</span>        <span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
 <div class="line"><span class="lineno">  323</span>    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
 <div class="line"><span class="lineno">  324</span>    m_electricalData.reactivePowerUnit =</div>
-<div class="line"><span class="lineno">  325</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  325</span>        <span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
 <div class="line"><span class="lineno">  326</span>    m_electricalData.haveMaxReactive = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;HaveMaxReactive&quot;</span>);</div>
 <div class="line"><span class="lineno">  327</span>    m_electricalData.maxReactive = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>);</div>
 <div class="line"><span class="lineno">  328</span>    m_electricalData.maxReactiveUnit =</div>
-<div class="line"><span class="lineno">  329</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  329</span>        <span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
 <div class="line"><span class="lineno">  330</span>    m_electricalData.haveMinReactive = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;HaveMinReactive&quot;</span>);</div>
 <div class="line"><span class="lineno">  331</span>    m_electricalData.minReactive = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>);</div>
 <div class="line"><span class="lineno">  332</span>    m_electricalData.minReactiveUnit =</div>
-<div class="line"><span class="lineno">  333</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  333</span>        <span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
 <div class="line"><span class="lineno">  334</span>    m_electricalData.useMachineBase = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;UseMachineBase&quot;</span>);</div>
 <div class="line"><span class="lineno">  335</span> </div>
 <div class="line"><span class="lineno">  336</span>    <span class="keyword">auto</span> fault = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Fault&quot;</span>);</div>
@@ -1175,8 +1165,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  349</span> </div>
 <div class="line"><span class="lineno">  350</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  351</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a></div><div class="ttdeci">ElectricalUnit</div><div class="ttdoc">Electrical units.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
-<div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00378">Element.cpp:378</a></div></div>
+<div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00383">Element.cpp:383</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1322,7 +1311,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> &gt;&#160;</td>
+          <td class="paramtype">std::vector&lt; ElectricalUnit &gt;&#160;</td>
           <td class="paramname"><em>nominalVoltageUnit</em>&#160;</td>
         </tr>
         <tr>
@@ -1421,7 +1410,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">   77</span>    }</div>
 <div class="line"><span class="lineno">   78</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">   79</span>}</div>
-<div class="ttc" id="aclass_sync_machine_form_html"><div class="ttname"><a href="class_sync_machine_form.html">SyncMachineForm</a></div><div class="ttdoc">Form to edit the synchronous machine power data.</div><div class="ttdef"><b>Definition</b> <a href="_sync_machine_form_8h_source.html#l00037">SyncMachineForm.h:38</a></div></div>
+<div class="ttc" id="aclass_sync_machine_form_html"><div class="ttname"><a href="class_sync_machine_form.html">SyncMachineForm</a></div><div class="ttdoc">Form to edit the synchronous machine power data.</div><div class="ttdef"><b>Definition</b> <a href="_sync_machine_form_8h_source.html#l00038">SyncMachineForm.h:39</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

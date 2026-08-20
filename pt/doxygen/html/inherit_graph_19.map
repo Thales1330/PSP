@@ -1,5 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,175,31"/>
-<area shape="rect" id="Node000001" href="$class_e_m_t_element_form.html" title=" " alt="" coords="223,5,360,31"/>
-<area shape="poly" id="edge44_Node000000_Node000001" title=" " alt="" coords="189,15,222,15,222,21,189,21"/>
+<area shape="rect" id="Node000000" href="$class_electric_calculation.html" title="Base class for electrical calculations providing general utility methods." alt="" coords="5,80,148,105"/>
+<area shape="rect" id="Node000001" href="$class_electromechanical.html" title="Calculates the electromechanical transient based on disturbances (e.g. system fault)." alt="" coords="196,5,339,31"/>
+<area shape="poly" id="edge9_Node000000_Node000001" title=" " alt="" coords="117,72,195,40,226,28,228,33,197,44,119,77"/>
+<area shape="rect" id="Node000002" href="$class_fault.html" title="Calculate the fault of the system and update the elements data." alt="" coords="241,55,294,80"/>
+<area shape="poly" id="edge10_Node000000_Node000002" title=" " alt="" coords="161,79,240,68,241,73,162,84"/>
+<area shape="rect" id="Node000003" href="$class_power_flow.html" title="Calculate the power flow." alt="" coords="221,104,314,129"/>
+<area shape="poly" id="edge11_Node000000_Node000003" title=" " alt="" coords="162,101,221,108,220,113,161,106"/>
+<area shape="rect" id="Node000004" href="$class_power_quality.html" title="Responsible for the power quality calculations." alt="" coords="213,153,322,179"/>
+<area shape="poly" id="edge12_Node000000_Node000004" title=" " alt="" coords="122,108,197,138,231,151,229,156,195,143,120,113"/>
 </map>

@@ -10,5 +10,6 @@ var searchData=
   ['graphautolayout_7',['GraphAutoLayout',['../class_graph_auto_layout.html',1,'']]],
   ['graphicalelement_8',['GraphicalElement',['../class_graphical_element.html',1,'']]],
   ['graphlayoutedge_9',['GraphLayoutEdge',['../struct_graph_auto_layout_1_1_graph_layout_edge.html',1,'GraphAutoLayout']]],
-  ['graphlayoutnode_10',['GraphLayoutNode',['../struct_graph_auto_layout_1_1_graph_layout_node.html',1,'GraphAutoLayout']]]
+  ['graphlayoutnode_10',['GraphLayoutNode',['../struct_graph_auto_layout_1_1_graph_layout_node.html',1,'GraphAutoLayout']]],
+  ['guicolour_11',['GUIColour',['../struct_g_u_i_colour.html',1,'']]]
 ];

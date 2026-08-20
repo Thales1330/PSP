@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -177,6 +176,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac8bd52ddb8eed51a217fecb2eed65708" id="r_ac8bd52ddb8eed51a217fecb2eed65708"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element.html#ac8bd52ddb8eed51a217fecb2eed65708">Move</a> (wxPoint2DDouble position)</td></tr>
 <tr class="memdesc:ac8bd52ddb8eed51a217fecb2eed65708"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the element other position.  <br /></td></tr>
 <tr class="separator:ac8bd52ddb8eed51a217fecb2eed65708"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a376395c1984802d572227b61621fd6c2" id="r_a376395c1984802d572227b61621fd6c2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element.html#a376395c1984802d572227b61621fd6c2">SetFont</a> (wxFont &amp;font)</td></tr>
+<tr class="separator:a376395c1984802d572227b61621fd6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa818494e463798dcddbbddf9d29d43ab" id="r_aa818494e463798dcddbbddf9d29d43ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element.html#aa818494e463798dcddbbddf9d29d43ab">SetNodeList</a> (std::vector&lt; <a class="el" href="class_node.html">Node</a> * &gt; nodeList)</td></tr>
 <tr class="separator:aa818494e463798dcddbbddf9d29d43ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a752129171e0c4ba1c8f4d46868cc73c8" id="r_a752129171e0c4ba1c8f4d46868cc73c8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_node.html">Node</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element.html#a752129171e0c4ba1c8f4d46868cc73c8">GetNodeList</a> () const</td></tr>
@@ -305,12 +306,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element" id="r_aa79db7f54ba9754e953b5059a1d79486"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">GetTipText</a> () const</td></tr>
 <tr class="memdesc:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:aa79db7f54ba9754e953b5059a1d79486 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element" id="r_a6cca77f38afe3ade6d92294d0759427a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a6cca77f38afe3ade6d92294d0759427a">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
-<tr class="separator:a6cca77f38afe3ade6d92294d0759427a inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element" id="r_a44877d44d6e548c24f466913d118f61b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a44877d44d6e548c24f466913d118f61b">DrawDC</a> (wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
-<tr class="memdesc:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
-<tr class="separator:a44877d44d6e548c24f466913d118f61b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element" id="r_a5ac0a5f9ca1299f06ed9979789340b70"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a5ac0a5f9ca1299f06ed9979789340b70">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
+<tr class="separator:a5ac0a5f9ca1299f06ed9979789340b70 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element" id="r_a8720b78213ff3a15b16e2f53a70c139c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a8720b78213ff3a15b16e2f53a70c139c">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
+<tr class="memdesc:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
+<tr class="separator:a8720b78213ff3a15b16e2f53a70c139c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afab568cea0a7074bb9984e94bd2ba52e inherit pub_methods_class_element" id="r_afab568cea0a7074bb9984e94bd2ba52e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Rotate</a> (bool clockwise=true)</td></tr>
 <tr class="memdesc:afab568cea0a7074bb9984e94bd2ba52e inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <br /></td></tr>
 <tr class="separator:afab568cea0a7074bb9984e94bd2ba52e inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -510,8 +511,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5c1d43a226486a7a987bfb8c195ffac6 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element" id="r_a37ff451865d4852ffa8c54574a20cd0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a37ff451865d4852ffa8c54574a20cd0b">m_online</a> = true</td></tr>
 <tr class="separator:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element" id="r_a9692eec7ca16d6f81172788b4bf48072"><td class="memItemLeft" align="right" valign="top">wxColour&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9692eec7ca16d6f81172788b4bf48072">m_selectionColour</a></td></tr>
-<tr class="separator:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span class="obfuscator">.nosp@m.</span>s@uf<span class="obfuscator">.nosp@m.</span>u.br</a> </dd></dl>
@@ -537,7 +536,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_control_element_8cpp_source.html#l00111">111</a> of file <a class="el" href="_control_element_8cpp_source.html">ControlElement.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  111</span>: <a class="code hl_function" href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element</a>() { m_elementID = id; }</div>
-<div class="ttc" id="aclass_element_html_ab0d0e20be9a36ae676202db753faeec9"><div class="ttname"><a href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element::Element</a></div><div class="ttdeci">Element()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00027">Element.cpp:27</a></div></div>
+<div class="ttc" id="aclass_element_html_ab0d0e20be9a36ae676202db753faeec9"><div class="ttname"><a href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element::Element</a></div><div class="ttdeci">Element()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00028">Element.cpp:28</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -602,8 +601,8 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  130</span>        <span class="keywordflow">if</span> (node-&gt;GetNodeType() == Node::NodeType::NODE_IN) { <a class="code hl_function" href="class_element.html#a9332ba7b4ce2051a3935081cc890c03c">DrawDCTriangle</a>(node-&gt;GetInTrianglePts(), gc); }</div>
 <div class="line"><span class="lineno">  131</span>    }</div>
 <div class="line"><span class="lineno">  132</span>}</div>
-<div class="ttc" id="aclass_element_html_a9332ba7b4ce2051a3935081cc890c03c"><div class="ttname"><a href="class_element.html#a9332ba7b4ce2051a3935081cc890c03c">Element::DrawDCTriangle</a></div><div class="ttdeci">virtual void DrawDCTriangle(std::vector&lt; wxPoint2DDouble &gt; points, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00204">Element.cpp:204</a></div></div>
-<div class="ttc" id="aclass_element_html_af1fd54d12f61f461111697d11cf10b9c"><div class="ttname"><a href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">Element::DrawDCCircle</a></div><div class="ttdeci">virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a circle using device context.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00168">Element.cpp:168</a></div></div>
+<div class="ttc" id="aclass_element_html_a9332ba7b4ce2051a3935081cc890c03c"><div class="ttname"><a href="class_element.html#a9332ba7b4ce2051a3935081cc890c03c">Element::DrawDCTriangle</a></div><div class="ttdeci">virtual void DrawDCTriangle(std::vector&lt; wxPoint2DDouble &gt; points, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00209">Element.cpp:209</a></div></div>
+<div class="ttc" id="aclass_element_html_af1fd54d12f61f461111697d11cf10b9c"><div class="ttname"><a href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">Element::DrawDCCircle</a></div><div class="ttdeci">virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a circle using device context.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00173">Element.cpp:173</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -650,7 +649,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  169</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><span class="lineno">  170</span>}</div>
 <div class="ttc" id="aclass_control_element_html"><div class="ttname"><a href="class_control_element.html">ControlElement</a></div><div class="ttdef"><b>Definition</b> <a href="_control_element_8h_source.html#l00086">ControlElement.h:87</a></div></div>
-<div class="ttc" id="aclass_element_html_a20693eda52fae0b42d6fa6a70fd0a0ee"><div class="ttname"><a href="class_element.html#a20693eda52fae0b42d6fa6a70fd0a0ee">Element::GetID</a></div><div class="ttdeci">virtual int GetID() const</div><div class="ttdoc">Get the element ID.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00271">Element.h:271</a></div></div>
+<div class="ttc" id="aclass_element_html_a20693eda52fae0b42d6fa6a70fd0a0ee"><div class="ttname"><a href="class_element.html#a20693eda52fae0b42d6fa6a70fd0a0ee">Element::GetID</a></div><div class="ttdeci">virtual int GetID() const</div><div class="ttdoc">Get the element ID.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00273">Element.h:273</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -677,8 +676,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00096">96</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   96</span>{ <span class="keywordflow">return</span> m_nodeList; }</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00098">98</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   98</span>{ <span class="keywordflow">return</span> m_nodeList; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -705,8 +704,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00110">110</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  110</span>{ <span class="keywordflow">return</span> m_output; }</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00112">112</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  112</span>{ <span class="keywordflow">return</span> m_output; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -765,8 +764,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00106">106</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  106</span>{ <span class="keywordflow">return</span> m_solved; }</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00108">108</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>{ <span class="keywordflow">return</span> m_solved; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -811,7 +810,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  143</span>    <a class="code hl_function" href="class_element.html#a920fe7ba1563615857618f01e64b3284">SetPosition</a>(m_movePos + position - m_moveStartPt);</div>
 <div class="line"><span class="lineno">  144</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)m_nodeList.size(); ++i) { m_nodeList[i]-&gt;Move(position); }</div>
 <div class="line"><span class="lineno">  145</span>}</div>
-<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00028">Element.cpp:28</a></div></div>
+<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00033">Element.cpp:33</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -976,6 +975,35 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="a376395c1984802d572227b61621fd6c2" name="a376395c1984802d572227b61621fd6c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a376395c1984802d572227b61621fd6c2">&#9670;&#160;</a></span>SetFont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ControlElement::SetFont </td>
+          <td>(</td>
+          <td class="paramtype">wxFont &amp;&#160;</td>
+          <td class="paramname"><em>font</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00095">95</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   95</span>{}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="aa818494e463798dcddbbddf9d29d43ab" name="aa818494e463798dcddbbddf9d29d43ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa818494e463798dcddbbddf9d29d43ab">&#9670;&#160;</a></span>SetNodeList()</h2>
 
@@ -1000,8 +1028,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00095">95</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   95</span>{ m_nodeList = nodeList; }</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00097">97</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   97</span>{ m_nodeList = nodeList; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1029,8 +1057,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00111">111</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  111</span>{ m_output = output; }</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00113">113</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  113</span>{ m_output = output; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1058,8 +1086,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00107">107</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  107</span>{ m_solved = solved; }</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00109">109</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>{ m_solved = solved; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1183,8 +1211,8 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_constant.html#a380618903f79d9062da054a7337bab97">Constant</a>, <a class="el" href="class_gain.html#a5f955287a3e2c95404cdde9e71b1c637">Gain</a>, <a class="el" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl</a>, <a class="el" href="class_math_expression.html#a7430d1f92978843de5f1bd171f09def6">MathExpression</a>, and <a class="el" href="class_transfer_function.html#a5ca78c0edc2a9af0a1375b1b83d81d1b">TransferFunction</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00105">105</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  105</span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00107">107</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  107</span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1209,7 +1237,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00116">116</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00118">118</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
 
 </div>
 </div>
@@ -1233,7 +1261,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00118">118</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00120">120</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
 
 </div>
 </div>
@@ -1257,7 +1285,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00117">117</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00119">119</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
 
 </div>
 </div>

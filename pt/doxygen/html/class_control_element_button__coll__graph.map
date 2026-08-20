@@ -1,5 +1,7 @@
 <map id="ControlElementButton" name="ControlElementButton">
-<area shape="rect" id="Node000001" title="This class is responsible to handle the user interaction with control elements." alt="" coords="5,79,172,104"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="42,5,135,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,44,91,79,86,79,86,44"/>
+<area shape="rect" id="Node000001" title="This class is responsible to handle the user interaction with control elements." alt="" coords="26,93,193,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,99,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,41,104,91,99,94,65,44"/>
+<area shape="rect" id="Node000003" href="$struct_g_u_i_colour.html" title=" " alt="" coords="123,5,211,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,44,120,94,115,91,149,41"/>
 </map>

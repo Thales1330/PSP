@@ -18,7 +18,6 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -45,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w11a-beta</span>
+   &#160;<span id="projectnumber">2026w23a-beta</span>
    </div>
   </td>
  </tr>
@@ -164,12 +163,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ace755e5bc3cc72b491ce31c24c54a5cf" id="r_ace755e5bc3cc72b491ce31c24c54a5cf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capacitor.html#ace755e5bc3cc72b491ce31c24c54a5cf">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent, wxPoint2DDouble position)</td></tr>
 <tr class="memdesc:ace755e5bc3cc72b491ce31c24c54a5cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted.  <br /></td></tr>
 <tr class="separator:ace755e5bc3cc72b491ce31c24c54a5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9e0bb1d7f7b46ce5dfaa897472a1d28" id="r_ae9e0bb1d7f7b46ce5dfaa897472a1d28"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capacitor.html#ae9e0bb1d7f7b46ce5dfaa897472a1d28">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:ae9e0bb1d7f7b46ce5dfaa897472a1d28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
-<tr class="separator:ae9e0bb1d7f7b46ce5dfaa897472a1d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab50aa5dc3a345da6a47906924805e225" id="r_ab50aa5dc3a345da6a47906924805e225"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capacitor.html#ab50aa5dc3a345da6a47906924805e225">DrawDC</a> (wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
-<tr class="memdesc:ab50aa5dc3a345da6a47906924805e225"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
-<tr class="separator:ab50aa5dc3a345da6a47906924805e225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3a58870d34555b75259e9ad599fcbc6" id="r_ad3a58870d34555b75259e9ad599fcbc6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capacitor.html#ad3a58870d34555b75259e9ad599fcbc6">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:ad3a58870d34555b75259e9ad599fcbc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
+<tr class="separator:ad3a58870d34555b75259e9ad599fcbc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404a0c839a7f23e4d466e41971529e15" id="r_a404a0c839a7f23e4d466e41971529e15"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capacitor.html#a404a0c839a7f23e4d466e41971529e15">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxDC &amp;dc) const</td></tr>
+<tr class="memdesc:a404a0c839a7f23e4d466e41971529e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using wxDC.  <br /></td></tr>
+<tr class="separator:a404a0c839a7f23e4d466e41971529e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a994039e59a8ae0ec3fe7cf7f5b66e4e5" id="r_a994039e59a8ae0ec3fe7cf7f5b66e4e5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capacitor.html#a994039e59a8ae0ec3fe7cf7f5b66e4e5">Contains</a> (wxPoint2DDouble position) const</td></tr>
 <tr class="memdesc:a994039e59a8ae0ec3fe7cf7f5b66e4e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <br /></td></tr>
 <tr class="separator:a994039e59a8ae0ec3fe7cf7f5b66e4e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,20 +238,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element" id="r_abd2cee52270374e17951782bdb571dce"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#abd2cee52270374e17951782bdb571dce">UpdateSwitches</a> ()</td></tr>
 <tr class="memdesc:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the switch position.  <br /></td></tr>
 <tr class="separator:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element" id="r_a6e3940470ff76662ca7e4c552b12a9a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6">DrawDCSwitches</a> (wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw switch.  <br /></td></tr>
-<tr class="separator:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac603055a40392c377703203235e5e658 inherit pub_methods_class_power_element" id="r_ac603055a40392c377703203235e5e658"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#ac603055a40392c377703203235e5e658">DrawDCSwitches</a> (wxDC &amp;dc) const</td></tr>
-<tr class="separator:ac603055a40392c377703203235e5e658 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element" id="r_acaa2c9e5736ac6e38c4c6a9ebca78024"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">DrawDCSwitches</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw switch.  <br /></td></tr>
+<tr class="separator:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ffb8c51f0e8dbdfdf7c02c75719089b inherit pub_methods_class_power_element" id="r_a6ffb8c51f0e8dbdfdf7c02c75719089b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6ffb8c51f0e8dbdfdf7c02c75719089b">DrawDCSwitches</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxDC &amp;dc) const</td></tr>
+<tr class="separator:a6ffb8c51f0e8dbdfdf7c02c75719089b inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element" id="r_a6c656ef223d36e96b19b0a9ec2115e9e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6c656ef223d36e96b19b0a9ec2115e9e">CalculatePowerFlowPts</a> (std::vector&lt; wxPoint2DDouble &gt; edges)</td></tr>
 <tr class="memdesc:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the points of the power flow arrows.  <br /></td></tr>
 <tr class="separator:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element" id="r_ae3aaa8bf4f030ba75e63c843e07bdefb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#ae3aaa8bf4f030ba75e63c843e07bdefb">DrawDCPowerFlowPts</a> (wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw power flow arrows.  <br /></td></tr>
-<tr class="separator:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9653b32340f9f6769c3185edc2beb8b6 inherit pub_methods_class_power_element" id="r_a9653b32340f9f6769c3185edc2beb8b6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a9653b32340f9f6769c3185edc2beb8b6">DrawDCPowerFlowPts</a> (wxDC &amp;dc) const</td></tr>
-<tr class="separator:a9653b32340f9f6769c3185edc2beb8b6 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0730506d0417089d69f7ce64b05daed4 inherit pub_methods_class_power_element" id="r_a0730506d0417089d69f7ce64b05daed4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a0730506d0417089d69f7ce64b05daed4">SetNominalVoltage</a> (std::vector&lt; double &gt; nominalVoltage, std::vector&lt; <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> &gt; nominalVoltageUnit)</td></tr>
+<tr class="memitem:a97c5d3482c58bc2f88a320ce2497b97f inherit pub_methods_class_power_element" id="r_a97c5d3482c58bc2f88a320ce2497b97f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a97c5d3482c58bc2f88a320ce2497b97f">DrawDCPowerFlowPts</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:a97c5d3482c58bc2f88a320ce2497b97f inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw power flow arrows.  <br /></td></tr>
+<tr class="separator:a97c5d3482c58bc2f88a320ce2497b97f inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71cff7fea289dee67ba610858075fa02 inherit pub_methods_class_power_element" id="r_a71cff7fea289dee67ba610858075fa02"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a71cff7fea289dee67ba610858075fa02">DrawDCPowerFlowPts</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxDC &amp;dc) const</td></tr>
+<tr class="separator:a71cff7fea289dee67ba610858075fa02 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0730506d0417089d69f7ce64b05daed4 inherit pub_methods_class_power_element" id="r_a0730506d0417089d69f7ce64b05daed4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a0730506d0417089d69f7ce64b05daed4">SetNominalVoltage</a> (std::vector&lt; double &gt; nominalVoltage, std::vector&lt; ElectricalUnit &gt; nominalVoltageUnit)</td></tr>
 <tr class="memdesc:a0730506d0417089d69f7ce64b05daed4 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set nominal voltage of the element.  <br /></td></tr>
 <tr class="separator:a0730506d0417089d69f7ce64b05daed4 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d2e84b91ab7443b20a9d7eb6ab441f inherit pub_methods_class_power_element" id="r_a08d2e84b91ab7443b20a9d7eb6ab441f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a08d2e84b91ab7443b20a9d7eb6ab441f">SetSwitchingData</a> (<a class="el" href="struct_switching_data.html">SwitchingData</a> data)</td></tr>
@@ -276,8 +275,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4dbd26d0a7987c30729efffa860debc4 inherit pub_methods_class_power_element" id="r_a4dbd26d0a7987c30729efffa860debc4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a> (bool dynEvent=true)</td></tr>
 <tr class="memdesc:a4dbd26d0a7987c30729efffa860debc4 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set if the power element have dynamic event.  <br /></td></tr>
 <tr class="separator:a4dbd26d0a7987c30729efffa860debc4 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad57d3eb59a91d1ae45c5416f7bc5d896 inherit pub_methods_class_power_element" id="r_ad57d3eb59a91d1ae45c5416f7bc5d896"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#ad57d3eb59a91d1ae45c5416f7bc5d896">GetValueFromUnit</a> (double value, <a class="el" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a> valueUnit)</td></tr>
-<tr class="separator:ad57d3eb59a91d1ae45c5416f7bc5d896 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1154808b9a09e5920cad3ee32c8c4736 inherit pub_methods_class_power_element" id="r_a1154808b9a09e5920cad3ee32c8c4736"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a1154808b9a09e5920cad3ee32c8c4736">GetValueFromUnit</a> (double value, ElectricalUnit valueUnit) const</td></tr>
+<tr class="separator:a1154808b9a09e5920cad3ee32c8c4736 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a396c3e0e3d9a7b9255567e9692feaaa6 inherit pub_methods_class_power_element" id="r_a396c3e0e3d9a7b9255567e9692feaaa6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a396c3e0e3d9a7b9255567e9692feaaa6">SaveCADProperties</a> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
 <tr class="separator:a396c3e0e3d9a7b9255567e9692feaaa6 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5dba245ecbf31a460207a0e9176fde2 inherit pub_methods_class_power_element" id="r_af5dba245ecbf31a460207a0e9176fde2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#af5dba245ecbf31a460207a0e9176fde2">SaveSwitchingData</a> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *electricalNode)</td></tr>
@@ -543,8 +542,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5c1d43a226486a7a987bfb8c195ffac6 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element" id="r_a37ff451865d4852ffa8c54574a20cd0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a37ff451865d4852ffa8c54574a20cd0b">m_online</a> = true</td></tr>
 <tr class="separator:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element" id="r_a9692eec7ca16d6f81172788b4bf48072"><td class="memItemLeft" align="right" valign="top">wxColour&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9692eec7ca16d6f81172788b4bf48072">m_selectionColour</a></td></tr>
-<tr class="separator:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -718,10 +715,10 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">   59</span>    }</div>
 <div class="line"><span class="lineno">   60</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">   61</span>}</div>
-<div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00186">Element.h:186</a></div></div>
-<div class="ttc" id="aclass_element_html_a5c75d8a6e28326dd568104a4d9d3473f"><div class="ttname"><a href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">Element::GetAngle</a></div><div class="ttdeci">double GetAngle() const</div><div class="ttdoc">Get the element angle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00211">Element.h:211</a></div></div>
-<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00223">Element.cpp:223</a></div></div>
-<div class="ttc" id="aclass_element_html_ac38d6707d08cb5c057032aa94b511a62"><div class="ttname"><a href="class_element.html#ac38d6707d08cb5c057032aa94b511a62">Element::AddChild</a></div><div class="ttdeci">virtual void AddChild(Element *child)</div><div class="ttdoc">Add a child to the child list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00494">Element.cpp:494</a></div></div>
+<div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00188">Element.h:188</a></div></div>
+<div class="ttc" id="aclass_element_html_a5c75d8a6e28326dd568104a4d9d3473f"><div class="ttname"><a href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">Element::GetAngle</a></div><div class="ttdeci">double GetAngle() const</div><div class="ttdoc">Get the element angle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00213">Element.h:213</a></div></div>
+<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00228">Element.cpp:228</a></div></div>
+<div class="ttc" id="aclass_element_html_ac38d6707d08cb5c057032aa94b511a62"><div class="ttname"><a href="class_element.html#ac38d6707d08cb5c057032aa94b511a62">Element::AddChild</a></div><div class="ttdeci">virtual void AddChild(Element *child)</div><div class="ttdoc">Add a child to the child list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00499">Element.cpp:499</a></div></div>
 <div class="ttc" id="aclass_power_element_html_abd2cee52270374e17951782bdb571dce"><div class="ttname"><a href="class_power_element.html#abd2cee52270374e17951782bdb571dce">PowerElement::UpdateSwitches</a></div><div class="ttdeci">virtual void UpdateSwitches()</div><div class="ttdoc">Update the switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00073">PowerElement.cpp:73</a></div></div>
 <div class="ttc" id="aclass_power_element_html_aef6392c211caf557bdac287b174a1ea8"><div class="ttname"><a href="class_power_element.html#aef6392c211caf557bdac287b174a1ea8">PowerElement::GetSwitchPoint</a></div><div class="ttdeci">virtual wxPoint2DDouble GetSwitchPoint(Element *parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const</div><div class="ttdoc">Get the correct switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00039">PowerElement.cpp:39</a></div></div>
 </div><!-- fragment --><div class="dynheader">
@@ -800,8 +797,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ab50aa5dc3a345da6a47906924805e225" name="ab50aa5dc3a345da6a47906924805e225"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab50aa5dc3a345da6a47906924805e225">&#9670;&#160;</a></span>DrawDC() <span class="overload">[1/2]</span></h2>
+<a id="a404a0c839a7f23e4d466e41971529e15" name="a404a0c839a7f23e4d466e41971529e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a404a0c839a7f23e4d466e41971529e15">&#9670;&#160;</a></span>DrawDC() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -812,6 +809,12 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void Capacitor::DrawDC </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td>
+          <td class="paramname"><em>guiColour</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">wxPoint2DDouble&#160;</td>
           <td class="paramname"><em>translation</em>, </td>
         </tr>
@@ -843,6 +846,7 @@ Here is the call graph for this function:</div>
 <p>Draw the element using wxDC. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">guiColour</td><td>Colours of the system defined in properties. </td></tr>
     <tr><td class="paramname">translation</td><td>Translation of the system. </td></tr>
     <tr><td class="paramname">scale</td><td>Scale of the system. </td></tr>
     <tr><td class="paramname">dc</td><td>Device context. </td></tr>
@@ -850,19 +854,19 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#a44877d44d6e548c24f466913d118f61b">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a8720b78213ff3a15b16e2f53a70c139c">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_capacitor_8cpp_source.html#l00198">198</a> of file <a class="el" href="_capacitor_8cpp_source.html">Capacitor.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  199</span>{</div>
 <div class="line"><span class="lineno">  200</span>    wxColour elementColour;</div>
 <div class="line"><span class="lineno">  201</span>    <span class="keywordflow">if</span> (m_online) {</div>
 <div class="line"><span class="lineno">  202</span>        <span class="keywordflow">if</span> (m_dynEvent)</div>
-<div class="line"><span class="lineno">  203</span>            elementColour = m_dynamicEventColour;</div>
+<div class="line"><span class="lineno">  203</span>            elementColour = guiColour-&gt;eventElement;</div>
 <div class="line"><span class="lineno">  204</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  205</span>            elementColour = m_onlineElementColour;</div>
+<div class="line"><span class="lineno">  205</span>            elementColour = guiColour-&gt;enabled;</div>
 <div class="line"><span class="lineno">  206</span>    }</div>
 <div class="line"><span class="lineno">  207</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  208</span>        elementColour = m_offlineElementColour;</div>
+<div class="line"><span class="lineno">  208</span>        elementColour = guiColour-&gt;disable;</div>
 <div class="line"><span class="lineno">  209</span> </div>
 <div class="line"><span class="lineno">  210</span>    <span class="keywordflow">if</span> (m_inserted) {</div>
 <div class="line"><span class="lineno">  211</span>        wxPoint2DDouble p;</div>
@@ -884,7 +888,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  227</span>        }</div>
 <div class="line"><span class="lineno">  228</span> </div>
 <div class="line"><span class="lineno">  229</span>        <span class="keywordflow">if</span> (m_selected) {</div>
-<div class="line"><span class="lineno">  230</span>            dc.SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));</div>
+<div class="line"><span class="lineno">  230</span>            dc.SetPen(wxPen(guiColour-&gt;selection, 2 + m_borderSize * 2.0));</div>
 <div class="line"><span class="lineno">  231</span>            dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
 <div class="line"><span class="lineno">  232</span> </div>
 <div class="line"><span class="lineno">  233</span>            dc.DrawLines(pointListInt.size(), &amp;pointListInt[0]);</div>
@@ -897,22 +901,22 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  240</span> </div>
 <div class="line"><span class="lineno">  241</span>            <span class="comment">// Draw node selection.</span></div>
 <div class="line"><span class="lineno">  242</span>            dc.SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  243</span>            dc.SetBrush(wxBrush(wxColour(m_selectionColour)));</div>
+<div class="line"><span class="lineno">  243</span>            dc.SetBrush(wxBrush(guiColour-&gt;selection));</div>
 <div class="line"><span class="lineno">  244</span>            <a class="code hl_function" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a>(m_pointList[0], 5.0 + m_borderSize / scale, dc);</div>
 <div class="line"><span class="lineno">  245</span>        }</div>
 <div class="line"><span class="lineno">  246</span>        <span class="comment">// Draw Capacitor (layer 2).</span></div>
 <div class="line"><span class="lineno">  247</span>        <span class="comment">// Draw node.</span></div>
 <div class="line"><span class="lineno">  248</span>        dc.SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  249</span>        dc.SetBrush(wxBrush(wxColour(elementColour)));</div>
+<div class="line"><span class="lineno">  249</span>        dc.SetBrush(wxBrush(elementColour));</div>
 <div class="line"><span class="lineno">  250</span>        <a class="code hl_function" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a>(m_pointList[0], 5.0, dc);</div>
 <div class="line"><span class="lineno">  251</span> </div>
-<div class="line"><span class="lineno">  252</span>        dc.SetPen(wxPen(wxColour(elementColour), 2));</div>
+<div class="line"><span class="lineno">  252</span>        dc.SetPen(wxPen(elementColour, 2));</div>
 <div class="line"><span class="lineno">  253</span>        dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
 <div class="line"><span class="lineno">  254</span>        dc.DrawLines(pointListInt.size(), &amp;pointListInt[0]);</div>
 <div class="line"><span class="lineno">  255</span> </div>
-<div class="line"><span class="lineno">  256</span>        <a class="code hl_function" href="class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6">DrawDCSwitches</a>(dc);</div>
+<div class="line"><span class="lineno">  256</span>        <a class="code hl_function" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">DrawDCSwitches</a>(guiColour, dc);</div>
 <div class="line"><span class="lineno">  257</span> </div>
-<div class="line"><span class="lineno">  258</span>        dc.SetPen(wxPen(wxColour(elementColour), 2));</div>
+<div class="line"><span class="lineno">  258</span>        dc.SetPen(wxPen(elementColour, 2));</div>
 <div class="line"><span class="lineno">  259</span>        dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
 <div class="line"><span class="lineno">  260</span>        dc.DrawLines(2, &amp;capPts[0]);</div>
 <div class="line"><span class="lineno">  261</span>        dc.DrawLines(2, &amp;capPts[2]);</div>
@@ -920,17 +924,17 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  263</span>        DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), dc);</div>
 <div class="line"><span class="lineno">  264</span>    }</div>
 <div class="line"><span class="lineno">  265</span>}</div>
-<div class="ttc" id="aclass_element_html_af1fd54d12f61f461111697d11cf10b9c"><div class="ttname"><a href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">Element::DrawDCCircle</a></div><div class="ttdeci">virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a circle using device context.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00168">Element.cpp:168</a></div></div>
-<div class="ttc" id="aclass_power_element_html_a6e3940470ff76662ca7e4c552b12a9a6"><div class="ttname"><a href="class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6">PowerElement::DrawDCSwitches</a></div><div class="ttdeci">virtual void DrawDCSwitches(wxGraphicsContext *gc) const</div><div class="ttdoc">Draw switch.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00110">PowerElement.cpp:110</a></div></div>
+<div class="ttc" id="aclass_element_html_af1fd54d12f61f461111697d11cf10b9c"><div class="ttname"><a href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">Element::DrawDCCircle</a></div><div class="ttdeci">virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a circle using device context.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00173">Element.cpp:173</a></div></div>
+<div class="ttc" id="aclass_power_element_html_acaa2c9e5736ac6e38c4c6a9ebca78024"><div class="ttname"><a href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">PowerElement::DrawDCSwitches</a></div><div class="ttdeci">virtual void DrawDCSwitches(GUIColour *guiColour, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw switch.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00110">PowerElement.cpp:110</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_capacitor_ab50aa5dc3a345da6a47906924805e225_cgraph.png" border="0" usemap="#aclass_capacitor_ab50aa5dc3a345da6a47906924805e225_cgraph" alt=""/></div>
-<map name="aclass_capacitor_ab50aa5dc3a345da6a47906924805e225_cgraph" id="aclass_capacitor_ab50aa5dc3a345da6a47906924805e225_cgraph">
+<div class="center"><img src="class_capacitor_a404a0c839a7f23e4d466e41971529e15_cgraph.png" border="0" usemap="#aclass_capacitor_a404a0c839a7f23e4d466e41971529e15_cgraph" alt=""/></div>
+<map name="aclass_capacitor_a404a0c839a7f23e4d466e41971529e15_cgraph" id="aclass_capacitor_a404a0c839a7f23e4d466e41971529e15_cgraph">
 <area shape="rect" title="Draw the element using wxDC." alt="" coords="5,31,151,56"/>
 <area shape="rect" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c" title="Draw a circle using device context." alt="" coords="229,5,403,31"/>
 <area shape="poly" title=" " alt="" coords="151,33,214,26,215,31,152,38"/>
-<area shape="rect" href="class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6" title="Draw switch." alt="" coords="199,55,433,80"/>
+<area shape="rect" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024" title="Draw switch." alt="" coords="199,55,433,80"/>
 <area shape="poly" title=" " alt="" coords="151,48,185,51,185,57,151,53"/>
 <area shape="rect" href="class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="481,55,640,80"/>
 <area shape="poly" title=" " alt="" coords="433,65,468,65,468,70,433,70"/>
@@ -939,8 +943,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ae9e0bb1d7f7b46ce5dfaa897472a1d28" name="ae9e0bb1d7f7b46ce5dfaa897472a1d28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9e0bb1d7f7b46ce5dfaa897472a1d28">&#9670;&#160;</a></span>DrawDC() <span class="overload">[2/2]</span></h2>
+<a id="ad3a58870d34555b75259e9ad599fcbc6" name="ad3a58870d34555b75259e9ad599fcbc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a58870d34555b75259e9ad599fcbc6">&#9670;&#160;</a></span>DrawDC() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -951,6 +955,12 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void Capacitor::DrawDC </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td>
+          <td class="paramname"><em>guiColour</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">wxPoint2DDouble&#160;</td>
           <td class="paramname"><em>translation</em>, </td>
         </tr>
@@ -982,6 +992,7 @@ Here is the call graph for this function:</div>
 <p>Draw the element using GDI+. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">guiColour</td><td>Colours of the system defined in properties. </td></tr>
     <tr><td class="paramname">translation</td><td>Translation of the system. </td></tr>
     <tr><td class="paramname">scale</td><td>Scale of the system. </td></tr>
     <tr><td class="paramname">gc</td><td>Graphics context </td></tr>
@@ -989,19 +1000,19 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#a6cca77f38afe3ade6d92294d0759427a">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a5ac0a5f9ca1299f06ed9979789340b70">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_capacitor_8cpp_source.html#l00124">124</a> of file <a class="el" href="_capacitor_8cpp_source.html">Capacitor.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  125</span>{</div>
 <div class="line"><span class="lineno">  126</span>    wxColour elementColour;</div>
 <div class="line"><span class="lineno">  127</span>    <span class="keywordflow">if</span> (m_online) {</div>
 <div class="line"><span class="lineno">  128</span>        <span class="keywordflow">if</span> (m_dynEvent)</div>
-<div class="line"><span class="lineno">  129</span>            elementColour = m_dynamicEventColour;</div>
+<div class="line"><span class="lineno">  129</span>            elementColour = guiColour-&gt;eventElement;</div>
 <div class="line"><span class="lineno">  130</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  131</span>            elementColour = m_onlineElementColour;</div>
+<div class="line"><span class="lineno">  131</span>            elementColour = guiColour-&gt;enabled;</div>
 <div class="line"><span class="lineno">  132</span>    }</div>
 <div class="line"><span class="lineno">  133</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  134</span>        elementColour = m_offlineElementColour;</div>
+<div class="line"><span class="lineno">  134</span>        elementColour = guiColour-&gt;disable;</div>
 <div class="line"><span class="lineno">  135</span> </div>
 <div class="line"><span class="lineno">  136</span>    <span class="keywordflow">if</span> (m_inserted) {</div>
 <div class="line"><span class="lineno">  137</span>        std::vector&lt;wxPoint2DDouble&gt; capPts;</div>
@@ -1011,7 +1022,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  141</span>        capPts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2.0, m_position.m_y - m_height / 2.0 + 10.0));</div>
 <div class="line"><span class="lineno">  142</span> </div>
 <div class="line"><span class="lineno">  143</span>        <span class="keywordflow">if</span> (m_selected) {</div>
-<div class="line"><span class="lineno">  144</span>            gc-&gt;SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));</div>
+<div class="line"><span class="lineno">  144</span>            gc-&gt;SetPen(wxPen(guiColour-&gt;selection, 2 + m_borderSize * 2.0));</div>
 <div class="line"><span class="lineno">  145</span>            gc-&gt;SetBrush(*wxTRANSPARENT_BRUSH);</div>
 <div class="line"><span class="lineno">  146</span> </div>
 <div class="line"><span class="lineno">  147</span>            gc-&gt;StrokeLines(m_pointList.size(), &amp;m_pointList[0]);</div>
@@ -1032,20 +1043,20 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  162</span> </div>
 <div class="line"><span class="lineno">  163</span>            <span class="comment">// Draw node selection.</span></div>
 <div class="line"><span class="lineno">  164</span>            gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  165</span>            gc-&gt;SetBrush(wxBrush(wxColour(m_selectionColour)));</div>
+<div class="line"><span class="lineno">  165</span>            gc-&gt;SetBrush(wxBrush(guiColour-&gt;selection));</div>
 <div class="line"><span class="lineno">  166</span>            <a class="code hl_function" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a>(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);</div>
 <div class="line"><span class="lineno">  167</span>        }</div>
 <div class="line"><span class="lineno">  168</span>        <span class="comment">// Draw Capacitor (layer 2).</span></div>
 <div class="line"><span class="lineno">  169</span>        <span class="comment">// Draw node.</span></div>
 <div class="line"><span class="lineno">  170</span>        gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  171</span>        gc-&gt;SetBrush(wxBrush(wxColour(elementColour)));</div>
+<div class="line"><span class="lineno">  171</span>        gc-&gt;SetBrush(wxBrush(elementColour));</div>
 <div class="line"><span class="lineno">  172</span>        <a class="code hl_function" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a>(m_pointList[0], 5.0, 10, gc);</div>
 <div class="line"><span class="lineno">  173</span> </div>
-<div class="line"><span class="lineno">  174</span>        gc-&gt;SetPen(wxPen(wxColour(elementColour), 2));</div>
+<div class="line"><span class="lineno">  174</span>        gc-&gt;SetPen(wxPen(elementColour, 2));</div>
 <div class="line"><span class="lineno">  175</span>        gc-&gt;SetBrush(*wxTRANSPARENT_BRUSH);</div>
 <div class="line"><span class="lineno">  176</span>        gc-&gt;StrokeLines(m_pointList.size(), &amp;m_pointList[0]);</div>
 <div class="line"><span class="lineno">  177</span> </div>
-<div class="line"><span class="lineno">  178</span>        <a class="code hl_function" href="class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6">DrawDCSwitches</a>(gc);</div>
+<div class="line"><span class="lineno">  178</span>        <a class="code hl_function" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">DrawDCSwitches</a>(guiColour, gc);</div>
 <div class="line"><span class="lineno">  179</span> </div>
 <div class="line"><span class="lineno">  180</span>        <span class="comment">// Push the current matrix on stack.</span></div>
 <div class="line"><span class="lineno">  181</span>        gc-&gt;PushState();</div>
@@ -1054,7 +1065,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  184</span>        gc-&gt;Rotate(wxDegToRad(m_angle));</div>
 <div class="line"><span class="lineno">  185</span>        gc-&gt;Translate(-m_position.m_x, -m_position.m_y);</div>
 <div class="line"><span class="lineno">  186</span> </div>
-<div class="line"><span class="lineno">  187</span>        gc-&gt;SetPen(wxPen(wxColour(elementColour), 2));</div>
+<div class="line"><span class="lineno">  187</span>        gc-&gt;SetPen(wxPen(elementColour, 2));</div>
 <div class="line"><span class="lineno">  188</span>        gc-&gt;SetBrush(*wxTRANSPARENT_BRUSH);</div>
 <div class="line"><span class="lineno">  189</span>        gc-&gt;StrokeLines(2, &amp;capPts[0]);</div>
 <div class="line"><span class="lineno">  190</span>        gc-&gt;StrokeLines(2, &amp;capPts[2]);</div>
@@ -1067,12 +1078,12 @@ Here is the call graph for this function:</div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_capacitor_ae9e0bb1d7f7b46ce5dfaa897472a1d28_cgraph.png" border="0" usemap="#aclass_capacitor_ae9e0bb1d7f7b46ce5dfaa897472a1d28_cgraph" alt=""/></div>
-<map name="aclass_capacitor_ae9e0bb1d7f7b46ce5dfaa897472a1d28_cgraph" id="aclass_capacitor_ae9e0bb1d7f7b46ce5dfaa897472a1d28_cgraph">
+<div class="center"><img src="class_capacitor_ad3a58870d34555b75259e9ad599fcbc6_cgraph.png" border="0" usemap="#aclass_capacitor_ad3a58870d34555b75259e9ad599fcbc6_cgraph" alt=""/></div>
+<map name="aclass_capacitor_ad3a58870d34555b75259e9ad599fcbc6_cgraph" id="aclass_capacitor_ad3a58870d34555b75259e9ad599fcbc6_cgraph">
 <area shape="rect" title="Draw the element using GDI+." alt="" coords="5,31,151,56"/>
 <area shape="rect" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c" title="Draw a circle using device context." alt="" coords="229,5,403,31"/>
 <area shape="poly" title=" " alt="" coords="151,33,214,26,215,31,152,38"/>
-<area shape="rect" href="class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6" title="Draw switch." alt="" coords="199,55,433,80"/>
+<area shape="rect" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024" title="Draw switch." alt="" coords="199,55,433,80"/>
 <area shape="poly" title=" " alt="" coords="151,48,185,51,185,57,151,53"/>
 <area shape="rect" href="class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="481,55,640,80"/>
 <area shape="poly" title=" " alt="" coords="433,65,468,65,468,70,433,70"/>
@@ -1130,8 +1141,8 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  290</span>    <a class="code hl_function" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a>(menu);</div>
 <div class="line"><span class="lineno">  291</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  292</span>}</div>
-<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00075">Element.h:75</a></div></div>
-<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00388">Element.cpp:388</a></div></div>
+<div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00077">Element.h:77</a></div></div>
+<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00393">Element.cpp:393</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1239,17 +1250,17 @@ Here is the call graph for this function:</div>
 <div class="fragment"><div class="line"><span class="lineno">  317</span>{</div>
 <div class="line"><span class="lineno">  318</span>    <a class="code hl_struct" href="struct_capacitor_electrical_data.html">CapacitorElectricalData</a> data = m_electricalData;</div>
 <div class="line"><span class="lineno">  319</span>    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
-<div class="line"><span class="lineno">  320</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  320</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  321</span>        data.reactivePower = data.reactivePower / systemPowerBase;</div>
-<div class="line"><span class="lineno">  322</span>        data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  322</span>        data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  323</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  324</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  324</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  325</span>        data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;</div>
-<div class="line"><span class="lineno">  326</span>        data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  326</span>        data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  327</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  328</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  328</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  329</span>        data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;</div>
-<div class="line"><span class="lineno">  330</span>        data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  330</span>        data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><span class="lineno">  331</span>    } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  332</span>    <span class="keywordflow">default</span>:</div>
 <div class="line"><span class="lineno">  333</span>        <span class="keywordflow">break</span>;</div>
@@ -1257,10 +1268,6 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  335</span> </div>
 <div class="line"><span class="lineno">  336</span>    <span class="keywordflow">return</span> data;</div>
 <div class="line"><span class="lineno">  337</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a></div><div class="ttdeci">@ UNIT_Mvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a></div><div class="ttdeci">@ UNIT_var</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a></div><div class="ttdeci">@ UNIT_kvar</div></div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
 <div class="ttc" id="astruct_capacitor_electrical_data_html"><div class="ttname"><a href="struct_capacitor_electrical_data.html">CapacitorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00025">Capacitor.h:25</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1308,16 +1315,16 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  358</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"><span class="lineno">  359</span>    tipText += _(<span class="stringliteral">&quot;\nQ = &quot;</span>) + wxString::FromDouble(reactivePower, 5);</div>
 <div class="line"><span class="lineno">  360</span>    <span class="keywordflow">switch</span> (m_electricalData.reactivePowerUnit) {</div>
-<div class="line"><span class="lineno">  361</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  361</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
 <div class="line"><span class="lineno">  362</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
 <div class="line"><span class="lineno">  363</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  364</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  364</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
 <div class="line"><span class="lineno">  365</span>        tipText += _(<span class="stringliteral">&quot; var&quot;</span>);</div>
 <div class="line"><span class="lineno">  366</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  367</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  367</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
 <div class="line"><span class="lineno">  368</span>        tipText += _(<span class="stringliteral">&quot; kvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  369</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  370</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  370</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
 <div class="line"><span class="lineno">  371</span>        tipText += _(<span class="stringliteral">&quot; Mvar&quot;</span>);</div>
 <div class="line"><span class="lineno">  372</span>    } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  373</span>    <span class="keywordflow">default</span>:</div>
@@ -1368,7 +1375,7 @@ Here is the call graph for this function:</div>
 <div class="fragment"><div class="line"><span class="lineno">  301</span>{</div>
 <div class="line"><span class="lineno">  302</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a>(m_rect, rect, m_angle, 0.0);</div>
 <div class="line"><span class="lineno">  303</span>}</div>
-<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00290">Element.cpp:290</a></div></div>
+<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00295">Element.cpp:295</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1429,7 +1436,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  409</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
 <div class="line"><span class="lineno">  410</span>    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
 <div class="line"><span class="lineno">  411</span>    m_electricalData.reactivePowerUnit =</div>
-<div class="line"><span class="lineno">  412</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  412</span>        <span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
 <div class="line"><span class="lineno">  413</span> </div>
 <div class="line"><span class="lineno">  414</span>    <span class="keywordflow">if</span> (!OpenSwitchingData(electricalProp)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  415</span>    <span class="keywordflow">if</span> (m_swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size() != 0) <a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">true</span>);</div>
@@ -1437,10 +1444,9 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  417</span>    m_inserted = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  418</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  419</span>}</div>
-<div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a></div><div class="ttdeci">ElectricalUnit</div><div class="ttdoc">Electrical units.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
-<div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00378">Element.cpp:378</a></div></div>
-<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00229">PowerElement.h:229</a></div></div>
-<div class="ttc" id="astruct_switching_data_html_a3323745bf0a3f6461fbc19bc76a189df"><div class="ttname"><a href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">SwitchingData::swTime</a></div><div class="ttdeci">std::vector&lt; double &gt; swTime</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00101">PowerElement.h:101</a></div></div>
+<div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00383">Element.cpp:383</a></div></div>
+<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00201">PowerElement.h:201</a></div></div>
+<div class="ttc" id="astruct_switching_data_html_a3323745bf0a3f6461fbc19bc76a189df"><div class="ttname"><a href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">SwitchingData::swTime</a></div><div class="ttdeci">std::vector&lt; double &gt; swTime</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00073">PowerElement.h:73</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

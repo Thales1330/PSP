@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,176,31"/>
-<area shape="rect" id="Node000001" href="$class_harm_current_form.html" title=" " alt="" coords="224,5,363,31"/>
-<area shape="poly" id="edge52_Node000000_Node000001" title=" " alt="" coords="190,15,224,15,224,21,190,21"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,187,31"/>
+<area shape="rect" id="Node000001" href="$class_generator_stab_form.html" title="Form to edit the synchronous generator data for electromechanical studies." alt="" coords="235,5,384,31"/>
+<area shape="poly" id="edge51_Node000000_Node000001" title=" " alt="" coords="200,15,234,15,234,21,200,21"/>
 </map>
