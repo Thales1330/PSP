@@ -4422,7 +4422,7 @@ EMTElementFormBase::EMTElementFormBase(wxWindow* parent, wxWindowID id, const wx
     boxSizerLvl2_1132->Add(m_staticTextCyclesSS, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_spinCtrlCyclesToSS = new wxSpinCtrl(m_panelEMTGeneral, wxID_ANY, wxT("1"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), wxSP_ARROW_KEYS);
-    m_spinCtrlCyclesToSS->SetRange(1, 100);
+    m_spinCtrlCyclesToSS->SetRange(1, 10000);
     m_spinCtrlCyclesToSS->SetValue(1);
     
     boxSizerLvl2_1132->Add(m_spinCtrlCyclesToSS, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));

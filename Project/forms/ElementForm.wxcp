@@ -47333,7 +47333,7 @@
 																		}, {
 																			"type":	"string",
 																			"m_label":	"Max value:",
-																			"m_value":	"100"
+																			"m_value":	"10000"
 																		}],
 																	"m_events":	[],
 																	"m_children":	[]
