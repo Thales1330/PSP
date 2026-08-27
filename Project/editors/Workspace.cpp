@@ -572,7 +572,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 	// Text element
 	for (auto& text : m_textList) {
 		if (text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-			if (text->ShowForm(dialogParent, GetElementList())) SaveCurrentState();
+			if (text->ShowForm(dialogParent, GetElementList(), this)) SaveCurrentState();
 			// Modal dialogs can steal focus; restore it to the workspace panel to keep mouse/keyboard handling consistent.
 			if (m_workspacePanel) m_workspacePanel->SetFocus();
 			redraw = true;

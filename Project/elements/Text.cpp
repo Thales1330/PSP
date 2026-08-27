@@ -21,6 +21,8 @@
 
 #include "../simulation/ElectricCalculation.h"
 
+#include "../../editors/Workspace.h"
+
 #include "powerElement/Bus.h"
 #include "powerElement/Capacitor.h"
 #include "powerElement/IndMotor.h"
@@ -272,9 +274,17 @@ void Text::Rotate(bool clockwise)
 	if (m_angle >= 360 || m_angle <= -360) m_angle = 0.0;
 }
 
-bool Text::ShowForm(wxWindow* parent, std::vector<Element*> elementList)
+bool Text::ShowForm(wxWindow* parent, std::vector<Element*> elementList, wxWindow* workspace)
 {
-	TextForm textForm(parent, this, elementList);
+	Workspace* ws = dynamic_cast<Workspace*>(workspace);
+	if (!ws) return false;
+	double systemPowerBase = ws->GetProperties()->GetSimulationPropertiesData().basePower;
+	if (ws->GetProperties()->GetSimulationPropertiesData().basePowerUnit == ElectricalUnit::UNIT_MVA)
+		systemPowerBase *= 1e6;
+	else if (ws->GetProperties()->GetSimulationPropertiesData().basePowerUnit == ElectricalUnit::UNIT_kVA)
+		systemPowerBase *= 1e3;
+
+	TextForm textForm(parent, this, elementList, systemPowerBase);
 	if (textForm.ShowModal() == wxID_OK) {
 		return true;
 	}

@@ -81,7 +81,7 @@ public:
 	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc);
 	virtual bool Intersects(wxRect2DDouble rect) const;
 	virtual void Rotate(bool clockwise = true);
-	virtual bool ShowForm(wxWindow* parent, std::vector<Element*> elementList);
+	virtual bool ShowForm(wxWindow* parent, std::vector<Element*> elementList, wxWindow* workspace);
 	virtual void UpdateText(double systemPowerBase);
 	virtual wxString GetText() const { return m_text; }
 	virtual void SetText(wxString text);

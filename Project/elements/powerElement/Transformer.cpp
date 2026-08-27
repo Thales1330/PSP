@@ -695,6 +695,14 @@ TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePowe
 	data.powerFlow[0] = m_electricalData.powerFlow[0];
 	data.powerFlow[1] = m_electricalData.powerFlow[1];
 
+	data.faultCurrent[0][0] = m_electricalData.faultCurrent[0][0];
+	data.faultCurrent[0][1] = m_electricalData.faultCurrent[0][1];
+	data.faultCurrent[0][2] = m_electricalData.faultCurrent[0][2];
+	data.faultCurrent[1][0] = m_electricalData.faultCurrent[1][0];
+	data.faultCurrent[1][1] = m_electricalData.faultCurrent[1][1];
+	data.faultCurrent[1][2] = m_electricalData.faultCurrent[1][2];
+
+
 	data.harmonicOrder = m_electricalData.harmonicOrder;
 	data.harmonicCurrent[0] = m_electricalData.harmonicCurrent[0];
 	data.harmonicCurrent[1] = m_electricalData.harmonicCurrent[1];

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -32,7 +32,7 @@
 class TextForm : public TextFormBase
 {
    public:
-    TextForm(wxWindow* parent, Text* text, std::vector<Element*> elementList, double systemPowerBase = 100e6);
+    TextForm(wxWindow* parent, Text* text, std::vector<Element*> elementList, double systemPowerBase);
     virtual ~TextForm();
 
     virtual bool LoadChoices();
