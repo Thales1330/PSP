@@ -21,7 +21,7 @@
 
 #include "../simulation/ElectricCalculation.h"
 
-#include "../../editors/Workspace.h"
+#include "../editors/Workspace.h"
 
 #include "powerElement/Bus.h"
 #include "powerElement/Capacitor.h"
