@@ -423,6 +423,15 @@ bool Bus::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 		plotData.SetName(m_electricalData.name);
 		plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);
 		plotData.AddData(m_electricalData.absImpedanceVector, _("Impedance"));
+		const auto& z = m_electricalData.complexImpedanceVector;
+		std::vector<double> r(z.size());
+		std::vector<double> x(z.size());
+		for (std::size_t i = 0; i < z.size(); ++i) {
+			r[i] = z[i].real();
+			x[i] = z[i].imag();
+		}
+		plotData.AddData(r, _("Resistance"));
+		plotData.AddData(x, _("Reactance"));
 		return true;
 	}
 	return false;

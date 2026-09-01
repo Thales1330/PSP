@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -216,6 +216,9 @@ void Fault::UpdateElementsFault(double systemPowerBase)
 	std::complex<double> a = std::complex<double>(-0.5, 0.866025403784);
 	std::complex<double> a2 = std::complex<double>(-0.5, -0.866025403784);
 
+	std::complex<double> vpf = std::complex<double>(0.0, 0.0);
+
+
 	for (auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
 		Bus* bus = *it;
 		auto data = bus->GetElectricalData();
@@ -223,6 +226,8 @@ void Fault::UpdateElementsFault(double systemPowerBase)
 			data.faultCurrent[0] = m_fCurrentA;
 			data.faultCurrent[1] = m_fCurrentB;
 			data.faultCurrent[2] = m_fCurrentC;
+
+			vpf = data.voltage;
 		}
 		else {
 			data.faultCurrent[0] = data.faultCurrent[1] = data.faultCurrent[2] = std::complex<double>(0.0, 0.0);
@@ -367,10 +372,11 @@ void Fault::UpdateElementsFault(double systemPowerBase)
 				puData.zeroReactance + 3.0 * puData.groundReactance);
 
 			// Internal voltage
-			std::complex<double> i = std::complex<double>(puData.activePower, -puData.reactivePower) / std::conj(v);
-			std::complex<double> e = v + zPos * i;
+			//std::complex<double> i = std::complex<double>(puData.activePower, -puData.reactivePower) / std::conj(v);
+			//std::complex<double> e = v + zPos * i;
 
-			std::complex<double> syncGeneratorCurrentPos = n >= 0 ? (e - vPos) / zPos : 0.0;
+			//std::complex<double> syncGeneratorCurrentPos = n >= 0 ? (e - vPos) / zPos : 0.0;
+			std::complex<double> syncGeneratorCurrentPos = n >= 0 ? (v - vPos) / zPos : 0.0;
 			std::complex<double> syncGeneratorCurrentNeg = n >= 0 ? (-vNeg) / zNeg : 0.0;
 			std::complex<double> syncGeneratorCurrentZero(0.0, 0.0);
 			if (data.groundNeutral) syncGeneratorCurrentZero = n >= 0 ? (-vZero) / zZero : 0.0;
@@ -423,7 +429,7 @@ bool Fault::RunSCPowerCalcutation(double systemPowerBase)
 {
 	// Get adimittance matrix.
 	std::vector<std::vector<std::complex<double> > > yBusPos;
-	GetYBus(yBusPos, systemPowerBase, POSITIVE_SEQ, true);
+	GetYBus(yBusPos, systemPowerBase, POSITIVE_SEQ, true,  true);
 
 	// Calculate the impedance matrix.
 	if (!InvertMatrix(yBusPos, m_zBusPos)) {

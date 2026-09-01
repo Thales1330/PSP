@@ -73,6 +73,7 @@ struct BusElectricalData {
 	double thd = 0.0;
 
 	std::vector<double> absImpedanceVector;
+	std::vector< std::complex<double> > complexImpedanceVector;
 };
 
 /**

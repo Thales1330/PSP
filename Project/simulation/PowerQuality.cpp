@@ -458,7 +458,7 @@ bool PowerQuality::CalculateFrequencyResponse(double systemFreq,
 	for (unsigned int i = 0; i < m_busList.size(); i++) {
 		auto data = m_busList[i]->GetElectricalData();
 		data.absImpedanceVector.clear();
-		data.absImpedanceVector.shrink_to_fit();
+		data.complexImpedanceVector.clear();
 		m_busList[i]->SetElectricalData(data);
 	}
 
@@ -494,6 +494,8 @@ bool PowerQuality::CalculateFrequencyResponse(double systemFreq,
 				auto zh = GaussianElimination(yBus, iInj);
 
 				data.absImpedanceVector.push_back(std::abs(zh[data.number]));
+				data.complexImpedanceVector.push_back(zh[data.number]);
+
 				m_busList[i]->SetElectricalData(data);
 			}
 		}

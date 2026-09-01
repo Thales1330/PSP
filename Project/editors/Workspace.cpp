@@ -2677,7 +2677,15 @@ std::vector<Element*> Workspace::GetElementList() const
 bool Workspace::RunSCPower()
 {
 	Fault fault(GetElementList());
-	bool result = fault.RunSCPowerCalcutation(100e6);
+
+	auto simProp = m_properties->GetSimulationPropertiesData();
+	double basePower = simProp.basePower;
+	if (simProp.basePowerUnit == ElectricalUnit::UNIT_MVA)
+		basePower *= 1e6;
+	else if (simProp.basePowerUnit == ElectricalUnit::UNIT_kVA)
+		basePower *= 1e3;
+
+	bool result = fault.RunSCPowerCalcutation(basePower);
 	if (!result) {
 		wxMessageDialog msgDialog(this, fault.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
 		msgDialog.ShowModal();
