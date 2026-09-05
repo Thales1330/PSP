@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -53,6 +53,17 @@ struct TransformerElectricalData {
     double phaseShift = 0.0;
     bool useTransformerPower = false;
 
+    // On-Load Tap Changer (OLTC / Comutador sob carga)
+    bool hasTapChanger = false;
+    double nominalTurnsRatio = 1.0;
+    int oltcControlledBus = 1;          // 0 = Primary (Bus 1), 1 = Secondary (Bus 2)
+    double oltcTargetVoltage = 1.0;     // Target voltage in p.u.
+    double oltcVoltageDeadband = 0.005;  // Voltage deadband/tolerance in p.u.
+    double oltcMinTap = 0.90;           // Minimum tap in p.u.
+    double oltcMaxTap = 1.10;           // Maximum tap in p.u.
+    double oltcTapStep = 0.00625;       // Tap step size in p.u. (e.g. 5/8 % = 0.00625)
+    bool oltcIsDiscrete = false;        // Discrete tap steps vs continuous
+
     // Power flow (p.u.)
     std::complex<double> current[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
     std::complex<double> powerFlow[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
@@ -76,8 +87,9 @@ struct TransformerElectricalData {
 /**
  * @class Transformer
  * @author Thales Lima Oliveira <thales@ufu.br>
+ * @author Luiz Gonzaga Rocha Junior <luizgrj@gmail.com>
  * @date 06/10/2017
- * @brief Two-winding transformer power element.
+ * @brief Two-winding transformer power element with OLTC support.
  * @file Transformer.h
  */
 class Transformer : public Branch

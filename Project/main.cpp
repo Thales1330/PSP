@@ -1,4 +1,4 @@
-﻿#ifdef __INTELLISENSE__
+#ifdef __INTELLISENSE__
 #pragma diag_suppress 102
 #endif
 
@@ -41,6 +41,7 @@
  *  - Gauss-Seidel
  *  - Hybrid Newton-Gauss
  *  - Three-phase induction motors included in power flow studies
+ *  - On-Load Tap Changer (OLTC) voltage control in transformers
  *- **Short-Circuit calculation**
  *  - Balanced
  *  - Unbalanced

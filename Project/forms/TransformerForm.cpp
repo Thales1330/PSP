@@ -18,6 +18,9 @@
 #include "TransformerForm.h"
 #include "SwitchingForm.h"
 #include "../elements/powerElement/Transformer.h"
+#include "../elements/powerElement/Bus.h"
+#include <wx/msgdlg.h>
+#include <wx/statbox.h>
 
 TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : TransformerFormBase(parent)
 {
@@ -125,6 +128,122 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
     m_textCtrlPrimReactance->SetValue(Transformer::StringFromDouble(data.primaryGrndReactance));
     m_textCtrlSecResistance->SetValue(Transformer::StringFromDouble(data.secondaryGrndResistance));
     m_textCtrlSecReactance->SetValue(Transformer::StringFromDouble(data.secondaryGrndReactance));
+
+    // Tap Changer (OLTC) Tab
+    m_panelTapChanger = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelTapChanger, _("Tap Changer (OLTC)"), false);
+
+    wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
+
+    m_checkEnableTapChanger = new wxCheckBox(m_panelTapChanger, wxID_ANY, _("Enable On-Load Tap Changer (OLTC)"));
+    m_checkEnableTapChanger->SetValue(data.hasTapChanger);
+    topSizer->Add(m_checkEnableTapChanger, 0, wxALL, 10);
+
+    wxStaticBoxSizer* paramsBoxSizer = new wxStaticBoxSizer(wxVERTICAL, m_panelTapChanger, _("OLTC Parameters"));
+
+    wxFlexGridSizer* gridSizer = new wxFlexGridSizer(6, 3, 8, 10);
+    gridSizer->AddGrowableCol(1, 1);
+
+    // Controlled Bus
+    m_staticTextControlledBus = new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("Controlled bus:"));
+    wxArrayString busChoices;
+    wxString primLabel = _("Primary (Bus 1)");
+    wxString secLabel = _("Secondary (Bus 2)");
+    if (m_transformer->GetParentList().size() >= 2) {
+        Bus* b1 = static_cast<Bus*>(m_transformer->GetParentList()[0]);
+        Bus* b2 = static_cast<Bus*>(m_transformer->GetParentList()[1]);
+        if (b1) primLabel = wxString::Format(_("Primary: Bus %d (%s)"), b1->GetElectricalData().number + 1, b1->GetElectricalData().name);
+        if (b2) secLabel = wxString::Format(_("Secondary: Bus %d (%s)"), b2->GetElectricalData().number + 1, b2->GetElectricalData().name);
+    }
+    busChoices.Add(primLabel);
+    busChoices.Add(secLabel);
+    m_choiceControlledBus = new wxChoice(paramsBoxSizer->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, busChoices);
+    m_choiceControlledBus->SetSelection(data.oltcControlledBus == 0 ? 0 : 1);
+    gridSizer->Add(m_staticTextControlledBus, 0, wxALIGN_CENTER_VERTICAL);
+    gridSizer->Add(m_choiceControlledBus, 1, wxEXPAND);
+    gridSizer->Add(new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, wxEmptyString), 0);
+
+    // Target Voltage
+    m_staticTextTargetVoltage = new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("Target voltage (Vset):"));
+    m_textCtrlTargetVoltage = new wxTextCtrl(paramsBoxSizer->GetStaticBox(), wxID_ANY, Transformer::StringFromDouble(data.oltcTargetVoltage));
+    gridSizer->Add(m_staticTextTargetVoltage, 0, wxALIGN_CENTER_VERTICAL);
+    gridSizer->Add(m_textCtrlTargetVoltage, 1, wxEXPAND);
+    gridSizer->Add(new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("p.u.")), 0, wxALIGN_CENTER_VERTICAL);
+
+    // Voltage Deadband
+    m_staticTextDeadband = new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("Voltage deadband:"));
+    m_textCtrlDeadband = new wxTextCtrl(paramsBoxSizer->GetStaticBox(), wxID_ANY, Transformer::StringFromDouble(data.oltcVoltageDeadband));
+    gridSizer->Add(m_staticTextDeadband, 0, wxALIGN_CENTER_VERTICAL);
+    gridSizer->Add(m_textCtrlDeadband, 1, wxEXPAND);
+    gridSizer->Add(new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("p.u.")), 0, wxALIGN_CENTER_VERTICAL);
+
+    // Min Tap
+    m_staticTextMinTap = new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("Minimum tap (Tap min):"));
+    m_textCtrlMinTap = new wxTextCtrl(paramsBoxSizer->GetStaticBox(), wxID_ANY, Transformer::StringFromDouble(data.oltcMinTap));
+    gridSizer->Add(m_staticTextMinTap, 0, wxALIGN_CENTER_VERTICAL);
+    gridSizer->Add(m_textCtrlMinTap, 1, wxEXPAND);
+    gridSizer->Add(new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("p.u.")), 0, wxALIGN_CENTER_VERTICAL);
+
+    // Max Tap
+    m_staticTextMaxTap = new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("Maximum tap (Tap max):"));
+    m_textCtrlMaxTap = new wxTextCtrl(paramsBoxSizer->GetStaticBox(), wxID_ANY, Transformer::StringFromDouble(data.oltcMaxTap));
+    gridSizer->Add(m_staticTextMaxTap, 0, wxALIGN_CENTER_VERTICAL);
+    gridSizer->Add(m_textCtrlMaxTap, 1, wxEXPAND);
+    gridSizer->Add(new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("p.u.")), 0, wxALIGN_CENTER_VERTICAL);
+
+    // Tap Step Size
+    m_staticTextTapStep = new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("Tap step size:"));
+    m_textCtrlTapStep = new wxTextCtrl(paramsBoxSizer->GetStaticBox(), wxID_ANY, Transformer::StringFromDouble(data.oltcTapStep));
+    gridSizer->Add(m_staticTextTapStep, 0, wxALIGN_CENTER_VERTICAL);
+    gridSizer->Add(m_textCtrlTapStep, 1, wxEXPAND);
+    gridSizer->Add(new wxStaticText(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("p.u.")), 0, wxALIGN_CENTER_VERTICAL);
+
+    paramsBoxSizer->Add(gridSizer, 1, wxALL | wxEXPAND, 8);
+
+    m_checkDiscreteTap = new wxCheckBox(paramsBoxSizer->GetStaticBox(), wxID_ANY, _("Use discrete tap steps"));
+    m_checkDiscreteTap->SetValue(data.oltcIsDiscrete);
+    paramsBoxSizer->Add(m_checkDiscreteTap, 0, wxALL, 6);
+
+    topSizer->Add(paramsBoxSizer, 1, wxALL | wxEXPAND, 8);
+    m_panelTapChanger->SetSizer(topSizer);
+
+    m_checkEnableTapChanger->Bind(wxEVT_CHECKBOX, &TransformerForm::OnEnableTapChangerCheck, this);
+    m_checkDiscreteTap->Bind(wxEVT_CHECKBOX, &TransformerForm::OnDiscreteTapCheck, this);
+
+    UpdateTapChangerFields();
+
+    SetSize(GetBestSize());
+    Layout();
+}
+
+void TransformerForm::OnEnableTapChangerCheck(wxCommandEvent& event)
+{
+    UpdateTapChangerFields();
+}
+
+void TransformerForm::OnDiscreteTapCheck(wxCommandEvent& event)
+{
+    UpdateTapChangerFields();
+}
+
+void TransformerForm::UpdateTapChangerFields()
+{
+    bool enable = m_checkEnableTapChanger->GetValue();
+    m_staticTextControlledBus->Enable(enable);
+    m_choiceControlledBus->Enable(enable);
+    m_staticTextTargetVoltage->Enable(enable);
+    m_textCtrlTargetVoltage->Enable(enable);
+    m_staticTextDeadband->Enable(enable);
+    m_textCtrlDeadband->Enable(enable);
+    m_staticTextMinTap->Enable(enable);
+    m_textCtrlMinTap->Enable(enable);
+    m_staticTextMaxTap->Enable(enable);
+    m_textCtrlMaxTap->Enable(enable);
+    m_checkDiscreteTap->Enable(enable);
+
+    bool discrete = enable && m_checkDiscreteTap->GetValue();
+    m_staticTextTapStep->Enable(discrete);
+    m_textCtrlTapStep->Enable(discrete);
 }
 
 TransformerForm::~TransformerForm() {}
@@ -253,6 +372,54 @@ bool TransformerForm::ValidateData()
     if(!m_transformer->DoubleFromString(m_parent, m_textCtrlSecReactance->GetValue(), data.secondaryGrndReactance,
                                         _("Value entered incorrectly in the field \"Secondary ground reactance\".")))
         return false;
+
+    data.hasTapChanger = m_checkEnableTapChanger->GetValue();
+    if (data.hasTapChanger) {
+        data.oltcControlledBus = (m_choiceControlledBus->GetSelection() == 0) ? 0 : 1;
+
+        if (!m_transformer->DoubleFromString(m_parent, m_textCtrlTargetVoltage->GetValue(), data.oltcTargetVoltage,
+                                            _("Value entered incorrectly in the field \"Target voltage\".")))
+            return false;
+        if (data.oltcTargetVoltage <= 0.0) {
+            wxMessageBox(_("Target voltage must be greater than 0."), _("Error"), wxOK | wxICON_ERROR, m_parent);
+            return false;
+        }
+
+        if (!m_transformer->DoubleFromString(m_parent, m_textCtrlDeadband->GetValue(), data.oltcVoltageDeadband,
+                                            _("Value entered incorrectly in the field \"Voltage deadband\".")))
+            return false;
+        if (data.oltcVoltageDeadband < 0.0) {
+            wxMessageBox(_("Voltage deadband cannot be negative."), _("Error"), wxOK | wxICON_ERROR, m_parent);
+            return false;
+        }
+
+        if (!m_transformer->DoubleFromString(m_parent, m_textCtrlMinTap->GetValue(), data.oltcMinTap,
+                                            _("Value entered incorrectly in the field \"Minimum tap\".")))
+            return false;
+        if (data.oltcMinTap <= 0.0) {
+            wxMessageBox(_("Minimum tap must be greater than 0."), _("Error"), wxOK | wxICON_ERROR, m_parent);
+            return false;
+        }
+
+        if (!m_transformer->DoubleFromString(m_parent, m_textCtrlMaxTap->GetValue(), data.oltcMaxTap,
+                                            _("Value entered incorrectly in the field \"Maximum tap\".")))
+            return false;
+        if (data.oltcMaxTap < data.oltcMinTap) {
+            wxMessageBox(_("Maximum tap must be greater than or equal to minimum tap."), _("Error"), wxOK | wxICON_ERROR, m_parent);
+            return false;
+        }
+
+        data.oltcIsDiscrete = m_checkDiscreteTap->GetValue();
+
+        if (!m_transformer->DoubleFromString(m_parent, m_textCtrlTapStep->GetValue(), data.oltcTapStep,
+                                            _("Value entered incorrectly in the field \"Tap step size\".")))
+            return false;
+        if (data.oltcTapStep < 0.0) {
+            wxMessageBox(_("Tap step size cannot be negative."), _("Error"), wxOK | wxICON_ERROR, m_parent);
+            return false;
+        }
+    }
+    data.nominalTurnsRatio = data.turnsRatio;
 
     m_transformer->SetElectricaData(data);
     return true;
