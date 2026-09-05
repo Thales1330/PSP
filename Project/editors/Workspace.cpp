@@ -2188,6 +2188,18 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 
 		m_textList.emplace_back(newText);
 	} break;
+	case ID_TXT_TAP: {
+		if (FindTextElement(parentElement, DATA_TRANSFORMER_TAP)) return false;
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(25, -15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_TRANSFORMER_TAP);
+		newText->SetUnit(unit == ElectricalUnit::UNIT_NONE ? ElectricalUnit::UNIT_PU : unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
 	default:
 		return false;
 		break;

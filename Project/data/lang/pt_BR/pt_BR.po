@@ -4923,4 +4923,14 @@ msgstr "Valor inserido incorretamente no campo \"Tap máximo\"."
 msgid "Value entered incorrectly in the field \"Tap step size\"."
 msgstr "Valor inserido incorretamente no campo \"Passo do tap\"."
 
+msgid "Tap"
+msgstr "Tap"
+
+msgid "Tap = "
+msgstr "Tap = "
+
+msgid "Tap = %.*f p.u.\n"
+msgstr "Tap = %.*f p.u.\n"
+
+
 

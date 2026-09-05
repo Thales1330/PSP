@@ -594,6 +594,7 @@ bool Transformer::GetContextMenu(wxMenu& menu)
 	textMenu->Append(ID_TXT_BRANCH_CURRENT_2_1, _("Current (") + busName[1] + _(" to ") + busName[0] + wxT(")"));
 	textMenu->Append(ID_TXT_BRANCH_FAULT_CURRENT_1_2, _("Fault current (") + busName[0] + _(" to ") + busName[1] + wxT(")"));
 	textMenu->Append(ID_TXT_BRANCH_FAULT_CURRENT_2_1, _("Fault current (") + busName[1] + _(" to ") + busName[0] + wxT(")"));
+	textMenu->Append(ID_TXT_TAP, _("Tap"));
 	textMenu->SetClientData(menu.GetClientData());
 	menu.AppendSubMenu(textMenu, _("Add text"));
 
