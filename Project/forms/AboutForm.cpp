@@ -60,12 +60,12 @@ void AboutForm::Init()
     m_gridCredits->SetCellValue(4, 2, wxT("gcaixeta@ufu.br"));
     // Marcio Tamashiro
     //m_gridCredits->SetCellValue(5, 0, wxT("M") + static_cast<wxString>(L'\u00E1') + wxT("rcio Augusto Tamashiro"));
-    m_gridCredits->SetCellValue(5, 0, wxT("Márcio Augusto Tamashiro"));
+    m_gridCredits->SetCellValue(5, 0, wxT("Marcio Augusto Tamashiro"));
     m_gridCredits->SetCellValue(5, 1, "");
     m_gridCredits->SetCellValue(5, 2, wxT("tamashiro@ifto.edu.br"));
     // Luiz Gonzaga Rocha Junior
     m_gridCredits->SetCellValue(6, 0, wxT("Luiz Gonzaga Rocha Junior"));
-    m_gridCredits->SetCellValue(6, 1, _("OLTC implementation"));
+    m_gridCredits->SetCellValue(6, 1, _(""));
     m_gridCredits->SetCellValue(6, 2, wxT("luizgrj@gmail.com"));
 
     for(int i = 0; i < m_gridCredits->GetNumberRows(); ++i) {
