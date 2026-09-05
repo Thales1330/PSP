@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -83,17 +83,12 @@ void Bus::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 
 	if (!m_electricalData.isConnected)
 		gc->SetBrush(wxBrush(guiColour->disable));
-	else if (m_dynEvent)
+	else if (m_dynEvent || m_electricalData.hasFault)
 		gc->SetBrush(wxBrush(guiColour->eventElement));
 	else
-		gc->SetBrush(wxBrush(guiColour->bus));
+		gc->SetBrush(wxBrush(GetVoltageColour(guiColour)));
 
 	gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
-
-	if (m_electricalData.slackBus) {
-		gc->SetBrush(wxBrush(guiColour->slackBus));
-		gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
-	}
 
 	gc->PopState();
 
@@ -182,10 +177,10 @@ void Bus::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 
 	if (!m_electricalData.isConnected)
 		dc.SetBrush(wxBrush(guiColour->disable));
-	else if (m_dynEvent)
+	else if (m_dynEvent || m_electricalData.hasFault)
 		dc.SetBrush(wxBrush(guiColour->eventElement));
 	else
-		dc.SetBrush(wxBrush(guiColour->bus));
+		dc.SetBrush(wxBrush(GetVoltageColour(guiColour)));
 
 	DrawDCRectangle(gcPosition, m_width, m_height, m_angle, dc);
 
@@ -358,6 +353,67 @@ Element* Bus::GetCopy()
 	*copy = *this;
 	return copy;
 }
+
+wxColour Bus::GetVoltageColour(GUIColour* guiColour) const
+{
+	double v_kV = m_electricalData.nominalVoltage;
+	if (m_electricalData.nominalVoltageUnit == ElectricalUnit::UNIT_V) {
+		v_kV /= 1000.0;
+	}
+
+	const std::vector<VoltageLevelColour>* levels = nullptr;
+	if (guiColour && !guiColour->voltageLevels.empty()) {
+		levels = &guiColour->voltageLevels;
+	}
+
+	if (levels && !levels->empty()) {
+		// 1. Find closest configured level within 15% tolerance
+		double minDiff = 1e9;
+		int bestIdx = -1;
+		for (size_t i = 0; i < levels->size(); ++i) {
+			double diff = std::abs(v_kV - (*levels)[i].voltage);
+			if (diff < minDiff) {
+				minDiff = diff;
+				bestIdx = static_cast<int>(i);
+			}
+		}
+
+		if (bestIdx >= 0) {
+			double tol = std::max((*levels)[bestIdx].voltage * 0.15, 0.5);
+			if (minDiff <= tol) {
+				return (*levels)[bestIdx].colour;
+			}
+			// 2. Range match (assuming ordered descending)
+			for (size_t i = 0; i < levels->size(); ++i) {
+				if (v_kV >= (*levels)[i].voltage * 0.9) {
+					return (*levels)[i].colour;
+				}
+			}
+			return levels->back().colour;
+		}
+	}
+
+	if (v_kV >= 500.0) {
+		return wxColour(0, 90, 220);     // >= 500 kV (ex: 500 kV, 765 kV) - Royal Blue
+	} else if (v_kV >= 300.0) {
+		return wxColour(160, 82, 45);    // 300 kV - 500 kV (ex: 345 kV, 440 kV) - Brown
+	} else if (v_kV >= 200.0) {
+		return wxColour(220, 35, 35);    // 200 kV - 300 kV (ex: 230 kV) - Red
+	} else if (v_kV >= 100.0) {
+		return wxColour(0, 155, 65);     // 100 kV - 200 kV (ex: 138 kV, 161 kV) - Green
+	} else if (v_kV >= 50.0) {
+		return wxColour(145, 40, 205);   // 50 kV - 100 kV (ex: 69 kV, 88 kV) - Violet / Purple
+	} else if (v_kV >= 20.0) {
+		return wxColour(215, 35, 135);   // 20 kV - 50 kV (ex: 34.5 kV) - Magenta / Pink
+	} else if (v_kV >= 10.0) {
+		return wxColour(0, 165, 195);    // 10 kV - 20 kV (ex: 13.8 kV, 18 kV) - Cyan / Teal
+	} else if (v_kV >= 1.0) {
+		return wxColour(205, 150, 15);   // 1 kV - 10 kV (ex: 2.4 kV, 4.16 kV, 6.9 kV) - Gold / Amber
+	} else {
+		return wxColour(120, 125, 135);  // < 1 kV (Baixa Tensão: 220 V, 380 V, 440 V) - Slate Gray
+	}
+}
+
 wxString Bus::GetTipText() const
 {
 	wxString tipText = m_electricalData.name;

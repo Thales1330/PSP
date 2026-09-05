@@ -10,6 +10,7 @@
 #include <wx/stdpaths.h>
 #include <wx/dir.h>
 #include <wx/textfile.h>
+#include <wx/tokenzr.h>
 
 #include <wx/cmdline.h>
 #include <wx/msgout.h> 
@@ -152,6 +153,22 @@ public:
 				if (tag == "atpfile") {
 					data.atpPath = wxFileName(tagValue);
 				}
+				if (tag == "voltage_levels") {
+					data.voltageLevels.clear();
+					wxStringTokenizer tkz(tagValue, ";");
+					while (tkz.HasMoreTokens()) {
+						wxString token = tkz.GetNextToken().Trim().Trim(false);
+						if (token.IsEmpty()) continue;
+						wxString vStr = token.BeforeFirst(':');
+						wxString cStr = token.AfterFirst(':');
+						double v = 0.0;
+						if (vStr.ToCDouble(&v) || vStr.ToDouble(&v)) {
+							wxColour col(cStr);
+							if (!col.IsOk()) col = *wxBLACK;
+							data.voltageLevels.push_back({ v, col });
+						}
+					}
+				}
 			}
 			file.Close();
 		}
@@ -171,6 +188,13 @@ public:
 			file.AddLine("labelfontsize=10");
 			file.AddLine("atpfile=");
 			//file.AddLine("useOpenGL=yes");
+
+			wxString vlProp = "voltage_levels=";
+			for (size_t i = 0; i < data.voltageLevels.size(); ++i) {
+				if (i > 0) vlProp += ";";
+				vlProp += wxString::Format("%s:%s", wxString::FromCDouble(data.voltageLevels[i].voltage), data.voltageLevels[i].colour.GetAsString(wxC2S_HTML_SYNTAX));
+			}
+			file.AddLine(vlProp);
 
 			file.Write();
 			file.Close();
