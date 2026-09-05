@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -34,7 +34,7 @@ void AboutForm::Init()
     wxColour hyperlinkColour(6, 69, 173);
 
     m_gridCredits->AppendCols(3);
-    m_gridCredits->AppendRows(6);
+    m_gridCredits->AppendRows(7);
     m_gridCredits->HideColLabels();
     m_gridCredits->HideRowLabels();
     m_gridCredits->SetCellSize(0, 0, 1, 3);
@@ -60,9 +60,13 @@ void AboutForm::Init()
     m_gridCredits->SetCellValue(4, 2, wxT("gcaixeta@ufu.br"));
     // Marcio Tamashiro
     //m_gridCredits->SetCellValue(5, 0, wxT("M") + static_cast<wxString>(L'\u00E1') + wxT("rcio Augusto Tamashiro"));
-    m_gridCredits->SetCellValue(5, 0, wxT("Márcio Augusto Tamashiro"));
+    m_gridCredits->SetCellValue(5, 0, wxT("Marcio Augusto Tamashiro"));
     m_gridCredits->SetCellValue(5, 1, "");
     m_gridCredits->SetCellValue(5, 2, wxT("tamashiro@ifto.edu.br"));
+    // Luiz Gonzaga Rocha Junior
+    m_gridCredits->SetCellValue(6, 0, wxT("Luiz Gonzaga Rocha Junior"));
+    m_gridCredits->SetCellValue(6, 1, _(""));
+    m_gridCredits->SetCellValue(6, 2, wxT("luizgrj@gmail.com"));
 
     for(int i = 0; i < m_gridCredits->GetNumberRows(); ++i) {
         m_gridCredits->SetCellTextColour(i, 2, hyperlinkColour);

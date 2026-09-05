@@ -134,6 +134,7 @@ endif()
 if(MSVC)
   target_link_options(PSP-UFU PRIVATE "/MANIFEST:NO" "/SUBSYSTEM:WINDOWS")
   target_compile_definitions(PSP-UFU PRIVATE _CRT_SECURE_NO_WARNINGS)
+  target_compile_options(PSP-UFU PRIVATE "/utf-8")
 endif()
 
 # Additional includes

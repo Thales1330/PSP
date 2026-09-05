@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -20,8 +20,34 @@
 #include <wx/font.h>
 #include <wx/stdpaths.h>
 #include <wx/app.h>
+#include <wx/tokenzr.h>
+#include <wx/imaglist.h>
+#include <wx/dcmemory.h>
+#include <algorithm>
 #include "../utils/PropertiesData.h"
 
+
+static bool ParseVoltageDouble(const wxString& str, double& value)
+{
+	wxString s = str;
+	s.Trim().Trim(false);
+	if (s.IsEmpty()) return false;
+
+	// 1. Try standard ToDouble (respects current locale, e.g. "230,00" in pt_BR)
+	if (s.ToDouble(&value)) return true;
+
+	// 2. Try converting comma to dot via ToCDouble (e.g. "230.00" or "230,00" -> "230.00")
+	wxString sDot = s;
+	sDot.Replace(wxT(","), wxT("."));
+	if (sDot.ToCDouble(&value)) return true;
+
+	// 3. Try converting dot to comma via ToDouble (e.g. "230.00" -> "230,00" in pt_BR)
+	wxString sComma = s;
+	sComma.Replace(wxT("."), wxT(","));
+	if (sComma.ToDouble(&value)) return true;
+
+	return false;
+}
 
 GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* properties)
 	: GeneralPropertiesFormBase(parent)
@@ -77,9 +103,77 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 
 	wxFont currentFont(data.labelFontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, data.labelFont);
 	m_fontPickerText->SetSelectedFont(currentFont);
+
+	// Busbar (Barramento) tab setup
+	m_voltageLevels = data.voltageLevels;
+	if (m_voltageLevels.empty()) {
+		m_voltageLevels = PropertiesData::GetDefaultVoltageLevels();
+	}
+
+	m_panelBusbar = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	wxBoxSizer* busbarMainSizer = new wxBoxSizer(wxHORIZONTAL);
+	m_panelBusbar->SetSizer(busbarMainSizer);
+
+	wxBoxSizer* leftSizer = new wxBoxSizer(wxVERTICAL);
+	busbarMainSizer->Add(leftSizer, 1, wxALL | wxEXPAND, 5);
+
+	m_listCtrlVoltages = new wxListCtrl(m_panelBusbar, wxID_ANY, wxDefaultPosition, wxSize(240, 220), wxLC_REPORT | wxLC_SINGLE_SEL | wxLC_HRULES | wxLC_VRULES);
+	m_listCtrlVoltages->InsertColumn(0, wxEmptyString, wxLIST_FORMAT_LEFT, 110);
+	m_listCtrlVoltages->InsertColumn(1, wxEmptyString, wxLIST_FORMAT_LEFT, 110);
+	leftSizer->Add(m_listCtrlVoltages, 1, wxEXPAND, 0);
+
+	wxBoxSizer* rightSizer = new wxBoxSizer(wxVERTICAL);
+	busbarMainSizer->Add(rightSizer, 0, wxALL | wxEXPAND, 5);
+
+	m_staticTextVoltage = new wxStaticText(m_panelBusbar, wxID_ANY, wxEmptyString);
+	rightSizer->Add(m_staticTextVoltage, 0, wxLEFT | wxRIGHT | wxTOP, 5);
+
+	m_textCtrlVoltage = new wxTextCtrl(m_panelBusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(140, -1));
+	rightSizer->Add(m_textCtrlVoltage, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
+
+	m_staticTextColour = new wxStaticText(m_panelBusbar, wxID_ANY, wxEmptyString);
+	rightSizer->Add(m_staticTextColour, 0, wxLEFT | wxRIGHT | wxTOP, 5);
+
+	m_colourPickerBus = new wxColourPickerCtrl(m_panelBusbar, wxID_ANY, *wxBLACK, wxDefaultPosition, wxSize(140, -1));
+	rightSizer->Add(m_colourPickerBus, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
+
+	rightSizer->AddSpacer(10);
+
+	m_buttonAddVoltage = new wxButton(m_panelBusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(140, -1));
+	rightSizer->Add(m_buttonAddVoltage, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
+
+	m_buttonRemoveVoltage = new wxButton(m_panelBusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(140, -1));
+	rightSizer->Add(m_buttonRemoveVoltage, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
+
+	m_buttonDefaultVoltages = new wxButton(m_panelBusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(140, -1));
+	rightSizer->Add(m_buttonDefaultVoltages, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
+
+	m_notebook->AddPage(m_panelBusbar, wxEmptyString, false);
+	m_busbarPageIndex = m_notebook->GetPageCount() - 1;
+
+	m_choiceLanguage->Bind(wxEVT_CHOICE, &GeneralPropertiesForm::OnLanguageSelected, this);
+	m_listCtrlVoltages->Bind(wxEVT_LIST_ITEM_SELECTED, &GeneralPropertiesForm::OnVoltageItemSelected, this);
+	m_buttonAddVoltage->Bind(wxEVT_BUTTON, &GeneralPropertiesForm::OnButtonAddVoltage, this);
+	m_buttonRemoveVoltage->Bind(wxEVT_BUTTON, &GeneralPropertiesForm::OnButtonRemoveVoltage, this);
+	m_buttonDefaultVoltages->Bind(wxEVT_BUTTON, &GeneralPropertiesForm::OnButtonDefaultVoltages, this);
+
+	UpdateLanguageUI();
+	PopulateVoltageList();
+
+	if (GetSizer()) {
+		GetSizer()->Fit(this);
+	}
+	SetMinSize(wxSize(480, 380));
+	Fit();
+	Centre();
 }
 
-GeneralPropertiesForm::~GeneralPropertiesForm() {}
+GeneralPropertiesForm::~GeneralPropertiesForm()
+{
+	if (m_choiceLanguage) {
+		m_choiceLanguage->Unbind(wxEVT_CHOICE, &GeneralPropertiesForm::OnLanguageSelected, this);
+	}
+}
 void GeneralPropertiesForm::OnButtonOKClick(wxCommandEvent& event)
 {
 	if (ValidateData()) EndModal(wxID_OK);
@@ -166,6 +260,13 @@ bool GeneralPropertiesForm::ValidateData()
 	line += data.atpPath.GetFullPath();
 	file.AddLine(line);	
 
+	line = "voltage_levels=";
+	for (size_t i = 0; i < m_voltageLevels.size(); ++i) {
+		if (i > 0) line += ";";
+		line += wxString::Format("%s:%s", wxString::FromCDouble(m_voltageLevels[i].voltage), m_voltageLevels[i].colour.GetAsString(wxC2S_HTML_SYNTAX));
+	}
+	file.AddLine(line);
+
 	file.Write();
 	file.Close();
 
@@ -174,6 +275,7 @@ bool GeneralPropertiesForm::ValidateData()
 			_("Info"), wxOK | wxCENTRE | wxICON_INFORMATION);
 		msgDialog.ShowModal();
 	}
+	data.voltageLevels = m_voltageLevels;
 	m_properties->SetGeneralPropertiesData(data);
 	return true;
 }
@@ -190,3 +292,166 @@ void GeneralPropertiesForm::OnThemeSelected(wxCommandEvent& event)
 		break;
 	}
 }
+
+bool GeneralPropertiesForm::IsPortuguese() const
+{
+	if (m_choiceLanguage && m_choiceLanguage->GetSelection() != wxNOT_FOUND) {
+		return (m_choiceLanguage->GetSelection() == 1);
+	}
+	if (m_properties) {
+		return (m_properties->GetGeneralPropertiesData().language == wxLANGUAGE_PORTUGUESE_BRAZILIAN);
+	}
+	return false;
+}
+
+void GeneralPropertiesForm::UpdateLanguageUI()
+{
+	bool isPt = IsPortuguese();
+
+	if (m_notebook && m_panelBusbar) {
+		m_notebook->SetPageText(m_busbarPageIndex, isPt ? wxString(L"Barramento") : wxString(L"Busbar"));
+	}
+
+	if (m_listCtrlVoltages) {
+		wxListItem col0;
+		col0.SetMask(wxLIST_MASK_TEXT);
+		col0.SetText(isPt ? wxString(L"Tens\u00e3o (kV)") : wxString(L"Voltage (kV)"));
+		m_listCtrlVoltages->SetColumn(0, col0);
+
+		wxListItem col1;
+		col1.SetMask(wxLIST_MASK_TEXT);
+		col1.SetText(isPt ? wxString(L"Cor") : wxString(L"Colour"));
+		m_listCtrlVoltages->SetColumn(1, col1);
+	}
+
+	if (m_staticTextVoltage) {
+		m_staticTextVoltage->SetLabel(isPt ? wxString(L"Tens\u00e3o (kV):") : wxString(L"Voltage (kV):"));
+	}
+	if (m_staticTextColour) {
+		m_staticTextColour->SetLabel(isPt ? wxString(L"Cor:") : wxString(L"Colour:"));
+	}
+	if (m_buttonAddVoltage) {
+		m_buttonAddVoltage->SetLabel(isPt ? wxString(L"Adicionar / Atualizar") : wxString(L"Add / Update"));
+	}
+	if (m_buttonRemoveVoltage) {
+		m_buttonRemoveVoltage->SetLabel(isPt ? wxString(L"Remover") : wxString(L"Remove"));
+	}
+	if (m_buttonDefaultVoltages) {
+		m_buttonDefaultVoltages->SetLabel(isPt ? wxString(L"Padr\u00e3o") : wxString(L"Default"));
+	}
+}
+
+void GeneralPropertiesForm::OnLanguageSelected(wxCommandEvent& event)
+{
+	UpdateLanguageUI();
+	event.Skip();
+}
+
+void GeneralPropertiesForm::PopulateVoltageList()
+{
+	m_listCtrlVoltages->DeleteAllItems();
+
+	wxImageList* imgList = new wxImageList(16, 16, true);
+
+	for (size_t i = 0; i < m_voltageLevels.size(); ++i) {
+		const auto& lvl = m_voltageLevels[i];
+
+		wxBitmap bmp(16, 16);
+		wxMemoryDC memDC(bmp);
+		memDC.SetPen(*wxTRANSPARENT_PEN);
+		memDC.SetBrush(wxBrush(lvl.colour));
+		memDC.DrawRectangle(0, 0, 16, 16);
+
+		memDC.SetPen(wxPen(wxColour(120, 120, 120), 1));
+		memDC.SetBrush(*wxTRANSPARENT_BRUSH);
+		memDC.DrawRectangle(0, 0, 16, 16);
+		memDC.SelectObject(wxNullBitmap);
+
+		int imgIdx = imgList->Add(bmp);
+
+		long itemIndex = m_listCtrlVoltages->InsertItem(static_cast<long>(i), wxString::Format(wxT("%.2f"), lvl.voltage));
+		m_listCtrlVoltages->SetItem(itemIndex, 1, lvl.colour.GetAsString(wxC2S_HTML_SYNTAX), imgIdx);
+	}
+
+	m_listCtrlVoltages->AssignImageList(imgList, wxIMAGE_LIST_SMALL);
+}
+
+void GeneralPropertiesForm::OnVoltageItemSelected(wxListEvent& event)
+{
+	long itemIndex = event.GetIndex();
+	if (itemIndex >= 0 && static_cast<size_t>(itemIndex) < m_voltageLevels.size()) {
+		const auto& lvl = m_voltageLevels[itemIndex];
+		m_textCtrlVoltage->SetValue(wxString::Format(wxT("%.2f"), lvl.voltage));
+		m_colourPickerBus->SetColour(lvl.colour);
+	}
+}
+
+void GeneralPropertiesForm::OnButtonAddVoltage(wxCommandEvent& event)
+{
+	wxString vStr = m_textCtrlVoltage->GetValue();
+	double v = 0.0;
+	bool isPt = IsPortuguese();
+
+	if (!ParseVoltageDouble(vStr, v) || v <= 0.0) {
+		wxString msg = isPt ? wxString(L"Por favor, insira um valor v\u00e1lido de tens\u00e3o em kV.")
+		                    : wxString(L"Please enter a valid voltage value in kV.");
+		wxString title = isPt ? wxString(L"Aviso") : wxString(L"Warning");
+		wxMessageDialog msgDialog(this, msg, title, wxOK | wxICON_WARNING);
+		msgDialog.ShowModal();
+		return;
+	}
+
+	wxColour col = m_colourPickerBus->GetColour();
+
+	bool found = false;
+	for (auto& lvl : m_voltageLevels) {
+		if (std::abs(lvl.voltage - v) < 0.001) {
+			lvl.colour = col;
+			found = true;
+			break;
+		}
+	}
+
+	if (!found) {
+		m_voltageLevels.push_back({ v, col });
+	}
+
+	std::sort(m_voltageLevels.begin(), m_voltageLevels.end(), [](const VoltageLevelColour& a, const VoltageLevelColour& b) {
+		return a.voltage > b.voltage;
+	});
+
+	PopulateVoltageList();
+
+	for (size_t i = 0; i < m_voltageLevels.size(); ++i) {
+		if (std::abs(m_voltageLevels[i].voltage - v) < 0.001) {
+			m_listCtrlVoltages->SetItemState(static_cast<long>(i), wxLIST_STATE_SELECTED | wxLIST_STATE_FOCUSED, wxLIST_STATE_SELECTED | wxLIST_STATE_FOCUSED);
+			m_listCtrlVoltages->EnsureVisible(static_cast<long>(i));
+			break;
+		}
+	}
+}
+
+void GeneralPropertiesForm::OnButtonRemoveVoltage(wxCommandEvent& event)
+{
+	bool isPt = IsPortuguese();
+	long itemIndex = m_listCtrlVoltages->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+	if (itemIndex >= 0 && static_cast<size_t>(itemIndex) < m_voltageLevels.size()) {
+		m_voltageLevels.erase(m_voltageLevels.begin() + itemIndex);
+		PopulateVoltageList();
+		m_textCtrlVoltage->Clear();
+	} else {
+		wxString msg = isPt ? wxString(L"Selecione um n\u00edvel de tens\u00e3o da lista para remover.")
+		                    : wxString(L"Select a voltage level from the list to remove.");
+		wxString title = isPt ? wxString(L"Aviso") : wxString(L"Warning");
+		wxMessageDialog msgDialog(this, msg, title, wxOK | wxICON_WARNING);
+		msgDialog.ShowModal();
+	}
+}
+
+void GeneralPropertiesForm::OnButtonDefaultVoltages(wxCommandEvent& event)
+{
+	m_voltageLevels = PropertiesData::GetDefaultVoltageLevels();
+	PopulateVoltageList();
+	m_textCtrlVoltage->Clear();
+}
+

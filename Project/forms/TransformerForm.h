@@ -26,8 +26,9 @@ class Transformer;
 /**
  * @class TransformerForm
  * @author Thales Lima Oliveira <thales@ufu.br>
+ * @author Luiz Gonzaga Rocha Junior <luizgrj@gmail.com>
  * @date 05/10/2017
- * @brief Form to edit the transformer power data.
+ * @brief Form to edit the transformer power data and OLTC tap changer.
  * @file TransformerForm.h
  */
 class TransformerForm : public TransformerFormBase
@@ -41,8 +42,28 @@ class TransformerForm : public TransformerFormBase
     virtual void OnCancelButtonClick(wxCommandEvent& event);
     virtual void OnOKButtonClick(wxCommandEvent& event);
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
+    void OnEnableTapChangerCheck(wxCommandEvent& event);
+    void OnDiscreteTapCheck(wxCommandEvent& event);
+    void UpdateTapChangerFields();
 
     wxWindow* m_parent = nullptr;
     Transformer* m_transformer = nullptr;
+
+    // OLTC Controls
+    wxPanel* m_panelTapChanger = nullptr;
+    wxCheckBox* m_checkEnableTapChanger = nullptr;
+    wxStaticText* m_staticTextControlledBus = nullptr;
+    wxChoice* m_choiceControlledBus = nullptr;
+    wxStaticText* m_staticTextTargetVoltage = nullptr;
+    wxTextCtrl* m_textCtrlTargetVoltage = nullptr;
+    wxStaticText* m_staticTextDeadband = nullptr;
+    wxTextCtrl* m_textCtrlDeadband = nullptr;
+    wxStaticText* m_staticTextMinTap = nullptr;
+    wxTextCtrl* m_textCtrlMinTap = nullptr;
+    wxStaticText* m_staticTextMaxTap = nullptr;
+    wxTextCtrl* m_textCtrlMaxTap = nullptr;
+    wxCheckBox* m_checkDiscreteTap = nullptr;
+    wxStaticText* m_staticTextTapStep = nullptr;
+    wxTextCtrl* m_textCtrlTapStep = nullptr;
 };
 #endif  // TRANSFORMERFORM_H
