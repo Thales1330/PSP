@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -89,6 +89,8 @@ class MainFrame : public MainFrameBase
     int RunPSPTest();
 
    protected:
+    virtual void OnGridClick(wxRibbonButtonBarEvent& event) override;
+    virtual void OnAlignClick(wxRibbonButtonBarEvent& event) override;
     virtual void OnLabelMngrClick(wxRibbonButtonBarEvent& event);
     virtual void OnSnapshotDropdown(wxRibbonButtonBarEvent& event);
     virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event);

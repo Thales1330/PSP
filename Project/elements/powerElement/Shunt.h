@@ -37,6 +37,7 @@ class Shunt : public PowerElement
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual void Move(wxPoint2DDouble position);
+    virtual void AlignToGrid(double gridSize = 20.0) override;
     virtual void MoveNode(Element* element, wxPoint2DDouble position);
     virtual void StartMove(wxPoint2DDouble position);
     virtual void RotateNode(Element* parent, bool clockwise = true);
@@ -44,10 +45,10 @@ class Shunt : public PowerElement
     virtual bool NodeContains(wxPoint2DDouble position);
     virtual bool SetNodeParent(Element* parent);
     virtual void UpdateNodes();
+    virtual void UpdateSwitchesPosition() override;
+    virtual void UpdatePowerFlowArrowsPosition() override;
 
    protected:
-    void UpdateSwitchesPosition();
-    void UpdatePowerFlowArrowsPosition();
     //void DrawGround(wxPoint2DDouble position) const;
     void DrawDCGround(wxPoint2DDouble position, wxGraphicsContext* gc) const;
     void DrawDCGround(wxPoint2DDouble position, wxDC& dc) const;

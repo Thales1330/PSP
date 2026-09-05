@@ -42,6 +42,46 @@ void Shunt::Move(wxPoint2DDouble position)
     UpdatePowerFlowArrowsPosition();
 }
 
+void Shunt::AlignToGrid(double gridSize)
+{
+    if (gridSize <= 0.0) gridSize = 20.0;
+    wxPoint2DDouble oldPos = m_position;
+    wxPoint2DDouble newPos(std::round(oldPos.m_x / gridSize) * gridSize,
+                           std::round(oldPos.m_y / gridSize) * gridSize);
+    wxPoint2DDouble delta = newPos - oldPos;
+    SetPosition(newPos);
+    for (size_t i = 2; i < m_pointList.size(); ++i) {
+        m_pointList[i] += delta;
+    }
+
+    if (m_parentList.size() > 0 && m_parentList[0] && m_pointList.size() > 0) {
+        Element* bus = m_parentList[0];
+        if (std::abs(m_angle - 0.0) < 1.0 || std::abs(m_angle - 180.0) < 1.0) {
+            wxPoint2DDouble loc = bus->RotateAtPosition(wxPoint2DDouble(m_position.m_x, bus->GetPosition().m_y), -bus->GetAngle());
+            double halfW = bus->GetWidth() / 2.0 + 2.0;
+            if (std::abs(loc.m_x - bus->GetPosition().m_x) <= halfW) {
+                m_pointList[0].m_x = m_position.m_x;
+            }
+            m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
+        }
+        else {
+            wxPoint2DDouble loc = bus->RotateAtPosition(wxPoint2DDouble(bus->GetPosition().m_x, m_position.m_y), -bus->GetAngle());
+            double halfW = bus->GetWidth() / 2.0 + 2.0;
+            if (std::abs(loc.m_x - bus->GetPosition().m_x) <= halfW) {
+                m_pointList[0].m_y = m_position.m_y;
+            }
+            m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
+        }
+    }
+    else if (m_pointList.size() > 0) {
+        m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
+        m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
+    }
+
+    UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
+}
+
 void Shunt::MoveNode(Element* element, wxPoint2DDouble position)
 {
     if(element) {

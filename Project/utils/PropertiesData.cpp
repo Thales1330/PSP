@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -43,6 +43,7 @@ void PropertiesData::SetGUIColourTheme()
 
 		m_guiColour.swClose = wxColour(35, 150, 45);
 		m_guiColour.swOpen = wxColour(225, 55, 55);
+		m_guiColour.grid = wxColour(220, 222, 225);
 	}
 	else if (m_genData.theme == THEME_DARK)
 	{
@@ -63,5 +64,6 @@ void PropertiesData::SetGUIColourTheme()
 
 		m_guiColour.swClose = wxColour(60, 180, 70);
 		m_guiColour.swOpen = wxColour(235, 85, 85);
+		m_guiColour.grid = wxColour(60, 64, 72);
 	}
 }

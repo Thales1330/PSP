@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -189,6 +189,8 @@ void MainFrame::EnableCurrentProjectRibbon(bool enable)
 	m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_UNDO, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATEC, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATECC, enable);
+	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_GRID, enable);
+	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ALIGN, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_LABELMNGR, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_HARMDIST, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_FREQRESP, enable);
@@ -855,10 +857,28 @@ void MainFrame::OnHeatmapClick(wxRibbonButtonBarEvent& event)
 		workspace->EnableHeatMap(!enabled);
 	}
 }
+void MainFrame::OnGridClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+	if (workspace) {
+		const bool enabled = workspace->IsGridEnabled();
+		m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_GRID, !enabled);
+		workspace->EnableGrid(!enabled);
+		workspace->Redraw();
+	}
+}
+void MainFrame::OnAlignClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+	if (workspace) {
+		workspace->AlignSelectedToGrid();
+	}
+}
 void MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event)
 {
 	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
 	if (workspace) {
+		m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_GRID, workspace->IsGridEnabled());
 		m_ribbonButtonBarReports->ToggleButton(ID_RIBBON_HEATMAP, workspace->IsHeatMapEnable());
 		m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, workspace->IsContinuousCalculationActive());
 		m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, !workspace->IsContinuousCalculationActive());

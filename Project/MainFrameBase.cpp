@@ -5,6 +5,8 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "MainFrameBase.h"
+#include "utils/Path.h"
+#include <wx/dcmemory.h>
 
 
 // Declare the bitmap loading function
@@ -162,6 +164,39 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ROTATECC, _("Rotate Counter-clockwise"), wxXmlResource::Get()->LoadBitmap(wxT("rotateCounterClock32")), _("Rotate the selected elements counter-clockwise"), wxRIBBON_BUTTON_NORMAL);
     
+    wxBitmap gridBmp(Paths::GetDataPath() + "/images/ribbon/grid32.png", wxBITMAP_TYPE_PNG);
+    if (!gridBmp.IsOk()) {
+        gridBmp.Create(32, 32);
+        wxMemoryDC dc(gridBmp);
+        dc.SetBackground(*wxTRANSPARENT_BRUSH);
+        dc.Clear();
+        dc.SetPen(wxPen(wxColour(0, 129, 203), 2));
+        dc.DrawLine(8, 0, 8, 32);
+        dc.DrawLine(16, 0, 16, 32);
+        dc.DrawLine(24, 0, 24, 32);
+        dc.DrawLine(0, 8, 32, 8);
+        dc.DrawLine(0, 16, 32, 16);
+        dc.DrawLine(0, 24, 32, 24);
+        dc.SelectObject(wxNullBitmap);
+    }
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_GRID, _("Grid"), gridBmp, _("Enable/disable alignment grid"), wxRIBBON_BUTTON_TOGGLE);
+    
+    wxBitmap alignBmp(Paths::GetDataPath() + "/images/ribbon/align32.png", wxBITMAP_TYPE_PNG);
+    if (!alignBmp.IsOk()) {
+        alignBmp.Create(32, 32);
+        wxMemoryDC dc(alignBmp);
+        dc.SetBackground(*wxTRANSPARENT_BRUSH);
+        dc.Clear();
+        dc.SetPen(wxPen(wxColour(0, 129, 203), 2));
+        dc.DrawLine(4, 8, 28, 8);
+        dc.DrawLine(4, 16, 28, 16);
+        dc.DrawLine(4, 24, 28, 24);
+        dc.SetPen(wxPen(wxColour(230, 81, 0), 2));
+        dc.DrawLine(8, 2, 8, 30);
+        dc.SelectObject(wxNullBitmap);
+    }
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ALIGN, _("Align"), alignBmp, _("Align selected elements to the grid"), wxRIBBON_BUTTON_NORMAL);
+    
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_LABELMNGR, _("Label Manager"), wxXmlResource::Get()->LoadBitmap(wxT("labelMngr32")), _("Automatically insert labels into multiple elements at once"), wxRIBBON_BUTTON_NORMAL);
     
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_PROJSETTINGS, _("Project Settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens a dialog to set the main settings of the current project"), wxRIBBON_BUTTON_NORMAL);
@@ -277,6 +312,8 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnFitClick, this, ID_RIBBON_FIT);
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnRotClockClick, this, ID_RIBBON_ROTATEC);
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnRotCounterClockClick, this, ID_RIBBON_ROTATECC);
+    m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnGridClick, this, ID_RIBBON_GRID);
+    m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnAlignClick, this, ID_RIBBON_ALIGN);
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnLabelMngrClick, this, ID_RIBBON_LABELMNGR);
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnProjectSettingsClick, this, ID_RIBBON_PROJSETTINGS);
     m_ribbonButtonBarReports->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnDataReportClick, this, ID_RIBBON_DATAREPORT);
@@ -325,6 +362,8 @@ MainFrameBase::~MainFrameBase()
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnFitClick, this, ID_RIBBON_FIT);
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnRotClockClick, this, ID_RIBBON_ROTATEC);
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnRotCounterClockClick, this, ID_RIBBON_ROTATECC);
+    m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnGridClick, this, ID_RIBBON_GRID);
+    m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnAlignClick, this, ID_RIBBON_ALIGN);
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnLabelMngrClick, this, ID_RIBBON_LABELMNGR);
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnProjectSettingsClick, this, ID_RIBBON_PROJSETTINGS);
     m_ribbonButtonBarReports->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnDataReportClick, this, ID_RIBBON_DATAREPORT);

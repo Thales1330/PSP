@@ -4736,3 +4736,17 @@ msgstr "Diretório de dados não encontrado."
 
 #~ msgid "Adds a power line to the circuit"
 #~ msgstr "Insere uma linha no "
+
+msgid "Grid"
+msgstr "Grade"
+
+msgid "Enable/disable alignment grid"
+msgstr "Ativar/desativar grade de alinhamento"
+
+msgid "Align"
+msgstr "Alinhar"
+
+msgid "Align selected elements to the grid"
+msgstr "Alinhar elementos selecionados na grade"
+
+

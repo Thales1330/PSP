@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -269,6 +269,18 @@ void Element::StartMove(wxPoint2DDouble position)
 }
 
 void Element::Move(wxPoint2DDouble position) { SetPosition(m_movePos + position - m_moveStartPt); }
+void Element::AlignToGrid(double gridSize)
+{
+	if (gridSize <= 0.0) gridSize = 20.0;
+	wxPoint2DDouble oldPos = m_position;
+	wxPoint2DDouble newPos(std::round(oldPos.m_x / gridSize) * gridSize,
+	                       std::round(oldPos.m_y / gridSize) * gridSize);
+	wxPoint2DDouble delta = newPos - oldPos;
+	SetPosition(newPos);
+	for (auto& pt : m_pointList) {
+		pt += delta;
+	}
+}
 wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX, double offsetY) const
 {
 	return wxPoint2DDouble(m_position.m_x + offsetX + translation.m_x, m_position.m_y + offsetY + translation.m_y) *

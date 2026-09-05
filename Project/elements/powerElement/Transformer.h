@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -96,6 +96,7 @@ class Transformer : public Branch
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate(bool clockwise = true);
     virtual void Move(wxPoint2DDouble position);
+    virtual void AlignToGrid(double gridSize = 20.0) override;
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);
     virtual void StartMove(wxPoint2DDouble position);
     virtual bool GetContextMenu(wxMenu& menu);

@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -319,6 +319,16 @@ void Bus::Rotate(bool clockwise)
 
 	m_angle += rotAngle;
 	if (m_angle >= 360 || m_angle <= -360) m_angle = 0.0;
+}
+
+void Bus::AlignToGrid(double gridSize)
+{
+	if (gridSize <= 0.0) gridSize = 20.0;
+	wxPoint2DDouble newPos(std::round(m_position.m_x / gridSize) * gridSize,
+	                       std::round(m_position.m_y / gridSize) * gridSize);
+	m_width = std::round(m_width / gridSize) * gridSize;
+	if (m_width < gridSize) m_width = gridSize;
+	SetPosition(newPos);
 }
 
 bool Bus::GetContextMenu(wxMenu& menu)

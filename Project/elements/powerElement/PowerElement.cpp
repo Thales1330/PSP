@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -40,24 +40,38 @@ wxPoint2DDouble PowerElement::GetSwitchPoint(Element* parent,
                                              wxPoint2DDouble parentPoint,
                                              wxPoint2DDouble secondPoint) const
 {
-    double swLineSize = 25.0;
-    wxPoint2DDouble swPoint = wxPoint2DDouble(parentPoint.m_x, parentPoint.m_y - swLineSize);
+    double swLineSize = 20.0;
+    double dist = std::sqrt((secondPoint.m_x - parentPoint.m_x) * (secondPoint.m_x - parentPoint.m_x) +
+                            (secondPoint.m_y - parentPoint.m_y) * (secondPoint.m_y - parentPoint.m_y));
+    if (dist > 0.0 && dist < swLineSize) {
+        swLineSize = dist / 2.0;
+    }
 
-    // Rotate the second point (to compare).
     double angle = parent->GetAngle();
+    double rad = wxDegToRad(-angle);
+    double c = std::cos(rad);
+    double s = std::sin(rad);
+    double dx = secondPoint.m_x - parentPoint.m_x;
+    double dy = secondPoint.m_y - parentPoint.m_y;
+    double localX = c * dx - s * dy;
+    double localY = s * dx + c * dy;
 
-    secondPoint =
-        wxPoint2DDouble(std::cos(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) -
-                            std::sin(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
-                        std::sin(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) +
-                            std::cos(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+    wxPoint2DDouble localSwPoint(0.0, 0.0);
+    if (std::abs(localY) >= std::abs(localX)) {
+        localSwPoint.m_y = (localY >= 0.0) ? swLineSize : -swLineSize;
+    } else {
+        localSwPoint.m_x = (localX >= 0.0) ? swLineSize : -swLineSize;
+    }
 
-    // Rotate
-    if(secondPoint.m_y > parentPoint.m_y) angle -= 180.0;
-    return wxPoint2DDouble(std::cos(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) -
-                               std::sin(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
-                           std::sin(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) +
-                               std::cos(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+    double backRad = wxDegToRad(angle);
+    double bc = std::cos(backRad);
+    double bs = std::sin(backRad);
+    wxPoint2DDouble pt(parentPoint.m_x + bc * localSwPoint.m_x - bs * localSwPoint.m_y,
+                       parentPoint.m_y + bs * localSwPoint.m_x + bc * localSwPoint.m_y);
+
+    if (std::abs(pt.m_x - std::round(pt.m_x)) < 1e-4) pt.m_x = std::round(pt.m_x);
+    if (std::abs(pt.m_y - std::round(pt.m_y)) < 1e-4) pt.m_y = std::round(pt.m_y);
+    return pt;
 }
 
 bool PowerElement::SwitchesContains(wxPoint2DDouble position) const

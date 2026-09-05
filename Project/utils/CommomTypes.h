@@ -1,4 +1,4 @@
-﻿#ifndef	COMMONTYPES_H
+#ifndef	COMMONTYPES_H
 #define COMMONTYPES_H
 
 #include <wx/colour.h>
@@ -16,6 +16,7 @@ struct GUIColour {
 	wxColour pfArrow = wxColour(255, 130, 0);
 	wxColour swClose = wxColour(0, 102, 0);
 	wxColour swOpen = wxColour(255, 26, 26);
+	wxColour grid = wxColour(220, 222, 225);
 };
 
 /**

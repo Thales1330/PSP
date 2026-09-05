@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -250,6 +250,52 @@ void Line::Move(wxPoint2DDouble position)
 			m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
 		}
 	}
+}
+
+void Line::AlignToGrid(double gridSize)
+{
+	if (gridSize <= 0.0) gridSize = 20.0;
+	if (m_pointList.empty()) return;
+
+	// Snap intermediate points (indices 2 to size - 3)
+	for (size_t i = 2; i + 2 < m_pointList.size(); ++i) {
+		m_pointList[i].m_x = std::round(m_pointList[i].m_x / gridSize) * gridSize;
+		m_pointList[i].m_y = std::round(m_pointList[i].m_y / gridSize) * gridSize;
+	}
+
+	// Snap bus contact points
+	if (m_parentList.size() > 0 && m_parentList[0]) {
+		Element* bus1 = m_parentList[0];
+		wxPoint2DDouble localPt = bus1->RotateAtPosition(m_pointList[0], -bus1->GetAngle());
+		localPt.m_y = bus1->GetPosition().m_y;
+		localPt.m_x = std::round(localPt.m_x / gridSize) * gridSize;
+		double halfW = bus1->GetWidth() / 2.0;
+		if (localPt.m_x < bus1->GetPosition().m_x - halfW) localPt.m_x = bus1->GetPosition().m_x - halfW;
+		if (localPt.m_x > bus1->GetPosition().m_x + halfW) localPt.m_x = bus1->GetPosition().m_x + halfW;
+		m_pointList[0] = bus1->RotateAtPosition(localPt, bus1->GetAngle());
+	}
+	else if (!m_pointList.empty()) {
+		m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
+		m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
+	}
+
+	if (m_parentList.size() > 1 && m_parentList[1] && m_pointList.size() > 1) {
+		Element* bus2 = m_parentList[1];
+		wxPoint2DDouble localPt = bus2->RotateAtPosition(m_pointList.back(), -bus2->GetAngle());
+		localPt.m_y = bus2->GetPosition().m_y;
+		localPt.m_x = std::round(localPt.m_x / gridSize) * gridSize;
+		double halfW = bus2->GetWidth() / 2.0;
+		if (localPt.m_x < bus2->GetPosition().m_x - halfW) localPt.m_x = bus2->GetPosition().m_x - halfW;
+		if (localPt.m_x > bus2->GetPosition().m_x + halfW) localPt.m_x = bus2->GetPosition().m_x + halfW;
+		m_pointList.back() = bus2->RotateAtPosition(localPt, bus2->GetAngle());
+	}
+	else if (m_pointList.size() > 1) {
+		m_pointList.back().m_x = std::round(m_pointList.back().m_x / gridSize) * gridSize;
+		m_pointList.back().m_y = std::round(m_pointList.back().m_y / gridSize) * gridSize;
+	}
+
+	UpdateSwitchesPosition();
+	UpdatePowerFlowArrowsPosition();
 }
 
 bool Line::AddParent(Element* parent, wxPoint2DDouble position)

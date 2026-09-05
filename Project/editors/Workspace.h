@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -166,6 +166,13 @@ public:
 	ControlEditorManager& GetControlEditorManager() const { return *m_CEMngr; }
 	ChartWindowManager& GetChartWindowManager() const { return *m_CWMngr; }
 
+	void EnableGrid(bool enable = true) { m_showGrid = enable; }
+	bool IsGridEnabled() const { return m_showGrid; }
+	void SetGridSize(double size) { m_gridSize = size; }
+	double GetGridSize() const { return m_gridSize; }
+	wxPoint2DDouble SnapToGrid(const wxPoint2DDouble& pt) const;
+	void AlignSelectedToGrid();
+
 	bool InsertTextElement(int textID, Element* parentElement, ElectricalUnit unit = ElectricalUnit::UNIT_NONE, int precision = 2);
 	Element* FindTextElement(Element* parentElement, int dataType);
 	void RemoveAllTextElements();
@@ -223,6 +230,8 @@ protected:
 
 	void DrawScene(wxGraphicsContext* gc);
 	void DrawScene(wxDC& dc);
+	void DrawGrid(wxGraphicsContext* gc);
+	void DrawGrid(wxDC& dc);
 
 	//wxGLContext* m_glContext = nullptr;
 	wxStatusBar* m_statusBar = nullptr;
@@ -272,6 +281,8 @@ protected:
 	bool m_showHM = false;
 	bool m_showHMTimer = false;
 	bool m_hmAutomaticLabel = false;
+	bool m_showGrid = false;
+	double m_gridSize = 20.0;
 
 	std::unique_ptr<ControlEditorManager> m_CEMngr;
 	std::unique_ptr<ChartWindowManager> m_CWMngr;
