@@ -127,6 +127,7 @@ public:
 	virtual bool PickboxContains(wxPoint2DDouble position);
 	virtual bool GetContextMenu(wxMenu& menu);
 	virtual wxString GetTipText() const;
+	virtual wxColour GetVoltageColour(GUIColour* guiColour = nullptr) const;
 	virtual BusElectricalData GetElectricalData() const { return m_electricalData; }
 	virtual BusElectricalData& GetElectricalDataRef() { return m_electricalData; }
 	virtual void SetElectricalData(const BusElectricalData& electricalData) { m_electricalData = electricalData; }

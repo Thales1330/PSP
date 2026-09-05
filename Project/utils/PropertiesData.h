@@ -84,6 +84,7 @@ struct GeneralData {
 	wxFileName atpPath;
 	wxString atpWorkFolder = "";
 	bool showElementsToolBar = true;
+	std::vector<VoltageLevelColour> voltageLevels;
 };
 
 struct FreqResponseData {
@@ -106,12 +107,14 @@ public:
 	PropertiesData();
 	~PropertiesData();
 
+	static std::vector<VoltageLevelColour> GetDefaultVoltageLevels();
+
 	GUIColour* GetGUIColour() { return &m_guiColour; }
 	void SetGUIColourTheme();
 	SimulationData GetSimulationPropertiesData() const { return m_simulData; }
 	void SetSimulationPropertiesData(SimulationData simulationData) { m_simulData = simulationData; }
 	GeneralData GetGeneralPropertiesData() const { return m_genData; }
-	void SetGeneralPropertiesData(GeneralData generalData) { m_genData = generalData; }
+	void SetGeneralPropertiesData(GeneralData generalData);
 
 	void SetFreqRespData(const FreqResponseData& freqRespData) { this->m_freqRespData = freqRespData; }
 	const FreqResponseData& GetFreqRespData() const { return m_freqRespData; }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -243,6 +243,7 @@ bool PowerFlow::InitPowerFlow(std::vector<BusType>& busType,
 		return false;
 	}
 
+	m_tapAdjustmentsCount = 0;
 	return true;
 }
 
@@ -311,7 +312,10 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 			}
 			else emtPowerError = 0.0;
 
-			if (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) && emtPowerError < error) break;
+			bool qLimitReached = CheckReactiveLimits(busType, reactiveLimit, power, loadPower);
+			bool tapAdjusted = AdjustTapChangers(voltage, systemPowerBase);
+
+			if (!qLimitReached && !tapAdjusted && emtPowerError < error) break;
 		}
 
 		iteration++;
@@ -430,7 +434,10 @@ bool PowerFlow::RunNewtonRaphson(double systemPowerBase,
 
 			double emtPowerError = CalculateEMTPowerError(voltage, power, systemPowerBase, m_errorMsg);
 
-			if (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) && emtPowerError < error)
+			bool qLimitReached = CheckReactiveLimits(busType, reactiveLimit, power, loadPower);
+			bool tapAdjusted = AdjustTapChangers(voltage, systemPowerBase);
+
+			if (!qLimitReached && !tapAdjusted && emtPowerError < error)
 				break;
 			else {
 				GetNumPVPQ(busType, numPQ, numPV);
@@ -579,7 +586,10 @@ bool PowerFlow::RunGaussNewton(double systemPowerBase,
 		if (iterationError < error) {
 			double emtPowerError = CalculateEMTPowerError(voltage, power, systemPowerBase, m_errorMsg);
 
-			if (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) && emtPowerError < error)
+			bool qLimitReached = CheckReactiveLimits(busType, reactiveLimit, power, loadPower);
+			bool tapAdjusted = AdjustTapChangers(voltage, systemPowerBase);
+
+			if (!qLimitReached && !tapAdjusted && emtPowerError < error)
 				break;
 			else {
 				GetNumPVPQ(busType, numPQ, numPV);
@@ -622,6 +632,13 @@ void PowerFlow::ResetVoltages()
 		data.harmonicVoltage.clear();
 		data.thd = 0.0;
 		bus->SetElectricalData(data);
+	}
+	for (auto* transf : m_transformerList) {
+		auto data = transf->GetElectricalData();
+		if (data.hasTapChanger && data.nominalTurnsRatio > 0.0) {
+			data.turnsRatio = data.nominalTurnsRatio;
+			transf->SetElectricaData(data);
+		}
 	}
 }
 
@@ -908,4 +925,92 @@ bool PowerFlow::CalculateMotorsReactivePower(std::vector<std::complex<double> > 
 		}
 	}
 	return true;
+}
+
+bool PowerFlow::AdjustTapChangers(const std::vector<std::complex<double> >& voltage, double systemPowerBase)
+{
+	if (m_tapAdjustmentsCount >= 40) {
+		// Limit total adjustments to avoid infinite cycling
+		return false;
+	}
+
+	bool anyAdjusted = false;
+
+	for (Transformer* transformer : m_transformerList) {
+		if (!transformer->IsOnline() || transformer->GetParentList().size() < 2) continue;
+
+		TransformerElectricalData data = transformer->GetElectricalData();
+		if (!data.hasTapChanger) continue;
+
+		Bus* bus1 = static_cast<Bus*>(transformer->GetParentList()[0]);
+		Bus* bus2 = static_cast<Bus*>(transformer->GetParentList()[1]);
+		if (!bus1 || !bus2) continue;
+
+		int n1 = bus1->GetElectricalData().number;
+		int n2 = bus2->GetElectricalData().number;
+
+		int nCtrl = (data.oltcControlledBus == 0) ? n1 : n2;
+		bool isPrimary = (data.oltcControlledBus == 0);
+
+		if (nCtrl < 0 || nCtrl >= (int)voltage.size()) continue;
+
+		double vCtrl = std::abs(voltage[nCtrl]);
+		double vTarget = data.oltcTargetVoltage;
+		double deadband = std::max(data.oltcVoltageDeadband, 1e-4);
+
+		if (data.oltcIsDiscrete && data.oltcTapStep > 1e-4) {
+			deadband = std::max(deadband, 0.5 * data.oltcTapStep * vCtrl);
+		}
+
+		double vDiff = vCtrl - vTarget;
+		if (std::abs(vDiff) <= deadband) continue;
+
+		double currentTap = data.turnsRatio;
+		if (currentTap <= 1e-4) currentTap = 1.0;
+
+		// Model in PSP-UFU has ideal turns ratio a on side 1 (Primary):
+		// V1 / a ~ V2  => V2 ~ V1 / a  and  V1 ~ a * V2.
+		// Secondary (side 2): dV2/da ~ -V2/a
+		//   delta_V2 ~ -(V2/a)*delta_a => delta_a ~ -(a/V2)*delta_V2 = (a/V2)*(V2 - Vtarget) = (a/V2)*vDiff.
+		// Primary (side 1): dV1/da ~ V1/a
+		//   delta_V1 ~ (V1/a)*delta_a => delta_a ~ (a/V1)*delta_V1 = -(a/V1)*(V1 - Vtarget) = -(a/V1)*vDiff.
+
+		double damping = 0.8;
+		double deltaTap = (isPrimary ? -1.0 : 1.0) * (currentTap / std::max(vCtrl, 0.1)) * vDiff * damping;
+
+		if (data.oltcIsDiscrete && data.oltcTapStep > 1e-4) {
+			double step = data.oltcTapStep;
+			double numSteps = std::round(deltaTap / step);
+			if (numSteps == 0.0) {
+				numSteps = (deltaTap > 0.0) ? 1.0 : -1.0;
+			}
+			deltaTap = numSteps * step;
+		}
+
+		double newTap = currentTap + deltaTap;
+
+		// Limit to min/max range
+		if (newTap < data.oltcMinTap) newTap = data.oltcMinTap;
+		if (newTap > data.oltcMaxTap) newTap = data.oltcMaxTap;
+
+		if (data.oltcIsDiscrete && data.oltcTapStep > 1e-4) {
+			double step = data.oltcTapStep;
+			newTap = 1.0 + std::round((newTap - 1.0) / step) * step;
+			if (newTap < data.oltcMinTap) newTap = data.oltcMinTap;
+			if (newTap > data.oltcMaxTap) newTap = data.oltcMaxTap;
+		}
+
+		if (std::abs(newTap - currentTap) > 1e-5) {
+			data.turnsRatio = newTap;
+			transformer->SetElectricaData(data);
+			anyAdjusted = true;
+		}
+	}
+
+	if (anyAdjusted) {
+		m_tapAdjustmentsCount++;
+		GetYBus(m_yBus, systemPowerBase);
+	}
+
+	return anyAdjusted;
 }

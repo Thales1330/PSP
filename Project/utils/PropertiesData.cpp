@@ -68,6 +68,36 @@ void PropertiesData::SetGUIColourTheme()
 		m_guiColour.swOpen = wxColour(235, 85, 85);
 		m_guiColour.grid = wxColour(60, 64, 72);
 	}
+
+	if (m_genData.voltageLevels.empty()) {
+		m_genData.voltageLevels = GetDefaultVoltageLevels();
+	}
+	m_guiColour.voltageLevels = m_genData.voltageLevels;
+}
+
+std::vector<VoltageLevelColour> PropertiesData::GetDefaultVoltageLevels()
+{
+	return {
+		{ 500.0, wxColour(0, 90, 220) },    // >= 500 kV - Azul Real
+		{ 440.0, wxColour(160, 82, 45) },   // 440 kV - Marrom
+		{ 345.0, wxColour(190, 110, 50) },  // 345 kV - Marrom claro / Ocre
+		{ 230.0, wxColour(220, 35, 35) },   // 230 kV - Vermelho
+		{ 138.0, wxColour(0, 155, 65) },    // 138 kV - Verde
+		{ 69.0,  wxColour(145, 40, 205) },  // 69 kV  - Violeta / Roxo
+		{ 34.5,  wxColour(215, 35, 135) },  // 34.5 kV - Magenta / Rosa
+		{ 13.8,  wxColour(0, 165, 195) },   // 13.8 kV - Ciano / Azul claro
+		{ 4.16,  wxColour(205, 150, 15) },  // 4.16 kV - Dourado / Âmbar
+		{ 0.38,  wxColour(120, 125, 135) }  // 0.38 kV (380 V) - Cinza
+	};
+}
+
+void PropertiesData::SetGeneralPropertiesData(GeneralData generalData)
+{
+	m_genData = generalData;
+	if (m_genData.voltageLevels.empty()) {
+		m_genData.voltageLevels = GetDefaultVoltageLevels();
+	}
+	m_guiColour.voltageLevels = m_genData.voltageLevels;
 }
 
 bool PropertiesData::SaveConfigFile(const GeneralData& data)
@@ -131,6 +161,15 @@ bool PropertiesData::SaveConfigFile(const GeneralData& data)
 
 	line = wxString("elementstoolbar=") + (data.showElementsToolBar ? "yes" : "no");
 	file.AddLine(line);
+
+	if (!data.voltageLevels.empty()) {
+		line = "voltage_levels=";
+		for (size_t i = 0; i < data.voltageLevels.size(); ++i) {
+			if (i > 0) line += ";";
+			line += wxString::Format("%s:%s", wxString::FromCDouble(data.voltageLevels[i].voltage), data.voltageLevels[i].colour.GetAsString(wxC2S_HTML_SYNTAX));
+		}
+		file.AddLine(line);
+	}
 
 	file.Write();
 	file.Close();

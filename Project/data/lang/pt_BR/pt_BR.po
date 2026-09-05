@@ -4830,4 +4830,97 @@ msgstr "Adiciona um elemento transitório eletromagnético que conecta ao ATP"
 msgid "Adds a linked element label"
 msgstr "Adiciona um rótulo vinculado ao elemento"
 
+msgid "Busbar"
+msgstr "Barramento"
+
+msgid "Voltage (kV)"
+msgstr "Tensão (kV)"
+
+msgid "Voltage (kV):"
+msgstr "Tensão (kV):"
+
+msgid "Add / Update"
+msgstr "Adicionar / Atualizar"
+
+msgid "Default"
+msgstr "Padrão"
+
+msgid "Please enter a valid voltage value in kV."
+msgstr "Por favor, insira um valor válido de tensão em kV."
+
+msgid "Select a voltage level from the list to remove."
+msgstr "Selecione um nível de tensão da lista para remover."
+
+msgid "Tap Changer (OLTC)"
+msgstr "Comutador de Tap (OLTC)"
+
+msgid "Enable On-Load Tap Changer (OLTC)"
+msgstr "Habilitar comutador de tap sob carga (OLTC)"
+
+msgid "OLTC Parameters"
+msgstr "Parâmetros do OLTC"
+
+msgid "Controlled bus:"
+msgstr "Barra controlada:"
+
+msgid "Primary (Bus 1)"
+msgstr "Primário (Barra 1)"
+
+msgid "Secondary (Bus 2)"
+msgstr "Secundário (Barra 2)"
+
+msgid "Primary: Bus %d (%s)"
+msgstr "Primário: Barra %d (%s)"
+
+msgid "Secondary: Bus %d (%s)"
+msgstr "Secundário: Barra %d (%s)"
+
+msgid "Target voltage (Vset):"
+msgstr "Tensão de referência (Vset):"
+
+msgid "Voltage deadband:"
+msgstr "Banda morta de tensão:"
+
+msgid "Minimum tap (Tap min):"
+msgstr "Tap mínimo (Tap min):"
+
+msgid "Maximum tap (Tap max):"
+msgstr "Tap máximo (Tap max):"
+
+msgid "Tap step size:"
+msgstr "Passo do tap:"
+
+msgid "Use discrete tap steps"
+msgstr "Usar passos discretos de tap"
+
+msgid "Target voltage must be greater than 0."
+msgstr "A tensão de referência deve ser maior que 0."
+
+msgid "Voltage deadband cannot be negative."
+msgstr "A banda morta de tensão não pode ser negativa."
+
+msgid "Minimum tap must be greater than 0."
+msgstr "O tap mínimo deve ser maior que 0."
+
+msgid "Maximum tap must be greater than or equal to minimum tap."
+msgstr "O tap máximo deve ser maior ou igual ao tap mínimo."
+
+msgid "Tap step size cannot be negative."
+msgstr "O passo do tap não pode ser negativo."
+
+msgid "Value entered incorrectly in the field \"Target voltage\"."
+msgstr "Valor inserido incorretamente no campo \"Tensão de referência\"."
+
+msgid "Value entered incorrectly in the field \"Voltage deadband\"."
+msgstr "Valor inserido incorretamente no campo \"Banda morta de tensão\"."
+
+msgid "Value entered incorrectly in the field \"Minimum tap\"."
+msgstr "Valor inserido incorretamente no campo \"Tap mínimo\"."
+
+msgid "Value entered incorrectly in the field \"Maximum tap\"."
+msgstr "Valor inserido incorretamente no campo \"Tap máximo\"."
+
+msgid "Value entered incorrectly in the field \"Tap step size\"."
+msgstr "Valor inserido incorretamente no campo \"Passo do tap\"."
+
 

@@ -2,6 +2,12 @@
 #define COMMONTYPES_H
 
 #include <wx/colour.h>
+#include <vector>
+
+struct VoltageLevelColour {
+	double voltage = 0.0;       // Voltage in kV
+	wxColour colour = wxColour(0, 78, 255);
+};
 
 struct GUIColour {
 	wxColour background = wxColour(250, 249, 246);
@@ -17,6 +23,7 @@ struct GUIColour {
 	wxColour swClose = wxColour(0, 102, 0);
 	wxColour swOpen = wxColour(255, 26, 26);
 	wxColour grid = wxColour(220, 222, 225);
+	std::vector<VoltageLevelColour> voltageLevels;
 };
 
 /**
