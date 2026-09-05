@@ -4749,4 +4749,85 @@ msgstr "Alinhar"
 msgid "Align selected elements to the grid"
 msgstr "Alinhar elementos selecionados na grade"
 
+msgid "Floating toolbar"
+msgstr "Barra de ferramentas flutuante"
+
+msgid "Show elements toolbar"
+msgstr "Exibir barra de ferramentas de elementos"
+
+msgid "Elements"
+msgstr "Elementos"
+
+msgid "Bus"
+msgstr "Barra"
+
+msgid "Line"
+msgstr "Linha"
+
+msgid "Transformer"
+msgstr "Transformador"
+
+msgid "Generator"
+msgstr "Gerador"
+
+msgid "Induction motor"
+msgstr "Motor de indução"
+
+msgid "Synchronous compensator"
+msgstr "Compensador síncrono"
+
+msgid "Load"
+msgstr "Carga"
+
+msgid "Capacitor"
+msgstr "Capacitor"
+
+msgid "Inductor"
+msgstr "Indutor"
+
+msgid "Harmonic current"
+msgstr "Corrente harmônica"
+
+msgid "EMT Element"
+msgstr "Elemento EMT"
+
+msgid "Label"
+msgstr "Rótulo"
+
+msgid "Adds a bus at the circuit"
+msgstr "Adiciona uma barra ao circuito"
+
+msgid "Adds a power line at the circuit"
+msgstr "Adiciona uma linha de transmissão ao circuito"
+
+msgid "Adds a transformer at the circuit"
+msgstr "Adiciona um transformador ao circuito"
+
+msgid "Adds a generator at the circuit"
+msgstr "Adiciona um gerador ao circuito"
+
+msgid "Adds an induction motor at the circuit"
+msgstr "Adiciona um motor de indução ao circuito"
+
+msgid "Adds a synchronous compensator at the circuit"
+msgstr "Adiciona um compensador síncrono ao circuito"
+
+msgid "Adds a load at the circuit"
+msgstr "Adiciona uma carga ao circuito"
+
+msgid "Adds a shunt capacitor at the circuit"
+msgstr "Adiciona um capacitor shunt ao circuito"
+
+msgid "Adds a shunt inductor at the circuit"
+msgstr "Adiciona um reator shunt ao circuito"
+
+msgid "Adds a harmonic current source at the circuit"
+msgstr "Adiciona uma fonte de corrente harmônica ao circuito"
+
+msgid "Adds an electromagnetic transient element that connects with ATP"
+msgstr "Adiciona um elemento transitório eletromagnético que conecta ao ATP"
+
+msgid "Adds a linked element label"
+msgstr "Adiciona um rótulo vinculado ao elemento"
+
 

@@ -1,4 +1,4 @@
-﻿#ifdef __INTELLISENSE__
+#ifdef __INTELLISENSE__
 #pragma diag_suppress 102
 #endif
 
@@ -151,6 +151,14 @@ public:
 				if (tag == "atpfile") {
 					data.atpPath = wxFileName(tagValue);
 				}
+				if (tag == "elementstoolbar") {
+					if (tagValue == "yes" || tagValue == "true" || tagValue == "1") {
+						data.showElementsToolBar = true;
+					}
+					else if (tagValue == "no" || tagValue == "false" || tagValue == "0") {
+						data.showElementsToolBar = false;
+					}
+				}
 			}
 			file.Close();
 		}
@@ -169,6 +177,7 @@ public:
 			file.AddLine("labelfont=Arial");
 			file.AddLine("labelfontsize=10");
 			file.AddLine("atpfile=");
+			file.AddLine("elementstoolbar=yes");
 			//file.AddLine("useOpenGL=yes");
 
 			file.Write();
@@ -180,6 +189,7 @@ public:
 #ifdef __WXGTK__
 			data.plotLib = PlotLib::wxMATH_PLOT;
 #endif
+			data.showElementsToolBar = true;
 			//data.useOpenGL = true;
 			propertiesData->SetGeneralPropertiesData(data);
 		}

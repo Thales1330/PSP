@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -83,6 +83,7 @@ struct GeneralData {
 	int labelFontSize = 10;
 	wxFileName atpPath;
 	wxString atpWorkFolder = "";
+	bool showElementsToolBar = true;
 };
 
 struct FreqResponseData {
@@ -114,6 +115,8 @@ public:
 
 	void SetFreqRespData(const FreqResponseData& freqRespData) { this->m_freqRespData = freqRespData; }
 	const FreqResponseData& GetFreqRespData() const { return m_freqRespData; }
+
+	static bool SaveConfigFile(const GeneralData& data);
 
 protected:
 	GUIColour m_guiColour;

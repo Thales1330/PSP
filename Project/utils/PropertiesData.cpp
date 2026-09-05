@@ -18,6 +18,8 @@
 #include "PropertiesData.h"
 
 #include <wx/msgdlg.h>
+#include <wx/textfile.h>
+#include <wx/stdpaths.h>
 
 PropertiesData::PropertiesData() { SetGUIColourTheme(); }
 PropertiesData::~PropertiesData() {}
@@ -66,4 +68,71 @@ void PropertiesData::SetGUIColourTheme()
 		m_guiColour.swOpen = wxColour(235, 85, 85);
 		m_guiColour.grid = wxColour(60, 64, 72);
 	}
+}
+
+bool PropertiesData::SaveConfigFile(const GeneralData& data)
+{
+	wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
+	if (!fn.DirExists()) {
+		fn.Mkdir();
+	}
+	wxTextFile file(fn.GetFullPath());
+	if (!file.Create()) {
+		if (!file.Open()) {
+			return false;
+		}
+		file.Clear();
+	}
+
+	wxString line = "lang=";
+	switch (data.language) {
+	case wxLANGUAGE_PORTUGUESE_BRAZILIAN:
+		line += "pt-br";
+		break;
+	case wxLANGUAGE_ENGLISH:
+	default:
+		line += "en";
+		break;
+	}
+	file.AddLine(line);
+
+	line = "plotlib=";
+	switch (data.plotLib) {
+	case PlotLib::wxMATH_PLOT:
+		line += "mathplot";
+		break;
+	case PlotLib::wxCHART_DIR:
+	default:
+		line += "chartdir";
+		break;
+	}
+	file.AddLine(line);
+
+	line = "theme=";
+	switch (data.theme) {
+	case THEME_DARK:
+		line += "dark";
+		break;
+	case THEME_LIGHT:
+	default:
+		line += "light";
+		break;
+	}
+	file.AddLine(line);
+
+	line = "labelfont=" + data.labelFont;
+	file.AddLine(line);
+
+	line = wxString::Format("labelfontsize=%d", data.labelFontSize);
+	file.AddLine(line);
+
+	line = "atpfile=" + data.atpPath.GetFullPath();
+	file.AddLine(line);
+
+	line = wxString("elementstoolbar=") + (data.showElementsToolBar ? "yes" : "no");
+	file.AddLine(line);
+
+	file.Write();
+	file.Close();
+	return true;
 }

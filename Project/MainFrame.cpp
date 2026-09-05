@@ -39,6 +39,7 @@
 #include "forms/SimulationsSettingsForm.h"
 #include "forms/StabilityEventList.h"
 #include "forms/LabelManager.h" 
+#include "forms/ElementsToolBar.h" 
 
 #include "utils/FileHanding.h"
 #include "utils/PropertiesData.h"
@@ -158,10 +159,21 @@ void MainFrame::Init()
 	}
 
 	this->Layout();
+
+	m_elementsToolBar = new ElementsToolBar(this);
+	m_elementsToolBar->EnableTools(false);
+	if (m_generalProperties && m_generalProperties->GetGeneralPropertiesData().showElementsToolBar) {
+		CallAfter([this]() {
+			ShowElementsToolBar(true);
+		});
+	}
 }
 
 void MainFrame::EnableCurrentProjectRibbon(bool enable)
 {
+	if (m_elementsToolBar) {
+		m_elementsToolBar->EnableTools(enable);
+	}
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ADDELEMENT, enable);
 	m_ribbonButtonBarReports->EnableButton(ID_RIBBON_CHARTS, enable);
 	m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_CLOSE, enable);
@@ -194,11 +206,6 @@ void MainFrame::EnableCurrentProjectRibbon(bool enable)
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_LABELMNGR, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_HARMDIST, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_FREQRESP, enable);
-
-	//if (m_generalProperties->GetGeneralPropertiesData().useOpenGL)
-	//    m_ribbonButtonBarReports->EnableButton(ID_RIBBON_HEATMAP, enable);
-	//else
-	//    m_ribbonButtonBarReports->EnableButton(ID_RIBBON_HEATMAP, false);
 }
 
 void MainFrame::CreateDropdownMenus()
@@ -740,7 +747,9 @@ void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 {
 	GeneralPropertiesForm genPropForm(this, m_generalProperties);
 	genPropForm.SetInitialSize();
-	genPropForm.ShowModal();
+	if (genPropForm.ShowModal() == wxID_OK) {
+		ShowElementsToolBar(m_generalProperties->GetGeneralPropertiesData().showElementsToolBar);
+	}
 	for (auto& workspace : m_workspaceList) {
 		workspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
 		workspace->GetProperties()->SetGUIColourTheme();
@@ -908,5 +917,45 @@ void MainFrame::OnLabelMngrClick(wxRibbonButtonBarEvent& event)
 			workspace->UpdateTextElements();
 			workspace->Redraw();
 		}
+	}
+}
+
+void MainFrame::PositionElementsToolBar()
+{
+	if (!m_elementsToolBar) return;
+	wxRect frameRect = GetScreenRect();
+	wxSize tbSize = m_elementsToolBar->GetSize();
+	if (tbSize.GetWidth() <= 0 || tbSize.GetHeight() <= 0) {
+		tbSize = m_elementsToolBar->GetBestSize();
+	}
+	int x = frameRect.GetRight() - tbSize.GetWidth() - 25;
+	int y = frameRect.GetTop() + 165;
+	if (x < frameRect.GetLeft()) x = frameRect.GetLeft() + 10;
+	if (y < frameRect.GetTop()) y = frameRect.GetTop() + 10;
+	m_elementsToolBar->SetPosition(wxPoint(x, y));
+}
+
+void MainFrame::ShowElementsToolBar(bool show)
+{
+	if (!m_elementsToolBar) return;
+	if (show) {
+		if (!m_elementsToolBarPositioned) {
+			PositionElementsToolBar();
+			m_elementsToolBarPositioned = true;
+		}
+		m_elementsToolBar->Show();
+		m_elementsToolBar->Raise();
+	} else {
+		m_elementsToolBar->Hide();
+	}
+}
+
+void MainFrame::OnElementsToolBarClosed()
+{
+	if (m_generalProperties) {
+		auto data = m_generalProperties->GetGeneralPropertiesData();
+		data.showElementsToolBar = false;
+		m_generalProperties->SetGeneralPropertiesData(data);
+		PropertiesData::SaveConfigFile(data);
 	}
 }

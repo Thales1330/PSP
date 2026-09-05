@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -73,7 +73,7 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	//if (data.useOpenGL) m_choiceRender->SetSelection(0);
 	//else m_choiceRender->SetSelection(1);
 	m_filePickerATPFolder->SetPath(data.atpPath.GetFullPath());
-
+	m_checkBoxElementsToolBar->SetValue(data.showElementsToolBar);
 
 	wxFont currentFont(data.labelFontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, data.labelFont);
 	m_fontPickerText->SetSelectedFont(currentFont);
@@ -95,79 +95,45 @@ bool GeneralPropertiesForm::ValidateData()
 	data.labelFont = slectedFont.GetFaceName();
 	data.labelFontSize = slectedFont.GetPointSize();
 
-	//wxTextFile file("config.ini");
-	wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
-	wxTextFile file(fn.GetFullPath());
-	if (!file.Create()) {
-		if (!file.Open()) {
-			// Fail to access the file.
-			wxMessageDialog msgDialog(this,
-				_("It was not possible to access the init file.\nThe settings won't be applied."),
-				_("Error"), wxOK | wxCENTRE | wxICON_ERROR);
-			msgDialog.ShowModal();
-		}
-		file.Clear();
-	}
-
-	wxString line = "lang=";
 	switch (m_choiceLanguage->GetSelection()) {
 	case 0: {
-		line += "en";
 		data.language = wxLANGUAGE_ENGLISH;
 	} break;
 	case 1: {
-		line += "pt-br";
 		data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
 	} break;
 	}
-	file.AddLine(line);
 	if (data.language != checkData.language) needRestart = true;
 
-	line = "plotlib=";
 	switch (m_choicePlotLib->GetSelection()) {
 	case 0: {
-		line += "chartdir";
 		data.plotLib = PlotLib::wxCHART_DIR;
 	} break;
 	case 1: {
-		line += "mathplot";
 		data.plotLib = PlotLib::wxMATH_PLOT;
 	} break;
 	}
-	file.AddLine(line);
-	//if (data.plotLib != checkData.plotLib) hasChanges = true;
 
-	line = "theme=";
 	switch (m_choiceTheme->GetSelection()) {
 	case 0: {
-		line += "light";
 		data.theme = THEME_LIGHT;
 		wxTheApp->SetAppearance(wxApp::Appearance::Light);
 	} break;
 	case 1: {
-		line += "dark";
 		data.theme = THEME_DARK;
 		wxTheApp->SetAppearance(wxApp::Appearance::Dark);
 	} break;
 	}
-	file.AddLine(line);
 	if (data.theme != checkData.theme) needRestart = true;
 
-	line = "labelfont=";
-	line += data.labelFont;
-	file.AddLine(line);
+	data.showElementsToolBar = m_checkBoxElementsToolBar->GetValue();
 
-	line = "labelfontsize=";
-	line += wxString::Format("%d", data.labelFontSize);
-	file.AddLine(line);
-
-
-	line = "atpfile=";
-	line += data.atpPath.GetFullPath();
-	file.AddLine(line);	
-
-	file.Write();
-	file.Close();
+	if (!PropertiesData::SaveConfigFile(data)) {
+		wxMessageDialog msgDialog(this,
+			_("It was not possible to access the init file.\nThe settings won't be applied."),
+			_("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+		msgDialog.ShowModal();
+	}
 
 	if (needRestart) {
 		wxMessageDialog msgDialog(this, _("The application must be restarted to settings changes be applied."),

@@ -120,6 +120,18 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     
     boxSizerLvl3_21->Add(m_filePickerATPFolder, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
+    wxBoxSizer* boxSizerLvl3_elementsTB = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer1212->Add(boxSizerLvl3_elementsTB, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextElementsToolBar = new wxStaticText(m_panelGeneral, wxID_ANY, _("Floating toolbar"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_elementsTB->Add(m_staticTextElementsToolBar, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_checkBoxElementsToolBar = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Show elements toolbar"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_elementsTB->Add(m_checkBoxElementsToolBar, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxTOP, WXC_FROM_DIP(5));
+    
     wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
     
     boxSizer_lvl1_1->Add(boxSizer_bottonButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));

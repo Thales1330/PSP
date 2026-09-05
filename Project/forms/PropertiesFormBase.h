@@ -67,6 +67,8 @@ protected:
     wxFontPickerCtrl* m_fontPickerText;
     wxStaticText* m_staticTextATPFolder;
     wxFilePickerCtrl* m_filePickerATPFolder;
+    wxStaticText* m_staticTextElementsToolBar;
+    wxCheckBox* m_checkBoxElementsToolBar;
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
@@ -86,6 +88,8 @@ public:
     wxFontPickerCtrl* GetFontPickerText() { return m_fontPickerText; }
     wxStaticText* GetStaticTextATPFolder() { return m_staticTextATPFolder; }
     wxFilePickerCtrl* GetFilePickerATPFolder() { return m_filePickerATPFolder; }
+    wxStaticText* GetStaticTextElementsToolBar() { return m_staticTextElementsToolBar; }
+    wxCheckBox* GetCheckBoxElementsToolBar() { return m_checkBoxElementsToolBar; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }

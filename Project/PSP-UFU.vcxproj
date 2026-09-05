@@ -238,6 +238,7 @@
     <ClCompile Include="utils\FileHanding.cpp" />
     <ClCompile Include="extLibs\fparser\fparser.cc" />
     <ClCompile Include="extLibs\fparser\fpoptimizer.cc" />
+    <ClCompile Include="forms\ElementsToolBar.cpp" />
     <ClCompile Include="forms\FrequencyResponseForm.cpp" />
     <ClCompile Include="elements\controlElement\Gain.cpp" />
     <ClCompile Include="forms\GainForm.cpp" />
@@ -357,6 +358,7 @@
     <ClInclude Include="utils\FileHanding.h" />
     <ClInclude Include="extLibs\fparser\fparser.hh" />
     <ClInclude Include="extLibs\fparser\fpconfig.hh" />
+    <ClInclude Include="forms\ElementsToolBar.h" />
     <ClInclude Include="forms\FrequencyResponseForm.h" />
     <ClInclude Include="elements\controlElement\Gain.h" />
     <ClInclude Include="forms\GainForm.h" />

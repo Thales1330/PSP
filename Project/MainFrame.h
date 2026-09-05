@@ -38,6 +38,7 @@ class DataReport;
 class AboutForm;
 class ImportForm;
 class StabilityEventList;
+class ElementsToolBar;
 
 enum {
     ID_ADDMENU_BUS = 20000,
@@ -87,6 +88,11 @@ class MainFrame : public MainFrameBase
     ~MainFrame();
     
     int RunPSPTest();
+
+    void OnAddElementsClick(wxCommandEvent& event);
+    void ShowElementsToolBar(bool show);
+    void OnElementsToolBarClosed();
+    ElementsToolBar* GetElementsToolBar() { return m_elementsToolBar; }
 
    protected:
     virtual void OnGridClick(wxRibbonButtonBarEvent& event) override;
@@ -145,13 +151,14 @@ class MainFrame : public MainFrameBase
     wxMenu* m_snapshotMenu = nullptr;
     wxLocale* m_locale = nullptr;
     PropertiesData* m_generalProperties = nullptr;
-    //wxGLContext* m_sharedGLContext = nullptr;
+    ElementsToolBar* m_elementsToolBar = nullptr;
+    bool m_elementsToolBarPositioned = false;
+    void PositionElementsToolBar();
 
     void Init();
     void EnableCurrentProjectRibbon(bool enable = true);
     void CreateDropdownMenus();
 
-    void OnAddElementsClick(wxCommandEvent& event);
     void OnStabilityMenuClick(wxCommandEvent& event);
 	void OnSnapshotMenuClick(wxCommandEvent& event);
 };
