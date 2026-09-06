@@ -1,4 +1,4 @@
-﻿#include "LabelManager.h"
+#include "LabelManager.h"
 
 #include <wx/msgdlg.h>
 #include <array>
@@ -16,7 +16,9 @@ LabelManager::LabelManager(wxWindow* parent, Workspace* workspace)
 		_(L"Fault current (i → j)"), _(L"Fault current (j → i)") };
 
 	m_checkListBoxLine->Append(branchOptions);
-	m_checkListBoxTransformer->Append(branchOptions);
+	std::vector<wxString> transformerOptions = branchOptions;
+	transformerOptions.push_back(_(L"Tap"));
+	m_checkListBoxTransformer->Append(transformerOptions);
 
 	m_textCtrlPrecision->SetValue(wxString::Format("%d", m_precision));
 
@@ -392,6 +394,9 @@ wxString LabelManager::GetTransformerPreviewText(int dataID)
 	case 9: { // Fault current (j → i)
 		return GetCurrent3fText({ -25.56, 0.0, 0.0 });
 	} break;
+	case 10: { // Tap
+		return wxString::Format(_("Tap = %.*f p.u.\n"), m_precision, 1.0);
+	} break;
 	default:
 		break;
 	}
@@ -595,10 +600,12 @@ void LabelManager::OnApplyButtonClick(wxCommandEvent& event)
 			}
 		} break;
 		case TYPE_TRANSFORMER: {
-			TextID lineTextOptions[10] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,
+			TextID lineTextOptions[11] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,
 				ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,
-				ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1 };
-			ElectricalUnit textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };
+				ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1,
+				ID_TXT_TAP };
+			ElectricalUnit textUnits[11] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit,
+				ElectricalUnit::UNIT_PU };
 			m_checkListBoxTransformer->GetCheckedItems(checked);
 			for (int i : checked) {
 				m_workspace->InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);

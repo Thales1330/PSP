@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -100,7 +100,8 @@ enum TextID {
 	ID_TXT_BRANCH_CURRENT_1_2,
 	ID_TXT_BRANCH_CURRENT_2_1,
 	ID_TXT_BRANCH_FAULT_CURRENT_1_2,
-	ID_TXT_BRANCH_FAULT_CURRENT_2_1
+	ID_TXT_BRANCH_FAULT_CURRENT_2_1,
+	ID_TXT_TAP
 };
 /**
  * @class Element
@@ -231,6 +232,7 @@ public:
 	 * @return List of points.
 	 */
 	virtual std::vector<wxPoint2DDouble> GetPointList() const { return m_pointList; }
+	virtual std::vector<wxPoint2DDouble>& GetPointListRef() { return m_pointList; }
 	/**
 	 * @brief Add a parent to the element. This method must be used on power elements that connect to a bus, so the
 	 * parent must be a bus.
@@ -340,6 +342,7 @@ public:
 	 * moving.
 	 */
 	virtual void Move(wxPoint2DDouble position);
+	virtual void AlignToGrid(double gridSize = 20.0);
 
 	/**
 	 * @brief Move a node. StartMove(wxPoint2DDouble position) before start moving.
@@ -565,8 +568,8 @@ public:
 	 * @return Child List.
 	 */
 	virtual std::vector<Element*> GetChildList() const { return m_childList; }
-	// virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
-	// virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
+	virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
+	virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
 
 	/**
 	 * @brief Calculate the element boundaries.

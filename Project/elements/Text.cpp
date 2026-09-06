@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -846,6 +846,13 @@ void Text::UpdateText(double systemPowerBase)
 				default:
 					break;
 				}
+			} break;
+			case DATA_TRANSFORMER_TAP: {
+				double tap = data.turnsRatio;
+				if (m_unit == ElectricalUnit::UNIT_NONE)
+					SetText(_("Tap = ") + wxString::FromDouble(tap, m_decimalPlaces));
+				else
+					SetText(_("Tap = ") + wxString::FromDouble(tap, m_decimalPlaces) + " p.u.");
 			} break;
 			default:
 				break;

@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -189,6 +189,8 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 		gc->Scale(m_camera->GetScale(), m_camera->GetScale());
 		gc->Translate(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y);
 
+		DrawGrid(gc);
+
 		// Elements
 		for (auto& element : m_elementList) {
 			//#ifdef __WXMSW__
@@ -259,6 +261,8 @@ void Workspace::DrawScene(wxDC& dc)
 	dc.SetDeviceOrigin(m_camera->GetTranslation().m_x * m_camera->GetScale(), m_camera->GetTranslation().m_y * m_camera->GetScale());
 	//dc.SetLogicalOrigin(-m_camera->GetTranslation().m_x, -m_camera->GetTranslation().m_y);
 
+	DrawGrid(dc);
+
 	// Elements
 	for (auto& element : m_elementList) {
 		element->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), dc);
@@ -279,6 +283,163 @@ void Workspace::DrawScene(wxDC& dc)
 	if (m_hmPlane && m_showHM) {
 		m_hmPlane->DrawLabelDC(dc);
 	}
+}
+
+wxPoint2DDouble Workspace::SnapToGrid(const wxPoint2DDouble& pt) const
+{
+	if (!m_showGrid || m_gridSize <= 0.0) return pt;
+	return wxPoint2DDouble(
+		std::round(pt.m_x / m_gridSize) * m_gridSize,
+		std::round(pt.m_y / m_gridSize) * m_gridSize
+	);
+}
+
+void Workspace::DrawGrid(wxGraphicsContext* gc)
+{
+	if (!m_showGrid || !gc) return;
+
+	wxSize clientSize = m_workspacePanel ? m_workspacePanel->GetClientSize() : wxSize(wxRound(m_width), wxRound(m_height));
+	if (clientSize.GetWidth() <= 0 || clientSize.GetHeight() <= 0) return;
+
+	wxPoint2DDouble tl = m_camera->ScreenToWorld(wxPoint2DDouble(0, 0));
+	wxPoint2DDouble br = m_camera->ScreenToWorld(wxPoint2DDouble(clientSize.GetWidth(), clientSize.GetHeight()));
+
+	double minX = std::min(tl.m_x, br.m_x);
+	double maxX = std::max(tl.m_x, br.m_x);
+	double minY = std::min(tl.m_y, br.m_y);
+	double maxY = std::max(tl.m_y, br.m_y);
+
+	double step = m_gridSize;
+	if (step <= 0.0) step = 20.0;
+	while (step * m_camera->GetScale() < 12.0) {
+		step *= 2.0;
+	}
+
+	double startX = std::floor(minX / step) * step;
+	double endX = std::ceil(maxX / step) * step;
+	double startY = std::floor(minY / step) * step;
+	double endY = std::ceil(maxY / step) * step;
+
+	wxGraphicsPath path = gc->CreatePath();
+
+	for (double x = startX; x <= endX + (step * 0.1); x += step) {
+		path.MoveToPoint(x, minY);
+		path.AddLineToPoint(x, maxY);
+	}
+
+	for (double y = startY; y <= endY + (step * 0.1); y += step) {
+		path.MoveToPoint(minX, y);
+		path.AddLineToPoint(maxX, y);
+	}
+
+	wxColour gridColour = m_properties->GetGUIColour()->grid;
+	gc->SetPen(wxPen(gridColour, 1.0));
+	gc->StrokePath(path);
+}
+
+void Workspace::DrawGrid(wxDC& dc)
+{
+	if (!m_showGrid) return;
+
+	wxSize clientSize = m_workspacePanel ? m_workspacePanel->GetClientSize() : wxSize(wxRound(m_width), wxRound(m_height));
+	if (clientSize.GetWidth() <= 0 || clientSize.GetHeight() <= 0) return;
+
+	wxPoint2DDouble tl = m_camera->ScreenToWorld(wxPoint2DDouble(0, 0));
+	wxPoint2DDouble br = m_camera->ScreenToWorld(wxPoint2DDouble(clientSize.GetWidth(), clientSize.GetHeight()));
+
+	double minX = std::min(tl.m_x, br.m_x);
+	double maxX = std::max(tl.m_x, br.m_x);
+	double minY = std::min(tl.m_y, br.m_y);
+	double maxY = std::max(tl.m_y, br.m_y);
+
+	double step = m_gridSize;
+	if (step <= 0.0) step = 20.0;
+	while (step * m_camera->GetScale() < 12.0) {
+		step *= 2.0;
+	}
+
+	double startX = std::floor(minX / step) * step;
+	double endX = std::ceil(maxX / step) * step;
+	double startY = std::floor(minY / step) * step;
+	double endY = std::ceil(maxY / step) * step;
+
+	wxColour gridColour = m_properties->GetGUIColour()->grid;
+	dc.SetPen(wxPen(gridColour, 1, wxPENSTYLE_SOLID));
+
+	for (double x = startX; x <= endX + (step * 0.1); x += step) {
+		dc.DrawLine(wxRound(x), wxRound(minY), wxRound(x), wxRound(maxY));
+	}
+
+	for (double y = startY; y <= endY + (step * 0.1); y += step) {
+		dc.DrawLine(wxRound(minX), wxRound(y), wxRound(maxX), wxRound(y));
+	}
+}
+
+void Workspace::AlignSelectedToGrid()
+{
+	bool anySelected = false;
+	for (const auto& elem : m_elementList) {
+		if (elem->IsSelected()) {
+			anySelected = true;
+			break;
+		}
+	}
+	if (!anySelected) {
+		for (const auto& txt : m_textList) {
+			if (txt->IsSelected()) {
+				anySelected = true;
+				break;
+			}
+		}
+	}
+
+	double gs = m_gridSize > 0.0 ? m_gridSize : 20.0;
+
+	// First pass: align buses
+	for (auto& elem : m_elementList) {
+		if (elem->GetElementType() == TYPE_BUS) {
+			if (!anySelected || elem->IsSelected()) {
+				wxPoint2DDouble oldPos = elem->GetPosition();
+				elem->AlignToGrid(gs);
+				wxPoint2DDouble delta = elem->GetPosition() - oldPos;
+				if (std::abs(delta.m_x) > 1e-4 || std::abs(delta.m_y) > 1e-4) {
+					for (auto& child : elem->GetChildList()) {
+						if (auto powerElem = dynamic_cast<PowerElement*>(child)) {
+							auto& ptList = powerElem->GetPointListRef();
+							auto parentList = powerElem->GetParentList();
+							if (parentList.size() > 0 && parentList[0] == elem.get() && ptList.size() > 0) {
+								ptList[0] += delta;
+							}
+							if (parentList.size() > 1 && parentList[1] == elem.get() && ptList.size() > 1) {
+								ptList.back() += delta;
+							}
+							powerElem->UpdateSwitchesPosition();
+							powerElem->UpdatePowerFlowArrowsPosition();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Second pass: align non-bus elements (transformers, lines, machines, shunts, etc.)
+	for (auto& elem : m_elementList) {
+		if (elem->GetElementType() != TYPE_BUS) {
+			if (!anySelected || elem->IsSelected()) {
+				elem->AlignToGrid(gs);
+			}
+		}
+	}
+
+	// Third pass: align text
+	for (auto& txt : m_textList) {
+		if (!anySelected || txt->IsSelected()) {
+			txt->AlignToGrid(gs);
+		}
+	}
+
+	SaveCurrentState();
+	Redraw();
 }
 
 void Workspace::CopyToClipboard()
@@ -341,6 +502,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 	}
 	else if (m_mode == WorkspaceMode::MODE_INSERT || m_mode == WorkspaceMode::MODE_DRAG_INSERT || m_mode == WorkspaceMode::MODE_DRAG_INSERT_TEXT) {
 		wxPoint2DDouble clickPointWorld = m_camera->ScreenToWorld(clickPoint);
+		if (m_showGrid) clickPointWorld = SnapToGrid(clickPointWorld);
 
 		if (!m_elementList.empty()) {
 			// Get the last element inserted on the list.
@@ -764,13 +926,17 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 	switch (m_mode) {
 	case WorkspaceMode::MODE_INSERT: {
 		auto& newElement = m_elementList.back();  // Get the last element in the list.
-		newElement->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
+		wxPoint2DDouble pos = m_camera->ScreenToWorld(event.GetPosition());
+		if (m_showGrid) pos = SnapToGrid(pos);
+		newElement->SetPosition(pos);
 		redraw = true;
 	} break;
 
 	case WorkspaceMode::MODE_INSERT_TEXT: {
 		auto& newText = m_textList.back();
-		newText->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
+		wxPoint2DDouble pos = m_camera->ScreenToWorld(event.GetPosition());
+		if (m_showGrid) pos = SnapToGrid(pos);
+		newText->SetPosition(pos);
 		redraw = true;
 	} break;
 
@@ -831,18 +997,22 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 	} break;
 
 	case WorkspaceMode::MODE_MOVE_NODE: {
+		wxPoint2DDouble pos = m_camera->ScreenToWorld(event.GetPosition());
+		if (m_showGrid) pos = SnapToGrid(pos);
 		for (auto& element : m_elementList) {
 			if (element->IsSelected()) {
-				element->MoveNode(nullptr, m_camera->ScreenToWorld(event.GetPosition()));
+				element->MoveNode(nullptr, pos);
 				redraw = true;
 			}
 		}
 	} break;
 
 	case WorkspaceMode::MODE_MOVE_PICKBOX: {
+		wxPoint2DDouble pos = m_camera->ScreenToWorld(event.GetPosition());
+		if (m_showGrid) pos = SnapToGrid(pos);
 		for (auto& element : m_elementList) {
 			if (element->IsSelected()) {
-				element->MovePickbox(m_camera->ScreenToWorld(event.GetPosition()));
+				element->MovePickbox(pos);
 				redraw = true;
 			}
 		}
@@ -853,14 +1023,42 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
 	case WorkspaceMode::MODE_MOVE_ELEMENT:
 	case WorkspaceMode::MODE_PASTE: {
+		wxPoint2DDouble mouseWorld = m_camera->ScreenToWorld(event.GetPosition());
+		wxPoint2DDouble effectivePos = mouseWorld;
+		if (m_showGrid) {
+			Element* refElement = nullptr;
+			for (auto& element : m_elementList) {
+				if (element->IsSelected()) {
+					refElement = element.get();
+					break;
+				}
+			}
+			if (!refElement) {
+				for (auto& text : m_textList) {
+					if (text->IsSelected()) {
+						refElement = text.get();
+						break;
+					}
+				}
+			}
+			if (refElement) {
+				wxPoint2DDouble rawTarget = refElement->GetPosition() + (mouseWorld - refElement->GetMoveStartPosition());
+				wxPoint2DDouble snappedTarget = SnapToGrid(rawTarget);
+				effectivePos = refElement->GetMoveStartPosition() + (snappedTarget - refElement->GetPosition());
+			}
+			else {
+				effectivePos = SnapToGrid(mouseWorld);
+			}
+		}
+
 		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
 			auto element = *it;
 			if (element->IsSelected()) {
-				element->Move(m_camera->ScreenToWorld(event.GetPosition()));
+				element->Move(effectivePos);
 				// Move child nodes
 				std::vector<Element*> childList = element->GetChildList();
 				for (auto it = childList.begin(), itEnd = childList.end(); it != itEnd; ++it) {
-					(*it)->MoveNode(element.get(), m_camera->ScreenToWorld(event.GetPosition()));
+					(*it)->MoveNode(element.get(), effectivePos);
 				}
 				redraw = true;
 			}
@@ -868,7 +1066,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 		// Text element motion
 		for (auto& text : m_textList) {
 			if (text->IsSelected()) {
-				text->Move(m_camera->ScreenToWorld(event.GetPosition()));
+				text->Move(effectivePos);
 				redraw = true;
 			}
 		}
@@ -1987,6 +2185,18 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		newText->SetElementNumber(GetElementNumberFromList(parentElement));
 		if (textID == ID_TXT_BRANCH_FAULT_CURRENT_2_1)
 			newText->SetDirection(1); // std is 0
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_TAP: {
+		if (FindTextElement(parentElement, DATA_TRANSFORMER_TAP)) return false;
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(25, -15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_TRANSFORMER_TAP);
+		newText->SetUnit(unit == ElectricalUnit::UNIT_NONE ? ElectricalUnit::UNIT_PU : unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
 
 		m_textList.emplace_back(newText);
 	} break;

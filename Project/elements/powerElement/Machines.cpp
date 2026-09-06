@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -29,16 +29,55 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
         wxPoint2DDouble parentPt =
             parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
         parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
+        parentPt.m_x = std::round(parentPt.m_x / 20.0) * 20.0;             // Snap along bus to grid.
+        double halfLength = parent->GetWidth() / 2.0;
+        double minX = parent->GetPosition().m_x - halfLength;
+        double maxX = parent->GetPosition().m_x + halfLength;
+        if (parentPt.m_x < minX) parentPt.m_x = minX;
+        if (parentPt.m_x > maxX) parentPt.m_x = maxX;
         parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 
-        m_position = parentPt + wxPoint2DDouble(-100.0, 0.0);  // Shifts the position to the left of the bus.
-        m_width = m_height = 50.0;
-        m_rect = wxRect2DDouble(m_position.m_x - 25.0, m_position.m_y - 25.0, m_width, m_height);
+        // Determine orientation based on bus angle and click position
+        bool busHorizontal = (std::abs(parent->GetAngle() - 0.0) < 1.0 || std::abs(parent->GetAngle() - 180.0) < 1.0);
+        if (busHorizontal) {
+            if (position.m_y < parent->GetPosition().m_y) {
+                // Above bus: lead points down (+Y, angle 90)
+                m_position = parentPt + wxPoint2DDouble(0.0, -80.0);
+                m_angle = 90.0;
+            }
+            else {
+                // Below bus: lead points up (-Y, angle 270)
+                m_position = parentPt + wxPoint2DDouble(0.0, 80.0);
+                m_angle = 270.0;
+            }
+        }
+        else {
+            if (position.m_x < parent->GetPosition().m_x) {
+                // Left of bus: lead points right (+X, angle 0)
+                m_position = parentPt + wxPoint2DDouble(-80.0, 0.0);
+                m_angle = 0.0;
+            }
+            else {
+                // Right of bus: lead points left (-X, angle 180)
+                m_position = parentPt + wxPoint2DDouble(80.0, 0.0);
+                m_angle = 180.0;
+            }
+        }
+
+        m_width = m_height = 40.0;
+        m_rect = wxRect2DDouble(m_position.m_x - 20.0, m_position.m_y - 20.0, m_width, m_height);
 
         m_pointList.push_back(parentPt);
-        m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
-        m_pointList.push_back(m_position + wxPoint2DDouble(35.0, 0.0));
-        m_pointList.push_back(m_position + wxPoint2DDouble(25.0, 0.0));
+        wxPoint2DDouble term1 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+        wxPoint2DDouble term2 = m_position + RotateLocal(wxPoint2DDouble(20.0, 0.0), m_angle);
+        term1.m_x = std::round(term1.m_x);
+        term1.m_y = std::round(term1.m_y);
+        term2.m_x = std::round(term2.m_x);
+        term2.m_y = std::round(term2.m_y);
+
+        m_pointList.push_back(GetSwitchPoint(parent, parentPt, term1));
+        m_pointList.push_back(term1);
+        m_pointList.push_back(term2);
         m_inserted = true;
 
         wxRect2DDouble genRect(0, 0, 0, 0);
@@ -118,7 +157,7 @@ void Machines::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double 
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
 			gc->SetBrush(wxBrush(guiColour->selection));
-            DrawDCCircle(m_position, 25.0 + (m_borderSize + 1.5) / scale, 20, gc);
+            DrawDCCircle(m_position, 20.0 + (m_borderSize + 1.5) / scale, 20, gc);
 
             // Draw nodes selection.
 			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
@@ -133,18 +172,18 @@ void Machines::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double 
 		gc->SetPen(wxPen(wxColour(elementColour), 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
 		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
-		DrawDCCircle(m_position, 25.0, 20.0, gc);
+		DrawDCCircle(m_position, 20.0, 20.0, gc);
 
 		DrawDCSwitches(guiColour, gc);
 		DrawDCPowerFlowPts(guiColour, gc);
 
 		gc->SetPen(*wxTRANSPARENT_PEN);
 		gc->SetBrush(wxBrush(guiColour->background));
-		DrawDCCircle(m_position, 25.0, 20.0, gc);
+		DrawDCCircle(m_position, 20.0, 20.0, gc);
 
 		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-        DrawDCCircle(m_position, 25.0, 20.0, gc);
+        DrawDCCircle(m_position, 20.0, 20.0, gc);
 
 		// Draw machine symbol.
 		DrawDCSymbol(gc);
@@ -177,7 +216,7 @@ void Machines::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double 
 
             dc.SetPen(*wxTRANSPARENT_PEN);
             dc.SetBrush(wxBrush(guiColour->selection));
-            DrawDCCircle(m_position, 25.0 + (m_borderSize + 1.5) / scale, dc);
+            DrawDCCircle(m_position, 20.0 + (m_borderSize + 1.5) / scale, dc);
 
             // Draw nodes selection.
             DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, dc);
@@ -192,18 +231,18 @@ void Machines::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double 
         dc.SetPen(wxPen(wxColour(elementColour), 2));
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.DrawLines(pointListInt.size(), &pointListInt[0]);
-        DrawDCCircle(m_position, 25.0, dc);
+        DrawDCCircle(m_position, 20.0, dc);
 
         DrawDCSwitches(guiColour, dc);
         DrawDCPowerFlowPts(guiColour, dc);
 
         dc.SetPen(*wxTRANSPARENT_PEN);
         dc.SetBrush(wxBrush(guiColour->background));
-        DrawDCCircle(m_position, 25.0, dc);
+        DrawDCCircle(m_position, 20.0, dc);
 
         dc.SetPen(wxPen(elementColour, 2));
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
-        DrawDCCircle(m_position, 25.0, dc);
+        DrawDCCircle(m_position, 20.0, dc);
 
         // Draw machine symbol.
         DrawDCSymbol(dc);
@@ -223,8 +262,11 @@ void Machines::UpdateSwitchesPosition()
 void Machines::Move(wxPoint2DDouble position)
 {
     SetPosition(m_movePos + position - m_moveStartPt);
-    for(int i = 2; i < (int)m_pointList.size(); i++) {
-        m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
+    if (m_pointList.size() >= 4) {
+        wxPoint2DDouble t1 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+        wxPoint2DDouble t2 = m_position + RotateLocal(wxPoint2DDouble(20.0, 0.0), m_angle);
+        m_pointList[2] = wxPoint2DDouble(std::round(t1.m_x), std::round(t1.m_y));
+        m_pointList[3] = wxPoint2DDouble(std::round(t2.m_x), std::round(t2.m_y));
     }
     if(!m_parentList[0]) {
         m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
@@ -347,9 +389,64 @@ void Machines::Rotate(bool clockwise)
     if(!clockwise) rotAngle = -m_rotationAngle;
 
     m_angle += rotAngle;
-    if(m_angle >= 360 || m_angle <= -360) m_angle = 0.0;
-    m_pointList[2] = RotateAtPosition(m_pointList[2], rotAngle);
-    m_pointList[3] = RotateAtPosition(m_pointList[3], rotAngle);
+    while (m_angle >= 360.0) m_angle -= 360.0;
+    while (m_angle < 0.0) m_angle += 360.0;
+
+    if (std::abs(m_angle - 90.0) < 1e-4) m_angle = 90.0;
+    else if (std::abs(m_angle - 180.0) < 1e-4) m_angle = 180.0;
+    else if (std::abs(m_angle - 270.0) < 1e-4) m_angle = 270.0;
+    else if (std::abs(m_angle - 0.0) < 1e-4 || std::abs(m_angle - 360.0) < 1e-4) m_angle = 0.0;
+
+    if (m_pointList.size() >= 4) {
+        wxPoint2DDouble t1 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+        wxPoint2DDouble t2 = m_position + RotateLocal(wxPoint2DDouble(20.0, 0.0), m_angle);
+        m_pointList[2] = wxPoint2DDouble(std::round(t1.m_x), std::round(t1.m_y));
+        m_pointList[3] = wxPoint2DDouble(std::round(t2.m_x), std::round(t2.m_y));
+    }
+    UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
+}
+
+void Machines::AlignToGrid(double gridSize)
+{
+    if (gridSize <= 0.0) gridSize = 20.0;
+    m_position.m_x = std::round(m_position.m_x / gridSize) * gridSize;
+    m_position.m_y = std::round(m_position.m_y / gridSize) * gridSize;
+    m_width = 40.0;
+    m_height = 40.0;
+    SetPosition(m_position);
+
+    if (m_pointList.size() >= 4) {
+        wxPoint2DDouble t1 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+        wxPoint2DDouble t2 = m_position + RotateLocal(wxPoint2DDouble(20.0, 0.0), m_angle);
+        m_pointList[2] = wxPoint2DDouble(std::round(t1.m_x), std::round(t1.m_y));
+        m_pointList[3] = wxPoint2DDouble(std::round(t2.m_x), std::round(t2.m_y));
+    }
+
+    if (m_parentList.size() > 0 && m_parentList[0] && m_pointList.size() > 0) {
+        Element* bus = m_parentList[0];
+        if (std::abs(m_angle - 90.0) < 1.0 || std::abs(m_angle - 270.0) < 1.0) {
+            wxPoint2DDouble loc = bus->RotateAtPosition(wxPoint2DDouble(m_position.m_x, bus->GetPosition().m_y), -bus->GetAngle());
+            double halfW = bus->GetWidth() / 2.0 + 2.0;
+            if (std::abs(loc.m_x - bus->GetPosition().m_x) <= halfW) {
+                m_pointList[0].m_x = m_position.m_x;
+            }
+            m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
+        }
+        else {
+            wxPoint2DDouble loc = bus->RotateAtPosition(wxPoint2DDouble(bus->GetPosition().m_x, m_position.m_y), -bus->GetAngle());
+            double halfW = bus->GetWidth() / 2.0 + 2.0;
+            if (std::abs(loc.m_x - bus->GetPosition().m_x) <= halfW) {
+                m_pointList[0].m_y = m_position.m_y;
+            }
+            m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
+        }
+    }
+    else if (m_pointList.size() > 0) {
+        m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
+        m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
+    }
+
     UpdateSwitchesPosition();
     UpdatePowerFlowArrowsPosition();
 }

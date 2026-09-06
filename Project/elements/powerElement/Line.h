@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -71,6 +71,7 @@ class Line : public Branch
     virtual void DrawDC(GUIColour* guiColour,wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void DrawDC(GUIColour* guiColour,wxPoint2DDouble translation, double scale, wxDC& dc) const;
     virtual void Move(wxPoint2DDouble position);
+    virtual void AlignToGrid(double gridSize = 20.0) override;
     virtual void StartMove(wxPoint2DDouble position);
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);
     virtual bool SetNodeParent(Element* parent);

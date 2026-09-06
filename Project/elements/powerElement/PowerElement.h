@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -124,6 +124,8 @@ class PowerElement : public Element
      * @brief Update the switch position.
      */
     virtual void UpdateSwitches();
+    virtual void UpdateSwitchesPosition() {}
+    virtual void UpdatePowerFlowArrowsPosition() {}
 
     /**
      * @brief Draw switch.

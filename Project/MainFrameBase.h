@@ -81,6 +81,8 @@ public:
         ID_RIBBON_COPY = 10035,
         ID_RIBBON_OPEN = 10036,
         ID_RIBBON_NEW = 10037,
+        ID_RIBBON_GRID = 10038,
+        ID_RIBBON_ALIGN = 10039,
     };
 protected:
     wxRibbonBar* m_ribbonBar;
@@ -129,6 +131,8 @@ protected:
     virtual void OnFitClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnRotClockClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnRotCounterClockClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnGridClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnAlignClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnLabelMngrClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnDataReportClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
