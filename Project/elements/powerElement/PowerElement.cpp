@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -23,74 +23,90 @@
 
 PowerElement::PowerElement() : Element()
 {
-    m_busColour.Set(0, 78, 255, 255);
-    m_onlineElementColour.Set(51, 51, 51, 255);
-    m_offlineElementColour.Set(128, 128, 128, 255);
-    m_closedSwitchColour.Set(0, 102, 0, 255);
-    m_openedSwitchColour.Set(255, 26, 26, 255);
-    m_powerFlowArrowColour.Set(255, 130, 0, 255);
-    m_dynamicEventColour.Set(255, 130, 0, 255);
+	m_busColour.Set(0, 78, 255, 255);
+	m_onlineElementColour.Set(51, 51, 51, 255);
+	m_offlineElementColour.Set(128, 128, 128, 255);
+	m_closedSwitchColour.Set(0, 102, 0, 255);
+	m_openedSwitchColour.Set(255, 26, 26, 255);
+	m_powerFlowArrowColour.Set(255, 130, 0, 255);
+	m_dynamicEventColour.Set(255, 130, 0, 255);
 }
 
 void PowerElement::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
 {
 }
 
-wxPoint2DDouble PowerElement::GetSwitchPoint(Element* parent,
-                                             wxPoint2DDouble parentPoint,
-                                             wxPoint2DDouble secondPoint) const
+wxPoint2DDouble PowerElement::GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const
 {
-    double swLineSize = 20.0;
-    double dist = std::sqrt((secondPoint.m_x - parentPoint.m_x) * (secondPoint.m_x - parentPoint.m_x) +
-                            (secondPoint.m_y - parentPoint.m_y) * (secondPoint.m_y - parentPoint.m_y));
-    if (dist > 0.0 && dist < swLineSize) {
-        swLineSize = dist / 2.0;
-    }
+	double swLineSize = 20.0;
 
-    double angle = parent->GetAngle();
-    double rad = wxDegToRad(-angle);
-    double c = std::cos(rad);
-    double s = std::sin(rad);
-    double dx = secondPoint.m_x - parentPoint.m_x;
-    double dy = secondPoint.m_y - parentPoint.m_y;
-    double localX = c * dx - s * dy;
-    double localY = s * dx + c * dy;
+	double dist = std::sqrt(
+		(secondPoint.m_x - parentPoint.m_x) *
+		(secondPoint.m_x - parentPoint.m_x) +
+		(secondPoint.m_y - parentPoint.m_y) *
+		(secondPoint.m_y - parentPoint.m_y));
 
-    wxPoint2DDouble localSwPoint(0.0, 0.0);
-    if (std::abs(localY) >= std::abs(localX)) {
-        localSwPoint.m_y = (localY >= 0.0) ? swLineSize : -swLineSize;
-    } else {
-        localSwPoint.m_x = (localX >= 0.0) ? swLineSize : -swLineSize;
-    }
+	if (dist > 0.0 && dist < swLineSize) {
+		swLineSize = dist / 2.0;
+	}
 
-    double backRad = wxDegToRad(angle);
-    double bc = std::cos(backRad);
-    double bs = std::sin(backRad);
-    wxPoint2DDouble pt(parentPoint.m_x + bc * localSwPoint.m_x - bs * localSwPoint.m_y,
-                       parentPoint.m_y + bs * localSwPoint.m_x + bc * localSwPoint.m_y);
+	double angle = parent->GetAngle();
 
-    if (std::abs(pt.m_x - std::round(pt.m_x)) < 1e-4) pt.m_x = std::round(pt.m_x);
-    if (std::abs(pt.m_y - std::round(pt.m_y)) < 1e-4) pt.m_y = std::round(pt.m_y);
-    return pt;
+	// Transform secondPoint to the local coordinate system of the parent.
+	double rad = wxDegToRad(-angle);
+	double c = std::cos(rad);
+	double s = std::sin(rad);
+
+	double dx = secondPoint.m_x - parentPoint.m_x;
+	double dy = secondPoint.m_y - parentPoint.m_y;
+
+	double localX = c * dx - s * dy;
+	double localY = s * dx + c * dy;
+
+	// Keep the original behavior:
+	// the switch is always perpendicular to the bus.
+	//
+	// The local Y coordinate only determines which side of the bus the switch should be placed.
+	if (localY > 0.0) {
+		angle -= 180.0;
+	}
+
+	// The switch starts above the parent in its local coordinate system and is rotated according to the parent angle.
+	wxPoint2DDouble swPoint(parentPoint.m_x, parentPoint.m_y - swLineSize);
+
+	double backRad = wxDegToRad(angle);
+	double bc = std::cos(backRad);
+	double bs = std::sin(backRad);
+
+	wxPoint2DDouble pt(bc * (swPoint.m_x - parentPoint.m_x) - bs * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
+		bs * (swPoint.m_x - parentPoint.m_x) + bc * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+
+	if (std::abs(pt.m_x - std::round(pt.m_x)) < 1e-4)
+		pt.m_x = std::round(pt.m_x);
+
+	if (std::abs(pt.m_y - std::round(pt.m_y)) < 1e-4)
+		pt.m_y = std::round(pt.m_y);
+
+	return pt;
 }
 
 bool PowerElement::SwitchesContains(wxPoint2DDouble position) const
 {
-    for(int i = 0; i < (int)m_switchRect.size(); i++) {
-        if(m_parentList[i]) {
-            if(m_switchRect[i].Contains(position)) return true;
-        }
-    }
-    return false;
+	for (int i = 0; i < (int)m_switchRect.size(); i++) {
+		if (m_parentList[i]) {
+			if (m_switchRect[i].Contains(position)) return true;
+		}
+	}
+	return false;
 }
 
 void PowerElement::UpdateSwitches()
 {
-    // General method, to one switch only.
-    wxPoint2DDouble swCenter = wxPoint2DDouble((m_pointList[0].m_x + m_pointList[1].m_x) / 2.0,
-                                               (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
-    m_switchRect[0] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize,
-                                     m_switchSize);
+	// General method, to one switch only.
+	wxPoint2DDouble swCenter = wxPoint2DDouble((m_pointList[0].m_x + m_pointList[1].m_x) / 2.0,
+		(m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
+	m_switchRect[0] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize,
+		m_switchSize);
 }
 
 //void PowerElement::DrawSwitches() const
@@ -124,96 +140,96 @@ void PowerElement::UpdateSwitches()
 void PowerElement::DrawDCSwitches(GUIColour* guiColour, wxGraphicsContext* gc) const
 {
 	gc->SetPen(*wxTRANSPARENT_PEN);
-	
+
 	int i = 0;
-    for (auto parent : m_parentList) {
+	for (auto parent : m_parentList) {
 		if (parent) {
 			if (m_online) {
-                gc->SetBrush(wxBrush(guiColour->swClose));
+				gc->SetBrush(wxBrush(guiColour->swClose));
 			}
 			else {
-                gc->SetBrush(wxBrush(guiColour->swOpen));
+				gc->SetBrush(wxBrush(guiColour->swOpen));
 			}
 
-            gc->PushState();
+			gc->PushState();
 			gc->Translate(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
 				m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0);
-            gc->Rotate(wxDegToRad(parent->GetAngle()));
+			gc->Rotate(wxDegToRad(parent->GetAngle()));
 			gc->Translate(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
 				-m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0);
 
-            wxPoint2DDouble switchPos = m_switchRect[i].GetPosition();
+			wxPoint2DDouble switchPos = m_switchRect[i].GetPosition();
 			gc->DrawRectangle(switchPos.m_x, switchPos.m_y, m_switchSize, m_switchSize);
 
-            gc->PopState();
+			gc->PopState();
 		}
 		i++;
-    }
+	}
 }
 
 void PowerElement::DrawDCSwitches(GUIColour* guiColour, wxDC& dc) const
 {
-    dc.SetPen(*wxTRANSPARENT_PEN);
+	dc.SetPen(*wxTRANSPARENT_PEN);
 
-    int i = 0;
-    for (auto parent : m_parentList) {
-        if (parent) {
-            if (m_online) {
-                dc.SetBrush(wxBrush(guiColour->swClose));
-            }
-            else {
-                dc.SetBrush(wxBrush(guiColour->swOpen));
-            }
+	int i = 0;
+	for (auto parent : m_parentList) {
+		if (parent) {
+			if (m_online) {
+				dc.SetBrush(wxBrush(guiColour->swClose));
+			}
+			else {
+				dc.SetBrush(wxBrush(guiColour->swOpen));
+			}
 
-            DrawDCRectangle(m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
+			DrawDCRectangle(m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
 				m_switchSize, m_switchSize, parent->GetAngle(), dc);
-        }
-        i++;
-    }
+		}
+		i++;
+	}
 }
 
 void PowerElement::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 {
-    double arrowRate = 100.0;  // One arrow to each "arrowRate" distance in pixels.
+	double arrowRate = 100.0;  // One arrow to each "arrowRate" distance in pixels.
 
-    if(edges.size() < 2) return;
+	if (edges.size() < 2) return;
 
-    // Clear all power flow points
-    for(int i = 0; i < (int)m_powerFlowArrow.size(); i++) m_powerFlowArrow[i].clear();
-    m_powerFlowArrow.clear();
+	// Clear all power flow points
+	for (int i = 0; i < (int)m_powerFlowArrow.size(); i++) m_powerFlowArrow[i].clear();
+	m_powerFlowArrow.clear();
 
-    for(int i = 1; i < (int)edges.size(); i++) {
-        wxPoint2DDouble pt1 = edges[i - 1];
-        wxPoint2DDouble pt2 = edges[i];
+	for (int i = 1; i < (int)edges.size(); i++) {
+		wxPoint2DDouble pt1 = edges[i - 1];
+		wxPoint2DDouble pt2 = edges[i];
 
-        double angle = std::atan2(pt2.m_y - pt1.m_y, pt2.m_x - pt1.m_x);
+		double angle = std::atan2(pt2.m_y - pt1.m_y, pt2.m_x - pt1.m_x);
 
-        wxPoint2DDouble rotPt2(
-            std::cos(-angle) * (pt2.m_x - pt1.m_x) - std::sin(-angle) * (pt2.m_y - pt1.m_y) + pt1.m_x,
-            std::sin(-angle) * (pt2.m_x - pt1.m_x) + std::cos(-angle) * (pt2.m_y - pt1.m_y) + pt1.m_y);
+		wxPoint2DDouble rotPt2(
+			std::cos(-angle) * (pt2.m_x - pt1.m_x) - std::sin(-angle) * (pt2.m_y - pt1.m_y) + pt1.m_x,
+			std::sin(-angle) * (pt2.m_x - pt1.m_x) + std::cos(-angle) * (pt2.m_y - pt1.m_y) + pt1.m_y);
 
-        int numArrows = std::abs(pt1.m_x - rotPt2.m_x) / arrowRate;
-        if(numArrows == 0) numArrows = 1;
+		int numArrows = std::abs(pt1.m_x - rotPt2.m_x) / arrowRate;
+		if (numArrows == 0) numArrows = 1;
 
-        for(int i = 0; i < numArrows; i++) {
-            wxPoint2DDouble arrowCenter(pt1.m_x + ((rotPt2.m_x - pt1.m_x) / double(numArrows + 1)) * double(i + 1),
-                                        pt1.m_y + ((rotPt2.m_y - pt1.m_y) / double(numArrows + 1)) * double(i + 1));
+		for (int i = 0; i < numArrows; i++) {
+			wxPoint2DDouble arrowCenter(pt1.m_x + ((rotPt2.m_x - pt1.m_x) / double(numArrows + 1)) * double(i + 1),
+				pt1.m_y + ((rotPt2.m_y - pt1.m_y) / double(numArrows + 1)) * double(i + 1));
 
-            std::vector<wxPoint2DDouble> triPts;
-            triPts.push_back(arrowCenter + wxPoint2DDouble(5.0, 0.0));
-            triPts.push_back(arrowCenter + wxPoint2DDouble(-5.0, 5.0));
-            triPts.push_back(arrowCenter + wxPoint2DDouble(-5.0, -5.0));
+			std::vector<wxPoint2DDouble> triPts;
+			triPts.push_back(arrowCenter + wxPoint2DDouble(5.0, 0.0));
+			triPts.push_back(arrowCenter + wxPoint2DDouble(-5.0, 5.0));
+			triPts.push_back(arrowCenter + wxPoint2DDouble(-5.0, -5.0));
 
-            // Rotate back.
-            for(int i = 0; i < 3; i++) {
-                triPts[i] = wxPoint2DDouble(
-                    std::cos(angle) * (triPts[i].m_x - pt1.m_x) - std::sin(angle) * (triPts[i].m_y - pt1.m_y) + pt1.m_x,
-                    std::sin(angle) * (triPts[i].m_x - pt1.m_x) + std::cos(angle) * (triPts[i].m_y - pt1.m_y) +
-                        pt1.m_y);
-            }
-            m_powerFlowArrow.push_back(triPts);
-        }
-    }
+			// Rotate back.
+			for (int i = 0; i < 3; i++) {
+				triPts[i] = wxPoint2DDouble(
+					std::cos(angle) * (triPts[i].m_x - pt1.m_x) - std::sin(angle) * (triPts[i].m_y - pt1.m_y) + pt1.m_x,
+					std::sin(angle) * (triPts[i].m_x - pt1.m_x) + std::cos(angle) * (triPts[i].m_y - pt1.m_y) +
+					pt1.m_y);
+			}
+			m_powerFlowArrow.push_back(triPts);
+		}
+	}
 }
 
 //void PowerElement::DrawPowerFlowPts() const
@@ -226,149 +242,150 @@ void PowerElement::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 
 void PowerElement::DrawDCPowerFlowPts(GUIColour* guiColour, wxGraphicsContext* gc) const
 {
-    gc->SetPen(*wxTRANSPARENT_PEN);
+	gc->SetPen(*wxTRANSPARENT_PEN);
 	if (m_online) {
-        gc->SetBrush(wxBrush(guiColour->pfArrow));
+		gc->SetBrush(wxBrush(guiColour->pfArrow));
 		for (auto arrow : m_powerFlowArrow) { DrawDCTriangle(arrow, gc); }
 	}
 }
 
 void PowerElement::DrawDCPowerFlowPts(GUIColour* guiColour, wxDC& dc) const
 {
-    dc.SetPen(*wxTRANSPARENT_PEN);
-    if (m_online) {
-        dc.SetBrush(wxBrush(guiColour->pfArrow));
-        for (auto arrow : m_powerFlowArrow) { 
+	dc.SetPen(*wxTRANSPARENT_PEN);
+	if (m_online) {
+		dc.SetBrush(wxBrush(guiColour->pfArrow));
+		for (auto arrow : m_powerFlowArrow) {
 			std::vector<wxPoint> arrowPts;
-            for (auto& pt : arrow) {
+			for (auto& pt : arrow) {
 				arrowPts.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y));
 			}
-            DrawDCTriangle(arrowPts, dc);
-        }
-    }
+			DrawDCTriangle(arrowPts, dc);
+		}
+	}
 }
 
 double PowerElement::GetValueFromUnit(double value, ElectricalUnit valueUnit) const
 {
-    switch(valueUnit) {
-        case ElectricalUnit::UNIT_kV:
-        case ElectricalUnit::UNIT_kA:
-        case ElectricalUnit::UNIT_kW:
-        case ElectricalUnit::UNIT_kVA:
-        case ElectricalUnit::UNIT_kvar: {
-            return value * 1e3;
-        } break;
-        case ElectricalUnit::UNIT_MW:
-        case ElectricalUnit::UNIT_MVA:
-        case ElectricalUnit::UNIT_Mvar: {
-            return value * 1e6;
-        }
-        default:
-            break;
-    }
-    return value;
+	switch (valueUnit) {
+	case ElectricalUnit::UNIT_kV:
+	case ElectricalUnit::UNIT_kA:
+	case ElectricalUnit::UNIT_kW:
+	case ElectricalUnit::UNIT_kVA:
+	case ElectricalUnit::UNIT_kvar: {
+		return value * 1e3;
+	} break;
+	case ElectricalUnit::UNIT_MW:
+	case ElectricalUnit::UNIT_MVA:
+	case ElectricalUnit::UNIT_Mvar: {
+		return value * 1e6;
+	}
+	default:
+		break;
+	}
+	return value;
 }
 
 bool PowerElement::OpenCADProperties(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
 {
-    auto cadPropNode = elementNode->first_node("CADProperties");
-    if(!cadPropNode) return false;
+	auto cadPropNode = elementNode->first_node("CADProperties");
+	if (!cadPropNode) return false;
 
-    auto position = cadPropNode->first_node("Position");
-    double posX = XMLParser::GetNodeValueDouble(position, "X");
-    double posY = XMLParser::GetNodeValueDouble(position, "Y");
-    auto size = cadPropNode->first_node("Size");
-    m_width = XMLParser::GetNodeValueDouble(size, "Width");
-    m_height = XMLParser::GetNodeValueDouble(size, "Height");
-    double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-    SetPosition(wxPoint2DDouble(posX, posY));
+	auto position = cadPropNode->first_node("Position");
+	double posX = XMLParser::GetNodeValueDouble(position, "X");
+	double posY = XMLParser::GetNodeValueDouble(position, "Y");
+	auto size = cadPropNode->first_node("Size");
+	m_width = XMLParser::GetNodeValueDouble(size, "Width");
+	m_height = XMLParser::GetNodeValueDouble(size, "Height");
+	double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
+	SetPosition(wxPoint2DDouble(posX, posY));
 
-    auto nodePosition = cadPropNode->first_node("NodePosition");
-    double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
-    double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+	auto nodePosition = cadPropNode->first_node("NodePosition");
+	double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+	double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
 
-    int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
-    // If the opened power element has no parent, set up the basics CAD properties of the element manually, otherwise
-    // just class method AddParent to calculate properly.
-    if(parentID == -1) {
-        m_parentList.push_back(nullptr);
-        m_pointList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
-        m_pointList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
-        m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -m_height / 2.0 - 10.0));
-        m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -m_height / 2.0));
+	int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
+	// If the opened power element has no parent, set up the basics CAD properties of the element manually, otherwise
+	// just class method AddParent to calculate properly.
+	if (parentID == -1) {
+		m_parentList.push_back(nullptr);
+		m_pointList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
+		m_pointList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
+		m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -m_height / 2.0 - 10.0));
+		m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -m_height / 2.0));
 
-        wxRect2DDouble genRect(0, 0, 0, 0);
-        m_switchRect.push_back(genRect);  // Push a general rectangle.
-        UpdateSwitches();
+		wxRect2DDouble genRect(0, 0, 0, 0);
+		m_switchRect.push_back(genRect);  // Push a general rectangle.
+		UpdateSwitches();
 
-        m_online = false;  // Not connected elements are always offline.
-    } else {
-        AddParent(parentList[parentID], wxPoint2DDouble(nodePosX, nodePosY));
-    }
+		m_online = false;  // Not connected elements are always offline.
+	}
+	else {
+		AddParent(parentList[parentID], wxPoint2DDouble(nodePosX, nodePosY), true);
+	}
 
-    // Set up the points properly.
-    StartMove(m_position);
-    Move(wxPoint2DDouble(posX, posY));
+	// Set up the points properly.
+	StartMove(m_position);
+	Move(wxPoint2DDouble(posX, posY));
 
-    // Set the rotation properly.
-    int numRot = angle / m_rotationAngle;
-    bool clockwise = true;
-    if(numRot < 0) {
-        numRot = std::abs(numRot);
-        clockwise = false;
-    }
-    for(int i = 0; i < numRot; i++) Rotate(clockwise);
+	// Set the rotation properly.
+	int numRot = angle / m_rotationAngle;
+	bool clockwise = true;
+	if (numRot < 0) {
+		numRot = std::abs(numRot);
+		clockwise = false;
+	}
+	for (int i = 0; i < numRot; i++) Rotate(clockwise);
 
-    return true;
+	return true;
 }
 
 void PowerElement::SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode)
 {
-    auto cadProp = XMLParser::AppendNode(doc, elementNode, "CADProperties");
-    auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-    auto posX = XMLParser::AppendNode(doc, position, "X");
-    XMLParser::SetNodeValue(doc, posX, m_position.m_x);
-    auto posY = XMLParser::AppendNode(doc, position, "Y");
-    XMLParser::SetNodeValue(doc, posY, m_position.m_y);
-    auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-    auto width = XMLParser::AppendNode(doc, size, "Width");
-    XMLParser::SetNodeValue(doc, width, m_width);
-    auto height = XMLParser::AppendNode(doc, size, "Height");
-    XMLParser::SetNodeValue(doc, height, m_height);
-    auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-    XMLParser::SetNodeValue(doc, angle, m_angle);
-    auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
-    auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
-    XMLParser::SetNodeValue(doc, nodePosX, m_pointList[0].m_x);
-    auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
-    XMLParser::SetNodeValue(doc, nodePosY, m_pointList[0].m_y);
-    auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
-    Element* parent = m_parentList[0];
-    if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetID());
+	auto cadProp = XMLParser::AppendNode(doc, elementNode, "CADProperties");
+	auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+	auto posX = XMLParser::AppendNode(doc, position, "X");
+	XMLParser::SetNodeValue(doc, posX, m_position.m_x);
+	auto posY = XMLParser::AppendNode(doc, position, "Y");
+	XMLParser::SetNodeValue(doc, posY, m_position.m_y);
+	auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+	auto width = XMLParser::AppendNode(doc, size, "Width");
+	XMLParser::SetNodeValue(doc, width, m_width);
+	auto height = XMLParser::AppendNode(doc, size, "Height");
+	XMLParser::SetNodeValue(doc, height, m_height);
+	auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+	XMLParser::SetNodeValue(doc, angle, m_angle);
+	auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
+	auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+	XMLParser::SetNodeValue(doc, nodePosX, m_pointList[0].m_x);
+	auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+	XMLParser::SetNodeValue(doc, nodePosY, m_pointList[0].m_y);
+	auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
+	Element* parent = m_parentList[0];
+	if (parent) XMLParser::SetNodeValue(doc, parentID, parent->GetID());
 }
 
 void PowerElement::SaveSwitchingData(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* electricalNode)
 {
-    auto switchingList = XMLParser::AppendNode(doc, electricalNode, "SwitchingList");
-    for(int i = 0; i < static_cast<int>(m_swData.swType.size()); i++) {
-        auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
-        XMLParser::SetNodeAttribute(doc, switching, "ID", i);
-        auto swType = XMLParser::AppendNode(doc, switching, "Type");
-        XMLParser::SetNodeValue(doc, swType, static_cast<int>(m_swData.swType[i]));
-        auto swTime = XMLParser::AppendNode(doc, switching, "Time");
-        XMLParser::SetNodeValue(doc, swTime, m_swData.swTime[i]);
-    }
+	auto switchingList = XMLParser::AppendNode(doc, electricalNode, "SwitchingList");
+	for (int i = 0; i < static_cast<int>(m_swData.swType.size()); i++) {
+		auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+		XMLParser::SetNodeAttribute(doc, switching, "ID", i);
+		auto swType = XMLParser::AppendNode(doc, switching, "Type");
+		XMLParser::SetNodeValue(doc, swType, static_cast<int>(m_swData.swType[i]));
+		auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+		XMLParser::SetNodeValue(doc, swTime, m_swData.swTime[i]);
+	}
 }
 
 bool PowerElement::OpenSwitchingData(rapidxml::xml_node<>* electricalNode)
 {
-    auto switchingList = electricalNode->first_node("SwitchingList");
-    if(!switchingList) return false;
-    auto swNode = switchingList->first_node("Switching");
-    while(swNode) {
-        m_swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
-        m_swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
-        swNode = swNode->next_sibling("Switching");
-    }
-    return true;
+	auto switchingList = electricalNode->first_node("SwitchingList");
+	if (!switchingList) return false;
+	auto swNode = switchingList->first_node("Switching");
+	while (swNode) {
+		m_swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+		m_swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
+		swNode = swNode->next_sibling("Switching");
+	}
+	return true;
 }

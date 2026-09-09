@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -298,7 +298,7 @@ void Line::AlignToGrid(double gridSize)
 	UpdatePowerFlowArrowsPosition();
 }
 
-bool Line::AddParent(Element* parent, wxPoint2DDouble position)
+bool Line::AddParent(Element* parent, wxPoint2DDouble position, bool isOpening)
 {
 	if (parent) {
 		// First bus.

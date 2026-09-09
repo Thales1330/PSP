@@ -78,7 +78,7 @@ class Load : public Shunt
     ~Load();
 
     virtual Element* GetCopy();
-    virtual bool AddParent(Element* parent, wxPoint2DDouble position);
+    virtual bool AddParent(Element* parent, wxPoint2DDouble position, bool isOpening = false);
     //virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void DrawDC(GUIColour* guiColour,wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void DrawDC(GUIColour* guiColour,wxPoint2DDouble translation, double scale, wxDC& dc) const;

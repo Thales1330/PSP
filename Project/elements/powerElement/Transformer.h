@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -100,7 +100,7 @@ class Transformer : public Branch
     virtual ~Transformer();
 
     virtual Element* GetCopy();
-    virtual bool AddParent(Element* parent, wxPoint2DDouble position);
+    virtual bool AddParent(Element* parent, wxPoint2DDouble position, bool isOpening = false);
     virtual bool Contains(wxPoint2DDouble position) const;
     //virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void DrawDC(GUIColour* guiColour,wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;

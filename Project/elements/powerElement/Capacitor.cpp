@@ -29,7 +29,7 @@ Capacitor::Capacitor(wxString name) : Shunt() {
 
 Capacitor::~Capacitor() {}
 
-bool Capacitor::AddParent(Element* parent, wxPoint2DDouble position)
+bool Capacitor::AddParent(Element* parent, wxPoint2DDouble position, bool isOpening)
 {
 	if (parent) {
 		m_parentList.push_back(parent);

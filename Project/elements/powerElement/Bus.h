@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -114,7 +114,7 @@ public:
 	 * \param position Position of the parent element.
 	 * \return True.
 	 */
-	virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; }
+	virtual bool AddParent(Element* parent, wxPoint2DDouble position, bool isOpening = false) { return true; }
 	virtual bool Contains(wxPoint2DDouble position) const;
 	virtual bool Intersects(wxRect2DDouble rect) const;
 	//virtual void Draw(wxPoint2DDouble translation, double scale) const;

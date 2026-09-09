@@ -31,7 +31,7 @@ Load::Load(wxString name) : Shunt()
 
 Load::~Load() {}
 
-bool Load::AddParent(Element* parent, wxPoint2DDouble position)
+bool Load::AddParent(Element* parent, wxPoint2DDouble position, bool isOpening)
 {
 	if (parent) {
 		m_parentList.push_back(parent);

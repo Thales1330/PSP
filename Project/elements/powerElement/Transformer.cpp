@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -35,7 +35,7 @@ Transformer::Transformer(wxString name) : Branch()
 }
 Transformer::~Transformer() {}
 
-bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
+bool Transformer::AddParent(Element* parent, wxPoint2DDouble position, bool isOpening)
 {
 	if (parent) {
 		// First bus.
@@ -43,11 +43,12 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 			m_position = position;
 			m_parentList.push_back(parent);
 			parent->AddChild(this);
-			wxPoint2DDouble parentPt =
-				parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-			parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-			parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
-			m_pointList.push_back(parentPt);                                    // First point
+
+			wxPoint2DDouble parentPt = parent->RotateAtPosition(position, -parent->GetAngle()); // Rotate click to horizontal position
+			parentPt.m_y = parent->GetPosition().m_y; // Centralize on bus.
+			parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+
+			m_pointList.push_back(parentPt); // First point
 			m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
 
 			wxRect2DDouble genRect(0, 0, 0, 0);
@@ -55,21 +56,70 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 
 			return false;
 		}
+
 		// Second bus.
 		else if (parent != m_parentList[0]) {
 			m_parentList.push_back(parent);
 			parent->AddChild(this);
-			wxPoint2DDouble parentPt =
-				parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-			parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-			parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 
+			wxPoint2DDouble parentPt = parent->RotateAtPosition(position, -parent->GetAngle()); // Rotate click to horizontal position.
+			parentPt.m_y = parent->GetPosition().m_y; // Centralize on bus.
+
+			parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+
+			if (isOpening) {
+				m_width = 70.0;
+				m_height = 40.0;
+
+				m_position = wxPoint2DDouble(
+					(m_pointList[0].m_x + parentPt.m_x) / 2.0,
+					(m_pointList[0].m_y + parentPt.m_y) / 2.0);
+
+				SetPosition(m_position);
+
+				wxPoint2DDouble term1 =
+					m_position +
+					RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
+
+				wxPoint2DDouble term2 =
+					m_position +
+					RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+
+				m_pointList.push_back(term1);
+				m_pointList.push_back(term2);
+
+				m_pointList[1] =
+					GetSwitchPoint(
+						m_parentList[0],
+						m_pointList[0],
+						term1);
+
+				m_pointList.push_back(
+					GetSwitchPoint(
+						parent,
+						parentPt,
+						term2));
+
+				m_pointList.push_back(parentPt);
+				m_inserted = true;
+
+				wxRect2DDouble genRect(0, 0, 0, 0);
+				m_switchRect.push_back(genRect);
+
+				UpdateSwitches();
+				UpdatePowerFlowArrowsPosition();
+
+				return true;
+			}
+
+			// Normal insertion: determine position and rotation automatically.
 			wxPoint2DDouble p1 = m_pointList[0];
 			wxPoint2DDouble p2 = parentPt;
+
 			double dx = p2.m_x - p1.m_x;
 			double dy = p2.m_y - p1.m_y;
 
-			// Determine orientation based on bus separation
+			// Determine orientation based on bus separation.
 			if (std::abs(dy) > std::abs(dx)) {
 				m_angle = (dy >= 0.0) ? 90.0 : 270.0;
 			}
@@ -80,7 +130,7 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 			// Get the midpoint between the two bus points.
 			m_position = wxPoint2DDouble((p1.m_x + p2.m_x) / 2.0, (p1.m_y + p2.m_y) / 2.0);
 
-			// Snap position to grid alignment
+			// Snap position to grid alignment.
 			if (std::abs(dx) < 1.0) {
 				m_position.m_x = p1.m_x;
 				m_position.m_y = std::round(m_position.m_y / 20.0) * 20.0;
@@ -94,28 +144,51 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 				m_position.m_y = std::round(m_position.m_y / 20.0) * 20.0;
 			}
 
+			// Check whether a point belongs to the rotated bus rectangle.
+			//
+			// The point is first transformed into the local coordinate
+			// system of the bus. In that system:
+			//   X -> bus width
+			//   Y -> bus height
+			//
+			// This makes the test independent of the bus rotation.
+			auto IsPointInsideBus = [](Element* bus, const wxPoint2DDouble& point) -> bool {
+				wxPoint2DDouble delta(
+					point.m_x - bus->GetPosition().m_x,
+					point.m_y - bus->GetPosition().m_y);
+
+				wxPoint2DDouble local =
+					bus->RotateLocal(delta, -bus->GetAngle());
+
+				double halfWidth = bus->GetWidth() / 2.0 + 2.0;
+				double halfHeight = bus->GetHeight() / 2.0 + 2.0;
+
+				return std::abs(local.m_x) <= halfWidth &&
+					std::abs(local.m_y) <= halfHeight;
+				};
+
 			if (std::abs(dy) > std::abs(dx)) {
-				Element* bus1 = m_parentList[0];
-				Element* bus2 = parent;
-				wxPoint2DDouble loc1 = bus1->RotateAtPosition(wxPoint2DDouble(m_position.m_x, bus1->GetPosition().m_y), -bus1->GetAngle());
-				wxPoint2DDouble loc2 = bus2->RotateAtPosition(wxPoint2DDouble(m_position.m_x, bus2->GetPosition().m_y), -bus2->GetAngle());
-				double halfW1 = bus1->GetWidth() / 2.0 + 2.0;
-				double halfW2 = bus2->GetWidth() / 2.0 + 2.0;
-				if (std::abs(loc1.m_x - bus1->GetPosition().m_x) <= halfW1 &&
-				    std::abs(loc2.m_x - bus2->GetPosition().m_x) <= halfW2) {
+				// Transformer is vertically oriented.
+				// Keep the connection points aligned in X.
+				wxPoint2DDouble candidate1( m_position.m_x, m_parentList[0]->GetPosition().m_y);
+
+				wxPoint2DDouble candidate2( m_position.m_x, parent->GetPosition().m_y);
+
+				if (IsPointInsideBus(m_parentList[0], candidate1) && IsPointInsideBus(parent, candidate2)) {
 					m_pointList[0].m_x = m_position.m_x;
 					parentPt.m_x = m_position.m_x;
 				}
 			}
 			else {
-				Element* bus1 = m_parentList[0];
-				Element* bus2 = parent;
-				wxPoint2DDouble loc1 = bus1->RotateAtPosition(wxPoint2DDouble(bus1->GetPosition().m_x, m_position.m_y), -bus1->GetAngle());
-				wxPoint2DDouble loc2 = bus2->RotateAtPosition(wxPoint2DDouble(bus2->GetPosition().m_x, m_position.m_y), -bus2->GetAngle());
-				double halfW1 = bus1->GetWidth() / 2.0 + 2.0;
-				double halfW2 = bus2->GetWidth() / 2.0 + 2.0;
-				if (std::abs(loc1.m_x - bus1->GetPosition().m_x) <= halfW1 &&
-				    std::abs(loc2.m_x - bus2->GetPosition().m_x) <= halfW2) {
+				// Transformer is horizontally oriented.
+				// Keep the connection points aligned in Y.
+				wxPoint2DDouble candidate1(m_parentList[0]->GetPosition().m_x, m_position.m_y);
+
+				wxPoint2DDouble candidate2(parent->GetPosition().m_x, m_position.m_y);
+
+				if (IsPointInsideBus(m_parentList[0], candidate1) &&
+					IsPointInsideBus(parent, candidate2)) {
+
 					m_pointList[0].m_y = m_position.m_y;
 					parentPt.m_y = m_position.m_y;
 				}
@@ -124,15 +197,21 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 			// Set the transformer rectangle.
 			m_width = 70.0;
 			m_height = 40.0;
+
 			SetPosition(m_position);  // This method calculates the rectangle properly.
 
-			// Set the terminals at 40.0 units offset (2 grid cells), rotated by m_angle
+			// Set the terminals at 40.0 units offset (2 grid cells),
+			// rotated by m_angle.
 			wxPoint2DDouble term1 = m_position + RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
+
 			wxPoint2DDouble term2 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+
 			term1.m_x = std::round(term1.m_x);
 			term1.m_y = std::round(term1.m_y);
+
 			term2.m_x = std::round(term2.m_x);
 			term2.m_y = std::round(term2.m_y);
+
 			m_pointList.push_back(term1);
 			m_pointList.push_back(term2);
 
@@ -147,12 +226,14 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 
 			wxRect2DDouble genRect(0, 0, 0, 0);
 			m_switchRect.push_back(genRect);
+
 			UpdateSwitches();
 			UpdatePowerFlowArrowsPosition();
 
 			return true;
 		}
 	}
+
 	return false;
 }
 
@@ -268,8 +349,15 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
 			gc->SetBrush(wxBrush(guiColour->selection));
-			DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
-			DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
+			//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
+			//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
+			DrawDCCircle(
+				m_position + wxPoint2DDouble(-15.0, 0.0),
+				20 + (m_borderSize + 1.5) / scale, 20, gc);
+
+			DrawDCCircle(
+				m_position + wxPoint2DDouble(15.0, 0.0),
+				20 + (m_borderSize + 1.5) / scale, 20, gc);
 
 			gc->PopState();
 
@@ -309,13 +397,27 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 		//glColor4d(1.0, 1.0, 1.0, 1.0);
 		gc->SetPen(*wxTRANSPARENT_PEN);
 		gc->SetBrush(wxBrush(guiColour->background));
-		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
-		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
+		//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
+		//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
+		DrawDCCircle(
+			m_position + wxPoint2DDouble(-15.0, 0.0),
+			20, 20, gc);
+
+		DrawDCCircle(
+			m_position + wxPoint2DDouble(15.0, 0.0),
+			20, 20, gc);
 
 		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
-		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
+		//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
+		//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
+		DrawDCCircle(
+			m_position + wxPoint2DDouble(-15.0, 0.0),
+			20, 20, gc);
+
+		DrawDCCircle(
+			m_position + wxPoint2DDouble(15.0, 0.0),
+			20, 20, gc);
 
 		// Point
 		gc->SetPen(*wxTRANSPARENT_PEN);
@@ -454,13 +556,16 @@ void Transformer::Move(wxPoint2DDouble position)
 
 void Transformer::AlignToGrid(double gridSize)
 {
-	if (gridSize <= 0.0) gridSize = 20.0;
-	// 1. Snap center position to grid
+	if (gridSize <= 0.0)
+		gridSize = 20.0;
+
+	// 1. Snap center position to grid.
 	m_position.m_x = std::round(m_position.m_x / gridSize) * gridSize;
 	m_position.m_y = std::round(m_position.m_y / gridSize) * gridSize;
+
 	SetPosition(m_position);
 
-	// 2. Rigidly attach terminals at 40.0 units offset
+	// 2. Rigidly attach terminals at 40.0 units offset.
 	if (m_pointList.size() >= 4) {
 		wxPoint2DDouble t1 = m_position + RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
 		wxPoint2DDouble t2 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
@@ -468,54 +573,96 @@ void Transformer::AlignToGrid(double gridSize)
 		m_pointList[3] = wxPoint2DDouble(std::round(t2.m_x), std::round(t2.m_y));
 	}
 
-	// 3. Align bus contact points
+	// Transformer orientation.
 	bool isVertical = (std::abs(m_angle - 90.0) < 1.0 || std::abs(m_angle - 270.0) < 1.0);
 
-	if (m_parentList.size() > 0 && m_parentList[0] && m_pointList.size() > 0) {
+	// Check whether a point belongs to the rotated bus rectangle.
+	auto IsPointInsideBus =
+		[](Element* bus, const wxPoint2DDouble& point) -> bool
+		{
+			wxPoint2DDouble delta(point.m_x - bus->GetPosition().m_x, point.m_y - bus->GetPosition().m_y);
+
+			// Transform the point into the local coordinate
+			// system of the bus.
+			wxPoint2DDouble local = bus->RotateLocal(delta, -bus->GetAngle());
+
+			double halfWidth = bus->GetWidth() / 2.0 + 2.0;
+			double halfHeight = bus->GetHeight() / 2.0 + 2.0;
+
+			return std::abs(local.m_x) <= halfWidth && std::abs(local.m_y) <= halfHeight;
+		};
+
+	// 3. Align first bus contact point.
+	if (m_parentList.size() > 0 && m_parentList[0] && !m_pointList.empty()) {
+
 		Element* bus1 = m_parentList[0];
+
 		if (isVertical) {
-			wxPoint2DDouble loc = bus1->RotateAtPosition(wxPoint2DDouble(m_position.m_x, bus1->GetPosition().m_y), -bus1->GetAngle());
-			double halfW = bus1->GetWidth() / 2.0 + 2.0;
-			if (std::abs(loc.m_x - bus1->GetPosition().m_x) <= halfW) {
+			// Candidate point obtained by aligning X with the
+			// transformer center.
+			wxPoint2DDouble candidate(m_position.m_x, bus1->GetPosition().m_y);
+
+			if (IsPointInsideBus(bus1, candidate)) {
 				m_pointList[0].m_x = m_position.m_x;
 			}
+
+			// Snap the longitudinal coordinate to the grid.
 			m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
 		}
 		else {
-			wxPoint2DDouble loc = bus1->RotateAtPosition(wxPoint2DDouble(bus1->GetPosition().m_x, m_position.m_y), -bus1->GetAngle());
-			double halfW = bus1->GetWidth() / 2.0 + 2.0;
-			if (std::abs(loc.m_x - bus1->GetPosition().m_x) <= halfW) {
+			// Candidate point obtained by aligning Y with the
+			// transformer center.
+			wxPoint2DDouble candidate(bus1->GetPosition().m_x, m_position.m_y);
+
+			if (IsPointInsideBus(bus1, candidate)) {
 				m_pointList[0].m_y = m_position.m_y;
 			}
+
+			// Snap the longitudinal coordinate to the grid.
 			m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
 		}
 	}
-	else if (m_pointList.size() > 0) {
+	else if (!m_pointList.empty()) {
 		m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
+
 		m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
 	}
 
-	if (m_parentList.size() > 1 && m_parentList[1] && m_pointList.size() > 1) {
+	// 4. Align second bus contact point.
+	if (m_parentList.size() > 1 &&
+		m_parentList[1] &&
+		!m_pointList.empty()) {
+
 		Element* bus2 = m_parentList[1];
+
 		if (isVertical) {
-			wxPoint2DDouble loc = bus2->RotateAtPosition(wxPoint2DDouble(m_position.m_x, bus2->GetPosition().m_y), -bus2->GetAngle());
-			double halfW = bus2->GetWidth() / 2.0 + 2.0;
-			if (std::abs(loc.m_x - bus2->GetPosition().m_x) <= halfW) {
+			// Candidate point obtained by aligning X with the
+			// transformer center.
+			wxPoint2DDouble candidate(m_position.m_x, bus2->GetPosition().m_y);
+
+			if (IsPointInsideBus(bus2, candidate)) {
 				m_pointList.back().m_x = m_position.m_x;
 			}
+
+			// Snap the longitudinal coordinate to the grid.
 			m_pointList.back().m_y = std::round(m_pointList.back().m_y / gridSize) * gridSize;
 		}
 		else {
-			wxPoint2DDouble loc = bus2->RotateAtPosition(wxPoint2DDouble(bus2->GetPosition().m_x, m_position.m_y), -bus2->GetAngle());
-			double halfW = bus2->GetWidth() / 2.0 + 2.0;
-			if (std::abs(loc.m_x - bus2->GetPosition().m_x) <= halfW) {
+			// Candidate point obtained by aligning Y with the
+			// transformer center.
+			wxPoint2DDouble candidate(bus2->GetPosition().m_x, m_position.m_y);
+
+			if (IsPointInsideBus(bus2, candidate)) {
 				m_pointList.back().m_y = m_position.m_y;
 			}
+
+			// Snap the longitudinal coordinate to the grid.
 			m_pointList.back().m_x = std::round(m_pointList.back().m_x / gridSize) * gridSize;
 		}
 	}
 	else if (m_pointList.size() > 1) {
 		m_pointList.back().m_x = std::round(m_pointList.back().m_x / gridSize) * gridSize;
+
 		m_pointList.back().m_y = std::round(m_pointList.back().m_y / gridSize) * gridSize;
 	}
 
@@ -1061,7 +1208,7 @@ bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Ele
 	auto size = cadPropNode->first_node("Size");
 	m_width = XMLParser::GetNodeValueDouble(size, "Width");
 	m_height = XMLParser::GetNodeValueDouble(size, "Height");
-	double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
+	m_angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
 	// Get nodes points
 	std::vector<wxPoint2DDouble> ptsList;
@@ -1099,10 +1246,10 @@ bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Ele
 		{
 			Bus* dummyBus = new Bus(nodePtsList[i]);
 			dummyBusList.push_back(dummyBus);
-			AddParent(dummyBus, nodePtsList[i]);
+			AddParent(dummyBus, nodePtsList[i], true);
 		}
 		else {  // Parent connected (necessarily a bus, get from bus list)
-			AddParent(parentList[parentID[i]], nodePtsList[i]);
+			AddParent(parentList[parentID[i]], nodePtsList[i], true);
 		}
 	}
 
@@ -1117,13 +1264,13 @@ bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Ele
 	dummyBusList.clear();
 
 	// Set rotation properly.
-	int numRot = angle / GetRotationAngle();
-	bool clockwise = true;
-	if (numRot < 0) {
-		numRot = std::abs(numRot);
-		clockwise = false;
-	}
-	for (int i = 0; i < numRot; i++) Rotate(clockwise);
+	//int numRot = angle / GetRotationAngle();
+	//bool clockwise = true;
+	//if (numRot < 0) {
+	//	numRot = std::abs(numRot);
+	//	clockwise = false;
+	//}
+	//for (int i = 0; i < numRot; i++) Rotate(clockwise);
 
 	auto electricalProp = elementNode->first_node("ElectricalProperties");
 	if (!electricalProp) return false;
@@ -1239,7 +1386,7 @@ void Transformer::SetBestPositionAndRotation()
 			double halfW1 = bus1->GetWidth() / 2.0 + 2.0;
 			double halfW2 = bus2->GetWidth() / 2.0 + 2.0;
 			if (std::abs(loc1.m_x - bus1->GetPosition().m_x) <= halfW1 &&
-			    std::abs(loc2.m_x - bus2->GetPosition().m_x) <= halfW2) {
+				std::abs(loc2.m_x - bus2->GetPosition().m_x) <= halfW2) {
 				m_pointList[0].m_x = m_position.m_x;
 				m_pointList.back().m_x = m_position.m_x;
 			}
@@ -1250,7 +1397,7 @@ void Transformer::SetBestPositionAndRotation()
 			double halfW1 = bus1->GetWidth() / 2.0 + 2.0;
 			double halfW2 = bus2->GetWidth() / 2.0 + 2.0;
 			if (std::abs(loc1.m_x - bus1->GetPosition().m_x) <= halfW1 &&
-			    std::abs(loc2.m_x - bus2->GetPosition().m_x) <= halfW2) {
+				std::abs(loc2.m_x - bus2->GetPosition().m_x) <= halfW2) {
 				m_pointList[0].m_y = m_position.m_y;
 				m_pointList.back().m_y = m_position.m_y;
 			}

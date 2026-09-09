@@ -31,7 +31,7 @@ Inductor::Inductor(wxString name) : Shunt()
 
 Inductor::~Inductor() {}
 
-bool Inductor::AddParent(Element* parent, wxPoint2DDouble position)
+bool Inductor::AddParent(Element* parent, wxPoint2DDouble position, bool isOpening)
 {
 	if (parent) {
 		m_parentList.push_back(parent);

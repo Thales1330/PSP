@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -240,7 +240,7 @@ public:
 	 * @param parent Element parent.
 	 * @param position Node position in the parent.
 	 */
-	virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return false; }
+	virtual bool AddParent(Element* parent, wxPoint2DDouble position, bool isOpening = false) { return false; }
 	/**
 	 * @brief Add a parent to the element.
 	 * @param parent Element parent.
