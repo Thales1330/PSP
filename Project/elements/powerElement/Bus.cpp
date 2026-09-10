@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -83,8 +83,8 @@ void Bus::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 
 	if (!m_electricalData.isConnected)
 		gc->SetBrush(wxBrush(guiColour->disable));
-	else if (m_dynEvent || m_electricalData.hasFault)
-		gc->SetBrush(wxBrush(guiColour->eventElement));
+	//else if (m_dynEvent)
+	//	gc->SetBrush(wxBrush(guiColour->eventElement));
 	else
 		gc->SetBrush(wxBrush(GetVoltageColour(guiColour)));
 
@@ -148,6 +148,10 @@ void Bus::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 		delete[] points;
 
 		gc->PopState();
+	}
+
+	if (m_dynEvent) {
+		DrawStabilityEventGC(gc, translation, scale, guiColour, true);
 	}
 }
 

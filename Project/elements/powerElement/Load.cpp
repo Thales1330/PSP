@@ -71,10 +71,10 @@ void Load::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scal
 {
 	wxColour elementColour;
 	if (m_online) {
-		if (m_dynEvent)
-			elementColour = guiColour->eventElement;
-		else
-			elementColour = guiColour->enabled;
+		//if (m_dynEvent)
+		//	elementColour = guiColour->eventElement;
+		//else
+		elementColour = guiColour->enabled;
 	}
 	else
 		elementColour = guiColour->disable;
@@ -133,6 +133,10 @@ void Load::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scal
 		gc->SetBrush(wxBrush(elementColour));
 		DrawDCTriangle(triangPts, gc);
 		gc->PopState();
+
+		if (m_dynEvent) {
+			DrawStabilityEventGC(gc, translation, scale, guiColour);
+		}
 	}
 }
 

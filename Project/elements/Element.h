@@ -519,6 +519,8 @@ public:
 
 	virtual void DrawDCTriangle(std::vector<wxPoint> points, wxDC& dc) const;
 
+	virtual void DrawStabilityEventGC(wxGraphicsContext* gc, wxPoint2DDouble translation, double scale, GUIColour* guiColour, bool rotateAnchor = false) const;
+
 	/**
 	 * @brief Draw a point.
 	 * @param position Point position.

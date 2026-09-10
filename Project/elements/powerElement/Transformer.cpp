@@ -170,9 +170,9 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position, bool isOp
 			if (std::abs(dy) > std::abs(dx)) {
 				// Transformer is vertically oriented.
 				// Keep the connection points aligned in X.
-				wxPoint2DDouble candidate1( m_position.m_x, m_parentList[0]->GetPosition().m_y);
+				wxPoint2DDouble candidate1(m_position.m_x, m_parentList[0]->GetPosition().m_y);
 
-				wxPoint2DDouble candidate2( m_position.m_x, parent->GetPosition().m_y);
+				wxPoint2DDouble candidate2(m_position.m_x, parent->GetPosition().m_y);
 
 				if (IsPointInsideBus(m_parentList[0], candidate1) && IsPointInsideBus(parent, candidate2)) {
 					m_pointList[0].m_x = m_position.m_x;
@@ -325,10 +325,10 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 {
 	wxColour elementColour;
 	if (m_online) {
-		if (m_dynEvent)
-			elementColour = guiColour->eventElement;
-		else
-			elementColour = guiColour->enabled;
+		//if (m_dynEvent)
+		//	elementColour = guiColour->eventElement;
+		//else
+		elementColour = guiColour->enabled;
 	}
 	else
 		elementColour = guiColour->disable;
@@ -349,15 +349,8 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
 			gc->SetBrush(wxBrush(guiColour->selection));
-			//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
-			//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
-			DrawDCCircle(
-				m_position + wxPoint2DDouble(-15.0, 0.0),
-				20 + (m_borderSize + 1.5) / scale, 20, gc);
-
-			DrawDCCircle(
-				m_position + wxPoint2DDouble(15.0, 0.0),
-				20 + (m_borderSize + 1.5) / scale, 20, gc);
+			DrawDCCircle(m_position + wxPoint2DDouble(-15.0, 0.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
+			DrawDCCircle(m_position + wxPoint2DDouble(15.0, 0.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
 
 			gc->PopState();
 
@@ -397,27 +390,13 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 		//glColor4d(1.0, 1.0, 1.0, 1.0);
 		gc->SetPen(*wxTRANSPARENT_PEN);
 		gc->SetBrush(wxBrush(guiColour->background));
-		//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
-		//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
-		DrawDCCircle(
-			m_position + wxPoint2DDouble(-15.0, 0.0),
-			20, 20, gc);
-
-		DrawDCCircle(
-			m_position + wxPoint2DDouble(15.0, 0.0),
-			20, 20, gc);
+		DrawDCCircle(m_position + wxPoint2DDouble(-15.0, 0.0), 20, 20, gc);
+		DrawDCCircle(m_position + wxPoint2DDouble(15.0, 0.0), 20, 20, gc);
 
 		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
-		//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
-		DrawDCCircle(
-			m_position + wxPoint2DDouble(-15.0, 0.0),
-			20, 20, gc);
-
-		DrawDCCircle(
-			m_position + wxPoint2DDouble(15.0, 0.0),
-			20, 20, gc);
+		DrawDCCircle(m_position + wxPoint2DDouble(-15.0, 0.0), 20, 20, gc);
+		DrawDCCircle(m_position + wxPoint2DDouble(15.0, 0.0), 20, 20, gc);
 
 		// Point
 		gc->SetPen(*wxTRANSPARENT_PEN);
@@ -425,6 +404,10 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 		DrawDCCircle(m_rect.GetPosition(), 4, 10, gc);
 
 		gc->PopState();
+
+		if (m_dynEvent) {
+			DrawStabilityEventGC(gc, translation, scale, guiColour);
+		}
 	}
 }
 

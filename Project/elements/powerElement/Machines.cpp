@@ -78,11 +78,8 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position, bool isOpeni
 			}
 		}
 
-		// ------------------------------------------------------------
 		// The following geometry is common to normal insertion and file loading.
 		// When opening a file, m_position and m_angle are preserved from the file.
-		// ------------------------------------------------------------
-
 		m_width = m_height = 50.0;
 		m_rect = wxRect2DDouble(m_position.m_x - 25.0, m_position.m_y - 25.0, m_width, m_height);
 
@@ -126,10 +123,10 @@ void Machines::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double 
 {
 	wxColour elementColour;
 	if (m_online) {
-		if (m_dynEvent)
-			elementColour = guiColour->eventElement;
-		else
-			elementColour = guiColour->enabled;
+		//if (m_dynEvent)
+		//	elementColour = guiColour->eventElement;
+		//else
+		elementColour = guiColour->enabled;
 	}
 	else
 		elementColour = guiColour->disable;
@@ -173,6 +170,10 @@ void Machines::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double 
 
 		// Draw machine symbol.
 		DrawDCSymbol(gc);
+
+		if (m_dynEvent) {
+			DrawStabilityEventGC(gc, translation, scale, guiColour);
+		}
 	}
 }
 

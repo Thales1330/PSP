@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -50,20 +50,20 @@ class TransformerForm : public TransformerFormBase
     Transformer* m_transformer = nullptr;
 
     // OLTC Controls
-    wxPanel* m_panelTapChanger = nullptr;
-    wxCheckBox* m_checkEnableTapChanger = nullptr;
-    wxStaticText* m_staticTextControlledBus = nullptr;
-    wxChoice* m_choiceControlledBus = nullptr;
-    wxStaticText* m_staticTextTargetVoltage = nullptr;
-    wxTextCtrl* m_textCtrlTargetVoltage = nullptr;
-    wxStaticText* m_staticTextDeadband = nullptr;
-    wxTextCtrl* m_textCtrlDeadband = nullptr;
-    wxStaticText* m_staticTextMinTap = nullptr;
-    wxTextCtrl* m_textCtrlMinTap = nullptr;
-    wxStaticText* m_staticTextMaxTap = nullptr;
-    wxTextCtrl* m_textCtrlMaxTap = nullptr;
-    wxCheckBox* m_checkDiscreteTap = nullptr;
-    wxStaticText* m_staticTextTapStep = nullptr;
-    wxTextCtrl* m_textCtrlTapStep = nullptr;
+    //wxPanel* m_panelTapChanger = nullptr;
+    //wxCheckBox* m_checkEnableTapChanger = nullptr;
+    //wxStaticText* m_staticTextControlledBus = nullptr;
+    //wxChoice* m_choiceControlledBus = nullptr;
+    //wxStaticText* m_staticTextTargetVoltage = nullptr;
+    //wxTextCtrl* m_textCtrlTargetVoltage = nullptr;
+    //wxStaticText* m_staticTextDeadband = nullptr;
+    //wxTextCtrl* m_textCtrlDeadband = nullptr;
+    //wxStaticText* m_staticTextMinTap = nullptr;
+    //wxTextCtrl* m_textCtrlMinTap = nullptr;
+    //wxStaticText* m_staticTextMaxTap = nullptr;
+    //wxTextCtrl* m_textCtrlMaxTap = nullptr;
+    //wxCheckBox* m_checkDiscreteTap = nullptr;
+    //wxStaticText* m_staticTextTapStep = nullptr;
+    //wxTextCtrl* m_textCtrlTapStep = nullptr;
 };
 #endif  // TRANSFORMERFORM_H

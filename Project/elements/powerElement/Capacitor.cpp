@@ -125,10 +125,10 @@ void Capacitor::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double
 {
 	wxColour elementColour;
 	if (m_online) {
-		if (m_dynEvent)
-			elementColour = guiColour->eventElement;
-		else
-			elementColour = guiColour->enabled;
+		//if (m_dynEvent)
+		//	elementColour = guiColour->eventElement;
+		//else
+		elementColour = guiColour->enabled;
 	}
 	else
 		elementColour = guiColour->disable;
@@ -192,6 +192,10 @@ void Capacitor::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double
 		DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), gc);
 
 		gc->PopState();
+
+		if (m_dynEvent) {
+			DrawStabilityEventGC(gc, translation, scale, guiColour);
+		}
 	}
 }
 

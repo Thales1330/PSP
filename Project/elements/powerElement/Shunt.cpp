@@ -83,7 +83,6 @@ void Shunt::AlignToGrid(double gridSize)
 
 		// Transform p2 to the local coordinate system of the bus.
 		wxPoint2DDouble p2Delta(p2.m_x - bus->GetPosition().m_x, p2.m_y - bus->GetPosition().m_y);
-
 		wxPoint2DDouble p2Local = bus->RotateLocal(p2Delta, -bus->GetAngle());
 
 		// The new connection point is located at the same longitudinal position as p2 and exactly on the center line of the bus.
@@ -103,7 +102,6 @@ void Shunt::AlignToGrid(double gridSize)
 
 		// No parent: simply snap the connection point to the grid.
 		m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
-
 		m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
 	}
 
