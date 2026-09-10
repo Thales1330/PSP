@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -45,33 +45,40 @@ public:
 	virtual ~GeneralPropertiesForm();
 
 protected:
+    void OnButtonAddVoltage(wxCommandEvent& event) override;
+    void OnButtonDefaultVoltages(wxCommandEvent& event) override;
+    void OnButtonRemoveVoltage(wxCommandEvent& event) override;
+    void OnVoltageItemSelected(wxListEvent& event) override;
     virtual void OnThemeSelected(wxCommandEvent& event);
 	virtual void OnButtonCancelClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
 	virtual void OnButtonOKClick(wxCommandEvent& event);
 	virtual bool ValidateData();
+	void PopulateVoltageList();
 
 	// Busbar (Barramento) tab controls
-	wxPanel* m_panelBusbar = nullptr;
-	wxListCtrl* m_listCtrlVoltages = nullptr;
-	wxStaticText* m_staticTextVoltage = nullptr;
-	wxTextCtrl* m_textCtrlVoltage = nullptr;
-	wxStaticText* m_staticTextColour = nullptr;
-	wxColourPickerCtrl* m_colourPickerBus = nullptr;
-	wxButton* m_buttonAddVoltage = nullptr;
-	wxButton* m_buttonRemoveVoltage = nullptr;
-	wxButton* m_buttonDefaultVoltages = nullptr;
-	size_t m_busbarPageIndex = 1;
+	//wxPanel* m_panelBusbar = nullptr;
+	//wxListCtrl* m_listCtrlVoltages = nullptr;
+	//wxStaticText* m_staticTextVoltage = nullptr;
+	//wxTextCtrl* m_textCtrlVoltage = nullptr;
+	//wxStaticText* m_staticTextColour = nullptr;
+	//wxColourPickerCtrl* m_colourPickerBus = nullptr;
+	//wxButton* m_buttonAddVoltage = nullptr;
+	//wxButton* m_buttonRemoveVoltage = nullptr;
+	//wxButton* m_buttonDefaultVoltages = nullptr;
+	//size_t m_busbarPageIndex = 1;
+	//
+	//std::vector<VoltageLevelColour> m_voltageLevels;
+	//
+	//bool IsPortuguese() const;
+	//void UpdateLanguageUI();
+	//void PopulateVoltageList();
+	//void OnLanguageSelected(wxCommandEvent& event);
+	//void OnVoltageItemSelected(wxListEvent& event);
+	//void OnButtonAddVoltage(wxCommandEvent& event);
+	//void OnButtonRemoveVoltage(wxCommandEvent& event);
+	//void OnButtonDefaultVoltages(wxCommandEvent& event);
 
 	std::vector<VoltageLevelColour> m_voltageLevels;
-
-	bool IsPortuguese() const;
-	void UpdateLanguageUI();
-	void PopulateVoltageList();
-	void OnLanguageSelected(wxCommandEvent& event);
-	void OnVoltageItemSelected(wxListEvent& event);
-	void OnButtonAddVoltage(wxCommandEvent& event);
-	void OnButtonRemoveVoltage(wxCommandEvent& event);
-	void OnButtonDefaultVoltages(wxCommandEvent& event);
 
 	PropertiesData* m_properties = nullptr;
 };

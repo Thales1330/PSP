@@ -137,13 +137,14 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
 	if (m_transformer->GetParentList().size() >= 2) {
 		Bus* b1 = dynamic_cast<Bus*>(m_transformer->GetParentList()[0]);
 		Bus* b2 = dynamic_cast<Bus*>(m_transformer->GetParentList()[1]);
-		if (b1) primLabel = wxString::Format(_("Primary: Bus %d (%s)"), b1->GetElectricalData().number + 1, b1->GetElectricalData().name);
-		if (b2) secLabel = wxString::Format(_("Secondary: Bus %d (%s)"), b2->GetElectricalData().number + 1, b2->GetElectricalData().name);
+		if (b1) primLabel = wxString::Format(_("%s"), b1->GetElectricalData().name);
+		if (b2) secLabel = wxString::Format(_("%s"), b2->GetElectricalData().name);
 	}
 	busChoices.Add(primLabel);
 	busChoices.Add(secLabel);
 	m_choiceControlledBus->Append(busChoices);
 	m_choiceControlledBus->SetSelection(data.oltcControlledBus == 0 ? 0 : 1);
+	m_choiceControlledBus->SetMaxSize(wxSize(200, -1));
 
 	m_textCtrlTargetVoltage->SetValue(Transformer::StringFromDouble(data.oltcTargetVoltage));
 	m_textCtrlDeadband->SetValue(Transformer::StringFromDouble(data.oltcVoltageDeadband));
