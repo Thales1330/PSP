@@ -114,10 +114,10 @@ void Line::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scal
 
 	wxColour elementColour;
 	if (m_online) {
-		if (m_dynEvent)
-			elementColour = guiColour->eventElement;
-		else
-			elementColour = guiColour->enabled;
+		//if (m_dynEvent)
+		//	elementColour = guiColour->eventElement;
+		//else
+		elementColour = guiColour->enabled;
 	}
 	else
 		elementColour = guiColour->disable;
@@ -175,6 +175,11 @@ void Line::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scal
 		}
 
 		gc->PopState();
+	}
+
+	if (m_dynEvent && m_pointList.size() >= 3) {
+		auto pt = m_pointList[1] / 2.0 + m_pointList[2] / 2.0;
+		DrawStabilityEventGC(gc, translation, scale, guiColour, false, pt);
 	}
 }
 

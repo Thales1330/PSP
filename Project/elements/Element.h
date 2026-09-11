@@ -24,7 +24,7 @@
 #include <wx/menu.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
-//#include <GL/glew.h>
+ //#include <GL/glew.h>
 #ifdef _MSC_VER
  //#include <windows.h>
 #endif 
@@ -458,9 +458,9 @@ public:
 	 * @param numSegments Num of segments of the circle.
 	 * @param mode OpenGl primitive.
 	 */
-	//virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
+	 //virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
 
-	virtual void DrawDCRectangle(wxPoint2DDouble position, double width, double height,	double angle, wxDC& dc) const;
+	virtual void DrawDCRectangle(wxPoint2DDouble position, double width, double height, double angle, wxDC& dc) const;
 
 	virtual void DrawDCRoundedRectRotated(wxDC& dc, const wxPoint2DDouble& center, double width, double height, double radius, double angleDeg, int arcSegments = 8) const;
 
@@ -493,59 +493,59 @@ public:
 	 * @param height Rectangle height.
 	 * @param mode OpenGl primitive.
 	 */
-	//virtual void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
-	//virtual void DrawRectangle(wxPoint2DDouble position, double width, double height) const;
+	 //virtual void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
+	 //virtual void DrawRectangle(wxPoint2DDouble position, double width, double height) const;
 
-	/**
-	 * @brief Draw rectangle.
-	 * @param points Rectangle vertices.
-	 * @param mode OpenGl primitive.
-	 */
-	//virtual void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
+	 /**
+	  * @brief Draw rectangle.
+	  * @param points Rectangle vertices.
+	  * @param mode OpenGl primitive.
+	  */
+	  //virtual void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
 
-	/**
-	 * @brief Draw a triangle.
-	 * @param points Triangle vertices.
-	 * @param mode OpenGl primitive.
-	 */
-	//virtual void DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode = GL_TRIANGLES) const;
+	  /**
+	   * @brief Draw a triangle.
+	   * @param points Triangle vertices.
+	   * @param mode OpenGl primitive.
+	   */
+	   //virtual void DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode = GL_TRIANGLES) const;
 
-	/**
-	 * @brief Draw a triangle.
-	 * @param points Triangle vertices.
-	 * @param gc Device context.
-	 */
+	   /**
+		* @brief Draw a triangle.
+		* @param points Triangle vertices.
+		* @param gc Device context.
+		*/
 	virtual void DrawDCTriangle(std::vector<wxPoint2DDouble> points, wxGraphicsContext* gc) const;
 
 	virtual void DrawDCTriangle(std::vector<wxPoint> points, wxDC& dc) const;
 
-	virtual void DrawStabilityEventGC(wxGraphicsContext* gc, wxPoint2DDouble translation, double scale, GUIColour* guiColour, bool rotateAnchor = false) const;
+	virtual void DrawStabilityEventGC(wxGraphicsContext* gc, wxPoint2DDouble translation, double scale, GUIColour* guiColour, bool rotateAnchor = false, wxPoint2DDouble iconPosition = wxPoint2DDouble(-1, -1)) const;
 
 	/**
 	 * @brief Draw a point.
 	 * @param position Point position.
 	 * @param size Point size.
 	 */
-	//virtual void DrawPoint(wxPoint2DDouble position, double size) const;
+	 //virtual void DrawPoint(wxPoint2DDouble position, double size) const;
 
-	/**
-	 * @brief Draw line.
-	 * @param points Line vertices.
-	 * @param mode OpenGl primitive.
-	 */
-	//virtual void DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode = GL_LINE_STRIP) const;
+	 /**
+	  * @brief Draw line.
+	  * @param points Line vertices.
+	  * @param mode OpenGl primitive.
+	  */
+	  //virtual void DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode = GL_LINE_STRIP) const;
 
-	/**
-	 * @brief Draw pickbox.
-	 * @param position Pickbox position.
-	 */
-	//virtual void DrawPickbox(wxPoint2DDouble position) const;
+	  /**
+	   * @brief Draw pickbox.
+	   * @param position Pickbox position.
+	   */
+	   //virtual void DrawPickbox(wxPoint2DDouble position) const;
 
-	/**
-	 * @brief Draw pickbox using direct context.
-	 * @param position Pickbox position.
-	 * @param gc Direct context.
-	 */
+	   /**
+		* @brief Draw pickbox using direct context.
+		* @param position Pickbox position.
+		* @param gc Direct context.
+		*/
 	virtual void DrawDCPickbox(wxPoint2DDouble position, wxGraphicsContext* gc) const;
 
 	/**

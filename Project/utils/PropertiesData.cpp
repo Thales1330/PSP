@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -73,21 +73,22 @@ void PropertiesData::SetGUIColourTheme()
 		m_genData.voltageLevels = GetDefaultVoltageLevels();
 	}
 	m_guiColour.voltageLevels = m_genData.voltageLevels;
+	m_guiColour.useVoltageLevels = m_genData.useBusVoltageColours;
 }
 
 std::vector<VoltageLevelColour> PropertiesData::GetDefaultVoltageLevels()
 {
 	return {
-		{ 500.0, wxColour(0, 90, 220) },    // >= 500 kV - Azul Real
-		{ 440.0, wxColour(160, 82, 45) },   // 440 kV - Marrom
-		{ 345.0, wxColour(190, 110, 50) },  // 345 kV - Marrom claro / Ocre
-		{ 230.0, wxColour(220, 35, 35) },   // 230 kV - Vermelho
-		{ 138.0, wxColour(0, 155, 65) },    // 138 kV - Verde
-		{ 69.0,  wxColour(145, 40, 205) },  // 69 kV  - Violeta / Roxo
-		{ 34.5,  wxColour(215, 35, 135) },  // 34.5 kV - Magenta / Rosa
-		{ 13.8,  wxColour(0, 165, 195) },   // 13.8 kV - Ciano / Azul claro
-		{ 4.16,  wxColour(205, 150, 15) },  // 4.16 kV - Dourado / Âmbar
-		{ 0.38,  wxColour(120, 125, 135) }  // 0.38 kV (380 V) - Cinza
+	{ 500.0, wxColour(198, 40, 40) },    // 500 kV - Dark red
+	{ 440.0, wxColour(224, 90, 42) },    // 440 kV - Orange-red
+	{ 345.0, wxColour(242, 177, 52) },   // 345 kV - Amber
+	{ 230.0, wxColour(67, 176, 92) },    // 230 kV - Green
+	{ 138.0, wxColour(40, 105, 235) },   // 138 kV - Blue
+	{ 69.0,  wxColour(0, 180, 220) },    // 69 kV - Cyan
+	{ 34.5,  wxColour(0, 106, 106) },    // 34.5 kV - Teal
+	{ 13.8,  wxColour(94, 53, 177) },    // 13.8 kV - Violet
+	{ 4.16,  wxColour(158, 62, 172) },   // 4.16 kV - Purple
+	{ 0.38,  wxColour(151, 132, 208) }   // 0.38 kV (380 V) - Light purple
 	};
 }
 
@@ -160,6 +161,9 @@ bool PropertiesData::SaveConfigFile(const GeneralData& data)
 	file.AddLine(line);
 
 	line = wxString("elementstoolbar=") + (data.showElementsToolBar ? "yes" : "no");
+	file.AddLine(line);
+
+	line = wxString("usevoltagebuscolours=") + (data.useBusVoltageColours ? "yes" : "no");
 	file.AddLine(line);
 
 	if (!data.voltageLevels.empty()) {

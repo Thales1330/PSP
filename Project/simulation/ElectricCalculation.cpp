@@ -612,7 +612,8 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 		}
 	}
 
-	// Synchronous machines
+	// Handling other shunt elements
+	// Capacitor, Inductor, Load, SyncGenerator and SyncMotor
 	for (auto* bus : m_busList) {
 		BusElectricalData data = bus->GetElectricalData();
 		int i = data.number;
@@ -625,8 +626,14 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 
 			for (auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
 				SyncGenerator* syncGenerator = *itsg;
-				if (bus == syncGenerator->GetParentList()[0] && syncGenerator->IsOnline())
+				if (bus == syncGenerator->GetParentList()[0] && syncGenerator->IsOnline()) {
 					syncGeneratorsOnBus.push_back(syncGenerator);
+					auto cData = syncGenerator->GetPUElectricalData(systemPowerBase);
+					if (cData.activePower >= 0.0)
+						syncGenerator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
+					else
+						syncGenerator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
+				}
 			}
 			for (auto itsm = m_syncMotorList.begin(); itsm != m_syncMotorList.end(); itsm++) {
 				SyncMotor* syncMotor = *itsm;
@@ -634,6 +641,10 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 					syncMotorsOnBus.push_back(syncMotor);
 					SyncMotorElectricalData childData = syncMotor->GetPUElectricalData(systemPowerBase);
 					loadPower += std::complex<double>(childData.activePower, 0.0);
+					if (childData.activePower >= 0.0)
+						syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
+					else
+						syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
 				}
 			}
 			for (auto itlo = m_loadList.begin(); itlo != m_loadList.end(); itlo++) {

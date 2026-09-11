@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -960,22 +960,22 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 					// If the mouse is over a pickbox set correct mouse cursor.
 					if (element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
 						foundPickbox = true;
-//#ifdef __WXMSW__
-//						const DWORD beforeCursor = GetWorkspaceGDIObjects();
-//#endif
+						//#ifdef __WXMSW__
+						//						const DWORD beforeCursor = GetWorkspaceGDIObjects();
+						//#endif
 						SetCursor(element->GetBestPickboxCursor());
-//#ifdef __WXMSW__
-//						LogWorkspaceGDIDelta(wxString::Format("Workspace::OnMouseMotion pickbox cursor type %d", element->GetElementType()), beforeCursor);
-//#endif
+						//#ifdef __WXMSW__
+						//						LogWorkspaceGDIDelta(wxString::Format("Workspace::OnMouseMotion pickbox cursor type %d", element->GetElementType()), beforeCursor);
+						//#endif
 					}
 					else if (!foundPickbox) {
-//#ifdef __WXMSW__
-//						const DWORD beforeCursor = GetWorkspaceGDIObjects();
-//#endif
+						//#ifdef __WXMSW__
+						//						const DWORD beforeCursor = GetWorkspaceGDIObjects();
+						//#endif
 						SetCursor(wxCURSOR_ARROW);
-//#ifdef __WXMSW__
-//						LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
-//#endif
+						//#ifdef __WXMSW__
+						//						LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
+						//#endif
 						element->ResetPickboxes();
 					}
 				}
@@ -984,13 +984,13 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
 					element->ShowPickbox(false);
 					element->ResetPickboxes();
-//#ifdef __WXMSW__
-//					const DWORD beforeCursor = GetWorkspaceGDIObjects();
-//#endif
+					//#ifdef __WXMSW__
+					//					const DWORD beforeCursor = GetWorkspaceGDIObjects();
+					//#endif
 					SetCursor(wxCURSOR_ARROW);
-//#ifdef __WXMSW__
-//					LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
-//#endif
+					//#ifdef __WXMSW__
+					//					LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
+					//#endif
 				}
 			}
 		}
@@ -1189,7 +1189,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 	bool insertingElement = false;
 	if (m_mode == WorkspaceMode::MODE_INSERT || m_mode == WorkspaceMode::MODE_INSERT_TEXT) insertingElement = true;
 
-	char key = event.GetUnicodeKey();
+	int key = event.GetKeyCode();
 	if (key != WXK_NONE) {
 		switch (key) {
 		case WXK_ESCAPE:  // Cancel operations.
@@ -1212,6 +1212,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				m_mode = WorkspaceMode::MODE_EDIT;
 				Redraw();
 			}
+			UnselectAll();
 		} break;
 		case WXK_DELETE:  // Delete selected elements
 		{
@@ -1219,18 +1220,22 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		} break;
 		case 'A': {
 			if (!insertingElement) {
-				//Text* newText = new Text(m_camera->ScreenToWorld(event.GetPosition()), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-				auto newText = std::make_shared<Text>(
-					m_camera->ScreenToWorld(event.GetPosition()),
-					m_properties->GetGeneralPropertiesData().labelFont,
-					m_properties->GetGeneralPropertiesData().labelFontSize);
-				m_textList.push_back(newText);
-				m_mode = WorkspaceMode::MODE_INSERT_TEXT;
-				m_statusBar->SetStatusText(_("Insert Text: Click to insert, ESC to cancel."));
-				if (m_hmPlane && m_showHM) {
-					m_hmPlane->Clear();
+				if (!event.ControlDown()) {
+					auto newText = std::make_shared<Text>(
+						m_camera->ScreenToWorld(event.GetPosition()),
+						m_properties->GetGeneralPropertiesData().labelFont,
+						m_properties->GetGeneralPropertiesData().labelFontSize);
+					m_textList.push_back(newText);
+					m_mode = WorkspaceMode::MODE_INSERT_TEXT;
+					m_statusBar->SetStatusText(_("Insert Text: Click to insert, ESC to cancel."));
+					if (m_hmPlane && m_showHM) {
+						m_hmPlane->Clear();
+					}
+					Redraw();
 				}
-				Redraw();
+				else {
+					AlignSelectedToGrid();
+				}
 			}
 		} break;
 		case 'F': {
@@ -1528,13 +1533,13 @@ void Workspace::GetStateListsCopy(const std::vector< std::shared_ptr<PowerElemen
 	std::map<Element*, Element*> elementMap;
 
 	for (auto& element : elementsList) {
-//#ifdef __WXMSW__
-//		const DWORD beforeElementCopy = GetWorkspaceGDIObjects();
-//#endif
+		//#ifdef __WXMSW__
+		//		const DWORD beforeElementCopy = GetWorkspaceGDIObjects();
+		//#endif
 		PowerElement* copyElement = static_cast<PowerElement*>(element->GetCopy());
-//#ifdef __WXMSW__
-//		LogWorkspaceGDIDelta(wxString::Format("Workspace::GetStateListsCopy element copy type %d", element->GetElementType()), beforeElementCopy);
-//#endif
+		//#ifdef __WXMSW__
+		//		LogWorkspaceGDIDelta(wxString::Format("Workspace::GetStateListsCopy element copy type %d", element->GetElementType()), beforeElementCopy);
+		//#endif
 		elementsListCopy.emplace_back(copyElement);
 		elementMap[element.get()] = copyElement;
 	}
@@ -1563,14 +1568,14 @@ void Workspace::GetStateListsCopy(const std::vector< std::shared_ptr<PowerElemen
 	}
 
 	for (const auto& text : textList) {
-//#ifdef __WXMSW__
-//		const DWORD beforeTextCopy = GetWorkspaceGDIObjects();
-//#endif
+		//#ifdef __WXMSW__
+		//		const DWORD beforeTextCopy = GetWorkspaceGDIObjects();
+		//#endif
 		auto copyText = static_cast<Text*>(text->GetCopy());
-//#ifdef __WXMSW__
-//		LogWorkspaceGDIDelta("Workspace::GetStateListsCopy text copy", beforeTextCopy);
-//#endif
-		// Set text the correct element associated with the text
+		//#ifdef __WXMSW__
+		//		LogWorkspaceGDIDelta("Workspace::GetStateListsCopy text copy", beforeTextCopy);
+		//#endif
+				// Set text the correct element associated with the text
 		auto it = elementMap.find(copyText->GetElement());
 
 		if (it != elementMap.end())
@@ -2585,18 +2590,18 @@ void Workspace::SaveCurrentState()
 	std::vector< std::shared_ptr<Text> > currentStateTextList;
 
 	GetStateListsCopy(m_elementList, m_textList, currentStateElementList, currentStateTextList);
-//#ifdef __WXMSW__
-//	LogWorkspaceGDIDelta("Workspace::SaveCurrentState after copy", beforeSaveState);
-//#endif
+	//#ifdef __WXMSW__
+	//	LogWorkspaceGDIDelta("Workspace::SaveCurrentState after copy", beforeSaveState);
+	//#endif
 
-	// Delete all states after the current one
-	//auto itE = m_elementListState.begin();
-	//std::advance(itE, m_currenteState + 1);
-	//for (; itE != m_elementListState.end(); ++itE) {
-	//	auto& elementList = *itE;
-	//	for (auto& element : elementList) delete element;
-	//	elementList.clear();
-	//}
+		// Delete all states after the current one
+		//auto itE = m_elementListState.begin();
+		//std::advance(itE, m_currenteState + 1);
+		//for (; itE != m_elementListState.end(); ++itE) {
+		//	auto& elementList = *itE;
+		//	for (auto& element : elementList) delete element;
+		//	elementList.clear();
+		//}
 	m_elementListState.resize(m_currenteState + 1);
 
 	//auto itT = m_textListState.begin();
@@ -2629,13 +2634,13 @@ void Workspace::SaveCurrentState()
 
 	m_elementListState.emplace_back(currentStateElementList);
 	m_textListState.emplace_back(currentStateTextList);
-//#ifdef __WXMSW__
-//	LogWorkspaceGDIDelta(wxString::Format("Workspace::SaveCurrentState stored states=%zu elements=%zu texts=%zu",
-//		m_elementListState.size(),
-//		currentStateElementList.size(),
-//		currentStateTextList.size()),
-//		beforeSaveState);
-//#endif
+	//#ifdef __WXMSW__
+	//	LogWorkspaceGDIDelta(wxString::Format("Workspace::SaveCurrentState stored states=%zu elements=%zu texts=%zu",
+	//		m_elementListState.size(),
+	//		currentStateElementList.size(),
+	//		currentStateTextList.size()),
+	//		beforeSaveState);
+	//#endif
 
 #ifdef _DEBUG
 	wxString msg = "";
@@ -2737,6 +2742,7 @@ void Workspace::UnselectAll()
 	for (auto& text : m_textList) {
 		text->SetSelected(false);
 	}
+	Redraw();
 }
 
 void Workspace::EnableHeatMap(const bool& enable)

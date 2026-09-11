@@ -85,8 +85,10 @@ void Bus::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 		gc->SetBrush(wxBrush(guiColour->disable));
 	//else if (m_dynEvent)
 	//	gc->SetBrush(wxBrush(guiColour->eventElement));
-	else
+	else if (guiColour->useVoltageLevels)
 		gc->SetBrush(wxBrush(GetVoltageColour(guiColour)));
+	else
+		gc->SetBrush(wxBrush(guiColour->bus));
 
 	gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
 
@@ -123,7 +125,6 @@ void Bus::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 		wxPoint2DDouble fsPosition = WorldToScreen(translation, scale, m_width / 2.0);
 
 		wxColour faultSymbolColour(255, 0, 0, 255);
-		//glColor4dv(faultSymbolColour);
 
 		double scale = 1.5;
 
@@ -424,7 +425,7 @@ wxColour Bus::GetVoltageColour(GUIColour* guiColour) const
 	} else if (v_kV >= 1.0) {
 		return wxColour(205, 150, 15);   // 1 kV - 10 kV (ex: 2.4 kV, 4.16 kV, 6.9 kV) - Gold / Amber
 	} else {
-		return wxColour(120, 125, 135);  // < 1 kV (Baixa Tensão: 220 V, 380 V, 440 V) - Slate Gray
+		return wxColour(120, 125, 135);  // < 1 kV (220 V, 380 V, 440 V) - Slate Gray
 	}
 }
 

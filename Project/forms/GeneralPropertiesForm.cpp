@@ -105,6 +105,8 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	m_fontPickerText->SetSelectedFont(currentFont);
 
 	// Buses colour tab setup
+	m_checkBoxUseBusColours->SetValue(data.useBusVoltageColours);
+	EnableBusColoursControls(data.useBusVoltageColours);
 	m_voltageLevels = data.voltageLevels;
 	if (m_voltageLevels.empty()) {
 		m_voltageLevels = PropertiesData::GetDefaultVoltageLevels();
@@ -112,53 +114,6 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 
 	m_listCtrlVoltages->InsertColumn(0, wxEmptyString, wxLIST_FORMAT_LEFT, 110);
 	m_listCtrlVoltages->InsertColumn(1, wxEmptyString, wxLIST_FORMAT_LEFT, 110);
-
-	//m_panelBusbar = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	//wxBoxSizer* busbarMainSizer = new wxBoxSizer(wxHORIZONTAL);
-	//m_panelBusbar->SetSizer(busbarMainSizer);
-	//
-	//wxBoxSizer* leftSizer = new wxBoxSizer(wxVERTICAL);
-	//busbarMainSizer->Add(leftSizer, 1, wxALL | wxEXPAND, 5);
-	//
-	//m_listCtrlVoltages = new wxListCtrl(m_panelBusbar, wxID_ANY, wxDefaultPosition, wxSize(240, 220), wxLC_REPORT | wxLC_SINGLE_SEL | wxLC_HRULES | wxLC_VRULES);
-	//m_listCtrlVoltages->InsertColumn(0, wxEmptyString, wxLIST_FORMAT_LEFT, 110);
-	//m_listCtrlVoltages->InsertColumn(1, wxEmptyString, wxLIST_FORMAT_LEFT, 110);
-	//leftSizer->Add(m_listCtrlVoltages, 1, wxEXPAND, 0);
-	//
-	//wxBoxSizer* rightSizer = new wxBoxSizer(wxVERTICAL);
-	//busbarMainSizer->Add(rightSizer, 0, wxALL | wxEXPAND, 5);
-	//
-	//m_staticTextVoltage = new wxStaticText(m_panelBusbar, wxID_ANY, wxEmptyString);
-	//rightSizer->Add(m_staticTextVoltage, 0, wxLEFT | wxRIGHT | wxTOP, 5);
-	//
-	//m_textCtrlVoltage = new wxTextCtrl(m_panelBusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(140, -1));
-	//rightSizer->Add(m_textCtrlVoltage, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
-	//
-	//m_staticTextColour = new wxStaticText(m_panelBusbar, wxID_ANY, wxEmptyString);
-	//rightSizer->Add(m_staticTextColour, 0, wxLEFT | wxRIGHT | wxTOP, 5);
-	//
-	//m_colourPickerBus = new wxColourPickerCtrl(m_panelBusbar, wxID_ANY, *wxBLACK, wxDefaultPosition, wxSize(140, -1));
-	//rightSizer->Add(m_colourPickerBus, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
-	//
-	//rightSizer->AddSpacer(10);
-	//
-	//m_buttonAddVoltage = new wxButton(m_panelBusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(140, -1));
-	//rightSizer->Add(m_buttonAddVoltage, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
-	//
-	//m_buttonRemoveVoltage = new wxButton(m_panelBusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(140, -1));
-	//rightSizer->Add(m_buttonRemoveVoltage, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
-	//
-	//m_buttonDefaultVoltages = new wxButton(m_panelBusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(140, -1));
-	//rightSizer->Add(m_buttonDefaultVoltages, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, 5);
-	//
-	//m_notebook->AddPage(m_panelBusbar, wxEmptyString, false);
-	//m_busbarPageIndex = m_notebook->GetPageCount() - 1;
-	//
-	//m_choiceLanguage->Bind(wxEVT_CHOICE, &GeneralPropertiesForm::OnLanguageSelected, this);
-	//m_listCtrlVoltages->Bind(wxEVT_LIST_ITEM_SELECTED, &GeneralPropertiesForm::OnVoltageItemSelected, this);
-	//m_buttonAddVoltage->Bind(wxEVT_BUTTON, &GeneralPropertiesForm::OnButtonAddVoltage, this);
-	//m_buttonRemoveVoltage->Bind(wxEVT_BUTTON, &GeneralPropertiesForm::OnButtonRemoveVoltage, this);
-	//m_buttonDefaultVoltages->Bind(wxEVT_BUTTON, &GeneralPropertiesForm::OnButtonDefaultVoltages, this);
 
 	PopulateVoltageList();
 
@@ -221,6 +176,8 @@ bool GeneralPropertiesForm::ValidateData()
 	if (data.theme != checkData.theme) needRestart = true;
 
 	data.showElementsToolBar = m_checkBoxElementsToolBar->GetValue();
+
+	data.useBusVoltageColours = m_checkBoxUseBusColours->GetValue();
 	data.voltageLevels = m_voltageLevels;
 
 	if (!PropertiesData::SaveConfigFile(data)) {
@@ -279,6 +236,16 @@ void GeneralPropertiesForm::PopulateVoltageList()
 	}
 
 	m_listCtrlVoltages->AssignImageList(imgList, wxIMAGE_LIST_SMALL);
+}
+
+void GeneralPropertiesForm::EnableBusColoursControls(bool enable)
+{
+	m_listCtrlVoltages->Enable(enable);
+	m_textCtrlVoltage->Enable(enable);
+	m_colourPickerBus->Enable(enable);
+	m_buttonAddVoltage->Enable(enable);
+	m_buttonRemoveVoltage->Enable(enable);
+	m_buttonDefaultVoltages->Enable(enable);
 }
 
 void GeneralPropertiesForm::OnVoltageItemSelected(wxListEvent& event)
@@ -351,4 +318,10 @@ void GeneralPropertiesForm::OnButtonDefaultVoltages(wxCommandEvent& event)
 	m_voltageLevels = PropertiesData::GetDefaultVoltageLevels();
 	PopulateVoltageList();
 	m_textCtrlVoltage->Clear();
+}
+
+void GeneralPropertiesForm::OnUseBusColoursClick(wxCommandEvent& event)
+{
+	EnableBusColoursControls(event.GetSelection());
+	event.Skip();
 }

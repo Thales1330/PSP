@@ -136,17 +136,26 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     m_panelBusbar = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelBusbar, _("Bus colors"), false);
     
-    wxBoxSizer* boxSizer1329 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer1329 = new wxBoxSizer(wxVERTICAL);
     m_panelBusbar->SetSizer(boxSizer1329);
+    
+    m_checkBoxUseBusColours = new wxCheckBox(m_panelBusbar, wxID_ANY, _("Use voltage-dependent bus colors"), wxDefaultPosition, wxDLG_UNIT(m_panelBusbar, wxSize(-1,-1)), 0);
+    m_checkBoxUseBusColours->SetValue(false);
+    
+    boxSizer1329->Add(m_checkBoxUseBusColours, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizer1404 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer1329->Add(boxSizer1404, 1, wxEXPAND, WXC_FROM_DIP(5));
     
     m_listCtrlVoltages = new wxListCtrl(m_panelBusbar, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelBusbar, wxSize(-1,-1)), wxLC_VRULES|wxLC_HRULES|wxLC_SINGLE_SEL|wxLC_NO_HEADER|wxLC_REPORT);
     
-    boxSizer1329->Add(m_listCtrlVoltages, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1404->Add(m_listCtrlVoltages, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     m_listCtrlVoltages->SetMinSize(wxSize(220,-1));
     
     wxBoxSizer* boxSizer1331 = new wxBoxSizer(wxVERTICAL);
     
-    boxSizer1329->Add(boxSizer1331, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1404->Add(boxSizer1331, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl3_27 = new wxBoxSizer(wxVERTICAL);
     
@@ -238,6 +247,7 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
         wxPersistenceManager::Get().Restore(this);
     }
     // Connect events
+    m_checkBoxUseBusColours->Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &GeneralPropertiesFormBase::OnUseBusColoursClick, this);
     m_listCtrlVoltages->Bind(wxEVT_COMMAND_LIST_ITEM_SELECTED, &GeneralPropertiesFormBase::OnVoltageItemSelected, this);
     m_buttonAddVoltage->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonAddVoltage, this);
     m_buttonRemoveVoltage->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonRemoveVoltage, this);
@@ -249,6 +259,7 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
 
 GeneralPropertiesFormBase::~GeneralPropertiesFormBase()
 {
+    m_checkBoxUseBusColours->Unbind(wxEVT_COMMAND_CHECKBOX_CLICKED, &GeneralPropertiesFormBase::OnUseBusColoursClick, this);
     m_listCtrlVoltages->Unbind(wxEVT_COMMAND_LIST_ITEM_SELECTED, &GeneralPropertiesFormBase::OnVoltageItemSelected, this);
     m_buttonAddVoltage->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonAddVoltage, this);
     m_buttonRemoveVoltage->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonRemoveVoltage, this);

@@ -1,4 +1,4 @@
-#ifdef __INTELLISENSE__
+﻿#ifdef __INTELLISENSE__
 #pragma diag_suppress 102
 #endif
 
@@ -161,6 +161,14 @@ public:
 						data.showElementsToolBar = false;
 					}
 				}
+				if (tag == "usevoltagebuscolours") {
+					if (tagValue == "yes" || tagValue == "true" || tagValue == "1") {
+						data.useBusVoltageColours = true;
+					}
+					else if (tagValue == "no" || tagValue == "false" || tagValue == "0") {
+						data.useBusVoltageColours = false;
+					}
+				}				
 				if (tag == "voltage_levels") {
 					data.voltageLevels.clear();
 					wxStringTokenizer tkz(tagValue, ";");
@@ -195,7 +203,8 @@ public:
 			file.AddLine("labelfont=Arial");
 			file.AddLine("labelfontsize=10");
 			file.AddLine("atpfile=");
-			file.AddLine("elementstoolbar=yes");
+			file.AddLine("elementstoolbar=no");
+			file.AddLine("usevoltagebuscolours=no");
 			//file.AddLine("useOpenGL=yes");
 
 			wxString vlProp = "voltage_levels=";
@@ -214,7 +223,8 @@ public:
 #ifdef __WXGTK__
 			data.plotLib = PlotLib::wxMATH_PLOT;
 #endif
-			data.showElementsToolBar = true;
+			data.showElementsToolBar = false;
+			data.useBusVoltageColours = false;
 			//data.useOpenGL = true;
 			propertiesData->SetGeneralPropertiesData(data);
 		}

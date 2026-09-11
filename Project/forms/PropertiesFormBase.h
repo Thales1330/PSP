@@ -71,6 +71,7 @@ protected:
     wxFilePickerCtrl* m_filePickerATPFolder;
     wxCheckBox* m_checkBoxElementsToolBar;
     wxPanel* m_panelBusbar;
+    wxCheckBox* m_checkBoxUseBusColours;
     wxListCtrl* m_listCtrlVoltages;
     wxStaticText* m_staticTextVoltage;
     wxTextCtrl* m_textCtrlVoltage;
@@ -84,6 +85,7 @@ protected:
     wxButton* m_buttonCancel;
 
 protected:
+    virtual void OnUseBusColoursClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnVoltageItemSelected(wxListEvent& event) { event.Skip(); }
     virtual void OnButtonAddVoltage(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonRemoveVoltage(wxCommandEvent& event) { event.Skip(); }
@@ -104,6 +106,7 @@ public:
     wxFilePickerCtrl* GetFilePickerATPFolder() { return m_filePickerATPFolder; }
     wxCheckBox* GetCheckBoxElementsToolBar() { return m_checkBoxElementsToolBar; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxCheckBox* GetCheckBoxUseBusColours() { return m_checkBoxUseBusColours; }
     wxListCtrl* GetListCtrlVoltages() { return m_listCtrlVoltages; }
     wxStaticText* GetStaticTextVoltage() { return m_staticTextVoltage; }
     wxTextCtrl* GetTextCtrlVoltage() { return m_textCtrlVoltage; }

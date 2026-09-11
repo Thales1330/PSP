@@ -218,7 +218,7 @@ void Element::DrawDCTriangle(std::vector<wxPoint> points, wxDC& dc) const
 	dc.DrawPolygon(4, &points[0]);
 }
 
-void Element::DrawStabilityEventGC(wxGraphicsContext* gc, wxPoint2DDouble translation, double scale, GUIColour* guiColour, bool rotateAnchor) const
+void Element::DrawStabilityEventGC(wxGraphicsContext* gc, wxPoint2DDouble translation, double scale, GUIColour* guiColour, bool rotateAnchor, wxPoint2DDouble iconPosition) const
 {
 	if (!gc)
 		return;
@@ -237,22 +237,30 @@ void Element::DrawStabilityEventGC(wxGraphicsContext* gc, wxPoint2DDouble transl
 	gc->PushState();
 	gc->SetTransform(identityMatrix);
 
-	// Get the element angle in a canonical range [-90°, 90°].
-	double anchorAngle = std::fmod(m_angle, 180.0);
+	wxPoint2DDouble screenPt;
 
-	if (anchorAngle >= 90.0)
-		anchorAngle -= 180.0;
-	else if (anchorAngle < -90.0)
-		anchorAngle += 180.0;
+	// Use the specified position when provided.
+	if (iconPosition.m_x != -1.0 || iconPosition.m_y != -1.0) {
+		screenPt = WorldToScreen(iconPosition, translation, scale, 0.0, 0.0);
+	}
+	else {
+		// Get the element angle in a canonical range [-90°, 90°].
+		double anchorAngle = std::fmod(m_angle, 180.0);
 
-	// Get the right edge of the element.
-	wxPoint2DDouble anchor(m_width / 2.0, 0.0);
+		if (anchorAngle >= 90.0)
+			anchorAngle -= 180.0;
+		else if (anchorAngle < -90.0)
+			anchorAngle += 180.0;
 
-	if (rotateAnchor)
-		anchor = RotateLocal(anchor, anchorAngle);
+		// Get the right edge of the element.
+		wxPoint2DDouble anchor(m_width / 2.0, 0.0);
 
-	// Convert the anchor to screen coordinates.
-	wxPoint2DDouble screenPt = WorldToScreen(translation, scale, anchor.m_x, anchor.m_y);
+		if (rotateAnchor)
+			anchor = RotateLocal(anchor, anchorAngle);
+
+		// Convert the anchor to screen coordinates.
+		screenPt = WorldToScreen(translation, scale, anchor.m_x, anchor.m_y);
+	}
 
 	// Keep the indicator at a fixed screen-space offset from the element.
 	screenPt.m_x += radius + margin * scale;
