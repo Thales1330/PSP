@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -47,6 +47,7 @@
 #include "editors/ChartView.h"
 #include "editors/Workspace.h"
 #include "extLibs/artProvider/ArtMetro.h"
+#include "utils/Path.h"
  //#include "WorkspaceDC.h"
 
 MainFrame::MainFrame() : MainFrameBase(nullptr) {}
@@ -165,7 +166,7 @@ void MainFrame::Init()
 	if (m_generalProperties && m_generalProperties->GetGeneralPropertiesData().showElementsToolBar) {
 		CallAfter([this]() {
 			ShowElementsToolBar(true);
-		});
+			});
 	}
 }
 
@@ -212,33 +213,88 @@ void MainFrame::CreateDropdownMenus()
 {
 	m_addElementsMenu = new wxMenu();
 
+	struct ElementIcon {
+		int id;
+		wxString file;
+	};
+
+	const std::vector<ElementIcon> elementIcons = {
+		{ ID_ADDMENU_BUS,         "bus.png" },
+		{ ID_ADDMENU_CAPACITOR,   "capacitor.png" },
+		{ ID_ADDMENU_EMTELEMENT,  "emtelement.png" },
+		{ ID_ADDMENU_GENERATOR,   "generator.png" },
+		{ ID_ADDMENU_HARMCURRENT, "harmcurrent.png" },
+		{ ID_ADDMENU_INDMOTOR,    "indmotor.png" },
+		{ ID_ADDMENU_INDUCTOR,    "inductor.png" },
+		{ ID_ADDMENU_LINE,        "line.png" },
+		{ ID_ADDMENU_LOAD,        "load.png" },
+		{ ID_ADDMENU_SYNCCOMP,    "synccomp.png" },
+		{ ID_ADDMENU_TEXT,        "text.png" },
+		{ ID_ADDMENU_TRANSFORMER, "transformer.png" }
+	};
+
+	std::map<int, wxBitmap> elementBitmaps;
+
+	const int iconSize = FromDIP(16);
+
+	for (const auto& icon : elementIcons) {
+		wxImage image(Paths::GetDataPath() + "/images/elements/" + icon.file, wxBITMAP_TYPE_PNG);
+
+		if (image.IsOk()) {
+			image.Rescale(iconSize, iconSize, wxIMAGE_QUALITY_HIGH);
+			elementBitmaps[icon.id] = wxBitmap(image);
+		}
+	}
+
 	wxMenuItem* busElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_BUS, _("&Bus\tB"), _("Adds a bus at the circuit"));
-	// busElement->SetBitmap(wxArtProvider::GetBitmap(wxART_WARNING));
+	busElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_BUS));
+
 	wxMenuItem* lineElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_LINE, _("&Line\tL"), _("Adds a power line at the circuit"));
+	lineElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_LINE));
+
 	wxMenuItem* transformerElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TRANSFORMER, _("&Transformer\tT"),
 		_("Adds a transformer at the circuit"));
+	transformerElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_TRANSFORMER));
+
 	wxMenuItem* generatorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_GENERATOR, _("&Generator\tG"),
 		_("Adds a generator at the circuit"));
+	generatorElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_GENERATOR));
+
 	wxMenuItem* indMotorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDMOTOR, _("&Induction motor\tI"),
 		_("Adds an induction motor at the circuit"));
+	indMotorElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_INDMOTOR));
+
 	wxMenuItem* syncCompElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_SYNCCOMP, _("&Synchronous compensator \tK"),
 			_("Adds an induction motor at the circuit"));
+	syncCompElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_SYNCCOMP));
+
 	wxMenuItem* loadElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_LOAD, _("&Load\tShift-L"), _("Adds a load at the circuit"));
+	loadElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_LOAD));
+
 	wxMenuItem* capacitorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_CAPACITOR, _("&Capacitor\tShift-C"),
 		_("Adds a shunt capacitor at the circuit"));
+	capacitorElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_CAPACITOR));
+
 	wxMenuItem* inductorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDUCTOR, _("&Inductor\tShift-I"),
 		_("Adds a shunt inductor at the circuit"));
+	inductorElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_INDUCTOR));
+
 	wxMenuItem* harmCurrentElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_HARMCURRENT, _("&Harmonic current\tShift-H"),
 			_("Adds a harmonic current source at the circuit"));
+	harmCurrentElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_HARMCURRENT));
+
 	wxMenuItem* emtElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_EMTELEMENT, _("&Electromagnetic Transient Element\tShift-E"), _("Adds an electromagnetic transient element that connects with ATP"));
+	emtElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_EMTELEMENT));
+
 	wxMenuItem* textElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TEXT, _("&Label\tA"), _("Adds a linked element label"));
+	textElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_TEXT));
 
 
 	m_addElementsMenu->Append(busElement);
@@ -945,7 +1001,8 @@ void MainFrame::ShowElementsToolBar(bool show)
 		}
 		m_elementsToolBar->Show();
 		m_elementsToolBar->Raise();
-	} else {
+	}
+	else {
 		m_elementsToolBar->Hide();
 	}
 }
