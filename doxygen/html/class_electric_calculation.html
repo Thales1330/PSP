@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -131,7 +131,7 @@ Inheritance diagram for ElectricCalculation:</div>
 <area shape="poly" title=" " alt="" coords="208,38,106,81,104,76,206,33"/>
 <area shape="rect" href="class_fault.html" title="Calculate the fault of the system and update the elements data." alt="" coords="173,79,226,104"/>
 <area shape="poly" title=" " alt="" coords="234,44,209,80,205,77,230,41"/>
-<area shape="rect" href="class_power_flow.html" title="Calculate the power flow." alt="" coords="250,79,343,104"/>
+<area shape="rect" href="class_power_flow.html" title="Calculate the power flow (including OLTC tap adjustment)." alt="" coords="250,79,343,104"/>
 <area shape="poly" title=" " alt="" coords="265,41,291,77,286,80,261,44"/>
 <area shape="rect" href="class_power_quality.html" title="Responsible for the power quality calculations." alt="" coords="367,79,477,104"/>
 <area shape="poly" title=" " alt="" coords="289,33,394,76,392,81,287,38"/>
@@ -384,11 +384,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00850">850</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  851</span>{</div>
-<div class="line"><span class="lineno">  852</span>    dValue = -std::real(complexValue) * std::sin(angle) + std::imag(complexValue) * std::cos(angle);</div>
-<div class="line"><span class="lineno">  853</span>    qValue = std::real(complexValue) * std::cos(angle) + std::imag(complexValue) * std::sin(angle);</div>
-<div class="line"><span class="lineno">  854</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00861">861</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  862</span>{</div>
+<div class="line"><span class="lineno">  863</span>    dValue = -std::real(complexValue) * std::sin(angle) + std::imag(complexValue) * std::cos(angle);</div>
+<div class="line"><span class="lineno">  864</span>    qValue = std::real(complexValue) * std::cos(angle) + std::imag(complexValue) * std::sin(angle);</div>
+<div class="line"><span class="lineno">  865</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -428,23 +428,23 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the calculation was successful. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01078">1078</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1079</span>{</div>
-<div class="line"><span class="lineno"> 1080</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* emtElement : <a class="code hl_variable" href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">m_emtElementList</a>) {</div>
-<div class="line"><span class="lineno"> 1081</span>        <span class="keywordflow">if</span> (!emtElement-&gt;IsOnline()) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1082</span> </div>
-<div class="line"><span class="lineno"> 1083</span>        emtElement-&gt;UpdateData();</div>
-<div class="line"><span class="lineno"> 1084</span>        <span class="keywordflow">if</span> (!emtElement-&gt;CalculateCurrent(errorMsg)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1085</span>        <span class="keyword">auto</span> data = emtElement-&gt;GetEMTElementData();</div>
-<div class="line"><span class="lineno"> 1086</span>        <span class="keywordtype">double</span> baseCurrent = basePower / (sqrt(3.0) * data.baseVoltage);</div>
-<div class="line"><span class="lineno"> 1087</span>        std::complex&lt;double&gt; current = data.currHarmonics[1] / baseCurrent; <span class="comment">// Fundamental frequency current</span></div>
-<div class="line"><span class="lineno"> 1088</span>        std::complex&lt;double&gt; y0 = current / data.puVoltage;</div>
-<div class="line"><span class="lineno"> 1089</span>        data.y0 = y0;</div>
-<div class="line"><span class="lineno"> 1090</span>        data.power = std::complex&lt;double&gt;(0.0, 0.0);</div>
-<div class="line"><span class="lineno"> 1091</span>        emtElement-&gt;SetEMTElementData(data);</div>
-<div class="line"><span class="lineno"> 1092</span>    }</div>
-<div class="line"><span class="lineno"> 1093</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1094</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01089">1089</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1090</span>{</div>
+<div class="line"><span class="lineno"> 1091</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* emtElement : <a class="code hl_variable" href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">m_emtElementList</a>) {</div>
+<div class="line"><span class="lineno"> 1092</span>        <span class="keywordflow">if</span> (!emtElement-&gt;IsOnline()) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno"> 1093</span> </div>
+<div class="line"><span class="lineno"> 1094</span>        emtElement-&gt;UpdateData();</div>
+<div class="line"><span class="lineno"> 1095</span>        <span class="keywordflow">if</span> (!emtElement-&gt;CalculateCurrent(errorMsg)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1096</span>        <span class="keyword">auto</span> data = emtElement-&gt;GetEMTElementData();</div>
+<div class="line"><span class="lineno"> 1097</span>        <span class="keywordtype">double</span> baseCurrent = basePower / (sqrt(3.0) * data.baseVoltage);</div>
+<div class="line"><span class="lineno"> 1098</span>        std::complex&lt;double&gt; current = data.currHarmonics[1] / baseCurrent; <span class="comment">// Fundamental frequency current</span></div>
+<div class="line"><span class="lineno"> 1099</span>        std::complex&lt;double&gt; y0 = current / data.puVoltage;</div>
+<div class="line"><span class="lineno"> 1100</span>        data.y0 = y0;</div>
+<div class="line"><span class="lineno"> 1101</span>        data.power = std::complex&lt;double&gt;(0.0, 0.0);</div>
+<div class="line"><span class="lineno"> 1102</span>        emtElement-&gt;SetEMTElementData(data);</div>
+<div class="line"><span class="lineno"> 1103</span>    }</div>
+<div class="line"><span class="lineno"> 1104</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1105</span>}</div>
 <div class="ttc" id="aclass_e_m_t_element_html"><div class="ttname"><a href="class_e_m_t_element.html">EMTElement</a></div><div class="ttdoc">Element to connect ATP-EMTP.</div><div class="ttdef"><b>Definition</b> <a href="_e_m_t_element_8h_source.html#l00082">EMTElement.h:83</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a776b2178a331b362a0ca3d379c1ec558"><div class="ttname"><a href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">ElectricCalculation::m_emtElementList</a></div><div class="ttdeci">std::vector&lt; EMTElement * &gt; m_emtElementList</div><div class="ttdoc">List of electromagnetic transient (EMT) elements in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00390">ElectricCalculation.h:390</a></div></div>
 </div><!-- fragment -->
@@ -493,39 +493,39 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the calculation was successful. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01096">1096</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1097</span>{</div>
-<div class="line"><span class="lineno"> 1098</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* emtElement : <a class="code hl_variable" href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">m_emtElementList</a>) {</div>
-<div class="line"><span class="lineno"> 1099</span>        <span class="keywordflow">if</span> (!emtElement-&gt;IsOnline()) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1100</span> </div>
-<div class="line"><span class="lineno"> 1101</span>        emtElement-&gt;UpdateData();</div>
-<div class="line"><span class="lineno"> 1102</span>        <span class="keywordflow">if</span> (updateCurrent) {</div>
-<div class="line"><span class="lineno"> 1103</span>            <span class="keywordflow">if</span> (!emtElement-&gt;CalculateCurrent(errorMsg)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1104</span>        }</div>
-<div class="line"><span class="lineno"> 1105</span>        <span class="keyword">auto</span> data = emtElement-&gt;GetEMTElementData();</div>
-<div class="line"><span class="lineno"> 1106</span>        <span class="keywordtype">double</span> baseCurrent = basePower / (sqrt(3.0) * data.baseVoltage);</div>
-<div class="line"><span class="lineno"> 1107</span>        <span class="comment">//std::complex&lt;double&gt; current = data.currHarmonics[1];</span></div>
-<div class="line"><span class="lineno"> 1108</span>        std::complex&lt;double&gt; current = data.currHarmonics[1] / baseCurrent; <span class="comment">// Fundamental frequency current</span></div>
-<div class="line"><span class="lineno"> 1109</span> </div>
-<div class="line"><span class="lineno"> 1110</span>        std::complex&lt;double&gt; i0 = data.y0 * data.puVoltage; <span class="comment">// Current already injected via admittance matrix</span></div>
-<div class="line"><span class="lineno"> 1111</span>        <span class="comment">//std::complex&lt;double&gt; voltage = data.baseVoltage * data.puVoltage;</span></div>
-<div class="line"><span class="lineno"> 1112</span>        <span class="comment">//std::complex&lt;double&gt; power = (sqrt(3.0) * voltage * std::conj(current)) / basePower;</span></div>
-<div class="line"><span class="lineno"> 1113</span>        std::complex&lt;double&gt; power = data.puVoltage * std::conj(current - i0);</div>
-<div class="line"><span class="lineno"> 1114</span>        data.powerDiff = power - data.power;</div>
-<div class="line"><span class="lineno"> 1115</span>        data.power = power;</div>
-<div class="line"><span class="lineno"> 1116</span>        emtElement-&gt;SetEMTElementData(data);</div>
-<div class="line"><span class="lineno"> 1117</span> </div>
-<div class="line"><span class="lineno"> 1118</span>        <span class="comment">//wxString currentStr = data.name + &quot;:\n&quot;;</span></div>
-<div class="line"><span class="lineno"> 1119</span>        <span class="comment">//for (auto const&amp; [harm, current] : data.currHarmonics)</span></div>
-<div class="line"><span class="lineno"> 1120</span>        <span class="comment">//{</span></div>
-<div class="line"><span class="lineno"> 1121</span>        <span class="comment">//  currentStr += wxString::Format(&quot;I(%dh) = %f p.u.\n&quot;, harm, abs(current) / baseCurrent);</span></div>
-<div class="line"><span class="lineno"> 1122</span>        <span class="comment">//}</span></div>
-<div class="line"><span class="lineno"> 1123</span>        <span class="comment">//currentStr += wxString::Format(&quot;S = %e + j%e p.u.\n&quot;, data.power.real(), data.power.imag());</span></div>
-<div class="line"><span class="lineno"> 1124</span>        <span class="comment">//currentStr += wxString::Format(&quot;SDiff = %e p.u.\n&quot;, abs(data.powerDiff));</span></div>
-<div class="line"><span class="lineno"> 1125</span>        <span class="comment">//wxMessageBox(currentStr);</span></div>
-<div class="line"><span class="lineno"> 1126</span>    }</div>
-<div class="line"><span class="lineno"> 1127</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1128</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01107">1107</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1108</span>{</div>
+<div class="line"><span class="lineno"> 1109</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* emtElement : <a class="code hl_variable" href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">m_emtElementList</a>) {</div>
+<div class="line"><span class="lineno"> 1110</span>        <span class="keywordflow">if</span> (!emtElement-&gt;IsOnline()) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno"> 1111</span> </div>
+<div class="line"><span class="lineno"> 1112</span>        emtElement-&gt;UpdateData();</div>
+<div class="line"><span class="lineno"> 1113</span>        <span class="keywordflow">if</span> (updateCurrent) {</div>
+<div class="line"><span class="lineno"> 1114</span>            <span class="keywordflow">if</span> (!emtElement-&gt;CalculateCurrent(errorMsg)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1115</span>        }</div>
+<div class="line"><span class="lineno"> 1116</span>        <span class="keyword">auto</span> data = emtElement-&gt;GetEMTElementData();</div>
+<div class="line"><span class="lineno"> 1117</span>        <span class="keywordtype">double</span> baseCurrent = basePower / (sqrt(3.0) * data.baseVoltage);</div>
+<div class="line"><span class="lineno"> 1118</span>        <span class="comment">//std::complex&lt;double&gt; current = data.currHarmonics[1];</span></div>
+<div class="line"><span class="lineno"> 1119</span>        std::complex&lt;double&gt; current = data.currHarmonics[1] / baseCurrent; <span class="comment">// Fundamental frequency current</span></div>
+<div class="line"><span class="lineno"> 1120</span> </div>
+<div class="line"><span class="lineno"> 1121</span>        std::complex&lt;double&gt; i0 = data.y0 * data.puVoltage; <span class="comment">// Current already injected via admittance matrix</span></div>
+<div class="line"><span class="lineno"> 1122</span>        <span class="comment">//std::complex&lt;double&gt; voltage = data.baseVoltage * data.puVoltage;</span></div>
+<div class="line"><span class="lineno"> 1123</span>        <span class="comment">//std::complex&lt;double&gt; power = (sqrt(3.0) * voltage * std::conj(current)) / basePower;</span></div>
+<div class="line"><span class="lineno"> 1124</span>        std::complex&lt;double&gt; power = data.puVoltage * std::conj(current - i0);</div>
+<div class="line"><span class="lineno"> 1125</span>        data.powerDiff = power - data.power;</div>
+<div class="line"><span class="lineno"> 1126</span>        data.power = power;</div>
+<div class="line"><span class="lineno"> 1127</span>        emtElement-&gt;SetEMTElementData(data);</div>
+<div class="line"><span class="lineno"> 1128</span> </div>
+<div class="line"><span class="lineno"> 1129</span>        <span class="comment">//wxString currentStr = data.name + &quot;:\n&quot;;</span></div>
+<div class="line"><span class="lineno"> 1130</span>        <span class="comment">//for (auto const&amp; [harm, current] : data.currHarmonics)</span></div>
+<div class="line"><span class="lineno"> 1131</span>        <span class="comment">//{</span></div>
+<div class="line"><span class="lineno"> 1132</span>        <span class="comment">//  currentStr += wxString::Format(&quot;I(%dh) = %f p.u.\n&quot;, harm, abs(current) / baseCurrent);</span></div>
+<div class="line"><span class="lineno"> 1133</span>        <span class="comment">//}</span></div>
+<div class="line"><span class="lineno"> 1134</span>        <span class="comment">//currentStr += wxString::Format(&quot;S = %e + j%e p.u.\n&quot;, data.power.real(), data.power.imag());</span></div>
+<div class="line"><span class="lineno"> 1135</span>        <span class="comment">//currentStr += wxString::Format(&quot;SDiff = %e p.u.\n&quot;, abs(data.powerDiff));</span></div>
+<div class="line"><span class="lineno"> 1136</span>        <span class="comment">//wxMessageBox(currentStr);</span></div>
+<div class="line"><span class="lineno"> 1137</span>    }</div>
+<div class="line"><span class="lineno"> 1138</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1139</span>}</div>
 </div><!-- fragment --><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -589,39 +589,39 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The calculated power error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01130">1130</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1131</span>{</div>
-<div class="line"><span class="lineno"> 1132</span>    <span class="comment">// Update buses voltages</span></div>
-<div class="line"><span class="lineno"> 1133</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_bus.html">Bus</a>* bus : <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>) {</div>
-<div class="line"><span class="lineno"> 1134</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno"> 1135</span>        <span class="keywordflow">if</span> (data.isConnected) {</div>
-<div class="line"><span class="lineno"> 1136</span>            data.voltage = voltage[data.number];</div>
-<div class="line"><span class="lineno"> 1137</span>            bus-&gt;SetElectricalData(data);</div>
-<div class="line"><span class="lineno"> 1138</span>        }</div>
-<div class="line"><span class="lineno"> 1139</span>    }</div>
-<div class="line"><span class="lineno"> 1140</span> </div>
-<div class="line"><span class="lineno"> 1141</span>    <a class="code hl_function" href="class_electric_calculation.html#a6eb2c7b6ce908a98ae9a848a6424b546">CalculateEMTElementsPower</a>(basePower, errorMsg);</div>
-<div class="line"><span class="lineno"> 1142</span>    <span class="comment">// Update power array and calculate error</span></div>
-<div class="line"><span class="lineno"> 1143</span>    <span class="keywordtype">double</span> error = 0.0;</div>
-<div class="line"><span class="lineno"> 1144</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* emtElement : <a class="code hl_variable" href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">m_emtElementList</a>) {</div>
-<div class="line"><span class="lineno"> 1145</span>        <span class="keywordflow">if</span> (!emtElement-&gt;IsOnline()) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1146</span> </div>
-<div class="line"><span class="lineno"> 1147</span>        <span class="keywordflow">if</span> (!emtElement-&gt;GetParentList().empty()) {</div>
-<div class="line"><span class="lineno"> 1148</span>            <span class="keywordflow">if</span> (emtElement-&gt;GetParentList()[0] != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno"> 1149</span>                <span class="keywordtype">int</span> numBus = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(emtElement-&gt;GetParentList()[0])-&gt;GetElectricalData().number;</div>
-<div class="line"><span class="lineno"> 1150</span>                <span class="keyword">auto</span> data = emtElement-&gt;GetEMTElementData();</div>
-<div class="line"><span class="lineno"> 1151</span>                power[numBus] += data.powerDiff;</div>
-<div class="line"><span class="lineno"> 1152</span>                <span class="keywordflow">if</span> (error &lt; std::abs(data.powerDiff))</div>
-<div class="line"><span class="lineno"> 1153</span>                    error = std::abs(data.powerDiff);</div>
-<div class="line"><span class="lineno"> 1154</span>            }</div>
-<div class="line"><span class="lineno"> 1155</span>        }</div>
-<div class="line"><span class="lineno"> 1156</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01141">1141</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1142</span>{</div>
+<div class="line"><span class="lineno"> 1143</span>    <span class="comment">// Update buses voltages</span></div>
+<div class="line"><span class="lineno"> 1144</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_bus.html">Bus</a>* bus : <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>) {</div>
+<div class="line"><span class="lineno"> 1145</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno"> 1146</span>        <span class="keywordflow">if</span> (data.isConnected) {</div>
+<div class="line"><span class="lineno"> 1147</span>            data.voltage = voltage[data.number];</div>
+<div class="line"><span class="lineno"> 1148</span>            bus-&gt;SetElectricalData(data);</div>
+<div class="line"><span class="lineno"> 1149</span>        }</div>
+<div class="line"><span class="lineno"> 1150</span>    }</div>
+<div class="line"><span class="lineno"> 1151</span> </div>
+<div class="line"><span class="lineno"> 1152</span>    <a class="code hl_function" href="class_electric_calculation.html#a6eb2c7b6ce908a98ae9a848a6424b546">CalculateEMTElementsPower</a>(basePower, errorMsg);</div>
+<div class="line"><span class="lineno"> 1153</span>    <span class="comment">// Update power array and calculate error</span></div>
+<div class="line"><span class="lineno"> 1154</span>    <span class="keywordtype">double</span> error = 0.0;</div>
+<div class="line"><span class="lineno"> 1155</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* emtElement : <a class="code hl_variable" href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">m_emtElementList</a>) {</div>
+<div class="line"><span class="lineno"> 1156</span>        <span class="keywordflow">if</span> (!emtElement-&gt;IsOnline()) <span class="keywordflow">continue</span>;</div>
 <div class="line"><span class="lineno"> 1157</span> </div>
-<div class="line"><span class="lineno"> 1158</span>    <span class="keywordflow">return</span> error;</div>
-<div class="line"><span class="lineno"> 1159</span>}</div>
-<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
+<div class="line"><span class="lineno"> 1158</span>        <span class="keywordflow">if</span> (!emtElement-&gt;GetParentList().empty()) {</div>
+<div class="line"><span class="lineno"> 1159</span>            <span class="keywordflow">if</span> (emtElement-&gt;GetParentList()[0] != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno"> 1160</span>                <span class="keywordtype">int</span> numBus = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(emtElement-&gt;GetParentList()[0])-&gt;GetElectricalData().number;</div>
+<div class="line"><span class="lineno"> 1161</span>                <span class="keyword">auto</span> data = emtElement-&gt;GetEMTElementData();</div>
+<div class="line"><span class="lineno"> 1162</span>                power[numBus] += data.powerDiff;</div>
+<div class="line"><span class="lineno"> 1163</span>                <span class="keywordflow">if</span> (error &lt; std::abs(data.powerDiff))</div>
+<div class="line"><span class="lineno"> 1164</span>                    error = std::abs(data.powerDiff);</div>
+<div class="line"><span class="lineno"> 1165</span>            }</div>
+<div class="line"><span class="lineno"> 1166</span>        }</div>
+<div class="line"><span class="lineno"> 1167</span>    }</div>
+<div class="line"><span class="lineno"> 1168</span> </div>
+<div class="line"><span class="lineno"> 1169</span>    <span class="keywordflow">return</span> error;</div>
+<div class="line"><span class="lineno"> 1170</span>}</div>
+<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00086">Bus.h:87</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a0eeb4b5afc082617247351857af26c22"><div class="ttname"><a href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">ElectricCalculation::m_busList</a></div><div class="ttdeci">std::vector&lt; Bus * &gt; m_busList</div><div class="ttdoc">List of buses in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00370">ElectricCalculation.h:370</a></div></div>
-<div class="ttc" id="aclass_electric_calculation_html_a6eb2c7b6ce908a98ae9a848a6424b546"><div class="ttname"><a href="class_electric_calculation.html#a6eb2c7b6ce908a98ae9a848a6424b546">ElectricCalculation::CalculateEMTElementsPower</a></div><div class="ttdeci">bool CalculateEMTElementsPower(const double &amp;basePower, wxString &amp;errorMsg, bool updateCurrent=true)</div><div class="ttdoc">Calculate the power of EMT elements.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l01096">ElectricCalculation.cpp:1096</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a6eb2c7b6ce908a98ae9a848a6424b546"><div class="ttname"><a href="class_electric_calculation.html#a6eb2c7b6ce908a98ae9a848a6424b546">ElectricCalculation::CalculateEMTElementsPower</a></div><div class="ttdeci">bool CalculateEMTElementsPower(const double &amp;basePower, wxString &amp;errorMsg, bool updateCurrent=true)</div><div class="ttdoc">Calculate the power of EMT elements.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l01107">ElectricCalculation.cpp:1107</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -671,17 +671,17 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Resulting complex vector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00967">967</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  970</span>{</div>
-<div class="line"><span class="lineno">  971</span>    std::vector&lt;std::complex&lt;double&gt; &gt; solution;</div>
-<div class="line"><span class="lineno">  972</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) {</div>
-<div class="line"><span class="lineno">  973</span>        solution.push_back(std::complex&lt;double&gt;(0.0, 0.0));</div>
-<div class="line"><span class="lineno">  974</span> </div>
-<div class="line"><span class="lineno">  975</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; matrix.size(); j++) { solution[i] += matrix[i][j] * vector[j]; }</div>
-<div class="line"><span class="lineno">  976</span>    }</div>
-<div class="line"><span class="lineno">  977</span> </div>
-<div class="line"><span class="lineno">  978</span>    <span class="keywordflow">return</span> solution;</div>
-<div class="line"><span class="lineno">  979</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00978">978</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  981</span>{</div>
+<div class="line"><span class="lineno">  982</span>    std::vector&lt;std::complex&lt;double&gt; &gt; solution;</div>
+<div class="line"><span class="lineno">  983</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) {</div>
+<div class="line"><span class="lineno">  984</span>        solution.push_back(std::complex&lt;double&gt;(0.0, 0.0));</div>
+<div class="line"><span class="lineno">  985</span> </div>
+<div class="line"><span class="lineno">  986</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; matrix.size(); j++) { solution[i] += matrix[i][j] * vector[j]; }</div>
+<div class="line"><span class="lineno">  987</span>    }</div>
+<div class="line"><span class="lineno">  988</span> </div>
+<div class="line"><span class="lineno">  989</span>    <span class="keywordflow">return</span> solution;</div>
+<div class="line"><span class="lineno">  990</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -834,12 +834,12 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00856">856</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  857</span>{</div>
-<div class="line"><span class="lineno">  858</span>    <span class="keywordtype">double</span> real = qValue * std::cos(angle) - dValue * std::sin(angle);</div>
-<div class="line"><span class="lineno">  859</span>    <span class="keywordtype">double</span> imag = qValue * std::sin(angle) + dValue * std::cos(angle);</div>
-<div class="line"><span class="lineno">  860</span>    complexValue = std::complex&lt;double&gt;(real, imag);</div>
-<div class="line"><span class="lineno">  861</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00867">867</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  868</span>{</div>
+<div class="line"><span class="lineno">  869</span>    <span class="keywordtype">double</span> real = qValue * std::cos(angle) - dValue * std::sin(angle);</div>
+<div class="line"><span class="lineno">  870</span>    <span class="keywordtype">double</span> imag = qValue * std::sin(angle) + dValue * std::cos(angle);</div>
+<div class="line"><span class="lineno">  871</span>    complexValue = std::complex&lt;double&gt;(real, imag);</div>
+<div class="line"><span class="lineno">  872</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -879,47 +879,47 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Solution vector of the linear system. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00907">907</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  909</span>{</div>
-<div class="line"><span class="lineno">  910</span>    <span class="comment">//[Ref] https://en.wikipedia.org/wiki/Gaussian_elimination</span></div>
-<div class="line"><span class="lineno">  911</span> </div>
-<div class="line"><span class="lineno">  912</span>    std::vector&lt;double&gt; solution;</div>
-<div class="line"><span class="lineno">  913</span> </div>
-<div class="line"><span class="lineno">  914</span>    std::vector&lt;std::vector&lt;double&gt; &gt; triangMatrix;</div>
-<div class="line"><span class="lineno">  915</span>    triangMatrix.resize(matrix.size());</div>
-<div class="line"><span class="lineno">  916</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) { triangMatrix[i].resize(matrix.size()); }</div>
-<div class="line"><span class="lineno">  917</span> </div>
-<div class="line"><span class="lineno">  918</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) { solution.push_back(array[i]); }</div>
-<div class="line"><span class="lineno">  919</span> </div>
-<div class="line"><span class="lineno">  920</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) {</div>
-<div class="line"><span class="lineno">  921</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; matrix.size(); j++) { triangMatrix[i][j] = matrix[i][j]; }</div>
-<div class="line"><span class="lineno">  922</span>    }</div>
-<div class="line"><span class="lineno">  923</span> </div>
-<div class="line"><span class="lineno">  924</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; matrix.size(); k++) {</div>
-<div class="line"><span class="lineno">  925</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k1 = k + 1;</div>
-<div class="line"><span class="lineno">  926</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = k; i &lt; matrix.size(); i++) {</div>
-<div class="line"><span class="lineno">  927</span>            <span class="keywordflow">if</span> (triangMatrix[i][k] != 0.0) {</div>
-<div class="line"><span class="lineno">  928</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = k1; j &lt; matrix.size(); j++) {</div>
-<div class="line"><span class="lineno">  929</span>                    triangMatrix[i][j] = triangMatrix[i][j] / triangMatrix[i][k];</div>
-<div class="line"><span class="lineno">  930</span>                }</div>
-<div class="line"><span class="lineno">  931</span>                solution[i] = solution[i] / triangMatrix[i][k];</div>
-<div class="line"><span class="lineno">  932</span>            }</div>
-<div class="line"><span class="lineno">  933</span>        }</div>
-<div class="line"><span class="lineno">  934</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = k1; i &lt; matrix.size(); i++) {</div>
-<div class="line"><span class="lineno">  935</span>            <span class="keywordflow">if</span> (triangMatrix[i][k] != 0.0) {</div>
-<div class="line"><span class="lineno">  936</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = k1; j &lt; matrix.size(); j++) { triangMatrix[i][j] -= triangMatrix[k][j]; }</div>
-<div class="line"><span class="lineno">  937</span>                solution[i] -= solution[k];</div>
-<div class="line"><span class="lineno">  938</span>            }</div>
-<div class="line"><span class="lineno">  939</span>        }</div>
-<div class="line"><span class="lineno">  940</span>    }</div>
-<div class="line"><span class="lineno">  941</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size()) - 2; i &gt;= 0; i--) {</div>
-<div class="line"><span class="lineno">  942</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size()) - 1; j &gt;= i + 1; j--) {</div>
-<div class="line"><span class="lineno">  943</span>            solution[i] -= triangMatrix[i][j] * solution[j];</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00918">918</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  920</span>{</div>
+<div class="line"><span class="lineno">  921</span>    <span class="comment">//[Ref] https://en.wikipedia.org/wiki/Gaussian_elimination</span></div>
+<div class="line"><span class="lineno">  922</span> </div>
+<div class="line"><span class="lineno">  923</span>    std::vector&lt;double&gt; solution;</div>
+<div class="line"><span class="lineno">  924</span> </div>
+<div class="line"><span class="lineno">  925</span>    std::vector&lt;std::vector&lt;double&gt; &gt; triangMatrix;</div>
+<div class="line"><span class="lineno">  926</span>    triangMatrix.resize(matrix.size());</div>
+<div class="line"><span class="lineno">  927</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) { triangMatrix[i].resize(matrix.size()); }</div>
+<div class="line"><span class="lineno">  928</span> </div>
+<div class="line"><span class="lineno">  929</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) { solution.push_back(array[i]); }</div>
+<div class="line"><span class="lineno">  930</span> </div>
+<div class="line"><span class="lineno">  931</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) {</div>
+<div class="line"><span class="lineno">  932</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; matrix.size(); j++) { triangMatrix[i][j] = matrix[i][j]; }</div>
+<div class="line"><span class="lineno">  933</span>    }</div>
+<div class="line"><span class="lineno">  934</span> </div>
+<div class="line"><span class="lineno">  935</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; matrix.size(); k++) {</div>
+<div class="line"><span class="lineno">  936</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k1 = k + 1;</div>
+<div class="line"><span class="lineno">  937</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = k; i &lt; matrix.size(); i++) {</div>
+<div class="line"><span class="lineno">  938</span>            <span class="keywordflow">if</span> (triangMatrix[i][k] != 0.0) {</div>
+<div class="line"><span class="lineno">  939</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = k1; j &lt; matrix.size(); j++) {</div>
+<div class="line"><span class="lineno">  940</span>                    triangMatrix[i][j] = triangMatrix[i][j] / triangMatrix[i][k];</div>
+<div class="line"><span class="lineno">  941</span>                }</div>
+<div class="line"><span class="lineno">  942</span>                solution[i] = solution[i] / triangMatrix[i][k];</div>
+<div class="line"><span class="lineno">  943</span>            }</div>
 <div class="line"><span class="lineno">  944</span>        }</div>
-<div class="line"><span class="lineno">  945</span>    }</div>
-<div class="line"><span class="lineno">  946</span> </div>
-<div class="line"><span class="lineno">  947</span>    <span class="keywordflow">return</span> solution;</div>
-<div class="line"><span class="lineno">  948</span>}</div>
+<div class="line"><span class="lineno">  945</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = k1; i &lt; matrix.size(); i++) {</div>
+<div class="line"><span class="lineno">  946</span>            <span class="keywordflow">if</span> (triangMatrix[i][k] != 0.0) {</div>
+<div class="line"><span class="lineno">  947</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = k1; j &lt; matrix.size(); j++) { triangMatrix[i][j] -= triangMatrix[k][j]; }</div>
+<div class="line"><span class="lineno">  948</span>                solution[i] -= solution[k];</div>
+<div class="line"><span class="lineno">  949</span>            }</div>
+<div class="line"><span class="lineno">  950</span>        }</div>
+<div class="line"><span class="lineno">  951</span>    }</div>
+<div class="line"><span class="lineno">  952</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size()) - 2; i &gt;= 0; i--) {</div>
+<div class="line"><span class="lineno">  953</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size()) - 1; j &gt;= i + 1; j--) {</div>
+<div class="line"><span class="lineno">  954</span>            solution[i] -= triangMatrix[i][j] * solution[j];</div>
+<div class="line"><span class="lineno">  955</span>        }</div>
+<div class="line"><span class="lineno">  956</span>    }</div>
+<div class="line"><span class="lineno">  957</span> </div>
+<div class="line"><span class="lineno">  958</span>    <span class="keywordflow">return</span> solution;</div>
+<div class="line"><span class="lineno">  959</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -959,47 +959,47 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Solution vector of the linear system. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00863">863</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  866</span>{</div>
-<div class="line"><span class="lineno">  867</span>    <span class="comment">//[Ref] https://en.wikipedia.org/wiki/Gaussian_elimination</span></div>
-<div class="line"><span class="lineno">  868</span> </div>
-<div class="line"><span class="lineno">  869</span>    std::vector&lt;std::complex&lt;double&gt; &gt; solution;</div>
-<div class="line"><span class="lineno">  870</span> </div>
-<div class="line"><span class="lineno">  871</span>    std::vector&lt;std::vector&lt;std::complex&lt;double&gt; &gt; &gt; triangMatrix;</div>
-<div class="line"><span class="lineno">  872</span>    triangMatrix.resize(matrix.size());</div>
-<div class="line"><span class="lineno">  873</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) { triangMatrix[i].resize(matrix.size()); }</div>
-<div class="line"><span class="lineno">  874</span> </div>
-<div class="line"><span class="lineno">  875</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) { solution.push_back(array[i]); }</div>
-<div class="line"><span class="lineno">  876</span> </div>
-<div class="line"><span class="lineno">  877</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) {</div>
-<div class="line"><span class="lineno">  878</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; matrix.size(); j++) { triangMatrix[i][j] = matrix[i][j]; }</div>
-<div class="line"><span class="lineno">  879</span>    }</div>
-<div class="line"><span class="lineno">  880</span> </div>
-<div class="line"><span class="lineno">  881</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; matrix.size(); k++) {</div>
-<div class="line"><span class="lineno">  882</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k1 = k + 1;</div>
-<div class="line"><span class="lineno">  883</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = k; i &lt; matrix.size(); i++) {</div>
-<div class="line"><span class="lineno">  884</span>            <span class="keywordflow">if</span> (triangMatrix[i][k] != std::complex&lt;double&gt;(0.0, 0.0)) {</div>
-<div class="line"><span class="lineno">  885</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = k1; j &lt; matrix.size(); j++) {</div>
-<div class="line"><span class="lineno">  886</span>                    triangMatrix[i][j] = triangMatrix[i][j] / triangMatrix[i][k];</div>
-<div class="line"><span class="lineno">  887</span>                }</div>
-<div class="line"><span class="lineno">  888</span>                solution[i] = solution[i] / triangMatrix[i][k];</div>
-<div class="line"><span class="lineno">  889</span>            }</div>
-<div class="line"><span class="lineno">  890</span>        }</div>
-<div class="line"><span class="lineno">  891</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = k1; i &lt; matrix.size(); i++) {</div>
-<div class="line"><span class="lineno">  892</span>            <span class="keywordflow">if</span> (triangMatrix[i][k] != std::complex&lt;double&gt;(0.0, 0.0)) {</div>
-<div class="line"><span class="lineno">  893</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = k1; j &lt; matrix.size(); j++) { triangMatrix[i][j] -= triangMatrix[k][j]; }</div>
-<div class="line"><span class="lineno">  894</span>                solution[i] -= solution[k];</div>
-<div class="line"><span class="lineno">  895</span>            }</div>
-<div class="line"><span class="lineno">  896</span>        }</div>
-<div class="line"><span class="lineno">  897</span>    }</div>
-<div class="line"><span class="lineno">  898</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size()) - 2; i &gt;= 0; i--) {</div>
-<div class="line"><span class="lineno">  899</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size()) - 1; j &gt;= i + 1; j--) {</div>
-<div class="line"><span class="lineno">  900</span>            solution[i] -= triangMatrix[i][j] * solution[j];</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00874">874</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  877</span>{</div>
+<div class="line"><span class="lineno">  878</span>    <span class="comment">//[Ref] https://en.wikipedia.org/wiki/Gaussian_elimination</span></div>
+<div class="line"><span class="lineno">  879</span> </div>
+<div class="line"><span class="lineno">  880</span>    std::vector&lt;std::complex&lt;double&gt; &gt; solution;</div>
+<div class="line"><span class="lineno">  881</span> </div>
+<div class="line"><span class="lineno">  882</span>    std::vector&lt;std::vector&lt;std::complex&lt;double&gt; &gt; &gt; triangMatrix;</div>
+<div class="line"><span class="lineno">  883</span>    triangMatrix.resize(matrix.size());</div>
+<div class="line"><span class="lineno">  884</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) { triangMatrix[i].resize(matrix.size()); }</div>
+<div class="line"><span class="lineno">  885</span> </div>
+<div class="line"><span class="lineno">  886</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) { solution.push_back(array[i]); }</div>
+<div class="line"><span class="lineno">  887</span> </div>
+<div class="line"><span class="lineno">  888</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; matrix.size(); i++) {</div>
+<div class="line"><span class="lineno">  889</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; matrix.size(); j++) { triangMatrix[i][j] = matrix[i][j]; }</div>
+<div class="line"><span class="lineno">  890</span>    }</div>
+<div class="line"><span class="lineno">  891</span> </div>
+<div class="line"><span class="lineno">  892</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; matrix.size(); k++) {</div>
+<div class="line"><span class="lineno">  893</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k1 = k + 1;</div>
+<div class="line"><span class="lineno">  894</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = k; i &lt; matrix.size(); i++) {</div>
+<div class="line"><span class="lineno">  895</span>            <span class="keywordflow">if</span> (triangMatrix[i][k] != std::complex&lt;double&gt;(0.0, 0.0)) {</div>
+<div class="line"><span class="lineno">  896</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = k1; j &lt; matrix.size(); j++) {</div>
+<div class="line"><span class="lineno">  897</span>                    triangMatrix[i][j] = triangMatrix[i][j] / triangMatrix[i][k];</div>
+<div class="line"><span class="lineno">  898</span>                }</div>
+<div class="line"><span class="lineno">  899</span>                solution[i] = solution[i] / triangMatrix[i][k];</div>
+<div class="line"><span class="lineno">  900</span>            }</div>
 <div class="line"><span class="lineno">  901</span>        }</div>
-<div class="line"><span class="lineno">  902</span>    }</div>
-<div class="line"><span class="lineno">  903</span> </div>
-<div class="line"><span class="lineno">  904</span>    <span class="keywordflow">return</span> solution;</div>
-<div class="line"><span class="lineno">  905</span>}</div>
+<div class="line"><span class="lineno">  902</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = k1; i &lt; matrix.size(); i++) {</div>
+<div class="line"><span class="lineno">  903</span>            <span class="keywordflow">if</span> (triangMatrix[i][k] != std::complex&lt;double&gt;(0.0, 0.0)) {</div>
+<div class="line"><span class="lineno">  904</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = k1; j &lt; matrix.size(); j++) { triangMatrix[i][j] -= triangMatrix[k][j]; }</div>
+<div class="line"><span class="lineno">  905</span>                solution[i] -= solution[k];</div>
+<div class="line"><span class="lineno">  906</span>            }</div>
+<div class="line"><span class="lineno">  907</span>        }</div>
+<div class="line"><span class="lineno">  908</span>    }</div>
+<div class="line"><span class="lineno">  909</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size()) - 2; i &gt;= 0; i--) {</div>
+<div class="line"><span class="lineno">  910</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size()) - 1; j &gt;= i + 1; j--) {</div>
+<div class="line"><span class="lineno">  911</span>            solution[i] -= triangMatrix[i][j] * solution[j];</div>
+<div class="line"><span class="lineno">  912</span>        }</div>
+<div class="line"><span class="lineno">  913</span>    }</div>
+<div class="line"><span class="lineno">  914</span> </div>
+<div class="line"><span class="lineno">  915</span>    <span class="keywordflow">return</span> solution;</div>
+<div class="line"><span class="lineno">  916</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1161,7 +1161,7 @@ Here is the caller graph for this function:</div>
 <div class="ttc" id="aclass_electric_calculation_html_a8dcbf4f2468a5b55680ba4c17d909102"><div class="ttname"><a href="class_electric_calculation.html#a8dcbf4f2468a5b55680ba4c17d909102">ElectricCalculation::m_syncMotorList</a></div><div class="ttdeci">std::vector&lt; SyncMotor * &gt; m_syncMotorList</div><div class="ttdoc">List of synchronous motors in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00384">ElectricCalculation.h:384</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_acd2059f84b2c124b1400677d5adeea12"><div class="ttname"><a href="class_electric_calculation.html#acd2059f84b2c124b1400677d5adeea12">ElectricCalculation::m_harmCurrentList</a></div><div class="ttdeci">std::vector&lt; HarmCurrent * &gt; m_harmCurrentList</div><div class="ttdoc">List of harmonic current sources in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00388">ElectricCalculation.h:388</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_ad7bfee2d7cba726ff6aa7605a969d49a"><div class="ttname"><a href="class_electric_calculation.html#ad7bfee2d7cba726ff6aa7605a969d49a">ElectricCalculation::m_inductorList</a></div><div class="ttdeci">std::vector&lt; Inductor * &gt; m_inductorList</div><div class="ttdoc">List of inductors in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00376">ElectricCalculation.h:376</a></div></div>
-<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00113">Element.h:114</a></div></div>
+<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00114">Element.h:115</a></div></div>
 <div class="ttc" id="aclass_harm_current_html"><div class="ttname"><a href="class_harm_current.html">HarmCurrent</a></div><div class="ttdoc">Shunt Harmonic Corrent Source.</div><div class="ttdef"><b>Definition</b> <a href="_harm_current_8h_source.html#l00023">HarmCurrent.h:24</a></div></div>
 <div class="ttc" id="aclass_ind_motor_html"><div class="ttname"><a href="class_ind_motor.html">IndMotor</a></div><div class="ttdoc">Induction motor power element.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00118">IndMotor.h:119</a></div></div>
 <div class="ttc" id="aclass_inductor_html"><div class="ttname"><a href="class_inductor.html">Inductor</a></div><div class="ttdoc">Inductor shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00038">Inductor.h:39</a></div></div>
@@ -1170,7 +1170,7 @@ Here is the caller graph for this function:</div>
 <div class="ttc" id="aclass_power_element_html"><div class="ttname"><a href="class_power_element.html">PowerElement</a></div><div class="ttdoc">Abstract class of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00095">PowerElement.h:96</a></div></div>
 <div class="ttc" id="aclass_sync_generator_html"><div class="ttname"><a href="class_sync_generator.html">SyncGenerator</a></div><div class="ttdoc">Synchronous generator power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_generator_8h_source.html#l00145">SyncGenerator.h:146</a></div></div>
 <div class="ttc" id="aclass_sync_motor_html"><div class="ttname"><a href="class_sync_motor.html">SyncMotor</a></div><div class="ttdoc">Synchronous motor (synchronous compensator) power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00134">SyncMotor.h:135</a></div></div>
-<div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00083">Transformer.h:84</a></div></div>
+<div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element with OLTC support.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00095">Transformer.h:96</a></div></div>
 <div class="ttc" id="astruct_bus_electrical_data_html"><div class="ttname"><a href="struct_bus_electrical_data.html">BusElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00024">Bus.h:24</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -1413,54 +1413,54 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00981">981</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  984</span>{</div>
-<div class="line"><span class="lineno">  985</span>    <span class="comment">// Doolittle method</span></div>
-<div class="line"><span class="lineno">  986</span>    <span class="comment">// [Ref] http://www3.nd.edu/~zxu2/acms40390F11/Alg-LU-Crout.pdf</span></div>
-<div class="line"><span class="lineno">  987</span>    <span class="comment">// [Ref] http://www.engr.colostate.edu/~thompson/hPage/CourseMat/Tutorials/CompMethods/doolittle.pdf</span></div>
-<div class="line"><span class="lineno">  988</span> </div>
-<div class="line"><span class="lineno">  989</span>    <span class="keywordtype">int</span> size = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size());  <span class="comment">// Decomposed matrix size.</span></div>
-<div class="line"><span class="lineno">  990</span> </div>
-<div class="line"><span class="lineno">  991</span>    <span class="comment">// Set upper and lower matrices sizes.</span></div>
-<div class="line"><span class="lineno">  992</span>    matrixL.resize(size);</div>
-<div class="line"><span class="lineno">  993</span>    matrixU.resize(size);</div>
-<div class="line"><span class="lineno">  994</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><span class="lineno">  995</span>        matrixL[i].resize(size);</div>
-<div class="line"><span class="lineno">  996</span>        matrixU[i].resize(size);</div>
-<div class="line"><span class="lineno">  997</span>    }</div>
-<div class="line"><span class="lineno">  998</span> </div>
-<div class="line"><span class="lineno">  999</span>    <span class="comment">// First row of upper matrix and first column of lower matrix.</span></div>
-<div class="line"><span class="lineno"> 1000</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><span class="lineno"> 1001</span>        matrixU[0][i] = matrix[0][i];</div>
-<div class="line"><span class="lineno"> 1002</span>        matrixL[i][0] = matrix[i][0] / matrixU[0][0];</div>
-<div class="line"><span class="lineno"> 1003</span>    }</div>
-<div class="line"><span class="lineno"> 1004</span> </div>
-<div class="line"><span class="lineno"> 1005</span>    <span class="comment">// Lower matrix main diagonal.</span></div>
-<div class="line"><span class="lineno"> 1006</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; size; i++) { matrixL[i][i] = std::complex&lt;double&gt;(1.0, 0.0); }</div>
-<div class="line"><span class="lineno"> 1007</span> </div>
-<div class="line"><span class="lineno"> 1008</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; size - 1; i++) {</div>
-<div class="line"><span class="lineno"> 1009</span>        <span class="comment">// Upper matrix main diagonal.</span></div>
-<div class="line"><span class="lineno"> 1010</span>        matrixU[i][i] = matrix[i][i];</div>
-<div class="line"><span class="lineno"> 1011</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; i; k++) { matrixU[i][i] -= matrixL[i][k] * matrixU[k][i]; }</div>
-<div class="line"><span class="lineno"> 1012</span> </div>
-<div class="line"><span class="lineno"> 1013</span>        <span class="comment">// Others elements of upper matrix</span></div>
-<div class="line"><span class="lineno"> 1014</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; size; j++) {</div>
-<div class="line"><span class="lineno"> 1015</span>            matrixU[i][j] = matrix[i][j];</div>
-<div class="line"><span class="lineno"> 1016</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; i; k++) { matrixU[i][j] -= matrixL[i][k] * matrixU[k][j]; }</div>
-<div class="line"><span class="lineno"> 1017</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00992">992</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  995</span>{</div>
+<div class="line"><span class="lineno">  996</span>    <span class="comment">// Doolittle method</span></div>
+<div class="line"><span class="lineno">  997</span>    <span class="comment">// [Ref] http://www3.nd.edu/~zxu2/acms40390F11/Alg-LU-Crout.pdf</span></div>
+<div class="line"><span class="lineno">  998</span>    <span class="comment">// [Ref] http://www.engr.colostate.edu/~thompson/hPage/CourseMat/Tutorials/CompMethods/doolittle.pdf</span></div>
+<div class="line"><span class="lineno">  999</span> </div>
+<div class="line"><span class="lineno"> 1000</span>    <span class="keywordtype">int</span> size = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size());  <span class="comment">// Decomposed matrix size.</span></div>
+<div class="line"><span class="lineno"> 1001</span> </div>
+<div class="line"><span class="lineno"> 1002</span>    <span class="comment">// Set upper and lower matrices sizes.</span></div>
+<div class="line"><span class="lineno"> 1003</span>    matrixL.resize(size);</div>
+<div class="line"><span class="lineno"> 1004</span>    matrixU.resize(size);</div>
+<div class="line"><span class="lineno"> 1005</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
+<div class="line"><span class="lineno"> 1006</span>        matrixL[i].resize(size);</div>
+<div class="line"><span class="lineno"> 1007</span>        matrixU[i].resize(size);</div>
+<div class="line"><span class="lineno"> 1008</span>    }</div>
+<div class="line"><span class="lineno"> 1009</span> </div>
+<div class="line"><span class="lineno"> 1010</span>    <span class="comment">// First row of upper matrix and first column of lower matrix.</span></div>
+<div class="line"><span class="lineno"> 1011</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
+<div class="line"><span class="lineno"> 1012</span>        matrixU[0][i] = matrix[0][i];</div>
+<div class="line"><span class="lineno"> 1013</span>        matrixL[i][0] = matrix[i][0] / matrixU[0][0];</div>
+<div class="line"><span class="lineno"> 1014</span>    }</div>
+<div class="line"><span class="lineno"> 1015</span> </div>
+<div class="line"><span class="lineno"> 1016</span>    <span class="comment">// Lower matrix main diagonal.</span></div>
+<div class="line"><span class="lineno"> 1017</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; size; i++) { matrixL[i][i] = std::complex&lt;double&gt;(1.0, 0.0); }</div>
 <div class="line"><span class="lineno"> 1018</span> </div>
-<div class="line"><span class="lineno"> 1019</span>        <span class="comment">// Lower matrix elements</span></div>
-<div class="line"><span class="lineno"> 1020</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; size; j++) {</div>
-<div class="line"><span class="lineno"> 1021</span>            matrixL[j][i] = matrix[j][i];</div>
-<div class="line"><span class="lineno"> 1022</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; i; k++) { matrixL[j][i] -= matrixL[j][k] * matrixU[k][i]; }</div>
-<div class="line"><span class="lineno"> 1023</span>            matrixL[j][i] = matrixL[j][i] / matrixU[i][i];</div>
-<div class="line"><span class="lineno"> 1024</span>        }</div>
-<div class="line"><span class="lineno"> 1025</span>    }</div>
-<div class="line"><span class="lineno"> 1026</span> </div>
-<div class="line"><span class="lineno"> 1027</span>    <span class="comment">// Last element of upper matrix.</span></div>
-<div class="line"><span class="lineno"> 1028</span>    matrixU[size - 1][size - 1] = matrix[size - 1][size - 1];</div>
-<div class="line"><span class="lineno"> 1029</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; size - 1; k++) { matrixU[size - 1][size - 1] -= matrixL[size - 1][k] * matrixU[k][size - 1]; }</div>
-<div class="line"><span class="lineno"> 1030</span>}</div>
+<div class="line"><span class="lineno"> 1019</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; size - 1; i++) {</div>
+<div class="line"><span class="lineno"> 1020</span>        <span class="comment">// Upper matrix main diagonal.</span></div>
+<div class="line"><span class="lineno"> 1021</span>        matrixU[i][i] = matrix[i][i];</div>
+<div class="line"><span class="lineno"> 1022</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; i; k++) { matrixU[i][i] -= matrixL[i][k] * matrixU[k][i]; }</div>
+<div class="line"><span class="lineno"> 1023</span> </div>
+<div class="line"><span class="lineno"> 1024</span>        <span class="comment">// Others elements of upper matrix</span></div>
+<div class="line"><span class="lineno"> 1025</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; size; j++) {</div>
+<div class="line"><span class="lineno"> 1026</span>            matrixU[i][j] = matrix[i][j];</div>
+<div class="line"><span class="lineno"> 1027</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; i; k++) { matrixU[i][j] -= matrixL[i][k] * matrixU[k][j]; }</div>
+<div class="line"><span class="lineno"> 1028</span>        }</div>
+<div class="line"><span class="lineno"> 1029</span> </div>
+<div class="line"><span class="lineno"> 1030</span>        <span class="comment">// Lower matrix elements</span></div>
+<div class="line"><span class="lineno"> 1031</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; size; j++) {</div>
+<div class="line"><span class="lineno"> 1032</span>            matrixL[j][i] = matrix[j][i];</div>
+<div class="line"><span class="lineno"> 1033</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; i; k++) { matrixL[j][i] -= matrixL[j][k] * matrixU[k][i]; }</div>
+<div class="line"><span class="lineno"> 1034</span>            matrixL[j][i] = matrixL[j][i] / matrixU[i][i];</div>
+<div class="line"><span class="lineno"> 1035</span>        }</div>
+<div class="line"><span class="lineno"> 1036</span>    }</div>
+<div class="line"><span class="lineno"> 1037</span> </div>
+<div class="line"><span class="lineno"> 1038</span>    <span class="comment">// Last element of upper matrix.</span></div>
+<div class="line"><span class="lineno"> 1039</span>    matrixU[size - 1][size - 1] = matrix[size - 1][size - 1];</div>
+<div class="line"><span class="lineno"> 1040</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; size - 1; k++) { matrixU[size - 1][size - 1] -= matrixL[size - 1][k] * matrixU[k][size - 1]; }</div>
+<div class="line"><span class="lineno"> 1041</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1489,22 +1489,22 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Enumeration indicating the synchronous machine model. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00950">950</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  951</span>{</div>
-<div class="line"><span class="lineno">  952</span>    <span class="keyword">auto</span> data = generator-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno">  953</span>    <span class="keywordflow">if</span> (data.transTd0 != 0.0) {</div>
-<div class="line"><span class="lineno">  954</span>        <span class="keywordflow">if</span> (data.transTq0 != 0.0) {</div>
-<div class="line"><span class="lineno">  955</span>            <span class="keywordflow">if</span> (data.subTd0 != 0.0 || data.subTq0 != 0.0) { <span class="keywordflow">return</span> Machines::SM_MODEL_5; }</div>
-<div class="line"><span class="lineno">  956</span>            <span class="keywordflow">return</span> Machines::SM_MODEL_3;</div>
-<div class="line"><span class="lineno">  957</span>        }</div>
-<div class="line"><span class="lineno">  958</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  959</span>            <span class="keywordflow">if</span> (data.subTd0 != 0.0 || data.subTq0 != 0.0) { <span class="keywordflow">return</span> Machines::SM_MODEL_4; }</div>
-<div class="line"><span class="lineno">  960</span>            <span class="keywordflow">return</span> Machines::SM_MODEL_2;</div>
-<div class="line"><span class="lineno">  961</span>        }</div>
-<div class="line"><span class="lineno">  962</span>    }</div>
-<div class="line"><span class="lineno">  963</span> </div>
-<div class="line"><span class="lineno">  964</span>    <span class="keywordflow">return</span> Machines::SM_MODEL_1;</div>
-<div class="line"><span class="lineno">  965</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00961">961</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  962</span>{</div>
+<div class="line"><span class="lineno">  963</span>    <span class="keyword">auto</span> data = generator-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">  964</span>    <span class="keywordflow">if</span> (data.transTd0 != 0.0) {</div>
+<div class="line"><span class="lineno">  965</span>        <span class="keywordflow">if</span> (data.transTq0 != 0.0) {</div>
+<div class="line"><span class="lineno">  966</span>            <span class="keywordflow">if</span> (data.subTd0 != 0.0 || data.subTq0 != 0.0) { <span class="keywordflow">return</span> Machines::SM_MODEL_5; }</div>
+<div class="line"><span class="lineno">  967</span>            <span class="keywordflow">return</span> Machines::SM_MODEL_3;</div>
+<div class="line"><span class="lineno">  968</span>        }</div>
+<div class="line"><span class="lineno">  969</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  970</span>            <span class="keywordflow">if</span> (data.subTd0 != 0.0 || data.subTq0 != 0.0) { <span class="keywordflow">return</span> Machines::SM_MODEL_4; }</div>
+<div class="line"><span class="lineno">  971</span>            <span class="keywordflow">return</span> Machines::SM_MODEL_2;</div>
+<div class="line"><span class="lineno">  972</span>        }</div>
+<div class="line"><span class="lineno">  973</span>    }</div>
+<div class="line"><span class="lineno">  974</span> </div>
+<div class="line"><span class="lineno">  975</span>    <span class="keywordflow">return</span> Machines::SM_MODEL_1;</div>
+<div class="line"><span class="lineno">  976</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1635,16 +1635,16 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the parent bus was successfully found. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01057">1057</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1058</span>{</div>
-<div class="line"><span class="lineno"> 1059</span>    <span class="keyword">auto</span> parentList = childElement-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>();</div>
-<div class="line"><span class="lineno"> 1060</span>    <span class="keywordflow">if</span> (parentList.size() &lt; 1) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1061</span>    parentBus = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(parentList[0]);</div>
-<div class="line"><span class="lineno"> 1062</span>    <span class="keywordflow">if</span> (parentBus == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1063</span>    <span class="keywordflow">if</span> (parentBus-&gt;GetElectricalData().number &lt; 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1064</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1065</span>}</div>
-<div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00562">Element.h:562</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01068">1068</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1069</span>{</div>
+<div class="line"><span class="lineno"> 1070</span>    <span class="keyword">auto</span> parentList = childElement-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>();</div>
+<div class="line"><span class="lineno"> 1071</span>    <span class="keywordflow">if</span> (parentList.size() &lt; 1) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1072</span>    parentBus = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(parentList[0]);</div>
+<div class="line"><span class="lineno"> 1073</span>    <span class="keywordflow">if</span> (parentBus == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1074</span>    <span class="keywordflow">if</span> (parentBus-&gt;GetElectricalData().number &lt; 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1075</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1076</span>}</div>
+<div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00567">Element.h:567</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1701,16 +1701,16 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if both parent buses were successfully found. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01067">1067</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1068</span>{</div>
-<div class="line"><span class="lineno"> 1069</span>    <span class="keyword">auto</span> parentList = childElement-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>();</div>
-<div class="line"><span class="lineno"> 1070</span>    <span class="keywordflow">if</span> (parentList.size() &lt; 2) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1071</span>    parentBus1 = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(parentList[0]);</div>
-<div class="line"><span class="lineno"> 1072</span>    parentBus2 = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(parentList[1]);</div>
-<div class="line"><span class="lineno"> 1073</span>    <span class="keywordflow">if</span> (parentBus1 == <span class="keyword">nullptr</span> || parentBus2 == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1074</span>    <span class="keywordflow">if</span> (parentBus1-&gt;GetElectricalData().number &lt; 0 || parentBus2-&gt;GetElectricalData().number &lt; 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1075</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1076</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01078">1078</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1079</span>{</div>
+<div class="line"><span class="lineno"> 1080</span>    <span class="keyword">auto</span> parentList = childElement-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>();</div>
+<div class="line"><span class="lineno"> 1081</span>    <span class="keywordflow">if</span> (parentList.size() &lt; 2) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1082</span>    parentBus1 = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(parentList[0]);</div>
+<div class="line"><span class="lineno"> 1083</span>    parentBus2 = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(parentList[1]);</div>
+<div class="line"><span class="lineno"> 1084</span>    <span class="keywordflow">if</span> (parentBus1 == <span class="keyword">nullptr</span> || parentBus2 == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1085</span>    <span class="keywordflow">if</span> (parentBus1-&gt;GetElectricalData().number &lt; 0 || parentBus2-&gt;GetElectricalData().number &lt; 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1086</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1087</span>}</div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -2226,7 +2226,7 @@ Here is the call graph for this function:</div>
 <div class="ttc" id="a_electric_calculation_8h_html_a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932"><div class="ttname"><a href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932">POSITIVE_SEQ</a></div><div class="ttdeci">@ POSITIVE_SEQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00068">ElectricCalculation.h:68</a></div></div>
 <div class="ttc" id="a_electric_calculation_8h_html_a73321f98d9ea4582f9de005ef5ed8594a1e62759b7c2cceb121f3888cd0581579"><div class="ttname"><a href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a1e62759b7c2cceb121f3888cd0581579">NEGATIVE_SEQ</a></div><div class="ttdeci">@ NEGATIVE_SEQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00069">ElectricCalculation.h:69</a></div></div>
 <div class="ttc" id="a_electric_calculation_8h_html_a73321f98d9ea4582f9de005ef5ed8594a5e496f6aa3a618c364e3ca1b7e01a15e"><div class="ttname"><a href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a5e496f6aa3a618c364e3ca1b7e01a15e">ZERO_SEQ</a></div><div class="ttdeci">@ ZERO_SEQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00071">ElectricCalculation.h:70</a></div></div>
-<div class="ttc" id="aclass_element_html_a57c84a8e6eb80f0fea6e23cdd439d5aa"><div class="ttname"><a href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">Element::IsOnline</a></div><div class="ttdeci">bool IsOnline() const</div><div class="ttdoc">Checks if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00228">Element.h:228</a></div></div>
+<div class="ttc" id="aclass_element_html_a57c84a8e6eb80f0fea6e23cdd439d5aa"><div class="ttname"><a href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">Element::IsOnline</a></div><div class="ttdeci">bool IsOnline() const</div><div class="ttdoc">Checks if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00229">Element.h:229</a></div></div>
 <div class="ttc" id="astruct_capacitor_electrical_data_html"><div class="ttname"><a href="struct_capacitor_electrical_data.html">CapacitorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00025">Capacitor.h:25</a></div></div>
 <div class="ttc" id="astruct_inductor_electrical_data_html"><div class="ttname"><a href="struct_inductor_electrical_data.html">InductorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00025">Inductor.h:25</a></div></div>
 <div class="ttc" id="astruct_line_electrical_data_html"><div class="ttname"><a href="struct_line_electrical_data.html">LineElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00024">Line.h:24</a></div></div>
@@ -2308,73 +2308,73 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Return true if was possible to invert the matrix. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00781">781</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  783</span>{</div>
-<div class="line"><span class="lineno">  784</span>    <span class="keywordtype">int</span> order = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size());</div>
-<div class="line"><span class="lineno">  785</span> </div>
-<div class="line"><span class="lineno">  786</span>    inverse.clear();</div>
-<div class="line"><span class="lineno">  787</span>    <span class="comment">// Fill the inverse matrix with identity.</span></div>
-<div class="line"><span class="lineno">  788</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; order; ++i) {</div>
-<div class="line"><span class="lineno">  789</span>        std::vector&lt;std::complex&lt;double&gt; &gt; line;</div>
-<div class="line"><span class="lineno">  790</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; order; ++j) {</div>
-<div class="line"><span class="lineno">  791</span>            line.push_back(i == j ? std::complex&lt;double&gt;(1.0, 0.0) : std::complex&lt;double&gt;(0.0, 0.0));</div>
-<div class="line"><span class="lineno">  792</span>        }</div>
-<div class="line"><span class="lineno">  793</span>        inverse.push_back(line);</div>
-<div class="line"><span class="lineno">  794</span>    }</div>
-<div class="line"><span class="lineno">  795</span> </div>
-<div class="line"><span class="lineno">  796</span>    <span class="comment">// Check if a main diagonal value of the matrix is zero, if one is zero, try a linear combination to remove it.</span></div>
-<div class="line"><span class="lineno">  797</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; order; ++i) {</div>
-<div class="line"><span class="lineno">  798</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; order; ++j) {</div>
-<div class="line"><span class="lineno">  799</span>            <span class="keywordflow">if</span> (i == j &amp;&amp; matrix[i][j] == std::complex&lt;double&gt;(0.0, 0.0)) {</div>
-<div class="line"><span class="lineno">  800</span>                <span class="keywordtype">int</span> row = 0;</div>
-<div class="line"><span class="lineno">  801</span>                <span class="keywordflow">while</span> (row &lt; order) {</div>
-<div class="line"><span class="lineno">  802</span>                    <span class="keywordflow">if</span> (matrix[row][j] != std::complex&lt;double&gt;(0.0, 0.0)) {</div>
-<div class="line"><span class="lineno">  803</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; order; ++k) {</div>
-<div class="line"><span class="lineno">  804</span>                            matrix[i][k] += matrix[row][k];</div>
-<div class="line"><span class="lineno">  805</span>                            inverse[i][k] += inverse[row][k];</div>
-<div class="line"><span class="lineno">  806</span>                        }</div>
-<div class="line"><span class="lineno">  807</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  808</span>                    }</div>
-<div class="line"><span class="lineno">  809</span>                    row++;</div>
-<div class="line"><span class="lineno">  810</span>                }</div>
-<div class="line"><span class="lineno">  811</span>                <span class="comment">// If all line values are zero, the matrix is singular and the solution is impossible.</span></div>
-<div class="line"><span class="lineno">  812</span>                <span class="keywordflow">if</span> (row == order) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  813</span>            }</div>
-<div class="line"><span class="lineno">  814</span>        }</div>
-<div class="line"><span class="lineno">  815</span>    }</div>
-<div class="line"><span class="lineno">  816</span> </div>
-<div class="line"><span class="lineno">  817</span>    <span class="comment">// Linear combinations are made in both matrices, the goal is the input matrix become the identity. The final result</span></div>
-<div class="line"><span class="lineno">  818</span>    <span class="comment">// have two matrices: the identity and the inverse of the input.</span></div>
-<div class="line"><span class="lineno">  819</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; order; ++i) {</div>
-<div class="line"><span class="lineno">  820</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; order; ++j) {</div>
-<div class="line"><span class="lineno">  821</span>            <span class="keywordflow">if</span> (i != j) {</div>
-<div class="line"><span class="lineno">  822</span>                <span class="keywordflow">if</span> (matrix[i][i] == std::complex&lt;double&gt;(0.0, 0.0)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  823</span> </div>
-<div class="line"><span class="lineno">  824</span>                std::complex&lt;double&gt; factor = matrix[j][i] / matrix[i][i];</div>
-<div class="line"><span class="lineno">  825</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; order; ++k) {</div>
-<div class="line"><span class="lineno">  826</span>                    matrix[j][k] -= factor * matrix[i][k];</div>
-<div class="line"><span class="lineno">  827</span>                    inverse[j][k] -= factor * inverse[i][k];</div>
-<div class="line"><span class="lineno">  828</span>                }</div>
-<div class="line"><span class="lineno">  829</span>            }</div>
-<div class="line"><span class="lineno">  830</span>        }</div>
-<div class="line"><span class="lineno">  831</span>    }</div>
-<div class="line"><span class="lineno">  832</span>    <span class="comment">// Main diagonal calculation.</span></div>
-<div class="line"><span class="lineno">  833</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; order; ++i) {</div>
-<div class="line"><span class="lineno">  834</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; order; ++j) {</div>
-<div class="line"><span class="lineno">  835</span>            <span class="keywordflow">if</span> (i == j) {</div>
-<div class="line"><span class="lineno">  836</span>                <span class="keywordflow">if</span> (matrix[i][j] == std::complex&lt;double&gt;(0.0, 0.0)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  837</span> </div>
-<div class="line"><span class="lineno">  838</span>                std::complex&lt;double&gt; factor = (matrix[i][j] - std::complex&lt;double&gt;(1.0, 0.0)) / matrix[i][j];</div>
-<div class="line"><span class="lineno">  839</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; order; ++k) {</div>
-<div class="line"><span class="lineno">  840</span>                    matrix[j][k] -= factor * matrix[i][k];</div>
-<div class="line"><span class="lineno">  841</span>                    inverse[j][k] -= factor * inverse[i][k];</div>
-<div class="line"><span class="lineno">  842</span>                }</div>
-<div class="line"><span class="lineno">  843</span>            }</div>
-<div class="line"><span class="lineno">  844</span>        }</div>
-<div class="line"><span class="lineno">  845</span>    }</div>
-<div class="line"><span class="lineno">  846</span> </div>
-<div class="line"><span class="lineno">  847</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  848</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l00792">792</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  794</span>{</div>
+<div class="line"><span class="lineno">  795</span>    <span class="keywordtype">int</span> order = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(matrix.size());</div>
+<div class="line"><span class="lineno">  796</span> </div>
+<div class="line"><span class="lineno">  797</span>    inverse.clear();</div>
+<div class="line"><span class="lineno">  798</span>    <span class="comment">// Fill the inverse matrix with identity.</span></div>
+<div class="line"><span class="lineno">  799</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; order; ++i) {</div>
+<div class="line"><span class="lineno">  800</span>        std::vector&lt;std::complex&lt;double&gt; &gt; line;</div>
+<div class="line"><span class="lineno">  801</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; order; ++j) {</div>
+<div class="line"><span class="lineno">  802</span>            line.push_back(i == j ? std::complex&lt;double&gt;(1.0, 0.0) : std::complex&lt;double&gt;(0.0, 0.0));</div>
+<div class="line"><span class="lineno">  803</span>        }</div>
+<div class="line"><span class="lineno">  804</span>        inverse.push_back(line);</div>
+<div class="line"><span class="lineno">  805</span>    }</div>
+<div class="line"><span class="lineno">  806</span> </div>
+<div class="line"><span class="lineno">  807</span>    <span class="comment">// Check if a main diagonal value of the matrix is zero, if one is zero, try a linear combination to remove it.</span></div>
+<div class="line"><span class="lineno">  808</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; order; ++i) {</div>
+<div class="line"><span class="lineno">  809</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; order; ++j) {</div>
+<div class="line"><span class="lineno">  810</span>            <span class="keywordflow">if</span> (i == j &amp;&amp; matrix[i][j] == std::complex&lt;double&gt;(0.0, 0.0)) {</div>
+<div class="line"><span class="lineno">  811</span>                <span class="keywordtype">int</span> row = 0;</div>
+<div class="line"><span class="lineno">  812</span>                <span class="keywordflow">while</span> (row &lt; order) {</div>
+<div class="line"><span class="lineno">  813</span>                    <span class="keywordflow">if</span> (matrix[row][j] != std::complex&lt;double&gt;(0.0, 0.0)) {</div>
+<div class="line"><span class="lineno">  814</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; order; ++k) {</div>
+<div class="line"><span class="lineno">  815</span>                            matrix[i][k] += matrix[row][k];</div>
+<div class="line"><span class="lineno">  816</span>                            inverse[i][k] += inverse[row][k];</div>
+<div class="line"><span class="lineno">  817</span>                        }</div>
+<div class="line"><span class="lineno">  818</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  819</span>                    }</div>
+<div class="line"><span class="lineno">  820</span>                    row++;</div>
+<div class="line"><span class="lineno">  821</span>                }</div>
+<div class="line"><span class="lineno">  822</span>                <span class="comment">// If all line values are zero, the matrix is singular and the solution is impossible.</span></div>
+<div class="line"><span class="lineno">  823</span>                <span class="keywordflow">if</span> (row == order) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  824</span>            }</div>
+<div class="line"><span class="lineno">  825</span>        }</div>
+<div class="line"><span class="lineno">  826</span>    }</div>
+<div class="line"><span class="lineno">  827</span> </div>
+<div class="line"><span class="lineno">  828</span>    <span class="comment">// Linear combinations are made in both matrices, the goal is the input matrix become the identity. The final result</span></div>
+<div class="line"><span class="lineno">  829</span>    <span class="comment">// have two matrices: the identity and the inverse of the input.</span></div>
+<div class="line"><span class="lineno">  830</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; order; ++i) {</div>
+<div class="line"><span class="lineno">  831</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; order; ++j) {</div>
+<div class="line"><span class="lineno">  832</span>            <span class="keywordflow">if</span> (i != j) {</div>
+<div class="line"><span class="lineno">  833</span>                <span class="keywordflow">if</span> (matrix[i][i] == std::complex&lt;double&gt;(0.0, 0.0)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  834</span> </div>
+<div class="line"><span class="lineno">  835</span>                std::complex&lt;double&gt; factor = matrix[j][i] / matrix[i][i];</div>
+<div class="line"><span class="lineno">  836</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; order; ++k) {</div>
+<div class="line"><span class="lineno">  837</span>                    matrix[j][k] -= factor * matrix[i][k];</div>
+<div class="line"><span class="lineno">  838</span>                    inverse[j][k] -= factor * inverse[i][k];</div>
+<div class="line"><span class="lineno">  839</span>                }</div>
+<div class="line"><span class="lineno">  840</span>            }</div>
+<div class="line"><span class="lineno">  841</span>        }</div>
+<div class="line"><span class="lineno">  842</span>    }</div>
+<div class="line"><span class="lineno">  843</span>    <span class="comment">// Main diagonal calculation.</span></div>
+<div class="line"><span class="lineno">  844</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; order; ++i) {</div>
+<div class="line"><span class="lineno">  845</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; order; ++j) {</div>
+<div class="line"><span class="lineno">  846</span>            <span class="keywordflow">if</span> (i == j) {</div>
+<div class="line"><span class="lineno">  847</span>                <span class="keywordflow">if</span> (matrix[i][j] == std::complex&lt;double&gt;(0.0, 0.0)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  848</span> </div>
+<div class="line"><span class="lineno">  849</span>                std::complex&lt;double&gt; factor = (matrix[i][j] - std::complex&lt;double&gt;(1.0, 0.0)) / matrix[i][j];</div>
+<div class="line"><span class="lineno">  850</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; order; ++k) {</div>
+<div class="line"><span class="lineno">  851</span>                    matrix[j][k] -= factor * matrix[i][k];</div>
+<div class="line"><span class="lineno">  852</span>                    inverse[j][k] -= factor * inverse[i][k];</div>
+<div class="line"><span class="lineno">  853</span>                }</div>
+<div class="line"><span class="lineno">  854</span>            }</div>
+<div class="line"><span class="lineno">  855</span>        }</div>
+<div class="line"><span class="lineno">  856</span>    }</div>
+<div class="line"><span class="lineno">  857</span> </div>
+<div class="line"><span class="lineno">  858</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  859</span>}</div>
 </div><!-- fragment --><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -2433,28 +2433,28 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Solution vector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01032">1032</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1035</span>{</div>
-<div class="line"><span class="lineno"> 1036</span>    <span class="keywordtype">int</span> size = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(b.size());</div>
-<div class="line"><span class="lineno"> 1037</span>    std::vector&lt;std::complex&lt;double&gt; &gt; x;</div>
-<div class="line"><span class="lineno"> 1038</span>    std::vector&lt;std::complex&lt;double&gt; &gt; y;</div>
-<div class="line"><span class="lineno"> 1039</span>    x.resize(size);</div>
-<div class="line"><span class="lineno"> 1040</span>    y.resize(size);</div>
-<div class="line"><span class="lineno"> 1041</span> </div>
-<div class="line"><span class="lineno"> 1042</span>    <span class="comment">// Forward</span></div>
-<div class="line"><span class="lineno"> 1043</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><span class="lineno"> 1044</span>        y[i] = b[i];</div>
-<div class="line"><span class="lineno"> 1045</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; i; j++) { y[i] -= l[i][j] * y[j]; }</div>
-<div class="line"><span class="lineno"> 1046</span>        y[i] /= l[i][i];</div>
-<div class="line"><span class="lineno"> 1047</span>    }</div>
-<div class="line"><span class="lineno"> 1048</span>    <span class="comment">// Backward</span></div>
-<div class="line"><span class="lineno"> 1049</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = size - 1; i &gt;= 0; i--) {</div>
-<div class="line"><span class="lineno"> 1050</span>        x[i] = y[i];</div>
-<div class="line"><span class="lineno"> 1051</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; size; j++) { x[i] -= u[i][j] * x[j]; }</div>
-<div class="line"><span class="lineno"> 1052</span>        x[i] /= u[i][i];</div>
-<div class="line"><span class="lineno"> 1053</span>    }</div>
-<div class="line"><span class="lineno"> 1054</span>    <span class="keywordflow">return</span> x;</div>
-<div class="line"><span class="lineno"> 1055</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8cpp_source.html#l01043">1043</a> of file <a class="el" href="_electric_calculation_8cpp_source.html">ElectricCalculation.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1046</span>{</div>
+<div class="line"><span class="lineno"> 1047</span>    <span class="keywordtype">int</span> size = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(b.size());</div>
+<div class="line"><span class="lineno"> 1048</span>    std::vector&lt;std::complex&lt;double&gt; &gt; x;</div>
+<div class="line"><span class="lineno"> 1049</span>    std::vector&lt;std::complex&lt;double&gt; &gt; y;</div>
+<div class="line"><span class="lineno"> 1050</span>    x.resize(size);</div>
+<div class="line"><span class="lineno"> 1051</span>    y.resize(size);</div>
+<div class="line"><span class="lineno"> 1052</span> </div>
+<div class="line"><span class="lineno"> 1053</span>    <span class="comment">// Forward</span></div>
+<div class="line"><span class="lineno"> 1054</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
+<div class="line"><span class="lineno"> 1055</span>        y[i] = b[i];</div>
+<div class="line"><span class="lineno"> 1056</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; i; j++) { y[i] -= l[i][j] * y[j]; }</div>
+<div class="line"><span class="lineno"> 1057</span>        y[i] /= l[i][i];</div>
+<div class="line"><span class="lineno"> 1058</span>    }</div>
+<div class="line"><span class="lineno"> 1059</span>    <span class="comment">// Backward</span></div>
+<div class="line"><span class="lineno"> 1060</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = size - 1; i &gt;= 0; i--) {</div>
+<div class="line"><span class="lineno"> 1061</span>        x[i] = y[i];</div>
+<div class="line"><span class="lineno"> 1062</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; size; j++) { x[i] -= u[i][j] * x[j]; }</div>
+<div class="line"><span class="lineno"> 1063</span>        x[i] /= u[i][i];</div>
+<div class="line"><span class="lineno"> 1064</span>    }</div>
+<div class="line"><span class="lineno"> 1065</span>    <span class="keywordflow">return</span> x;</div>
+<div class="line"><span class="lineno"> 1066</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2680,180 +2680,191 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  612</span>        }</div>
 <div class="line"><span class="lineno">  613</span>    }</div>
 <div class="line"><span class="lineno">  614</span> </div>
-<div class="line"><span class="lineno">  615</span>    <span class="comment">// Synchronous machines</span></div>
-<div class="line"><span class="lineno">  616</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* bus : <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>) {</div>
-<div class="line"><span class="lineno">  617</span>        <a class="code hl_struct" href="struct_bus_electrical_data.html">BusElectricalData</a> data = bus-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno">  618</span>        <span class="keywordtype">int</span> i = data.number;</div>
-<div class="line"><span class="lineno">  619</span> </div>
-<div class="line"><span class="lineno">  620</span>        <span class="keywordflow">if</span> (data.isConnected) {</div>
-<div class="line"><span class="lineno">  621</span>            <span class="comment">// Get the synchronous machines connected and calculate the load power on the bus.</span></div>
-<div class="line"><span class="lineno">  622</span>            std::vector&lt;SyncGenerator*&gt; syncGeneratorsOnBus;</div>
-<div class="line"><span class="lineno">  623</span>            std::vector&lt;SyncMotor*&gt; syncMotorsOnBus;</div>
-<div class="line"><span class="lineno">  624</span>            std::complex&lt;double&gt; loadPower(0.0, 0.0);</div>
-<div class="line"><span class="lineno">  625</span> </div>
-<div class="line"><span class="lineno">  626</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itsg = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(); itsg != <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); itsg++) {</div>
-<div class="line"><span class="lineno">  627</span>                <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *itsg;</div>
-<div class="line"><span class="lineno">  628</span>                <span class="keywordflow">if</span> (bus == syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0] &amp;&amp; syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>())</div>
-<div class="line"><span class="lineno">  629</span>                    syncGeneratorsOnBus.push_back(syncGenerator);</div>
-<div class="line"><span class="lineno">  630</span>            }</div>
-<div class="line"><span class="lineno">  631</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itsm = <a class="code hl_variable" href="class_electric_calculation.html#a8dcbf4f2468a5b55680ba4c17d909102">m_syncMotorList</a>.begin(); itsm != <a class="code hl_variable" href="class_electric_calculation.html#a8dcbf4f2468a5b55680ba4c17d909102">m_syncMotorList</a>.end(); itsm++) {</div>
-<div class="line"><span class="lineno">  632</span>                <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* syncMotor = *itsm;</div>
-<div class="line"><span class="lineno">  633</span>                <span class="keywordflow">if</span> (bus == syncMotor-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0] &amp;&amp; syncMotor-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
-<div class="line"><span class="lineno">  634</span>                    syncMotorsOnBus.push_back(syncMotor);</div>
-<div class="line"><span class="lineno">  635</span>                    <a class="code hl_struct" href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a> childData = syncMotor-&gt;GetPUElectricalData(systemPowerBase);</div>
-<div class="line"><span class="lineno">  636</span>                    loadPower += std::complex&lt;double&gt;(childData.activePower, 0.0);</div>
-<div class="line"><span class="lineno">  637</span>                }</div>
-<div class="line"><span class="lineno">  638</span>            }</div>
-<div class="line"><span class="lineno">  639</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itlo = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.begin(); itlo != <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.end(); itlo++) {</div>
-<div class="line"><span class="lineno">  640</span>                <a class="code hl_class" href="class_load.html">Load</a>* load = *itlo;</div>
-<div class="line"><span class="lineno">  641</span>                <span class="keywordflow">if</span> (bus == load-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0] &amp;&amp; load-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
-<div class="line"><span class="lineno">  642</span>                    <a class="code hl_struct" href="struct_load_electrical_data.html">LoadElectricalData</a> childData = load-&gt;GetPUElectricalData(systemPowerBase);</div>
-<div class="line"><span class="lineno">  643</span>                    <span class="keywordflow">if</span> (childData.loadType == CONST_POWER)</div>
-<div class="line"><span class="lineno">  644</span>                        loadPower += std::complex&lt;double&gt;(childData.activePower, childData.reactivePower);</div>
-<div class="line"><span class="lineno">  645</span> </div>
-<div class="line"><span class="lineno">  646</span>                    <span class="keywordflow">if</span> (childData.activePower &gt;= 0.0)</div>
-<div class="line"><span class="lineno">  647</span>                        load-&gt;<a class="code hl_function" href="class_power_element.html#a2ee71f9eb90beadf5439ce9f70469b49">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a>);</div>
-<div class="line"><span class="lineno">  648</span>                    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  649</span>                        load-&gt;<a class="code hl_function" href="class_power_element.html#a2ee71f9eb90beadf5439ce9f70469b49">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a>);</div>
-<div class="line"><span class="lineno">  650</span>                }</div>
-<div class="line"><span class="lineno">  651</span>            }</div>
-<div class="line"><span class="lineno">  652</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itim = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(); itim != <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); itim++) {</div>
-<div class="line"><span class="lineno">  653</span>                <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* indMotor = *itim;</div>
-<div class="line"><span class="lineno">  654</span>                <span class="keywordflow">if</span> (bus == indMotor-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0] &amp;&amp; indMotor-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
-<div class="line"><span class="lineno">  655</span>                    <a class="code hl_struct" href="struct_ind_motor_electrical_data.html">IndMotorElectricalData</a> childData = indMotor-&gt;GetPUElectricalData(systemPowerBase);</div>
-<div class="line"><span class="lineno">  656</span>                    loadPower += std::complex&lt;double&gt;(childData.activePower, childData.reactivePower);</div>
-<div class="line"><span class="lineno">  657</span> </div>
-<div class="line"><span class="lineno">  658</span>                    <span class="keywordflow">if</span> (childData.activePower &gt;= 0.0)</div>
-<div class="line"><span class="lineno">  659</span>                        indMotor-&gt;<a class="code hl_function" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a>);</div>
-<div class="line"><span class="lineno">  660</span>                    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  661</span>                        indMotor-&gt;<a class="code hl_function" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a>);</div>
-<div class="line"><span class="lineno">  662</span>                }</div>
-<div class="line"><span class="lineno">  663</span>            }</div>
-<div class="line"><span class="lineno">  664</span> </div>
-<div class="line"><span class="lineno">  665</span>            <span class="comment">// Setup the reactive machines vector for the distribution of reactive power</span></div>
-<div class="line"><span class="lineno">  666</span>            std::vector&lt;ReactiveMachine&gt; machines;</div>
-<div class="line"><span class="lineno">  667</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>* gen : syncGeneratorsOnBus) {</div>
+<div class="line"><span class="lineno">  615</span>    <span class="comment">// Handling other shunt elements</span></div>
+<div class="line"><span class="lineno">  616</span>    <span class="comment">// Capacitor, Inductor, Load, SyncGenerator and SyncMotor</span></div>
+<div class="line"><span class="lineno">  617</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* bus : <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>) {</div>
+<div class="line"><span class="lineno">  618</span>        <a class="code hl_struct" href="struct_bus_electrical_data.html">BusElectricalData</a> data = bus-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">  619</span>        <span class="keywordtype">int</span> i = data.number;</div>
+<div class="line"><span class="lineno">  620</span> </div>
+<div class="line"><span class="lineno">  621</span>        <span class="keywordflow">if</span> (data.isConnected) {</div>
+<div class="line"><span class="lineno">  622</span>            <span class="comment">// Get the synchronous machines connected and calculate the load power on the bus.</span></div>
+<div class="line"><span class="lineno">  623</span>            std::vector&lt;SyncGenerator*&gt; syncGeneratorsOnBus;</div>
+<div class="line"><span class="lineno">  624</span>            std::vector&lt;SyncMotor*&gt; syncMotorsOnBus;</div>
+<div class="line"><span class="lineno">  625</span>            std::complex&lt;double&gt; loadPower(0.0, 0.0);</div>
+<div class="line"><span class="lineno">  626</span> </div>
+<div class="line"><span class="lineno">  627</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itsg = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(); itsg != <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); itsg++) {</div>
+<div class="line"><span class="lineno">  628</span>                <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *itsg;</div>
+<div class="line"><span class="lineno">  629</span>                <span class="keywordflow">if</span> (bus == syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0] &amp;&amp; syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
+<div class="line"><span class="lineno">  630</span>                    syncGeneratorsOnBus.push_back(syncGenerator);</div>
+<div class="line"><span class="lineno">  631</span>                    <span class="keyword">auto</span> cData = syncGenerator-&gt;GetPUElectricalData(systemPowerBase);</div>
+<div class="line"><span class="lineno">  632</span>                    <span class="keywordflow">if</span> (cData.activePower &gt;= 0.0)</div>
+<div class="line"><span class="lineno">  633</span>                        syncGenerator-&gt;<a class="code hl_function" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a>);</div>
+<div class="line"><span class="lineno">  634</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  635</span>                        syncGenerator-&gt;<a class="code hl_function" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a>);</div>
+<div class="line"><span class="lineno">  636</span>                }</div>
+<div class="line"><span class="lineno">  637</span>            }</div>
+<div class="line"><span class="lineno">  638</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itsm = <a class="code hl_variable" href="class_electric_calculation.html#a8dcbf4f2468a5b55680ba4c17d909102">m_syncMotorList</a>.begin(); itsm != <a class="code hl_variable" href="class_electric_calculation.html#a8dcbf4f2468a5b55680ba4c17d909102">m_syncMotorList</a>.end(); itsm++) {</div>
+<div class="line"><span class="lineno">  639</span>                <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* syncMotor = *itsm;</div>
+<div class="line"><span class="lineno">  640</span>                <span class="keywordflow">if</span> (bus == syncMotor-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0] &amp;&amp; syncMotor-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
+<div class="line"><span class="lineno">  641</span>                    syncMotorsOnBus.push_back(syncMotor);</div>
+<div class="line"><span class="lineno">  642</span>                    <a class="code hl_struct" href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a> childData = syncMotor-&gt;GetPUElectricalData(systemPowerBase);</div>
+<div class="line"><span class="lineno">  643</span>                    loadPower += std::complex&lt;double&gt;(childData.activePower, 0.0);</div>
+<div class="line"><span class="lineno">  644</span>                    <span class="keywordflow">if</span> (childData.activePower &gt;= 0.0)</div>
+<div class="line"><span class="lineno">  645</span>                        syncMotor-&gt;<a class="code hl_function" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a>);</div>
+<div class="line"><span class="lineno">  646</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  647</span>                        syncMotor-&gt;<a class="code hl_function" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a>);</div>
+<div class="line"><span class="lineno">  648</span>                }</div>
+<div class="line"><span class="lineno">  649</span>            }</div>
+<div class="line"><span class="lineno">  650</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itlo = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.begin(); itlo != <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.end(); itlo++) {</div>
+<div class="line"><span class="lineno">  651</span>                <a class="code hl_class" href="class_load.html">Load</a>* load = *itlo;</div>
+<div class="line"><span class="lineno">  652</span>                <span class="keywordflow">if</span> (bus == load-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0] &amp;&amp; load-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
+<div class="line"><span class="lineno">  653</span>                    <a class="code hl_struct" href="struct_load_electrical_data.html">LoadElectricalData</a> childData = load-&gt;GetPUElectricalData(systemPowerBase);</div>
+<div class="line"><span class="lineno">  654</span>                    <span class="keywordflow">if</span> (childData.loadType == CONST_POWER)</div>
+<div class="line"><span class="lineno">  655</span>                        loadPower += std::complex&lt;double&gt;(childData.activePower, childData.reactivePower);</div>
+<div class="line"><span class="lineno">  656</span> </div>
+<div class="line"><span class="lineno">  657</span>                    <span class="keywordflow">if</span> (childData.activePower &gt;= 0.0)</div>
+<div class="line"><span class="lineno">  658</span>                        load-&gt;<a class="code hl_function" href="class_power_element.html#a2ee71f9eb90beadf5439ce9f70469b49">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a>);</div>
+<div class="line"><span class="lineno">  659</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  660</span>                        load-&gt;<a class="code hl_function" href="class_power_element.html#a2ee71f9eb90beadf5439ce9f70469b49">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a>);</div>
+<div class="line"><span class="lineno">  661</span>                }</div>
+<div class="line"><span class="lineno">  662</span>            }</div>
+<div class="line"><span class="lineno">  663</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itim = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(); itim != <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); itim++) {</div>
+<div class="line"><span class="lineno">  664</span>                <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* indMotor = *itim;</div>
+<div class="line"><span class="lineno">  665</span>                <span class="keywordflow">if</span> (bus == indMotor-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0] &amp;&amp; indMotor-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
+<div class="line"><span class="lineno">  666</span>                    <a class="code hl_struct" href="struct_ind_motor_electrical_data.html">IndMotorElectricalData</a> childData = indMotor-&gt;GetPUElectricalData(systemPowerBase);</div>
+<div class="line"><span class="lineno">  667</span>                    loadPower += std::complex&lt;double&gt;(childData.activePower, childData.reactivePower);</div>
 <div class="line"><span class="lineno">  668</span> </div>
-<div class="line"><span class="lineno">  669</span>                <span class="keywordflow">if</span> (data.slackBus) {</div>
-<div class="line"><span class="lineno">  670</span>                    <span class="keyword">auto</span> dataG = gen-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno">  671</span>                    <span class="keywordtype">double</span> activePower = (power[data.number].real() + loadPower.real()) * (systemPowerBase / <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(syncGeneratorsOnBus.size()));</div>
-<div class="line"><span class="lineno">  672</span>                    <span class="keywordflow">switch</span> (dataG.activePowerUnit) {</div>
-<div class="line"><span class="lineno">  673</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
-<div class="line"><span class="lineno">  674</span>                        activePower /= systemPowerBase;</div>
-<div class="line"><span class="lineno">  675</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  676</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW:</div>
-<div class="line"><span class="lineno">  677</span>                        activePower /= 1e3;</div>
-<div class="line"><span class="lineno">  678</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  679</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW:</div>
-<div class="line"><span class="lineno">  680</span>                        activePower /= 1e6;</div>
-<div class="line"><span class="lineno">  681</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  682</span>                    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  683</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  684</span>                    }</div>
-<div class="line"><span class="lineno">  685</span> </div>
-<div class="line"><span class="lineno">  686</span>                    dataG.activePower = activePower;</div>
-<div class="line"><span class="lineno">  687</span>                    gen-&gt;SetElectricalData(dataG);</div>
-<div class="line"><span class="lineno">  688</span>                }</div>
-<div class="line"><span class="lineno">  689</span> </div>
-<div class="line"><span class="lineno">  690</span>                <span class="keyword">auto</span> dataG = gen-&gt;GetPUElectricalData(systemPowerBase);</div>
-<div class="line"><span class="lineno">  691</span> </div>
-<div class="line"><span class="lineno">  692</span>                <a class="code hl_struct" href="struct_reactive_machine.html">ReactiveMachine</a> m;</div>
-<div class="line"><span class="lineno">  693</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#aa4b8f3e336f314d296322493361db8dd">qMax</a> = dataG.maxReactive;</div>
-<div class="line"><span class="lineno">  694</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#acfc047755dcbc3e2a798987355a62036">qMin</a> = dataG.minReactive;</div>
-<div class="line"><span class="lineno">  695</span> </div>
-<div class="line"><span class="lineno">  696</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a2c954dbbf0a254cb2eadff4825bb4027">hasMax</a> = dataG.haveMaxReactive;</div>
-<div class="line"><span class="lineno">  697</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a3446a4d1176c46673d311f1913b3b3ab">hasMin</a> = dataG.haveMinReactive;</div>
-<div class="line"><span class="lineno">  698</span> </div>
-<div class="line"><span class="lineno">  699</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747">machine</a> = gen;</div>
-<div class="line"><span class="lineno">  700</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a471582b4a852b89b142d08f4809fdbb9">isGenerator</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  701</span> </div>
-<div class="line"><span class="lineno">  702</span>                machines.push_back(m);</div>
-<div class="line"><span class="lineno">  703</span>            }</div>
-<div class="line"><span class="lineno">  704</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>* mot : syncMotorsOnBus) {</div>
-<div class="line"><span class="lineno">  705</span> </div>
-<div class="line"><span class="lineno">  706</span>                <span class="keyword">auto</span> data = mot-&gt;GetPUElectricalData(systemPowerBase);</div>
-<div class="line"><span class="lineno">  707</span> </div>
-<div class="line"><span class="lineno">  708</span>                <a class="code hl_struct" href="struct_reactive_machine.html">ReactiveMachine</a> m;</div>
-<div class="line"><span class="lineno">  709</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#aa4b8f3e336f314d296322493361db8dd">qMax</a> = data.maxReactive;</div>
-<div class="line"><span class="lineno">  710</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#acfc047755dcbc3e2a798987355a62036">qMin</a> = data.minReactive;</div>
-<div class="line"><span class="lineno">  711</span> </div>
-<div class="line"><span class="lineno">  712</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a2c954dbbf0a254cb2eadff4825bb4027">hasMax</a> = data.haveMaxReactive;</div>
-<div class="line"><span class="lineno">  713</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a3446a4d1176c46673d311f1913b3b3ab">hasMin</a> = data.haveMinReactive;</div>
-<div class="line"><span class="lineno">  714</span> </div>
-<div class="line"><span class="lineno">  715</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747">machine</a> = mot;</div>
-<div class="line"><span class="lineno">  716</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a471582b4a852b89b142d08f4809fdbb9">isGenerator</a> = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  717</span> </div>
-<div class="line"><span class="lineno">  718</span>                machines.push_back(m);</div>
-<div class="line"><span class="lineno">  719</span>            }</div>
-<div class="line"><span class="lineno">  720</span> </div>
-<div class="line"><span class="lineno">  721</span>            <span class="comment">// Distribute the reactive power among the synchronous machines and set their reactive power</span></div>
-<div class="line"><span class="lineno">  722</span>            <span class="keywordtype">double</span> qTotal = power[i].imag() + loadPower.imag();</div>
-<div class="line"><span class="lineno">  723</span>            <a class="code hl_function" href="class_electric_calculation.html#a0115a1ea5beda3dcb0565d84c9e06de1">DistributeReactivePower</a>(machines, qTotal);</div>
-<div class="line"><span class="lineno">  724</span> </div>
-<div class="line"><span class="lineno">  725</span>            <span class="comment">// Set the reactive power on the machines</span></div>
-<div class="line"><span class="lineno">  726</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; m : machines) {</div>
-<div class="line"><span class="lineno">  727</span> </div>
-<div class="line"><span class="lineno">  728</span>                <span class="keywordflow">if</span> (m.<a class="code hl_variable" href="struct_reactive_machine.html#a471582b4a852b89b142d08f4809fdbb9">isGenerator</a>) {</div>
-<div class="line"><span class="lineno">  729</span> </div>
-<div class="line"><span class="lineno">  730</span>                    <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* gen = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>*<span class="keyword">&gt;</span>(m.<a class="code hl_variable" href="struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747">machine</a>);</div>
-<div class="line"><span class="lineno">  731</span>                    <span class="keyword">auto</span> data = gen-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno">  732</span> </div>
-<div class="line"><span class="lineno">  733</span>                    <span class="keywordtype">double</span> reactivePower = m.<a class="code hl_variable" href="struct_reactive_machine.html#a1a2573e9299bcd94d1c9db96191f9a19">q</a> * systemPowerBase;</div>
-<div class="line"><span class="lineno">  734</span> </div>
-<div class="line"><span class="lineno">  735</span>                    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
-<div class="line"><span class="lineno">  736</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
-<div class="line"><span class="lineno">  737</span>                        reactivePower /= systemPowerBase;</div>
-<div class="line"><span class="lineno">  738</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  739</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
-<div class="line"><span class="lineno">  740</span>                        reactivePower /= 1e3;</div>
-<div class="line"><span class="lineno">  741</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  742</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
-<div class="line"><span class="lineno">  743</span>                        reactivePower /= 1e6;</div>
-<div class="line"><span class="lineno">  744</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  745</span>                    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  746</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  747</span>                    }</div>
-<div class="line"><span class="lineno">  748</span> </div>
-<div class="line"><span class="lineno">  749</span>                    data.reactivePower = reactivePower;</div>
-<div class="line"><span class="lineno">  750</span>                    gen-&gt;SetElectricalData(data);</div>
-<div class="line"><span class="lineno">  751</span>                }</div>
-<div class="line"><span class="lineno">  752</span>                <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  753</span> </div>
-<div class="line"><span class="lineno">  754</span>                    <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* mot = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>*<span class="keyword">&gt;</span>(m.<a class="code hl_variable" href="struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747">machine</a>);</div>
-<div class="line"><span class="lineno">  755</span>                    <span class="keyword">auto</span> data = mot-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno">  756</span> </div>
-<div class="line"><span class="lineno">  757</span>                    <span class="keywordtype">double</span> reactivePower = m.<a class="code hl_variable" href="struct_reactive_machine.html#a1a2573e9299bcd94d1c9db96191f9a19">q</a> * systemPowerBase;</div>
-<div class="line"><span class="lineno">  758</span> </div>
-<div class="line"><span class="lineno">  759</span>                    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
-<div class="line"><span class="lineno">  760</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
-<div class="line"><span class="lineno">  761</span>                        reactivePower /= systemPowerBase;</div>
-<div class="line"><span class="lineno">  762</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  763</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
-<div class="line"><span class="lineno">  764</span>                        reactivePower /= 1e3;</div>
-<div class="line"><span class="lineno">  765</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  766</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
-<div class="line"><span class="lineno">  767</span>                        reactivePower /= 1e6;</div>
-<div class="line"><span class="lineno">  768</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  769</span>                    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  770</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  771</span>                    }</div>
-<div class="line"><span class="lineno">  772</span> </div>
-<div class="line"><span class="lineno">  773</span>                    data.reactivePower = reactivePower;</div>
-<div class="line"><span class="lineno">  774</span>                    mot-&gt;SetElectricalData(data);</div>
-<div class="line"><span class="lineno">  775</span>                }</div>
-<div class="line"><span class="lineno">  776</span>            }</div>
-<div class="line"><span class="lineno">  777</span>        }</div>
-<div class="line"><span class="lineno">  778</span>    }</div>
-<div class="line"><span class="lineno">  779</span>}</div>
+<div class="line"><span class="lineno">  669</span>                    <span class="keywordflow">if</span> (childData.activePower &gt;= 0.0)</div>
+<div class="line"><span class="lineno">  670</span>                        indMotor-&gt;<a class="code hl_function" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a>);</div>
+<div class="line"><span class="lineno">  671</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  672</span>                        indMotor-&gt;<a class="code hl_function" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">SetPowerFlowDirection</a>(<a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a>);</div>
+<div class="line"><span class="lineno">  673</span>                }</div>
+<div class="line"><span class="lineno">  674</span>            }</div>
+<div class="line"><span class="lineno">  675</span> </div>
+<div class="line"><span class="lineno">  676</span>            <span class="comment">// Setup the reactive machines vector for the distribution of reactive power</span></div>
+<div class="line"><span class="lineno">  677</span>            std::vector&lt;ReactiveMachine&gt; machines;</div>
+<div class="line"><span class="lineno">  678</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>* gen : syncGeneratorsOnBus) {</div>
+<div class="line"><span class="lineno">  679</span> </div>
+<div class="line"><span class="lineno">  680</span>                <span class="keywordflow">if</span> (data.slackBus) {</div>
+<div class="line"><span class="lineno">  681</span>                    <span class="keyword">auto</span> dataG = gen-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">  682</span>                    <span class="keywordtype">double</span> activePower = (power[data.number].real() + loadPower.real()) * (systemPowerBase / <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(syncGeneratorsOnBus.size()));</div>
+<div class="line"><span class="lineno">  683</span>                    <span class="keywordflow">switch</span> (dataG.activePowerUnit) {</div>
+<div class="line"><span class="lineno">  684</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
+<div class="line"><span class="lineno">  685</span>                        activePower /= systemPowerBase;</div>
+<div class="line"><span class="lineno">  686</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  687</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kW:</div>
+<div class="line"><span class="lineno">  688</span>                        activePower /= 1e3;</div>
+<div class="line"><span class="lineno">  689</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  690</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_MW:</div>
+<div class="line"><span class="lineno">  691</span>                        activePower /= 1e6;</div>
+<div class="line"><span class="lineno">  692</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  693</span>                    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  694</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  695</span>                    }</div>
+<div class="line"><span class="lineno">  696</span> </div>
+<div class="line"><span class="lineno">  697</span>                    dataG.activePower = activePower;</div>
+<div class="line"><span class="lineno">  698</span>                    gen-&gt;SetElectricalData(dataG);</div>
+<div class="line"><span class="lineno">  699</span>                }</div>
+<div class="line"><span class="lineno">  700</span> </div>
+<div class="line"><span class="lineno">  701</span>                <span class="keyword">auto</span> dataG = gen-&gt;GetPUElectricalData(systemPowerBase);</div>
+<div class="line"><span class="lineno">  702</span> </div>
+<div class="line"><span class="lineno">  703</span>                <a class="code hl_struct" href="struct_reactive_machine.html">ReactiveMachine</a> m;</div>
+<div class="line"><span class="lineno">  704</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#aa4b8f3e336f314d296322493361db8dd">qMax</a> = dataG.maxReactive;</div>
+<div class="line"><span class="lineno">  705</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#acfc047755dcbc3e2a798987355a62036">qMin</a> = dataG.minReactive;</div>
+<div class="line"><span class="lineno">  706</span> </div>
+<div class="line"><span class="lineno">  707</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a2c954dbbf0a254cb2eadff4825bb4027">hasMax</a> = dataG.haveMaxReactive;</div>
+<div class="line"><span class="lineno">  708</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a3446a4d1176c46673d311f1913b3b3ab">hasMin</a> = dataG.haveMinReactive;</div>
+<div class="line"><span class="lineno">  709</span> </div>
+<div class="line"><span class="lineno">  710</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747">machine</a> = gen;</div>
+<div class="line"><span class="lineno">  711</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a471582b4a852b89b142d08f4809fdbb9">isGenerator</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  712</span> </div>
+<div class="line"><span class="lineno">  713</span>                machines.push_back(m);</div>
+<div class="line"><span class="lineno">  714</span>            }</div>
+<div class="line"><span class="lineno">  715</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>* mot : syncMotorsOnBus) {</div>
+<div class="line"><span class="lineno">  716</span> </div>
+<div class="line"><span class="lineno">  717</span>                <span class="keyword">auto</span> data = mot-&gt;GetPUElectricalData(systemPowerBase);</div>
+<div class="line"><span class="lineno">  718</span> </div>
+<div class="line"><span class="lineno">  719</span>                <a class="code hl_struct" href="struct_reactive_machine.html">ReactiveMachine</a> m;</div>
+<div class="line"><span class="lineno">  720</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#aa4b8f3e336f314d296322493361db8dd">qMax</a> = data.maxReactive;</div>
+<div class="line"><span class="lineno">  721</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#acfc047755dcbc3e2a798987355a62036">qMin</a> = data.minReactive;</div>
+<div class="line"><span class="lineno">  722</span> </div>
+<div class="line"><span class="lineno">  723</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a2c954dbbf0a254cb2eadff4825bb4027">hasMax</a> = data.haveMaxReactive;</div>
+<div class="line"><span class="lineno">  724</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a3446a4d1176c46673d311f1913b3b3ab">hasMin</a> = data.haveMinReactive;</div>
+<div class="line"><span class="lineno">  725</span> </div>
+<div class="line"><span class="lineno">  726</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747">machine</a> = mot;</div>
+<div class="line"><span class="lineno">  727</span>                m.<a class="code hl_variable" href="struct_reactive_machine.html#a471582b4a852b89b142d08f4809fdbb9">isGenerator</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  728</span> </div>
+<div class="line"><span class="lineno">  729</span>                machines.push_back(m);</div>
+<div class="line"><span class="lineno">  730</span>            }</div>
+<div class="line"><span class="lineno">  731</span> </div>
+<div class="line"><span class="lineno">  732</span>            <span class="comment">// Distribute the reactive power among the synchronous machines and set their reactive power</span></div>
+<div class="line"><span class="lineno">  733</span>            <span class="keywordtype">double</span> qTotal = power[i].imag() + loadPower.imag();</div>
+<div class="line"><span class="lineno">  734</span>            <a class="code hl_function" href="class_electric_calculation.html#a0115a1ea5beda3dcb0565d84c9e06de1">DistributeReactivePower</a>(machines, qTotal);</div>
+<div class="line"><span class="lineno">  735</span> </div>
+<div class="line"><span class="lineno">  736</span>            <span class="comment">// Set the reactive power on the machines</span></div>
+<div class="line"><span class="lineno">  737</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; m : machines) {</div>
+<div class="line"><span class="lineno">  738</span> </div>
+<div class="line"><span class="lineno">  739</span>                <span class="keywordflow">if</span> (m.<a class="code hl_variable" href="struct_reactive_machine.html#a471582b4a852b89b142d08f4809fdbb9">isGenerator</a>) {</div>
+<div class="line"><span class="lineno">  740</span> </div>
+<div class="line"><span class="lineno">  741</span>                    <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* gen = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>*<span class="keyword">&gt;</span>(m.<a class="code hl_variable" href="struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747">machine</a>);</div>
+<div class="line"><span class="lineno">  742</span>                    <span class="keyword">auto</span> data = gen-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">  743</span> </div>
+<div class="line"><span class="lineno">  744</span>                    <span class="keywordtype">double</span> reactivePower = m.<a class="code hl_variable" href="struct_reactive_machine.html#a1a2573e9299bcd94d1c9db96191f9a19">q</a> * systemPowerBase;</div>
+<div class="line"><span class="lineno">  745</span> </div>
+<div class="line"><span class="lineno">  746</span>                    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
+<div class="line"><span class="lineno">  747</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
+<div class="line"><span class="lineno">  748</span>                        reactivePower /= systemPowerBase;</div>
+<div class="line"><span class="lineno">  749</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  750</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
+<div class="line"><span class="lineno">  751</span>                        reactivePower /= 1e3;</div>
+<div class="line"><span class="lineno">  752</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  753</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
+<div class="line"><span class="lineno">  754</span>                        reactivePower /= 1e6;</div>
+<div class="line"><span class="lineno">  755</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  756</span>                    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  757</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  758</span>                    }</div>
+<div class="line"><span class="lineno">  759</span> </div>
+<div class="line"><span class="lineno">  760</span>                    data.reactivePower = reactivePower;</div>
+<div class="line"><span class="lineno">  761</span>                    gen-&gt;SetElectricalData(data);</div>
+<div class="line"><span class="lineno">  762</span>                }</div>
+<div class="line"><span class="lineno">  763</span>                <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  764</span> </div>
+<div class="line"><span class="lineno">  765</span>                    <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* mot = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>*<span class="keyword">&gt;</span>(m.<a class="code hl_variable" href="struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747">machine</a>);</div>
+<div class="line"><span class="lineno">  766</span>                    <span class="keyword">auto</span> data = mot-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">  767</span> </div>
+<div class="line"><span class="lineno">  768</span>                    <span class="keywordtype">double</span> reactivePower = m.<a class="code hl_variable" href="struct_reactive_machine.html#a1a2573e9299bcd94d1c9db96191f9a19">q</a> * systemPowerBase;</div>
+<div class="line"><span class="lineno">  769</span> </div>
+<div class="line"><span class="lineno">  770</span>                    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
+<div class="line"><span class="lineno">  771</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU:</div>
+<div class="line"><span class="lineno">  772</span>                        reactivePower /= systemPowerBase;</div>
+<div class="line"><span class="lineno">  773</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  774</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar:</div>
+<div class="line"><span class="lineno">  775</span>                        reactivePower /= 1e3;</div>
+<div class="line"><span class="lineno">  776</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  777</span>                    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar:</div>
+<div class="line"><span class="lineno">  778</span>                        reactivePower /= 1e6;</div>
+<div class="line"><span class="lineno">  779</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  780</span>                    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  781</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  782</span>                    }</div>
+<div class="line"><span class="lineno">  783</span> </div>
+<div class="line"><span class="lineno">  784</span>                    data.reactivePower = reactivePower;</div>
+<div class="line"><span class="lineno">  785</span>                    mot-&gt;SetElectricalData(data);</div>
+<div class="line"><span class="lineno">  786</span>                }</div>
+<div class="line"><span class="lineno">  787</span>            }</div>
+<div class="line"><span class="lineno">  788</span>        }</div>
+<div class="line"><span class="lineno">  789</span>    }</div>
+<div class="line"><span class="lineno">  790</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607"><div class="ttname"><a href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a></div><div class="ttdeci">@ PF_TO_ELEMENT</div></div>
 <div class="ttc" id="a_power_element_8h_html_a73d8987af477cf1cb7e6d5285444a949aaa9cc0242e6b75def5c498ea5fbf43e5"><div class="ttname"><a href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949aaa9cc0242e6b75def5c498ea5fbf43e5">PowerFlowDirection::PF_BUS1_TO_BUS2</a></div><div class="ttdeci">@ PF_BUS1_TO_BUS2</div></div>
 <div class="ttc" id="a_power_element_8h_html_a73d8987af477cf1cb7e6d5285444a949ab1812fe35312d53da73aeb7d3412a395"><div class="ttname"><a href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949ab1812fe35312d53da73aeb7d3412a395">PowerFlowDirection::PF_BUS2_TO_BUS1</a></div><div class="ttdeci">@ PF_BUS2_TO_BUS1</div></div>
 <div class="ttc" id="a_power_element_8h_html_a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a"><div class="ttname"><a href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a></div><div class="ttdeci">@ PF_TO_BUS</div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a0115a1ea5beda3dcb0565d84c9e06de1"><div class="ttname"><a href="class_electric_calculation.html#a0115a1ea5beda3dcb0565d84c9e06de1">ElectricCalculation::DistributeReactivePower</a></div><div class="ttdeci">void DistributeReactivePower(std::vector&lt; ReactiveMachine &gt; &amp;machines, double qTotal)</div><div class="ttdoc">Distribute reactive power among synchronous machines connected to the same bus.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00408">ElectricCalculation.cpp:408</a></div></div>
-<div class="ttc" id="aclass_line_html_a400c8d0397ecdfe6c0a8380ee6bc7e1e"><div class="ttname"><a href="class_line.html#a400c8d0397ecdfe6c0a8380ee6bc7e1e">Line::SetPowerFlowDirection</a></div><div class="ttdeci">virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection)</div><div class="ttdoc">Set the direction of the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_line_8cpp_source.html#l00598">Line.cpp:598</a></div></div>
-<div class="ttc" id="aclass_machines_html_a293cb955dcacaaebca564b8a91ce57d3"><div class="ttname"><a href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">Machines::SetPowerFlowDirection</a></div><div class="ttdeci">virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection)</div><div class="ttdoc">Set the direction of the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_machines_8cpp_source.html#l00379">Machines.cpp:379</a></div></div>
-<div class="ttc" id="aclass_power_element_html_a2ee71f9eb90beadf5439ce9f70469b49"><div class="ttname"><a href="class_power_element.html#a2ee71f9eb90beadf5439ce9f70469b49">PowerElement::SetPowerFlowDirection</a></div><div class="ttdeci">virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection)</div><div class="ttdoc">Set the direction of the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00180">PowerElement.h:180</a></div></div>
-<div class="ttc" id="aclass_transformer_html_a328c419af15701734168c8db62eefa36"><div class="ttname"><a href="class_transformer.html#a328c419af15701734168c8db62eefa36">Transformer::SetPowerFlowDirection</a></div><div class="ttdeci">virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection)</div><div class="ttdoc">Set the direction of the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00583">Transformer.cpp:583</a></div></div>
+<div class="ttc" id="aclass_line_html_a400c8d0397ecdfe6c0a8380ee6bc7e1e"><div class="ttname"><a href="class_line.html#a400c8d0397ecdfe6c0a8380ee6bc7e1e">Line::SetPowerFlowDirection</a></div><div class="ttdeci">virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection)</div><div class="ttdoc">Set the direction of the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_line_8cpp_source.html#l00649">Line.cpp:649</a></div></div>
+<div class="ttc" id="aclass_machines_html_a293cb955dcacaaebca564b8a91ce57d3"><div class="ttname"><a href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">Machines::SetPowerFlowDirection</a></div><div class="ttdeci">virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection)</div><div class="ttdoc">Set the direction of the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_machines_8cpp_source.html#l00553">Machines.cpp:553</a></div></div>
+<div class="ttc" id="aclass_power_element_html_a2ee71f9eb90beadf5439ce9f70469b49"><div class="ttname"><a href="class_power_element.html#a2ee71f9eb90beadf5439ce9f70469b49">PowerElement::SetPowerFlowDirection</a></div><div class="ttdeci">virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection)</div><div class="ttdoc">Set the direction of the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00182">PowerElement.h:182</a></div></div>
+<div class="ttc" id="aclass_transformer_html_a328c419af15701734168c8db62eefa36"><div class="ttname"><a href="class_transformer.html#a328c419af15701734168c8db62eefa36">Transformer::SetPowerFlowDirection</a></div><div class="ttdeci">virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection)</div><div class="ttdoc">Set the direction of the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00858">Transformer.cpp:858</a></div></div>
 <div class="ttc" id="astruct_ind_motor_electrical_data_html"><div class="ttname"><a href="struct_ind_motor_electrical_data.html">IndMotorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00025">IndMotor.h:25</a></div></div>
 <div class="ttc" id="astruct_reactive_machine_html"><div class="ttname"><a href="struct_reactive_machine.html">ReactiveMachine</a></div><div class="ttdoc">Auxiliary structure used to distribute reactive power among machines connected to a bus.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00091">ElectricCalculation.h:91</a></div></div>
 <div class="ttc" id="astruct_reactive_machine_html_a1a2573e9299bcd94d1c9db96191f9a19"><div class="ttname"><a href="struct_reactive_machine.html#a1a2573e9299bcd94d1c9db96191f9a19">ReactiveMachine::q</a></div><div class="ttdeci">double q</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00100">ElectricCalculation.h:100</a></div></div>

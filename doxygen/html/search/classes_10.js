@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['workspace_0',['Workspace',['../class_workspace.html',1,'']]]
+  ['voltagelevelcolour_0',['VoltageLevelColour',['../struct_voltage_level_colour.html',1,'']]]
 ];

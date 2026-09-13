@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -168,6 +168,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa98b8a2f097fc02fee1ea874e19480f3" id="r_aa98b8a2f097fc02fee1ea874e19480f3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#aa98b8a2f097fc02fee1ea874e19480f3">Move</a> (wxPoint2DDouble position)</td></tr>
 <tr class="memdesc:aa98b8a2f097fc02fee1ea874e19480f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the element other position.  <br /></td></tr>
 <tr class="separator:aa98b8a2f097fc02fee1ea874e19480f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f6ff915135115fbcb97cb0c02137951" id="r_a6f6ff915135115fbcb97cb0c02137951"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a6f6ff915135115fbcb97cb0c02137951">AlignToGrid</a> (double gridSize=20.0) override</td></tr>
+<tr class="separator:a6f6ff915135115fbcb97cb0c02137951"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23d2fed4e9b6a69bc4527b4345bd5bbd" id="r_a23d2fed4e9b6a69bc4527b4345bd5bbd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a23d2fed4e9b6a69bc4527b4345bd5bbd">MoveNode</a> (<a class="el" href="class_element.html">Element</a> *element, wxPoint2DDouble position)</td></tr>
 <tr class="memdesc:a23d2fed4e9b6a69bc4527b4345bd5bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move a node. <a class="el" href="class_shunt.html#a56d6136d647f64cf490dd9d7720f6865" title="Update the element attributes related to the movement.">StartMove(wxPoint2DDouble position)</a> before start moving.  <br /></td></tr>
 <tr class="separator:a23d2fed4e9b6a69bc4527b4345bd5bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,6 +191,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abe01dcdf8bc0ba6fc97d41673889fb8e" id="r_abe01dcdf8bc0ba6fc97d41673889fb8e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#abe01dcdf8bc0ba6fc97d41673889fb8e">UpdateNodes</a> ()</td></tr>
 <tr class="memdesc:abe01dcdf8bc0ba6fc97d41673889fb8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the nodes according to the parents. If a parent is removed, use this method.  <br /></td></tr>
 <tr class="separator:abe01dcdf8bc0ba6fc97d41673889fb8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a681d0d71b8281c7e0f610bc51ebdd60a" id="r_a681d0d71b8281c7e0f610bc51ebdd60a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a681d0d71b8281c7e0f610bc51ebdd60a">UpdateSwitchesPosition</a> () override</td></tr>
+<tr class="separator:a681d0d71b8281c7e0f610bc51ebdd60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63eba8b813d773b13dbd8d1ef3819dba" id="r_a63eba8b813d773b13dbd8d1ef3819dba"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a63eba8b813d773b13dbd8d1ef3819dba">UpdatePowerFlowArrowsPosition</a> () override</td></tr>
+<tr class="separator:a63eba8b813d773b13dbd8d1ef3819dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_power_element"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_power_element')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_power_element.html">PowerElement</a></td></tr>
 <tr class="memitem:a382cdc0897802eb0a89692483fa7043e inherit pub_methods_class_power_element" id="r_a382cdc0897802eb0a89692483fa7043e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a382cdc0897802eb0a89692483fa7043e">PowerElement</a> ()</td></tr>
 <tr class="memdesc:a382cdc0897802eb0a89692483fa7043e inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
@@ -326,9 +332,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element" id="r_a4a4840007087b2abb7fcdda29ca7dcad"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; wxPoint2DDouble &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a4a4840007087b2abb7fcdda29ca7dcad">GetPointList</a> () const</td></tr>
 <tr class="memdesc:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list of points that connect the element to bus.  <br /></td></tr>
 <tr class="separator:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a569178e9138490a981511a644536c0f9 inherit pub_methods_class_element" id="r_a569178e9138490a981511a644536c0f9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent, wxPoint2DDouble position)</td></tr>
-<tr class="memdesc:a569178e9138490a981511a644536c0f9 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted.  <br /></td></tr>
-<tr class="separator:a569178e9138490a981511a644536c0f9 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d085e56588a6077191be04bd6fa6ee3 inherit pub_methods_class_element" id="r_a3d085e56588a6077191be04bd6fa6ee3"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; wxPoint2DDouble &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a3d085e56588a6077191be04bd6fa6ee3">GetPointListRef</a> ()</td></tr>
+<tr class="separator:a3d085e56588a6077191be04bd6fa6ee3 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72f58b63026e6012f5d8b7a70a33bede inherit pub_methods_class_element" id="r_a72f58b63026e6012f5d8b7a70a33bede"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a72f58b63026e6012f5d8b7a70a33bede">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent, wxPoint2DDouble position, bool isOpening=false)</td></tr>
+<tr class="memdesc:a72f58b63026e6012f5d8b7a70a33bede inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted.  <br /></td></tr>
+<tr class="separator:a72f58b63026e6012f5d8b7a70a33bede inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element" id="r_ad1f153a87797633ab310d07e1d06eba9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#ad1f153a87797633ab310d07e1d06eba9">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent)</td></tr>
 <tr class="memdesc:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent to the element.  <br /></td></tr>
 <tr class="separator:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -418,6 +426,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9332ba7b4ce2051a3935081cc890c03c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a386ab44db7634b76da0c98215dd73a00 inherit pub_methods_class_element" id="r_a386ab44db7634b76da0c98215dd73a00"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a386ab44db7634b76da0c98215dd73a00">DrawDCTriangle</a> (std::vector&lt; wxPoint &gt; points, wxDC &amp;dc) const</td></tr>
 <tr class="separator:a386ab44db7634b76da0c98215dd73a00 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4dbd5da8ee7814dbdf1dcaedb428c30 inherit pub_methods_class_element" id="r_aa4dbd5da8ee7814dbdf1dcaedb428c30"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#aa4dbd5da8ee7814dbdf1dcaedb428c30">DrawStabilityEventGC</a> (wxGraphicsContext *gc, wxPoint2DDouble translation, double scale, <a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, bool rotateAnchor=false, wxPoint2DDouble iconPosition=wxPoint2DDouble(-1, -1)) const</td></tr>
+<tr class="separator:aa4dbd5da8ee7814dbdf1dcaedb428c30 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element" id="r_a9e0ee619f7429004eaeddb9040f6d70f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a> (wxPoint2DDouble position, wxGraphicsContext *gc) const</td></tr>
 <tr class="memdesc:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a point.  <br /></td></tr>
 <tr class="separator:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -434,6 +444,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element" id="r_a5bf79b05af0dd1bbb62b352f293e1421"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="class_element.html">Element</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a> () const</td></tr>
 <tr class="memdesc:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Child list.  <br /></td></tr>
 <tr class="separator:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc4b94082f7491271f5507d38efc003 inherit pub_methods_class_element" id="r_a1cc4b94082f7491271f5507d38efc003"><td class="memItemLeft" align="right" valign="top">virtual wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a1cc4b94082f7491271f5507d38efc003">GetMoveStartPosition</a> () const</td></tr>
+<tr class="separator:a1cc4b94082f7491271f5507d38efc003 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3a49415bed103647fb07354c3be17c inherit pub_methods_class_element" id="r_acf3a49415bed103647fb07354c3be17c"><td class="memItemLeft" align="right" valign="top">virtual wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#acf3a49415bed103647fb07354c3be17c">GetMovePosition</a> () const</td></tr>
+<tr class="separator:acf3a49415bed103647fb07354c3be17c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element" id="r_a57f5771fd003020fef3866a1d1dc7487"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a57f5771fd003020fef3866a1d1dc7487">CalculateBoundaries</a> (wxPoint2DDouble &amp;leftUp, wxPoint2DDouble &amp;rightBottom) const</td></tr>
 <tr class="memdesc:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the element boundaries.  <br /></td></tr>
 <tr class="separator:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -463,10 +477,6 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a33a6bcf6612d4cf8c4de8e9f916a22e8" id="r_a33a6bcf6612d4cf8c4de8e9f916a22e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a33a6bcf6612d4cf8c4de8e9f916a22e8">UpdateSwitchesPosition</a> ()</td></tr>
-<tr class="separator:a33a6bcf6612d4cf8c4de8e9f916a22e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98e8f5798d17f613dfc0964e5007cd91" id="r_a98e8f5798d17f613dfc0964e5007cd91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a98e8f5798d17f613dfc0964e5007cd91">UpdatePowerFlowArrowsPosition</a> ()</td></tr>
-<tr class="separator:a98e8f5798d17f613dfc0964e5007cd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab0e7218156274492963308dda0a8230" id="r_aab0e7218156274492963308dda0a8230"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#aab0e7218156274492963308dda0a8230">DrawDCGround</a> (wxPoint2DDouble position, wxGraphicsContext *gc) const</td></tr>
 <tr class="separator:aab0e7218156274492963308dda0a8230"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aad955b38440e553f821799a9cd15d2" id="r_a3aad955b38440e553f821799a9cd15d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a3aad955b38440e553f821799a9cd15d2">DrawDCGround</a> (wxPoint2DDouble position, wxDC &amp;dc) const</td></tr>
@@ -606,6 +616,106 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6f6ff915135115fbcb97cb0c02137951" name="a6f6ff915135115fbcb97cb0c02137951"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f6ff915135115fbcb97cb0c02137951">&#9670;&#160;</a></span>AlignToGrid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Shunt::AlignToGrid </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>gridSize</em> = <code>20.0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00046">46</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>{</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">if</span> (gridSize &lt;= 0.0)</div>
+<div class="line"><span class="lineno">   49</span>        gridSize = 20.0;</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span>    <span class="comment">// 1. Align m_position to the grid.</span></div>
+<div class="line"><span class="lineno">   52</span>    wxPoint2DDouble oldPosition = m_position;</div>
+<div class="line"><span class="lineno">   53</span> </div>
+<div class="line"><span class="lineno">   54</span>    wxPoint2DDouble newPosition(</div>
+<div class="line"><span class="lineno">   55</span>        std::round(oldPosition.m_x / gridSize) * gridSize,</div>
+<div class="line"><span class="lineno">   56</span>        std::round(oldPosition.m_y / gridSize) * gridSize);</div>
+<div class="line"><span class="lineno">   57</span> </div>
+<div class="line"><span class="lineno">   58</span>    wxPoint2DDouble delta = newPosition - oldPosition;</div>
+<div class="line"><span class="lineno">   59</span> </div>
+<div class="line"><span class="lineno">   60</span>    m_position = newPosition;</div>
+<div class="line"><span class="lineno">   61</span>    <a class="code hl_function" href="class_element.html#a920fe7ba1563615857618f01e64b3284">SetPosition</a>(m_position);</div>
+<div class="line"><span class="lineno">   62</span> </div>
+<div class="line"><span class="lineno">   63</span>    <span class="comment">// 2. Move the shunt geometry together with m_position.</span></div>
+<div class="line"><span class="lineno">   64</span>    <span class="comment">// Point 0 = bus connection.</span></div>
+<div class="line"><span class="lineno">   65</span>    <span class="comment">// Point 1 = switch.</span></div>
+<div class="line"><span class="lineno">   66</span>    <span class="comment">// Point 2+ = shunt geometry.</span></div>
+<div class="line"><span class="lineno">   67</span>    <span class="comment">//</span></div>
+<div class="line"><span class="lineno">   68</span>    <span class="comment">// Point 0 is not moved here because it must be aligned  with the bus in the next step.</span></div>
+<div class="line"><span class="lineno">   69</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 2; i &lt; m_pointList.size(); ++i) {</div>
+<div class="line"><span class="lineno">   70</span>        m_pointList[i] += delta;</div>
+<div class="line"><span class="lineno">   71</span>    }</div>
+<div class="line"><span class="lineno">   72</span> </div>
+<div class="line"><span class="lineno">   73</span>    <span class="comment">// 3. Align the bus connection point (m_pointList[0]) with the reference point (m_pointList[2]).</span></div>
+<div class="line"><span class="lineno">   74</span>    <span class="comment">//</span></div>
+<div class="line"><span class="lineno">   75</span>    <span class="comment">// The alignment is completely independent of m_angle.</span></div>
+<div class="line"><span class="lineno">   76</span>    <span class="comment">// m_pointList[2] determines the position along the bus.</span></div>
+<div class="line"><span class="lineno">   77</span>    <span class="keywordflow">if</span> (!m_parentList.empty() &amp;&amp;</div>
+<div class="line"><span class="lineno">   78</span>        m_parentList[0] &amp;&amp;</div>
+<div class="line"><span class="lineno">   79</span>        m_pointList.size() &gt;= 3) {</div>
+<div class="line"><span class="lineno">   80</span> </div>
+<div class="line"><span class="lineno">   81</span>        <a class="code hl_class" href="class_element.html">Element</a>* bus = m_parentList[0];</div>
+<div class="line"><span class="lineno">   82</span>        wxPoint2DDouble p2 = m_pointList[2];</div>
+<div class="line"><span class="lineno">   83</span> </div>
+<div class="line"><span class="lineno">   84</span>        <span class="comment">// Transform p2 to the local coordinate system of the bus.</span></div>
+<div class="line"><span class="lineno">   85</span>        wxPoint2DDouble p2Delta(p2.m_x - bus-&gt;<a class="code hl_function" href="class_element.html#a536ad18a847dcc979c984b3cb287f238">GetPosition</a>().m_x, p2.m_y - bus-&gt;<a class="code hl_function" href="class_element.html#a536ad18a847dcc979c984b3cb287f238">GetPosition</a>().m_y);</div>
+<div class="line"><span class="lineno">   86</span>        wxPoint2DDouble p2Local = bus-&gt;RotateLocal(p2Delta, -bus-&gt;<a class="code hl_function" href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">GetAngle</a>());</div>
+<div class="line"><span class="lineno">   87</span> </div>
+<div class="line"><span class="lineno">   88</span>        <span class="comment">// The new connection point is located at the same longitudinal position as p2 and exactly on the center line of the bus.</span></div>
+<div class="line"><span class="lineno">   89</span>        wxPoint2DDouble candidateLocal(p2Local.m_x, 0.0);</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>        <span class="comment">// The candidate must remain within the length of the bus.</span></div>
+<div class="line"><span class="lineno">   92</span>        <span class="keywordtype">double</span> halfWidth = bus-&gt;<a class="code hl_function" href="class_element.html#a23e1fe2745c70cfb43725f608c4bce00">GetWidth</a>() / 2.0 + 2.0;</div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span>        <span class="keywordflow">if</span> (std::abs(candidateLocal.m_x) &lt;= halfWidth) {</div>
+<div class="line"><span class="lineno">   95</span> </div>
+<div class="line"><span class="lineno">   96</span>            <span class="comment">// Transform the candidate back to global coordinates.</span></div>
+<div class="line"><span class="lineno">   97</span>            wxPoint2DDouble candidate = bus-&gt;<a class="code hl_function" href="class_element.html#a536ad18a847dcc979c984b3cb287f238">GetPosition</a>() + bus-&gt;RotateLocal(candidateLocal, bus-&gt;<a class="code hl_function" href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">GetAngle</a>());</div>
+<div class="line"><span class="lineno">   98</span>            m_pointList[0] = candidate;</div>
+<div class="line"><span class="lineno">   99</span>        }</div>
+<div class="line"><span class="lineno">  100</span>    }</div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!m_pointList.empty()) {</div>
+<div class="line"><span class="lineno">  102</span> </div>
+<div class="line"><span class="lineno">  103</span>        <span class="comment">// No parent: simply snap the connection point to the grid.</span></div>
+<div class="line"><span class="lineno">  104</span>        m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;</div>
+<div class="line"><span class="lineno">  105</span>        m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;</div>
+<div class="line"><span class="lineno">  106</span>    }</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>    <span class="comment">// 4. Update dependent geometry.</span></div>
+<div class="line"><span class="lineno">  109</span>    UpdateSwitchesPosition();</div>
+<div class="line"><span class="lineno">  110</span>    UpdatePowerFlowArrowsPosition();</div>
+<div class="line"><span class="lineno">  111</span>}</div>
+<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00114">Element.h:115</a></div></div>
+<div class="ttc" id="aclass_element_html_a23e1fe2745c70cfb43725f608c4bce00"><div class="ttname"><a href="class_element.html#a23e1fe2745c70cfb43725f608c4bce00">Element::GetWidth</a></div><div class="ttdeci">double GetWidth() const</div><div class="ttdoc">Get the element width.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00209">Element.h:209</a></div></div>
+<div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00189">Element.h:189</a></div></div>
+<div class="ttc" id="aclass_element_html_a5c75d8a6e28326dd568104a4d9d3473f"><div class="ttname"><a href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">Element::GetAngle</a></div><div class="ttdeci">double GetAngle() const</div><div class="ttdoc">Get the element angle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00214">Element.h:214</a></div></div>
+<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00033">Element.cpp:33</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a449431a2044b838d35cbb991aa1de658" name="a449431a2044b838d35cbb991aa1de658"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a449431a2044b838d35cbb991aa1de658">&#9670;&#160;</a></span>Contains()</h2>
 
@@ -681,33 +791,33 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00186">186</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  187</span>{</div>
-<div class="line"><span class="lineno">  188</span>    wxPoint groundPts[8];</div>
-<div class="line"><span class="lineno">  189</span>    wxPoint2DDouble p;</div>
-<div class="line"><span class="lineno">  190</span> </div>
-<div class="line"><span class="lineno">  191</span>    p = position;</div>
-<div class="line"><span class="lineno">  192</span>    groundPts[0] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><span class="lineno">  193</span>    p = position + wxPoint2DDouble(0, 10);</div>
-<div class="line"><span class="lineno">  194</span>    groundPts[1] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><span class="lineno">  195</span>    p = position + wxPoint2DDouble(-10, 10);</div>
-<div class="line"><span class="lineno">  196</span>    groundPts[2] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><span class="lineno">  197</span>    p = position + wxPoint2DDouble(10, 10);</div>
-<div class="line"><span class="lineno">  198</span>    groundPts[3] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><span class="lineno">  199</span>    p = position + wxPoint2DDouble(-6, 15);</div>
-<div class="line"><span class="lineno">  200</span>    groundPts[4] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><span class="lineno">  201</span>    p = position + wxPoint2DDouble(6, 15);</div>
-<div class="line"><span class="lineno">  202</span>    groundPts[5] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><span class="lineno">  203</span>    p = position + wxPoint2DDouble(-3, 20);</div>
-<div class="line"><span class="lineno">  204</span>    groundPts[6] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><span class="lineno">  205</span>    p = position + wxPoint2DDouble(3, 20);</div>
-<div class="line"><span class="lineno">  206</span>    groundPts[7] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><span class="lineno">  207</span> </div>
-<div class="line"><span class="lineno">  208</span>    dc.DrawLines(2, &amp;groundPts[0]);</div>
-<div class="line"><span class="lineno">  209</span>    dc.DrawLines(2, &amp;groundPts[2]);</div>
-<div class="line"><span class="lineno">  210</span>    dc.DrawLines(2, &amp;groundPts[4]);</div>
-<div class="line"><span class="lineno">  211</span>    dc.DrawLines(2, &amp;groundPts[6]);</div>
-<div class="line"><span class="lineno">  212</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00256">256</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  257</span>{</div>
+<div class="line"><span class="lineno">  258</span>    wxPoint groundPts[8];</div>
+<div class="line"><span class="lineno">  259</span>    wxPoint2DDouble p;</div>
+<div class="line"><span class="lineno">  260</span> </div>
+<div class="line"><span class="lineno">  261</span>    p = position;</div>
+<div class="line"><span class="lineno">  262</span>    groundPts[0] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><span class="lineno">  263</span>    p = position + wxPoint2DDouble(0, 10);</div>
+<div class="line"><span class="lineno">  264</span>    groundPts[1] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><span class="lineno">  265</span>    p = position + wxPoint2DDouble(-10, 10);</div>
+<div class="line"><span class="lineno">  266</span>    groundPts[2] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><span class="lineno">  267</span>    p = position + wxPoint2DDouble(10, 10);</div>
+<div class="line"><span class="lineno">  268</span>    groundPts[3] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><span class="lineno">  269</span>    p = position + wxPoint2DDouble(-6, 15);</div>
+<div class="line"><span class="lineno">  270</span>    groundPts[4] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><span class="lineno">  271</span>    p = position + wxPoint2DDouble(6, 15);</div>
+<div class="line"><span class="lineno">  272</span>    groundPts[5] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><span class="lineno">  273</span>    p = position + wxPoint2DDouble(-3, 20);</div>
+<div class="line"><span class="lineno">  274</span>    groundPts[6] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><span class="lineno">  275</span>    p = position + wxPoint2DDouble(3, 20);</div>
+<div class="line"><span class="lineno">  276</span>    groundPts[7] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><span class="lineno">  277</span> </div>
+<div class="line"><span class="lineno">  278</span>    dc.DrawLines(2, &amp;groundPts[0]);</div>
+<div class="line"><span class="lineno">  279</span>    dc.DrawLines(2, &amp;groundPts[2]);</div>
+<div class="line"><span class="lineno">  280</span>    dc.DrawLines(2, &amp;groundPts[4]);</div>
+<div class="line"><span class="lineno">  281</span>    dc.DrawLines(2, &amp;groundPts[6]);</div>
+<div class="line"><span class="lineno">  282</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -745,23 +855,23 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00168">168</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  169</span>{</div>
-<div class="line"><span class="lineno">  170</span>    std::vector&lt;wxPoint2DDouble&gt; groundPts;</div>
-<div class="line"><span class="lineno">  171</span>    groundPts.push_back(position);</div>
-<div class="line"><span class="lineno">  172</span>    groundPts.push_back(position + wxPoint2DDouble(0, 10));</div>
-<div class="line"><span class="lineno">  173</span>    groundPts.push_back(position + wxPoint2DDouble(-10, 10));</div>
-<div class="line"><span class="lineno">  174</span>    groundPts.push_back(position + wxPoint2DDouble(10, 10));</div>
-<div class="line"><span class="lineno">  175</span>    groundPts.push_back(position + wxPoint2DDouble(-6, 15));</div>
-<div class="line"><span class="lineno">  176</span>    groundPts.push_back(position + wxPoint2DDouble(6, 15));</div>
-<div class="line"><span class="lineno">  177</span>    groundPts.push_back(position + wxPoint2DDouble(-3, 20));</div>
-<div class="line"><span class="lineno">  178</span>    groundPts.push_back(position + wxPoint2DDouble(3, 20));</div>
-<div class="line"><span class="lineno">  179</span> </div>
-<div class="line"><span class="lineno">  180</span>    gc-&gt;StrokeLines(2, &amp;groundPts[0]);</div>
-<div class="line"><span class="lineno">  181</span>    gc-&gt;StrokeLines(2, &amp;groundPts[2]);</div>
-<div class="line"><span class="lineno">  182</span>    gc-&gt;StrokeLines(2, &amp;groundPts[4]);</div>
-<div class="line"><span class="lineno">  183</span>    gc-&gt;StrokeLines(2, &amp;groundPts[6]);</div>
-<div class="line"><span class="lineno">  184</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00238">238</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  239</span>{</div>
+<div class="line"><span class="lineno">  240</span>    std::vector&lt;wxPoint2DDouble&gt; groundPts;</div>
+<div class="line"><span class="lineno">  241</span>    groundPts.push_back(position);</div>
+<div class="line"><span class="lineno">  242</span>    groundPts.push_back(position + wxPoint2DDouble(0, 10));</div>
+<div class="line"><span class="lineno">  243</span>    groundPts.push_back(position + wxPoint2DDouble(-10, 10));</div>
+<div class="line"><span class="lineno">  244</span>    groundPts.push_back(position + wxPoint2DDouble(10, 10));</div>
+<div class="line"><span class="lineno">  245</span>    groundPts.push_back(position + wxPoint2DDouble(-6, 15));</div>
+<div class="line"><span class="lineno">  246</span>    groundPts.push_back(position + wxPoint2DDouble(6, 15));</div>
+<div class="line"><span class="lineno">  247</span>    groundPts.push_back(position + wxPoint2DDouble(-3, 20));</div>
+<div class="line"><span class="lineno">  248</span>    groundPts.push_back(position + wxPoint2DDouble(3, 20));</div>
+<div class="line"><span class="lineno">  249</span> </div>
+<div class="line"><span class="lineno">  250</span>    gc-&gt;StrokeLines(2, &amp;groundPts[0]);</div>
+<div class="line"><span class="lineno">  251</span>    gc-&gt;StrokeLines(2, &amp;groundPts[2]);</div>
+<div class="line"><span class="lineno">  252</span>    gc-&gt;StrokeLines(2, &amp;groundPts[4]);</div>
+<div class="line"><span class="lineno">  253</span>    gc-&gt;StrokeLines(2, &amp;groundPts[6]);</div>
+<div class="line"><span class="lineno">  254</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -850,19 +960,18 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#abe884d99d12d5252e18956162115b025">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00032">32</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   33</span>{</div>
-<div class="line"><span class="lineno">   34</span>    <a class="code hl_function" href="class_element.html#a920fe7ba1563615857618f01e64b3284">SetPosition</a>(m_movePos + position - m_moveStartPt);</div>
-<div class="line"><span class="lineno">   35</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 2; i &lt; (int)m_pointList.size(); i++) {</div>
-<div class="line"><span class="lineno">   36</span>        m_pointList[i] = m_movePts[i] + position - m_moveStartPt;</div>
-<div class="line"><span class="lineno">   37</span>    }</div>
-<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">if</span>(!m_parentList[0]) {</div>
-<div class="line"><span class="lineno">   39</span>        m_pointList[0] = m_movePts[0] + position - m_moveStartPt;</div>
-<div class="line"><span class="lineno">   40</span>    }</div>
-<div class="line"><span class="lineno">   41</span>    UpdateSwitchesPosition();</div>
-<div class="line"><span class="lineno">   42</span>    UpdatePowerFlowArrowsPosition();</div>
-<div class="line"><span class="lineno">   43</span>}</div>
-<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00033">Element.cpp:33</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00033">33</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>{</div>
+<div class="line"><span class="lineno">   35</span>    <a class="code hl_function" href="class_element.html#a920fe7ba1563615857618f01e64b3284">SetPosition</a>(m_movePos + position - m_moveStartPt);</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; (int)m_pointList.size(); i++) {</div>
+<div class="line"><span class="lineno">   37</span>        m_pointList[i] = m_movePts[i] + position - m_moveStartPt;</div>
+<div class="line"><span class="lineno">   38</span>    }</div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">if</span> (!m_parentList[0]) {</div>
+<div class="line"><span class="lineno">   40</span>        m_pointList[0] = m_movePts[0] + position - m_moveStartPt;</div>
+<div class="line"><span class="lineno">   41</span>    }</div>
+<div class="line"><span class="lineno">   42</span>    UpdateSwitchesPosition();</div>
+<div class="line"><span class="lineno">   43</span>    UpdatePowerFlowArrowsPosition();</div>
+<div class="line"><span class="lineno">   44</span>}</div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -921,27 +1030,28 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a870e266e0457bacbc3f7ef1fb70c6fdd">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00045">45</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>{</div>
-<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">if</span>(element) {</div>
-<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">if</span>(element == m_parentList[0]) {</div>
-<div class="line"><span class="lineno">   49</span>            m_pointList[0] = m_movePts[0] + position - m_moveStartPt;</div>
-<div class="line"><span class="lineno">   50</span>        }</div>
-<div class="line"><span class="lineno">   51</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   52</span>        <span class="keywordflow">if</span>(m_activeNodeID == 1) {</div>
-<div class="line"><span class="lineno">   53</span>            m_pointList[0] = m_movePts[0] + position - m_moveStartPt;</div>
-<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">if</span>(m_parentList[0]) {</div>
-<div class="line"><span class="lineno">   55</span>                m_parentList[0]-&gt;RemoveChild(<span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   56</span>                m_parentList[0] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">   57</span>                m_online = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   58</span>            }</div>
-<div class="line"><span class="lineno">   59</span>        }</div>
-<div class="line"><span class="lineno">   60</span>    }</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>    <span class="comment">// Recalculate switches positions</span></div>
-<div class="line"><span class="lineno">   63</span>    UpdateSwitchesPosition();</div>
-<div class="line"><span class="lineno">   64</span>    UpdatePowerFlowArrowsPosition();</div>
-<div class="line"><span class="lineno">   65</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00113">113</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  114</span>{</div>
+<div class="line"><span class="lineno">  115</span>    <span class="keywordflow">if</span> (element) {</div>
+<div class="line"><span class="lineno">  116</span>        <span class="keywordflow">if</span> (element == m_parentList[0]) {</div>
+<div class="line"><span class="lineno">  117</span>            m_pointList[0] = m_movePts[0] + position - m_moveStartPt;</div>
+<div class="line"><span class="lineno">  118</span>        }</div>
+<div class="line"><span class="lineno">  119</span>    }</div>
+<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  121</span>        <span class="keywordflow">if</span> (m_activeNodeID == 1) {</div>
+<div class="line"><span class="lineno">  122</span>            m_pointList[0] = m_movePts[0] + position - m_moveStartPt;</div>
+<div class="line"><span class="lineno">  123</span>            <span class="keywordflow">if</span> (m_parentList[0]) {</div>
+<div class="line"><span class="lineno">  124</span>                m_parentList[0]-&gt;RemoveChild(<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  125</span>                m_parentList[0] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  126</span>                m_online = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  127</span>            }</div>
+<div class="line"><span class="lineno">  128</span>        }</div>
+<div class="line"><span class="lineno">  129</span>    }</div>
+<div class="line"><span class="lineno">  130</span> </div>
+<div class="line"><span class="lineno">  131</span>    <span class="comment">// Recalculate switches positions</span></div>
+<div class="line"><span class="lineno">  132</span>    UpdateSwitchesPosition();</div>
+<div class="line"><span class="lineno">  133</span>    UpdatePowerFlowArrowsPosition();</div>
+<div class="line"><span class="lineno">  134</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -980,19 +1090,19 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a95b4f7e9341883ec39d0201148afffb4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00084">84</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   85</span>{</div>
-<div class="line"><span class="lineno">   86</span>    wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,</div>
-<div class="line"><span class="lineno">   87</span>                            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);</div>
-<div class="line"><span class="lineno">   88</span> </div>
-<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span>(nodeRect.Contains(position)) {</div>
-<div class="line"><span class="lineno">   90</span>        m_activeNodeID = 1;</div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   92</span>    }</div>
-<div class="line"><span class="lineno">   93</span> </div>
-<div class="line"><span class="lineno">   94</span>    m_activeNodeID = 0;</div>
-<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   96</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00153">153</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  154</span>{</div>
+<div class="line"><span class="lineno">  155</span>    wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,</div>
+<div class="line"><span class="lineno">  156</span>        10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);</div>
+<div class="line"><span class="lineno">  157</span> </div>
+<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">if</span> (nodeRect.Contains(position)) {</div>
+<div class="line"><span class="lineno">  159</span>        m_activeNodeID = 1;</div>
+<div class="line"><span class="lineno">  160</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  161</span>    }</div>
+<div class="line"><span class="lineno">  162</span> </div>
+<div class="line"><span class="lineno">  163</span>    m_activeNodeID = 0;</div>
+<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  165</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1030,15 +1140,15 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a9504437b60faf2c5a27584de8a24810c">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00074">74</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>{</div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">if</span>(parent == m_parentList[0]) {</div>
-<div class="line"><span class="lineno">   77</span>        m_parentList[0] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">   78</span>        m_online = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   79</span>        UpdateSwitchesPosition();</div>
-<div class="line"><span class="lineno">   80</span>        UpdatePowerFlowArrowsPosition();</div>
-<div class="line"><span class="lineno">   81</span>    }</div>
-<div class="line"><span class="lineno">   82</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00143">143</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  144</span>{</div>
+<div class="line"><span class="lineno">  145</span>    <span class="keywordflow">if</span> (parent == m_parentList[0]) {</div>
+<div class="line"><span class="lineno">  146</span>        m_parentList[0] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  147</span>        m_online = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  148</span>        UpdateSwitchesPosition();</div>
+<div class="line"><span class="lineno">  149</span>        UpdatePowerFlowArrowsPosition();</div>
+<div class="line"><span class="lineno">  150</span>    }</div>
+<div class="line"><span class="lineno">  151</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1087,18 +1197,18 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#af26c67b6dd32eb1b3e417fddf54818c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00141">141</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  142</span>{</div>
-<div class="line"><span class="lineno">  143</span>    <span class="keywordtype">double</span> rotAngle = m_rotationAngle;</div>
-<div class="line"><span class="lineno">  144</span>    <span class="keywordflow">if</span>(!clockwise) rotAngle = -m_rotationAngle;</div>
-<div class="line"><span class="lineno">  145</span> </div>
-<div class="line"><span class="lineno">  146</span>    <span class="keywordflow">if</span>(parent == m_parentList[0]) {</div>
-<div class="line"><span class="lineno">  147</span>        m_pointList[0] = parent-&gt;<a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(m_pointList[0], rotAngle);</div>
-<div class="line"><span class="lineno">  148</span>        UpdateSwitchesPosition();</div>
-<div class="line"><span class="lineno">  149</span>        UpdatePowerFlowArrowsPosition();</div>
-<div class="line"><span class="lineno">  150</span>    }</div>
-<div class="line"><span class="lineno">  151</span>}</div>
-<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00228">Element.cpp:228</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00211">211</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  212</span>{</div>
+<div class="line"><span class="lineno">  213</span>    <span class="keywordtype">double</span> rotAngle = m_rotationAngle;</div>
+<div class="line"><span class="lineno">  214</span>    <span class="keywordflow">if</span> (!clockwise) rotAngle = -m_rotationAngle;</div>
+<div class="line"><span class="lineno">  215</span> </div>
+<div class="line"><span class="lineno">  216</span>    <span class="keywordflow">if</span> (parent == m_parentList[0]) {</div>
+<div class="line"><span class="lineno">  217</span>        m_pointList[0] = parent-&gt;<a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(m_pointList[0], rotAngle);</div>
+<div class="line"><span class="lineno">  218</span>        UpdateSwitchesPosition();</div>
+<div class="line"><span class="lineno">  219</span>        UpdatePowerFlowArrowsPosition();</div>
+<div class="line"><span class="lineno">  220</span>    }</div>
+<div class="line"><span class="lineno">  221</span>}</div>
+<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00298">Element.cpp:298</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1147,35 +1257,34 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ac7490a91f3edfff08584567cc84d86b5">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00098">98</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   99</span>{</div>
-<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">if</span>(parent &amp;&amp; m_activeNodeID != 0) {</div>
-<div class="line"><span class="lineno">  101</span>        wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,</div>
-<div class="line"><span class="lineno">  102</span>                                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);</div>
-<div class="line"><span class="lineno">  103</span> </div>
-<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">if</span>(parent-&gt;<a class="code hl_function" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Intersects</a>(nodeRect)) {</div>
-<div class="line"><span class="lineno">  105</span>            m_parentList[0] = parent;</div>
-<div class="line"><span class="lineno">  106</span> </div>
-<div class="line"><span class="lineno">  107</span>            <span class="comment">// Centralize the node on bus.</span></div>
-<div class="line"><span class="lineno">  108</span>            wxPoint2DDouble parentPt =</div>
-<div class="line"><span class="lineno">  109</span>                parent-&gt;<a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(m_pointList[0], -parent-&gt;<a class="code hl_function" href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">GetAngle</a>());  <span class="comment">// Rotate click to horizontal position.</span></div>
-<div class="line"><span class="lineno">  110</span>            parentPt.m_y = parent-&gt;<a class="code hl_function" href="class_element.html#a536ad18a847dcc979c984b3cb287f238">GetPosition</a>().m_y;                           <span class="comment">// Centralize on bus.</span></div>
-<div class="line"><span class="lineno">  111</span>            parentPt = parent-&gt;<a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(parentPt, parent-&gt;<a class="code hl_function" href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">GetAngle</a>());</div>
-<div class="line"><span class="lineno">  112</span>            m_pointList[0] = parentPt;</div>
-<div class="line"><span class="lineno">  113</span> </div>
-<div class="line"><span class="lineno">  114</span>            UpdateSwitchesPosition();</div>
-<div class="line"><span class="lineno">  115</span>            UpdatePowerFlowArrowsPosition();</div>
-<div class="line"><span class="lineno">  116</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  117</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  118</span>            m_parentList[0] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  119</span>            m_online = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  120</span>        }</div>
-<div class="line"><span class="lineno">  121</span>    }</div>
-<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  123</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00167">167</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  168</span>{</div>
+<div class="line"><span class="lineno">  169</span>    <span class="keywordflow">if</span> (parent &amp;&amp; m_activeNodeID != 0) {</div>
+<div class="line"><span class="lineno">  170</span>        wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,</div>
+<div class="line"><span class="lineno">  171</span>            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);</div>
+<div class="line"><span class="lineno">  172</span> </div>
+<div class="line"><span class="lineno">  173</span>        <span class="keywordflow">if</span> (parent-&gt;<a class="code hl_function" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Intersects</a>(nodeRect)) {</div>
+<div class="line"><span class="lineno">  174</span>            m_parentList[0] = parent;</div>
+<div class="line"><span class="lineno">  175</span> </div>
+<div class="line"><span class="lineno">  176</span>            <span class="comment">// Centralize the node on bus.</span></div>
+<div class="line"><span class="lineno">  177</span>            wxPoint2DDouble parentPt =</div>
+<div class="line"><span class="lineno">  178</span>                parent-&gt;<a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(m_pointList[0], -parent-&gt;<a class="code hl_function" href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">GetAngle</a>());  <span class="comment">// Rotate click to horizontal position.</span></div>
+<div class="line"><span class="lineno">  179</span>            parentPt.m_y = parent-&gt;<a class="code hl_function" href="class_element.html#a536ad18a847dcc979c984b3cb287f238">GetPosition</a>().m_y;                           <span class="comment">// Centralize on bus.</span></div>
+<div class="line"><span class="lineno">  180</span>            parentPt = parent-&gt;<a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(parentPt, parent-&gt;<a class="code hl_function" href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">GetAngle</a>());</div>
+<div class="line"><span class="lineno">  181</span>            m_pointList[0] = parentPt;</div>
+<div class="line"><span class="lineno">  182</span> </div>
+<div class="line"><span class="lineno">  183</span>            UpdateSwitchesPosition();</div>
+<div class="line"><span class="lineno">  184</span>            UpdatePowerFlowArrowsPosition();</div>
+<div class="line"><span class="lineno">  185</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  186</span>        }</div>
+<div class="line"><span class="lineno">  187</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  188</span>            m_parentList[0] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  189</span>            m_online = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  190</span>        }</div>
+<div class="line"><span class="lineno">  191</span>    }</div>
+<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  193</span>}</div>
 <div class="ttc" id="aclass_element_html_a038dfd8452fe48ab04bc4e47820c148e"><div class="ttname"><a href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element::Intersects</a></div><div class="ttdeci">virtual bool Intersects(wxRect2DDouble rect) const =0</div><div class="ttdoc">Check if the element's rect intersects other rect.</div></div>
-<div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00188">Element.h:188</a></div></div>
-<div class="ttc" id="aclass_element_html_a5c75d8a6e28326dd568104a4d9d3473f"><div class="ttname"><a href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">Element::GetAngle</a></div><div class="ttdeci">double GetAngle() const</div><div class="ttdoc">Get the element angle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00213">Element.h:213</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1229,12 +1338,12 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a846a2a51780a99363b4d4b1812ca16b4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00067">67</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   68</span>{</div>
-<div class="line"><span class="lineno">   69</span>    m_moveStartPt = position;</div>
-<div class="line"><span class="lineno">   70</span>    m_movePts = m_pointList;</div>
-<div class="line"><span class="lineno">   71</span>    m_movePos = m_position;</div>
-<div class="line"><span class="lineno">   72</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00136">136</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  137</span>{</div>
+<div class="line"><span class="lineno">  138</span>    m_moveStartPt = position;</div>
+<div class="line"><span class="lineno">  139</span>    m_movePts = m_pointList;</div>
+<div class="line"><span class="lineno">  140</span>    m_movePos = m_position;</div>
+<div class="line"><span class="lineno">  141</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1265,21 +1374,21 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a499c3b52be27d2bf436a13b6f5353b9c">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00125">125</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  126</span>{</div>
-<div class="line"><span class="lineno">  127</span>    <span class="keywordflow">if</span>(m_parentList[0]) {</div>
-<div class="line"><span class="lineno">  128</span>        wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,</div>
-<div class="line"><span class="lineno">  129</span>                                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);</div>
-<div class="line"><span class="lineno">  130</span> </div>
-<div class="line"><span class="lineno">  131</span>        <span class="keywordflow">if</span>(!m_parentList[0]-&gt;<a class="code hl_function" href="class_shunt.html#afdbf0c51f9630589937298329bb041fe">Intersects</a>(nodeRect)) {</div>
-<div class="line"><span class="lineno">  132</span>            m_parentList[0]-&gt;RemoveChild(<span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  133</span>            m_parentList[0] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  134</span>            m_online = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  135</span>            UpdateSwitchesPosition();</div>
-<div class="line"><span class="lineno">  136</span>            UpdatePowerFlowArrowsPosition();</div>
-<div class="line"><span class="lineno">  137</span>        }</div>
-<div class="line"><span class="lineno">  138</span>    }</div>
-<div class="line"><span class="lineno">  139</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00195">195</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  196</span>{</div>
+<div class="line"><span class="lineno">  197</span>    <span class="keywordflow">if</span> (m_parentList[0]) {</div>
+<div class="line"><span class="lineno">  198</span>        wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,</div>
+<div class="line"><span class="lineno">  199</span>            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);</div>
+<div class="line"><span class="lineno">  200</span> </div>
+<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">if</span> (!m_parentList[0]-&gt;<a class="code hl_function" href="class_shunt.html#afdbf0c51f9630589937298329bb041fe">Intersects</a>(nodeRect)) {</div>
+<div class="line"><span class="lineno">  202</span>            m_parentList[0]-&gt;RemoveChild(<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  203</span>            m_parentList[0] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  204</span>            m_online = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  205</span>            UpdateSwitchesPosition();</div>
+<div class="line"><span class="lineno">  206</span>            UpdatePowerFlowArrowsPosition();</div>
+<div class="line"><span class="lineno">  207</span>        }</div>
+<div class="line"><span class="lineno">  208</span>    }</div>
+<div class="line"><span class="lineno">  209</span>}</div>
 <div class="ttc" id="aclass_shunt_html_afdbf0c51f9630589937298329bb041fe"><div class="ttname"><a href="class_shunt.html#afdbf0c51f9630589937298329bb041fe">Shunt::Intersects</a></div><div class="ttdeci">virtual bool Intersects(wxRect2DDouble rect) const</div><div class="ttdoc">Check if the element's rect intersects other rect.</div><div class="ttdef"><b>Definition</b> <a href="_shunt_8h_source.html#l00038">Shunt.h:38</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1294,8 +1403,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a98e8f5798d17f613dfc0964e5007cd91" name="a98e8f5798d17f613dfc0964e5007cd91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98e8f5798d17f613dfc0964e5007cd91">&#9670;&#160;</a></span>UpdatePowerFlowArrowsPosition()</h2>
+<a id="a63eba8b813d773b13dbd8d1ef3819dba" name="a63eba8b813d773b13dbd8d1ef3819dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63eba8b813d773b13dbd8d1ef3819dba">&#9670;&#160;</a></span>UpdatePowerFlowArrowsPosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1312,40 +1421,42 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00214">214</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  215</span>{</div>
-<div class="line"><span class="lineno">  216</span>    std::vector&lt;wxPoint2DDouble&gt; edges;</div>
-<div class="line"><span class="lineno">  217</span>    <span class="keywordflow">switch</span>(m_pfDirection) {</div>
-<div class="line"><span class="lineno">  218</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a06d679ea57938c356ac36623eab3da9a">PowerFlowDirection::PF_NONE</a>: {</div>
-<div class="line"><span class="lineno">  219</span>            m_powerFlowArrow.clear();</div>
-<div class="line"><span class="lineno">  220</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  221</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a>: {</div>
-<div class="line"><span class="lineno">  222</span>            edges.push_back(m_pointList[2]);</div>
-<div class="line"><span class="lineno">  223</span>            edges.push_back(m_pointList[1]);</div>
-<div class="line"><span class="lineno">  224</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  225</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a>: {</div>
-<div class="line"><span class="lineno">  226</span>            edges.push_back(m_pointList[1]);</div>
-<div class="line"><span class="lineno">  227</span>            edges.push_back(m_pointList[2]);</div>
-<div class="line"><span class="lineno">  228</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  229</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  230</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  231</span>    }</div>
-<div class="line"><span class="lineno">  232</span>    <a class="code hl_function" href="class_power_element.html#a6c656ef223d36e96b19b0a9ec2115e9e">CalculatePowerFlowPts</a>(edges);</div>
-<div class="line"><span class="lineno">  233</span>}</div>
+<p>Reimplemented from <a class="el" href="class_power_element.html">PowerElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00284">284</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  285</span>{</div>
+<div class="line"><span class="lineno">  286</span>    std::vector&lt;wxPoint2DDouble&gt; edges;</div>
+<div class="line"><span class="lineno">  287</span>    <span class="keywordflow">switch</span> (m_pfDirection) {</div>
+<div class="line"><span class="lineno">  288</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a06d679ea57938c356ac36623eab3da9a">PowerFlowDirection::PF_NONE</a>: {</div>
+<div class="line"><span class="lineno">  289</span>        m_powerFlowArrow.clear();</div>
+<div class="line"><span class="lineno">  290</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  291</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a>: {</div>
+<div class="line"><span class="lineno">  292</span>        edges.push_back(m_pointList[2]);</div>
+<div class="line"><span class="lineno">  293</span>        edges.push_back(m_pointList[1]);</div>
+<div class="line"><span class="lineno">  294</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  295</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a>: {</div>
+<div class="line"><span class="lineno">  296</span>        edges.push_back(m_pointList[1]);</div>
+<div class="line"><span class="lineno">  297</span>        edges.push_back(m_pointList[2]);</div>
+<div class="line"><span class="lineno">  298</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  299</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  300</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  301</span>    }</div>
+<div class="line"><span class="lineno">  302</span>    <a class="code hl_function" href="class_power_element.html#a6c656ef223d36e96b19b0a9ec2115e9e">CalculatePowerFlowPts</a>(edges);</div>
+<div class="line"><span class="lineno">  303</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607"><div class="ttname"><a href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607">PowerFlowDirection::PF_TO_ELEMENT</a></div><div class="ttdeci">@ PF_TO_ELEMENT</div></div>
 <div class="ttc" id="a_power_element_8h_html_a73d8987af477cf1cb7e6d5285444a949a06d679ea57938c356ac36623eab3da9a"><div class="ttname"><a href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a06d679ea57938c356ac36623eab3da9a">PowerFlowDirection::PF_NONE</a></div><div class="ttdeci">@ PF_NONE</div></div>
 <div class="ttc" id="a_power_element_8h_html_a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a"><div class="ttname"><a href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a">PowerFlowDirection::PF_TO_BUS</a></div><div class="ttdeci">@ PF_TO_BUS</div></div>
-<div class="ttc" id="aclass_power_element_html_a6c656ef223d36e96b19b0a9ec2115e9e"><div class="ttname"><a href="class_power_element.html#a6c656ef223d36e96b19b0a9ec2115e9e">PowerElement::CalculatePowerFlowPts</a></div><div class="ttdeci">virtual void CalculatePowerFlowPts(std::vector&lt; wxPoint2DDouble &gt; edges)</div><div class="ttdoc">Calculate the points of the power flow arrows.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00161">PowerElement.cpp:161</a></div></div>
+<div class="ttc" id="aclass_power_element_html_a6c656ef223d36e96b19b0a9ec2115e9e"><div class="ttname"><a href="class_power_element.html#a6c656ef223d36e96b19b0a9ec2115e9e">PowerElement::CalculatePowerFlowPts</a></div><div class="ttdeci">virtual void CalculatePowerFlowPts(std::vector&lt; wxPoint2DDouble &gt; edges)</div><div class="ttdoc">Calculate the points of the power flow arrows.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00191">PowerElement.cpp:191</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a33a6bcf6612d4cf8c4de8e9f916a22e8" name="a33a6bcf6612d4cf8c4de8e9f916a22e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33a6bcf6612d4cf8c4de8e9f916a22e8">&#9670;&#160;</a></span>UpdateSwitchesPosition()</h2>
+<a id="a681d0d71b8281c7e0f610bc51ebdd60a" name="a681d0d71b8281c7e0f610bc51ebdd60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a681d0d71b8281c7e0f610bc51ebdd60a">&#9670;&#160;</a></span>UpdateSwitchesPosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1362,21 +1473,24 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Reimplemented from <a class="el" href="class_power_element.html">PowerElement</a>.</p>
+
 <p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00022">22</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   23</span>{</div>
-<div class="line"><span class="lineno">   24</span>    <span class="keywordflow">if</span>(m_parentList[0]) {</div>
+<div class="line"><span class="lineno">   24</span>    <span class="keywordflow">if</span> (m_parentList[0]) {</div>
 <div class="line"><span class="lineno">   25</span>        m_pointList[1] = <a class="code hl_function" href="class_power_element.html#aef6392c211caf557bdac287b174a1ea8">GetSwitchPoint</a>(m_parentList[0], m_pointList[0], m_pointList[2]);</div>
-<div class="line"><span class="lineno">   26</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   27</span>        m_pointList[1] = m_pointList[0];</div>
-<div class="line"><span class="lineno">   28</span>    }</div>
-<div class="line"><span class="lineno">   29</span>    <a class="code hl_function" href="class_power_element.html#abd2cee52270374e17951782bdb571dce">UpdateSwitches</a>();</div>
-<div class="line"><span class="lineno">   30</span>}</div>
-<div class="ttc" id="aclass_power_element_html_abd2cee52270374e17951782bdb571dce"><div class="ttname"><a href="class_power_element.html#abd2cee52270374e17951782bdb571dce">PowerElement::UpdateSwitches</a></div><div class="ttdeci">virtual void UpdateSwitches()</div><div class="ttdoc">Update the switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00073">PowerElement.cpp:73</a></div></div>
+<div class="line"><span class="lineno">   26</span>    }</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   28</span>        m_pointList[1] = m_pointList[0];</div>
+<div class="line"><span class="lineno">   29</span>    }</div>
+<div class="line"><span class="lineno">   30</span>    <a class="code hl_function" href="class_power_element.html#abd2cee52270374e17951782bdb571dce">UpdateSwitches</a>();</div>
+<div class="line"><span class="lineno">   31</span>}</div>
+<div class="ttc" id="aclass_power_element_html_abd2cee52270374e17951782bdb571dce"><div class="ttname"><a href="class_power_element.html#abd2cee52270374e17951782bdb571dce">PowerElement::UpdateSwitches</a></div><div class="ttdeci">virtual void UpdateSwitches()</div><div class="ttdoc">Update the switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00103">PowerElement.cpp:103</a></div></div>
 <div class="ttc" id="aclass_power_element_html_aef6392c211caf557bdac287b174a1ea8"><div class="ttname"><a href="class_power_element.html#aef6392c211caf557bdac287b174a1ea8">PowerElement::GetSwitchPoint</a></div><div class="ttdeci">virtual wxPoint2DDouble GetSwitchPoint(Element *parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const</div><div class="ttdoc">Get the correct switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00039">PowerElement.cpp:39</a></div></div>
 </div><!-- fragment -->
 </div>

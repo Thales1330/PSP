@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -163,9 +163,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4288c4c84c8840705c3ce6ccd42e578c" id="r_a4288c4c84c8840705c3ce6ccd42e578c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#a4288c4c84c8840705c3ce6ccd42e578c">GetCopy</a> ()</td></tr>
 <tr class="memdesc:a4288c4c84c8840705c3ce6ccd42e578c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <br /></td></tr>
 <tr class="separator:a4288c4c84c8840705c3ce6ccd42e578c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab046baebe4bfe0a52905148d78f44681" id="r_ab046baebe4bfe0a52905148d78f44681"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#ab046baebe4bfe0a52905148d78f44681">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent, wxPoint2DDouble position)</td></tr>
-<tr class="memdesc:ab046baebe4bfe0a52905148d78f44681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent element to the <a class="el" href="class_bus.html" title="Node for power elements. All others power elements are connected through this.">Bus</a>.  <br /></td></tr>
-<tr class="separator:ab046baebe4bfe0a52905148d78f44681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dce052ae7ef9ae2ffe1e69fa684b8c0" id="r_a7dce052ae7ef9ae2ffe1e69fa684b8c0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#a7dce052ae7ef9ae2ffe1e69fa684b8c0">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent, wxPoint2DDouble position, bool isOpening=false)</td></tr>
+<tr class="memdesc:a7dce052ae7ef9ae2ffe1e69fa684b8c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent element to the <a class="el" href="class_bus.html" title="Node for power elements. All others power elements are connected through this.">Bus</a>.  <br /></td></tr>
+<tr class="separator:a7dce052ae7ef9ae2ffe1e69fa684b8c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2b960058be6e990463b53d79c74c7a3" id="r_ad2b960058be6e990463b53d79c74c7a3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#ad2b960058be6e990463b53d79c74c7a3">Contains</a> (wxPoint2DDouble position) const</td></tr>
 <tr class="memdesc:ad2b960058be6e990463b53d79c74c7a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <br /></td></tr>
 <tr class="separator:ad2b960058be6e990463b53d79c74c7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,6 +181,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ace039d00c23d36a7c14d7e4155c94791" id="r_ace039d00c23d36a7c14d7e4155c94791"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#ace039d00c23d36a7c14d7e4155c94791">Rotate</a> (bool clockwise=true)</td></tr>
 <tr class="memdesc:ace039d00c23d36a7c14d7e4155c94791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <br /></td></tr>
 <tr class="separator:ace039d00c23d36a7c14d7e4155c94791"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af385dabef0ce20cecb015ef205fdabc6" id="r_af385dabef0ce20cecb015ef205fdabc6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#af385dabef0ce20cecb015ef205fdabc6">AlignToGrid</a> (double gridSize=20.0) override</td></tr>
+<tr class="separator:af385dabef0ce20cecb015ef205fdabc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac43fc37f8c8a8bc120d9a4bb68da3345" id="r_ac43fc37f8c8a8bc120d9a4bb68da3345"><td class="memItemLeft" align="right" valign="top">virtual wxCursor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#ac43fc37f8c8a8bc120d9a4bb68da3345">GetBestPickboxCursor</a> () const</td></tr>
 <tr class="memdesc:ac43fc37f8c8a8bc120d9a4bb68da3345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the best cursor to shown to the user when the mouse is above a pickbox.  <br /></td></tr>
 <tr class="separator:ac43fc37f8c8a8bc120d9a4bb68da3345"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,6 +198,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0cf17a7aec23d436ff1eeb9834eb2b70" id="r_a0cf17a7aec23d436ff1eeb9834eb2b70"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#a0cf17a7aec23d436ff1eeb9834eb2b70">GetTipText</a> () const</td></tr>
 <tr class="memdesc:a0cf17a7aec23d436ff1eeb9834eb2b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:a0cf17a7aec23d436ff1eeb9834eb2b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec6d8b2aed8a98667d46b324e0c68454" id="r_aec6d8b2aed8a98667d46b324e0c68454"><td class="memItemLeft" align="right" valign="top">virtual wxColour&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#aec6d8b2aed8a98667d46b324e0c68454">GetVoltageColour</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour=nullptr) const</td></tr>
+<tr class="separator:aec6d8b2aed8a98667d46b324e0c68454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41d505181d722879d7a699574bffaa9a" id="r_a41d505181d722879d7a699574bffaa9a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_bus_electrical_data.html">BusElectricalData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#a41d505181d722879d7a699574bffaa9a">GetElectricalData</a> () const</td></tr>
 <tr class="separator:a41d505181d722879d7a699574bffaa9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ac4e35a6bc93fd5048304887a3a8856" id="r_a2ac4e35a6bc93fd5048304887a3a8856"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_bus_electrical_data.html">BusElectricalData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus.html#a2ac4e35a6bc93fd5048304887a3a8856">GetElectricalDataRef</a> ()</td></tr>
@@ -228,6 +232,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element" id="r_abd2cee52270374e17951782bdb571dce"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#abd2cee52270374e17951782bdb571dce">UpdateSwitches</a> ()</td></tr>
 <tr class="memdesc:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the switch position.  <br /></td></tr>
 <tr class="separator:abd2cee52270374e17951782bdb571dce inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5b0f76cd2bfa9c107127047b91fb72 inherit pub_methods_class_power_element" id="r_a6d5b0f76cd2bfa9c107127047b91fb72"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6d5b0f76cd2bfa9c107127047b91fb72">UpdateSwitchesPosition</a> ()</td></tr>
+<tr class="separator:a6d5b0f76cd2bfa9c107127047b91fb72 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45d43999ed3342bad628650f9bf7fae5 inherit pub_methods_class_power_element" id="r_a45d43999ed3342bad628650f9bf7fae5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a45d43999ed3342bad628650f9bf7fae5">UpdatePowerFlowArrowsPosition</a> ()</td></tr>
+<tr class="separator:a45d43999ed3342bad628650f9bf7fae5 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element" id="r_acaa2c9e5736ac6e38c4c6a9ebca78024"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">DrawDCSwitches</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxGraphicsContext *gc) const</td></tr>
 <tr class="memdesc:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw switch.  <br /></td></tr>
 <tr class="separator:acaa2c9e5736ac6e38c4c6a9ebca78024 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -346,6 +354,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element" id="r_a4a4840007087b2abb7fcdda29ca7dcad"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; wxPoint2DDouble &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a4a4840007087b2abb7fcdda29ca7dcad">GetPointList</a> () const</td></tr>
 <tr class="memdesc:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list of points that connect the element to bus.  <br /></td></tr>
 <tr class="separator:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d085e56588a6077191be04bd6fa6ee3 inherit pub_methods_class_element" id="r_a3d085e56588a6077191be04bd6fa6ee3"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; wxPoint2DDouble &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a3d085e56588a6077191be04bd6fa6ee3">GetPointListRef</a> ()</td></tr>
+<tr class="separator:a3d085e56588a6077191be04bd6fa6ee3 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element" id="r_ad1f153a87797633ab310d07e1d06eba9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#ad1f153a87797633ab310d07e1d06eba9">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent)</td></tr>
 <tr class="memdesc:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent to the element.  <br /></td></tr>
 <tr class="separator:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -432,6 +442,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9332ba7b4ce2051a3935081cc890c03c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a386ab44db7634b76da0c98215dd73a00 inherit pub_methods_class_element" id="r_a386ab44db7634b76da0c98215dd73a00"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a386ab44db7634b76da0c98215dd73a00">DrawDCTriangle</a> (std::vector&lt; wxPoint &gt; points, wxDC &amp;dc) const</td></tr>
 <tr class="separator:a386ab44db7634b76da0c98215dd73a00 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4dbd5da8ee7814dbdf1dcaedb428c30 inherit pub_methods_class_element" id="r_aa4dbd5da8ee7814dbdf1dcaedb428c30"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#aa4dbd5da8ee7814dbdf1dcaedb428c30">DrawStabilityEventGC</a> (wxGraphicsContext *gc, wxPoint2DDouble translation, double scale, <a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, bool rotateAnchor=false, wxPoint2DDouble iconPosition=wxPoint2DDouble(-1, -1)) const</td></tr>
+<tr class="separator:aa4dbd5da8ee7814dbdf1dcaedb428c30 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element" id="r_a9e0ee619f7429004eaeddb9040f6d70f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a> (wxPoint2DDouble position, wxGraphicsContext *gc) const</td></tr>
 <tr class="memdesc:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a point.  <br /></td></tr>
 <tr class="separator:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -448,6 +460,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element" id="r_a5bf79b05af0dd1bbb62b352f293e1421"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="class_element.html">Element</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a> () const</td></tr>
 <tr class="memdesc:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Child list.  <br /></td></tr>
 <tr class="separator:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc4b94082f7491271f5507d38efc003 inherit pub_methods_class_element" id="r_a1cc4b94082f7491271f5507d38efc003"><td class="memItemLeft" align="right" valign="top">virtual wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a1cc4b94082f7491271f5507d38efc003">GetMoveStartPosition</a> () const</td></tr>
+<tr class="separator:a1cc4b94082f7491271f5507d38efc003 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3a49415bed103647fb07354c3be17c inherit pub_methods_class_element" id="r_acf3a49415bed103647fb07354c3be17c"><td class="memItemLeft" align="right" valign="top">virtual wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#acf3a49415bed103647fb07354c3be17c">GetMovePosition</a> () const</td></tr>
+<tr class="separator:acf3a49415bed103647fb07354c3be17c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element" id="r_a57f5771fd003020fef3866a1d1dc7487"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a57f5771fd003020fef3866a1d1dc7487">CalculateBoundaries</a> (wxPoint2DDouble &amp;leftUp, wxPoint2DDouble &amp;rightBottom) const</td></tr>
 <tr class="memdesc:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the element boundaries.  <br /></td></tr>
 <tr class="separator:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -563,7 +579,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span class="obfuscator">.nosp@m.</span>s@uf<span class="obfuscator">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00085">85</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00086">86</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aacf35e62456128245a02db34334f9a3d" name="aacf35e62456128245a02db34334f9a3d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aacf35e62456128245a02db34334f9a3d">&#9670;&#160;</a></span>Bus() <span class="overload">[1/3]</span></h2>
@@ -722,8 +738,8 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab046baebe4bfe0a52905148d78f44681" name="ab046baebe4bfe0a52905148d78f44681"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab046baebe4bfe0a52905148d78f44681">&#9670;&#160;</a></span>AddParent()</h2>
+<a id="a7dce052ae7ef9ae2ffe1e69fa684b8c0" name="a7dce052ae7ef9ae2ffe1e69fa684b8c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dce052ae7ef9ae2ffe1e69fa684b8c0">&#9670;&#160;</a></span>AddParent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -741,7 +757,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">wxPoint2DDouble&#160;</td>
-          <td class="paramname"><em>position</em>&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isOpening</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -767,10 +789,48 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a72f58b63026e6012f5d8b7a70a33bede">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00116">116</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00117">117</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af385dabef0ce20cecb015ef205fdabc6" name="af385dabef0ce20cecb015ef205fdabc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af385dabef0ce20cecb015ef205fdabc6">&#9670;&#160;</a></span>AlignToGrid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bus::AlignToGrid </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>gridSize</em> = <code>20.0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00324">324</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  325</span>{</div>
+<div class="line"><span class="lineno">  326</span>    <span class="keywordflow">if</span> (gridSize &lt;= 0.0) gridSize = 20.0;</div>
+<div class="line"><span class="lineno">  327</span>    wxPoint2DDouble newPos(std::round(m_position.m_x / gridSize) * gridSize,</div>
+<div class="line"><span class="lineno">  328</span>                           std::round(m_position.m_y / gridSize) * gridSize);</div>
+<div class="line"><span class="lineno">  329</span>    m_width = std::round(m_width / gridSize) * gridSize;</div>
+<div class="line"><span class="lineno">  330</span>    <span class="keywordflow">if</span> (m_width &lt; gridSize) m_width = gridSize;</div>
+<div class="line"><span class="lineno">  331</span>    <a class="code hl_function" href="class_element.html#a920fe7ba1563615857618f01e64b3284">SetPosition</a>(newPos);</div>
+<div class="line"><span class="lineno">  332</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -813,7 +873,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  236</span>    wxPoint2DDouble ptR = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(position, -m_angle);</div>
 <div class="line"><span class="lineno">  237</span>    <span class="keywordflow">return</span> m_rect.Contains(ptR);</div>
 <div class="line"><span class="lineno">  238</span>}</div>
-<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00228">Element.cpp:228</a></div></div>
+<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00298">Element.cpp:298</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -912,10 +972,10 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  182</span> </div>
 <div class="line"><span class="lineno">  183</span>    <span class="keywordflow">if</span> (!m_electricalData.isConnected)</div>
 <div class="line"><span class="lineno">  184</span>        dc.SetBrush(wxBrush(guiColour-&gt;disable));</div>
-<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_dynEvent)</div>
+<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_dynEvent || m_electricalData.hasFault)</div>
 <div class="line"><span class="lineno">  186</span>        dc.SetBrush(wxBrush(guiColour-&gt;eventElement));</div>
 <div class="line"><span class="lineno">  187</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  188</span>        dc.SetBrush(wxBrush(guiColour-&gt;bus));</div>
+<div class="line"><span class="lineno">  188</span>        dc.SetBrush(wxBrush(GetVoltageColour(guiColour)));</div>
 <div class="line"><span class="lineno">  189</span> </div>
 <div class="line"><span class="lineno">  190</span>    <a class="code hl_function" href="class_element.html#a79e18ae8f29cea9cec00bf11f21f5241">DrawDCRectangle</a>(gcPosition, m_width, m_height, m_angle, dc);</div>
 <div class="line"><span class="lineno">  191</span> </div>
@@ -961,7 +1021,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  231</span>    }</div>
 <div class="line"><span class="lineno">  232</span>}</div>
 <div class="ttc" id="aclass_element_html_a79e18ae8f29cea9cec00bf11f21f5241"><div class="ttname"><a href="class_element.html#a79e18ae8f29cea9cec00bf11f21f5241">Element::DrawDCRectangle</a></div><div class="ttdeci">virtual void DrawDCRectangle(wxPoint2DDouble position, double width, double height, double angle, wxDC &amp;dc) const</div><div class="ttdoc">Draw a circle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00041">Element.cpp:41</a></div></div>
-<div class="ttc" id="aclass_element_html_abfee7ea88f4689c2a6eb4d39452f84d8"><div class="ttname"><a href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">Element::WorldToScreen</a></div><div class="ttdeci">virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX=0.0, double offsetY=0.0) const</div><div class="ttdoc">Convert the element position to screen position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00272">Element.cpp:272</a></div></div>
+<div class="ttc" id="aclass_element_html_abfee7ea88f4689c2a6eb4d39452f84d8"><div class="ttname"><a href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">Element::WorldToScreen</a></div><div class="ttdeci">virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX=0.0, double offsetY=0.0) const</div><div class="ttdoc">Convert the element position to screen position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00354">Element.cpp:354</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1078,79 +1138,79 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">   83</span> </div>
 <div class="line"><span class="lineno">   84</span>    <span class="keywordflow">if</span> (!m_electricalData.isConnected)</div>
 <div class="line"><span class="lineno">   85</span>        gc-&gt;SetBrush(wxBrush(guiColour-&gt;disable));</div>
-<div class="line"><span class="lineno">   86</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_dynEvent)</div>
-<div class="line"><span class="lineno">   87</span>        gc-&gt;SetBrush(wxBrush(guiColour-&gt;eventElement));</div>
-<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   89</span>        gc-&gt;SetBrush(wxBrush(guiColour-&gt;bus));</div>
-<div class="line"><span class="lineno">   90</span> </div>
-<div class="line"><span class="lineno">   91</span>    gc-&gt;DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);</div>
+<div class="line"><span class="lineno">   86</span>    <span class="comment">//else if (m_dynEvent)</span></div>
+<div class="line"><span class="lineno">   87</span>    <span class="comment">//  gc-&gt;SetBrush(wxBrush(guiColour-&gt;eventElement));</span></div>
+<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (guiColour-&gt;useVoltageLevels)</div>
+<div class="line"><span class="lineno">   89</span>        gc-&gt;SetBrush(wxBrush(GetVoltageColour(guiColour)));</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   91</span>        gc-&gt;SetBrush(wxBrush(guiColour-&gt;bus));</div>
 <div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">if</span> (m_electricalData.slackBus) {</div>
-<div class="line"><span class="lineno">   94</span>        gc-&gt;SetBrush(wxBrush(guiColour-&gt;slackBus));</div>
-<div class="line"><span class="lineno">   95</span>        gc-&gt;DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);</div>
-<div class="line"><span class="lineno">   96</span>    }</div>
-<div class="line"><span class="lineno">   97</span> </div>
-<div class="line"><span class="lineno">   98</span>    gc-&gt;PopState();</div>
-<div class="line"><span class="lineno">   99</span> </div>
-<div class="line"><span class="lineno">  100</span>    <span class="comment">// Draw pickbox (layer 3)</span></div>
-<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">if</span> (m_showPickbox) {</div>
-<div class="line"><span class="lineno">  102</span>        gc-&gt;PushState();</div>
-<div class="line"><span class="lineno">  103</span>        gc-&gt;SetTransform(identityMatrix);</div>
-<div class="line"><span class="lineno">  104</span> </div>
-<div class="line"><span class="lineno">  105</span>        wxPoint2DDouble screenPt = <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale);</div>
-<div class="line"><span class="lineno">  106</span>        gc-&gt;Translate(screenPt.m_x, screenPt.m_y);</div>
-<div class="line"><span class="lineno">  107</span>        gc-&gt;Rotate(wxDegToRad(m_angle));</div>
-<div class="line"><span class="lineno">  108</span>        gc-&gt;Translate(-screenPt.m_x, -screenPt.m_y);</div>
-<div class="line"><span class="lineno">  109</span> </div>
-<div class="line"><span class="lineno">  110</span>        wxPoint2DDouble pbPosition[2] = { <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale, m_width / 2.0) - wxPoint2DDouble(4, 4),</div>
-<div class="line"><span class="lineno">  111</span>                                         <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale, -m_width / 2.0) - wxPoint2DDouble(4, 4) };</div>
-<div class="line"><span class="lineno">  112</span>        <a class="code hl_function" href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a>(pbPosition[0], gc);</div>
-<div class="line"><span class="lineno">  113</span>        <a class="code hl_function" href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a>(pbPosition[1], gc);</div>
+<div class="line"><span class="lineno">   93</span>    gc-&gt;DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);</div>
+<div class="line"><span class="lineno">   94</span> </div>
+<div class="line"><span class="lineno">   95</span>    gc-&gt;PopState();</div>
+<div class="line"><span class="lineno">   96</span> </div>
+<div class="line"><span class="lineno">   97</span>    <span class="comment">// Draw pickbox (layer 3)</span></div>
+<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">if</span> (m_showPickbox) {</div>
+<div class="line"><span class="lineno">   99</span>        gc-&gt;PushState();</div>
+<div class="line"><span class="lineno">  100</span>        gc-&gt;SetTransform(identityMatrix);</div>
+<div class="line"><span class="lineno">  101</span> </div>
+<div class="line"><span class="lineno">  102</span>        wxPoint2DDouble screenPt = <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale);</div>
+<div class="line"><span class="lineno">  103</span>        gc-&gt;Translate(screenPt.m_x, screenPt.m_y);</div>
+<div class="line"><span class="lineno">  104</span>        gc-&gt;Rotate(wxDegToRad(m_angle));</div>
+<div class="line"><span class="lineno">  105</span>        gc-&gt;Translate(-screenPt.m_x, -screenPt.m_y);</div>
+<div class="line"><span class="lineno">  106</span> </div>
+<div class="line"><span class="lineno">  107</span>        wxPoint2DDouble pbPosition[2] = { <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale, m_width / 2.0) - wxPoint2DDouble(4, 4),</div>
+<div class="line"><span class="lineno">  108</span>                                         <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale, -m_width / 2.0) - wxPoint2DDouble(4, 4) };</div>
+<div class="line"><span class="lineno">  109</span>        <a class="code hl_function" href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a>(pbPosition[0], gc);</div>
+<div class="line"><span class="lineno">  110</span>        <a class="code hl_function" href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a>(pbPosition[1], gc);</div>
+<div class="line"><span class="lineno">  111</span> </div>
+<div class="line"><span class="lineno">  112</span>        gc-&gt;PopState();</div>
+<div class="line"><span class="lineno">  113</span>    }</div>
 <div class="line"><span class="lineno">  114</span> </div>
-<div class="line"><span class="lineno">  115</span>        gc-&gt;PopState();</div>
-<div class="line"><span class="lineno">  116</span>    }</div>
-<div class="line"><span class="lineno">  117</span> </div>
-<div class="line"><span class="lineno">  118</span>    <span class="comment">// Draw faulted bus symbol (layer 4)</span></div>
-<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">if</span> (m_electricalData.hasFault) {</div>
-<div class="line"><span class="lineno">  120</span>        gc-&gt;PushState();</div>
-<div class="line"><span class="lineno">  121</span>        gc-&gt;SetTransform(identityMatrix);</div>
-<div class="line"><span class="lineno">  122</span> </div>
-<div class="line"><span class="lineno">  123</span>        wxPoint2DDouble screenPt = <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale);</div>
-<div class="line"><span class="lineno">  124</span>        gc-&gt;Translate(screenPt.m_x, screenPt.m_y);</div>
-<div class="line"><span class="lineno">  125</span>        gc-&gt;Rotate(wxDegToRad(m_angle));</div>
-<div class="line"><span class="lineno">  126</span>        gc-&gt;Translate(-screenPt.m_x, -screenPt.m_y);</div>
-<div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>        wxPoint2DDouble fsPosition = <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale, m_width / 2.0);</div>
-<div class="line"><span class="lineno">  129</span> </div>
-<div class="line"><span class="lineno">  130</span>        wxColour faultSymbolColour(255, 0, 0, 255);</div>
-<div class="line"><span class="lineno">  131</span>        <span class="comment">//glColor4dv(faultSymbolColour);</span></div>
-<div class="line"><span class="lineno">  132</span> </div>
-<div class="line"><span class="lineno">  133</span>        <span class="keywordtype">double</span> scale = 1.5;</div>
+<div class="line"><span class="lineno">  115</span>    <span class="comment">// Draw faulted bus symbol (layer 4)</span></div>
+<div class="line"><span class="lineno">  116</span>    <span class="keywordflow">if</span> (m_electricalData.hasFault) {</div>
+<div class="line"><span class="lineno">  117</span>        gc-&gt;PushState();</div>
+<div class="line"><span class="lineno">  118</span>        gc-&gt;SetTransform(identityMatrix);</div>
+<div class="line"><span class="lineno">  119</span> </div>
+<div class="line"><span class="lineno">  120</span>        wxPoint2DDouble screenPt = <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale);</div>
+<div class="line"><span class="lineno">  121</span>        gc-&gt;Translate(screenPt.m_x, screenPt.m_y);</div>
+<div class="line"><span class="lineno">  122</span>        gc-&gt;Rotate(wxDegToRad(m_angle));</div>
+<div class="line"><span class="lineno">  123</span>        gc-&gt;Translate(-screenPt.m_x, -screenPt.m_y);</div>
+<div class="line"><span class="lineno">  124</span> </div>
+<div class="line"><span class="lineno">  125</span>        wxPoint2DDouble fsPosition = <a class="code hl_function" href="class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8">WorldToScreen</a>(translation, scale, m_width / 2.0);</div>
+<div class="line"><span class="lineno">  126</span> </div>
+<div class="line"><span class="lineno">  127</span>        wxColour faultSymbolColour(255, 0, 0, 255);</div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span>        <span class="keywordtype">double</span> scale = 1.5;</div>
+<div class="line"><span class="lineno">  130</span> </div>
+<div class="line"><span class="lineno">  131</span>        gc-&gt;SetBrush(*wxRED_BRUSH);</div>
+<div class="line"><span class="lineno">  132</span>        gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
+<div class="line"><span class="lineno">  133</span>        <span class="comment">//gc-&gt;SetPen(*wxRED_PEN);</span></div>
 <div class="line"><span class="lineno">  134</span> </div>
-<div class="line"><span class="lineno">  135</span>        gc-&gt;SetBrush(*wxRED_BRUSH);</div>
-<div class="line"><span class="lineno">  136</span>        gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">  137</span>        <span class="comment">//gc-&gt;SetPen(*wxRED_PEN);</span></div>
-<div class="line"><span class="lineno">  138</span> </div>
-<div class="line"><span class="lineno">  139</span>        wxPoint2DDouble* points = <span class="keyword">new</span> wxPoint2DDouble[4];</div>
-<div class="line"><span class="lineno">  140</span>        points[0] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);</div>
-<div class="line"><span class="lineno">  141</span>        points[1] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);</div>
-<div class="line"><span class="lineno">  142</span>        points[2] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);</div>
-<div class="line"><span class="lineno">  143</span>        points[3] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);</div>
-<div class="line"><span class="lineno">  144</span> </div>
-<div class="line"><span class="lineno">  145</span>        gc-&gt;DrawLines(4, points);</div>
+<div class="line"><span class="lineno">  135</span>        wxPoint2DDouble* points = <span class="keyword">new</span> wxPoint2DDouble[4];</div>
+<div class="line"><span class="lineno">  136</span>        points[0] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);</div>
+<div class="line"><span class="lineno">  137</span>        points[1] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);</div>
+<div class="line"><span class="lineno">  138</span>        points[2] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);</div>
+<div class="line"><span class="lineno">  139</span>        points[3] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);</div>
+<div class="line"><span class="lineno">  140</span> </div>
+<div class="line"><span class="lineno">  141</span>        gc-&gt;DrawLines(4, points);</div>
+<div class="line"><span class="lineno">  142</span> </div>
+<div class="line"><span class="lineno">  143</span>        points[0] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);</div>
+<div class="line"><span class="lineno">  144</span>        points[1] = wxPoint2DDouble(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);</div>
+<div class="line"><span class="lineno">  145</span>        points[2] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);</div>
 <div class="line"><span class="lineno">  146</span> </div>
-<div class="line"><span class="lineno">  147</span>        points[0] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);</div>
-<div class="line"><span class="lineno">  148</span>        points[1] = wxPoint2DDouble(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);</div>
-<div class="line"><span class="lineno">  149</span>        points[2] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);</div>
+<div class="line"><span class="lineno">  147</span>        gc-&gt;DrawLines(3, points);</div>
+<div class="line"><span class="lineno">  148</span> </div>
+<div class="line"><span class="lineno">  149</span>        <span class="keyword">delete</span>[] points;</div>
 <div class="line"><span class="lineno">  150</span> </div>
-<div class="line"><span class="lineno">  151</span>        gc-&gt;DrawLines(3, points);</div>
-<div class="line"><span class="lineno">  152</span> </div>
-<div class="line"><span class="lineno">  153</span>        <span class="keyword">delete</span>[] points;</div>
-<div class="line"><span class="lineno">  154</span> </div>
-<div class="line"><span class="lineno">  155</span>        gc-&gt;PopState();</div>
+<div class="line"><span class="lineno">  151</span>        gc-&gt;PopState();</div>
+<div class="line"><span class="lineno">  152</span>    }</div>
+<div class="line"><span class="lineno">  153</span> </div>
+<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">if</span> (m_dynEvent) {</div>
+<div class="line"><span class="lineno">  155</span>        DrawStabilityEventGC(gc, translation, scale, guiColour, <span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  156</span>    }</div>
 <div class="line"><span class="lineno">  157</span>}</div>
-<div class="ttc" id="aclass_element_html_a9e0ee619f7429004eaeddb9040f6d70f"><div class="ttname"><a href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">Element::DrawDCPickbox</a></div><div class="ttdeci">virtual void DrawDCPickbox(wxPoint2DDouble position, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a point.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00221">Element.cpp:221</a></div></div>
+<div class="ttc" id="aclass_element_html_a9e0ee619f7429004eaeddb9040f6d70f"><div class="ttname"><a href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">Element::DrawDCPickbox</a></div><div class="ttdeci">virtual void DrawDCPickbox(wxPoint2DDouble position, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a point.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00291">Element.cpp:291</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1248,28 +1308,28 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a2a436b0497017a1c3d03dba5e59f037e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00324">324</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  325</span>{</div>
-<div class="line"><span class="lineno">  326</span>    menu.Append(<a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ContextMenuID::ID_EDIT_ELEMENT</a>, _(<span class="stringliteral">&quot;Edit bus&quot;</span>));</div>
-<div class="line"><span class="lineno">  327</span> </div>
-<div class="line"><span class="lineno">  328</span>    wxMenu* textMenu = <span class="keyword">new</span> wxMenu();</div>
-<div class="line"><span class="lineno">  329</span> </div>
-<div class="line"><span class="lineno">  330</span>    textMenu-&gt;Append(ID_TXT_NAME, _(<span class="stringliteral">&quot;Name&quot;</span>));</div>
-<div class="line"><span class="lineno">  331</span>    textMenu-&gt;Append(ID_TXT_VOLTAGE, _(<span class="stringliteral">&quot;Voltage&quot;</span>));</div>
-<div class="line"><span class="lineno">  332</span>    textMenu-&gt;Append(ID_TXT_ANGLE, _(<span class="stringliteral">&quot;Angle&quot;</span>));</div>
-<div class="line"><span class="lineno">  333</span>    textMenu-&gt;Append(ID_TXT_FAULTCURRENT, _(<span class="stringliteral">&quot;Fault current&quot;</span>));</div>
-<div class="line"><span class="lineno">  334</span>    textMenu-&gt;Append(ID_TXT_FAULTVOLTAGE, _(<span class="stringliteral">&quot;Fault voltage&quot;</span>));</div>
-<div class="line"><span class="lineno">  335</span>    textMenu-&gt;Append(ID_TXT_SCC, _(<span class="stringliteral">&quot;Short-circuit power&quot;</span>));</div>
-<div class="line"><span class="lineno">  336</span>    textMenu-&gt;Append(ID_TXT_THD, _(<span class="stringliteral">&quot;Voltage THD&quot;</span>));</div>
-<div class="line"><span class="lineno">  337</span>    textMenu-&gt;SetClientData(menu.GetClientData());</div>
-<div class="line"><span class="lineno">  338</span> </div>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00334">334</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  335</span>{</div>
+<div class="line"><span class="lineno">  336</span>    menu.Append(<a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ContextMenuID::ID_EDIT_ELEMENT</a>, _(<span class="stringliteral">&quot;Edit bus&quot;</span>));</div>
+<div class="line"><span class="lineno">  337</span> </div>
+<div class="line"><span class="lineno">  338</span>    wxMenu* textMenu = <span class="keyword">new</span> wxMenu();</div>
 <div class="line"><span class="lineno">  339</span> </div>
-<div class="line"><span class="lineno">  340</span>    menu.AppendSubMenu(textMenu, _(<span class="stringliteral">&quot;Add text&quot;</span>));</div>
-<div class="line"><span class="lineno">  341</span>    <a class="code hl_function" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a>(menu);</div>
-<div class="line"><span class="lineno">  342</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  343</span>}</div>
+<div class="line"><span class="lineno">  340</span>    textMenu-&gt;Append(ID_TXT_NAME, _(<span class="stringliteral">&quot;Name&quot;</span>));</div>
+<div class="line"><span class="lineno">  341</span>    textMenu-&gt;Append(ID_TXT_VOLTAGE, _(<span class="stringliteral">&quot;Voltage&quot;</span>));</div>
+<div class="line"><span class="lineno">  342</span>    textMenu-&gt;Append(ID_TXT_ANGLE, _(<span class="stringliteral">&quot;Angle&quot;</span>));</div>
+<div class="line"><span class="lineno">  343</span>    textMenu-&gt;Append(ID_TXT_FAULTCURRENT, _(<span class="stringliteral">&quot;Fault current&quot;</span>));</div>
+<div class="line"><span class="lineno">  344</span>    textMenu-&gt;Append(ID_TXT_FAULTVOLTAGE, _(<span class="stringliteral">&quot;Fault voltage&quot;</span>));</div>
+<div class="line"><span class="lineno">  345</span>    textMenu-&gt;Append(ID_TXT_SCC, _(<span class="stringliteral">&quot;Short-circuit power&quot;</span>));</div>
+<div class="line"><span class="lineno">  346</span>    textMenu-&gt;Append(ID_TXT_THD, _(<span class="stringliteral">&quot;Voltage THD&quot;</span>));</div>
+<div class="line"><span class="lineno">  347</span>    textMenu-&gt;SetClientData(menu.GetClientData());</div>
+<div class="line"><span class="lineno">  348</span> </div>
+<div class="line"><span class="lineno">  349</span> </div>
+<div class="line"><span class="lineno">  350</span>    menu.AppendSubMenu(textMenu, _(<span class="stringliteral">&quot;Add text&quot;</span>));</div>
+<div class="line"><span class="lineno">  351</span>    <a class="code hl_function" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a>(menu);</div>
+<div class="line"><span class="lineno">  352</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  353</span>}</div>
 <div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00077">Element.h:77</a></div></div>
-<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00393">Element.cpp:393</a></div></div>
+<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00475">Element.cpp:475</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1311,13 +1371,13 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a09cef76a09ba34330ede838eaddbc740">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00355">355</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  356</span>{</div>
-<div class="line"><span class="lineno">  357</span>    <a class="code hl_class" href="class_bus.html">Bus</a>* copy = <span class="keyword">new</span> <a class="code hl_function" href="class_bus.html#aacf35e62456128245a02db34334f9a3d">Bus</a>();</div>
-<div class="line"><span class="lineno">  358</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  359</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><span class="lineno">  360</span>}</div>
-<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00365">365</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  366</span>{</div>
+<div class="line"><span class="lineno">  367</span>    <a class="code hl_class" href="class_bus.html">Bus</a>* copy = <span class="keyword">new</span> <a class="code hl_function" href="class_bus.html#aacf35e62456128245a02db34334f9a3d">Bus</a>();</div>
+<div class="line"><span class="lineno">  368</span>    *copy = *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  369</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><span class="lineno">  370</span>}</div>
+<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00086">Bus.h:87</a></div></div>
 <div class="ttc" id="aclass_bus_html_aacf35e62456128245a02db34334f9a3d"><div class="ttname"><a href="class_bus.html#aacf35e62456128245a02db34334f9a3d">Bus::Bus</a></div><div class="ttdeci">Bus()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8cpp_source.html#l00023">Bus.cpp:23</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1355,8 +1415,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00128">128</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  128</span>{ <span class="keywordflow">return</span> m_electricalData; }</div>
+<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00131">131</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  131</span>{ <span class="keywordflow">return</span> m_electricalData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1383,8 +1443,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00129">129</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  129</span>{ <span class="keywordflow">return</span> m_electricalData; }</div>
+<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00132">132</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  132</span>{ <span class="keywordflow">return</span> m_electricalData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1433,32 +1493,41 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_power_element.html#a10f4dfdf0554d19fb4525b7e4abe4f25">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00404">404</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  405</span>{</div>
-<div class="line"><span class="lineno">  406</span>    <span class="keywordflow">if</span> (study == <a class="code hl_enumvalue" href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a0bd879a71322c110d9221f9e548fd1b9">PlotStudy::STABILITY</a>) {</div>
-<div class="line"><span class="lineno">  407</span>        <span class="keywordflow">if</span> (!m_electricalData.plotBus) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  408</span>        plotData.SetName(m_electricalData.name);</div>
-<div class="line"><span class="lineno">  409</span>        plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);</div>
-<div class="line"><span class="lineno">  410</span> </div>
-<div class="line"><span class="lineno">  411</span>        std::vector&lt;double&gt; absVoltage, argVoltage;</div>
-<div class="line"><span class="lineno">  412</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_electricalData.stabVoltageVector.size(); ++i) {</div>
-<div class="line"><span class="lineno">  413</span>            absVoltage.push_back(std::abs(m_electricalData.stabVoltageVector[i]));</div>
-<div class="line"><span class="lineno">  414</span>            argVoltage.push_back(wxRadToDeg(std::arg(m_electricalData.stabVoltageVector[i])));</div>
-<div class="line"><span class="lineno">  415</span>        }</div>
-<div class="line"><span class="lineno">  416</span>        plotData.AddData(absVoltage, _(<span class="stringliteral">&quot;Voltage&quot;</span>));</div>
-<div class="line"><span class="lineno">  417</span>        plotData.AddData(argVoltage, _(<span class="stringliteral">&quot;Angle&quot;</span>));</div>
-<div class="line"><span class="lineno">  418</span>        plotData.AddData(m_electricalData.stabFreqVector, _(<span class="stringliteral">&quot;Frequency&quot;</span>));</div>
-<div class="line"><span class="lineno">  419</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  420</span>    }</div>
-<div class="line"><span class="lineno">  421</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (study == <a class="code hl_enumvalue" href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a82def898ef073a3756ebf164d30768d3">PlotStudy::FREQRESPONSE</a>) {</div>
-<div class="line"><span class="lineno">  422</span>        <span class="keywordflow">if</span> (!m_electricalData.plotPQData) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  423</span>        plotData.SetName(m_electricalData.name);</div>
-<div class="line"><span class="lineno">  424</span>        plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);</div>
-<div class="line"><span class="lineno">  425</span>        plotData.AddData(m_electricalData.absImpedanceVector, _(<span class="stringliteral">&quot;Impedance&quot;</span>));</div>
-<div class="line"><span class="lineno">  426</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  427</span>    }</div>
-<div class="line"><span class="lineno">  428</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  429</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00475">475</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  476</span>{</div>
+<div class="line"><span class="lineno">  477</span>    <span class="keywordflow">if</span> (study == <a class="code hl_enumvalue" href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a0bd879a71322c110d9221f9e548fd1b9">PlotStudy::STABILITY</a>) {</div>
+<div class="line"><span class="lineno">  478</span>        <span class="keywordflow">if</span> (!m_electricalData.plotBus) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  479</span>        plotData.SetName(m_electricalData.name);</div>
+<div class="line"><span class="lineno">  480</span>        plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);</div>
+<div class="line"><span class="lineno">  481</span> </div>
+<div class="line"><span class="lineno">  482</span>        std::vector&lt;double&gt; absVoltage, argVoltage;</div>
+<div class="line"><span class="lineno">  483</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_electricalData.stabVoltageVector.size(); ++i) {</div>
+<div class="line"><span class="lineno">  484</span>            absVoltage.push_back(std::abs(m_electricalData.stabVoltageVector[i]));</div>
+<div class="line"><span class="lineno">  485</span>            argVoltage.push_back(wxRadToDeg(std::arg(m_electricalData.stabVoltageVector[i])));</div>
+<div class="line"><span class="lineno">  486</span>        }</div>
+<div class="line"><span class="lineno">  487</span>        plotData.AddData(absVoltage, _(<span class="stringliteral">&quot;Voltage&quot;</span>));</div>
+<div class="line"><span class="lineno">  488</span>        plotData.AddData(argVoltage, _(<span class="stringliteral">&quot;Angle&quot;</span>));</div>
+<div class="line"><span class="lineno">  489</span>        plotData.AddData(m_electricalData.stabFreqVector, _(<span class="stringliteral">&quot;Frequency&quot;</span>));</div>
+<div class="line"><span class="lineno">  490</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  491</span>    }</div>
+<div class="line"><span class="lineno">  492</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (study == <a class="code hl_enumvalue" href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a82def898ef073a3756ebf164d30768d3">PlotStudy::FREQRESPONSE</a>) {</div>
+<div class="line"><span class="lineno">  493</span>        <span class="keywordflow">if</span> (!m_electricalData.plotPQData) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  494</span>        plotData.SetName(m_electricalData.name);</div>
+<div class="line"><span class="lineno">  495</span>        plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);</div>
+<div class="line"><span class="lineno">  496</span>        plotData.AddData(m_electricalData.absImpedanceVector, _(<span class="stringliteral">&quot;Impedance&quot;</span>));</div>
+<div class="line"><span class="lineno">  497</span>        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; z = m_electricalData.complexImpedanceVector;</div>
+<div class="line"><span class="lineno">  498</span>        std::vector&lt;double&gt; r(z.size());</div>
+<div class="line"><span class="lineno">  499</span>        std::vector&lt;double&gt; x(z.size());</div>
+<div class="line"><span class="lineno">  500</span>        <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; z.size(); ++i) {</div>
+<div class="line"><span class="lineno">  501</span>            r[i] = z[i].real();</div>
+<div class="line"><span class="lineno">  502</span>            x[i] = z[i].imag();</div>
+<div class="line"><span class="lineno">  503</span>        }</div>
+<div class="line"><span class="lineno">  504</span>        plotData.AddData(r, _(<span class="stringliteral">&quot;Resistance&quot;</span>));</div>
+<div class="line"><span class="lineno">  505</span>        plotData.AddData(x, _(<span class="stringliteral">&quot;Reactance&quot;</span>));</div>
+<div class="line"><span class="lineno">  506</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  507</span>    }</div>
+<div class="line"><span class="lineno">  508</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  509</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_aa6ba1b31b31a1cc802b6b3b3051a83a4a0bd879a71322c110d9221f9e548fd1b9"><div class="ttname"><a href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a0bd879a71322c110d9221f9e548fd1b9">PlotStudy::STABILITY</a></div><div class="ttdeci">@ STABILITY</div></div>
 <div class="ttc" id="a_power_element_8h_html_aa6ba1b31b31a1cc802b6b3b3051a83a4a82def898ef073a3756ebf164d30768d3"><div class="ttname"><a href="_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a82def898ef073a3756ebf164d30768d3">PlotStudy::FREQRESPONSE</a></div><div class="ttdeci">@ FREQRESPONSE</div></div>
 </div><!-- fragment -->
@@ -1492,49 +1561,49 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00361">361</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  362</span>{</div>
-<div class="line"><span class="lineno">  363</span>    wxString tipText = m_electricalData.name;</div>
-<div class="line"><span class="lineno">  364</span>    tipText += wxString::Format(<span class="stringliteral">&quot; (%d)&quot;</span>, m_electricalData.number + 1);</div>
-<div class="line"><span class="lineno">  365</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  366</span>    tipText += <a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(m_electricalData.nominalVoltage, 1) +</div>
-<div class="line"><span class="lineno">  367</span>        (m_electricalData.nominalVoltageUnit == ElectricalUnit::UNIT_V</div>
-<div class="line"><span class="lineno">  368</span>            ? _(<span class="stringliteral">&quot; V&quot;</span>)</div>
-<div class="line"><span class="lineno">  369</span>            : _(<span class="stringliteral">&quot; kV&quot;</span>));</div>
-<div class="line"><span class="lineno">  370</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  371</span>    tipText += _(<span class="stringliteral">&quot;\nV = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.voltage), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  372</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  373</span>    tipText += wxString(L<span class="stringliteral">&#39;\u03B8&#39;</span>) + <span class="stringliteral">&quot; = &quot;</span> + wxString::FromDouble(wxRadToDeg(std::arg(m_electricalData.voltage)), 5)</div>
-<div class="line"><span class="lineno">  374</span>        + wxString(L<span class="stringliteral">&#39;\u00B0&#39;</span>);</div>
-<div class="line"><span class="lineno">  375</span> </div>
-<div class="line"><span class="lineno">  376</span>    tipText += _(<span class="stringliteral">&quot;\n\nFault info:&quot;</span>);</div>
-<div class="line"><span class="lineno">  377</span>    tipText += _(<span class="stringliteral">&quot;\nVa = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultVoltage[0]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  378</span>    tipText += _(<span class="stringliteral">&quot;\nVb = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultVoltage[1]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  379</span>    tipText += _(<span class="stringliteral">&quot;\nVc = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultVoltage[2]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  380</span>    <span class="keywordflow">if</span> (m_electricalData.hasFault) {</div>
-<div class="line"><span class="lineno">  381</span>        tipText += _(<span class="stringliteral">&quot;\nIa = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultCurrent[0]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  382</span>        tipText += _(<span class="stringliteral">&quot;\nIb = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultCurrent[1]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  383</span>        tipText += _(<span class="stringliteral">&quot;\nIc = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultCurrent[2]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  384</span>    }</div>
-<div class="line"><span class="lineno">  385</span> </div>
-<div class="line"><span class="lineno">  386</span>    tipText += _(<span class="stringliteral">&quot;\n\nSsc = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.scPower), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  387</span> </div>
-<div class="line"><span class="lineno">  388</span>    wxString harmonicsInfo = _(<span class="stringliteral">&quot;\n\nHarmonics info:&quot;</span>);</div>
-<div class="line"><span class="lineno">  389</span>    <span class="keywordtype">bool</span> hasHarmonics = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  390</span>    harmonicsInfo += _(<span class="stringliteral">&quot;\nTHD = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.thd), 5) + wxT(<span class="stringliteral">&quot;%&quot;</span>);</div>
-<div class="line"><span class="lineno">  391</span>    <span class="keywordtype">int</span> i = 0;</div>
-<div class="line"><span class="lineno">  392</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; hVoltage : m_electricalData.harmonicVoltage) {</div>
-<div class="line"><span class="lineno">  393</span>        hasHarmonics = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  394</span>        wxString hVoltageStr;</div>
-<div class="line"><span class="lineno">  395</span>        hVoltageStr.Printf(_(<span class="stringliteral">&quot;\nVh(%d) = %.5e%s%.2f%s p.u.&quot;</span>), m_electricalData.harmonicOrder[i], std::abs(hVoltage), wxString(L<span class="stringliteral">&#39;\u2220&#39;</span>), wxRadToDeg(std::arg(hVoltage)), wxString(L<span class="stringliteral">&#39;\u00B0&#39;</span>));</div>
-<div class="line"><span class="lineno">  396</span>        harmonicsInfo += hVoltageStr;</div>
-<div class="line"><span class="lineno">  397</span>        i++;</div>
-<div class="line"><span class="lineno">  398</span>    }</div>
-<div class="line"><span class="lineno">  399</span>    <span class="keywordflow">if</span> (hasHarmonics) tipText += harmonicsInfo;</div>
-<div class="line"><span class="lineno">  400</span> </div>
-<div class="line"><span class="lineno">  401</span>    <span class="keywordflow">return</span> tipText;</div>
-<div class="line"><span class="lineno">  402</span>}</div>
-<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00466">Element.cpp:466</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00432">432</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  433</span>{</div>
+<div class="line"><span class="lineno">  434</span>    wxString tipText = m_electricalData.name;</div>
+<div class="line"><span class="lineno">  435</span>    tipText += wxString::Format(<span class="stringliteral">&quot; (%d)&quot;</span>, m_electricalData.number + 1);</div>
+<div class="line"><span class="lineno">  436</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  437</span>    tipText += <a class="code hl_function" href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">StringFromDouble</a>(m_electricalData.nominalVoltage, 1) +</div>
+<div class="line"><span class="lineno">  438</span>        (m_electricalData.nominalVoltageUnit == ElectricalUnit::UNIT_V</div>
+<div class="line"><span class="lineno">  439</span>            ? _(<span class="stringliteral">&quot; V&quot;</span>)</div>
+<div class="line"><span class="lineno">  440</span>            : _(<span class="stringliteral">&quot; kV&quot;</span>));</div>
+<div class="line"><span class="lineno">  441</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  442</span>    tipText += _(<span class="stringliteral">&quot;\nV = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.voltage), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  443</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  444</span>    tipText += wxString(L<span class="stringliteral">&#39;\u03B8&#39;</span>) + <span class="stringliteral">&quot; = &quot;</span> + wxString::FromDouble(wxRadToDeg(std::arg(m_electricalData.voltage)), 5)</div>
+<div class="line"><span class="lineno">  445</span>        + wxString(L<span class="stringliteral">&#39;\u00B0&#39;</span>);</div>
+<div class="line"><span class="lineno">  446</span> </div>
+<div class="line"><span class="lineno">  447</span>    tipText += _(<span class="stringliteral">&quot;\n\nFault info:&quot;</span>);</div>
+<div class="line"><span class="lineno">  448</span>    tipText += _(<span class="stringliteral">&quot;\nVa = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultVoltage[0]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  449</span>    tipText += _(<span class="stringliteral">&quot;\nVb = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultVoltage[1]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  450</span>    tipText += _(<span class="stringliteral">&quot;\nVc = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultVoltage[2]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  451</span>    <span class="keywordflow">if</span> (m_electricalData.hasFault) {</div>
+<div class="line"><span class="lineno">  452</span>        tipText += _(<span class="stringliteral">&quot;\nIa = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultCurrent[0]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  453</span>        tipText += _(<span class="stringliteral">&quot;\nIb = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultCurrent[1]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  454</span>        tipText += _(<span class="stringliteral">&quot;\nIc = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.faultCurrent[2]), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  455</span>    }</div>
+<div class="line"><span class="lineno">  456</span> </div>
+<div class="line"><span class="lineno">  457</span>    tipText += _(<span class="stringliteral">&quot;\n\nSsc = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.scPower), 5) + _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  458</span> </div>
+<div class="line"><span class="lineno">  459</span>    wxString harmonicsInfo = _(<span class="stringliteral">&quot;\n\nHarmonics info:&quot;</span>);</div>
+<div class="line"><span class="lineno">  460</span>    <span class="keywordtype">bool</span> hasHarmonics = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  461</span>    harmonicsInfo += _(<span class="stringliteral">&quot;\nTHD = &quot;</span>) + wxString::FromDouble(std::abs(m_electricalData.thd), 5) + wxT(<span class="stringliteral">&quot;%&quot;</span>);</div>
+<div class="line"><span class="lineno">  462</span>    <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><span class="lineno">  463</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; hVoltage : m_electricalData.harmonicVoltage) {</div>
+<div class="line"><span class="lineno">  464</span>        hasHarmonics = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  465</span>        wxString hVoltageStr;</div>
+<div class="line"><span class="lineno">  466</span>        hVoltageStr.Printf(_(<span class="stringliteral">&quot;\nVh(%d) = %.5e%s%.2f%s p.u.&quot;</span>), m_electricalData.harmonicOrder[i], std::abs(hVoltage), wxString(L<span class="stringliteral">&#39;\u2220&#39;</span>), wxRadToDeg(std::arg(hVoltage)), wxString(L<span class="stringliteral">&#39;\u00B0&#39;</span>));</div>
+<div class="line"><span class="lineno">  467</span>        harmonicsInfo += hVoltageStr;</div>
+<div class="line"><span class="lineno">  468</span>        i++;</div>
+<div class="line"><span class="lineno">  469</span>    }</div>
+<div class="line"><span class="lineno">  470</span>    <span class="keywordflow">if</span> (hasHarmonics) tipText += harmonicsInfo;</div>
+<div class="line"><span class="lineno">  471</span> </div>
+<div class="line"><span class="lineno">  472</span>    <span class="keywordflow">return</span> tipText;</div>
+<div class="line"><span class="lineno">  473</span>}</div>
+<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00548">Element.cpp:548</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1546,6 +1615,92 @@ Here is the call graph for this function:</div>
 </map>
 </div>
 
+</div>
+</div>
+<a id="aec6d8b2aed8a98667d46b324e0c68454" name="aec6d8b2aed8a98667d46b324e0c68454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec6d8b2aed8a98667d46b324e0c68454">&#9670;&#160;</a></span>GetVoltageColour()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">wxColour Bus::GetVoltageColour </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *&#160;</td>
+          <td class="paramname"><em>guiColour</em> = <code>nullptr</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00372">372</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  373</span>{</div>
+<div class="line"><span class="lineno">  374</span>    <span class="keywordtype">double</span> v_kV = m_electricalData.nominalVoltage;</div>
+<div class="line"><span class="lineno">  375</span>    <span class="keywordflow">if</span> (m_electricalData.nominalVoltageUnit == ElectricalUnit::UNIT_V) {</div>
+<div class="line"><span class="lineno">  376</span>        v_kV /= 1000.0;</div>
+<div class="line"><span class="lineno">  377</span>    }</div>
+<div class="line"><span class="lineno">  378</span> </div>
+<div class="line"><span class="lineno">  379</span>    <span class="keyword">const</span> std::vector&lt;VoltageLevelColour&gt;* levels = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  380</span>    <span class="keywordflow">if</span> (guiColour &amp;&amp; !guiColour-&gt;voltageLevels.empty()) {</div>
+<div class="line"><span class="lineno">  381</span>        levels = &amp;guiColour-&gt;voltageLevels;</div>
+<div class="line"><span class="lineno">  382</span>    }</div>
+<div class="line"><span class="lineno">  383</span> </div>
+<div class="line"><span class="lineno">  384</span>    <span class="keywordflow">if</span> (levels &amp;&amp; !levels-&gt;empty()) {</div>
+<div class="line"><span class="lineno">  385</span>        <span class="comment">// 1. Find closest configured level within 15% tolerance</span></div>
+<div class="line"><span class="lineno">  386</span>        <span class="keywordtype">double</span> minDiff = 1e9;</div>
+<div class="line"><span class="lineno">  387</span>        <span class="keywordtype">int</span> bestIdx = -1;</div>
+<div class="line"><span class="lineno">  388</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; levels-&gt;size(); ++i) {</div>
+<div class="line"><span class="lineno">  389</span>            <span class="keywordtype">double</span> diff = std::abs(v_kV - (*levels)[i].voltage);</div>
+<div class="line"><span class="lineno">  390</span>            <span class="keywordflow">if</span> (diff &lt; minDiff) {</div>
+<div class="line"><span class="lineno">  391</span>                minDiff = diff;</div>
+<div class="line"><span class="lineno">  392</span>                bestIdx = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(i);</div>
+<div class="line"><span class="lineno">  393</span>            }</div>
+<div class="line"><span class="lineno">  394</span>        }</div>
+<div class="line"><span class="lineno">  395</span> </div>
+<div class="line"><span class="lineno">  396</span>        <span class="keywordflow">if</span> (bestIdx &gt;= 0) {</div>
+<div class="line"><span class="lineno">  397</span>            <span class="keywordtype">double</span> tol = std::max((*levels)[bestIdx].voltage * 0.15, 0.5);</div>
+<div class="line"><span class="lineno">  398</span>            <span class="keywordflow">if</span> (minDiff &lt;= tol) {</div>
+<div class="line"><span class="lineno">  399</span>                <span class="keywordflow">return</span> (*levels)[bestIdx].colour;</div>
+<div class="line"><span class="lineno">  400</span>            }</div>
+<div class="line"><span class="lineno">  401</span>            <span class="comment">// 2. Range match (assuming ordered descending)</span></div>
+<div class="line"><span class="lineno">  402</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; levels-&gt;size(); ++i) {</div>
+<div class="line"><span class="lineno">  403</span>                <span class="keywordflow">if</span> (v_kV &gt;= (*levels)[i].voltage * 0.9) {</div>
+<div class="line"><span class="lineno">  404</span>                    <span class="keywordflow">return</span> (*levels)[i].colour;</div>
+<div class="line"><span class="lineno">  405</span>                }</div>
+<div class="line"><span class="lineno">  406</span>            }</div>
+<div class="line"><span class="lineno">  407</span>            <span class="keywordflow">return</span> levels-&gt;back().colour;</div>
+<div class="line"><span class="lineno">  408</span>        }</div>
+<div class="line"><span class="lineno">  409</span>    }</div>
+<div class="line"><span class="lineno">  410</span> </div>
+<div class="line"><span class="lineno">  411</span>    <span class="keywordflow">if</span> (v_kV &gt;= 500.0) {</div>
+<div class="line"><span class="lineno">  412</span>        <span class="keywordflow">return</span> wxColour(0, 90, 220);     <span class="comment">// &gt;= 500 kV (ex: 500 kV, 765 kV) - Royal Blue</span></div>
+<div class="line"><span class="lineno">  413</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v_kV &gt;= 300.0) {</div>
+<div class="line"><span class="lineno">  414</span>        <span class="keywordflow">return</span> wxColour(160, 82, 45);    <span class="comment">// 300 kV - 500 kV (ex: 345 kV, 440 kV) - Brown</span></div>
+<div class="line"><span class="lineno">  415</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v_kV &gt;= 200.0) {</div>
+<div class="line"><span class="lineno">  416</span>        <span class="keywordflow">return</span> wxColour(220, 35, 35);    <span class="comment">// 200 kV - 300 kV (ex: 230 kV) - Red</span></div>
+<div class="line"><span class="lineno">  417</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v_kV &gt;= 100.0) {</div>
+<div class="line"><span class="lineno">  418</span>        <span class="keywordflow">return</span> wxColour(0, 155, 65);     <span class="comment">// 100 kV - 200 kV (ex: 138 kV, 161 kV) - Green</span></div>
+<div class="line"><span class="lineno">  419</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v_kV &gt;= 50.0) {</div>
+<div class="line"><span class="lineno">  420</span>        <span class="keywordflow">return</span> wxColour(145, 40, 205);   <span class="comment">// 50 kV - 100 kV (ex: 69 kV, 88 kV) - Violet / Purple</span></div>
+<div class="line"><span class="lineno">  421</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v_kV &gt;= 20.0) {</div>
+<div class="line"><span class="lineno">  422</span>        <span class="keywordflow">return</span> wxColour(215, 35, 135);   <span class="comment">// 20 kV - 50 kV (ex: 34.5 kV) - Magenta / Pink</span></div>
+<div class="line"><span class="lineno">  423</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v_kV &gt;= 10.0) {</div>
+<div class="line"><span class="lineno">  424</span>        <span class="keywordflow">return</span> wxColour(0, 165, 195);    <span class="comment">// 10 kV - 20 kV (ex: 13.8 kV, 18 kV) - Cyan / Teal</span></div>
+<div class="line"><span class="lineno">  425</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v_kV &gt;= 1.0) {</div>
+<div class="line"><span class="lineno">  426</span>        <span class="keywordflow">return</span> wxColour(205, 150, 15);   <span class="comment">// 1 kV - 10 kV (ex: 2.4 kV, 4.16 kV, 6.9 kV) - Gold / Amber</span></div>
+<div class="line"><span class="lineno">  427</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  428</span>        <span class="keywordflow">return</span> wxColour(120, 125, 135);  <span class="comment">// &lt; 1 kV (220 V, 380 V, 440 V) - Slate Gray</span></div>
+<div class="line"><span class="lineno">  429</span>    }</div>
+<div class="line"><span class="lineno">  430</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a5014be68f4bb5d8f1a1ea861b03bacdf" name="a5014be68f4bb5d8f1a1ea861b03bacdf"></a>
@@ -1588,7 +1743,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  243</span> </div>
 <div class="line"><span class="lineno">  244</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a>(m_rect, rect, m_angle, 0.0);</div>
 <div class="line"><span class="lineno">  245</span>}</div>
-<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00295">Element.cpp:295</a></div></div>
+<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00377">Element.cpp:377</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1706,46 +1861,46 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00487">487</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  488</span>{</div>
-<div class="line"><span class="lineno">  489</span>    <span class="keywordflow">if</span> (!Element::OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  490</span> </div>
-<div class="line"><span class="lineno">  491</span>    <span class="keyword">auto</span> electricalProp = elementNode-&gt;first_node(<span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
-<div class="line"><span class="lineno">  492</span>    <span class="keywordflow">if</span> (!electricalProp) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  493</span> </div>
-<div class="line"><span class="lineno">  494</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
-<div class="line"><span class="lineno">  495</span>    m_electricalData.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;NominalVoltage&quot;</span>);</div>
-<div class="line"><span class="lineno">  496</span>    m_electricalData.nominalVoltageUnit =</div>
-<div class="line"><span class="lineno">  497</span>        (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;NominalVoltage&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>);</div>
-<div class="line"><span class="lineno">  498</span>    m_electricalData.isVoltageControlled = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;IsVoltageControlled&quot;</span>);</div>
-<div class="line"><span class="lineno">  499</span>    m_electricalData.controlledVoltage = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ControlledVoltage&quot;</span>);</div>
-<div class="line"><span class="lineno">  500</span>    m_electricalData.controlledVoltageUnitChoice =</div>
-<div class="line"><span class="lineno">  501</span>        XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ControlledVoltage&quot;</span>, <span class="stringliteral">&quot;Choice&quot;</span>);</div>
-<div class="line"><span class="lineno">  502</span>    m_electricalData.slackBus = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;SlackBus&quot;</span>);</div>
-<div class="line"><span class="lineno">  503</span>    <span class="keyword">auto</span> fault = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Fault&quot;</span>);</div>
-<div class="line"><span class="lineno">  504</span>    m_electricalData.hasFault = XMLParser::GetNodeValueInt(fault, <span class="stringliteral">&quot;HasFault&quot;</span>);</div>
-<div class="line"><span class="lineno">  505</span>    m_electricalData.faultType = (<a class="code hl_enumeration" href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df">FaultData</a>)XMLParser::GetNodeValueInt(fault, <span class="stringliteral">&quot;Type&quot;</span>);</div>
-<div class="line"><span class="lineno">  506</span>    m_electricalData.faultLocation = (<a class="code hl_enumeration" href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df">FaultData</a>)XMLParser::GetNodeValueInt(fault, <span class="stringliteral">&quot;Location&quot;</span>);</div>
-<div class="line"><span class="lineno">  507</span>    m_electricalData.faultResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;Resistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  508</span>    m_electricalData.faultReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;Reactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  509</span>    <span class="keyword">auto</span> stability = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Stability&quot;</span>);</div>
-<div class="line"><span class="lineno">  510</span>    m_electricalData.plotBus = XMLParser::GetNodeValueInt(stability, <span class="stringliteral">&quot;Plot&quot;</span>);</div>
-<div class="line"><span class="lineno">  511</span>    m_electricalData.stabHasFault = XMLParser::GetNodeValueInt(stability, <span class="stringliteral">&quot;HasFault&quot;</span>);</div>
-<div class="line"><span class="lineno">  512</span>    m_electricalData.stabFaultTime = XMLParser::GetNodeValueDouble(stability, <span class="stringliteral">&quot;FaultTime&quot;</span>);</div>
-<div class="line"><span class="lineno">  513</span>    m_electricalData.stabFaultLength = XMLParser::GetNodeValueDouble(stability, <span class="stringliteral">&quot;FaultLength&quot;</span>);</div>
-<div class="line"><span class="lineno">  514</span>    m_electricalData.stabFaultResistance = XMLParser::GetNodeValueDouble(stability, <span class="stringliteral">&quot;FaultResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  515</span>    m_electricalData.stabFaultReactance = XMLParser::GetNodeValueDouble(stability, <span class="stringliteral">&quot;FaultReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  516</span> </div>
-<div class="line"><span class="lineno">  517</span>    <span class="keyword">auto</span> powerQuality = electricalProp-&gt;first_node(<span class="stringliteral">&quot;PowerQuality&quot;</span>);</div>
-<div class="line"><span class="lineno">  518</span>    <span class="keywordflow">if</span> (powerQuality) m_electricalData.plotPQData = XMLParser::GetNodeValueInt(powerQuality, <span class="stringliteral">&quot;Plot&quot;</span>);</div>
-<div class="line"><span class="lineno">  519</span> </div>
-<div class="line"><span class="lineno">  520</span>    <span class="keywordflow">if</span> (m_electricalData.stabHasFault) <a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  521</span>    <a class="code hl_function" href="class_element.html#afe66b6b0104f3f54f402a3387ff61b38">SetInserted</a>();</div>
-<div class="line"><span class="lineno">  522</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  523</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00567">567</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  568</span>{</div>
+<div class="line"><span class="lineno">  569</span>    <span class="keywordflow">if</span> (!Element::OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  570</span> </div>
+<div class="line"><span class="lineno">  571</span>    <span class="keyword">auto</span> electricalProp = elementNode-&gt;first_node(<span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
+<div class="line"><span class="lineno">  572</span>    <span class="keywordflow">if</span> (!electricalProp) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  573</span> </div>
+<div class="line"><span class="lineno">  574</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
+<div class="line"><span class="lineno">  575</span>    m_electricalData.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;NominalVoltage&quot;</span>);</div>
+<div class="line"><span class="lineno">  576</span>    m_electricalData.nominalVoltageUnit =</div>
+<div class="line"><span class="lineno">  577</span>        (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;NominalVoltage&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>);</div>
+<div class="line"><span class="lineno">  578</span>    m_electricalData.isVoltageControlled = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;IsVoltageControlled&quot;</span>);</div>
+<div class="line"><span class="lineno">  579</span>    m_electricalData.controlledVoltage = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ControlledVoltage&quot;</span>);</div>
+<div class="line"><span class="lineno">  580</span>    m_electricalData.controlledVoltageUnitChoice =</div>
+<div class="line"><span class="lineno">  581</span>        XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ControlledVoltage&quot;</span>, <span class="stringliteral">&quot;Choice&quot;</span>);</div>
+<div class="line"><span class="lineno">  582</span>    m_electricalData.slackBus = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;SlackBus&quot;</span>);</div>
+<div class="line"><span class="lineno">  583</span>    <span class="keyword">auto</span> fault = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Fault&quot;</span>);</div>
+<div class="line"><span class="lineno">  584</span>    m_electricalData.hasFault = XMLParser::GetNodeValueInt(fault, <span class="stringliteral">&quot;HasFault&quot;</span>);</div>
+<div class="line"><span class="lineno">  585</span>    m_electricalData.faultType = (<a class="code hl_enumeration" href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df">FaultData</a>)XMLParser::GetNodeValueInt(fault, <span class="stringliteral">&quot;Type&quot;</span>);</div>
+<div class="line"><span class="lineno">  586</span>    m_electricalData.faultLocation = (<a class="code hl_enumeration" href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df">FaultData</a>)XMLParser::GetNodeValueInt(fault, <span class="stringliteral">&quot;Location&quot;</span>);</div>
+<div class="line"><span class="lineno">  587</span>    m_electricalData.faultResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;Resistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  588</span>    m_electricalData.faultReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;Reactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  589</span>    <span class="keyword">auto</span> stability = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Stability&quot;</span>);</div>
+<div class="line"><span class="lineno">  590</span>    m_electricalData.plotBus = XMLParser::GetNodeValueInt(stability, <span class="stringliteral">&quot;Plot&quot;</span>);</div>
+<div class="line"><span class="lineno">  591</span>    m_electricalData.stabHasFault = XMLParser::GetNodeValueInt(stability, <span class="stringliteral">&quot;HasFault&quot;</span>);</div>
+<div class="line"><span class="lineno">  592</span>    m_electricalData.stabFaultTime = XMLParser::GetNodeValueDouble(stability, <span class="stringliteral">&quot;FaultTime&quot;</span>);</div>
+<div class="line"><span class="lineno">  593</span>    m_electricalData.stabFaultLength = XMLParser::GetNodeValueDouble(stability, <span class="stringliteral">&quot;FaultLength&quot;</span>);</div>
+<div class="line"><span class="lineno">  594</span>    m_electricalData.stabFaultResistance = XMLParser::GetNodeValueDouble(stability, <span class="stringliteral">&quot;FaultResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  595</span>    m_electricalData.stabFaultReactance = XMLParser::GetNodeValueDouble(stability, <span class="stringliteral">&quot;FaultReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  596</span> </div>
+<div class="line"><span class="lineno">  597</span>    <span class="keyword">auto</span> powerQuality = electricalProp-&gt;first_node(<span class="stringliteral">&quot;PowerQuality&quot;</span>);</div>
+<div class="line"><span class="lineno">  598</span>    <span class="keywordflow">if</span> (powerQuality) m_electricalData.plotPQData = XMLParser::GetNodeValueInt(powerQuality, <span class="stringliteral">&quot;Plot&quot;</span>);</div>
+<div class="line"><span class="lineno">  599</span> </div>
+<div class="line"><span class="lineno">  600</span>    <span class="keywordflow">if</span> (m_electricalData.stabHasFault) <a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  601</span>    <a class="code hl_function" href="class_element.html#afe66b6b0104f3f54f402a3387ff61b38">SetInserted</a>();</div>
+<div class="line"><span class="lineno">  602</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  603</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_a70fd34766a0e92aa6761f871a3d1f0df"><div class="ttname"><a href="_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df">FaultData</a></div><div class="ttdeci">FaultData</div><div class="ttdoc">Information about fault (type and location).</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
-<div class="ttc" id="aclass_element_html_afe66b6b0104f3f54f402a3387ff61b38"><div class="ttname"><a href="class_element.html#afe66b6b0104f3f54f402a3387ff61b38">Element::SetInserted</a></div><div class="ttdeci">void SetInserted(bool inserted=true)</div><div class="ttdoc">Set if the element is properly inserted in the workspace.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00634">Element.h:634</a></div></div>
-<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00201">PowerElement.h:201</a></div></div>
+<div class="ttc" id="aclass_element_html_afe66b6b0104f3f54f402a3387ff61b38"><div class="ttname"><a href="class_element.html#afe66b6b0104f3f54f402a3387ff61b38">Element::SetInserted</a></div><div class="ttdeci">void SetInserted(bool inserted=true)</div><div class="ttdoc">Set if the element is properly inserted in the workspace.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00639">Element.h:639</a></div></div>
+<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00203">PowerElement.h:203</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1901,61 +2056,61 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00431">431</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  432</span>{</div>
-<div class="line"><span class="lineno">  433</span>    m_electricalData.number = m_elementID;</div>
-<div class="line"><span class="lineno">  434</span> </div>
-<div class="line"><span class="lineno">  435</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Bus&quot;</span>);</div>
-<div class="line"><span class="lineno">  436</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><span class="lineno">  437</span> </div>
-<div class="line"><span class="lineno">  438</span>    Element::SaveCADProperties(doc, elementNode);</div>
-<div class="line"><span class="lineno">  439</span> </div>
-<div class="line"><span class="lineno">  440</span>    <span class="keyword">auto</span> electricalProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
-<div class="line"><span class="lineno">  441</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><span class="lineno">  442</span>    XMLParser::SetNodeValue(doc, name, m_electricalData.name);</div>
-<div class="line"><span class="lineno">  443</span>    <span class="keyword">auto</span> nominalVoltage = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;NominalVoltage&quot;</span>);</div>
-<div class="line"><span class="lineno">  444</span>    XMLParser::SetNodeValue(doc, nominalVoltage, m_electricalData.nominalVoltage);</div>
-<div class="line"><span class="lineno">  445</span>    XMLParser::SetNodeAttribute(doc, nominalVoltage, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.nominalVoltageUnit));</div>
-<div class="line"><span class="lineno">  446</span>    <span class="keyword">auto</span> isVoltageControlled = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IsVoltageControlled&quot;</span>);</div>
-<div class="line"><span class="lineno">  447</span>    XMLParser::SetNodeValue(doc, isVoltageControlled, m_electricalData.isVoltageControlled);</div>
-<div class="line"><span class="lineno">  448</span>    <span class="keyword">auto</span> controlledVoltage = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;ControlledVoltage&quot;</span>);</div>
-<div class="line"><span class="lineno">  449</span>    XMLParser::SetNodeValue(doc, controlledVoltage, m_electricalData.controlledVoltage);</div>
-<div class="line"><span class="lineno">  450</span>    XMLParser::SetNodeAttribute(doc, controlledVoltage, <span class="stringliteral">&quot;Choice&quot;</span>, m_electricalData.controlledVoltageUnitChoice);</div>
-<div class="line"><span class="lineno">  451</span>    <span class="keyword">auto</span> slackBus = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;SlackBus&quot;</span>);</div>
-<div class="line"><span class="lineno">  452</span>    XMLParser::SetNodeValue(doc, slackBus, m_electricalData.slackBus);</div>
-<div class="line"><span class="lineno">  453</span> </div>
-<div class="line"><span class="lineno">  454</span>    <span class="keyword">auto</span> fault = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Fault&quot;</span>);</div>
-<div class="line"><span class="lineno">  455</span>    <span class="keyword">auto</span> hasFault = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;HasFault&quot;</span>);</div>
-<div class="line"><span class="lineno">  456</span>    XMLParser::SetNodeValue(doc, hasFault, m_electricalData.hasFault);</div>
-<div class="line"><span class="lineno">  457</span>    <span class="keyword">auto</span> faultType = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;Type&quot;</span>);</div>
-<div class="line"><span class="lineno">  458</span>    XMLParser::SetNodeValue(doc, faultType, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.faultType));</div>
-<div class="line"><span class="lineno">  459</span>    <span class="keyword">auto</span> faultLocation = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;Location&quot;</span>);</div>
-<div class="line"><span class="lineno">  460</span>    XMLParser::SetNodeValue(doc, faultLocation, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.faultLocation));</div>
-<div class="line"><span class="lineno">  461</span>    <span class="keyword">auto</span> faultResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;Resistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  462</span>    XMLParser::SetNodeValue(doc, faultResistance, m_electricalData.faultResistance);</div>
-<div class="line"><span class="lineno">  463</span>    <span class="keyword">auto</span> faultReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;Reactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  464</span>    XMLParser::SetNodeValue(doc, faultReactance, m_electricalData.faultReactance);</div>
-<div class="line"><span class="lineno">  465</span> </div>
-<div class="line"><span class="lineno">  466</span>    <span class="keyword">auto</span> stability = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Stability&quot;</span>);</div>
-<div class="line"><span class="lineno">  467</span>    <span class="keyword">auto</span> plotBus = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;Plot&quot;</span>);</div>
-<div class="line"><span class="lineno">  468</span>    XMLParser::SetNodeValue(doc, plotBus, m_electricalData.plotBus);</div>
-<div class="line"><span class="lineno">  469</span>    <span class="keyword">auto</span> stabHasFault = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;HasFault&quot;</span>);</div>
-<div class="line"><span class="lineno">  470</span>    XMLParser::SetNodeValue(doc, stabHasFault, m_electricalData.stabHasFault);</div>
-<div class="line"><span class="lineno">  471</span>    <span class="keyword">auto</span> stabFaultTime = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;FaultTime&quot;</span>);</div>
-<div class="line"><span class="lineno">  472</span>    XMLParser::SetNodeValue(doc, stabFaultTime, m_electricalData.stabFaultTime);</div>
-<div class="line"><span class="lineno">  473</span>    <span class="keyword">auto</span> stabFaultLength = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;FaultLength&quot;</span>);</div>
-<div class="line"><span class="lineno">  474</span>    XMLParser::SetNodeValue(doc, stabFaultLength, m_electricalData.stabFaultLength);</div>
-<div class="line"><span class="lineno">  475</span>    <span class="keyword">auto</span> stabFaultResistance = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;FaultResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  476</span>    XMLParser::SetNodeValue(doc, stabFaultResistance, m_electricalData.stabFaultResistance);</div>
-<div class="line"><span class="lineno">  477</span>    <span class="keyword">auto</span> stabFaultReactance = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;FaultReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  478</span>    XMLParser::SetNodeValue(doc, stabFaultReactance, m_electricalData.stabFaultReactance);</div>
-<div class="line"><span class="lineno">  479</span> </div>
-<div class="line"><span class="lineno">  480</span>    <span class="keyword">auto</span> powerQuality = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;PowerQuality&quot;</span>);</div>
-<div class="line"><span class="lineno">  481</span>    <span class="keyword">auto</span> plotPQData = XMLParser::AppendNode(doc, powerQuality, <span class="stringliteral">&quot;Plot&quot;</span>);</div>
-<div class="line"><span class="lineno">  482</span>    XMLParser::SetNodeValue(doc, plotPQData, m_electricalData.plotPQData);</div>
-<div class="line"><span class="lineno">  483</span> </div>
-<div class="line"><span class="lineno">  484</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><span class="lineno">  485</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00511">511</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  512</span>{</div>
+<div class="line"><span class="lineno">  513</span>    m_electricalData.number = m_elementID;</div>
+<div class="line"><span class="lineno">  514</span> </div>
+<div class="line"><span class="lineno">  515</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Bus&quot;</span>);</div>
+<div class="line"><span class="lineno">  516</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><span class="lineno">  517</span> </div>
+<div class="line"><span class="lineno">  518</span>    Element::SaveCADProperties(doc, elementNode);</div>
+<div class="line"><span class="lineno">  519</span> </div>
+<div class="line"><span class="lineno">  520</span>    <span class="keyword">auto</span> electricalProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
+<div class="line"><span class="lineno">  521</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><span class="lineno">  522</span>    XMLParser::SetNodeValue(doc, name, m_electricalData.name);</div>
+<div class="line"><span class="lineno">  523</span>    <span class="keyword">auto</span> nominalVoltage = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;NominalVoltage&quot;</span>);</div>
+<div class="line"><span class="lineno">  524</span>    XMLParser::SetNodeValue(doc, nominalVoltage, m_electricalData.nominalVoltage);</div>
+<div class="line"><span class="lineno">  525</span>    XMLParser::SetNodeAttribute(doc, nominalVoltage, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.nominalVoltageUnit));</div>
+<div class="line"><span class="lineno">  526</span>    <span class="keyword">auto</span> isVoltageControlled = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IsVoltageControlled&quot;</span>);</div>
+<div class="line"><span class="lineno">  527</span>    XMLParser::SetNodeValue(doc, isVoltageControlled, m_electricalData.isVoltageControlled);</div>
+<div class="line"><span class="lineno">  528</span>    <span class="keyword">auto</span> controlledVoltage = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;ControlledVoltage&quot;</span>);</div>
+<div class="line"><span class="lineno">  529</span>    XMLParser::SetNodeValue(doc, controlledVoltage, m_electricalData.controlledVoltage);</div>
+<div class="line"><span class="lineno">  530</span>    XMLParser::SetNodeAttribute(doc, controlledVoltage, <span class="stringliteral">&quot;Choice&quot;</span>, m_electricalData.controlledVoltageUnitChoice);</div>
+<div class="line"><span class="lineno">  531</span>    <span class="keyword">auto</span> slackBus = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;SlackBus&quot;</span>);</div>
+<div class="line"><span class="lineno">  532</span>    XMLParser::SetNodeValue(doc, slackBus, m_electricalData.slackBus);</div>
+<div class="line"><span class="lineno">  533</span> </div>
+<div class="line"><span class="lineno">  534</span>    <span class="keyword">auto</span> fault = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Fault&quot;</span>);</div>
+<div class="line"><span class="lineno">  535</span>    <span class="keyword">auto</span> hasFault = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;HasFault&quot;</span>);</div>
+<div class="line"><span class="lineno">  536</span>    XMLParser::SetNodeValue(doc, hasFault, m_electricalData.hasFault);</div>
+<div class="line"><span class="lineno">  537</span>    <span class="keyword">auto</span> faultType = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;Type&quot;</span>);</div>
+<div class="line"><span class="lineno">  538</span>    XMLParser::SetNodeValue(doc, faultType, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.faultType));</div>
+<div class="line"><span class="lineno">  539</span>    <span class="keyword">auto</span> faultLocation = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;Location&quot;</span>);</div>
+<div class="line"><span class="lineno">  540</span>    XMLParser::SetNodeValue(doc, faultLocation, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.faultLocation));</div>
+<div class="line"><span class="lineno">  541</span>    <span class="keyword">auto</span> faultResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;Resistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  542</span>    XMLParser::SetNodeValue(doc, faultResistance, m_electricalData.faultResistance);</div>
+<div class="line"><span class="lineno">  543</span>    <span class="keyword">auto</span> faultReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;Reactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  544</span>    XMLParser::SetNodeValue(doc, faultReactance, m_electricalData.faultReactance);</div>
+<div class="line"><span class="lineno">  545</span> </div>
+<div class="line"><span class="lineno">  546</span>    <span class="keyword">auto</span> stability = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Stability&quot;</span>);</div>
+<div class="line"><span class="lineno">  547</span>    <span class="keyword">auto</span> plotBus = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;Plot&quot;</span>);</div>
+<div class="line"><span class="lineno">  548</span>    XMLParser::SetNodeValue(doc, plotBus, m_electricalData.plotBus);</div>
+<div class="line"><span class="lineno">  549</span>    <span class="keyword">auto</span> stabHasFault = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;HasFault&quot;</span>);</div>
+<div class="line"><span class="lineno">  550</span>    XMLParser::SetNodeValue(doc, stabHasFault, m_electricalData.stabHasFault);</div>
+<div class="line"><span class="lineno">  551</span>    <span class="keyword">auto</span> stabFaultTime = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;FaultTime&quot;</span>);</div>
+<div class="line"><span class="lineno">  552</span>    XMLParser::SetNodeValue(doc, stabFaultTime, m_electricalData.stabFaultTime);</div>
+<div class="line"><span class="lineno">  553</span>    <span class="keyword">auto</span> stabFaultLength = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;FaultLength&quot;</span>);</div>
+<div class="line"><span class="lineno">  554</span>    XMLParser::SetNodeValue(doc, stabFaultLength, m_electricalData.stabFaultLength);</div>
+<div class="line"><span class="lineno">  555</span>    <span class="keyword">auto</span> stabFaultResistance = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;FaultResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  556</span>    XMLParser::SetNodeValue(doc, stabFaultResistance, m_electricalData.stabFaultResistance);</div>
+<div class="line"><span class="lineno">  557</span>    <span class="keyword">auto</span> stabFaultReactance = XMLParser::AppendNode(doc, stability, <span class="stringliteral">&quot;FaultReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  558</span>    XMLParser::SetNodeValue(doc, stabFaultReactance, m_electricalData.stabFaultReactance);</div>
+<div class="line"><span class="lineno">  559</span> </div>
+<div class="line"><span class="lineno">  560</span>    <span class="keyword">auto</span> powerQuality = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;PowerQuality&quot;</span>);</div>
+<div class="line"><span class="lineno">  561</span>    <span class="keyword">auto</span> plotPQData = XMLParser::AppendNode(doc, powerQuality, <span class="stringliteral">&quot;Plot&quot;</span>);</div>
+<div class="line"><span class="lineno">  562</span>    XMLParser::SetNodeValue(doc, plotPQData, m_electricalData.plotPQData);</div>
+<div class="line"><span class="lineno">  563</span> </div>
+<div class="line"><span class="lineno">  564</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><span class="lineno">  565</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1983,8 +2138,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00130">130</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  130</span>{ m_electricalData = electricalData; }</div>
+<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00133">133</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  133</span>{ m_electricalData = electricalData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2040,15 +2195,15 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00345">345</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  346</span>{</div>
-<div class="line"><span class="lineno">  347</span>    <a class="code hl_class" href="class_bus_form.html">BusForm</a> busForm(parent, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  348</span>    busForm.CentreOnParent();</div>
-<div class="line"><span class="lineno">  349</span>    <span class="keywordflow">if</span> (busForm.ShowModal() == wxID_OK) {</div>
-<div class="line"><span class="lineno">  350</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  351</span>    }</div>
-<div class="line"><span class="lineno">  352</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  353</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00355">355</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  356</span>{</div>
+<div class="line"><span class="lineno">  357</span>    <a class="code hl_class" href="class_bus_form.html">BusForm</a> busForm(parent, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  358</span>    busForm.CentreOnParent();</div>
+<div class="line"><span class="lineno">  359</span>    <span class="keywordflow">if</span> (busForm.ShowModal() == wxID_OK) {</div>
+<div class="line"><span class="lineno">  360</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  361</span>    }</div>
+<div class="line"><span class="lineno">  362</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  363</span>}</div>
 <div class="ttc" id="aclass_bus_form_html"><div class="ttname"><a href="class_bus_form.html">BusForm</a></div><div class="ttdoc">Form to edit the bus power data.</div><div class="ttdef"><b>Definition</b> <a href="_bus_form_8h_source.html#l00031">BusForm.h:32</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -2074,7 +2229,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00138">138</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00141">141</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
 
 </div>
 </div>

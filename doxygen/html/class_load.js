@@ -1,6 +1,6 @@
 var class_load =
 [
-    [ "AddParent", "class_load.html#ac9f449be9b919b36924a844324bf37ee", null ],
+    [ "AddParent", "class_load.html#a4bb647c4d8dc88431b50c9bbeb8cf528", null ],
     [ "DrawDC", "class_load.html#a461f593383c9d386a45189f1100b663c", null ],
     [ "DrawDC", "class_load.html#a1f07bb58d943234e04207573ce3af9a3", null ],
     [ "GetContextMenu", "class_load.html#a25b4a3e553f8400114ac8effa11287da", null ],

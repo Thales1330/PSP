@@ -1,6 +1,6 @@
 var class_machines =
 [
-    [ "AddParent", "class_machines.html#aaaf1b86dcbfd8f4a4c082a77d72b1fe3", null ],
+    [ "AddParent", "class_machines.html#aaa61e6c668a75d70ae7af0cd6469a03d", null ],
     [ "Contains", "class_machines.html#acda27b0ea8a7b0fb00d647d8744f346e", null ],
     [ "DrawDC", "class_machines.html#a386f94efcf9afdb3c0e00e5cefd8a84d", null ],
     [ "DrawDC", "class_machines.html#a8f31214a9cbedd715525caa2b63b310d", null ],

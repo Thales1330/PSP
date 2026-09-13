@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xmlparser_0',['XMLParser',['../class_x_m_l_parser.html',1,'']]]
+  ['workspace_0',['Workspace',['../class_workspace.html',1,'']]]
 ];

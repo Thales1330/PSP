@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -251,13 +251,15 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   16</span>        _(L<span class="stringliteral">&quot;Fault current (i → j)&quot;</span>), _(L<span class="stringliteral">&quot;Fault current (j → i)&quot;</span>) };</div>
 <div class="line"><span class="lineno">   17</span> </div>
 <div class="line"><span class="lineno">   18</span>    m_checkListBoxLine-&gt;Append(branchOptions);</div>
-<div class="line"><span class="lineno">   19</span>    m_checkListBoxTransformer-&gt;Append(branchOptions);</div>
-<div class="line"><span class="lineno">   20</span> </div>
-<div class="line"><span class="lineno">   21</span>    m_textCtrlPrecision-&gt;SetValue(wxString::Format(<span class="stringliteral">&quot;%d&quot;</span>, m_precision));</div>
+<div class="line"><span class="lineno">   19</span>    std::vector&lt;wxString&gt; transformerOptions = branchOptions;</div>
+<div class="line"><span class="lineno">   20</span>    transformerOptions.push_back(_(L<span class="stringliteral">&quot;Tap&quot;</span>));</div>
+<div class="line"><span class="lineno">   21</span>    m_checkListBoxTransformer-&gt;Append(transformerOptions);</div>
 <div class="line"><span class="lineno">   22</span> </div>
-<div class="line"><span class="lineno">   23</span>    Layout();</div>
-<div class="line"><span class="lineno">   24</span>    SetSize(GetBestSize());</div>
-<div class="line"><span class="lineno">   25</span>}</div>
+<div class="line"><span class="lineno">   23</span>    m_textCtrlPrecision-&gt;SetValue(wxString::Format(<span class="stringliteral">&quot;%d&quot;</span>, m_precision));</div>
+<div class="line"><span class="lineno">   24</span> </div>
+<div class="line"><span class="lineno">   25</span>    Layout();</div>
+<div class="line"><span class="lineno">   26</span>    SetSize(GetBestSize());</div>
+<div class="line"><span class="lineno">   27</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -284,9 +286,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00027">27</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   28</span>{</div>
-<div class="line"><span class="lineno">   29</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00029">29</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   30</span>{</div>
+<div class="line"><span class="lineno">   31</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -315,72 +317,72 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00051">51</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   52</span>{</div>
-<div class="line"><span class="lineno">   53</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">   54</span>    {</div>
-<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">   56</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Bus 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   57</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   58</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Voltage</span></div>
-<div class="line"><span class="lineno">   59</span>        <span class="keywordflow">switch</span> (m_radioBoxVoltage-&gt;GetSelection())</div>
-<div class="line"><span class="lineno">   60</span>        {</div>
-<div class="line"><span class="lineno">   61</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">   62</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f p.u.\n&quot;</span>, m_precision, 1.0);</div>
-<div class="line"><span class="lineno">   63</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   64</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">   65</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f V\n&quot;</span>, m_precision, 13800.0);</div>
-<div class="line"><span class="lineno">   66</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno">   68</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f kV\n&quot;</span>, m_precision, 13.8);</div>
-<div class="line"><span class="lineno">   69</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">   71</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   72</span>        }</div>
-<div class="line"><span class="lineno">   73</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   74</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Angle</span></div>
-<div class="line"><span class="lineno">   75</span>        <span class="keywordflow">switch</span> (m_radioBoxAngle-&gt;GetSelection())</div>
-<div class="line"><span class="lineno">   76</span>        {</div>
-<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">   78</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f°\n&quot;</span>, m_precision, 30.0);</div>
-<div class="line"><span class="lineno">   79</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   80</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">   81</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f rad\n&quot;</span>, m_precision, 0.5235987756);</div>
-<div class="line"><span class="lineno">   82</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   83</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">   84</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   85</span>        }</div>
-<div class="line"><span class="lineno">   86</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">case</span> 3: { <span class="comment">// Fault current</span></div>
-<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">return</span> GetCurrent3fText({ 25.54, 0.0, 0.0 });</div>
-<div class="line"><span class="lineno">   89</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">case</span> 4: { <span class="comment">// Fault voltage</span></div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">switch</span> (m_radioBoxVoltage-&gt;GetSelection())</div>
-<div class="line"><span class="lineno">   92</span>        {</div>
-<div class="line"><span class="lineno">   93</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">   94</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Va = %.*f p.u.\t Vb = %.*f p.u.\t Vc = %.*f p.u.\n&quot;</span>, m_precision, 0.0, m_precision, 1.0404, m_precision, 1.0246);</div>
-<div class="line"><span class="lineno">   95</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   96</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">   97</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Va = %.*f V\t Vb = %.*f V\t Vc = %.*f V\n&quot;</span>, m_precision, 0.0, m_precision, 14356.91, m_precision, 14140.11);</div>
-<div class="line"><span class="lineno">   98</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno">  100</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Va = %.*f kV\t Vb = %.*f kV\t Vc = %.*f kV\n&quot;</span>, m_precision, 0.0, m_precision, 14.35691, m_precision, 14.14011);</div>
-<div class="line"><span class="lineno">  101</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  103</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  104</span>        }</div>
-<div class="line"><span class="lineno">  105</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  106</span>    <span class="keywordflow">case</span> 5: { <span class="comment">// Short-circuit power</span></div>
-<div class="line"><span class="lineno">  107</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;VA&quot;</span>), 5.0);</div>
-<div class="line"><span class="lineno">  108</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">case</span> 6: { <span class="comment">// Voltage THD</span></div>
-<div class="line"><span class="lineno">  110</span>        <span class="keywordflow">return</span> wxString::Format(_(<span class="stringliteral">&quot;THD = %.*f%%\n&quot;</span>), m_precision, 5.36);</div>
-<div class="line"><span class="lineno">  111</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  112</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  114</span>    }</div>
-<div class="line"><span class="lineno">  115</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  116</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00053">53</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   54</span>{</div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">   56</span>    {</div>
+<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Bus 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   59</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Voltage</span></div>
+<div class="line"><span class="lineno">   61</span>        <span class="keywordflow">switch</span> (m_radioBoxVoltage-&gt;GetSelection())</div>
+<div class="line"><span class="lineno">   62</span>        {</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">   64</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f p.u.\n&quot;</span>, m_precision, 1.0);</div>
+<div class="line"><span class="lineno">   65</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   66</span>        <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">   67</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f V\n&quot;</span>, m_precision, 13800.0);</div>
+<div class="line"><span class="lineno">   68</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">case</span> 2: {</div>
+<div class="line"><span class="lineno">   70</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f kV\n&quot;</span>, m_precision, 13.8);</div>
+<div class="line"><span class="lineno">   71</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   72</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">   73</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   74</span>        }</div>
+<div class="line"><span class="lineno">   75</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Angle</span></div>
+<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">switch</span> (m_radioBoxAngle-&gt;GetSelection())</div>
+<div class="line"><span class="lineno">   78</span>        {</div>
+<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">   80</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f°\n&quot;</span>, m_precision, 30.0);</div>
+<div class="line"><span class="lineno">   81</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">   83</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f rad\n&quot;</span>, m_precision, 0.5235987756);</div>
+<div class="line"><span class="lineno">   84</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">   86</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   87</span>        }</div>
+<div class="line"><span class="lineno">   88</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">case</span> 3: { <span class="comment">// Fault current</span></div>
+<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">return</span> GetCurrent3fText({ 25.54, 0.0, 0.0 });</div>
+<div class="line"><span class="lineno">   91</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   92</span>    <span class="keywordflow">case</span> 4: { <span class="comment">// Fault voltage</span></div>
+<div class="line"><span class="lineno">   93</span>        <span class="keywordflow">switch</span> (m_radioBoxVoltage-&gt;GetSelection())</div>
+<div class="line"><span class="lineno">   94</span>        {</div>
+<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">   96</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Va = %.*f p.u.\t Vb = %.*f p.u.\t Vc = %.*f p.u.\n&quot;</span>, m_precision, 0.0, m_precision, 1.0404, m_precision, 1.0246);</div>
+<div class="line"><span class="lineno">   97</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">   99</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Va = %.*f V\t Vb = %.*f V\t Vc = %.*f V\n&quot;</span>, m_precision, 0.0, m_precision, 14356.91, m_precision, 14140.11);</div>
+<div class="line"><span class="lineno">  100</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  101</span>        <span class="keywordflow">case</span> 2: {</div>
+<div class="line"><span class="lineno">  102</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Va = %.*f kV\t Vb = %.*f kV\t Vc = %.*f kV\n&quot;</span>, m_precision, 0.0, m_precision, 14.35691, m_precision, 14.14011);</div>
+<div class="line"><span class="lineno">  103</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  105</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  106</span>        }</div>
+<div class="line"><span class="lineno">  107</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  108</span>    <span class="keywordflow">case</span> 5: { <span class="comment">// Short-circuit power</span></div>
+<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;VA&quot;</span>), 5.0);</div>
+<div class="line"><span class="lineno">  110</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">case</span> 6: { <span class="comment">// Voltage THD</span></div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">return</span> wxString::Format(_(<span class="stringliteral">&quot;THD = %.*f%%\n&quot;</span>), m_precision, 5.36);</div>
+<div class="line"><span class="lineno">  113</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  114</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  116</span>    }</div>
+<div class="line"><span class="lineno">  117</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  118</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -408,22 +410,22 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00401">401</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  402</span>{</div>
-<div class="line"><span class="lineno">  403</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">  404</span>    {</div>
-<div class="line"><span class="lineno">  405</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">  406</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Capacitor 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  407</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  408</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Reactive power</span></div>
-<div class="line"><span class="lineno">  409</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 1.0);</div>
-<div class="line"><span class="lineno">  410</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  411</span>          <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  412</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  413</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  414</span>    }</div>
-<div class="line"><span class="lineno">  415</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  416</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00406">406</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  407</span>{</div>
+<div class="line"><span class="lineno">  408</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">  409</span>    {</div>
+<div class="line"><span class="lineno">  410</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">  411</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Capacitor 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  412</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  413</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Reactive power</span></div>
+<div class="line"><span class="lineno">  414</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 1.0);</div>
+<div class="line"><span class="lineno">  415</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  416</span>          <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  417</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  418</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  419</span>    }</div>
+<div class="line"><span class="lineno">  420</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  421</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -451,24 +453,24 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00161">161</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  162</span>{</div>
-<div class="line"><span class="lineno">  163</span>    <span class="keywordflow">switch</span> (m_radioBoxCurrent-&gt;GetSelection())</div>
-<div class="line"><span class="lineno">  164</span>    {</div>
-<div class="line"><span class="lineno">  165</span>    <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">  166</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Ia = %.*f p.u.\t Ib = %.*f p.u.\t Ic = %.*f p.u.\n&quot;</span>, m_precision, puCurrents[0], m_precision, puCurrents[1], m_precision, puCurrents[2]);</div>
-<div class="line"><span class="lineno">  167</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">  169</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Ia = %.*f A\t Ib = %.*f A\t Ic = %.*f A\n&quot;</span>, m_precision, puCurrents[0] * 1e3, m_precision, puCurrents[1] * 1e3, m_precision, puCurrents[2] * 1e3);</div>
-<div class="line"><span class="lineno">  170</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  171</span>    <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno">  172</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Ia = %.*f kA\t Ib = %.*f kA\t Ic = %.*f kA\n&quot;</span>, m_precision, puCurrents[0], m_precision, puCurrents[1], m_precision, puCurrents[2]);</div>
-<div class="line"><span class="lineno">  173</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  174</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  175</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  176</span>    }</div>
-<div class="line"><span class="lineno">  177</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  178</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00163">163</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  164</span>{</div>
+<div class="line"><span class="lineno">  165</span>    <span class="keywordflow">switch</span> (m_radioBoxCurrent-&gt;GetSelection())</div>
+<div class="line"><span class="lineno">  166</span>    {</div>
+<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">  168</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Ia = %.*f p.u.\t Ib = %.*f p.u.\t Ic = %.*f p.u.\n&quot;</span>, m_precision, puCurrents[0], m_precision, puCurrents[1], m_precision, puCurrents[2]);</div>
+<div class="line"><span class="lineno">  169</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  170</span>    <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">  171</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Ia = %.*f A\t Ib = %.*f A\t Ic = %.*f A\n&quot;</span>, m_precision, puCurrents[0] * 1e3, m_precision, puCurrents[1] * 1e3, m_precision, puCurrents[2] * 1e3);</div>
+<div class="line"><span class="lineno">  172</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">case</span> 2: {</div>
+<div class="line"><span class="lineno">  174</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;Ia = %.*f kA\t Ib = %.*f kA\t Ic = %.*f kA\n&quot;</span>, m_precision, puCurrents[0], m_precision, puCurrents[1], m_precision, puCurrents[2]);</div>
+<div class="line"><span class="lineno">  175</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  176</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  178</span>    }</div>
+<div class="line"><span class="lineno">  179</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  180</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -506,45 +508,45 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00180">180</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  181</span>{</div>
-<div class="line"><span class="lineno">  182</span>    <span class="keywordflow">if</span> (unit == _(<span class="stringliteral">&quot;V&quot;</span>))</div>
-<div class="line"><span class="lineno">  183</span>    {</div>
-<div class="line"><span class="lineno">  184</span>        <span class="keywordflow">switch</span> (m_radioBoxVoltage-&gt;GetSelection())</div>
-<div class="line"><span class="lineno">  185</span>        {</div>
-<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">  187</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f p.u.\n&quot;</span>, m_precision, puValue);</div>
-<div class="line"><span class="lineno">  188</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  189</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">  190</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f V\n&quot;</span>, m_precision, puValue * 13800.0);</div>
-<div class="line"><span class="lineno">  191</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  192</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno">  193</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f kV\n&quot;</span>, m_precision, puValue * 13.8);</div>
-<div class="line"><span class="lineno">  194</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  195</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  196</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  197</span>        }</div>
-<div class="line"><span class="lineno">  198</span>    }</div>
-<div class="line"><span class="lineno">  199</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (unit == _(<span class="stringliteral">&quot;A&quot;</span>))</div>
-<div class="line"><span class="lineno">  200</span>    {</div>
-<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">switch</span> (m_radioBoxCurrent-&gt;GetSelection())</div>
-<div class="line"><span class="lineno">  202</span>        {</div>
-<div class="line"><span class="lineno">  203</span>        <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">  204</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f p.u.\n&quot;</span>, m_precision, puValue);</div>
-<div class="line"><span class="lineno">  205</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  206</span>        <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">  207</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f A\n&quot;</span>, m_precision, puValue * 1e3);</div>
-<div class="line"><span class="lineno">  208</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  209</span>        <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno">  210</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f kA\n&quot;</span>, m_precision, puValue);</div>
-<div class="line"><span class="lineno">  211</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  212</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  213</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  214</span>        }</div>
-<div class="line"><span class="lineno">  215</span>    }</div>
-<div class="line"><span class="lineno">  216</span> </div>
-<div class="line"><span class="lineno">  217</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  218</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00182">182</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  183</span>{</div>
+<div class="line"><span class="lineno">  184</span>    <span class="keywordflow">if</span> (unit == _(<span class="stringliteral">&quot;V&quot;</span>))</div>
+<div class="line"><span class="lineno">  185</span>    {</div>
+<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">switch</span> (m_radioBoxVoltage-&gt;GetSelection())</div>
+<div class="line"><span class="lineno">  187</span>        {</div>
+<div class="line"><span class="lineno">  188</span>        <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">  189</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f p.u.\n&quot;</span>, m_precision, puValue);</div>
+<div class="line"><span class="lineno">  190</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  191</span>        <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">  192</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f V\n&quot;</span>, m_precision, puValue * 13800.0);</div>
+<div class="line"><span class="lineno">  193</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  194</span>        <span class="keywordflow">case</span> 2: {</div>
+<div class="line"><span class="lineno">  195</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f kV\n&quot;</span>, m_precision, puValue * 13.8);</div>
+<div class="line"><span class="lineno">  196</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  197</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  198</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  199</span>        }</div>
+<div class="line"><span class="lineno">  200</span>    }</div>
+<div class="line"><span class="lineno">  201</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (unit == _(<span class="stringliteral">&quot;A&quot;</span>))</div>
+<div class="line"><span class="lineno">  202</span>    {</div>
+<div class="line"><span class="lineno">  203</span>        <span class="keywordflow">switch</span> (m_radioBoxCurrent-&gt;GetSelection())</div>
+<div class="line"><span class="lineno">  204</span>        {</div>
+<div class="line"><span class="lineno">  205</span>        <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">  206</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f p.u.\n&quot;</span>, m_precision, puValue);</div>
+<div class="line"><span class="lineno">  207</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  208</span>        <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">  209</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f A\n&quot;</span>, m_precision, puValue * 1e3);</div>
+<div class="line"><span class="lineno">  210</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  211</span>        <span class="keywordflow">case</span> 2: {</div>
+<div class="line"><span class="lineno">  212</span>            <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f kA\n&quot;</span>, m_precision, puValue);</div>
+<div class="line"><span class="lineno">  213</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  214</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  215</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  216</span>        }</div>
+<div class="line"><span class="lineno">  217</span>    }</div>
+<div class="line"><span class="lineno">  218</span> </div>
+<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  220</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -572,27 +574,27 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00118">118</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  119</span>{</div>
-<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">  121</span>    {</div>
-<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">  123</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Generator 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  124</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  125</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power</span></div>
-<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
-<div class="line"><span class="lineno">  127</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Reactive power</span></div>
-<div class="line"><span class="lineno">  129</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
-<div class="line"><span class="lineno">  130</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  131</span>    <span class="keywordflow">case</span> 3: { <span class="comment">// Fault current</span></div>
-<div class="line"><span class="lineno">  132</span>        <span class="keywordflow">return</span> GetCurrent3fText({ 22.54, 0.0, 0.0 });</div>
-<div class="line"><span class="lineno">  133</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  134</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  136</span>    }</div>
-<div class="line"><span class="lineno">  137</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  138</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00120">120</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  121</span>{</div>
+<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">  123</span>    {</div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Generator 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  126</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  127</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power</span></div>
+<div class="line"><span class="lineno">  128</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
+<div class="line"><span class="lineno">  129</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  130</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Reactive power</span></div>
+<div class="line"><span class="lineno">  131</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
+<div class="line"><span class="lineno">  132</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  133</span>    <span class="keywordflow">case</span> 3: { <span class="comment">// Fault current</span></div>
+<div class="line"><span class="lineno">  134</span>        <span class="keywordflow">return</span> GetCurrent3fText({ 22.54, 0.0, 0.0 });</div>
+<div class="line"><span class="lineno">  135</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  136</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  137</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  138</span>    }</div>
+<div class="line"><span class="lineno">  139</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  140</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -620,25 +622,25 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00435">435</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  436</span>{</div>
-<div class="line"><span class="lineno">  437</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">  438</span>    {</div>
-<div class="line"><span class="lineno">  439</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">  440</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Induction Motor 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  441</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  442</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power</span></div>
-<div class="line"><span class="lineno">  443</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
-<div class="line"><span class="lineno">  444</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  445</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Reactive power</span></div>
-<div class="line"><span class="lineno">  446</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
-<div class="line"><span class="lineno">  447</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  448</span>          <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  449</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  450</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  451</span>    }</div>
-<div class="line"><span class="lineno">  452</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  453</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00440">440</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  441</span>{</div>
+<div class="line"><span class="lineno">  442</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">  443</span>    {</div>
+<div class="line"><span class="lineno">  444</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">  445</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Induction Motor 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  446</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  447</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power</span></div>
+<div class="line"><span class="lineno">  448</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
+<div class="line"><span class="lineno">  449</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  450</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Reactive power</span></div>
+<div class="line"><span class="lineno">  451</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
+<div class="line"><span class="lineno">  452</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  453</span>          <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  454</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  455</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  456</span>    }</div>
+<div class="line"><span class="lineno">  457</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  458</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -666,22 +668,22 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00418">418</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  419</span>{</div>
-<div class="line"><span class="lineno">  420</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">  421</span>    {</div>
-<div class="line"><span class="lineno">  422</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">  423</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Inductor 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  424</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  425</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Reactive power</span></div>
-<div class="line"><span class="lineno">  426</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 1.0);</div>
-<div class="line"><span class="lineno">  427</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  428</span>          <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  429</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  430</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  431</span>    }</div>
-<div class="line"><span class="lineno">  432</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  433</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00423">423</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  424</span>{</div>
+<div class="line"><span class="lineno">  425</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">  426</span>    {</div>
+<div class="line"><span class="lineno">  427</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">  428</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Inductor 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  429</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  430</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Reactive power</span></div>
+<div class="line"><span class="lineno">  431</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 1.0);</div>
+<div class="line"><span class="lineno">  432</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  433</span>          <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  434</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  435</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  436</span>    }</div>
+<div class="line"><span class="lineno">  437</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  438</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -709,45 +711,45 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00321">321</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  322</span>{</div>
-<div class="line"><span class="lineno">  323</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">  324</span>    {</div>
-<div class="line"><span class="lineno">  325</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">  326</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Line 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  327</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  328</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power (i → j)</span></div>
-<div class="line"><span class="lineno">  329</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
-<div class="line"><span class="lineno">  330</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  331</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Active power (j → i)</span></div>
-<div class="line"><span class="lineno">  332</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), -1.0);</div>
-<div class="line"><span class="lineno">  333</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  334</span>    <span class="keywordflow">case</span> 3: { <span class="comment">// Reactive power (i → j)</span></div>
-<div class="line"><span class="lineno">  335</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
-<div class="line"><span class="lineno">  336</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  337</span>    <span class="keywordflow">case</span> 4: { <span class="comment">// Reactive power (j → i)</span></div>
-<div class="line"><span class="lineno">  338</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), -0.3);</div>
-<div class="line"><span class="lineno">  339</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  340</span>    <span class="keywordflow">case</span> 5: { <span class="comment">// Losses</span></div>
-<div class="line"><span class="lineno">  341</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 0.02);</div>
-<div class="line"><span class="lineno">  342</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  343</span>    <span class="keywordflow">case</span> 6: { <span class="comment">// Current (i → j)</span></div>
-<div class="line"><span class="lineno">  344</span>        <span class="keywordflow">return</span> GetCurrentOrVoltageText(_(<span class="stringliteral">&quot;A&quot;</span>), 0.5);</div>
-<div class="line"><span class="lineno">  345</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  346</span>    <span class="keywordflow">case</span> 7: { <span class="comment">// Current (j → i)</span></div>
-<div class="line"><span class="lineno">  347</span>        <span class="keywordflow">return</span> GetCurrentOrVoltageText(_(<span class="stringliteral">&quot;A&quot;</span>), -0.5);</div>
-<div class="line"><span class="lineno">  348</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  349</span>    <span class="keywordflow">case</span> 8: { <span class="comment">// Fault current (i → j)</span></div>
-<div class="line"><span class="lineno">  350</span>        <span class="keywordflow">return</span> GetCurrent3fText({ 25.56, 0.0, 0.0 });</div>
-<div class="line"><span class="lineno">  351</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  352</span>    <span class="keywordflow">case</span> 9: { <span class="comment">// Fault current (j → i)</span></div>
-<div class="line"><span class="lineno">  353</span>        <span class="keywordflow">return</span> GetCurrent3fText({ -25.56, 0.0, 0.0 });</div>
-<div class="line"><span class="lineno">  354</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  355</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  356</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  357</span>    }</div>
-<div class="line"><span class="lineno">  358</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  359</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00323">323</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  324</span>{</div>
+<div class="line"><span class="lineno">  325</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">  326</span>    {</div>
+<div class="line"><span class="lineno">  327</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">  328</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Line 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  329</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  330</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power (i → j)</span></div>
+<div class="line"><span class="lineno">  331</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
+<div class="line"><span class="lineno">  332</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  333</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Active power (j → i)</span></div>
+<div class="line"><span class="lineno">  334</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), -1.0);</div>
+<div class="line"><span class="lineno">  335</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  336</span>    <span class="keywordflow">case</span> 3: { <span class="comment">// Reactive power (i → j)</span></div>
+<div class="line"><span class="lineno">  337</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
+<div class="line"><span class="lineno">  338</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  339</span>    <span class="keywordflow">case</span> 4: { <span class="comment">// Reactive power (j → i)</span></div>
+<div class="line"><span class="lineno">  340</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), -0.3);</div>
+<div class="line"><span class="lineno">  341</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  342</span>    <span class="keywordflow">case</span> 5: { <span class="comment">// Losses</span></div>
+<div class="line"><span class="lineno">  343</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 0.02);</div>
+<div class="line"><span class="lineno">  344</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  345</span>    <span class="keywordflow">case</span> 6: { <span class="comment">// Current (i → j)</span></div>
+<div class="line"><span class="lineno">  346</span>        <span class="keywordflow">return</span> GetCurrentOrVoltageText(_(<span class="stringliteral">&quot;A&quot;</span>), 0.5);</div>
+<div class="line"><span class="lineno">  347</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  348</span>    <span class="keywordflow">case</span> 7: { <span class="comment">// Current (j → i)</span></div>
+<div class="line"><span class="lineno">  349</span>        <span class="keywordflow">return</span> GetCurrentOrVoltageText(_(<span class="stringliteral">&quot;A&quot;</span>), -0.5);</div>
+<div class="line"><span class="lineno">  350</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  351</span>    <span class="keywordflow">case</span> 8: { <span class="comment">// Fault current (i → j)</span></div>
+<div class="line"><span class="lineno">  352</span>        <span class="keywordflow">return</span> GetCurrent3fText({ 25.56, 0.0, 0.0 });</div>
+<div class="line"><span class="lineno">  353</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  354</span>    <span class="keywordflow">case</span> 9: { <span class="comment">// Fault current (j → i)</span></div>
+<div class="line"><span class="lineno">  355</span>        <span class="keywordflow">return</span> GetCurrent3fText({ -25.56, 0.0, 0.0 });</div>
+<div class="line"><span class="lineno">  356</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  357</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  358</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  359</span>    }</div>
+<div class="line"><span class="lineno">  360</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  361</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -775,25 +777,25 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00301">301</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  302</span>{</div>
-<div class="line"><span class="lineno">  303</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">  304</span>    {</div>
-<div class="line"><span class="lineno">  305</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">  306</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Load 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  307</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  308</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power</span></div>
-<div class="line"><span class="lineno">  309</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
-<div class="line"><span class="lineno">  310</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  311</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Reactive power</span></div>
-<div class="line"><span class="lineno">  312</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
-<div class="line"><span class="lineno">  313</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  314</span>          <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  315</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  316</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  317</span>    }</div>
-<div class="line"><span class="lineno">  318</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  319</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00303">303</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  304</span>{</div>
+<div class="line"><span class="lineno">  305</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">  306</span>    {</div>
+<div class="line"><span class="lineno">  307</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">  308</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Load 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  309</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  310</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power</span></div>
+<div class="line"><span class="lineno">  311</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
+<div class="line"><span class="lineno">  312</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  313</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Reactive power</span></div>
+<div class="line"><span class="lineno">  314</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
+<div class="line"><span class="lineno">  315</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  316</span>          <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  317</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  318</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  319</span>    }</div>
+<div class="line"><span class="lineno">  320</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  321</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -831,26 +833,26 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00140">140</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  141</span>{</div>
-<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">switch</span> (m_radioBoxPower-&gt;GetSelection()) {</div>
-<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">case</span> 0: {</div>
-<div class="line"><span class="lineno">  144</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f p.u.\n&quot;</span>, m_precision, puValue);</div>
-<div class="line"><span class="lineno">  145</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  146</span>    <span class="keywordflow">case</span> 1: {</div>
-<div class="line"><span class="lineno">  147</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f %s\n&quot;</span>, m_precision, puValue * 1.0e8, unit);</div>
-<div class="line"><span class="lineno">  148</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  149</span>    <span class="keywordflow">case</span> 2: {</div>
-<div class="line"><span class="lineno">  150</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f k%s\n&quot;</span>, m_precision, puValue * 1.0e5, unit);</div>
-<div class="line"><span class="lineno">  151</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  152</span>    <span class="keywordflow">case</span> 3: {</div>
-<div class="line"><span class="lineno">  153</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f M%s\n&quot;</span>, m_precision, puValue * 1.0e2, unit);</div>
-<div class="line"><span class="lineno">  154</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  155</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  156</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  157</span>    }</div>
-<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  159</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00142">142</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  143</span>{</div>
+<div class="line"><span class="lineno">  144</span>    <span class="keywordflow">switch</span> (m_radioBoxPower-&gt;GetSelection()) {</div>
+<div class="line"><span class="lineno">  145</span>    <span class="keywordflow">case</span> 0: {</div>
+<div class="line"><span class="lineno">  146</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f p.u.\n&quot;</span>, m_precision, puValue);</div>
+<div class="line"><span class="lineno">  147</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  148</span>    <span class="keywordflow">case</span> 1: {</div>
+<div class="line"><span class="lineno">  149</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f %s\n&quot;</span>, m_precision, puValue * 1.0e8, unit);</div>
+<div class="line"><span class="lineno">  150</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">case</span> 2: {</div>
+<div class="line"><span class="lineno">  152</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f k%s\n&quot;</span>, m_precision, puValue * 1.0e5, unit);</div>
+<div class="line"><span class="lineno">  153</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">case</span> 3: {</div>
+<div class="line"><span class="lineno">  155</span>        <span class="keywordflow">return</span> wxString::Format(<span class="stringliteral">&quot;%.*f M%s\n&quot;</span>, m_precision, puValue * 1.0e2, unit);</div>
+<div class="line"><span class="lineno">  156</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  157</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  158</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  159</span>    }</div>
+<div class="line"><span class="lineno">  160</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  161</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -878,25 +880,25 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00455">455</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  456</span>{</div>
-<div class="line"><span class="lineno">  457</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">  458</span>    {</div>
-<div class="line"><span class="lineno">  459</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">  460</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Synchronous Compensator 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  461</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  462</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power</span></div>
-<div class="line"><span class="lineno">  463</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 0.01);</div>
-<div class="line"><span class="lineno">  464</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  465</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Reactive power</span></div>
-<div class="line"><span class="lineno">  466</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 1.0);</div>
-<div class="line"><span class="lineno">  467</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  468</span>          <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  469</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  470</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  471</span>    }</div>
-<div class="line"><span class="lineno">  472</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  473</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00460">460</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  461</span>{</div>
+<div class="line"><span class="lineno">  462</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">  463</span>    {</div>
+<div class="line"><span class="lineno">  464</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">  465</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Synchronous Compensator 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  466</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  467</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power</span></div>
+<div class="line"><span class="lineno">  468</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 0.01);</div>
+<div class="line"><span class="lineno">  469</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  470</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Reactive power</span></div>
+<div class="line"><span class="lineno">  471</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 1.0);</div>
+<div class="line"><span class="lineno">  472</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  473</span>          <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  474</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  475</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  476</span>    }</div>
+<div class="line"><span class="lineno">  477</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  478</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -924,45 +926,48 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00361">361</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  362</span>{</div>
-<div class="line"><span class="lineno">  363</span>    <span class="keywordflow">switch</span> (dataID)</div>
-<div class="line"><span class="lineno">  364</span>    {</div>
-<div class="line"><span class="lineno">  365</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
-<div class="line"><span class="lineno">  366</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Transformer 1\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  367</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  368</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power (i → j)</span></div>
-<div class="line"><span class="lineno">  369</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
-<div class="line"><span class="lineno">  370</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  371</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Active power (j → i)</span></div>
-<div class="line"><span class="lineno">  372</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), -1.0);</div>
-<div class="line"><span class="lineno">  373</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  374</span>    <span class="keywordflow">case</span> 3: { <span class="comment">// Reactive power (i → j)</span></div>
-<div class="line"><span class="lineno">  375</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
-<div class="line"><span class="lineno">  376</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  377</span>    <span class="keywordflow">case</span> 4: { <span class="comment">// Reactive power (j → i)</span></div>
-<div class="line"><span class="lineno">  378</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), -0.3);</div>
-<div class="line"><span class="lineno">  379</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  380</span>    <span class="keywordflow">case</span> 5: { <span class="comment">// Losses</span></div>
-<div class="line"><span class="lineno">  381</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 0.02);</div>
-<div class="line"><span class="lineno">  382</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  383</span>    <span class="keywordflow">case</span> 6: { <span class="comment">// Current (i → j)</span></div>
-<div class="line"><span class="lineno">  384</span>        <span class="keywordflow">return</span> GetCurrentOrVoltageText(_(<span class="stringliteral">&quot;A&quot;</span>), 0.5);</div>
-<div class="line"><span class="lineno">  385</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  386</span>    <span class="keywordflow">case</span> 7: { <span class="comment">// Current (j → i)</span></div>
-<div class="line"><span class="lineno">  387</span>        <span class="keywordflow">return</span> GetCurrentOrVoltageText(_(<span class="stringliteral">&quot;A&quot;</span>), -0.5);</div>
-<div class="line"><span class="lineno">  388</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  389</span>    <span class="keywordflow">case</span> 8: { <span class="comment">// Fault current (i → j)</span></div>
-<div class="line"><span class="lineno">  390</span>        <span class="keywordflow">return</span> GetCurrent3fText({ 25.56, 0.0, 0.0 });</div>
-<div class="line"><span class="lineno">  391</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  392</span>    <span class="keywordflow">case</span> 9: { <span class="comment">// Fault current (j → i)</span></div>
-<div class="line"><span class="lineno">  393</span>        <span class="keywordflow">return</span> GetCurrent3fText({ -25.56, 0.0, 0.0 });</div>
-<div class="line"><span class="lineno">  394</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  395</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  396</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  397</span>    }</div>
-<div class="line"><span class="lineno">  398</span>    <span class="keywordflow">return</span> wxString();</div>
-<div class="line"><span class="lineno">  399</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00363">363</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  364</span>{</div>
+<div class="line"><span class="lineno">  365</span>    <span class="keywordflow">switch</span> (dataID)</div>
+<div class="line"><span class="lineno">  366</span>    {</div>
+<div class="line"><span class="lineno">  367</span>    <span class="keywordflow">case</span> 0: { <span class="comment">// Name</span></div>
+<div class="line"><span class="lineno">  368</span>        <span class="keywordflow">return</span> _(<span class="stringliteral">&quot;Transformer 1\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  369</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  370</span>    <span class="keywordflow">case</span> 1: { <span class="comment">// Active power (i → j)</span></div>
+<div class="line"><span class="lineno">  371</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 1.0);</div>
+<div class="line"><span class="lineno">  372</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  373</span>    <span class="keywordflow">case</span> 2: { <span class="comment">// Active power (j → i)</span></div>
+<div class="line"><span class="lineno">  374</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), -1.0);</div>
+<div class="line"><span class="lineno">  375</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  376</span>    <span class="keywordflow">case</span> 3: { <span class="comment">// Reactive power (i → j)</span></div>
+<div class="line"><span class="lineno">  377</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), 0.3);</div>
+<div class="line"><span class="lineno">  378</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  379</span>    <span class="keywordflow">case</span> 4: { <span class="comment">// Reactive power (j → i)</span></div>
+<div class="line"><span class="lineno">  380</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;var&quot;</span>), -0.3);</div>
+<div class="line"><span class="lineno">  381</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  382</span>    <span class="keywordflow">case</span> 5: { <span class="comment">// Losses</span></div>
+<div class="line"><span class="lineno">  383</span>        <span class="keywordflow">return</span> GetPowerText(_(<span class="stringliteral">&quot;W&quot;</span>), 0.02);</div>
+<div class="line"><span class="lineno">  384</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  385</span>    <span class="keywordflow">case</span> 6: { <span class="comment">// Current (i → j)</span></div>
+<div class="line"><span class="lineno">  386</span>        <span class="keywordflow">return</span> GetCurrentOrVoltageText(_(<span class="stringliteral">&quot;A&quot;</span>), 0.5);</div>
+<div class="line"><span class="lineno">  387</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  388</span>    <span class="keywordflow">case</span> 7: { <span class="comment">// Current (j → i)</span></div>
+<div class="line"><span class="lineno">  389</span>        <span class="keywordflow">return</span> GetCurrentOrVoltageText(_(<span class="stringliteral">&quot;A&quot;</span>), -0.5);</div>
+<div class="line"><span class="lineno">  390</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  391</span>    <span class="keywordflow">case</span> 8: { <span class="comment">// Fault current (i → j)</span></div>
+<div class="line"><span class="lineno">  392</span>        <span class="keywordflow">return</span> GetCurrent3fText({ 25.56, 0.0, 0.0 });</div>
+<div class="line"><span class="lineno">  393</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  394</span>    <span class="keywordflow">case</span> 9: { <span class="comment">// Fault current (j → i)</span></div>
+<div class="line"><span class="lineno">  395</span>        <span class="keywordflow">return</span> GetCurrent3fText({ -25.56, 0.0, 0.0 });</div>
+<div class="line"><span class="lineno">  396</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  397</span>    <span class="keywordflow">case</span> 10: { <span class="comment">// Tap</span></div>
+<div class="line"><span class="lineno">  398</span>        <span class="keywordflow">return</span> wxString::Format(_(<span class="stringliteral">&quot;Tap = %.*f p.u.\n&quot;</span>), m_precision, 1.0);</div>
+<div class="line"><span class="lineno">  399</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  400</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  401</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  402</span>    }</div>
+<div class="line"><span class="lineno">  403</span>    <span class="keywordflow">return</span> wxString();</div>
+<div class="line"><span class="lineno">  404</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -990,127 +995,129 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00497">497</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  498</span>{</div>
-<div class="line"><span class="lineno">  499</span>    <span class="keywordflow">if</span> (m_checkBoxReplace-&gt;GetValue()) {</div>
-<div class="line"><span class="lineno">  500</span>        m_workspace-&gt;RemoveAllTextElements();</div>
-<div class="line"><span class="lineno">  501</span>    }</div>
-<div class="line"><span class="lineno">  502</span>    ElectricalUnit voltageUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_V, ElectricalUnit::UNIT_kV };</div>
-<div class="line"><span class="lineno">  503</span>    ElectricalUnit currentUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_A, ElectricalUnit::UNIT_kA };</div>
-<div class="line"><span class="lineno">  504</span>    ElectricalUnit sUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_VA, ElectricalUnit::UNIT_kVA, ElectricalUnit::UNIT_MVA };</div>
-<div class="line"><span class="lineno">  505</span>    ElectricalUnit pUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_W, ElectricalUnit::UNIT_kW, ElectricalUnit::UNIT_MW };</div>
-<div class="line"><span class="lineno">  506</span>    ElectricalUnit qUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_var, ElectricalUnit::UNIT_kvar, ElectricalUnit::UNIT_Mvar };</div>
-<div class="line"><span class="lineno">  507</span>    ElectricalUnit angleUnitList[2] = { ElectricalUnit::UNIT_DEGREE, ElectricalUnit::UNIT_RADIAN };</div>
-<div class="line"><span class="lineno">  508</span> </div>
-<div class="line"><span class="lineno">  509</span>    ElectricalUnit voltageUnit = voltageUnitList[m_radioBoxVoltage-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  510</span>    ElectricalUnit currentUnit = currentUnitList[m_radioBoxCurrent-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  511</span>    ElectricalUnit sUnit = sUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  512</span>    ElectricalUnit pUnit = pUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  513</span>    ElectricalUnit qUnit = qUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  514</span>    ElectricalUnit angleUnit = angleUnitList[m_radioBoxAngle-&gt;GetSelection()];</div>
-<div class="line"><span class="lineno">  515</span> </div>
-<div class="line"><span class="lineno">  516</span>    <span class="keyword">auto</span> elementList = m_workspace-&gt;GetElementList();</div>
-<div class="line"><span class="lineno">  517</span>    <span class="keywordtype">int</span> numTxtElements = 0;</div>
-<div class="line"><span class="lineno">  518</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* element : elementList) {</div>
-<div class="line"><span class="lineno">  519</span>        ElementType elementType = element-&gt;GetElementType();</div>
-<div class="line"><span class="lineno">  520</span>        wxArrayInt checked;</div>
-<div class="line"><span class="lineno">  521</span>        <span class="keywordflow">switch</span> (elementType)</div>
-<div class="line"><span class="lineno">  522</span>        {</div>
-<div class="line"><span class="lineno">  523</span>        <span class="keywordflow">case</span> TYPE_BUS: {</div>
-<div class="line"><span class="lineno">  524</span>            TextID textOptions[7] = { ID_TXT_NAME, ID_TXT_VOLTAGE, ID_TXT_ANGLE, ID_TXT_FAULTCURRENT, ID_TXT_FAULTVOLTAGE, ID_TXT_SCC, ID_TXT_THD };</div>
-<div class="line"><span class="lineno">  525</span>            ElectricalUnit textUnits[7] = { ElectricalUnit::UNIT_NONE, voltageUnit, angleUnit, currentUnit, voltageUnit, sUnit, ElectricalUnit::UNIT_NONE };</div>
-<div class="line"><span class="lineno">  526</span>            m_checkListBoxBus-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  527</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  528</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  529</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  530</span>            }</div>
-<div class="line"><span class="lineno">  531</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  532</span>        <span class="keywordflow">case</span> TYPE_CAPACITOR: {</div>
-<div class="line"><span class="lineno">  533</span>            TextID textOptions[2] = { ID_TXT_NAME, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  534</span>            ElectricalUnit textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };</div>
-<div class="line"><span class="lineno">  535</span>            m_checkListBoxCapacitor-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  536</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  537</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  538</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  539</span>            }</div>
-<div class="line"><span class="lineno">  540</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  541</span>        <span class="keywordflow">case</span> TYPE_IND_MOTOR: {</div>
-<div class="line"><span class="lineno">  542</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  543</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
-<div class="line"><span class="lineno">  544</span>            m_checkListBoxIndMotor-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  545</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  546</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  547</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  548</span>            }</div>
-<div class="line"><span class="lineno">  549</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  550</span>        <span class="keywordflow">case</span> TYPE_INDUCTOR: {</div>
-<div class="line"><span class="lineno">  551</span>            TextID textOptions[2] = { ID_TXT_NAME, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  552</span>            ElectricalUnit textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };</div>
-<div class="line"><span class="lineno">  553</span>            m_checkListBoxInductor-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  554</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  555</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  556</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  557</span>            }</div>
-<div class="line"><span class="lineno">  558</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  559</span>        <span class="keywordflow">case</span> TYPE_LINE: {</div>
-<div class="line"><span class="lineno">  560</span>            TextID lineTextOptions[10] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,</div>
-<div class="line"><span class="lineno">  561</span>                ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,</div>
-<div class="line"><span class="lineno">  562</span>                ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1 };</div>
-<div class="line"><span class="lineno">  563</span>            ElectricalUnit textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };</div>
-<div class="line"><span class="lineno">  564</span>            m_checkListBoxLine-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  565</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  566</span>                m_workspace-&gt;InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  567</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  568</span>            }</div>
-<div class="line"><span class="lineno">  569</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  570</span>        <span class="keywordflow">case</span> TYPE_LOAD: {</div>
-<div class="line"><span class="lineno">  571</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  572</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
-<div class="line"><span class="lineno">  573</span>            m_checkListBoxLoad-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  574</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  575</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  576</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  577</span>            }</div>
-<div class="line"><span class="lineno">  578</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  579</span>        <span class="keywordflow">case</span> TYPE_SYNC_GENERATOR: {</div>
-<div class="line"><span class="lineno">  580</span>            TextID textOptions[4] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER, ID_TXT_FAULTCURRENT };</div>
-<div class="line"><span class="lineno">  581</span>            ElectricalUnit textUnits[4] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit, currentUnit };</div>
-<div class="line"><span class="lineno">  582</span>            m_checkListBoxGenerator-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  583</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  584</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  585</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  586</span>            }</div>
-<div class="line"><span class="lineno">  587</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  588</span>        <span class="keywordflow">case</span> TYPE_SYNC_MOTOR: {</div>
-<div class="line"><span class="lineno">  589</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
-<div class="line"><span class="lineno">  590</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
-<div class="line"><span class="lineno">  591</span>            m_checkListBoxSyncMotor-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  592</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  593</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  594</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  595</span>            }</div>
-<div class="line"><span class="lineno">  596</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  597</span>        <span class="keywordflow">case</span> TYPE_TRANSFORMER: {</div>
-<div class="line"><span class="lineno">  598</span>            TextID lineTextOptions[10] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,</div>
-<div class="line"><span class="lineno">  599</span>                ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,</div>
-<div class="line"><span class="lineno">  600</span>                ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1 };</div>
-<div class="line"><span class="lineno">  601</span>            ElectricalUnit textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };</div>
-<div class="line"><span class="lineno">  602</span>            m_checkListBoxTransformer-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  603</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  604</span>                m_workspace-&gt;InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);</div>
-<div class="line"><span class="lineno">  605</span>                numTxtElements++;</div>
-<div class="line"><span class="lineno">  606</span>            }</div>
-<div class="line"><span class="lineno">  607</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  608</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  609</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  610</span>        }</div>
-<div class="line"><span class="lineno">  611</span>    }</div>
-<div class="line"><span class="lineno">  612</span>    <span class="keywordflow">if</span> (numTxtElements != 0) {</div>
-<div class="line"><span class="lineno">  613</span>        m_workspace-&gt;SaveCurrentState();</div>
-<div class="line"><span class="lineno">  614</span>        m_workspace-&gt;UpdateTextElements();</div>
-<div class="line"><span class="lineno">  615</span>    }</div>
-<div class="line"><span class="lineno">  616</span>    EndModal(wxID_OK);</div>
-<div class="line"><span class="lineno">  617</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00502">502</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  503</span>{</div>
+<div class="line"><span class="lineno">  504</span>    <span class="keywordflow">if</span> (m_checkBoxReplace-&gt;GetValue()) {</div>
+<div class="line"><span class="lineno">  505</span>        m_workspace-&gt;RemoveAllTextElements();</div>
+<div class="line"><span class="lineno">  506</span>    }</div>
+<div class="line"><span class="lineno">  507</span>    ElectricalUnit voltageUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_V, ElectricalUnit::UNIT_kV };</div>
+<div class="line"><span class="lineno">  508</span>    ElectricalUnit currentUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_A, ElectricalUnit::UNIT_kA };</div>
+<div class="line"><span class="lineno">  509</span>    ElectricalUnit sUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_VA, ElectricalUnit::UNIT_kVA, ElectricalUnit::UNIT_MVA };</div>
+<div class="line"><span class="lineno">  510</span>    ElectricalUnit pUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_W, ElectricalUnit::UNIT_kW, ElectricalUnit::UNIT_MW };</div>
+<div class="line"><span class="lineno">  511</span>    ElectricalUnit qUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_var, ElectricalUnit::UNIT_kvar, ElectricalUnit::UNIT_Mvar };</div>
+<div class="line"><span class="lineno">  512</span>    ElectricalUnit angleUnitList[2] = { ElectricalUnit::UNIT_DEGREE, ElectricalUnit::UNIT_RADIAN };</div>
+<div class="line"><span class="lineno">  513</span> </div>
+<div class="line"><span class="lineno">  514</span>    ElectricalUnit voltageUnit = voltageUnitList[m_radioBoxVoltage-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  515</span>    ElectricalUnit currentUnit = currentUnitList[m_radioBoxCurrent-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  516</span>    ElectricalUnit sUnit = sUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  517</span>    ElectricalUnit pUnit = pUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  518</span>    ElectricalUnit qUnit = qUnitList[m_radioBoxPower-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  519</span>    ElectricalUnit angleUnit = angleUnitList[m_radioBoxAngle-&gt;GetSelection()];</div>
+<div class="line"><span class="lineno">  520</span> </div>
+<div class="line"><span class="lineno">  521</span>    <span class="keyword">auto</span> elementList = m_workspace-&gt;GetElementList();</div>
+<div class="line"><span class="lineno">  522</span>    <span class="keywordtype">int</span> numTxtElements = 0;</div>
+<div class="line"><span class="lineno">  523</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* element : elementList) {</div>
+<div class="line"><span class="lineno">  524</span>        ElementType elementType = element-&gt;GetElementType();</div>
+<div class="line"><span class="lineno">  525</span>        wxArrayInt checked;</div>
+<div class="line"><span class="lineno">  526</span>        <span class="keywordflow">switch</span> (elementType)</div>
+<div class="line"><span class="lineno">  527</span>        {</div>
+<div class="line"><span class="lineno">  528</span>        <span class="keywordflow">case</span> TYPE_BUS: {</div>
+<div class="line"><span class="lineno">  529</span>            TextID textOptions[7] = { ID_TXT_NAME, ID_TXT_VOLTAGE, ID_TXT_ANGLE, ID_TXT_FAULTCURRENT, ID_TXT_FAULTVOLTAGE, ID_TXT_SCC, ID_TXT_THD };</div>
+<div class="line"><span class="lineno">  530</span>            ElectricalUnit textUnits[7] = { ElectricalUnit::UNIT_NONE, voltageUnit, angleUnit, currentUnit, voltageUnit, sUnit, ElectricalUnit::UNIT_NONE };</div>
+<div class="line"><span class="lineno">  531</span>            m_checkListBoxBus-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  532</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  533</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  534</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  535</span>            }</div>
+<div class="line"><span class="lineno">  536</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  537</span>        <span class="keywordflow">case</span> TYPE_CAPACITOR: {</div>
+<div class="line"><span class="lineno">  538</span>            TextID textOptions[2] = { ID_TXT_NAME, ID_TXT_REACTIVE_POWER };</div>
+<div class="line"><span class="lineno">  539</span>            ElectricalUnit textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };</div>
+<div class="line"><span class="lineno">  540</span>            m_checkListBoxCapacitor-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  541</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  542</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  543</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  544</span>            }</div>
+<div class="line"><span class="lineno">  545</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  546</span>        <span class="keywordflow">case</span> TYPE_IND_MOTOR: {</div>
+<div class="line"><span class="lineno">  547</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
+<div class="line"><span class="lineno">  548</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
+<div class="line"><span class="lineno">  549</span>            m_checkListBoxIndMotor-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  550</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  551</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  552</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  553</span>            }</div>
+<div class="line"><span class="lineno">  554</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  555</span>        <span class="keywordflow">case</span> TYPE_INDUCTOR: {</div>
+<div class="line"><span class="lineno">  556</span>            TextID textOptions[2] = { ID_TXT_NAME, ID_TXT_REACTIVE_POWER };</div>
+<div class="line"><span class="lineno">  557</span>            ElectricalUnit textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };</div>
+<div class="line"><span class="lineno">  558</span>            m_checkListBoxInductor-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  559</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  560</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  561</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  562</span>            }</div>
+<div class="line"><span class="lineno">  563</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  564</span>        <span class="keywordflow">case</span> TYPE_LINE: {</div>
+<div class="line"><span class="lineno">  565</span>            TextID lineTextOptions[10] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,</div>
+<div class="line"><span class="lineno">  566</span>                ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,</div>
+<div class="line"><span class="lineno">  567</span>                ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1 };</div>
+<div class="line"><span class="lineno">  568</span>            ElectricalUnit textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };</div>
+<div class="line"><span class="lineno">  569</span>            m_checkListBoxLine-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  570</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  571</span>                m_workspace-&gt;InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  572</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  573</span>            }</div>
+<div class="line"><span class="lineno">  574</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  575</span>        <span class="keywordflow">case</span> TYPE_LOAD: {</div>
+<div class="line"><span class="lineno">  576</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
+<div class="line"><span class="lineno">  577</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
+<div class="line"><span class="lineno">  578</span>            m_checkListBoxLoad-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  579</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  580</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  581</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  582</span>            }</div>
+<div class="line"><span class="lineno">  583</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  584</span>        <span class="keywordflow">case</span> TYPE_SYNC_GENERATOR: {</div>
+<div class="line"><span class="lineno">  585</span>            TextID textOptions[4] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER, ID_TXT_FAULTCURRENT };</div>
+<div class="line"><span class="lineno">  586</span>            ElectricalUnit textUnits[4] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit, currentUnit };</div>
+<div class="line"><span class="lineno">  587</span>            m_checkListBoxGenerator-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  588</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  589</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  590</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  591</span>            }</div>
+<div class="line"><span class="lineno">  592</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  593</span>        <span class="keywordflow">case</span> TYPE_SYNC_MOTOR: {</div>
+<div class="line"><span class="lineno">  594</span>            TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };</div>
+<div class="line"><span class="lineno">  595</span>            ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };</div>
+<div class="line"><span class="lineno">  596</span>            m_checkListBoxSyncMotor-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  597</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  598</span>                m_workspace-&gt;InsertTextElement(textOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  599</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  600</span>            }</div>
+<div class="line"><span class="lineno">  601</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  602</span>        <span class="keywordflow">case</span> TYPE_TRANSFORMER: {</div>
+<div class="line"><span class="lineno">  603</span>            TextID lineTextOptions[11] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,</div>
+<div class="line"><span class="lineno">  604</span>                ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,</div>
+<div class="line"><span class="lineno">  605</span>                ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1,</div>
+<div class="line"><span class="lineno">  606</span>                ID_TXT_TAP };</div>
+<div class="line"><span class="lineno">  607</span>            ElectricalUnit textUnits[11] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit,</div>
+<div class="line"><span class="lineno">  608</span>                ElectricalUnit::UNIT_PU };</div>
+<div class="line"><span class="lineno">  609</span>            m_checkListBoxTransformer-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  610</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  611</span>                m_workspace-&gt;InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);</div>
+<div class="line"><span class="lineno">  612</span>                numTxtElements++;</div>
+<div class="line"><span class="lineno">  613</span>            }</div>
+<div class="line"><span class="lineno">  614</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  615</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  616</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  617</span>        }</div>
+<div class="line"><span class="lineno">  618</span>    }</div>
+<div class="line"><span class="lineno">  619</span>    <span class="keywordflow">if</span> (numTxtElements != 0) {</div>
+<div class="line"><span class="lineno">  620</span>        m_workspace-&gt;SaveCurrentState();</div>
+<div class="line"><span class="lineno">  621</span>        m_workspace-&gt;UpdateTextElements();</div>
+<div class="line"><span class="lineno">  622</span>    }</div>
+<div class="line"><span class="lineno">  623</span>    EndModal(wxID_OK);</div>
+<div class="line"><span class="lineno">  624</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1138,10 +1145,10 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00619">619</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  620</span>{</div>
-<div class="line"><span class="lineno">  621</span>    EndModal(wxID_CANCEL);</div>
-<div class="line"><span class="lineno">  622</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00626">626</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  627</span>{</div>
+<div class="line"><span class="lineno">  628</span>    EndModal(wxID_CANCEL);</div>
+<div class="line"><span class="lineno">  629</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1169,13 +1176,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00031">31</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   32</span>{</div>
-<div class="line"><span class="lineno">   33</span>    <span class="comment">//wxMessageBox(wxString::Format(&quot;%d&quot;, event.GetId()));</span></div>
-<div class="line"><span class="lineno">   34</span>    UpdatePreview(m_choicebook-&gt;GetSelection());</div>
-<div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">   37</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00033">33</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>{</div>
+<div class="line"><span class="lineno">   35</span>    <span class="comment">//wxMessageBox(wxString::Format(&quot;%d&quot;, event.GetId()));</span></div>
+<div class="line"><span class="lineno">   36</span>    UpdatePreview(m_choicebook-&gt;GetSelection());</div>
+<div class="line"><span class="lineno">   37</span> </div>
+<div class="line"><span class="lineno">   38</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">   39</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1203,11 +1210,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00475">475</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  476</span>{</div>
-<div class="line"><span class="lineno">  477</span>    UpdatePreview(m_choicebook-&gt;GetSelection());</div>
-<div class="line"><span class="lineno">  478</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  479</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00480">480</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  481</span>{</div>
+<div class="line"><span class="lineno">  482</span>    UpdatePreview(m_choicebook-&gt;GetSelection());</div>
+<div class="line"><span class="lineno">  483</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  484</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1235,15 +1242,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00487">487</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  488</span>{</div>
-<div class="line"><span class="lineno">  489</span>    <span class="keywordtype">long</span> precision;</div>
-<div class="line"><span class="lineno">  490</span>    <span class="keywordflow">if</span> (m_textCtrlPrecision-&gt;GetValue().ToLong(&amp;precision) &amp;&amp; precision &gt;= 0) {</div>
-<div class="line"><span class="lineno">  491</span>        m_precision = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(precision);</div>
-<div class="line"><span class="lineno">  492</span>        UpdatePreview(m_choicebook-&gt;GetSelection());</div>
-<div class="line"><span class="lineno">  493</span>    }</div>
-<div class="line"><span class="lineno">  494</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  495</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00492">492</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  493</span>{</div>
+<div class="line"><span class="lineno">  494</span>    <span class="keywordtype">long</span> precision;</div>
+<div class="line"><span class="lineno">  495</span>    <span class="keywordflow">if</span> (m_textCtrlPrecision-&gt;GetValue().ToLong(&amp;precision) &amp;&amp; precision &gt;= 0) {</div>
+<div class="line"><span class="lineno">  496</span>        m_precision = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(precision);</div>
+<div class="line"><span class="lineno">  497</span>        UpdatePreview(m_choicebook-&gt;GetSelection());</div>
+<div class="line"><span class="lineno">  498</span>    }</div>
+<div class="line"><span class="lineno">  499</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  500</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1271,11 +1278,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00481">481</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  482</span>{</div>
-<div class="line"><span class="lineno">  483</span>    UpdatePreview(m_choicebook-&gt;GetSelection());</div>
-<div class="line"><span class="lineno">  484</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  485</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00486">486</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  487</span>{</div>
+<div class="line"><span class="lineno">  488</span>    UpdatePreview(m_choicebook-&gt;GetSelection());</div>
+<div class="line"><span class="lineno">  489</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  490</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1303,86 +1310,86 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00220">220</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  221</span>{</div>
-<div class="line"><span class="lineno">  222</span>    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = checkListBox-&gt;GetId();</div>
-<div class="line"><span class="lineno">  223</span>    wxString name = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">  224</span>    wxString text = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">  225</span>    wxArrayInt checked;</div>
-<div class="line"><span class="lineno">  226</span>    checkListBox-&gt;GetCheckedItems(checked);</div>
-<div class="line"><span class="lineno">  227</span>    <span class="keywordflow">switch</span> (<span class="keywordtype">id</span>)</div>
-<div class="line"><span class="lineno">  228</span>    {</div>
-<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">case</span> ID_CL_BUS: {</div>
-<div class="line"><span class="lineno">  230</span>        name = _(<span class="stringliteral">&quot;Bus label&quot;</span>);</div>
-<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  232</span>            text += GetBusPreviewText(i);</div>
-<div class="line"><span class="lineno">  233</span>        }</div>
-<div class="line"><span class="lineno">  234</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  235</span>    <span class="keywordflow">case</span> ID_CL_GENERATOR: {</div>
-<div class="line"><span class="lineno">  236</span>        name = _(<span class="stringliteral">&quot;Generator label&quot;</span>);</div>
-<div class="line"><span class="lineno">  237</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  238</span>            text += GetGeneratorPreviewText(i);</div>
-<div class="line"><span class="lineno">  239</span>        }</div>
-<div class="line"><span class="lineno">  240</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">case</span> ID_CL_LOAD: {</div>
-<div class="line"><span class="lineno">  242</span>        name = _(<span class="stringliteral">&quot;Load label&quot;</span>);</div>
-<div class="line"><span class="lineno">  243</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  244</span>            text += GetLoadPreviewText(i);</div>
-<div class="line"><span class="lineno">  245</span>        }</div>
-<div class="line"><span class="lineno">  246</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  247</span>    <span class="keywordflow">case</span> ID_CL_LINE: {</div>
-<div class="line"><span class="lineno">  248</span>        name = _(<span class="stringliteral">&quot;Line label&quot;</span>);</div>
-<div class="line"><span class="lineno">  249</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  250</span>            text += GetLinePreviewText(i);</div>
-<div class="line"><span class="lineno">  251</span>        }</div>
-<div class="line"><span class="lineno">  252</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  253</span>    <span class="keywordflow">case</span> ID_CL_TRANSFORMER: {</div>
-<div class="line"><span class="lineno">  254</span>        name = _(<span class="stringliteral">&quot;Transformer label&quot;</span>);</div>
-<div class="line"><span class="lineno">  255</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  256</span>            text += GetTransformerPreviewText(i);</div>
-<div class="line"><span class="lineno">  257</span>        }</div>
-<div class="line"><span class="lineno">  258</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  259</span>    <span class="keywordflow">case</span> ID_CL_CAPACITOR: {</div>
-<div class="line"><span class="lineno">  260</span>        name = _(<span class="stringliteral">&quot;Capacitor label&quot;</span>);</div>
-<div class="line"><span class="lineno">  261</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  262</span>            text += GetCapacitorPreviewText(i);</div>
-<div class="line"><span class="lineno">  263</span>        }</div>
-<div class="line"><span class="lineno">  264</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  265</span>    <span class="keywordflow">case</span> ID_CL_INDUCTOR: {</div>
-<div class="line"><span class="lineno">  266</span>        name = _(<span class="stringliteral">&quot;Inductor label&quot;</span>);</div>
-<div class="line"><span class="lineno">  267</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  268</span>            text += GetInductorPreviewText(i);</div>
-<div class="line"><span class="lineno">  269</span>        }</div>
-<div class="line"><span class="lineno">  270</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  271</span>    <span class="keywordflow">case</span> ID_CL_INDMOTOR: {</div>
-<div class="line"><span class="lineno">  272</span>        name = _(<span class="stringliteral">&quot;Induction motor label&quot;</span>);</div>
-<div class="line"><span class="lineno">  273</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  274</span>            text += GetIndMotorPreviewText(i);</div>
-<div class="line"><span class="lineno">  275</span>        }</div>
-<div class="line"><span class="lineno">  276</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  277</span>    <span class="keywordflow">case</span> ID_CL_SYNCMOTOR: {</div>
-<div class="line"><span class="lineno">  278</span>        name = _(<span class="stringliteral">&quot;Synchronous motor label&quot;</span>);</div>
-<div class="line"><span class="lineno">  279</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
-<div class="line"><span class="lineno">  280</span>            text += GetSyncMotorPreviewText(i);</div>
-<div class="line"><span class="lineno">  281</span>        }</div>
-<div class="line"><span class="lineno">  282</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  283</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  284</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  285</span>    }</div>
-<div class="line"><span class="lineno">  286</span> </div>
-<div class="line"><span class="lineno">  287</span>    <span class="keywordflow">if</span> (!checked.IsEmpty()) {</div>
-<div class="line"><span class="lineno">  288</span>        m_richTextCtrlPreview-&gt;BeginUnderline();</div>
-<div class="line"><span class="lineno">  289</span>        m_richTextCtrlPreview-&gt;BeginBold();</div>
-<div class="line"><span class="lineno">  290</span>        m_richTextCtrlPreview-&gt;WriteText(name);</div>
-<div class="line"><span class="lineno">  291</span>        m_richTextCtrlPreview-&gt;EndBold();</div>
-<div class="line"><span class="lineno">  292</span>        m_richTextCtrlPreview-&gt;EndUnderline();</div>
-<div class="line"><span class="lineno">  293</span>        m_richTextCtrlPreview-&gt;Newline();</div>
-<div class="line"><span class="lineno">  294</span>        m_richTextCtrlPreview-&gt;BeginLeftIndent(60);</div>
-<div class="line"><span class="lineno">  295</span>        m_richTextCtrlPreview-&gt;WriteText(text);</div>
-<div class="line"><span class="lineno">  296</span>        m_richTextCtrlPreview-&gt;EndLeftIndent();</div>
-<div class="line"><span class="lineno">  297</span>        m_richTextCtrlPreview-&gt;Newline();</div>
-<div class="line"><span class="lineno">  298</span>    }</div>
-<div class="line"><span class="lineno">  299</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00222">222</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  223</span>{</div>
+<div class="line"><span class="lineno">  224</span>    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = checkListBox-&gt;GetId();</div>
+<div class="line"><span class="lineno">  225</span>    wxString name = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  226</span>    wxString text = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  227</span>    wxArrayInt checked;</div>
+<div class="line"><span class="lineno">  228</span>    checkListBox-&gt;GetCheckedItems(checked);</div>
+<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">switch</span> (<span class="keywordtype">id</span>)</div>
+<div class="line"><span class="lineno">  230</span>    {</div>
+<div class="line"><span class="lineno">  231</span>    <span class="keywordflow">case</span> ID_CL_BUS: {</div>
+<div class="line"><span class="lineno">  232</span>        name = _(<span class="stringliteral">&quot;Bus label&quot;</span>);</div>
+<div class="line"><span class="lineno">  233</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  234</span>            text += GetBusPreviewText(i);</div>
+<div class="line"><span class="lineno">  235</span>        }</div>
+<div class="line"><span class="lineno">  236</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  237</span>    <span class="keywordflow">case</span> ID_CL_GENERATOR: {</div>
+<div class="line"><span class="lineno">  238</span>        name = _(<span class="stringliteral">&quot;Generator label&quot;</span>);</div>
+<div class="line"><span class="lineno">  239</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  240</span>            text += GetGeneratorPreviewText(i);</div>
+<div class="line"><span class="lineno">  241</span>        }</div>
+<div class="line"><span class="lineno">  242</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  243</span>    <span class="keywordflow">case</span> ID_CL_LOAD: {</div>
+<div class="line"><span class="lineno">  244</span>        name = _(<span class="stringliteral">&quot;Load label&quot;</span>);</div>
+<div class="line"><span class="lineno">  245</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  246</span>            text += GetLoadPreviewText(i);</div>
+<div class="line"><span class="lineno">  247</span>        }</div>
+<div class="line"><span class="lineno">  248</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">case</span> ID_CL_LINE: {</div>
+<div class="line"><span class="lineno">  250</span>        name = _(<span class="stringliteral">&quot;Line label&quot;</span>);</div>
+<div class="line"><span class="lineno">  251</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  252</span>            text += GetLinePreviewText(i);</div>
+<div class="line"><span class="lineno">  253</span>        }</div>
+<div class="line"><span class="lineno">  254</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  255</span>    <span class="keywordflow">case</span> ID_CL_TRANSFORMER: {</div>
+<div class="line"><span class="lineno">  256</span>        name = _(<span class="stringliteral">&quot;Transformer label&quot;</span>);</div>
+<div class="line"><span class="lineno">  257</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  258</span>            text += GetTransformerPreviewText(i);</div>
+<div class="line"><span class="lineno">  259</span>        }</div>
+<div class="line"><span class="lineno">  260</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  261</span>    <span class="keywordflow">case</span> ID_CL_CAPACITOR: {</div>
+<div class="line"><span class="lineno">  262</span>        name = _(<span class="stringliteral">&quot;Capacitor label&quot;</span>);</div>
+<div class="line"><span class="lineno">  263</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  264</span>            text += GetCapacitorPreviewText(i);</div>
+<div class="line"><span class="lineno">  265</span>        }</div>
+<div class="line"><span class="lineno">  266</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  267</span>    <span class="keywordflow">case</span> ID_CL_INDUCTOR: {</div>
+<div class="line"><span class="lineno">  268</span>        name = _(<span class="stringliteral">&quot;Inductor label&quot;</span>);</div>
+<div class="line"><span class="lineno">  269</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  270</span>            text += GetInductorPreviewText(i);</div>
+<div class="line"><span class="lineno">  271</span>        }</div>
+<div class="line"><span class="lineno">  272</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  273</span>    <span class="keywordflow">case</span> ID_CL_INDMOTOR: {</div>
+<div class="line"><span class="lineno">  274</span>        name = _(<span class="stringliteral">&quot;Induction motor label&quot;</span>);</div>
+<div class="line"><span class="lineno">  275</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  276</span>            text += GetIndMotorPreviewText(i);</div>
+<div class="line"><span class="lineno">  277</span>        }</div>
+<div class="line"><span class="lineno">  278</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  279</span>    <span class="keywordflow">case</span> ID_CL_SYNCMOTOR: {</div>
+<div class="line"><span class="lineno">  280</span>        name = _(<span class="stringliteral">&quot;Synchronous motor label&quot;</span>);</div>
+<div class="line"><span class="lineno">  281</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : checked) {</div>
+<div class="line"><span class="lineno">  282</span>            text += GetSyncMotorPreviewText(i);</div>
+<div class="line"><span class="lineno">  283</span>        }</div>
+<div class="line"><span class="lineno">  284</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  285</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  286</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  287</span>    }</div>
+<div class="line"><span class="lineno">  288</span> </div>
+<div class="line"><span class="lineno">  289</span>    <span class="keywordflow">if</span> (!checked.IsEmpty()) {</div>
+<div class="line"><span class="lineno">  290</span>        m_richTextCtrlPreview-&gt;BeginUnderline();</div>
+<div class="line"><span class="lineno">  291</span>        m_richTextCtrlPreview-&gt;BeginBold();</div>
+<div class="line"><span class="lineno">  292</span>        m_richTextCtrlPreview-&gt;WriteText(name);</div>
+<div class="line"><span class="lineno">  293</span>        m_richTextCtrlPreview-&gt;EndBold();</div>
+<div class="line"><span class="lineno">  294</span>        m_richTextCtrlPreview-&gt;EndUnderline();</div>
+<div class="line"><span class="lineno">  295</span>        m_richTextCtrlPreview-&gt;Newline();</div>
+<div class="line"><span class="lineno">  296</span>        m_richTextCtrlPreview-&gt;BeginLeftIndent(60);</div>
+<div class="line"><span class="lineno">  297</span>        m_richTextCtrlPreview-&gt;WriteText(text);</div>
+<div class="line"><span class="lineno">  298</span>        m_richTextCtrlPreview-&gt;EndLeftIndent();</div>
+<div class="line"><span class="lineno">  299</span>        m_richTextCtrlPreview-&gt;Newline();</div>
+<div class="line"><span class="lineno">  300</span>    }</div>
+<div class="line"><span class="lineno">  301</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1410,17 +1417,17 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00039">39</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   40</span>{</div>
-<div class="line"><span class="lineno">   41</span>    std::vector&lt;wxCheckListBox*&gt; checkListBoxes = { m_checkListBoxBus, m_checkListBoxGenerator,</div>
-<div class="line"><span class="lineno">   42</span>        m_checkListBoxLoad, m_checkListBoxLine, m_checkListBoxTransformer, m_checkListBoxCapacitor,</div>
-<div class="line"><span class="lineno">   43</span>        m_checkListBoxInductor, m_checkListBoxIndMotor, m_checkListBoxSyncMotor };</div>
-<div class="line"><span class="lineno">   44</span> </div>
-<div class="line"><span class="lineno">   45</span>    m_richTextCtrlPreview-&gt;Clear();</div>
-<div class="line"><span class="lineno">   46</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* checkListBox : checkListBoxes) {</div>
-<div class="line"><span class="lineno">   47</span>        SetPreviewText(checkListBox);</div>
-<div class="line"><span class="lineno">   48</span>    }</div>
-<div class="line"><span class="lineno">   49</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_label_manager_8cpp_source.html#l00041">41</a> of file <a class="el" href="_label_manager_8cpp_source.html">LabelManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>{</div>
+<div class="line"><span class="lineno">   43</span>    std::vector&lt;wxCheckListBox*&gt; checkListBoxes = { m_checkListBoxBus, m_checkListBoxGenerator,</div>
+<div class="line"><span class="lineno">   44</span>        m_checkListBoxLoad, m_checkListBoxLine, m_checkListBoxTransformer, m_checkListBoxCapacitor,</div>
+<div class="line"><span class="lineno">   45</span>        m_checkListBoxInductor, m_checkListBoxIndMotor, m_checkListBoxSyncMotor };</div>
+<div class="line"><span class="lineno">   46</span> </div>
+<div class="line"><span class="lineno">   47</span>    m_richTextCtrlPreview-&gt;Clear();</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* checkListBox : checkListBoxes) {</div>
+<div class="line"><span class="lineno">   49</span>        SetPreviewText(checkListBox);</div>
+<div class="line"><span class="lineno">   50</span>    }</div>
+<div class="line"><span class="lineno">   51</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

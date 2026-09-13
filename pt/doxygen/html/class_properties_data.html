@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -110,6 +110,7 @@ $(document).ready(function(){initNavTree('class_properties_data.html',''); initR
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_properties_data-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">PropertiesData Class Reference</div></div>
@@ -156,6 +157,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad994096c178fa80ad32bd69ed2494923" id="r_ad994096c178fa80ad32bd69ed2494923"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_freq_response_data.html">FreqResponseData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_properties_data.html#ad994096c178fa80ad32bd69ed2494923">GetFreqRespData</a> () const</td></tr>
 <tr class="separator:ad994096c178fa80ad32bd69ed2494923"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aa00ca72529432f995f55284d64a6ca7b" id="r_aa00ca72529432f995f55284d64a6ca7b"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="struct_voltage_level_colour.html">VoltageLevelColour</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_properties_data.html#aa00ca72529432f995f55284d64a6ca7b">GetDefaultVoltageLevels</a> ()</td></tr>
+<tr class="separator:aa00ca72529432f995f55284d64a6ca7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb77e62b9a842ed429feaf6c412123e9" id="r_adb77e62b9a842ed429feaf6c412123e9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_properties_data.html#adb77e62b9a842ed429feaf6c412123e9">SaveConfigFile</a> (const <a class="el" href="struct_general_data.html">GeneralData</a> &amp;data)</td></tr>
+<tr class="separator:adb77e62b9a842ed429feaf6c412123e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a8177e2b18b3e3ce752e6f8c095319ff9" id="r_a8177e2b18b3e3ce752e6f8c095319ff9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_g_u_i_colour.html">GUIColour</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_properties_data.html#a8177e2b18b3e3ce752e6f8c095319ff9">m_guiColour</a></td></tr>
@@ -172,7 +180,7 @@ Protected Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span class="obfuscator">.nosp@m.</span>s@uf<span class="obfuscator">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00102">102</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00105">105</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac5b9a703313321402feb0b630137554a" name="ac5b9a703313321402feb0b630137554a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac5b9a703313321402feb0b630137554a">&#9670;&#160;</a></span>PropertiesData()</h2>
@@ -189,8 +197,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00022">22</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   22</span>{ SetGUIColourTheme(); }</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00024">24</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   24</span>{ SetGUIColourTheme(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -209,12 +217,53 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00023">23</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00025">25</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   25</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa00ca72529432f995f55284d64a6ca7b" name="aa00ca72529432f995f55284d64a6ca7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa00ca72529432f995f55284d64a6ca7b">&#9670;&#160;</a></span>GetDefaultVoltageLevels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_voltage_level_colour.html">VoltageLevelColour</a> &gt; PropertiesData::GetDefaultVoltageLevels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00079">79</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   80</span>{</div>
+<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">return</span> {</div>
+<div class="line"><span class="lineno">   82</span>    { 500.0, wxColour(198, 40, 40) },    <span class="comment">// 500 kV - Dark red</span></div>
+<div class="line"><span class="lineno">   83</span>    { 440.0, wxColour(224, 90, 42) },    <span class="comment">// 440 kV - Orange-red</span></div>
+<div class="line"><span class="lineno">   84</span>    { 345.0, wxColour(242, 177, 52) },   <span class="comment">// 345 kV - Amber</span></div>
+<div class="line"><span class="lineno">   85</span>    { 230.0, wxColour(67, 176, 92) },    <span class="comment">// 230 kV - Green</span></div>
+<div class="line"><span class="lineno">   86</span>    { 138.0, wxColour(40, 105, 235) },   <span class="comment">// 138 kV - Blue</span></div>
+<div class="line"><span class="lineno">   87</span>    { 69.0,  wxColour(0, 180, 220) },    <span class="comment">// 69 kV - Cyan</span></div>
+<div class="line"><span class="lineno">   88</span>    { 34.5,  wxColour(0, 106, 106) },    <span class="comment">// 34.5 kV - Teal</span></div>
+<div class="line"><span class="lineno">   89</span>    { 13.8,  wxColour(94, 53, 177) },    <span class="comment">// 13.8 kV - Violet</span></div>
+<div class="line"><span class="lineno">   90</span>    { 4.16,  wxColour(158, 62, 172) },   <span class="comment">// 4.16 kV - Purple</span></div>
+<div class="line"><span class="lineno">   91</span>    { 0.38,  wxColour(151, 132, 208) }   <span class="comment">// 0.38 kV (380 V) - Light purple</span></div>
+<div class="line"><span class="lineno">   92</span>    };</div>
+<div class="line"><span class="lineno">   93</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="ad994096c178fa80ad32bd69ed2494923" name="ad994096c178fa80ad32bd69ed2494923"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad994096c178fa80ad32bd69ed2494923">&#9670;&#160;</a></span>GetFreqRespData()</h2>
 
@@ -238,8 +287,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00116">116</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>{ <span class="keywordflow">return</span> m_freqRespData; }</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00121">121</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  121</span>{ <span class="keywordflow">return</span> m_freqRespData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -266,8 +315,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00112">112</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  112</span>{ <span class="keywordflow">return</span> m_genData; }</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00117">117</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>{ <span class="keywordflow">return</span> m_genData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -294,8 +343,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00108">108</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  108</span>{ <span class="keywordflow">return</span> &amp;m_guiColour; }</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00113">113</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  113</span>{ <span class="keywordflow">return</span> &amp;m_guiColour; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -322,8 +371,127 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00110">110</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  110</span>{ <span class="keywordflow">return</span> m_simulData; }</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00115">115</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  115</span>{ <span class="keywordflow">return</span> m_simulData; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adb77e62b9a842ed429feaf6c412123e9" name="adb77e62b9a842ed429feaf6c412123e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb77e62b9a842ed429feaf6c412123e9">&#9670;&#160;</a></span>SaveConfigFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PropertiesData::SaveConfigFile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_general_data.html">GeneralData</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00104">104</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  105</span>{</div>
+<div class="line"><span class="lineno">  106</span>    wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;PSP-UFU&quot;</span> + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;config.ini&quot;</span>);</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordflow">if</span> (!fn.DirExists()) {</div>
+<div class="line"><span class="lineno">  108</span>        fn.Mkdir();</div>
+<div class="line"><span class="lineno">  109</span>    }</div>
+<div class="line"><span class="lineno">  110</span>    wxTextFile file(fn.GetFullPath());</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">if</span> (!file.Create()) {</div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">if</span> (!file.Open()) {</div>
+<div class="line"><span class="lineno">  113</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  114</span>        }</div>
+<div class="line"><span class="lineno">  115</span>        file.Clear();</div>
+<div class="line"><span class="lineno">  116</span>    }</div>
+<div class="line"><span class="lineno">  117</span> </div>
+<div class="line"><span class="lineno">  118</span>    wxString line = <span class="stringliteral">&quot;lang=&quot;</span>;</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">switch</span> (data.language) {</div>
+<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">case</span> wxLANGUAGE_PORTUGUESE_BRAZILIAN:</div>
+<div class="line"><span class="lineno">  121</span>        line += <span class="stringliteral">&quot;pt-br&quot;</span>;</div>
+<div class="line"><span class="lineno">  122</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  123</span>    <span class="keywordflow">case</span> wxLANGUAGE_ENGLISH:</div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  125</span>        line += <span class="stringliteral">&quot;en&quot;</span>;</div>
+<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  127</span>    }</div>
+<div class="line"><span class="lineno">  128</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  129</span> </div>
+<div class="line"><span class="lineno">  130</span>    line = <span class="stringliteral">&quot;plotlib=&quot;</span>;</div>
+<div class="line"><span class="lineno">  131</span>    <span class="keywordflow">switch</span> (data.plotLib) {</div>
+<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">case</span> PlotLib::wxMATH_PLOT:</div>
+<div class="line"><span class="lineno">  133</span>        line += <span class="stringliteral">&quot;mathplot&quot;</span>;</div>
+<div class="line"><span class="lineno">  134</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  135</span>    <span class="keywordflow">case</span> PlotLib::wxCHART_DIR:</div>
+<div class="line"><span class="lineno">  136</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  137</span>        line += <span class="stringliteral">&quot;chartdir&quot;</span>;</div>
+<div class="line"><span class="lineno">  138</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  139</span>    }</div>
+<div class="line"><span class="lineno">  140</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>    line = <span class="stringliteral">&quot;theme=&quot;</span>;</div>
+<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">switch</span> (data.theme) {</div>
+<div class="line"><span class="lineno">  144</span>    <span class="keywordflow">case</span> THEME_DARK:</div>
+<div class="line"><span class="lineno">  145</span>        line += <span class="stringliteral">&quot;dark&quot;</span>;</div>
+<div class="line"><span class="lineno">  146</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  147</span>    <span class="keywordflow">case</span> THEME_LIGHT:</div>
+<div class="line"><span class="lineno">  148</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  149</span>        line += <span class="stringliteral">&quot;light&quot;</span>;</div>
+<div class="line"><span class="lineno">  150</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  151</span>    }</div>
+<div class="line"><span class="lineno">  152</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  153</span> </div>
+<div class="line"><span class="lineno">  154</span>    line = <span class="stringliteral">&quot;labelfont=&quot;</span> + data.labelFont;</div>
+<div class="line"><span class="lineno">  155</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  156</span> </div>
+<div class="line"><span class="lineno">  157</span>    line = wxString::Format(<span class="stringliteral">&quot;labelfontsize=%d&quot;</span>, data.labelFontSize);</div>
+<div class="line"><span class="lineno">  158</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  159</span> </div>
+<div class="line"><span class="lineno">  160</span>    line = <span class="stringliteral">&quot;atpfile=&quot;</span> + data.atpPath.GetFullPath();</div>
+<div class="line"><span class="lineno">  161</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  162</span> </div>
+<div class="line"><span class="lineno">  163</span>    line = wxString(<span class="stringliteral">&quot;elementstoolbar=&quot;</span>);</div>
+<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">switch</span> (data.elementsToolbar) {</div>
+<div class="line"><span class="lineno">  165</span>    <span class="keywordflow">case</span> NONE:</div>
+<div class="line"><span class="lineno">  166</span>        line += <span class="stringliteral">&quot;none&quot;</span>;</div>
+<div class="line"><span class="lineno">  167</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">case</span> VERTICAL:</div>
+<div class="line"><span class="lineno">  169</span>        line += <span class="stringliteral">&quot;vertical&quot;</span>;</div>
+<div class="line"><span class="lineno">  170</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  171</span>    <span class="keywordflow">case</span> HORIZONTAL:</div>
+<div class="line"><span class="lineno">  172</span>        line += <span class="stringliteral">&quot;horizontal&quot;</span>;</div>
+<div class="line"><span class="lineno">  173</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  174</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  175</span>        line += <span class="stringliteral">&quot;vertical&quot;</span>;</div>
+<div class="line"><span class="lineno">  176</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  177</span>    }</div>
+<div class="line"><span class="lineno">  178</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  179</span> </div>
+<div class="line"><span class="lineno">  180</span>    line = wxString(<span class="stringliteral">&quot;usevoltagebuscolours=&quot;</span>) + (data.useBusVoltageColours ? <span class="stringliteral">&quot;yes&quot;</span> : <span class="stringliteral">&quot;no&quot;</span>);</div>
+<div class="line"><span class="lineno">  181</span>    file.AddLine(line);</div>
+<div class="line"><span class="lineno">  182</span> </div>
+<div class="line"><span class="lineno">  183</span>    <span class="keywordflow">if</span> (!data.voltageLevels.empty()) {</div>
+<div class="line"><span class="lineno">  184</span>        line = <span class="stringliteral">&quot;voltage_levels=&quot;</span>;</div>
+<div class="line"><span class="lineno">  185</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; data.voltageLevels.size(); ++i) {</div>
+<div class="line"><span class="lineno">  186</span>            <span class="keywordflow">if</span> (i &gt; 0) line += <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><span class="lineno">  187</span>            line += wxString::Format(<span class="stringliteral">&quot;%s:%s&quot;</span>, wxString::FromCDouble(data.voltageLevels[i].voltage), data.voltageLevels[i].colour.GetAsString(wxC2S_HTML_SYNTAX));</div>
+<div class="line"><span class="lineno">  188</span>        }</div>
+<div class="line"><span class="lineno">  189</span>        file.AddLine(line);</div>
+<div class="line"><span class="lineno">  190</span>    }</div>
+<div class="line"><span class="lineno">  191</span> </div>
+<div class="line"><span class="lineno">  192</span>    file.Write();</div>
+<div class="line"><span class="lineno">  193</span>    file.Close();</div>
+<div class="line"><span class="lineno">  194</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  195</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -351,8 +519,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00115">115</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  115</span>{ this-&gt;m_freqRespData = freqRespData; }</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00120">120</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  120</span>{ this-&gt;m_freqRespData = freqRespData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -361,9 +529,6 @@ Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void PropertiesData::SetGeneralPropertiesData </td>
@@ -373,15 +538,16 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00113">113</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  113</span>{ m_genData = generalData; }</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00095">95</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   96</span>{</div>
+<div class="line"><span class="lineno">   97</span>    m_genData = generalData;</div>
+<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">if</span> (m_genData.voltageLevels.empty()) {</div>
+<div class="line"><span class="lineno">   99</span>        m_genData.voltageLevels = GetDefaultVoltageLevels();</div>
+<div class="line"><span class="lineno">  100</span>    }</div>
+<div class="line"><span class="lineno">  101</span>    m_guiColour.voltageLevels = m_genData.voltageLevels;</div>
+<div class="line"><span class="lineno">  102</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -400,49 +566,57 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00025">25</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   26</span>{</div>
-<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">if</span> (m_genData.theme == THEME_LIGHT)</div>
-<div class="line"><span class="lineno">   28</span>    {</div>
-<div class="line"><span class="lineno">   29</span>        m_guiColour.background = wxColour(250, 249, 246);</div>
-<div class="line"><span class="lineno">   30</span> </div>
-<div class="line"><span class="lineno">   31</span>        m_guiColour.text = wxColour(35, 35, 35);</div>
-<div class="line"><span class="lineno">   32</span>        m_guiColour.enabled = wxColour(20, 20, 20);</div>
-<div class="line"><span class="lineno">   33</span>        m_guiColour.disable = wxColour(145, 145, 145);</div>
-<div class="line"><span class="lineno">   34</span> </div>
-<div class="line"><span class="lineno">   35</span>        m_guiColour.selection = wxColour(40, 120, 255, 90);</div>
-<div class="line"><span class="lineno">   36</span>        m_guiColour.altSelection = wxColour(40, 200, 70, 90);</div>
-<div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>        m_guiColour.bus = wxColour(40, 105, 235);</div>
-<div class="line"><span class="lineno">   39</span>        m_guiColour.slackBus = wxColour(40, 105, 235);</div>
-<div class="line"><span class="lineno">   40</span> </div>
-<div class="line"><span class="lineno">   41</span>        m_guiColour.eventElement = wxColour(255, 120, 0);</div>
-<div class="line"><span class="lineno">   42</span>        m_guiColour.pfArrow = wxColour(255, 120, 0);</div>
-<div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>        m_guiColour.swClose = wxColour(35, 150, 45);</div>
-<div class="line"><span class="lineno">   45</span>        m_guiColour.swOpen = wxColour(225, 55, 55);</div>
-<div class="line"><span class="lineno">   46</span>    }</div>
-<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_genData.theme == THEME_DARK)</div>
-<div class="line"><span class="lineno">   48</span>    {</div>
-<div class="line"><span class="lineno">   49</span>        m_guiColour.background = wxColour(43, 46, 52);</div>
-<div class="line"><span class="lineno">   50</span> </div>
-<div class="line"><span class="lineno">   51</span>        m_guiColour.text = wxColour(205, 210, 215);</div>
-<div class="line"><span class="lineno">   52</span>        m_guiColour.enabled = wxColour(220, 224, 228);</div>
-<div class="line"><span class="lineno">   53</span>        m_guiColour.disable = wxColour(125, 130, 136);</div>
-<div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>        m_guiColour.selection = wxColour(70, 140, 255, 90);</div>
-<div class="line"><span class="lineno">   56</span>        m_guiColour.altSelection = wxColour(70, 200, 90, 90);</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8cpp_source.html#l00027">27</a> of file <a class="el" href="_properties_data_8cpp_source.html">PropertiesData.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   28</span>{</div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> (m_genData.theme == THEME_LIGHT)</div>
+<div class="line"><span class="lineno">   30</span>    {</div>
+<div class="line"><span class="lineno">   31</span>        m_guiColour.background = wxColour(250, 249, 246);</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>        m_guiColour.text = wxColour(35, 35, 35);</div>
+<div class="line"><span class="lineno">   34</span>        m_guiColour.enabled = wxColour(20, 20, 20);</div>
+<div class="line"><span class="lineno">   35</span>        m_guiColour.disable = wxColour(145, 145, 145);</div>
+<div class="line"><span class="lineno">   36</span> </div>
+<div class="line"><span class="lineno">   37</span>        m_guiColour.selection = wxColour(40, 120, 255, 90);</div>
+<div class="line"><span class="lineno">   38</span>        m_guiColour.altSelection = wxColour(40, 200, 70, 90);</div>
+<div class="line"><span class="lineno">   39</span> </div>
+<div class="line"><span class="lineno">   40</span>        m_guiColour.bus = wxColour(40, 105, 235);</div>
+<div class="line"><span class="lineno">   41</span>        m_guiColour.slackBus = wxColour(40, 105, 235);</div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>        m_guiColour.eventElement = wxColour(255, 120, 0);</div>
+<div class="line"><span class="lineno">   44</span>        m_guiColour.pfArrow = wxColour(255, 120, 0);</div>
+<div class="line"><span class="lineno">   45</span> </div>
+<div class="line"><span class="lineno">   46</span>        m_guiColour.swClose = wxColour(35, 150, 45);</div>
+<div class="line"><span class="lineno">   47</span>        m_guiColour.swOpen = wxColour(225, 55, 55);</div>
+<div class="line"><span class="lineno">   48</span>        m_guiColour.grid = wxColour(220, 222, 225);</div>
+<div class="line"><span class="lineno">   49</span>    }</div>
+<div class="line"><span class="lineno">   50</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_genData.theme == THEME_DARK)</div>
+<div class="line"><span class="lineno">   51</span>    {</div>
+<div class="line"><span class="lineno">   52</span>        m_guiColour.background = wxColour(43, 46, 52);</div>
+<div class="line"><span class="lineno">   53</span> </div>
+<div class="line"><span class="lineno">   54</span>        m_guiColour.text = wxColour(205, 210, 215);</div>
+<div class="line"><span class="lineno">   55</span>        m_guiColour.enabled = wxColour(220, 224, 228);</div>
+<div class="line"><span class="lineno">   56</span>        m_guiColour.disable = wxColour(125, 130, 136);</div>
 <div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span>        m_guiColour.bus = wxColour(70, 135, 255);</div>
-<div class="line"><span class="lineno">   59</span>        m_guiColour.slackBus = wxColour(95, 155, 255);</div>
+<div class="line"><span class="lineno">   58</span>        m_guiColour.selection = wxColour(70, 140, 255, 90);</div>
+<div class="line"><span class="lineno">   59</span>        m_guiColour.altSelection = wxColour(70, 200, 90, 90);</div>
 <div class="line"><span class="lineno">   60</span> </div>
-<div class="line"><span class="lineno">   61</span>        m_guiColour.eventElement = wxColour(240, 165, 60);</div>
-<div class="line"><span class="lineno">   62</span>        m_guiColour.pfArrow = wxColour(240, 165, 60);</div>
+<div class="line"><span class="lineno">   61</span>        m_guiColour.bus = wxColour(70, 135, 255);</div>
+<div class="line"><span class="lineno">   62</span>        m_guiColour.slackBus = wxColour(95, 155, 255);</div>
 <div class="line"><span class="lineno">   63</span> </div>
-<div class="line"><span class="lineno">   64</span>        m_guiColour.swClose = wxColour(60, 180, 70);</div>
-<div class="line"><span class="lineno">   65</span>        m_guiColour.swOpen = wxColour(235, 85, 85);</div>
-<div class="line"><span class="lineno">   66</span>    }</div>
-<div class="line"><span class="lineno">   67</span>}</div>
+<div class="line"><span class="lineno">   64</span>        m_guiColour.eventElement = wxColour(240, 165, 60);</div>
+<div class="line"><span class="lineno">   65</span>        m_guiColour.pfArrow = wxColour(240, 165, 60);</div>
+<div class="line"><span class="lineno">   66</span> </div>
+<div class="line"><span class="lineno">   67</span>        m_guiColour.swClose = wxColour(60, 180, 70);</div>
+<div class="line"><span class="lineno">   68</span>        m_guiColour.swOpen = wxColour(235, 85, 85);</div>
+<div class="line"><span class="lineno">   69</span>        m_guiColour.grid = wxColour(60, 64, 72);</div>
+<div class="line"><span class="lineno">   70</span>    }</div>
+<div class="line"><span class="lineno">   71</span> </div>
+<div class="line"><span class="lineno">   72</span>    <span class="keywordflow">if</span> (m_genData.voltageLevels.empty()) {</div>
+<div class="line"><span class="lineno">   73</span>        m_genData.voltageLevels = GetDefaultVoltageLevels();</div>
+<div class="line"><span class="lineno">   74</span>    }</div>
+<div class="line"><span class="lineno">   75</span>    m_guiColour.voltageLevels = m_genData.voltageLevels;</div>
+<div class="line"><span class="lineno">   76</span>    m_guiColour.useVoltageLevels = m_genData.useBusVoltageColours;</div>
+<div class="line"><span class="lineno">   77</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -470,8 +644,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00111">111</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  111</span>{ m_simulData = simulationData; }</div>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00116">116</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>{ m_simulData = simulationData; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -496,7 +670,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00122">122</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00129">129</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
 
 </div>
 </div>
@@ -520,7 +694,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00121">121</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00128">128</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
 
 </div>
 </div>
@@ -544,7 +718,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00119">119</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00126">126</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
 
 </div>
 </div>
@@ -568,7 +742,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00120">120</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_properties_data_8h_source.html#l00127">127</a> of file <a class="el" href="_properties_data_8h_source.html">PropertiesData.h</a>.</p>
 
 </div>
 </div>

@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -392,7 +392,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  149</span> </div>
 <div class="line"><span class="lineno">  150</span>    m_gridStabEventList-&gt;AutoSize();</div>
 <div class="line"><span class="lineno">  151</span>}</div>
-<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00466">Element.cpp:466</a></div></div>
+<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00548">Element.cpp:548</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -481,7 +481,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  105</span>        SetPowerElementSwitchingEvent(transformer, transformer-&gt;GetElectricalData().name);</div>
 <div class="line"><span class="lineno">  106</span>    }</div>
 <div class="line"><span class="lineno">  107</span>}</div>
-<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
+<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00086">Bus.h:87</a></div></div>
 <div class="ttc" id="aclass_capacitor_html"><div class="ttname"><a href="class_capacitor.html">Capacitor</a></div><div class="ttdoc">Shunt capactior power element.</div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00038">Capacitor.h:39</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html"><div class="ttname"><a href="class_electric_calculation.html">ElectricCalculation</a></div><div class="ttdoc">Base class for electrical calculations providing general utility methods.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00115">ElectricCalculation.h:116</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a0f3897dd498266cf6114ed3b2e284a24"><div class="ttname"><a href="class_electric_calculation.html#a0f3897dd498266cf6114ed3b2e284a24">ElectricCalculation::GetIndMotorList</a></div><div class="ttdeci">const std::vector&lt; IndMotor * &gt; GetIndMotorList() const</div><div class="ttdoc">Get the induction motors of the system (use GetElementsFromList first).</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00308">ElectricCalculation.h:308</a></div></div>
@@ -500,7 +500,7 @@ Protected Attributes</h2></td></tr>
 <div class="ttc" id="aclass_load_html"><div class="ttname"><a href="class_load.html">Load</a></div><div class="ttdoc">Loas shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_load_8h_source.html#l00073">Load.h:74</a></div></div>
 <div class="ttc" id="aclass_sync_generator_html"><div class="ttname"><a href="class_sync_generator.html">SyncGenerator</a></div><div class="ttdoc">Synchronous generator power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_generator_8h_source.html#l00145">SyncGenerator.h:146</a></div></div>
 <div class="ttc" id="aclass_sync_motor_html"><div class="ttname"><a href="class_sync_motor.html">SyncMotor</a></div><div class="ttdoc">Synchronous motor (synchronous compensator) power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00134">SyncMotor.h:135</a></div></div>
-<div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00083">Transformer.h:84</a></div></div>
+<div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element with OLTC support.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00095">Transformer.h:96</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -579,7 +579,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  174</span>    }</div>
 <div class="line"><span class="lineno">  175</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95"><div class="ttname"><a href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a></div><div class="ttdeci">@ SW_INSERT</div></div>
-<div class="ttc" id="aclass_power_element_html_ab78269f9b66fbf90ae09050083e9dbe1"><div class="ttname"><a href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">PowerElement::GetSwitchingData</a></div><div class="ttdeci">virtual SwitchingData GetSwitchingData()</div><div class="ttdoc">Returns the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00175">PowerElement.h:175</a></div></div>
+<div class="ttc" id="aclass_power_element_html_ab78269f9b66fbf90ae09050083e9dbe1"><div class="ttname"><a href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">PowerElement::GetSwitchingData</a></div><div class="ttdeci">virtual SwitchingData GetSwitchingData()</div><div class="ttdoc">Returns the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00177">PowerElement.h:177</a></div></div>
 <div class="ttc" id="astruct_switching_data_html"><div class="ttname"><a href="struct_switching_data.html">SwitchingData</a></div><div class="ttdoc">Switching data of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00071">PowerElement.h:71</a></div></div>
 <div class="ttc" id="astruct_switching_data_html_a3323745bf0a3f6461fbc19bc76a189df"><div class="ttname"><a href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">SwitchingData::swTime</a></div><div class="ttdeci">std::vector&lt; double &gt; swTime</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00073">PowerElement.h:73</a></div></div>
 <div class="ttc" id="astruct_switching_data_html_af78fb958137a0532ea2a584810708574"><div class="ttname"><a href="struct_switching_data.html#af78fb958137a0532ea2a584810708574">SwitchingData::swType</a></div><div class="ttdeci">std::vector&lt; SwitchingType &gt; swType</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00072">PowerElement.h:72</a></div></div>

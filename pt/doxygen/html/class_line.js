@@ -1,6 +1,6 @@
 var class_line =
 [
-    [ "AddParent", "class_line.html#a26c69f7f703dca718edc28d5093934a3", null ],
+    [ "AddParent", "class_line.html#ad6335503a8da6955c30709304b1f5961", null ],
     [ "AddPoint", "class_line.html#a046a7b2ebff50f237f73dbc182f7ff6f", null ],
     [ "CalculateBoundaries", "class_line.html#aa146d6b0c7f3b74204f2c88dcbd7f4b0", null ],
     [ "Contains", "class_line.html#a05eb3761f198a058045f85d6e685ca97", null ],

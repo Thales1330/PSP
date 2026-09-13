@@ -1,0 +1,7 @@
+<map id="Element::GetWidth" name="Element::GetWidth">
+<area shape="rect" id="Node000001" title="Get the element width." alt="" coords="228,31,373,56"/>
+<area shape="rect" id="Node000002" href="$class_machines.html#aaa61e6c668a75d70ae7af0cd6469a03d" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="13,5,172,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,35,172,30,172,25,214,30"/>
+<area shape="rect" id="Node000003" href="$class_transformer.html#ac8efef04d254c8b5b700bbe4921aec3e" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,55,180,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,56,181,60,180,55,214,51"/>
+</map>

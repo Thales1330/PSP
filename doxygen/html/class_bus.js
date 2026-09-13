@@ -3,7 +3,7 @@ var class_bus =
     [ "Bus", "class_bus.html#aacf35e62456128245a02db34334f9a3d", null ],
     [ "Bus", "class_bus.html#a66ef970dc1edfa02f96cf8820920ef37", null ],
     [ "Bus", "class_bus.html#ae822df818deb09d54f6a3bf0794b6ffa", null ],
-    [ "AddParent", "class_bus.html#ab046baebe4bfe0a52905148d78f44681", null ],
+    [ "AddParent", "class_bus.html#a7dce052ae7ef9ae2ffe1e69fa684b8c0", null ],
     [ "Contains", "class_bus.html#ad2b960058be6e990463b53d79c74c7a3", null ],
     [ "DrawDC", "class_bus.html#a840b27bdcfd376e50ef41f76a4a4d221", null ],
     [ "DrawDC", "class_bus.html#a2d2efe689986f54f4b20fa172449abc8", null ],

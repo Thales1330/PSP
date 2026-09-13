@@ -4,7 +4,7 @@ var class_element =
     [ "~Element", "class_element.html#ab4fc182292f44e46acba9c55662237bf", null ],
     [ "AddChild", "class_element.html#ac38d6707d08cb5c057032aa94b511a62", null ],
     [ "AddParent", "class_element.html#ad1f153a87797633ab310d07e1d06eba9", null ],
-    [ "AddParent", "class_element.html#a569178e9138490a981511a644536c0f9", null ],
+    [ "AddParent", "class_element.html#a72f58b63026e6012f5d8b7a70a33bede", null ],
     [ "AddPoint", "class_element.html#aa40c60c03d6a76639d8c6f6bab86720e", null ],
     [ "CalculateBoundaries", "class_element.html#a57f5771fd003020fef3866a1d1dc7487", null ],
     [ "Contains", "class_element.html#abf6c4949733debca55b2f56d8e9b7372", null ],

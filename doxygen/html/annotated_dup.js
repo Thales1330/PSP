@@ -36,6 +36,7 @@ var annotated_dup =
     [ "ElementDataObject", "class_element_data_object.html", null ],
     [ "ElementPlotData", "class_element_plot_data.html", null ],
     [ "ElementsLists", "struct_elements_lists.html", null ],
+    [ "ElementsToolBar", "class_elements_tool_bar.html", null ],
     [ "EMTElement", "class_e_m_t_element.html", "class_e_m_t_element" ],
     [ "EMTElementData", "struct_e_m_t_element_data.html", null ],
     [ "EMTElementForm", "class_e_m_t_element_form.html", null ],
@@ -127,6 +128,7 @@ var annotated_dup =
     [ "Transformer", "class_transformer.html", "class_transformer" ],
     [ "TransformerElectricalData", "struct_transformer_electrical_data.html", null ],
     [ "TransformerForm", "class_transformer_form.html", null ],
+    [ "VoltageLevelColour", "struct_voltage_level_colour.html", null ],
     [ "Workspace", "class_workspace.html", null ],
     [ "XMLParser", "class_x_m_l_parser.html", null ]
 ];

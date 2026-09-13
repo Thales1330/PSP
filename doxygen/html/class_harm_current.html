@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -160,9 +160,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3b73d7c63a873a80a43854748c831a4a" id="r_a3b73d7c63a873a80a43854748c831a4a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#a3b73d7c63a873a80a43854748c831a4a">GetCopy</a> ()</td></tr>
 <tr class="memdesc:a3b73d7c63a873a80a43854748c831a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <br /></td></tr>
 <tr class="separator:a3b73d7c63a873a80a43854748c831a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0d53fd562d5519bf006aa21f0f0247c" id="r_ad0d53fd562d5519bf006aa21f0f0247c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#ad0d53fd562d5519bf006aa21f0f0247c">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent, wxPoint2DDouble position)</td></tr>
-<tr class="memdesc:ad0d53fd562d5519bf006aa21f0f0247c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted.  <br /></td></tr>
-<tr class="separator:ad0d53fd562d5519bf006aa21f0f0247c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39a844d4156b3e591812a9df9b35480b" id="r_a39a844d4156b3e591812a9df9b35480b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#a39a844d4156b3e591812a9df9b35480b">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent, wxPoint2DDouble position, bool isOpening=false)</td></tr>
+<tr class="memdesc:a39a844d4156b3e591812a9df9b35480b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted.  <br /></td></tr>
+<tr class="separator:a39a844d4156b3e591812a9df9b35480b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1846f75552ae821af22149129c4f459" id="r_ae1846f75552ae821af22149129c4f459"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#ae1846f75552ae821af22149129c4f459">DrawDC</a> (<a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
 <tr class="memdesc:ae1846f75552ae821af22149129c4f459"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
 <tr class="separator:ae1846f75552ae821af22149129c4f459"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,6 +201,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa98b8a2f097fc02fee1ea874e19480f3 inherit pub_methods_class_shunt" id="r_aa98b8a2f097fc02fee1ea874e19480f3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#aa98b8a2f097fc02fee1ea874e19480f3">Move</a> (wxPoint2DDouble position)</td></tr>
 <tr class="memdesc:aa98b8a2f097fc02fee1ea874e19480f3 inherit pub_methods_class_shunt"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the element other position.  <br /></td></tr>
 <tr class="separator:aa98b8a2f097fc02fee1ea874e19480f3 inherit pub_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f6ff915135115fbcb97cb0c02137951 inherit pub_methods_class_shunt" id="r_a6f6ff915135115fbcb97cb0c02137951"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a6f6ff915135115fbcb97cb0c02137951">AlignToGrid</a> (double gridSize=20.0) override</td></tr>
+<tr class="separator:a6f6ff915135115fbcb97cb0c02137951 inherit pub_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23d2fed4e9b6a69bc4527b4345bd5bbd inherit pub_methods_class_shunt" id="r_a23d2fed4e9b6a69bc4527b4345bd5bbd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a23d2fed4e9b6a69bc4527b4345bd5bbd">MoveNode</a> (<a class="el" href="class_element.html">Element</a> *element, wxPoint2DDouble position)</td></tr>
 <tr class="memdesc:a23d2fed4e9b6a69bc4527b4345bd5bbd inherit pub_methods_class_shunt"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move a node. <a class="el" href="class_shunt.html#a56d6136d647f64cf490dd9d7720f6865" title="Update the element attributes related to the movement.">StartMove(wxPoint2DDouble position)</a> before start moving.  <br /></td></tr>
 <tr class="separator:a23d2fed4e9b6a69bc4527b4345bd5bbd inherit pub_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -222,6 +224,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abe01dcdf8bc0ba6fc97d41673889fb8e inherit pub_methods_class_shunt" id="r_abe01dcdf8bc0ba6fc97d41673889fb8e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#abe01dcdf8bc0ba6fc97d41673889fb8e">UpdateNodes</a> ()</td></tr>
 <tr class="memdesc:abe01dcdf8bc0ba6fc97d41673889fb8e inherit pub_methods_class_shunt"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the nodes according to the parents. If a parent is removed, use this method.  <br /></td></tr>
 <tr class="separator:abe01dcdf8bc0ba6fc97d41673889fb8e inherit pub_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a681d0d71b8281c7e0f610bc51ebdd60a inherit pub_methods_class_shunt" id="r_a681d0d71b8281c7e0f610bc51ebdd60a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a681d0d71b8281c7e0f610bc51ebdd60a">UpdateSwitchesPosition</a> () override</td></tr>
+<tr class="separator:a681d0d71b8281c7e0f610bc51ebdd60a inherit pub_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63eba8b813d773b13dbd8d1ef3819dba inherit pub_methods_class_shunt" id="r_a63eba8b813d773b13dbd8d1ef3819dba"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a63eba8b813d773b13dbd8d1ef3819dba">UpdatePowerFlowArrowsPosition</a> () override</td></tr>
+<tr class="separator:a63eba8b813d773b13dbd8d1ef3819dba inherit pub_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_power_element"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_power_element')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_power_element.html">PowerElement</a></td></tr>
 <tr class="memitem:a382cdc0897802eb0a89692483fa7043e inherit pub_methods_class_power_element" id="r_a382cdc0897802eb0a89692483fa7043e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a382cdc0897802eb0a89692483fa7043e">PowerElement</a> ()</td></tr>
 <tr class="memdesc:a382cdc0897802eb0a89692483fa7043e inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
@@ -357,6 +363,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element" id="r_a4a4840007087b2abb7fcdda29ca7dcad"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; wxPoint2DDouble &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a4a4840007087b2abb7fcdda29ca7dcad">GetPointList</a> () const</td></tr>
 <tr class="memdesc:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list of points that connect the element to bus.  <br /></td></tr>
 <tr class="separator:a4a4840007087b2abb7fcdda29ca7dcad inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d085e56588a6077191be04bd6fa6ee3 inherit pub_methods_class_element" id="r_a3d085e56588a6077191be04bd6fa6ee3"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; wxPoint2DDouble &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a3d085e56588a6077191be04bd6fa6ee3">GetPointListRef</a> ()</td></tr>
+<tr class="separator:a3d085e56588a6077191be04bd6fa6ee3 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element" id="r_ad1f153a87797633ab310d07e1d06eba9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#ad1f153a87797633ab310d07e1d06eba9">AddParent</a> (<a class="el" href="class_element.html">Element</a> *parent)</td></tr>
 <tr class="memdesc:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a parent to the element.  <br /></td></tr>
 <tr class="separator:ad1f153a87797633ab310d07e1d06eba9 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -428,6 +436,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9332ba7b4ce2051a3935081cc890c03c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a386ab44db7634b76da0c98215dd73a00 inherit pub_methods_class_element" id="r_a386ab44db7634b76da0c98215dd73a00"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a386ab44db7634b76da0c98215dd73a00">DrawDCTriangle</a> (std::vector&lt; wxPoint &gt; points, wxDC &amp;dc) const</td></tr>
 <tr class="separator:a386ab44db7634b76da0c98215dd73a00 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4dbd5da8ee7814dbdf1dcaedb428c30 inherit pub_methods_class_element" id="r_aa4dbd5da8ee7814dbdf1dcaedb428c30"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#aa4dbd5da8ee7814dbdf1dcaedb428c30">DrawStabilityEventGC</a> (wxGraphicsContext *gc, wxPoint2DDouble translation, double scale, <a class="el" href="struct_g_u_i_colour.html">GUIColour</a> *guiColour, bool rotateAnchor=false, wxPoint2DDouble iconPosition=wxPoint2DDouble(-1, -1)) const</td></tr>
+<tr class="separator:aa4dbd5da8ee7814dbdf1dcaedb428c30 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element" id="r_a9e0ee619f7429004eaeddb9040f6d70f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a> (wxPoint2DDouble position, wxGraphicsContext *gc) const</td></tr>
 <tr class="memdesc:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a point.  <br /></td></tr>
 <tr class="separator:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -444,6 +454,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element" id="r_a5bf79b05af0dd1bbb62b352f293e1421"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="class_element.html">Element</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a> () const</td></tr>
 <tr class="memdesc:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Child list.  <br /></td></tr>
 <tr class="separator:a5bf79b05af0dd1bbb62b352f293e1421 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc4b94082f7491271f5507d38efc003 inherit pub_methods_class_element" id="r_a1cc4b94082f7491271f5507d38efc003"><td class="memItemLeft" align="right" valign="top">virtual wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a1cc4b94082f7491271f5507d38efc003">GetMoveStartPosition</a> () const</td></tr>
+<tr class="separator:a1cc4b94082f7491271f5507d38efc003 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3a49415bed103647fb07354c3be17c inherit pub_methods_class_element" id="r_acf3a49415bed103647fb07354c3be17c"><td class="memItemLeft" align="right" valign="top">virtual wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#acf3a49415bed103647fb07354c3be17c">GetMovePosition</a> () const</td></tr>
+<tr class="separator:acf3a49415bed103647fb07354c3be17c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element" id="r_a57f5771fd003020fef3866a1d1dc7487"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a57f5771fd003020fef3866a1d1dc7487">CalculateBoundaries</a> (wxPoint2DDouble &amp;leftUp, wxPoint2DDouble &amp;rightBottom) const</td></tr>
 <tr class="memdesc:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the element boundaries.  <br /></td></tr>
 <tr class="separator:a57f5771fd003020fef3866a1d1dc7487 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -558,10 +572,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ad4eaa67d8313f6caa3a607cc500c4b44 inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a double value to string.  <br /></td></tr>
 <tr class="separator:ad4eaa67d8313f6caa3a607cc500c4b44 inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_shunt"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_shunt')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_shunt.html">Shunt</a></td></tr>
-<tr class="memitem:a33a6bcf6612d4cf8c4de8e9f916a22e8 inherit pro_methods_class_shunt" id="r_a33a6bcf6612d4cf8c4de8e9f916a22e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a33a6bcf6612d4cf8c4de8e9f916a22e8">UpdateSwitchesPosition</a> ()</td></tr>
-<tr class="separator:a33a6bcf6612d4cf8c4de8e9f916a22e8 inherit pro_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98e8f5798d17f613dfc0964e5007cd91 inherit pro_methods_class_shunt" id="r_a98e8f5798d17f613dfc0964e5007cd91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a98e8f5798d17f613dfc0964e5007cd91">UpdatePowerFlowArrowsPosition</a> ()</td></tr>
-<tr class="separator:a98e8f5798d17f613dfc0964e5007cd91 inherit pro_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab0e7218156274492963308dda0a8230 inherit pro_methods_class_shunt" id="r_aab0e7218156274492963308dda0a8230"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#aab0e7218156274492963308dda0a8230">DrawDCGround</a> (wxPoint2DDouble position, wxGraphicsContext *gc) const</td></tr>
 <tr class="separator:aab0e7218156274492963308dda0a8230 inherit pro_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aad955b38440e553f821799a9cd15d2 inherit pro_methods_class_shunt" id="r_a3aad955b38440e553f821799a9cd15d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a3aad955b38440e553f821799a9cd15d2">DrawDCGround</a> (wxPoint2DDouble position, wxDC &amp;dc) const</td></tr>
@@ -637,8 +647,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad0d53fd562d5519bf006aa21f0f0247c" name="ad0d53fd562d5519bf006aa21f0f0247c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0d53fd562d5519bf006aa21f0f0247c">&#9670;&#160;</a></span>AddParent()</h2>
+<a id="a39a844d4156b3e591812a9df9b35480b" name="a39a844d4156b3e591812a9df9b35480b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39a844d4156b3e591812a9df9b35480b">&#9670;&#160;</a></span>AddParent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -656,7 +666,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">wxPoint2DDouble&#160;</td>
-          <td class="paramname"><em>position</em>&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isOpening</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -680,7 +696,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a72f58b63026e6012f5d8b7a70a33bede">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_harm_current_8cpp_source.html#l00018">18</a> of file <a class="el" href="_harm_current_8cpp_source.html">HarmCurrent.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   19</span>{</div>
@@ -716,17 +732,17 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">   49</span>    }</div>
 <div class="line"><span class="lineno">   50</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">   51</span>}</div>
-<div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00188">Element.h:188</a></div></div>
-<div class="ttc" id="aclass_element_html_a5c75d8a6e28326dd568104a4d9d3473f"><div class="ttname"><a href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">Element::GetAngle</a></div><div class="ttdeci">double GetAngle() const</div><div class="ttdoc">Get the element angle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00213">Element.h:213</a></div></div>
-<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00228">Element.cpp:228</a></div></div>
-<div class="ttc" id="aclass_element_html_ac38d6707d08cb5c057032aa94b511a62"><div class="ttname"><a href="class_element.html#ac38d6707d08cb5c057032aa94b511a62">Element::AddChild</a></div><div class="ttdeci">virtual void AddChild(Element *child)</div><div class="ttdoc">Add a child to the child list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00499">Element.cpp:499</a></div></div>
-<div class="ttc" id="aclass_power_element_html_abd2cee52270374e17951782bdb571dce"><div class="ttname"><a href="class_power_element.html#abd2cee52270374e17951782bdb571dce">PowerElement::UpdateSwitches</a></div><div class="ttdeci">virtual void UpdateSwitches()</div><div class="ttdoc">Update the switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00073">PowerElement.cpp:73</a></div></div>
+<div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00189">Element.h:189</a></div></div>
+<div class="ttc" id="aclass_element_html_a5c75d8a6e28326dd568104a4d9d3473f"><div class="ttname"><a href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">Element::GetAngle</a></div><div class="ttdeci">double GetAngle() const</div><div class="ttdoc">Get the element angle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00214">Element.h:214</a></div></div>
+<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00298">Element.cpp:298</a></div></div>
+<div class="ttc" id="aclass_element_html_ac38d6707d08cb5c057032aa94b511a62"><div class="ttname"><a href="class_element.html#ac38d6707d08cb5c057032aa94b511a62">Element::AddChild</a></div><div class="ttdeci">virtual void AddChild(Element *child)</div><div class="ttdoc">Add a child to the child list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00581">Element.cpp:581</a></div></div>
+<div class="ttc" id="aclass_power_element_html_abd2cee52270374e17951782bdb571dce"><div class="ttname"><a href="class_power_element.html#abd2cee52270374e17951782bdb571dce">PowerElement::UpdateSwitches</a></div><div class="ttdeci">virtual void UpdateSwitches()</div><div class="ttdoc">Update the switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00103">PowerElement.cpp:103</a></div></div>
 <div class="ttc" id="aclass_power_element_html_aef6392c211caf557bdac287b174a1ea8"><div class="ttname"><a href="class_power_element.html#aef6392c211caf557bdac287b174a1ea8">PowerElement::GetSwitchPoint</a></div><div class="ttdeci">virtual wxPoint2DDouble GetSwitchPoint(Element *parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const</div><div class="ttdoc">Get the correct switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00039">PowerElement.cpp:39</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_harm_current_ad0d53fd562d5519bf006aa21f0f0247c_cgraph.png" border="0" usemap="#aclass_harm_current_ad0d53fd562d5519bf006aa21f0f0247c_cgraph" alt=""/></div>
-<map name="aclass_harm_current_ad0d53fd562d5519bf006aa21f0f0247c_cgraph" id="aclass_harm_current_ad0d53fd562d5519bf006aa21f0f0247c_cgraph">
+<div class="center"><img src="class_harm_current_a39a844d4156b3e591812a9df9b35480b_cgraph.png" border="0" usemap="#aclass_harm_current_a39a844d4156b3e591812a9df9b35480b_cgraph" alt=""/></div>
+<map name="aclass_harm_current_a39a844d4156b3e591812a9df9b35480b_cgraph" id="aclass_harm_current_a39a844d4156b3e591812a9df9b35480b_cgraph">
 <area shape="rect" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,132,185,157"/>
 <area shape="rect" href="class_element.html#ac38d6707d08cb5c057032aa94b511a62" title="Add a child to the child list." alt="" coords="277,5,419,31"/>
 <area shape="poly" title=" " alt="" coords="110,130,162,90,232,48,274,32,275,37,234,52,165,94,113,134"/>
@@ -933,7 +949,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  275</span>    }</div>
 <div class="line"><span class="lineno">  276</span>}</div>
 <div class="ttc" id="aclass_element_html_af1fd54d12f61f461111697d11cf10b9c"><div class="ttname"><a href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">Element::DrawDCCircle</a></div><div class="ttdeci">virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a circle using device context.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00173">Element.cpp:173</a></div></div>
-<div class="ttc" id="aclass_power_element_html_acaa2c9e5736ac6e38c4c6a9ebca78024"><div class="ttname"><a href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">PowerElement::DrawDCSwitches</a></div><div class="ttdeci">virtual void DrawDCSwitches(GUIColour *guiColour, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw switch.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00110">PowerElement.cpp:110</a></div></div>
+<div class="ttc" id="aclass_power_element_html_acaa2c9e5736ac6e38c4c6a9ebca78024"><div class="ttname"><a href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">PowerElement::DrawDCSwitches</a></div><div class="ttdeci">virtual void DrawDCSwitches(GUIColour *guiColour, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw switch.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00140">PowerElement.cpp:140</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1153,7 +1169,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  305</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  306</span>}</div>
 <div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00077">Element.h:77</a></div></div>
-<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00393">Element.cpp:393</a></div></div>
+<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00475">Element.cpp:475</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1325,7 +1341,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  319</span> </div>
 <div class="line"><span class="lineno">  320</span>    <span class="keywordflow">return</span> tipText;</div>
 <div class="line"><span class="lineno">  321</span>}</div>
-<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00466">Element.cpp:466</a></div></div>
+<div class="ttc" id="aclass_element_html_ad4eaa67d8313f6caa3a607cc500c4b44"><div class="ttname"><a href="class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44">Element::StringFromDouble</a></div><div class="ttdeci">static wxString StringFromDouble(double value, int minDecimal=1, int maxDecimals=13)</div><div class="ttdoc">Convert a double value to string.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00548">Element.cpp:548</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1377,7 +1393,7 @@ Here is the call graph for this function:</div>
 <div class="fragment"><div class="line"><span class="lineno">  285</span>{</div>
 <div class="line"><span class="lineno">  286</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a>(m_rect, rect, m_angle, 0.0);</div>
 <div class="line"><span class="lineno">  287</span>}</div>
-<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00295">Element.cpp:295</a></div></div>
+<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00377">Element.cpp:377</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1451,7 +1467,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  397</span>    m_inserted = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  398</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  399</span>}</div>
-<div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00383">Element.cpp:383</a></div></div>
+<div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00465">Element.cpp:465</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

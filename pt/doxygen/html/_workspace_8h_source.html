@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -277,124 +277,135 @@ $(document).ready(function(){initNavTree('_workspace_8h_source.html',''); initRe
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <a class="code hl_class" href="class_control_editor_manager.html">ControlEditorManager</a>&amp; GetControlEditorManager()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> *m_CEMngr; }</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <a class="code hl_class" href="class_chart_window_manager.html">ChartWindowManager</a>&amp; GetChartWindowManager()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> *m_CWMngr; }</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">bool</span> InsertTextElement(<span class="keywordtype">int</span> textID, <a class="code hl_class" href="class_element.html">Element</a>* parentElement, ElectricalUnit unit = ElectricalUnit::UNIT_NONE, <span class="keywordtype">int</span> precision = 2);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <a class="code hl_class" href="class_element.html">Element</a>* FindTextElement(<a class="code hl_class" href="class_element.html">Element</a>* parentElement, <span class="keywordtype">int</span> dataType);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordtype">void</span> RemoveAllTextElements();</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">void</span> CheckSlackBusDuplication(<a class="code hl_class" href="class_element.html">Element</a>* newSlackBus);</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordtype">void</span> ValidateBusesVoltages(<a class="code hl_class" href="class_element.html">Element</a>* initialBus);</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordtype">void</span> ValidateElementsVoltages();</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordtype">void</span> UpdateElementsID();</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordtype">bool</span> UpdateTextElements();</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">void</span> UpdateHeatMap();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">void</span> EnableGrid(<span class="keywordtype">bool</span> enable = <span class="keyword">true</span>) { m_showGrid = enable; }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordtype">bool</span> IsGridEnabled()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_showGrid; }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordtype">void</span> SetGridSize(<span class="keywordtype">double</span> size) { m_gridSize = size; }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordtype">double</span> GetGridSize()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_gridSize; }</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    wxPoint2DDouble SnapToGrid(<span class="keyword">const</span> wxPoint2DDouble&amp; pt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordtype">void</span> AlignSelectedToGrid();</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordtype">bool</span> InsertTextElement(<span class="keywordtype">int</span> textID, <a class="code hl_class" href="class_element.html">Element</a>* parentElement, ElectricalUnit unit = ElectricalUnit::UNIT_NONE, <span class="keywordtype">int</span> precision = 2);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <a class="code hl_class" href="class_element.html">Element</a>* FindTextElement(<a class="code hl_class" href="class_element.html">Element</a>* parentElement, <span class="keywordtype">int</span> dataType);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordtype">void</span> RemoveAllTextElements();</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">void</span> CheckSlackBusDuplication(<a class="code hl_class" href="class_element.html">Element</a>* newSlackBus);</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">int</span> GetElementNumber(ElementID elementID) { <span class="keywordflow">return</span> m_elementNumber[elementID]; }</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">void</span> IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>* GetProperties()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_properties; }</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    std::vector&lt;double&gt; GetStabilityTimeVector()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_stabilityTimeVector; }</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordtype">bool</span> IsContinuousCalculationActive()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_continuousCalc; }</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordtype">void</span> SetContinuousCalculationActive(<span class="keywordtype">bool</span> value = <span class="keyword">true</span>) { m_continuousCalc = value; }</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordtype">void</span> ResetAllVoltages();</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">bool</span> RunPowerFlow(<span class="keywordtype">bool</span> resetVoltages = <span class="keyword">false</span>, <span class="keywordtype">bool</span> showBusyInfo = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">bool</span> RunFault();</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordtype">bool</span> RunSCPower();</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordtype">bool</span> RunStaticStudies();</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordtype">bool</span> RunStability();</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordtype">bool</span> RunHarmonicDistortion(<span class="keywordtype">bool</span> runPowerFlowBefore = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordtype">bool</span> RunFrequencyResponse();</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMiddleDoubleClick(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnIdle(wxIdleEvent&amp; event);</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnTimer(wxTimerEvent&amp; event);</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnLeftDoubleClick(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnRightClickDown(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnLeftClickUp(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnScroll(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMiddleDown(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMiddleUp(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMouseMotion(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnKeyDown(wxKeyEvent&amp; event);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnLeftClickDown(wxMouseEvent&amp; event);</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnPaint(wxPaintEvent&amp; event);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnPopupClick(wxCommandEvent&amp; event);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnResize(wxSizeEvent&amp; event);</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnHeatMapTime(wxTimerEvent&amp; event);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="comment">//void SetViewport();</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordtype">void</span> UpdateStatusBar();</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordtype">int</span> GetElementNumberFromList(<a class="code hl_class" href="class_element.html">Element</a>* element);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keywordtype">void</span> GetStateListsCopy(<span class="keyword">const</span> std::vector&lt; std::shared_ptr&lt;PowerElement&gt; &gt;&amp; elementsList,</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keyword">const</span> std::vector&lt; std::shared_ptr&lt;Text&gt; &gt;&amp; textList,</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        std::vector&lt; std::shared_ptr&lt;PowerElement&gt; &gt;&amp; elementsListCopy,</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        std::vector&lt; std::shared_ptr&lt;Text&gt; &gt;&amp; textListCopy);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">void</span> DrawScene(wxGraphicsContext* gc);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">void</span> DrawScene(wxDC&amp; dc);</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="comment">//wxGLContext* m_glContext = nullptr;</span></div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    wxStatusBar* m_statusBar = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    wxAuiNotebook* m_auiNotebook = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <a class="code hl_class" href="class_camera.html">Camera</a>* m_camera = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    wxTipWindow::Ref m_tipWindow;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    wxString m_name;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    WorkspaceMode m_mode = WorkspaceMode::MODE_EDIT;</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    WorkspaceMode m_oldStatusMode = WorkspaceMode::MODE_EDIT;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="comment">//std::vector&lt;PowerElement*&gt; m_elementList;</span></div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    std::vector&lt; std::shared_ptr&lt;PowerElement&gt; &gt; m_elementList;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordtype">int</span> m_elementNumber[NUM_ELEMENTS];</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="comment">//std::vector&lt;Text*&gt; m_textList;</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    std::vector&lt; std::shared_ptr&lt;Text&gt; &gt; m_textList;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="comment">//std::vector&lt; std::vector&lt;PowerElement*&gt; &gt; m_elementListState;</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    std::vector&lt; std::vector&lt; std::shared_ptr&lt;PowerElement&gt; &gt; &gt; m_elementListState;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="comment">//std::vector&lt; std::vector&lt;Text*&gt; &gt; m_textListState;</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    std::vector&lt; std::vector&lt; std::shared_ptr&lt;Text&gt; &gt; &gt; m_textListState;</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordtype">int</span> m_currenteState = -1;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keywordtype">int</span> m_maxStates = 100;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    wxFileName m_savedPath;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">void</span> ValidateBusesVoltages(<a class="code hl_class" href="class_element.html">Element</a>* initialBus);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">void</span> ValidateElementsVoltages();</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordtype">void</span> UpdateElementsID();</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordtype">bool</span> UpdateTextElements();</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordtype">void</span> UpdateHeatMap();</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">int</span> GetElementNumber(ElementID elementID) { <span class="keywordflow">return</span> m_elementNumber[elementID]; }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">void</span> IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>* GetProperties()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_properties; }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    std::vector&lt;double&gt; GetStabilityTimeVector()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_stabilityTimeVector; }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordtype">bool</span> IsContinuousCalculationActive()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_continuousCalc; }</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordtype">void</span> SetContinuousCalculationActive(<span class="keywordtype">bool</span> value = <span class="keyword">true</span>) { m_continuousCalc = value; }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordtype">void</span> ResetAllVoltages();</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordtype">bool</span> RunPowerFlow(<span class="keywordtype">bool</span> resetVoltages = <span class="keyword">false</span>, <span class="keywordtype">bool</span> showBusyInfo = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keywordtype">bool</span> RunFault();</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordtype">bool</span> RunSCPower();</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordtype">bool</span> RunStaticStudies();</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordtype">bool</span> RunStability();</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordtype">bool</span> RunHarmonicDistortion(<span class="keywordtype">bool</span> runPowerFlowBefore = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordtype">bool</span> RunFrequencyResponse();</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMiddleDoubleClick(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnIdle(wxIdleEvent&amp; event);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnTimer(wxTimerEvent&amp; event);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnLeftDoubleClick(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnRightClickDown(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnLeftClickUp(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnScroll(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMiddleDown(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMiddleUp(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMouseMotion(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnKeyDown(wxKeyEvent&amp; event);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnLeftClickDown(wxMouseEvent&amp; event);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnPaint(wxPaintEvent&amp; event);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnPopupClick(wxCommandEvent&amp; event);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnResize(wxSizeEvent&amp; event);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnHeatMapTime(wxTimerEvent&amp; event);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="comment">//void SetViewport();</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">void</span> UpdateStatusBar();</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">int</span> GetElementNumberFromList(<a class="code hl_class" href="class_element.html">Element</a>* element);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordtype">void</span> GetStateListsCopy(<span class="keyword">const</span> std::vector&lt; std::shared_ptr&lt;PowerElement&gt; &gt;&amp; elementsList,</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keyword">const</span> std::vector&lt; std::shared_ptr&lt;Text&gt; &gt;&amp; textList,</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        std::vector&lt; std::shared_ptr&lt;PowerElement&gt; &gt;&amp; elementsListCopy,</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        std::vector&lt; std::shared_ptr&lt;Text&gt; &gt;&amp; textListCopy);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordtype">void</span> DrawScene(wxGraphicsContext* gc);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordtype">void</span> DrawScene(wxDC&amp; dc);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordtype">void</span> DrawGrid(wxGraphicsContext* gc);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keywordtype">void</span> DrawGrid(wxDC&amp; dc);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="comment">//wxGLContext* m_glContext = nullptr;</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    wxStatusBar* m_statusBar = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    wxAuiNotebook* m_auiNotebook = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <a class="code hl_class" href="class_camera.html">Camera</a>* m_camera = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    wxTipWindow::Ref m_tipWindow;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    wxString m_name;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    WorkspaceMode m_mode = WorkspaceMode::MODE_EDIT;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    WorkspaceMode m_oldStatusMode = WorkspaceMode::MODE_EDIT;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="comment">//std::vector&lt;PowerElement*&gt; m_elementList;</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    std::vector&lt; std::shared_ptr&lt;PowerElement&gt; &gt; m_elementList;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordtype">int</span> m_elementNumber[NUM_ELEMENTS];</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="comment">//std::vector&lt;Text*&gt; m_textList;</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    std::vector&lt; std::shared_ptr&lt;Text&gt; &gt; m_textList;</div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    wxRect2DDouble m_selectionRect;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    wxPoint2DDouble m_startSelRect;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>* m_properties = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    std::vector&lt;double&gt; m_stabilityTimeVector;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="comment">//std::vector&lt; std::vector&lt;PowerElement*&gt; &gt; m_elementListState;</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    std::vector&lt; std::vector&lt; std::shared_ptr&lt;PowerElement&gt; &gt; &gt; m_elementListState;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="comment">//std::vector&lt; std::vector&lt;Text*&gt; &gt; m_textListState;</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    std::vector&lt; std::vector&lt; std::shared_ptr&lt;Text&gt; &gt; &gt; m_textListState;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordtype">int</span> m_currenteState = -1;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordtype">int</span> m_maxStates = 100;</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordtype">bool</span> m_continuousCalc = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordtype">bool</span> m_disconnectedElement = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keywordtype">bool</span> m_justOpened = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordtype">float</span> m_width = 0.0;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordtype">float</span> m_height = 0.0;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    wxFileName m_savedPath;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    wxRect2DDouble m_selectionRect;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    wxPoint2DDouble m_startSelRect;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>* m_properties = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="comment">// Modern OpenGL</span></div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <a class="code hl_class" href="class_h_m_plane.html">HMPlane</a>* m_hmPlane = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="comment">//glm::mat4 m_projMatrix;</span></div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <span class="keywordtype">bool</span> m_showHM = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keywordtype">bool</span> m_showHMTimer = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordtype">bool</span> m_hmAutomaticLabel = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    std::vector&lt;double&gt; m_stabilityTimeVector;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordtype">bool</span> m_continuousCalc = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keywordtype">bool</span> m_disconnectedElement = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keywordtype">bool</span> m_justOpened = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keywordtype">float</span> m_width = 0.0;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordtype">float</span> m_height = 0.0;</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    std::unique_ptr&lt;ControlEditorManager&gt; m_CEMngr;</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    std::unique_ptr&lt;ChartWindowManager&gt; m_CWMngr;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="comment">// Modern OpenGL</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <a class="code hl_class" href="class_h_m_plane.html">HMPlane</a>* m_hmPlane = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span><span class="preprocessor">#ifdef _DEBUG</span></div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <a class="code hl_class" href="class_debug_main_frame.html">DebugMainFrame</a>* m_debugFrame = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>};</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <span class="comment">//glm::mat4 m_projMatrix;</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="keywordtype">bool</span> m_showHM = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keywordtype">bool</span> m_showHMTimer = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="keywordtype">bool</span> m_hmAutomaticLabel = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <span class="keywordtype">bool</span> m_showGrid = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordtype">double</span> m_gridSize = 20.0;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    std::unique_ptr&lt;ControlEditorManager&gt; m_CEMngr;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    std::unique_ptr&lt;ChartWindowManager&gt; m_CWMngr;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="preprocessor">#ifdef _DEBUG</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <a class="code hl_class" href="class_debug_main_frame.html">DebugMainFrame</a>* m_debugFrame = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>};</div>
 </div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="preprocessor">#endif  </span><span class="comment">// WORKSPACE_H</span></div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="preprocessor">#endif  </span><span class="comment">// WORKSPACE_H</span></div>
 <div class="ttc" id="a_control_editor_8h_html"><div class="ttname"><a href="_control_editor_8h.html">ControlEditor.h</a></div></div>
 <div class="ttc" id="a_control_editor_manager_8h_html"><div class="ttname"><a href="_control_editor_manager_8h.html">ControlEditorManager.h</a></div></div>
 <div class="ttc" id="aclass_camera_html"><div class="ttname"><a href="class_camera.html">Camera</a></div><div class="ttdoc">Class responsible for the correct visualization of the elements on screen.</div><div class="ttdef"><b>Definition</b> <a href="_camera_8h_source.html#l00030">Camera.h:31</a></div></div>
@@ -405,7 +416,7 @@ $(document).ready(function(){initNavTree('_workspace_8h_source.html',''); initRe
 <div class="ttc" id="aclass_debug_main_frame_html"><div class="ttname"><a href="class_debug_main_frame.html">DebugMainFrame</a></div><div class="ttdef"><b>Definition</b> <a href="_debug_main_frame_8hpp_source.html#l00005">DebugMainFrame.hpp:6</a></div></div>
 <div class="ttc" id="aclass_electromechanical_html"><div class="ttname"><a href="class_electromechanical.html">Electromechanical</a></div><div class="ttdoc">Calculates the electromechanical transient based on disturbances (e.g. system fault).</div><div class="ttdef"><b>Definition</b> <a href="_electromechanical_8h_source.html#l00051">Electromechanical.h:52</a></div></div>
 <div class="ttc" id="aclass_element_data_object_html"><div class="ttname"><a href="class_element_data_object.html">ElementDataObject</a></div><div class="ttdoc">Class to store the elements in the clipboard.</div><div class="ttdef"><b>Definition</b> <a href="_element_data_object_8h_source.html#l00036">ElementDataObject.h:37</a></div></div>
-<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00113">Element.h:114</a></div></div>
+<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00114">Element.h:115</a></div></div>
 <div class="ttc" id="aclass_element_plot_data_html"><div class="ttname"><a href="class_element_plot_data.html">ElementPlotData</a></div><div class="ttdef"><b>Definition</b> <a href="_element_plot_data_8h_source.html#l00067">ElementPlotData.h:68</a></div></div>
 <div class="ttc" id="aclass_fault_html"><div class="ttname"><a href="class_fault.html">Fault</a></div><div class="ttdoc">Calculate the fault of the system and update the elements data.</div><div class="ttdef"><b>Definition</b> <a href="_fault_8h_source.html#l00030">Fault.h:31</a></div></div>
 <div class="ttc" id="aclass_frequency_response_form_html"><div class="ttname"><a href="class_frequency_response_form.html">FrequencyResponseForm</a></div><div class="ttdef"><b>Definition</b> <a href="_frequency_response_form_8h_source.html#l00007">FrequencyResponseForm.h:8</a></div></div>
@@ -415,13 +426,13 @@ $(document).ready(function(){initNavTree('_workspace_8h_source.html',''); initRe
 <div class="ttc" id="aclass_inductor_html"><div class="ttname"><a href="class_inductor.html">Inductor</a></div><div class="ttdoc">Inductor shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00038">Inductor.h:39</a></div></div>
 <div class="ttc" id="aclass_line_html"><div class="ttname"><a href="class_line.html">Line</a></div><div class="ttdoc">Power line element.</div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00063">Line.h:64</a></div></div>
 <div class="ttc" id="aclass_load_html"><div class="ttname"><a href="class_load.html">Load</a></div><div class="ttdoc">Loas shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_load_8h_source.html#l00073">Load.h:74</a></div></div>
-<div class="ttc" id="aclass_power_flow_html"><div class="ttname"><a href="class_power_flow.html">PowerFlow</a></div><div class="ttdoc">Calculate the power flow.</div><div class="ttdef"><b>Definition</b> <a href="_power_flow_8h_source.html#l00035">PowerFlow.h:36</a></div></div>
+<div class="ttc" id="aclass_power_flow_html"><div class="ttname"><a href="class_power_flow.html">PowerFlow</a></div><div class="ttdoc">Calculate the power flow (including OLTC tap adjustment).</div><div class="ttdef"><b>Definition</b> <a href="_power_flow_8h_source.html#l00036">PowerFlow.h:37</a></div></div>
 <div class="ttc" id="aclass_power_quality_html"><div class="ttname"><a href="class_power_quality.html">PowerQuality</a></div><div class="ttdoc">Responsible for the power quality calculations.</div><div class="ttdef"><b>Definition</b> <a href="_power_quality_8h_source.html#l00016">PowerQuality.h:17</a></div></div>
-<div class="ttc" id="aclass_properties_data_html"><div class="ttname"><a href="class_properties_data.html">PropertiesData</a></div><div class="ttdoc">General and simulation data manager.</div><div class="ttdef"><b>Definition</b> <a href="_properties_data_8h_source.html#l00102">PropertiesData.h:103</a></div></div>
+<div class="ttc" id="aclass_properties_data_html"><div class="ttname"><a href="class_properties_data.html">PropertiesData</a></div><div class="ttdoc">General and simulation data manager.</div><div class="ttdef"><b>Definition</b> <a href="_properties_data_8h_source.html#l00105">PropertiesData.h:106</a></div></div>
 <div class="ttc" id="aclass_sync_generator_html"><div class="ttname"><a href="class_sync_generator.html">SyncGenerator</a></div><div class="ttdoc">Synchronous generator power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_generator_8h_source.html#l00145">SyncGenerator.h:146</a></div></div>
 <div class="ttc" id="aclass_sync_motor_html"><div class="ttname"><a href="class_sync_motor.html">SyncMotor</a></div><div class="ttdoc">Synchronous motor (synchronous compensator) power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00134">SyncMotor.h:135</a></div></div>
-<div class="ttc" id="aclass_text_html"><div class="ttname"><a href="class_text.html">Text</a></div><div class="ttdoc">Element that shows power element informations in workspace.</div><div class="ttdef"><b>Definition</b> <a href="_text_8h_source.html#l00069">Text.h:70</a></div></div>
-<div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00083">Transformer.h:84</a></div></div>
+<div class="ttc" id="aclass_text_html"><div class="ttname"><a href="class_text.html">Text</a></div><div class="ttdoc">Element that shows power element informations in workspace.</div><div class="ttdef"><b>Definition</b> <a href="_text_8h_source.html#l00070">Text.h:71</a></div></div>
+<div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element with OLTC support.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00095">Transformer.h:96</a></div></div>
 <div class="ttc" id="aclass_workspace_html"><div class="ttname"><a href="class_workspace.html">Workspace</a></div><div class="ttdoc">This class manages the graphical and power elements. It is responsible for handling the user's intera...</div><div class="ttdef"><b>Definition</b> <a href="_workspace_8h_source.html#l00104">Workspace.h:105</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

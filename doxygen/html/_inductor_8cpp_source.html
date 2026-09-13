@@ -44,7 +44,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w23a-beta</span>
+   &#160;<span id="projectnumber">2026w34a-beta</span>
    </div>
   </td>
  </tr>
@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('_inductor_8cpp_source.html',''); initR
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>Inductor::~Inductor() {}</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_inductor.html#a4e404c6e15f206fe0f5de06fc19dedf5">   34</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#a4e404c6e15f206fe0f5de06fc19dedf5">Inductor::AddParent</a>(<a class="code hl_class" href="class_element.html">Element</a>* parent, wxPoint2DDouble position)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_inductor.html#ad14904057a45e4e028f22cbec35a861c">   34</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#ad14904057a45e4e028f22cbec35a861c">Inductor::AddParent</a>(<a class="code hl_class" href="class_element.html">Element</a>* parent, wxPoint2DDouble position, <span class="keywordtype">bool</span> isOpening)</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>{</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> (parent) {</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        m_parentList.push_back(parent);</div>
@@ -246,10 +246,10 @@ $(document).ready(function(){initNavTree('_inductor_8cpp_source.html',''); initR
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="keyword"></span>{</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    wxColour elementColour;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">if</span> (m_online) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">if</span> (m_dynEvent)</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            elementColour = guiColour-&gt;eventElement;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            elementColour = guiColour-&gt;enabled;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="comment">//if (m_dynEvent)</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="comment">//  elementColour = guiColour-&gt;eventElement;</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="comment">//else</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        elementColour = guiColour-&gt;enabled;</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        elementColour = guiColour-&gt;disable;</div>
@@ -308,267 +308,271 @@ $(document).ready(function(){initNavTree('_inductor_8cpp_source.html',''); initR
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 50.0), gc);</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        gc-&gt;PopState();</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    }</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>}</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">if</span> (m_dynEvent) {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            DrawStabilityEventGC(gc, translation, scale, guiColour);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        }</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
 </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
-<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="class_inductor.html#a101c63e0fde35180aa3591fe7774e57c">  193</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_inductor.html#ad8a1636c55dda31577a37c8ff11d0b02">Inductor::DrawDC</a>(<a class="code hl_struct" href="struct_g_u_i_colour.html">GUIColour</a>* guiColour, wxPoint2DDouble translation, <span class="keywordtype">double</span> scale, wxDC&amp; dc)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    wxColour elementColour;</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">if</span> (m_online) {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">if</span> (m_dynEvent)</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            elementColour = guiColour-&gt;eventElement;</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            elementColour = guiColour-&gt;enabled;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    }</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        elementColour = guiColour-&gt;disable;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    std::vector&lt;wxPoint&gt; pointListInt;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; pt : m_pointList) {</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        pointListInt.emplace_back(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(pt.m_x), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(pt.m_y));</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordflow">if</span> (m_inserted) {</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        wxPoint arcPts[3];</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        wxPoint2DDouble p;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        p = m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        arcPts[0] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        p = m_position + wxPoint2DDouble(0, -m_height / 2.0 + 25.0);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        arcPts[1] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        p = m_position + wxPoint2DDouble(0, -m_height / 2.0 + 40.0);</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        arcPts[2] = RotateAround(p, m_position, m_angle);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">if</span> (m_selected) {</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            dc.SetPen(wxPen(guiColour-&gt;selection, 2 + m_borderSize * 2.0));</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="foldopen" id="foldopen00197" data-start="{" data-end="}">
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="class_inductor.html#a101c63e0fde35180aa3591fe7774e57c">  197</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_inductor.html#ad8a1636c55dda31577a37c8ff11d0b02">Inductor::DrawDC</a>(<a class="code hl_struct" href="struct_g_u_i_colour.html">GUIColour</a>* guiColour, wxPoint2DDouble translation, <span class="keywordtype">double</span> scale, wxDC&amp; dc)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    wxColour elementColour;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordflow">if</span> (m_online) {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">if</span> (m_dynEvent)</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            elementColour = guiColour-&gt;eventElement;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            elementColour = guiColour-&gt;enabled;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        elementColour = guiColour-&gt;disable;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    std::vector&lt;wxPoint&gt; pointListInt;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; pt : m_pointList) {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        pointListInt.emplace_back(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(pt.m_x), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(pt.m_y));</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    }</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordflow">if</span> (m_inserted) {</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        wxPoint arcPts[3];</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        wxPoint2DDouble p;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        p = m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        arcPts[0] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        p = m_position + wxPoint2DDouble(0, -m_height / 2.0 + 25.0);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        arcPts[1] = RotateAround(p, m_position, m_angle);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        p = m_position + wxPoint2DDouble(0, -m_height / 2.0 + 40.0);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        arcPts[2] = RotateAround(p, m_position, m_angle);</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            dc.DrawLines(pointListInt.size(), &amp;pointListInt[0]);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            DrawDCArc(arcPts[0], 10, 90 - m_angle, 315 - m_angle, dc);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            DrawDCArc(arcPts[1], 10, 45 - m_angle, 315 - m_angle, dc);</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            DrawDCArc(arcPts[2], 10, 45 - m_angle, 270 - m_angle, dc);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordflow">if</span> (m_selected) {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            dc.SetPen(wxPen(guiColour-&gt;selection, 2 + m_borderSize * 2.0));</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            dc.DrawLines(pointListInt.size(), &amp;pointListInt[0]);</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 50.0), dc);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            <span class="comment">// Draw node selection.</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            dc.SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            dc.SetBrush(wxBrush(guiColour-&gt;selection));</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <a class="code hl_function" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a>(m_pointList[0], 5.0 + m_borderSize / scale, dc);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        }</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="comment">// Draw Inductor (layer 2).</span></div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        dc.SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        dc.SetBrush(wxBrush(wxColour(elementColour)));</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <a class="code hl_function" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a>(m_pointList[0], 5.0, dc);</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        dc.SetPen(wxPen(wxColour(elementColour), 2));</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        dc.DrawLines(pointListInt.size(), &amp;pointListInt[0]);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            DrawDCArc(arcPts[0], 10, 90 - m_angle, 315 - m_angle, dc);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            DrawDCArc(arcPts[1], 10, 45 - m_angle, 315 - m_angle, dc);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            DrawDCArc(arcPts[2], 10, 45 - m_angle, 270 - m_angle, dc);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 50.0), dc);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            <span class="comment">// Draw node selection.</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            dc.SetPen(*wxTRANSPARENT_PEN);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            dc.SetBrush(wxBrush(guiColour-&gt;selection));</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <a class="code hl_function" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a>(m_pointList[0], 5.0 + m_borderSize / scale, dc);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        }</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="comment">// Draw Inductor (layer 2).</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        dc.SetPen(*wxTRANSPARENT_PEN);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        dc.SetBrush(wxBrush(wxColour(elementColour)));</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        <a class="code hl_function" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a>(m_pointList[0], 5.0, dc);</div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <a class="code hl_function" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">DrawDCSwitches</a>(guiColour, dc);</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        dc.SetPen(wxPen(wxColour(elementColour), 2));</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        DrawDCArc(arcPts[0], 10, 90 - m_angle, 315 - m_angle, dc);</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        DrawDCArc(arcPts[1], 10, 45 - m_angle, 315 - m_angle, dc);</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        DrawDCArc(arcPts[2], 10, 45 - m_angle, 270 - m_angle, dc);</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 50.0), dc);</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    }</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>}</div>
-</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        dc.SetPen(wxPen(wxColour(elementColour), 2));</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        dc.DrawLines(pointListInt.size(), &amp;pointListInt[0]);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        <a class="code hl_function" href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">DrawDCSwitches</a>(guiColour, dc);</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        dc.SetPen(wxPen(wxColour(elementColour), 2));</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        dc.SetBrush(*wxTRANSPARENT_BRUSH);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        DrawDCArc(arcPts[0], 10, 90 - m_angle, 315 - m_angle, dc);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        DrawDCArc(arcPts[1], 10, 45 - m_angle, 315 - m_angle, dc);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        DrawDCArc(arcPts[2], 10, 45 - m_angle, 270 - m_angle, dc);</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
-<div class="foldopen" id="foldopen00258" data-start="{" data-end="}">
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="class_inductor.html#a801bb445c01059558902c0eca4d38cdd">  258</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_inductor.html#a801bb445c01059558902c0eca4d38cdd">Inductor::Rotate</a>(<span class="keywordtype">bool</span> clockwise)</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>{</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordtype">double</span> rotAngle = m_rotationAngle;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordflow">if</span> (!clockwise) rotAngle = -m_rotationAngle;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    m_angle += rotAngle;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordflow">if</span> (m_angle &gt;= 360 || m_angle &lt;= -360) m_angle = 0.0;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    m_pointList[2] = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(m_pointList[2], rotAngle);</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    m_pointList[3] = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(m_pointList[3], rotAngle);</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    UpdateSwitchesPosition();</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>}</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 50.0), dc);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    }</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>}</div>
 </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="foldopen" id="foldopen00270" data-start="{" data-end="}">
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno"><a class="line" href="class_inductor.html#aa0ae00d91b40307141a8bd3aebf1a0c2">  270</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#aa0ae00d91b40307141a8bd3aebf1a0c2">Inductor::GetContextMenu</a>(wxMenu&amp; menu)</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>{</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    menu.Append(<a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a>, _(<span class="stringliteral">&quot;Edit Inductor&quot;</span>));</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="foldopen" id="foldopen00262" data-start="{" data-end="}">
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno"><a class="line" href="class_inductor.html#a801bb445c01059558902c0eca4d38cdd">  262</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_inductor.html#a801bb445c01059558902c0eca4d38cdd">Inductor::Rotate</a>(<span class="keywordtype">bool</span> clockwise)</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>{</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordtype">double</span> rotAngle = m_rotationAngle;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">if</span> (!clockwise) rotAngle = -m_rotationAngle;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    m_angle += rotAngle;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">if</span> (m_angle &gt;= 360 || m_angle &lt;= -360) m_angle = 0.0;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    m_pointList[2] = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(m_pointList[2], rotAngle);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    m_pointList[3] = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(m_pointList[3], rotAngle);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    UpdateSwitchesPosition();</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>}</div>
+</div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    wxMenu* textMenu = <span class="keyword">new</span> wxMenu();</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    textMenu-&gt;Append(ID_TXT_NAME, _(<span class="stringliteral">&quot;Name&quot;</span>));</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    textMenu-&gt;Append(ID_TXT_REACTIVE_POWER, _(<span class="stringliteral">&quot;Reactive power&quot;</span>));</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    textMenu-&gt;SetClientData(menu.GetClientData());</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    menu.AppendSubMenu(textMenu, _(<span class="stringliteral">&quot;Add text&quot;</span>));</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <a class="code hl_function" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a>(menu);</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>}</div>
-</div>
+<div class="foldopen" id="foldopen00274" data-start="{" data-end="}">
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="class_inductor.html#aa0ae00d91b40307141a8bd3aebf1a0c2">  274</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#aa0ae00d91b40307141a8bd3aebf1a0c2">Inductor::GetContextMenu</a>(wxMenu&amp; menu)</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>{</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    menu.Append(<a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a>, _(<span class="stringliteral">&quot;Edit Inductor&quot;</span>));</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    wxMenu* textMenu = <span class="keyword">new</span> wxMenu();</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    textMenu-&gt;Append(ID_TXT_NAME, _(<span class="stringliteral">&quot;Name&quot;</span>));</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    textMenu-&gt;Append(ID_TXT_REACTIVE_POWER, _(<span class="stringliteral">&quot;Reactive power&quot;</span>));</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    textMenu-&gt;SetClientData(menu.GetClientData());</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    menu.AppendSubMenu(textMenu, _(<span class="stringliteral">&quot;Add text&quot;</span>));</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="foldopen" id="foldopen00285" data-start="{" data-end="}">
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">  285</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">Inductor::Contains</a>(wxPoint2DDouble position)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    wxPoint2DDouble ptR = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(position, -m_angle);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keywordflow">return</span> m_rect.Contains(ptR);</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>}</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <a class="code hl_function" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a>(menu);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>}</div>
 </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">  291</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">Inductor::Intersects</a>(wxRect2DDouble rect)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a>(m_rect, rect, m_angle, 0.0); }</div>
-<div class="foldopen" id="foldopen00292" data-start="{" data-end="}">
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno"><a class="line" href="class_inductor.html#a2cb9979b9fcd8aff31ae4118e28c4132">  292</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#a2cb9979b9fcd8aff31ae4118e28c4132">Inductor::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element, wxWindow* workspace)</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>{</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <a class="code hl_class" href="class_reactive_shunt_element_form.html">ReactiveShuntElementForm</a> inductorForm(parent, <span class="keyword">this</span>);</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    inductorForm.SetTitle(_(<span class="stringliteral">&quot;Inductor&quot;</span>));</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    inductorForm.CenterOnParent();</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keywordflow">if</span> (inductorForm.ShowModal() == wxID_OK) {</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    }</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>}</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="foldopen" id="foldopen00289" data-start="{" data-end="}">
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno"><a class="line" href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">  289</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">Inductor::Contains</a>(wxPoint2DDouble position)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    wxPoint2DDouble ptR = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(position, -m_angle);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordflow">return</span> m_rect.Contains(ptR);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>}</div>
 </div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><a class="code hl_struct" href="struct_inductor_electrical_data.html">InductorElectricalData</a> Inductor::GetPUElectricalData(<span class="keywordtype">double</span> systemPowerBase)</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>{</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <a class="code hl_struct" href="struct_inductor_electrical_data.html">InductorElectricalData</a> data = m_electricalData;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        data.reactivePower = data.reactivePower / systemPowerBase;</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno"><a class="line" href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">  295</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">Inductor::Intersects</a>(wxRect2DDouble rect)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a>(m_rect, rect, m_angle, 0.0); }</div>
+<div class="foldopen" id="foldopen00296" data-start="{" data-end="}">
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno"><a class="line" href="class_inductor.html#a2cb9979b9fcd8aff31ae4118e28c4132">  296</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_inductor.html#a2cb9979b9fcd8aff31ae4118e28c4132">Inductor::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element, wxWindow* workspace)</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>{</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <a class="code hl_class" href="class_reactive_shunt_element_form.html">ReactiveShuntElementForm</a> inductorForm(parent, <span class="keyword">this</span>);</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    inductorForm.SetTitle(_(<span class="stringliteral">&quot;Inductor&quot;</span>));</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    inductorForm.CenterOnParent();</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="keywordflow">if</span> (inductorForm.ShowModal() == wxID_OK) {</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    }</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>}</div>
+</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><a class="code hl_struct" href="struct_inductor_electrical_data.html">InductorElectricalData</a> Inductor::GetPUElectricalData(<span class="keywordtype">double</span> systemPowerBase)</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>{</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <a class="code hl_struct" href="struct_inductor_electrical_data.html">InductorElectricalData</a> data = m_electricalData;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="keywordflow">switch</span> (data.reactivePowerUnit) {</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        data.reactivePower = data.reactivePower / systemPowerBase;</div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;</div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    }</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">return</span> data;</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>}</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
-<div class="foldopen" id="foldopen00326" data-start="{" data-end="}">
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno"><a class="line" href="class_inductor.html#a4241ebd43388ebe88ec5888a15bc22d9">  326</a></span><a class="code hl_class" href="class_element.html">Element</a>* <a class="code hl_function" href="class_inductor.html#a4241ebd43388ebe88ec5888a15bc22d9">Inductor::GetCopy</a>()</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>{</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <a class="code hl_class" href="class_inductor.html">Inductor</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_inductor.html">Inductor</a>();</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>}</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        data.reactivePowerUnit = ElectricalUnit::UNIT_PU;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    }</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keywordflow">return</span> data;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>}</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
+<div class="foldopen" id="foldopen00330" data-start="{" data-end="}">
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="class_inductor.html#a4241ebd43388ebe88ec5888a15bc22d9">  330</a></span><a class="code hl_class" href="class_element.html">Element</a>* <a class="code hl_function" href="class_inductor.html#a4241ebd43388ebe88ec5888a15bc22d9">Inductor::GetCopy</a>()</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>{</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <a class="code hl_class" href="class_inductor.html">Inductor</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_inductor.html">Inductor</a>();</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    *copy = *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>}</div>
 </div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
-<div class="foldopen" id="foldopen00333" data-start="{" data-end="}">
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno"><a class="line" href="class_inductor.html#ac16663899a076f0e84722b27193fe530">  333</a></span>wxString <a class="code hl_function" href="class_inductor.html#ac16663899a076f0e84722b27193fe530">Inductor::GetTipText</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    wxString tipText = m_electricalData.name;</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <span class="comment">// TODO: Avoid reactive power calculation.</span></div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keywordtype">double</span> reactivePower = m_electricalData.reactivePower;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keywordflow">if</span> (!m_online)</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        reactivePower = 0.0;</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        std::complex&lt;double&gt; v = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(m_parentList[0])-&gt;GetElectricalData().voltage;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        reactivePower *= std::pow(std::abs(v), 2);</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    }</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    tipText += _(<span class="stringliteral">&quot;\nQ = &quot;</span>) + wxString::FromDouble(reactivePower, 5);</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    <span class="keywordflow">switch</span> (m_electricalData.reactivePowerUnit) {</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        tipText += _(<span class="stringliteral">&quot; var&quot;</span>);</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        tipText += _(<span class="stringliteral">&quot; kvar&quot;</span>);</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        tipText += _(<span class="stringliteral">&quot; Mvar&quot;</span>);</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    }</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keywordflow">return</span> tipText;</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>}</div>
+<div class="foldopen" id="foldopen00337" data-start="{" data-end="}">
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno"><a class="line" href="class_inductor.html#ac16663899a076f0e84722b27193fe530">  337</a></span>wxString <a class="code hl_function" href="class_inductor.html#ac16663899a076f0e84722b27193fe530">Inductor::GetTipText</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    wxString tipText = m_electricalData.name;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    <span class="comment">// TODO: Avoid reactive power calculation.</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    <span class="keywordtype">double</span> reactivePower = m_electricalData.reactivePower;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="keywordflow">if</span> (!m_online)</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        reactivePower = 0.0;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        std::complex&lt;double&gt; v = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(m_parentList[0])-&gt;GetElectricalData().voltage;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        reactivePower *= std::pow(std::abs(v), 2);</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    }</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    tipText += _(<span class="stringliteral">&quot;\nQ = &quot;</span>) + wxString::FromDouble(reactivePower, 5);</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="keywordflow">switch</span> (m_electricalData.reactivePowerUnit) {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_PU: {</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_var: {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        tipText += _(<span class="stringliteral">&quot; var&quot;</span>);</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_kvar: {</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        tipText += _(<span class="stringliteral">&quot; kvar&quot;</span>);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    <span class="keywordflow">case</span> ElectricalUnit::UNIT_Mvar: {</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        tipText += _(<span class="stringliteral">&quot; Mvar&quot;</span>);</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    }</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="keywordflow">return</span> tipText;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>}</div>
 </div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>rapidxml::xml_node&lt;&gt;* Inductor::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>{</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Inductor&quot;</span>);</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    SaveCADProperties(doc, elementNode);</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="keyword">auto</span> electricalProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    <span class="keyword">auto</span> isOnline = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>);</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    XMLParser::SetNodeValue(doc, isOnline, m_online);</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    XMLParser::SetNodeValue(doc, name, m_electricalData.name);</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    <span class="keyword">auto</span> reactivePower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    XMLParser::SetNodeAttribute(doc, reactivePower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.reactivePowerUnit));</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    SaveSwitchingData(doc, electricalProp);</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>}</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span><span class="keywordtype">bool</span> Inductor::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode, std::vector&lt;Element*&gt; parentList)</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>{</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode, parentList)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>rapidxml::xml_node&lt;&gt;* Inductor::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>{</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Inductor&quot;</span>);</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span> </div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    SaveCADProperties(doc, elementNode);</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    <span class="keyword">auto</span> electricalProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    <span class="keyword">auto</span> isOnline = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>);</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    XMLParser::SetNodeValue(doc, isOnline, m_online);</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    XMLParser::SetNodeValue(doc, name, m_electricalData.name);</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    <span class="keyword">auto</span> reactivePower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    XMLParser::SetNodeAttribute(doc, reactivePower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.reactivePowerUnit));</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    SaveSwitchingData(doc, electricalProp);</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>}</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    <span class="keyword">auto</span> electricalProp = elementNode-&gt;first_node(<span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="keywordflow">if</span> (!electricalProp) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    <a class="code hl_function" href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">SetOnline</a>(XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>));</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>    m_electricalData.reactivePowerUnit =</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    <span class="keywordflow">if</span> (!OpenSwitchingData(electricalProp)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    <span class="keywordflow">if</span> (m_swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size() != 0) <a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    m_inserted = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>}</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span><span class="keywordtype">bool</span> Inductor::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode, std::vector&lt;Element*&gt; parentList)</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>{</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode, parentList)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    <span class="keyword">auto</span> electricalProp = elementNode-&gt;first_node(<span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keywordflow">if</span> (!electricalProp) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>    <a class="code hl_function" href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">SetOnline</a>(XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>));</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    m_electricalData.reactivePowerUnit =</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        <span class="keyword">static_cast&lt;</span>ElectricalUnit<span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    <span class="keywordflow">if</span> (!OpenSwitchingData(electricalProp)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    <span class="keywordflow">if</span> (m_swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size() != 0) <a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span> </div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>    m_inserted = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>}</div>
 <div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00077">Element.h:77</a></div></div>
 <div class="ttc" id="a_inductor_8h_html"><div class="ttname"><a href="_inductor_8h.html">Inductor.h</a></div></div>
-<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
-<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00113">Element.h:114</a></div></div>
-<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00295">Element.cpp:295</a></div></div>
-<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00393">Element.cpp:393</a></div></div>
-<div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00188">Element.h:188</a></div></div>
-<div class="ttc" id="aclass_element_html_a5c75d8a6e28326dd568104a4d9d3473f"><div class="ttname"><a href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">Element::GetAngle</a></div><div class="ttdeci">double GetAngle() const</div><div class="ttdoc">Get the element angle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00213">Element.h:213</a></div></div>
-<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00228">Element.cpp:228</a></div></div>
-<div class="ttc" id="aclass_element_html_ac38d6707d08cb5c057032aa94b511a62"><div class="ttname"><a href="class_element.html#ac38d6707d08cb5c057032aa94b511a62">Element::AddChild</a></div><div class="ttdeci">virtual void AddChild(Element *child)</div><div class="ttdoc">Add a child to the child list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00499">Element.cpp:499</a></div></div>
-<div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00383">Element.cpp:383</a></div></div>
+<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00086">Bus.h:87</a></div></div>
+<div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00114">Element.h:115</a></div></div>
+<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00377">Element.cpp:377</a></div></div>
+<div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00475">Element.cpp:475</a></div></div>
+<div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00189">Element.h:189</a></div></div>
+<div class="ttc" id="aclass_element_html_a5c75d8a6e28326dd568104a4d9d3473f"><div class="ttname"><a href="class_element.html#a5c75d8a6e28326dd568104a4d9d3473f">Element::GetAngle</a></div><div class="ttdeci">double GetAngle() const</div><div class="ttdoc">Get the element angle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00214">Element.h:214</a></div></div>
+<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00298">Element.cpp:298</a></div></div>
+<div class="ttc" id="aclass_element_html_ac38d6707d08cb5c057032aa94b511a62"><div class="ttname"><a href="class_element.html#ac38d6707d08cb5c057032aa94b511a62">Element::AddChild</a></div><div class="ttdeci">virtual void AddChild(Element *child)</div><div class="ttdoc">Add a child to the child list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00581">Element.cpp:581</a></div></div>
+<div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00465">Element.cpp:465</a></div></div>
 <div class="ttc" id="aclass_element_html_af1fd54d12f61f461111697d11cf10b9c"><div class="ttname"><a href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">Element::DrawDCCircle</a></div><div class="ttdeci">virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a circle using device context.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00173">Element.cpp:173</a></div></div>
 <div class="ttc" id="aclass_inductor_html"><div class="ttname"><a href="class_inductor.html">Inductor</a></div><div class="ttdoc">Inductor shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00038">Inductor.h:39</a></div></div>
-<div class="ttc" id="aclass_inductor_html_a2cb9979b9fcd8aff31ae4118e28c4132"><div class="ttname"><a href="class_inductor.html#a2cb9979b9fcd8aff31ae4118e28c4132">Inductor::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element, wxWindow *workspace=nullptr)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00292">Inductor.cpp:292</a></div></div>
-<div class="ttc" id="aclass_inductor_html_a3d331d2a725275a12489401180d4c1d1"><div class="ttname"><a href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">Inductor::Intersects</a></div><div class="ttdeci">virtual bool Intersects(wxRect2DDouble rect) const</div><div class="ttdoc">Check if the element's rect intersects other rect.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00291">Inductor.cpp:291</a></div></div>
-<div class="ttc" id="aclass_inductor_html_a4241ebd43388ebe88ec5888a15bc22d9"><div class="ttname"><a href="class_inductor.html#a4241ebd43388ebe88ec5888a15bc22d9">Inductor::GetCopy</a></div><div class="ttdeci">virtual Element * GetCopy()</div><div class="ttdoc">Get a the element copy.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00326">Inductor.cpp:326</a></div></div>
-<div class="ttc" id="aclass_inductor_html_a4e404c6e15f206fe0f5de06fc19dedf5"><div class="ttname"><a href="class_inductor.html#a4e404c6e15f206fe0f5de06fc19dedf5">Inductor::AddParent</a></div><div class="ttdeci">virtual bool AddParent(Element *parent, wxPoint2DDouble position)</div><div class="ttdoc">Add a parent to the element. This method must be used on power elements that connect to a bus,...</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00034">Inductor.cpp:34</a></div></div>
-<div class="ttc" id="aclass_inductor_html_a801bb445c01059558902c0eca4d38cdd"><div class="ttname"><a href="class_inductor.html#a801bb445c01059558902c0eca4d38cdd">Inductor::Rotate</a></div><div class="ttdeci">virtual void Rotate(bool clockwise=true)</div><div class="ttdoc">Rotate the element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00258">Inductor.cpp:258</a></div></div>
-<div class="ttc" id="aclass_inductor_html_aa0ae00d91b40307141a8bd3aebf1a0c2"><div class="ttname"><a href="class_inductor.html#aa0ae00d91b40307141a8bd3aebf1a0c2">Inductor::GetContextMenu</a></div><div class="ttdeci">virtual bool GetContextMenu(wxMenu &amp;menu)</div><div class="ttdoc">Get the element contex menu.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00270">Inductor.cpp:270</a></div></div>
-<div class="ttc" id="aclass_inductor_html_ac16663899a076f0e84722b27193fe530"><div class="ttname"><a href="class_inductor.html#ac16663899a076f0e84722b27193fe530">Inductor::GetTipText</a></div><div class="ttdeci">virtual wxString GetTipText() const</div><div class="ttdoc">Get the tip text.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00333">Inductor.cpp:333</a></div></div>
-<div class="ttc" id="aclass_inductor_html_ac3ba7de94a328b20ff86e968a6228f60"><div class="ttname"><a href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">Inductor::Contains</a></div><div class="ttdeci">virtual bool Contains(wxPoint2DDouble position) const</div><div class="ttdoc">Checks if the element contains a position.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00285">Inductor.cpp:285</a></div></div>
+<div class="ttc" id="aclass_inductor_html_a2cb9979b9fcd8aff31ae4118e28c4132"><div class="ttname"><a href="class_inductor.html#a2cb9979b9fcd8aff31ae4118e28c4132">Inductor::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element, wxWindow *workspace=nullptr)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00296">Inductor.cpp:296</a></div></div>
+<div class="ttc" id="aclass_inductor_html_a3d331d2a725275a12489401180d4c1d1"><div class="ttname"><a href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">Inductor::Intersects</a></div><div class="ttdeci">virtual bool Intersects(wxRect2DDouble rect) const</div><div class="ttdoc">Check if the element's rect intersects other rect.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00295">Inductor.cpp:295</a></div></div>
+<div class="ttc" id="aclass_inductor_html_a4241ebd43388ebe88ec5888a15bc22d9"><div class="ttname"><a href="class_inductor.html#a4241ebd43388ebe88ec5888a15bc22d9">Inductor::GetCopy</a></div><div class="ttdeci">virtual Element * GetCopy()</div><div class="ttdoc">Get a the element copy.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00330">Inductor.cpp:330</a></div></div>
+<div class="ttc" id="aclass_inductor_html_a801bb445c01059558902c0eca4d38cdd"><div class="ttname"><a href="class_inductor.html#a801bb445c01059558902c0eca4d38cdd">Inductor::Rotate</a></div><div class="ttdeci">virtual void Rotate(bool clockwise=true)</div><div class="ttdoc">Rotate the element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00262">Inductor.cpp:262</a></div></div>
+<div class="ttc" id="aclass_inductor_html_aa0ae00d91b40307141a8bd3aebf1a0c2"><div class="ttname"><a href="class_inductor.html#aa0ae00d91b40307141a8bd3aebf1a0c2">Inductor::GetContextMenu</a></div><div class="ttdeci">virtual bool GetContextMenu(wxMenu &amp;menu)</div><div class="ttdoc">Get the element contex menu.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00274">Inductor.cpp:274</a></div></div>
+<div class="ttc" id="aclass_inductor_html_ac16663899a076f0e84722b27193fe530"><div class="ttname"><a href="class_inductor.html#ac16663899a076f0e84722b27193fe530">Inductor::GetTipText</a></div><div class="ttdeci">virtual wxString GetTipText() const</div><div class="ttdoc">Get the tip text.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00337">Inductor.cpp:337</a></div></div>
+<div class="ttc" id="aclass_inductor_html_ac3ba7de94a328b20ff86e968a6228f60"><div class="ttname"><a href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">Inductor::Contains</a></div><div class="ttdeci">virtual bool Contains(wxPoint2DDouble position) const</div><div class="ttdoc">Checks if the element contains a position.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00289">Inductor.cpp:289</a></div></div>
+<div class="ttc" id="aclass_inductor_html_ad14904057a45e4e028f22cbec35a861c"><div class="ttname"><a href="class_inductor.html#ad14904057a45e4e028f22cbec35a861c">Inductor::AddParent</a></div><div class="ttdeci">virtual bool AddParent(Element *parent, wxPoint2DDouble position, bool isOpening=false)</div><div class="ttdoc">Add a parent to the element. This method must be used on power elements that connect to a bus,...</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00034">Inductor.cpp:34</a></div></div>
 <div class="ttc" id="aclass_inductor_html_ad8a1636c55dda31577a37c8ff11d0b02"><div class="ttname"><a href="class_inductor.html#ad8a1636c55dda31577a37c8ff11d0b02">Inductor::DrawDC</a></div><div class="ttdeci">virtual void DrawDC(GUIColour *guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw the element using GDI+.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8cpp_source.html#l00124">Inductor.cpp:124</a></div></div>
-<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00201">PowerElement.h:201</a></div></div>
-<div class="ttc" id="aclass_power_element_html_abd2cee52270374e17951782bdb571dce"><div class="ttname"><a href="class_power_element.html#abd2cee52270374e17951782bdb571dce">PowerElement::UpdateSwitches</a></div><div class="ttdeci">virtual void UpdateSwitches()</div><div class="ttdoc">Update the switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00073">PowerElement.cpp:73</a></div></div>
-<div class="ttc" id="aclass_power_element_html_acaa2c9e5736ac6e38c4c6a9ebca78024"><div class="ttname"><a href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">PowerElement::DrawDCSwitches</a></div><div class="ttdeci">virtual void DrawDCSwitches(GUIColour *guiColour, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw switch.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00110">PowerElement.cpp:110</a></div></div>
+<div class="ttc" id="aclass_power_element_html_a4dbd26d0a7987c30729efffa860debc4"><div class="ttname"><a href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">PowerElement::SetDynamicEvent</a></div><div class="ttdeci">virtual void SetDynamicEvent(bool dynEvent=true)</div><div class="ttdoc">Set if the power element have dynamic event.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00203">PowerElement.h:203</a></div></div>
+<div class="ttc" id="aclass_power_element_html_abd2cee52270374e17951782bdb571dce"><div class="ttname"><a href="class_power_element.html#abd2cee52270374e17951782bdb571dce">PowerElement::UpdateSwitches</a></div><div class="ttdeci">virtual void UpdateSwitches()</div><div class="ttdoc">Update the switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00103">PowerElement.cpp:103</a></div></div>
+<div class="ttc" id="aclass_power_element_html_acaa2c9e5736ac6e38c4c6a9ebca78024"><div class="ttname"><a href="class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024">PowerElement::DrawDCSwitches</a></div><div class="ttdeci">virtual void DrawDCSwitches(GUIColour *guiColour, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw switch.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00140">PowerElement.cpp:140</a></div></div>
 <div class="ttc" id="aclass_power_element_html_aef6392c211caf557bdac287b174a1ea8"><div class="ttname"><a href="class_power_element.html#aef6392c211caf557bdac287b174a1ea8">PowerElement::GetSwitchPoint</a></div><div class="ttdeci">virtual wxPoint2DDouble GetSwitchPoint(Element *parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const</div><div class="ttdoc">Get the correct switch position.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8cpp_source.html#l00039">PowerElement.cpp:39</a></div></div>
 <div class="ttc" id="aclass_reactive_shunt_element_form_html"><div class="ttname"><a href="class_reactive_shunt_element_form.html">ReactiveShuntElementForm</a></div><div class="ttdoc">Form to edit the reactive shunt element power data.</div><div class="ttdef"><b>Definition</b> <a href="_reactive_shunt_element_form_8h_source.html#l00034">ReactiveShuntElementForm.h:35</a></div></div>
 <div class="ttc" id="aclass_shunt_html"><div class="ttname"><a href="class_shunt.html">Shunt</a></div><div class="ttdoc">Abstract class for shunt power elements.</div><div class="ttdef"><b>Definition</b> <a href="_shunt_8h_source.html#l00031">Shunt.h:32</a></div></div>
-<div class="ttc" id="astruct_g_u_i_colour_html"><div class="ttname"><a href="struct_g_u_i_colour.html">GUIColour</a></div><div class="ttdef"><b>Definition</b> <a href="_commom_types_8h_source.html#l00006">CommomTypes.h:6</a></div></div>
+<div class="ttc" id="astruct_g_u_i_colour_html"><div class="ttname"><a href="struct_g_u_i_colour.html">GUIColour</a></div><div class="ttdef"><b>Definition</b> <a href="_commom_types_8h_source.html#l00012">CommomTypes.h:12</a></div></div>
 <div class="ttc" id="astruct_inductor_electrical_data_html"><div class="ttname"><a href="struct_inductor_electrical_data.html">InductorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00025">Inductor.h:25</a></div></div>
 <div class="ttc" id="astruct_switching_data_html_a3323745bf0a3f6461fbc19bc76a189df"><div class="ttname"><a href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">SwitchingData::swTime</a></div><div class="ttdeci">std::vector&lt; double &gt; swTime</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00073">PowerElement.h:73</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

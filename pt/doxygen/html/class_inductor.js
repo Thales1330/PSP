@@ -1,6 +1,6 @@
 var class_inductor =
 [
-    [ "AddParent", "class_inductor.html#a4e404c6e15f206fe0f5de06fc19dedf5", null ],
+    [ "AddParent", "class_inductor.html#ad14904057a45e4e028f22cbec35a861c", null ],
     [ "Contains", "class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60", null ],
     [ "DrawDC", "class_inductor.html#a101c63e0fde35180aa3591fe7774e57c", null ],
     [ "DrawDC", "class_inductor.html#ad8a1636c55dda31577a37c8ff11d0b02", null ],

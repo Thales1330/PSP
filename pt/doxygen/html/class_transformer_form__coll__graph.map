@@ -1,8 +1,8 @@
 <map id="TransformerForm" name="TransformerForm">
-<area shape="rect" id="Node000001" title="Form to edit the transformer power data." alt="" coords="43,344,176,369"/>
+<area shape="rect" id="Node000001" title="Form to edit the transformer power data and OLTC tap changer." alt="" coords="43,344,176,369"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,256,171,281"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,294,109,343,104,344,92,295"/>
-<area shape="rect" id="Node000003" href="$class_transformer.html" title="Two&#45;winding transformer power element." alt="" coords="195,256,295,281"/>
+<area shape="rect" id="Node000003" href="$class_transformer.html" title="Two&#45;winding transformer power element with OLTC support." alt="" coords="195,256,295,281"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="217,291,129,346,126,341,214,286"/>
 <area shape="rect" id="Node000004" href="$class_branch.html" title="Abstract class for branch power elements." alt="" coords="108,168,175,193"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="167,200,233,254,230,258,164,204"/>

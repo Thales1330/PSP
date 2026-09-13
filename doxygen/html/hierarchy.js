@@ -213,6 +213,7 @@ var hierarchy =
     [ "TransformerFormBase", null, [
       [ "TransformerForm", "class_transformer_form.html", null ]
     ] ],
+    [ "VoltageLevelColour", "struct_voltage_level_colour.html", null ],
     [ "WorkspaceBase", null, [
       [ "Workspace", "class_workspace.html", null ]
     ] ],
@@ -227,6 +228,7 @@ var hierarchy =
       [ "DebugMainFrameBase", "class_debug_main_frame_base.html", [
         [ "DebugMainFrame", "class_debug_main_frame.html", null ]
       ] ],
+      [ "ElementsToolBar", "class_elements_tool_bar.html", null ],
       [ "MainFrameBase", "class_main_frame_base.html", [
         [ "MainFrame", "class_main_frame.html", null ]
       ] ]

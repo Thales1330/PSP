@@ -12,7 +12,7 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,139,129,139,129,145,95,145"/>
 <area shape="rect" id="Node000004" href="$class_line.html" title="Power line element." alt="" coords="460,5,509,31"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="381,50,459,23,461,28,383,55"/>
-<area shape="rect" id="Node000005" href="$class_transformer.html" title="Two&#45;winding transformer power element." alt="" coords="435,55,535,80"/>
+<area shape="rect" id="Node000005" href="$class_transformer.html" title="Two&#45;winding transformer power element with OLTC support." alt="" coords="435,55,535,80"/>
 <area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="383,65,434,65,434,70,383,70"/>
 <area shape="rect" id="Node000008" href="$class_ind_motor.html" title="Induction motor power element." alt="" coords="445,104,525,129"/>
 <area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="386,146,444,127,446,132,388,152"/>
