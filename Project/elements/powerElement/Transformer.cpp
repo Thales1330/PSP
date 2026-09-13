@@ -35,7 +35,7 @@ Transformer::Transformer(wxString name) : Branch()
 }
 Transformer::~Transformer() {}
 
-bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
+bool Transformer::AddParent(Element* parent, wxPoint2DDouble position, bool isOpening)
 {
 	if (parent) {
 		// First bus.
@@ -43,11 +43,12 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 			m_position = position;
 			m_parentList.push_back(parent);
 			parent->AddChild(this);
-			wxPoint2DDouble parentPt =
-				parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-			parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-			parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
-			m_pointList.push_back(parentPt);                                    // First point
+
+			wxPoint2DDouble parentPt = parent->RotateAtPosition(position, -parent->GetAngle()); // Rotate click to horizontal position
+			parentPt.m_y = parent->GetPosition().m_y; // Centralize on bus.
+			parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+
+			m_pointList.push_back(parentPt); // First point
 			m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
 
 			wxRect2DDouble genRect(0, 0, 0, 0);
@@ -55,47 +56,184 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 
 			return false;
 		}
+
 		// Second bus.
 		else if (parent != m_parentList[0]) {
 			m_parentList.push_back(parent);
 			parent->AddChild(this);
-			wxPoint2DDouble parentPt =
-				parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-			parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-			parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 
-			// Get the average between the two bus points.
-			m_position =
-				wxPoint2DDouble((m_pointList[0].m_x + parentPt.m_x) / 2.0, (m_pointList[0].m_y + parentPt.m_y) / 2.0);
+			wxPoint2DDouble parentPt = parent->RotateAtPosition(position, -parent->GetAngle()); // Rotate click to horizontal position.
+			parentPt.m_y = parent->GetPosition().m_y; // Centralize on bus.
+
+			parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+
+			if (isOpening) {
+				m_width = 70.0;
+				m_height = 40.0;
+
+				m_position = wxPoint2DDouble(
+					(m_pointList[0].m_x + parentPt.m_x) / 2.0,
+					(m_pointList[0].m_y + parentPt.m_y) / 2.0);
+
+				SetPosition(m_position);
+
+				wxPoint2DDouble term1 =
+					m_position +
+					RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
+
+				wxPoint2DDouble term2 =
+					m_position +
+					RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+
+				m_pointList.push_back(term1);
+				m_pointList.push_back(term2);
+
+				m_pointList[1] =
+					GetSwitchPoint(
+						m_parentList[0],
+						m_pointList[0],
+						term1);
+
+				m_pointList.push_back(
+					GetSwitchPoint(
+						parent,
+						parentPt,
+						term2));
+
+				m_pointList.push_back(parentPt);
+				m_inserted = true;
+
+				wxRect2DDouble genRect(0, 0, 0, 0);
+				m_switchRect.push_back(genRect);
+
+				UpdateSwitches();
+				UpdatePowerFlowArrowsPosition();
+
+				return true;
+			}
+
+			// Normal insertion: determine position and rotation automatically.
+			wxPoint2DDouble p1 = m_pointList[0];
+			wxPoint2DDouble p2 = parentPt;
+
+			double dx = p2.m_x - p1.m_x;
+			double dy = p2.m_y - p1.m_y;
+
+			// Determine orientation based on bus separation.
+			if (std::abs(dy) > std::abs(dx)) {
+				m_angle = (dy >= 0.0) ? 90.0 : 270.0;
+			}
+			else {
+				m_angle = (dx >= 0.0) ? 0.0 : 180.0;
+			}
+
+			// Get the midpoint between the two bus points.
+			m_position = wxPoint2DDouble((p1.m_x + p2.m_x) / 2.0, (p1.m_y + p2.m_y) / 2.0);
+
+			// Snap position to grid alignment.
+			if (std::abs(dx) < 1.0) {
+				m_position.m_x = p1.m_x;
+				m_position.m_y = std::round(m_position.m_y / 20.0) * 20.0;
+			}
+			else if (std::abs(dy) < 1.0) {
+				m_position.m_y = p1.m_y;
+				m_position.m_x = std::round(m_position.m_x / 20.0) * 20.0;
+			}
+			else {
+				m_position.m_x = std::round(m_position.m_x / 20.0) * 20.0;
+				m_position.m_y = std::round(m_position.m_y / 20.0) * 20.0;
+			}
+
+			// Check whether a point belongs to the rotated bus rectangle.
+			//
+			// The point is first transformed into the local coordinate
+			// system of the bus. In that system:
+			//   X -> bus width
+			//   Y -> bus height
+			//
+			// This makes the test independent of the bus rotation.
+			auto IsPointInsideBus = [](Element* bus, const wxPoint2DDouble& point) -> bool {
+				wxPoint2DDouble delta(
+					point.m_x - bus->GetPosition().m_x,
+					point.m_y - bus->GetPosition().m_y);
+
+				wxPoint2DDouble local =
+					bus->RotateLocal(delta, -bus->GetAngle());
+
+				double halfWidth = bus->GetWidth() / 2.0 + 2.0;
+				double halfHeight = bus->GetHeight() / 2.0 + 2.0;
+
+				return std::abs(local.m_x) <= halfWidth &&
+					std::abs(local.m_y) <= halfHeight;
+				};
+
+			if (std::abs(dy) > std::abs(dx)) {
+				// Transformer is vertically oriented.
+				// Keep the connection points aligned in X.
+				wxPoint2DDouble candidate1(m_position.m_x, m_parentList[0]->GetPosition().m_y);
+
+				wxPoint2DDouble candidate2(m_position.m_x, parent->GetPosition().m_y);
+
+				if (IsPointInsideBus(m_parentList[0], candidate1) && IsPointInsideBus(parent, candidate2)) {
+					m_pointList[0].m_x = m_position.m_x;
+					parentPt.m_x = m_position.m_x;
+				}
+			}
+			else {
+				// Transformer is horizontally oriented.
+				// Keep the connection points aligned in Y.
+				wxPoint2DDouble candidate1(m_parentList[0]->GetPosition().m_x, m_position.m_y);
+
+				wxPoint2DDouble candidate2(parent->GetPosition().m_x, m_position.m_y);
+
+				if (IsPointInsideBus(m_parentList[0], candidate1) &&
+					IsPointInsideBus(parent, candidate2)) {
+
+					m_pointList[0].m_y = m_position.m_y;
+					parentPt.m_y = m_position.m_y;
+				}
+			}
+
 			// Set the transformer rectangle.
 			m_width = 70.0;
 			m_height = 40.0;
-			SetPosition(m_position);  // This method calculates the rectangle propely.
-			// Set the "side" points.
-			m_pointList.push_back(
-				wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(-10 - m_borderSize, m_height / 2.0)));
-			m_pointList.push_back(
-				wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(m_width + 10 + m_borderSize, m_height / 2.0)));
+
+			SetPosition(m_position);  // This method calculates the rectangle properly.
+
+			// Set the terminals at 40.0 units offset (2 grid cells),
+			// rotated by m_angle.
+			wxPoint2DDouble term1 = m_position + RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
+
+			wxPoint2DDouble term2 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+
+			term1.m_x = std::round(term1.m_x);
+			term1.m_y = std::round(term1.m_y);
+
+			term2.m_x = std::round(term2.m_x);
+			term2.m_y = std::round(term2.m_y);
+
+			m_pointList.push_back(term1);
+			m_pointList.push_back(term2);
 
 			// Set first switch point.
-			wxPoint2DDouble secondPoint = parentPt;
-			if (m_pointList.size() > 2) { secondPoint = m_pointList[2]; }
-			m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], secondPoint);
+			m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], term1);
 
 			// Set the second switch point.
-			m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_pointList[m_pointList.size() - 1]));
+			m_pointList.push_back(GetSwitchPoint(parent, parentPt, term2));
 
 			m_pointList.push_back(parentPt);  // Last point.
 			m_inserted = true;
 
 			wxRect2DDouble genRect(0, 0, 0, 0);
 			m_switchRect.push_back(genRect);
+
 			UpdateSwitches();
 			UpdatePowerFlowArrowsPosition();
 
 			return true;
 		}
 	}
+
 	return false;
 }
 
@@ -187,10 +325,10 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 {
 	wxColour elementColour;
 	if (m_online) {
-		if (m_dynEvent)
-			elementColour = guiColour->eventElement;
-		else
-			elementColour = guiColour->enabled;
+		//if (m_dynEvent)
+		//	elementColour = guiColour->eventElement;
+		//else
+		elementColour = guiColour->enabled;
 	}
 	else
 		elementColour = guiColour->disable;
@@ -211,8 +349,8 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
 			gc->SetBrush(wxBrush(guiColour->selection));
-			DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
-			DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
+			DrawDCCircle(m_position + wxPoint2DDouble(-15.0, 0.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
+			DrawDCCircle(m_position + wxPoint2DDouble(15.0, 0.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
 
 			gc->PopState();
 
@@ -252,13 +390,13 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 		//glColor4d(1.0, 1.0, 1.0, 1.0);
 		gc->SetPen(*wxTRANSPARENT_PEN);
 		gc->SetBrush(wxBrush(guiColour->background));
-		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
-		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
+		DrawDCCircle(m_position + wxPoint2DDouble(-15.0, 0.0), 20, 20, gc);
+		DrawDCCircle(m_position + wxPoint2DDouble(15.0, 0.0), 20, 20, gc);
 
 		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
-		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
+		DrawDCCircle(m_position + wxPoint2DDouble(-15.0, 0.0), 20, 20, gc);
+		DrawDCCircle(m_position + wxPoint2DDouble(15.0, 0.0), 20, 20, gc);
 
 		// Point
 		gc->SetPen(*wxTRANSPARENT_PEN);
@@ -266,6 +404,10 @@ void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 		DrawDCCircle(m_rect.GetPosition(), 4, 10, gc);
 
 		gc->PopState();
+
+		if (m_dynEvent) {
+			DrawStabilityEventGC(gc, translation, scale, guiColour);
+		}
 	}
 }
 
@@ -353,12 +495,23 @@ void Transformer::Rotate(bool clockwise)
 	if (!clockwise) rotAngle = -m_rotationAngle;
 
 	m_angle += rotAngle;
-	if (m_angle >= 360 || m_angle <= -360) m_angle = 0.0;
+	while (m_angle >= 360.0) m_angle -= 360.0;
+	while (m_angle < 0.0) m_angle += 360.0;
 
-	// Rotate all the points, except the switches and buses points.
-	for (int i = 2; i < (int)m_pointList.size() - 2; i++) {
-		m_pointList[i] = RotateAtPosition(m_pointList[i], rotAngle);
+	// Clean up floating point precision for cardinal angles
+	if (std::abs(m_angle - 90.0) < 1e-4) m_angle = 90.0;
+	else if (std::abs(m_angle - 180.0) < 1e-4) m_angle = 180.0;
+	else if (std::abs(m_angle - 270.0) < 1e-4) m_angle = 270.0;
+	else if (std::abs(m_angle - 0.0) < 1e-4 || std::abs(m_angle - 360.0) < 1e-4) m_angle = 0.0;
+
+	// Update terminals rigidly attached to transformer body at 40.0 units offset
+	if (m_pointList.size() >= 4) {
+		wxPoint2DDouble t1 = m_position + RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
+		wxPoint2DDouble t2 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+		m_pointList[2] = wxPoint2DDouble(std::round(t1.m_x), std::round(t1.m_y));
+		m_pointList[3] = wxPoint2DDouble(std::round(t2.m_x), std::round(t2.m_y));
 	}
+
 	UpdateSwitchesPosition();
 	UpdatePowerFlowArrowsPosition();
 }
@@ -367,12 +520,133 @@ void Transformer::Move(wxPoint2DDouble position)
 {
 	SetPosition(m_movePos + position - m_moveStartPt);
 
-	// Move all the points, except the switches and buses points.
-	for (int i = 2; i < (int)m_pointList.size() - 2; i++) { m_pointList[i] = m_movePts[i] + position - m_moveStartPt; }
+	// Update terminals rigidly attached to transformer body at 40.0 units offset
+	if (m_pointList.size() >= 4) {
+		wxPoint2DDouble t1 = m_position + RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
+		wxPoint2DDouble t2 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+		m_pointList[2] = wxPoint2DDouble(std::round(t1.m_x), std::round(t1.m_y));
+		m_pointList[3] = wxPoint2DDouble(std::round(t2.m_x), std::round(t2.m_y));
+	}
 
 	if (!m_parentList[0]) { m_pointList[0] = m_movePts[0] + position - m_moveStartPt; }
 	if (!m_parentList[1]) {
 		m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
+	}
+
+	UpdateSwitchesPosition();
+	UpdatePowerFlowArrowsPosition();
+}
+
+void Transformer::AlignToGrid(double gridSize)
+{
+	if (gridSize <= 0.0)
+		gridSize = 20.0;
+
+	// 1. Snap center position to grid.
+	m_position.m_x = std::round(m_position.m_x / gridSize) * gridSize;
+	m_position.m_y = std::round(m_position.m_y / gridSize) * gridSize;
+
+	SetPosition(m_position);
+
+	// 2. Rigidly attach terminals at 40.0 units offset.
+	if (m_pointList.size() >= 4) {
+		wxPoint2DDouble t1 = m_position + RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
+		wxPoint2DDouble t2 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+		m_pointList[2] = wxPoint2DDouble(std::round(t1.m_x), std::round(t1.m_y));
+		m_pointList[3] = wxPoint2DDouble(std::round(t2.m_x), std::round(t2.m_y));
+	}
+
+	// Transformer orientation.
+	bool isVertical = (std::abs(m_angle - 90.0) < 1.0 || std::abs(m_angle - 270.0) < 1.0);
+
+	// Check whether a point belongs to the rotated bus rectangle.
+	auto IsPointInsideBus =
+		[](Element* bus, const wxPoint2DDouble& point) -> bool
+		{
+			wxPoint2DDouble delta(point.m_x - bus->GetPosition().m_x, point.m_y - bus->GetPosition().m_y);
+
+			// Transform the point into the local coordinate
+			// system of the bus.
+			wxPoint2DDouble local = bus->RotateLocal(delta, -bus->GetAngle());
+
+			double halfWidth = bus->GetWidth() / 2.0 + 2.0;
+			double halfHeight = bus->GetHeight() / 2.0 + 2.0;
+
+			return std::abs(local.m_x) <= halfWidth && std::abs(local.m_y) <= halfHeight;
+		};
+
+	// 3. Align first bus contact point.
+	if (m_parentList.size() > 0 && m_parentList[0] && !m_pointList.empty()) {
+
+		Element* bus1 = m_parentList[0];
+
+		if (isVertical) {
+			// Candidate point obtained by aligning X with the
+			// transformer center.
+			wxPoint2DDouble candidate(m_position.m_x, bus1->GetPosition().m_y);
+
+			if (IsPointInsideBus(bus1, candidate)) {
+				m_pointList[0].m_x = m_position.m_x;
+			}
+
+			// Snap the longitudinal coordinate to the grid.
+			m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
+		}
+		else {
+			// Candidate point obtained by aligning Y with the
+			// transformer center.
+			wxPoint2DDouble candidate(bus1->GetPosition().m_x, m_position.m_y);
+
+			if (IsPointInsideBus(bus1, candidate)) {
+				m_pointList[0].m_y = m_position.m_y;
+			}
+
+			// Snap the longitudinal coordinate to the grid.
+			m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
+		}
+	}
+	else if (!m_pointList.empty()) {
+		m_pointList[0].m_x = std::round(m_pointList[0].m_x / gridSize) * gridSize;
+
+		m_pointList[0].m_y = std::round(m_pointList[0].m_y / gridSize) * gridSize;
+	}
+
+	// 4. Align second bus contact point.
+	if (m_parentList.size() > 1 &&
+		m_parentList[1] &&
+		!m_pointList.empty()) {
+
+		Element* bus2 = m_parentList[1];
+
+		if (isVertical) {
+			// Candidate point obtained by aligning X with the
+			// transformer center.
+			wxPoint2DDouble candidate(m_position.m_x, bus2->GetPosition().m_y);
+
+			if (IsPointInsideBus(bus2, candidate)) {
+				m_pointList.back().m_x = m_position.m_x;
+			}
+
+			// Snap the longitudinal coordinate to the grid.
+			m_pointList.back().m_y = std::round(m_pointList.back().m_y / gridSize) * gridSize;
+		}
+		else {
+			// Candidate point obtained by aligning Y with the
+			// transformer center.
+			wxPoint2DDouble candidate(bus2->GetPosition().m_x, m_position.m_y);
+
+			if (IsPointInsideBus(bus2, candidate)) {
+				m_pointList.back().m_y = m_position.m_y;
+			}
+
+			// Snap the longitudinal coordinate to the grid.
+			m_pointList.back().m_x = std::round(m_pointList.back().m_x / gridSize) * gridSize;
+		}
+	}
+	else if (m_pointList.size() > 1) {
+		m_pointList.back().m_x = std::round(m_pointList.back().m_x / gridSize) * gridSize;
+
+		m_pointList.back().m_y = std::round(m_pointList.back().m_y / gridSize) * gridSize;
 	}
 
 	UpdateSwitchesPosition();
@@ -450,6 +724,7 @@ bool Transformer::GetContextMenu(wxMenu& menu)
 	textMenu->Append(ID_TXT_BRANCH_CURRENT_2_1, _("Current (") + busName[1] + _(" to ") + busName[0] + wxT(")"));
 	textMenu->Append(ID_TXT_BRANCH_FAULT_CURRENT_1_2, _("Fault current (") + busName[0] + _(" to ") + busName[1] + wxT(")"));
 	textMenu->Append(ID_TXT_BRANCH_FAULT_CURRENT_2_1, _("Fault current (") + busName[1] + _(" to ") + busName[0] + wxT(")"));
+	textMenu->Append(ID_TXT_TAP, _("Tap"));
 	textMenu->SetClientData(menu.GetClientData());
 	menu.AppendSubMenu(textMenu, _("Add text"));
 
@@ -636,6 +911,14 @@ wxString Transformer::GetTipText() const
 		tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
 			wxString::FromDouble(m_electricalData.powerFlow[1].imag(), 5) + _(" p.u.");
 
+		if (m_electricalData.hasTapChanger) {
+			tipText += _("\nOLTC: Enabled (Vset = ") +
+				wxString::FromDouble(m_electricalData.oltcTargetVoltage, 3) +
+				_(" p.u., Tap = ") +
+				wxString::FromDouble(m_electricalData.turnsRatio, 4) +
+				_(" p.u.)");
+		}
+
 		if (!m_electricalData.harmonicOrder.empty()) {
 			tipText += _("\n\nHarmonic currents:");
 			int i = 0;
@@ -682,6 +965,16 @@ TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePowe
 	data.connection = m_electricalData.connection;
 	data.turnsRatio = m_electricalData.turnsRatio;
 	data.phaseShift = m_electricalData.phaseShift;
+
+	data.hasTapChanger = m_electricalData.hasTapChanger;
+	data.nominalTurnsRatio = m_electricalData.nominalTurnsRatio;
+	data.oltcControlledBus = m_electricalData.oltcControlledBus;
+	data.oltcTargetVoltage = m_electricalData.oltcTargetVoltage;
+	data.oltcVoltageDeadband = m_electricalData.oltcVoltageDeadband;
+	data.oltcMinTap = m_electricalData.oltcMinTap;
+	data.oltcMaxTap = m_electricalData.oltcMaxTap;
+	data.oltcTapStep = m_electricalData.oltcTapStep;
+	data.oltcIsDiscrete = m_electricalData.oltcIsDiscrete;
 
 	data.zeroResistance = m_electricalData.zeroResistance;
 	data.zeroIndReactance = m_electricalData.zeroIndReactance;
@@ -848,6 +1141,26 @@ rapidxml::xml_node<>* Transformer::SaveElement(rapidxml::xml_document<>& doc, ra
 	auto useTransformerPower = XMLParser::AppendNode(doc, electricalProp, "UseTransfomerPower");
 	XMLParser::SetNodeValue(doc, useTransformerPower, m_electricalData.useTransformerPower);
 
+	auto oltcNode = XMLParser::AppendNode(doc, electricalProp, "TapChanger");
+	auto hasTapChanger = XMLParser::AppendNode(doc, oltcNode, "Enabled");
+	XMLParser::SetNodeValue(doc, hasTapChanger, m_electricalData.hasTapChanger ? 1 : 0);
+	auto nominalTurnsRatio = XMLParser::AppendNode(doc, oltcNode, "NominalTurnsRatio");
+	XMLParser::SetNodeValue(doc, nominalTurnsRatio, m_electricalData.nominalTurnsRatio);
+	auto oltcControlledBus = XMLParser::AppendNode(doc, oltcNode, "ControlledBus");
+	XMLParser::SetNodeValue(doc, oltcControlledBus, m_electricalData.oltcControlledBus);
+	auto oltcTargetVoltage = XMLParser::AppendNode(doc, oltcNode, "TargetVoltage");
+	XMLParser::SetNodeValue(doc, oltcTargetVoltage, m_electricalData.oltcTargetVoltage);
+	auto oltcVoltageDeadband = XMLParser::AppendNode(doc, oltcNode, "VoltageDeadband");
+	XMLParser::SetNodeValue(doc, oltcVoltageDeadband, m_electricalData.oltcVoltageDeadband);
+	auto oltcMinTap = XMLParser::AppendNode(doc, oltcNode, "MinTap");
+	XMLParser::SetNodeValue(doc, oltcMinTap, m_electricalData.oltcMinTap);
+	auto oltcMaxTap = XMLParser::AppendNode(doc, oltcNode, "MaxTap");
+	XMLParser::SetNodeValue(doc, oltcMaxTap, m_electricalData.oltcMaxTap);
+	auto oltcTapStep = XMLParser::AppendNode(doc, oltcNode, "TapStep");
+	XMLParser::SetNodeValue(doc, oltcTapStep, m_electricalData.oltcTapStep);
+	auto oltcIsDiscrete = XMLParser::AppendNode(doc, oltcNode, "IsDiscrete");
+	XMLParser::SetNodeValue(doc, oltcIsDiscrete, m_electricalData.oltcIsDiscrete ? 1 : 0);
+
 	auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
 	auto zeroResistance = XMLParser::AppendNode(doc, fault, "ZeroResistance");
 	XMLParser::SetNodeValue(doc, zeroResistance, m_electricalData.zeroResistance);
@@ -878,7 +1191,7 @@ bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Ele
 	auto size = cadPropNode->first_node("Size");
 	m_width = XMLParser::GetNodeValueDouble(size, "Width");
 	m_height = XMLParser::GetNodeValueDouble(size, "Height");
-	double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
+	m_angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
 	// Get nodes points
 	std::vector<wxPoint2DDouble> ptsList;
@@ -916,10 +1229,10 @@ bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Ele
 		{
 			Bus* dummyBus = new Bus(nodePtsList[i]);
 			dummyBusList.push_back(dummyBus);
-			AddParent(dummyBus, nodePtsList[i]);
+			AddParent(dummyBus, nodePtsList[i], true);
 		}
 		else {  // Parent connected (necessarily a bus, get from bus list)
-			AddParent(parentList[parentID[i]], nodePtsList[i]);
+			AddParent(parentList[parentID[i]], nodePtsList[i], true);
 		}
 	}
 
@@ -934,13 +1247,13 @@ bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Ele
 	dummyBusList.clear();
 
 	// Set rotation properly.
-	int numRot = angle / GetRotationAngle();
-	bool clockwise = true;
-	if (numRot < 0) {
-		numRot = std::abs(numRot);
-		clockwise = false;
-	}
-	for (int i = 0; i < numRot; i++) Rotate(clockwise);
+	//int numRot = angle / GetRotationAngle();
+	//bool clockwise = true;
+	//if (numRot < 0) {
+	//	numRot = std::abs(numRot);
+	//	clockwise = false;
+	//}
+	//for (int i = 0; i < numRot; i++) Rotate(clockwise);
 
 	auto electricalProp = elementNode->first_node("ElectricalProperties");
 	if (!electricalProp) return false;
@@ -967,6 +1280,42 @@ bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Ele
 	m_electricalData.phaseShift = XMLParser::GetNodeValueDouble(electricalProp, "PhaseShift");
 	m_electricalData.useTransformerPower = XMLParser::GetNodeValueInt(electricalProp, "UseTransfomerPower");
 
+	auto oltcNode = electricalProp->first_node("TapChanger");
+	if (oltcNode) {
+		m_electricalData.hasTapChanger = XMLParser::GetNodeValueInt(oltcNode, "Enabled") == 1;
+		auto nomNode = oltcNode->first_node("NominalTurnsRatio");
+		if (nomNode) wxString(nomNode->value()).ToCDouble(&m_electricalData.nominalTurnsRatio);
+		else m_electricalData.nominalTurnsRatio = m_electricalData.turnsRatio;
+		auto ctrlBusNode = oltcNode->first_node("ControlledBus");
+		if (ctrlBusNode) {
+			long cb = 1;
+			wxString(ctrlBusNode->value()).ToCLong(&cb);
+			m_electricalData.oltcControlledBus = (int)cb;
+		}
+		auto targetVNode = oltcNode->first_node("TargetVoltage");
+		if (targetVNode) wxString(targetVNode->value()).ToCDouble(&m_electricalData.oltcTargetVoltage);
+		auto deadbandNode = oltcNode->first_node("VoltageDeadband");
+		if (deadbandNode) wxString(deadbandNode->value()).ToCDouble(&m_electricalData.oltcVoltageDeadband);
+		auto minTapNode = oltcNode->first_node("MinTap");
+		if (minTapNode) wxString(minTapNode->value()).ToCDouble(&m_electricalData.oltcMinTap);
+		auto maxTapNode = oltcNode->first_node("MaxTap");
+		if (maxTapNode) wxString(maxTapNode->value()).ToCDouble(&m_electricalData.oltcMaxTap);
+		auto tapStepNode = oltcNode->first_node("TapStep");
+		if (tapStepNode) wxString(tapStepNode->value()).ToCDouble(&m_electricalData.oltcTapStep);
+		m_electricalData.oltcIsDiscrete = XMLParser::GetNodeValueInt(oltcNode, "IsDiscrete") == 1;
+	}
+	else {
+		m_electricalData.hasTapChanger = false;
+		m_electricalData.nominalTurnsRatio = m_electricalData.turnsRatio;
+		m_electricalData.oltcControlledBus = 1;
+		m_electricalData.oltcTargetVoltage = 1.0;
+		m_electricalData.oltcVoltageDeadband = 0.005;
+		m_electricalData.oltcMinTap = 0.90;
+		m_electricalData.oltcMaxTap = 1.10;
+		m_electricalData.oltcTapStep = 0.00625;
+		m_electricalData.oltcIsDiscrete = false;
+	}
+
 	auto fault = electricalProp->first_node("Fault");
 	m_electricalData.zeroResistance = XMLParser::GetNodeValueDouble(fault, "ZeroResistance");
 	m_electricalData.zeroIndReactance = XMLParser::GetNodeValueDouble(fault, "ZeroIndReactance");
@@ -985,10 +1334,65 @@ void Transformer::SetBestPositionAndRotation()
 {
 	wxPoint2DDouble p1 = m_pointList[0];
 	wxPoint2DDouble p2 = m_pointList[m_pointList.size() - 1];
+	double dx = p2.m_x - p1.m_x;
+	double dy = p2.m_y - p1.m_y;
+
+	if (std::abs(dy) > std::abs(dx)) {
+		m_angle = (dy >= 0.0) ? 90.0 : 270.0;
+	}
+	else {
+		m_angle = (dx >= 0.0) ? 0.0 : 180.0;
+	}
+
 	wxPoint2DDouble mid = (p1 + p2) / 2.0;
-	StartMove(m_position);
-	Move(mid);
-	double bestAngle = wxRadToDeg(std::atan2(p2.m_y - p1.m_y, p2.m_x - p1.m_x));
-	bool clockwise = bestAngle > 0 ? true : false;
-	while (std::abs(m_angle) < std::abs(bestAngle)) { Rotate(clockwise); }
+	if (std::abs(dx) < 1.0) {
+		mid.m_x = p1.m_x;
+		mid.m_y = std::round(mid.m_y / 20.0) * 20.0;
+	}
+	else if (std::abs(dy) < 1.0) {
+		mid.m_y = p1.m_y;
+		mid.m_x = std::round(mid.m_x / 20.0) * 20.0;
+	}
+	else {
+		mid.m_x = std::round(mid.m_x / 20.0) * 20.0;
+		mid.m_y = std::round(mid.m_y / 20.0) * 20.0;
+	}
+
+	SetPosition(mid);
+
+	if (m_parentList.size() > 0 && m_parentList[0] && m_parentList.size() > 1 && m_parentList[1]) {
+		Element* bus1 = m_parentList[0];
+		Element* bus2 = m_parentList[1];
+		if (std::abs(dy) > std::abs(dx)) {
+			wxPoint2DDouble loc1 = bus1->RotateAtPosition(wxPoint2DDouble(m_position.m_x, bus1->GetPosition().m_y), -bus1->GetAngle());
+			wxPoint2DDouble loc2 = bus2->RotateAtPosition(wxPoint2DDouble(m_position.m_x, bus2->GetPosition().m_y), -bus2->GetAngle());
+			double halfW1 = bus1->GetWidth() / 2.0 + 2.0;
+			double halfW2 = bus2->GetWidth() / 2.0 + 2.0;
+			if (std::abs(loc1.m_x - bus1->GetPosition().m_x) <= halfW1 &&
+				std::abs(loc2.m_x - bus2->GetPosition().m_x) <= halfW2) {
+				m_pointList[0].m_x = m_position.m_x;
+				m_pointList.back().m_x = m_position.m_x;
+			}
+		}
+		else {
+			wxPoint2DDouble loc1 = bus1->RotateAtPosition(wxPoint2DDouble(bus1->GetPosition().m_x, m_position.m_y), -bus1->GetAngle());
+			wxPoint2DDouble loc2 = bus2->RotateAtPosition(wxPoint2DDouble(bus2->GetPosition().m_x, m_position.m_y), -bus2->GetAngle());
+			double halfW1 = bus1->GetWidth() / 2.0 + 2.0;
+			double halfW2 = bus2->GetWidth() / 2.0 + 2.0;
+			if (std::abs(loc1.m_x - bus1->GetPosition().m_x) <= halfW1 &&
+				std::abs(loc2.m_x - bus2->GetPosition().m_x) <= halfW2) {
+				m_pointList[0].m_y = m_position.m_y;
+				m_pointList.back().m_y = m_position.m_y;
+			}
+		}
+	}
+
+	if (m_pointList.size() >= 4) {
+		wxPoint2DDouble t1 = m_position + RotateLocal(wxPoint2DDouble(-40.0, 0.0), m_angle);
+		wxPoint2DDouble t2 = m_position + RotateLocal(wxPoint2DDouble(40.0, 0.0), m_angle);
+		m_pointList[2] = wxPoint2DDouble(std::round(t1.m_x), std::round(t1.m_y));
+		m_pointList[3] = wxPoint2DDouble(std::round(t2.m_x), std::round(t2.m_y));
+	}
+	UpdateSwitchesPosition();
+	UpdatePowerFlowArrowsPosition();
 }

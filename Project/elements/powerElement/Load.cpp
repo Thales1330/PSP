@@ -31,7 +31,7 @@ Load::Load(wxString name) : Shunt()
 
 Load::~Load() {}
 
-bool Load::AddParent(Element* parent, wxPoint2DDouble position)
+bool Load::AddParent(Element* parent, wxPoint2DDouble position, bool isOpening)
 {
 	if (parent) {
 		m_parentList.push_back(parent);
@@ -71,10 +71,10 @@ void Load::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scal
 {
 	wxColour elementColour;
 	if (m_online) {
-		if (m_dynEvent)
-			elementColour = guiColour->eventElement;
-		else
-			elementColour = guiColour->enabled;
+		//if (m_dynEvent)
+		//	elementColour = guiColour->eventElement;
+		//else
+		elementColour = guiColour->enabled;
 	}
 	else
 		elementColour = guiColour->disable;
@@ -133,6 +133,10 @@ void Load::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scal
 		gc->SetBrush(wxBrush(elementColour));
 		DrawDCTriangle(triangPts, gc);
 		gc->PopState();
+
+		if (m_dynEvent) {
+			DrawStabilityEventGC(gc, translation, scale, guiColour);
+		}
 	}
 }
 

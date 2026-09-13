@@ -56,7 +56,8 @@ enum DataType {
 	DATA_PF_REACTIVE,
 	DATA_PF_LOSSES,
 	DATA_PF_CURRENT,
-	DATA_PQ_THD
+	DATA_PQ_THD,
+	DATA_TRANSFORMER_TAP
 };
 
 /**
@@ -74,7 +75,7 @@ public:
 	~Text();
 
 	virtual Element* GetCopy();
-	virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; };
+	virtual bool AddParent(Element* parent, wxPoint2DDouble position, bool isOpening = false) { return true; };
 	virtual bool Contains(wxPoint2DDouble position) const;
 	//virtual void Draw(wxPoint2DDouble translation, double scale);
 	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc);

@@ -20,8 +20,34 @@
 #include <wx/font.h>
 #include <wx/stdpaths.h>
 #include <wx/app.h>
+#include <wx/tokenzr.h>
+#include <wx/imaglist.h>
+#include <wx/dcmemory.h>
+#include <algorithm>
 #include "../utils/PropertiesData.h"
 
+
+static bool ParseVoltageDouble(const wxString& str, double& value)
+{
+	wxString s = str;
+	s.Trim().Trim(false);
+	if (s.IsEmpty()) return false;
+
+	// 1. Try standard ToDouble (respects current locale, e.g. "230,00" in pt_BR)
+	if (s.ToDouble(&value)) return true;
+
+	// 2. Try converting comma to dot via ToCDouble (e.g. "230.00" or "230,00" -> "230.00")
+	wxString sDot = s;
+	sDot.Replace(wxT(","), wxT("."));
+	if (sDot.ToCDouble(&value)) return true;
+
+	// 3. Try converting dot to comma via ToDouble (e.g. "230.00" -> "230,00" in pt_BR)
+	wxString sComma = s;
+	sComma.Replace(wxT("."), wxT(","));
+	if (sComma.ToDouble(&value)) return true;
+
+	return false;
+}
 
 GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* properties)
 	: GeneralPropertiesFormBase(parent)
@@ -42,7 +68,7 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	m_choicePlotLib->Clear();
 	m_choicePlotLib->Insert(_("Chart Director"), 0);
 	m_choicePlotLib->Insert(_("wxMathPlot"), 1);
-	
+
 	switch (data.language) {
 	case wxLANGUAGE_ENGLISH: {
 		m_choiceLanguage->SetSelection(0);
@@ -73,13 +99,36 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	//if (data.useOpenGL) m_choiceRender->SetSelection(0);
 	//else m_choiceRender->SetSelection(1);
 	m_filePickerATPFolder->SetPath(data.atpPath.GetFullPath());
-
+	m_choiceElementToolbar->SetSelection(data.elementsToolbar);
 
 	wxFont currentFont(data.labelFontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, data.labelFont);
 	m_fontPickerText->SetSelectedFont(currentFont);
+
+	// Buses colour tab setup
+	m_checkBoxUseBusColours->SetValue(data.useBusVoltageColours);
+	EnableBusColoursControls(data.useBusVoltageColours);
+	m_voltageLevels = data.voltageLevels;
+	if (m_voltageLevels.empty()) {
+		m_voltageLevels = PropertiesData::GetDefaultVoltageLevels();
+	}
+
+	m_listCtrlVoltages->InsertColumn(0, wxEmptyString, wxLIST_FORMAT_LEFT, 110);
+	m_listCtrlVoltages->InsertColumn(1, wxEmptyString, wxLIST_FORMAT_LEFT, 110);
+
+	PopulateVoltageList();
+
+	if (GetSizer()) {
+		GetSizer()->Fit(this);
+	}
+	Layout();
+	SetMinSize(wxSize(480, 380));
+	Fit();
+	Centre();
 }
 
-GeneralPropertiesForm::~GeneralPropertiesForm() {}
+GeneralPropertiesForm::~GeneralPropertiesForm()
+{
+}
 void GeneralPropertiesForm::OnButtonOKClick(wxCommandEvent& event)
 {
 	if (ValidateData()) EndModal(wxID_OK);
@@ -95,79 +144,48 @@ bool GeneralPropertiesForm::ValidateData()
 	data.labelFont = slectedFont.GetFaceName();
 	data.labelFontSize = slectedFont.GetPointSize();
 
-	//wxTextFile file("config.ini");
-	wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
-	wxTextFile file(fn.GetFullPath());
-	if (!file.Create()) {
-		if (!file.Open()) {
-			// Fail to access the file.
-			wxMessageDialog msgDialog(this,
-				_("It was not possible to access the init file.\nThe settings won't be applied."),
-				_("Error"), wxOK | wxCENTRE | wxICON_ERROR);
-			msgDialog.ShowModal();
-		}
-		file.Clear();
-	}
-
-	wxString line = "lang=";
 	switch (m_choiceLanguage->GetSelection()) {
 	case 0: {
-		line += "en";
 		data.language = wxLANGUAGE_ENGLISH;
 	} break;
 	case 1: {
-		line += "pt-br";
 		data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
 	} break;
 	}
-	file.AddLine(line);
 	if (data.language != checkData.language) needRestart = true;
 
-	line = "plotlib=";
 	switch (m_choicePlotLib->GetSelection()) {
 	case 0: {
-		line += "chartdir";
 		data.plotLib = PlotLib::wxCHART_DIR;
 	} break;
 	case 1: {
-		line += "mathplot";
 		data.plotLib = PlotLib::wxMATH_PLOT;
 	} break;
 	}
-	file.AddLine(line);
-	//if (data.plotLib != checkData.plotLib) hasChanges = true;
 
-	line = "theme=";
 	switch (m_choiceTheme->GetSelection()) {
 	case 0: {
-		line += "light";
 		data.theme = THEME_LIGHT;
 		wxTheApp->SetAppearance(wxApp::Appearance::Light);
 	} break;
 	case 1: {
-		line += "dark";
 		data.theme = THEME_DARK;
 		wxTheApp->SetAppearance(wxApp::Appearance::Dark);
 	} break;
 	}
-	file.AddLine(line);
 	if (data.theme != checkData.theme) needRestart = true;
 
-	line = "labelfont=";
-	line += data.labelFont;
-	file.AddLine(line);
+	data.elementsToolbar = static_cast<ElementsToolbar>(m_choiceElementToolbar->GetSelection());
 
-	line = "labelfontsize=";
-	line += wxString::Format("%d", data.labelFontSize);
-	file.AddLine(line);
+	data.useBusVoltageColours = m_checkBoxUseBusColours->GetValue();
+	data.voltageLevels = m_voltageLevels;
 
-
-	line = "atpfile=";
-	line += data.atpPath.GetFullPath();
-	file.AddLine(line);	
-
-	file.Write();
-	file.Close();
+	if (!PropertiesData::SaveConfigFile(data)) {
+		wxMessageDialog msgDialog(this,
+			_("It was not possible to access the init file.\nThe settings won't be applied."),
+			_("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+		msgDialog.ShowModal();
+	}
 
 	if (needRestart) {
 		wxMessageDialog msgDialog(this, _("The application must be restarted to settings changes be applied."),
@@ -189,4 +207,121 @@ void GeneralPropertiesForm::OnThemeSelected(wxCommandEvent& event)
 		wxTheApp->SetAppearance(wxApp::Appearance::Dark);
 		break;
 	}
+}
+
+void GeneralPropertiesForm::PopulateVoltageList()
+{
+	m_listCtrlVoltages->DeleteAllItems();
+
+	wxImageList* imgList = new wxImageList(16, 16, true);
+
+	for (size_t i = 0; i < m_voltageLevels.size(); ++i) {
+		const auto& lvl = m_voltageLevels[i];
+
+		wxBitmap bmp(16, 16);
+		wxMemoryDC memDC(bmp);
+		memDC.SetPen(*wxTRANSPARENT_PEN);
+		memDC.SetBrush(wxBrush(lvl.colour));
+		memDC.DrawRectangle(0, 0, 16, 16);
+
+		memDC.SetPen(wxPen(wxColour(120, 120, 120), 1));
+		memDC.SetBrush(*wxTRANSPARENT_BRUSH);
+		memDC.DrawRectangle(0, 0, 16, 16);
+		memDC.SelectObject(wxNullBitmap);
+
+		int imgIdx = imgList->Add(bmp);
+
+		long itemIndex = m_listCtrlVoltages->InsertItem(static_cast<long>(i), wxString::Format(wxT("%.2f"), lvl.voltage));
+		m_listCtrlVoltages->SetItem(itemIndex, 1, lvl.colour.GetAsString(wxC2S_HTML_SYNTAX), imgIdx);
+	}
+
+	m_listCtrlVoltages->AssignImageList(imgList, wxIMAGE_LIST_SMALL);
+}
+
+void GeneralPropertiesForm::EnableBusColoursControls(bool enable)
+{
+	m_listCtrlVoltages->Enable(enable);
+	m_textCtrlVoltage->Enable(enable);
+	m_colourPickerBus->Enable(enable);
+	m_buttonAddVoltage->Enable(enable);
+	m_buttonRemoveVoltage->Enable(enable);
+	m_buttonDefaultVoltages->Enable(enable);
+}
+
+void GeneralPropertiesForm::OnVoltageItemSelected(wxListEvent& event)
+{
+	long itemIndex = event.GetIndex();
+	if (itemIndex >= 0 && static_cast<size_t>(itemIndex) < m_voltageLevels.size()) {
+		const auto& lvl = m_voltageLevels[itemIndex];
+		m_textCtrlVoltage->SetValue(wxString::Format(wxT("%.2f"), lvl.voltage));
+		m_colourPickerBus->SetColour(lvl.colour);
+	}
+}
+
+void GeneralPropertiesForm::OnButtonAddVoltage(wxCommandEvent& event)
+{
+	wxString vStr = m_textCtrlVoltage->GetValue();
+	double v = 0.0;
+
+	if (!ParseVoltageDouble(vStr, v) || v <= 0.0) {
+		wxMessageDialog msgDialog(this, _("Please enter a valid voltage value in kV."), _("Warning"), wxOK | wxICON_WARNING);
+		msgDialog.ShowModal();
+		return;
+	}
+
+	wxColour col = m_colourPickerBus->GetColour();
+
+	bool found = false;
+	for (auto& lvl : m_voltageLevels) {
+		if (std::abs(lvl.voltage - v) < 0.001) {
+			lvl.colour = col;
+			found = true;
+			break;
+		}
+	}
+
+	if (!found) {
+		m_voltageLevels.push_back({ v, col });
+	}
+
+	std::sort(m_voltageLevels.begin(), m_voltageLevels.end(), [](const VoltageLevelColour& a, const VoltageLevelColour& b) {
+		return a.voltage > b.voltage;
+		});
+
+	PopulateVoltageList();
+
+	for (size_t i = 0; i < m_voltageLevels.size(); ++i) {
+		if (std::abs(m_voltageLevels[i].voltage - v) < 0.001) {
+			m_listCtrlVoltages->SetItemState(static_cast<long>(i), wxLIST_STATE_SELECTED | wxLIST_STATE_FOCUSED, wxLIST_STATE_SELECTED | wxLIST_STATE_FOCUSED);
+			m_listCtrlVoltages->EnsureVisible(static_cast<long>(i));
+			break;
+		}
+	}
+}
+
+void GeneralPropertiesForm::OnButtonRemoveVoltage(wxCommandEvent& event)
+{
+	long itemIndex = m_listCtrlVoltages->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+	if (itemIndex >= 0 && static_cast<size_t>(itemIndex) < m_voltageLevels.size()) {
+		m_voltageLevels.erase(m_voltageLevels.begin() + itemIndex);
+		PopulateVoltageList();
+		m_textCtrlVoltage->Clear();
+	}
+	else {
+		wxMessageDialog msgDialog(this, _("Select a voltage level from the list to remove."), _("Warning"), wxOK | wxICON_WARNING);
+		msgDialog.ShowModal();
+	}
+}
+
+void GeneralPropertiesForm::OnButtonDefaultVoltages(wxCommandEvent& event)
+{
+	m_voltageLevels = PropertiesData::GetDefaultVoltageLevels();
+	PopulateVoltageList();
+	m_textCtrlVoltage->Clear();
+}
+
+void GeneralPropertiesForm::OnUseBusColoursClick(wxCommandEvent& event)
+{
+	EnableBusColoursControls(event.GetSelection());
+	event.Skip();
 }

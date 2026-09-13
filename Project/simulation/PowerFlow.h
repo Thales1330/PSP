@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -28,8 +28,9 @@
  /**
   * @class PowerFlow
   * @author Thales Lima Oliveira <thales@ufu.br>
+  * @author Luiz Gonzaga Rocha Junior <luizgrj@gmail.com>
   * @date 06/10/2017
-  * @brief Calculate the power flow.
+  * @brief Calculate the power flow (including OLTC tap adjustment).
   * @file PowerFlow.h
   */
 class PowerFlow : public ElectricCalculation
@@ -104,11 +105,13 @@ protected:
 		std::vector<std::complex<double> >& power);
 
 	bool HasInvalidValue(const std::vector< std::complex<double> >& voltage);
+	bool AdjustTapChangers(const std::vector<std::complex<double> >& voltage, double systemPowerBase);
 
 	std::vector<std::vector<std::complex<double> > > m_yBus;
 	wxString m_errorMsg = "";
 	int m_numberOfBuses = 0;
 	int m_iterations = 0;
+	int m_tapAdjustmentsCount = 0;
 };
 
 #endif  // POWERFLOW_H

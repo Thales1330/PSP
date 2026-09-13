@@ -25,6 +25,7 @@
 //#include <wx/glcanvas.h>
 
 #include "MainFrameBase.h"
+#include "utils/CommomTypes.h"
 
 class MainFrameBase;
 class wxRibbonMetroArtProvider;
@@ -38,6 +39,7 @@ class DataReport;
 class AboutForm;
 class ImportForm;
 class StabilityEventList;
+class ElementsToolBar;
 
 enum {
     ID_ADDMENU_BUS = 20000,
@@ -88,7 +90,14 @@ class MainFrame : public MainFrameBase
     
     int RunPSPTest();
 
+    void OnAddElementsClick(wxCommandEvent& event);
+    void BuildElementsToolBar(ElementsToolbar style);
+    void OnElementsToolBarClosed();
+    ElementsToolBar* GetElementsToolBar() { return m_elementsToolBar; }
+
    protected:
+    virtual void OnGridClick(wxRibbonButtonBarEvent& event) override;
+    virtual void OnAlignClick(wxRibbonButtonBarEvent& event) override;
     virtual void OnLabelMngrClick(wxRibbonButtonBarEvent& event);
     virtual void OnSnapshotDropdown(wxRibbonButtonBarEvent& event);
     virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event);
@@ -143,13 +152,14 @@ class MainFrame : public MainFrameBase
     wxMenu* m_snapshotMenu = nullptr;
     wxLocale* m_locale = nullptr;
     PropertiesData* m_generalProperties = nullptr;
-    //wxGLContext* m_sharedGLContext = nullptr;
+    ElementsToolBar* m_elementsToolBar = nullptr;
+    bool m_elementsToolBarPositioned = false;
+    void PositionElementsToolBar();
 
     void Init();
     void EnableCurrentProjectRibbon(bool enable = true);
     void CreateDropdownMenus();
 
-    void OnAddElementsClick(wxCommandEvent& event);
     void OnStabilityMenuClick(wxCommandEvent& event);
 	void OnSnapshotMenuClick(wxCommandEvent& event);
 };

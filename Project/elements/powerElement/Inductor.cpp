@@ -31,7 +31,7 @@ Inductor::Inductor(wxString name) : Shunt()
 
 Inductor::~Inductor() {}
 
-bool Inductor::AddParent(Element* parent, wxPoint2DDouble position)
+bool Inductor::AddParent(Element* parent, wxPoint2DDouble position, bool isOpening)
 {
 	if (parent) {
 		m_parentList.push_back(parent);
@@ -125,10 +125,10 @@ void Inductor::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double 
 {
 	wxColour elementColour;
 	if (m_online) {
-		if (m_dynEvent)
-			elementColour = guiColour->eventElement;
-		else
-			elementColour = guiColour->enabled;
+		//if (m_dynEvent)
+		//	elementColour = guiColour->eventElement;
+		//else
+		elementColour = guiColour->enabled;
 	}
 	else
 		elementColour = guiColour->disable;
@@ -187,6 +187,10 @@ void Inductor::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double 
 		DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 50.0), gc);
 
 		gc->PopState();
+
+		if (m_dynEvent) {
+			DrawStabilityEventGC(gc, translation, scale, guiColour);
+		}
 	}
 }
 

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -22,6 +22,10 @@
 
 #include <wx/textfile.h>
 #include <wx/msgdlg.h>
+#include <wx/clrpicker.h>
+#include <wx/listctrl.h>
+#include <vector>
+#include "../utils/CommomTypes.h"
 
 class PropertiesData;
 
@@ -41,10 +45,20 @@ public:
 	virtual ~GeneralPropertiesForm();
 
 protected:
-    virtual void OnThemeSelected(wxCommandEvent& event);
+	void OnUseBusColoursClick(wxCommandEvent& event) override;
+	void OnButtonAddVoltage(wxCommandEvent& event) override;
+	void OnButtonDefaultVoltages(wxCommandEvent& event) override;
+	void OnButtonRemoveVoltage(wxCommandEvent& event) override;
+	void OnVoltageItemSelected(wxListEvent& event) override;
+	virtual void OnThemeSelected(wxCommandEvent& event);
 	virtual void OnButtonCancelClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
 	virtual void OnButtonOKClick(wxCommandEvent& event);
 	virtual bool ValidateData();
+	void PopulateVoltageList();
+	void EnableBusColoursControls(bool enable = true);
+
+
+	std::vector<VoltageLevelColour> m_voltageLevels;
 
 	PropertiesData* m_properties = nullptr;
 };

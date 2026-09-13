@@ -114,18 +114,20 @@ public:
 	 * \param position Position of the parent element.
 	 * \return True.
 	 */
-	virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; }
+	virtual bool AddParent(Element* parent, wxPoint2DDouble position, bool isOpening = false) { return true; }
 	virtual bool Contains(wxPoint2DDouble position) const;
 	virtual bool Intersects(wxRect2DDouble rect) const;
 	//virtual void Draw(wxPoint2DDouble translation, double scale) const;
 	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
 	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const;
 	virtual void Rotate(bool clockwise = true);
+	virtual void AlignToGrid(double gridSize = 20.0) override;
 	virtual wxCursor GetBestPickboxCursor() const;
 	virtual void MovePickbox(wxPoint2DDouble position);
 	virtual bool PickboxContains(wxPoint2DDouble position);
 	virtual bool GetContextMenu(wxMenu& menu);
 	virtual wxString GetTipText() const;
+	virtual wxColour GetVoltageColour(GUIColour* guiColour = nullptr) const;
 	virtual BusElectricalData GetElectricalData() const { return m_electricalData; }
 	virtual BusElectricalData& GetElectricalDataRef() { return m_electricalData; }
 	virtual void SetElectricalData(const BusElectricalData& electricalData) { m_electricalData = electricalData; }

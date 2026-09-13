@@ -97,6 +97,7 @@ Besides these two contexts, the "Stability" button can be seen in the lower left
   values={[
     {label: 'General', value: 'general'},
     {label: 'Fault', value: 'fault'},
+    {label: 'Tap Changer (OLTC)', value: 'oltc'},
     {label: 'Stability Button', value: 'stability'},
   ]}
 >
@@ -164,6 +165,32 @@ Failure to enter these data will result in incorrect results for [unbalanced fau
 
 #### Grounding impedances
 Grounding impedances are only used for $Y_{grounded}$ connection and must be entered in $p.u.$
+
+</TabItem>
+<TabItem value="oltc">
+
+#### Enable On-Load Tap Changer (OLTC)
+Enables automatic tap adjustment during [power flow](powerFlow) calculations to regulate the voltage of the designated bus within the specified range.
+
+#### Controlled Bus
+Defines which terminal of the transformer has its voltage regulated:
+- **Secondary (Bus 2)**: Most common in distribution and transmission step-down substations, keeping load voltage regulated.
+- **Primary (Bus 1)**: Regulates the primary terminal voltage.
+
+#### Target Voltage ($V_{set}$)
+The desired voltage magnitude setpoint in $p.u.$ (e.g. $1.0~p.u.$) that the OLTC attempts to maintain at the controlled bus.
+
+#### Voltage Deadband (Tolerance)
+Tolerance band around the target voltage (in $p.u.$) to avoid unnecessary hunting or cycling between adjacent tap positions (default is $0.005~p.u.$).
+
+#### Minimum and Maximum Tap
+Operating limits for the turns ratio $a$ in $p.u.$:
+- **Minimum Tap ($Tap_{min}$)**: Lower allowable tap ratio (typically $0.90~p.u.$).
+- **Maximum Tap ($Tap_{max}$)**: Upper allowable tap ratio (typically $1.10~p.u.$).
+
+#### Discrete Tap Positions
+When checked, the tap varies in discrete mechanical steps rather than continuously.
+- **Tap step size**: The size of each discrete tap increment in $p.u.$ (e.g. $0.00625~p.u.$ for standard 32-step $\pm 10\%$ regulators, corresponding to $5/8\%$).
 
 </TabItem>
 <TabItem value="stability">

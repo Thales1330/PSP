@@ -70,7 +70,7 @@ struct SimulationData {
 	double underVoltageConstCurrent = 70.0;
 	double underVoltageConstPower = 70.0;
 
-	// Hamonics
+	// Harmonics
 	HarmLoadConnection harmLoadConnection = HarmLoadConnection::PARALLEL;
 };
 
@@ -83,6 +83,9 @@ struct GeneralData {
 	int labelFontSize = 10;
 	wxFileName atpPath;
 	wxString atpWorkFolder = "";
+	ElementsToolbar elementsToolbar = VERTICAL;
+	bool useBusVoltageColours = false;
+	std::vector<VoltageLevelColour> voltageLevels;
 };
 
 struct FreqResponseData {
@@ -105,15 +108,19 @@ public:
 	PropertiesData();
 	~PropertiesData();
 
+	static std::vector<VoltageLevelColour> GetDefaultVoltageLevels();
+
 	GUIColour* GetGUIColour() { return &m_guiColour; }
 	void SetGUIColourTheme();
 	SimulationData GetSimulationPropertiesData() const { return m_simulData; }
 	void SetSimulationPropertiesData(SimulationData simulationData) { m_simulData = simulationData; }
 	GeneralData GetGeneralPropertiesData() const { return m_genData; }
-	void SetGeneralPropertiesData(GeneralData generalData) { m_genData = generalData; }
+	void SetGeneralPropertiesData(GeneralData generalData);
 
 	void SetFreqRespData(const FreqResponseData& freqRespData) { this->m_freqRespData = freqRespData; }
 	const FreqResponseData& GetFreqRespData() const { return m_freqRespData; }
+
+	static bool SaveConfigFile(const GeneralData& data);
 
 protected:
 	GUIColour m_guiColour;

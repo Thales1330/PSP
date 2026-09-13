@@ -18,6 +18,8 @@
 #include "PropertiesData.h"
 
 #include <wx/msgdlg.h>
+#include <wx/textfile.h>
+#include <wx/stdpaths.h>
 
 PropertiesData::PropertiesData() { SetGUIColourTheme(); }
 PropertiesData::~PropertiesData() {}
@@ -43,6 +45,7 @@ void PropertiesData::SetGUIColourTheme()
 
 		m_guiColour.swClose = wxColour(35, 150, 45);
 		m_guiColour.swOpen = wxColour(225, 55, 55);
+		m_guiColour.grid = wxColour(220, 222, 225);
 	}
 	else if (m_genData.theme == THEME_DARK)
 	{
@@ -63,5 +66,130 @@ void PropertiesData::SetGUIColourTheme()
 
 		m_guiColour.swClose = wxColour(60, 180, 70);
 		m_guiColour.swOpen = wxColour(235, 85, 85);
+		m_guiColour.grid = wxColour(60, 64, 72);
 	}
+
+	if (m_genData.voltageLevels.empty()) {
+		m_genData.voltageLevels = GetDefaultVoltageLevels();
+	}
+	m_guiColour.voltageLevels = m_genData.voltageLevels;
+	m_guiColour.useVoltageLevels = m_genData.useBusVoltageColours;
+}
+
+std::vector<VoltageLevelColour> PropertiesData::GetDefaultVoltageLevels()
+{
+	return {
+	{ 500.0, wxColour(198, 40, 40) },    // 500 kV - Dark red
+	{ 440.0, wxColour(224, 90, 42) },    // 440 kV - Orange-red
+	{ 345.0, wxColour(242, 177, 52) },   // 345 kV - Amber
+	{ 230.0, wxColour(67, 176, 92) },    // 230 kV - Green
+	{ 138.0, wxColour(40, 105, 235) },   // 138 kV - Blue
+	{ 69.0,  wxColour(0, 180, 220) },    // 69 kV - Cyan
+	{ 34.5,  wxColour(0, 106, 106) },    // 34.5 kV - Teal
+	{ 13.8,  wxColour(94, 53, 177) },    // 13.8 kV - Violet
+	{ 4.16,  wxColour(158, 62, 172) },   // 4.16 kV - Purple
+	{ 0.38,  wxColour(151, 132, 208) }   // 0.38 kV (380 V) - Light purple
+	};
+}
+
+void PropertiesData::SetGeneralPropertiesData(GeneralData generalData)
+{
+	m_genData = generalData;
+	if (m_genData.voltageLevels.empty()) {
+		m_genData.voltageLevels = GetDefaultVoltageLevels();
+	}
+	m_guiColour.voltageLevels = m_genData.voltageLevels;
+}
+
+bool PropertiesData::SaveConfigFile(const GeneralData& data)
+{
+	wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
+	if (!fn.DirExists()) {
+		fn.Mkdir();
+	}
+	wxTextFile file(fn.GetFullPath());
+	if (!file.Create()) {
+		if (!file.Open()) {
+			return false;
+		}
+		file.Clear();
+	}
+
+	wxString line = "lang=";
+	switch (data.language) {
+	case wxLANGUAGE_PORTUGUESE_BRAZILIAN:
+		line += "pt-br";
+		break;
+	case wxLANGUAGE_ENGLISH:
+	default:
+		line += "en";
+		break;
+	}
+	file.AddLine(line);
+
+	line = "plotlib=";
+	switch (data.plotLib) {
+	case PlotLib::wxMATH_PLOT:
+		line += "mathplot";
+		break;
+	case PlotLib::wxCHART_DIR:
+	default:
+		line += "chartdir";
+		break;
+	}
+	file.AddLine(line);
+
+	line = "theme=";
+	switch (data.theme) {
+	case THEME_DARK:
+		line += "dark";
+		break;
+	case THEME_LIGHT:
+	default:
+		line += "light";
+		break;
+	}
+	file.AddLine(line);
+
+	line = "labelfont=" + data.labelFont;
+	file.AddLine(line);
+
+	line = wxString::Format("labelfontsize=%d", data.labelFontSize);
+	file.AddLine(line);
+
+	line = "atpfile=" + data.atpPath.GetFullPath();
+	file.AddLine(line);
+
+	line = wxString("elementstoolbar=");
+	switch (data.elementsToolbar) {
+	case NONE:
+		line += "none";
+		break;
+	case VERTICAL:
+		line += "vertical";
+		break;
+	case HORIZONTAL:
+		line += "horizontal";
+		break;
+	default:
+		line += "vertical";
+		break;
+	}
+	file.AddLine(line);
+
+	line = wxString("usevoltagebuscolours=") + (data.useBusVoltageColours ? "yes" : "no");
+	file.AddLine(line);
+
+	if (!data.voltageLevels.empty()) {
+		line = "voltage_levels=";
+		for (size_t i = 0; i < data.voltageLevels.size(); ++i) {
+			if (i > 0) line += ";";
+			line += wxString::Format("%s:%s", wxString::FromCDouble(data.voltageLevels[i].voltage), data.voltageLevels[i].colour.GetAsString(wxC2S_HTML_SYNTAX));
+		}
+		file.AddLine(line);
+	}
+
+	file.Write();
+	file.Close();
+	return true;
 }

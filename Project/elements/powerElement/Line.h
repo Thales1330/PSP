@@ -71,12 +71,13 @@ class Line : public Branch
     virtual void DrawDC(GUIColour* guiColour,wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void DrawDC(GUIColour* guiColour,wxPoint2DDouble translation, double scale, wxDC& dc) const;
     virtual void Move(wxPoint2DDouble position);
+    virtual void AlignToGrid(double gridSize = 20.0) override;
     virtual void StartMove(wxPoint2DDouble position);
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);
     virtual bool SetNodeParent(Element* parent);
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_SIZING; }
     virtual Element* GetCopy();
-    virtual bool AddParent(Element* parent, wxPoint2DDouble position);
+    virtual bool AddParent(Element* parent, wxPoint2DDouble position, bool isOpening = false);
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void MovePickbox(wxPoint2DDouble position);
     virtual bool PickboxContains(wxPoint2DDouble position);

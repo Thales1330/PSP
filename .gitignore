@@ -2,6 +2,7 @@
 ##################
 .clang/
 .codelite/
+build/
 Project/Release_Windows_x64/
 Project/Release_Windows_x32/
 Project/Release_Ubuntu_x64/

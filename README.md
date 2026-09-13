@@ -30,6 +30,7 @@ The software can perform the following studies:
   - Gauss-Seidel
   - Hybrid Newton-Gauss
   - Three-phase induction motors included in power flow studies
+  - On-Load Tap Changer (OLTC) voltage control in transformers
 - **Short-Circuit calculation**
   - Balanced
   - Unbalanced

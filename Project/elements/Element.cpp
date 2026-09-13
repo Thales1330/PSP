@@ -218,6 +218,76 @@ void Element::DrawDCTriangle(std::vector<wxPoint> points, wxDC& dc) const
 	dc.DrawPolygon(4, &points[0]);
 }
 
+void Element::DrawStabilityEventGC(wxGraphicsContext* gc, wxPoint2DDouble translation, double scale, GUIColour* guiColour, bool rotateAnchor, wxPoint2DDouble iconPosition) const
+{
+	if (!gc)
+		return;
+
+	// Fixed size in screen pixels.
+	constexpr double radius = 10.0;
+	constexpr int handWidth = 3;
+	constexpr int crownWidth = 7;
+	constexpr int crownHeight = 3;
+	constexpr int crownStem = 3;
+	constexpr double margin = 4.0;
+
+	wxGraphicsMatrix identityMatrix = gc->GetTransform();
+	identityMatrix.Set();
+
+	gc->PushState();
+	gc->SetTransform(identityMatrix);
+
+	wxPoint2DDouble screenPt;
+
+	// Use the specified position when provided.
+	if (iconPosition.m_x != -1.0 || iconPosition.m_y != -1.0) {
+		screenPt = WorldToScreen(iconPosition, translation, scale, 0.0, 0.0);
+	}
+	else {
+		// Get the element angle in a canonical range [-90°, 90°].
+		double anchorAngle = std::fmod(m_angle, 180.0);
+
+		if (anchorAngle >= 90.0)
+			anchorAngle -= 180.0;
+		else if (anchorAngle < -90.0)
+			anchorAngle += 180.0;
+
+		// Get the right edge of the element.
+		wxPoint2DDouble anchor(m_width / 2.0, 0.0);
+
+		if (rotateAnchor)
+			anchor = RotateLocal(anchor, anchorAngle);
+
+		// Convert the anchor to screen coordinates.
+		screenPt = WorldToScreen(translation, scale, anchor.m_x, anchor.m_y);
+	}
+
+	// Keep the indicator at a fixed screen-space offset from the element.
+	screenPt.m_x += radius + margin * scale;
+	screenPt.m_y -= radius + crownStem + crownHeight + margin * scale;
+
+	// Draw stopwatch body.
+	gc->SetPen(*wxTRANSPARENT_PEN);
+	gc->SetBrush(wxBrush(guiColour->bus));
+	gc->DrawEllipse(screenPt.m_x - radius, screenPt.m_y - radius, 2.0 * radius, 2.0 * radius);
+
+	// Draw stopwatch stem.
+	gc->SetPen(wxPen(guiColour->bus, crownHeight));
+	gc->StrokeLine(screenPt.m_x, screenPt.m_y - radius, screenPt.m_x, screenPt.m_y - radius - crownStem);
+
+	// Draw stopwatch crown.
+	gc->StrokeLine(screenPt.m_x - crownWidth / 2.0, screenPt.m_y - radius - crownStem, screenPt.m_x + crownWidth / 2.0, screenPt.m_y - radius - crownStem);
+
+	// Draw clock hands.
+	wxPen handPen(guiColour->eventElement, handWidth);
+	handPen.SetCap(wxCAP_ROUND);
+	gc->SetPen(handPen);
+	gc->StrokeLine(screenPt.m_x, screenPt.m_y, screenPt.m_x, screenPt.m_y - 7.0);
+	gc->StrokeLine(screenPt.m_x, screenPt.m_y, screenPt.m_x + 5.0, screenPt.m_y + 3.0);
+
+	gc->PopState();
+}
+
 void Element::DrawDCPickbox(wxPoint2DDouble position, wxGraphicsContext* gc) const
 {
 	gc->SetPen(wxPen(wxColour(0, 0, 0, 255)));
@@ -269,6 +339,18 @@ void Element::StartMove(wxPoint2DDouble position)
 }
 
 void Element::Move(wxPoint2DDouble position) { SetPosition(m_movePos + position - m_moveStartPt); }
+void Element::AlignToGrid(double gridSize)
+{
+	if (gridSize <= 0.0) gridSize = 20.0;
+	wxPoint2DDouble oldPos = m_position;
+	wxPoint2DDouble newPos(std::round(oldPos.m_x / gridSize) * gridSize,
+	                       std::round(oldPos.m_y / gridSize) * gridSize);
+	wxPoint2DDouble delta = newPos - oldPos;
+	SetPosition(newPos);
+	for (auto& pt : m_pointList) {
+		pt += delta;
+	}
+}
 wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX, double offsetY) const
 {
 	return wxPoint2DDouble(m_position.m_x + offsetX + translation.m_x, m_position.m_y + offsetY + translation.m_y) *

@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -173,6 +173,10 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
 		case 5: {
 			m_text->SetDataType(DATA_SC_CURRENT);
 		} break;
+		case 6: {
+			m_text->SetDataType(DATA_TRANSFORMER_TAP);
+			m_text->SetUnit(ElectricalUnit::UNIT_PU);
+		} break;
 		}
 	} break;
 	case TYPE_LOAD:
@@ -206,7 +210,7 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
 	}
 	DataTypeChoice();
 
-	if (m_text->GetDataType() == DATA_NAME || m_text->GetDataType() == DATA_PQ_THD) Preview();
+	if (m_text->GetDataType() == DATA_NAME || m_text->GetDataType() == DATA_PQ_THD || m_text->GetDataType() == DATA_TRANSFORMER_TAP) Preview();
 }
 
 bool TextForm::LoadChoices()
@@ -576,6 +580,20 @@ bool TextForm::LoadChoices()
 				break;
 			}
 		} break;
+		case DATA_TRANSFORMER_TAP: {
+			m_choiceTextType->SetSelection(6);
+			switch (m_text->GetUnit()) {
+			case ElectricalUnit::UNIT_PU: {
+				m_choiceTextUnit->SetSelection(0);
+			} break;
+			case ElectricalUnit::UNIT_NONE: {
+				m_choiceTextUnit->SetSelection(1);
+			} break;
+			default:
+				m_choiceTextUnit->SetSelection(0);
+				break;
+			}
+		} break;
 		default:
 			break;
 		}
@@ -928,6 +946,7 @@ void TextForm::ElementNumberChoice()
 		arrayString.Add(_("Losses"));
 		arrayString.Add(_("Current"));
 		arrayString.Add(_("Fault current"));
+		arrayString.Add(_("Tap"));
 	} break;
 	case TYPE_LOAD: {
 		Load* load = m_allElements.GetLoadList()[index];
@@ -1031,10 +1050,18 @@ void TextForm::DataTypeChoice()
 		arrayString.Add(_("kvar"));
 		arrayString.Add(_("Mvar"));
 	} break;
+	case DATA_TRANSFORMER_TAP: {
+		arrayString.Add(_("p.u."));
+		arrayString.Add(_("None"));
+	} break;
 	default:
 		break;
 	}
 	m_choiceTextUnit->Append(arrayString);
+
+	if (m_text->GetDataType() == DATA_TRANSFORMER_TAP) {
+		m_choiceTextUnit->SetSelection(m_text->GetUnit() == ElectricalUnit::UNIT_NONE ? 1 : 0);
+	}
 
 	switch (m_text->GetElementTypeText()) {
 	case TYPE_LINE: {
@@ -1061,7 +1088,7 @@ void TextForm::DataTypeChoice()
 		}
 	} break;
 	case TYPE_TRANSFORMER: {
-		if (m_text->GetDataType() != DATA_PF_LOSSES) {
+		if (m_text->GetDataType() != DATA_PF_LOSSES && m_text->GetDataType() != DATA_TRANSFORMER_TAP) {
 			//auto it = m_allElements.GetTransformerList().begin();
 			//std::advance(it, m_text->GetElementNumber());
 			Transformer* transformer = m_allElements.GetTransformerList()[m_text->GetElementNumber()];
@@ -1195,6 +1222,18 @@ void TextForm::UnitChoice()
 			break;
 		}
 	} break;
+	case DATA_TRANSFORMER_TAP: {
+		switch (m_choiceTextUnit->GetSelection()) {
+		case 0: {
+			m_text->SetUnit(ElectricalUnit::UNIT_PU);
+		} break;
+		case 1: {
+			m_text->SetUnit(ElectricalUnit::UNIT_NONE);
+		} break;
+		default:
+			break;
+		}
+	} break;
 	default:
 		break;
 	}
@@ -1219,7 +1258,7 @@ bool TextForm::ValidateData()
 		m_choiceTextUnit->GetSelection() == -1)
 		return false;
 	if (m_text->GetElementTypeText() == TYPE_LINE || m_text->GetElementTypeText() == TYPE_TRANSFORMER) {
-		if (m_text->GetDataType() != DATA_PF_LOSSES && m_text->GetDataType() != DATA_NAME) {
+		if (m_text->GetDataType() != DATA_PF_LOSSES && m_text->GetDataType() != DATA_NAME && m_text->GetDataType() != DATA_TRANSFORMER_TAP) {
 			if (m_choiceTextFromBus->GetSelection() == -1) return false;
 			if (m_choiceTextToBus->GetSelection() == -1) return false;
 		}

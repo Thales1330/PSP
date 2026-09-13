@@ -10,6 +10,7 @@
 #include <wx/stdpaths.h>
 #include <wx/dir.h>
 #include <wx/textfile.h>
+#include <wx/tokenzr.h>
 
 #include <wx/cmdline.h>
 #include <wx/msgout.h> 
@@ -41,6 +42,7 @@
  *  - Gauss-Seidel
  *  - Hybrid Newton-Gauss
  *  - Three-phase induction motors included in power flow studies
+ *  - On-Load Tap Changer (OLTC) voltage control in transformers
  *- **Short-Circuit calculation**
  *  - Balanced
  *  - Unbalanced
@@ -151,6 +153,45 @@ public:
 				if (tag == "atpfile") {
 					data.atpPath = wxFileName(tagValue);
 				}
+				if (tag == "elementstoolbar") {
+					if (tagValue == "none") {
+						data.elementsToolbar = NONE;
+					}
+					else if (tagValue == "vertical") {
+						data.elementsToolbar = VERTICAL;
+					}
+					else if (tagValue == "horizontal") {
+						data.elementsToolbar = HORIZONTAL;
+					}
+					else
+					{
+						data.elementsToolbar = VERTICAL;
+					}
+				}
+				if (tag == "usevoltagebuscolours") {
+					if (tagValue == "yes" || tagValue == "true" || tagValue == "1") {
+						data.useBusVoltageColours = true;
+					}
+					else if (tagValue == "no" || tagValue == "false" || tagValue == "0") {
+						data.useBusVoltageColours = false;
+					}
+				}
+				if (tag == "voltage_levels") {
+					data.voltageLevels.clear();
+					wxStringTokenizer tkz(tagValue, ";");
+					while (tkz.HasMoreTokens()) {
+						wxString token = tkz.GetNextToken().Trim().Trim(false);
+						if (token.IsEmpty()) continue;
+						wxString vStr = token.BeforeFirst(':');
+						wxString cStr = token.AfterFirst(':');
+						double v = 0.0;
+						if (vStr.ToCDouble(&v) || vStr.ToDouble(&v)) {
+							wxColour col(cStr);
+							if (!col.IsOk()) col = *wxBLACK;
+							data.voltageLevels.push_back({ v, col });
+						}
+					}
+				}
 			}
 			file.Close();
 		}
@@ -169,7 +210,16 @@ public:
 			file.AddLine("labelfont=Arial");
 			file.AddLine("labelfontsize=10");
 			file.AddLine("atpfile=");
+			file.AddLine("elementstoolbar=no");
+			file.AddLine("usevoltagebuscolours=no");
 			//file.AddLine("useOpenGL=yes");
+
+			wxString vlProp = "voltage_levels=";
+			for (size_t i = 0; i < data.voltageLevels.size(); ++i) {
+				if (i > 0) vlProp += ";";
+				vlProp += wxString::Format("%s:%s", wxString::FromCDouble(data.voltageLevels[i].voltage), data.voltageLevels[i].colour.GetAsString(wxC2S_HTML_SYNTAX));
+			}
+			file.AddLine(vlProp);
 
 			file.Write();
 			file.Close();
@@ -180,6 +230,8 @@ public:
 #ifdef __WXGTK__
 			data.plotLib = PlotLib::wxMATH_PLOT;
 #endif
+			data.elementsToolbar = VERTICAL;
+			data.useBusVoltageColours = true;
 			//data.useOpenGL = true;
 			propertiesData->SetGeneralPropertiesData(data);
 		}

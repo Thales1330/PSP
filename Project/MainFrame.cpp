@@ -39,6 +39,7 @@
 #include "forms/SimulationsSettingsForm.h"
 #include "forms/StabilityEventList.h"
 #include "forms/LabelManager.h" 
+#include "forms/ElementsToolBar.h" 
 
 #include "utils/FileHanding.h"
 #include "utils/PropertiesData.h"
@@ -46,6 +47,7 @@
 #include "editors/ChartView.h"
 #include "editors/Workspace.h"
 #include "extLibs/artProvider/ArtMetro.h"
+#include "utils/Path.h"
  //#include "WorkspaceDC.h"
 
 MainFrame::MainFrame() : MainFrameBase(nullptr) {}
@@ -158,10 +160,24 @@ void MainFrame::Init()
 	}
 
 	this->Layout();
+
+	if (!m_generalProperties) return;
+
+	//m_elementsToolBar = new ElementsToolBar(this, m_generalProperties->GetGeneralPropertiesData().elementsToolbar == VERTICAL);
+	//m_elementsToolBar->EnableTools(false);
+	if (m_generalProperties->GetGeneralPropertiesData().elementsToolbar != NONE) {
+		CallAfter([this]() {
+			BuildElementsToolBar(m_generalProperties->GetGeneralPropertiesData().elementsToolbar);
+			m_elementsToolBar->EnableTools(false);
+			});
+	}
 }
 
 void MainFrame::EnableCurrentProjectRibbon(bool enable)
 {
+	if (m_elementsToolBar) {
+		m_elementsToolBar->EnableTools(enable);
+	}
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ADDELEMENT, enable);
 	m_ribbonButtonBarReports->EnableButton(ID_RIBBON_CHARTS, enable);
 	m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_CLOSE, enable);
@@ -189,47 +205,99 @@ void MainFrame::EnableCurrentProjectRibbon(bool enable)
 	m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_UNDO, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATEC, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATECC, enable);
+	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_GRID, enable);
+	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ALIGN, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_LABELMNGR, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_HARMDIST, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_FREQRESP, enable);
-
-	//if (m_generalProperties->GetGeneralPropertiesData().useOpenGL)
-	//    m_ribbonButtonBarReports->EnableButton(ID_RIBBON_HEATMAP, enable);
-	//else
-	//    m_ribbonButtonBarReports->EnableButton(ID_RIBBON_HEATMAP, false);
 }
 
 void MainFrame::CreateDropdownMenus()
 {
 	m_addElementsMenu = new wxMenu();
 
+	struct ElementIcon {
+		int id;
+		wxString file;
+	};
+
+	const std::vector<ElementIcon> elementIcons = {
+		{ ID_ADDMENU_BUS,         "bus.png" },
+		{ ID_ADDMENU_CAPACITOR,   "capacitor.png" },
+		{ ID_ADDMENU_EMTELEMENT,  "emtelement.png" },
+		{ ID_ADDMENU_GENERATOR,   "generator.png" },
+		{ ID_ADDMENU_HARMCURRENT, "harmcurrent.png" },
+		{ ID_ADDMENU_INDMOTOR,    "indmotor.png" },
+		{ ID_ADDMENU_INDUCTOR,    "inductor.png" },
+		{ ID_ADDMENU_LINE,        "line.png" },
+		{ ID_ADDMENU_LOAD,        "load.png" },
+		{ ID_ADDMENU_SYNCCOMP,    "synccomp.png" },
+		{ ID_ADDMENU_TEXT,        "text.png" },
+		{ ID_ADDMENU_TRANSFORMER, "transformer.png" }
+	};
+
+	std::map<int, wxBitmap> elementBitmaps;
+
+	const int iconSize = FromDIP(16);
+
+	for (const auto& icon : elementIcons) {
+		wxImage image(Paths::GetDataPath() + "/images/elements/" + icon.file, wxBITMAP_TYPE_PNG);
+
+		if (image.IsOk()) {
+			image.Rescale(iconSize, iconSize, wxIMAGE_QUALITY_HIGH);
+			elementBitmaps[icon.id] = wxBitmap(image);
+		}
+	}
+
 	wxMenuItem* busElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_BUS, _("&Bus\tB"), _("Adds a bus at the circuit"));
-	// busElement->SetBitmap(wxArtProvider::GetBitmap(wxART_WARNING));
+	busElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_BUS));
+
 	wxMenuItem* lineElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_LINE, _("&Line\tL"), _("Adds a power line at the circuit"));
+	lineElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_LINE));
+
 	wxMenuItem* transformerElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TRANSFORMER, _("&Transformer\tT"),
 		_("Adds a transformer at the circuit"));
+	transformerElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_TRANSFORMER));
+
 	wxMenuItem* generatorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_GENERATOR, _("&Generator\tG"),
 		_("Adds a generator at the circuit"));
+	generatorElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_GENERATOR));
+
 	wxMenuItem* indMotorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDMOTOR, _("&Induction motor\tI"),
 		_("Adds an induction motor at the circuit"));
+	indMotorElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_INDMOTOR));
+
 	wxMenuItem* syncCompElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_SYNCCOMP, _("&Synchronous compensator \tK"),
 			_("Adds an induction motor at the circuit"));
+	syncCompElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_SYNCCOMP));
+
 	wxMenuItem* loadElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_LOAD, _("&Load\tShift-L"), _("Adds a load at the circuit"));
+	loadElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_LOAD));
+
 	wxMenuItem* capacitorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_CAPACITOR, _("&Capacitor\tShift-C"),
 		_("Adds a shunt capacitor at the circuit"));
+	capacitorElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_CAPACITOR));
+
 	wxMenuItem* inductorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDUCTOR, _("&Inductor\tShift-I"),
 		_("Adds a shunt inductor at the circuit"));
+	inductorElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_INDUCTOR));
+
 	wxMenuItem* harmCurrentElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_HARMCURRENT, _("&Harmonic current\tShift-H"),
 			_("Adds a harmonic current source at the circuit"));
+	harmCurrentElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_HARMCURRENT));
+
 	wxMenuItem* emtElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_EMTELEMENT, _("&Electromagnetic Transient Element\tShift-E"), _("Adds an electromagnetic transient element that connects with ATP"));
+	emtElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_EMTELEMENT));
+
 	wxMenuItem* textElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TEXT, _("&Label\tA"), _("Adds a linked element label"));
+	textElement->SetBitmap(elementBitmaps.at(ID_ADDMENU_TEXT));
 
 
 	m_addElementsMenu->Append(busElement);
@@ -738,7 +806,9 @@ void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 {
 	GeneralPropertiesForm genPropForm(this, m_generalProperties);
 	genPropForm.SetInitialSize();
-	genPropForm.ShowModal();
+	if (genPropForm.ShowModal() == wxID_OK) {
+		BuildElementsToolBar(m_generalProperties->GetGeneralPropertiesData().elementsToolbar);
+	}
 	for (auto& workspace : m_workspaceList) {
 		workspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
 		workspace->GetProperties()->SetGUIColourTheme();
@@ -855,10 +925,28 @@ void MainFrame::OnHeatmapClick(wxRibbonButtonBarEvent& event)
 		workspace->EnableHeatMap(!enabled);
 	}
 }
+void MainFrame::OnGridClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+	if (workspace) {
+		const bool enabled = workspace->IsGridEnabled();
+		m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_GRID, !enabled);
+		workspace->EnableGrid(!enabled);
+		workspace->Redraw();
+	}
+}
+void MainFrame::OnAlignClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+	if (workspace) {
+		workspace->AlignSelectedToGrid();
+	}
+}
 void MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event)
 {
 	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
 	if (workspace) {
+		m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_GRID, workspace->IsGridEnabled());
 		m_ribbonButtonBarReports->ToggleButton(ID_RIBBON_HEATMAP, workspace->IsHeatMapEnable());
 		m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, workspace->IsContinuousCalculationActive());
 		m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, !workspace->IsContinuousCalculationActive());
@@ -888,5 +976,50 @@ void MainFrame::OnLabelMngrClick(wxRibbonButtonBarEvent& event)
 			workspace->UpdateTextElements();
 			workspace->Redraw();
 		}
+	}
+}
+
+void MainFrame::PositionElementsToolBar()
+{
+	if (!m_elementsToolBar) return;
+	//wxRect frameRect = GetScreenRect();
+	//wxSize tbSize = m_elementsToolBar->GetSize();
+	//if (tbSize.GetWidth() <= 0 || tbSize.GetHeight() <= 0) {
+	//	tbSize = m_elementsToolBar->GetBestSize();
+	//}
+	//int x = frameRect.GetRight() - tbSize.GetWidth() - 25;
+	//int y = frameRect.GetTop() + 165;
+	//if (x < frameRect.GetLeft()) x = frameRect.GetLeft() + 10;
+	//if (y < frameRect.GetTop()) y = frameRect.GetTop() + 10;
+	//m_elementsToolBar->SetPosition(wxPoint(x, y));
+	wxPoint pos = GetPosition() + wxPoint(20, m_ribbonBar->GetSize().GetHeight() + 70);
+	m_elementsToolBar->Move(pos);
+}
+
+void MainFrame::BuildElementsToolBar(ElementsToolbar style)
+{
+	if (style != NONE) {
+		delete m_elementsToolBar;
+		//if (!m_elementsToolBarPositioned) {
+		m_elementsToolBar = new ElementsToolBar(this, style == VERTICAL);
+		PositionElementsToolBar();
+		m_elementsToolBarPositioned = true;
+		//}
+		m_elementsToolBar->Show();
+		m_elementsToolBar->Raise();
+	}
+	else {
+		if (!m_elementsToolBar) return;
+		m_elementsToolBar->Hide();
+	}
+}
+
+void MainFrame::OnElementsToolBarClosed()
+{
+	if (m_generalProperties) {
+		auto data = m_generalProperties->GetGeneralPropertiesData();
+		data.elementsToolbar = NONE;
+		m_generalProperties->SetGeneralPropertiesData(data);
+		PropertiesData::SaveConfigFile(data);
 	}
 }

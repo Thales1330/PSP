@@ -2,6 +2,12 @@
 #define COMMONTYPES_H
 
 #include <wx/colour.h>
+#include <vector>
+
+struct VoltageLevelColour {
+	double voltage = 0.0;       // Voltage in kV
+	wxColour colour = wxColour(0, 78, 255);
+};
 
 struct GUIColour {
 	wxColour background = wxColour(250, 249, 246);
@@ -16,6 +22,9 @@ struct GUIColour {
 	wxColour pfArrow = wxColour(255, 130, 0);
 	wxColour swClose = wxColour(0, 102, 0);
 	wxColour swOpen = wxColour(255, 26, 26);
+	wxColour grid = wxColour(220, 222, 225);
+	bool useVoltageLevels = false;
+	std::vector<VoltageLevelColour> voltageLevels;
 };
 
 /**
@@ -48,6 +57,7 @@ enum class ElectricalUnit : int {
 
 enum PowerFlowMethod { NEWTON_RAPHSON = 0, GAUSS_SEIDEL, GAUSS_NEWTON };
 enum GUITheme { THEME_LIGHT = 0, THEME_DARK };
+enum ElementsToolbar {NONE = 0, VERTICAL, HORIZONTAL};
 enum class HarmLoadConnection { PARALLEL = 0, SERIES, DISCONNECTED };
 enum class PlotLib { wxMATH_PLOT = 0, wxCHART_DIR = 1 };
 enum class BusFreqEstimation { ANGLE_DERIVATION = 0, WASHOUT_FILTER = 1 };

@@ -38,13 +38,14 @@ class Machines : public PowerElement
     Machines();
     virtual ~Machines() {}
 
-    virtual bool AddParent(Element* parent, wxPoint2DDouble position);
+    virtual bool AddParent(Element* parent, wxPoint2DDouble position, bool isOpening = false);
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     //virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext*  gc) const;
     virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const;
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual void Move(wxPoint2DDouble position);
+    virtual void AlignToGrid(double gridSize = 20.0) override;
     virtual void MoveNode(Element* element, wxPoint2DDouble position);
     virtual void StartMove(wxPoint2DDouble position);
     virtual void RotateNode(Element* parent, bool clockwise = true);
@@ -57,10 +58,10 @@ class Machines : public PowerElement
     virtual void DrawDCSymbol(wxGraphicsContext* gc) const {}
     virtual void DrawDCSymbol(wxDC& dc) const {}
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
+    virtual void UpdateSwitchesPosition() override;
+    virtual void UpdatePowerFlowArrowsPosition() override;
 
    protected:
-    void UpdateSwitchesPosition();
-    void UpdatePowerFlowArrowsPosition();
     //bool m_inserted = false;
 };
 
