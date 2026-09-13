@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -25,6 +25,7 @@
 //#include <wx/glcanvas.h>
 
 #include "MainFrameBase.h"
+#include "utils/CommomTypes.h"
 
 class MainFrameBase;
 class wxRibbonMetroArtProvider;
@@ -90,7 +91,7 @@ class MainFrame : public MainFrameBase
     int RunPSPTest();
 
     void OnAddElementsClick(wxCommandEvent& event);
-    void ShowElementsToolBar(bool show);
+    void BuildElementsToolBar(ElementsToolbar style);
     void OnElementsToolBarClosed();
     ElementsToolBar* GetElementsToolBar() { return m_elementsToolBar; }
 

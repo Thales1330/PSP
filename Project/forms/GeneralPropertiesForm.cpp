@@ -99,7 +99,7 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	//if (data.useOpenGL) m_choiceRender->SetSelection(0);
 	//else m_choiceRender->SetSelection(1);
 	m_filePickerATPFolder->SetPath(data.atpPath.GetFullPath());
-	m_checkBoxElementsToolBar->SetValue(data.showElementsToolBar);
+	m_choiceElementToolbar->SetSelection(data.elementsToolbar);
 
 	wxFont currentFont(data.labelFontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, data.labelFont);
 	m_fontPickerText->SetSelectedFont(currentFont);
@@ -123,7 +123,7 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	Layout();
 	SetMinSize(wxSize(480, 380));
 	Fit();
-	Centre();	
+	Centre();
 }
 
 GeneralPropertiesForm::~GeneralPropertiesForm()
@@ -175,7 +175,7 @@ bool GeneralPropertiesForm::ValidateData()
 	}
 	if (data.theme != checkData.theme) needRestart = true;
 
-	data.showElementsToolBar = m_checkBoxElementsToolBar->GetValue();
+	data.elementsToolbar = static_cast<ElementsToolbar>(m_choiceElementToolbar->GetSelection());
 
 	data.useBusVoltageColours = m_checkBoxUseBusColours->GetValue();
 	data.voltageLevels = m_voltageLevels;

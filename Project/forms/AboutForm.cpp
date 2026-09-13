@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -23,7 +23,7 @@ AboutForm::~AboutForm() {}
 void AboutForm::Init()
 {
     // Set program version. Format: (Alpha/Beta/Release) (YEAR)w(WEEK)(a/b/c/...)
-    m_staticTextVersion->SetLabel("2026w35a-beta");
+    m_staticTextVersion->SetLabel("2026w37a-beta");
     
     // Create developers table
     m_gridCredits->EnableGridLines(false);
@@ -46,7 +46,7 @@ void AboutForm::Init()
     m_gridCredits->SetCellFont(0, 0, headerFont);
     m_gridCredits->SetCellValue(1, 0, wxT("Thales Lima Oliveira"));
     m_gridCredits->SetCellValue(1, 1, _("Main developer and project admin"));
-    m_gridCredits->SetCellValue(1, 2, wxT("thales@ufu.br"));
+    m_gridCredits->SetCellValue(1, 2, wxT("thales.oliveira@uftm.edu.br\nthales@ufu.br"));
 
     m_gridCredits->SetRowMinimalHeight(2, 30);
 
@@ -60,12 +60,12 @@ void AboutForm::Init()
     m_gridCredits->SetCellValue(4, 2, wxT("gcaixeta@ufu.br"));
     // Marcio Tamashiro
     //m_gridCredits->SetCellValue(5, 0, wxT("M") + static_cast<wxString>(L'\u00E1') + wxT("rcio Augusto Tamashiro"));
-    m_gridCredits->SetCellValue(5, 0, wxT("Marcio Augusto Tamashiro"));
+    m_gridCredits->SetCellValue(5, 0, wxT("Márcio Augusto Tamashiro"));
     m_gridCredits->SetCellValue(5, 1, "");
     m_gridCredits->SetCellValue(5, 2, wxT("tamashiro@ifto.edu.br"));
     // Luiz Gonzaga Rocha Junior
     m_gridCredits->SetCellValue(6, 0, wxT("Luiz Gonzaga Rocha Junior"));
-    m_gridCredits->SetCellValue(6, 1, _(""));
+    m_gridCredits->SetCellValue(6, 1, wxT(""));
     m_gridCredits->SetCellValue(6, 2, wxT("luizgrj@gmail.com"));
 
     for(int i = 0; i < m_gridCredits->GetNumberRows(); ++i) {

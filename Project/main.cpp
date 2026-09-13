@@ -154,11 +154,18 @@ public:
 					data.atpPath = wxFileName(tagValue);
 				}
 				if (tag == "elementstoolbar") {
-					if (tagValue == "yes" || tagValue == "true" || tagValue == "1") {
-						data.showElementsToolBar = true;
+					if (tagValue == "none") {
+						data.elementsToolbar = NONE;
 					}
-					else if (tagValue == "no" || tagValue == "false" || tagValue == "0") {
-						data.showElementsToolBar = false;
+					else if (tagValue == "vertical") {
+						data.elementsToolbar = VERTICAL;
+					}
+					else if (tagValue == "horizontal") {
+						data.elementsToolbar = HORIZONTAL;
+					}
+					else
+					{
+						data.elementsToolbar = VERTICAL;
 					}
 				}
 				if (tag == "usevoltagebuscolours") {
@@ -168,7 +175,7 @@ public:
 					else if (tagValue == "no" || tagValue == "false" || tagValue == "0") {
 						data.useBusVoltageColours = false;
 					}
-				}				
+				}
 				if (tag == "voltage_levels") {
 					data.voltageLevels.clear();
 					wxStringTokenizer tkz(tagValue, ";");
@@ -223,8 +230,8 @@ public:
 #ifdef __WXGTK__
 			data.plotLib = PlotLib::wxMATH_PLOT;
 #endif
-			data.showElementsToolBar = false;
-			data.useBusVoltageColours = false;
+			data.elementsToolbar = VERTICAL;
+			data.useBusVoltageColours = true;
 			//data.useOpenGL = true;
 			propertiesData->SetGeneralPropertiesData(data);
 		}

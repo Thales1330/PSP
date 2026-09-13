@@ -1,4 +1,4 @@
-#ifndef ELEMENTSTOOLBAR_H
+﻿#ifndef ELEMENTSTOOLBAR_H
 #define ELEMENTSTOOLBAR_H
 
 #include <wx/frame.h>
@@ -13,14 +13,14 @@ class MainFrame;
 class ElementsToolBar : public wxFrame
 {
 public:
-	ElementsToolBar(MainFrame* parent);
+	ElementsToolBar(MainFrame* parent, bool vertical = true);
 	virtual ~ElementsToolBar();
 
 	void EnableTools(bool enable);
 	wxToolBar* GetToolBar() { return m_toolBar; }
 
 protected:
-	void InitToolBar();
+	void InitToolBar(bool vertical = true);
 	void OnToolClicked(wxCommandEvent& event);
 	void OnClose(wxCloseEvent& event);
 

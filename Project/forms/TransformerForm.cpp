@@ -363,6 +363,15 @@ bool TransformerForm::ValidateData()
 			wxMessageBox(_("Tap step size cannot be negative."), _("Error"), wxOK | wxICON_ERROR, m_parent);
 			return false;
 		}
+
+		// Adjust current tap to the configured OLTC limits.
+		data.turnsRatio = std::clamp(data.turnsRatio, data.oltcMinTap, data.oltcMaxTap);
+
+		// Align the current tap with the configured discrete tap step.
+		if (data.oltcIsDiscrete && data.oltcTapStep > 1e-4) {
+			data.turnsRatio = 1.0 + std::round((data.turnsRatio - 1.0) / data.oltcTapStep) * data.oltcTapStep;
+			data.turnsRatio = std::clamp(data.turnsRatio, data.oltcMinTap, data.oltcMaxTap);
+		}
 	}
 	data.nominalTurnsRatio = data.turnsRatio;
 

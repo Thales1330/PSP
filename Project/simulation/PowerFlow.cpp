@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -968,12 +968,32 @@ bool PowerFlow::AdjustTapChangers(const std::vector<std::complex<double> >& volt
 		double currentTap = data.turnsRatio;
 		if (currentTap <= 1e-4) currentTap = 1.0;
 
-		// Model in PSP-UFU has ideal turns ratio a on side 1 (Primary):
-		// V1 / a ~ V2  => V2 ~ V1 / a  and  V1 ~ a * V2.
-		// Secondary (side 2): dV2/da ~ -V2/a
-		//   delta_V2 ~ -(V2/a)*delta_a => delta_a ~ -(a/V2)*delta_V2 = (a/V2)*(V2 - Vtarget) = (a/V2)*vDiff.
-		// Primary (side 1): dV1/da ~ V1/a
-		//   delta_V1 ~ (V1/a)*delta_a => delta_a ~ (a/V1)*delta_V1 = -(a/V1)*(V1 - Vtarget) = -(a/V1)*vDiff.
+
+		//tex:
+		// Model in PSP-UFU has ideal turns ratio $a$ on side 1 (Primary):
+		//
+		// $$\frac{V_1}{a} \approx V_2$$
+		// $$V_2 \approx \frac{V_1}{a}, \qquad V_1 \approx aV_2$$
+		//
+		// Secondary (side 2):
+		//
+		// $$\frac{dV_2}{da} \approx -\frac{V_2}{a}$$
+		//
+		// $$\Delta V_2 \approx -\frac{V_2}{a}\Delta a$$
+		// $$\Rightarrow\quad
+		// \Delta a \approx -\frac{a}{V_2}\Delta V_2
+		// = \frac{a}{V_2}(V_2 - V_{\mathrm{target}})
+		// = \frac{a}{V_2}v_{\mathrm{Diff}}$$
+		//
+		// Primary (side 1):
+		//
+		// $$\frac{dV_1}{da} \approx \frac{V_1}{a}$$
+		//
+		// $$\Delta V_1 \approx \frac{V_1}{a}\Delta a$$
+		// $$\Rightarrow\quad
+		// \Delta a \approx \frac{a}{V_1}\Delta V_1
+		// = -\frac{a}{V_1}(V_1 - V_{\mathrm{target}})
+		// = -\frac{a}{V_1}v_{\mathrm{Diff}}$$
 
 		double damping = 0.8;
 		double deltaTap = (isPrimary ? -1.0 : 1.0) * (currentTap / std::max(vCtrl, 0.1)) * vDiff * damping;

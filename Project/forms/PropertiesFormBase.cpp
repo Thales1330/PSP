@@ -128,10 +128,18 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     
     gridSizer12126684->Add(boxSizerLvl3_21182100, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_checkBoxElementsToolBar = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Show elements toolbar"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    m_checkBoxElementsToolBar->SetValue(false);
+    m_staticTextElelmentTool = new wxStaticText(m_panelGeneral, wxID_ANY, _("Power elements toolbar"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
-    boxSizerLvl3_21182100->Add(m_checkBoxElementsToolBar, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_LEFT, WXC_FROM_DIP(5));
+    boxSizerLvl3_21182100->Add(m_staticTextElelmentTool, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceElementToolbarArr;
+    m_choiceElementToolbarArr.Add(_("Hide"));
+    m_choiceElementToolbarArr.Add(_("Vertical"));
+    m_choiceElementToolbarArr.Add(_("Horizontal"));
+    m_choiceElementToolbar = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceElementToolbarArr, 0);
+    m_choiceElementToolbar->SetSelection(0);
+    
+    boxSizerLvl3_21182100->Add(m_choiceElementToolbar, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
     m_panelBusbar = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelBusbar, _("Bus colors"), false);

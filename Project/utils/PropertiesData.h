@@ -83,7 +83,7 @@ struct GeneralData {
 	int labelFontSize = 10;
 	wxFileName atpPath;
 	wxString atpWorkFolder = "";
-	bool showElementsToolBar = true;
+	ElementsToolbar elementsToolbar = VERTICAL;
 	bool useBusVoltageColours = false;
 	std::vector<VoltageLevelColour> voltageLevels;
 };

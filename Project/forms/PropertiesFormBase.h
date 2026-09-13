@@ -69,7 +69,8 @@ protected:
     wxFontPickerCtrl* m_fontPickerText;
     wxStaticText* m_staticTextATPFolder;
     wxFilePickerCtrl* m_filePickerATPFolder;
-    wxCheckBox* m_checkBoxElementsToolBar;
+    wxStaticText* m_staticTextElelmentTool;
+    wxChoice* m_choiceElementToolbar;
     wxPanel* m_panelBusbar;
     wxCheckBox* m_checkBoxUseBusColours;
     wxListCtrl* m_listCtrlVoltages;
@@ -104,7 +105,8 @@ public:
     wxFontPickerCtrl* GetFontPickerText() { return m_fontPickerText; }
     wxStaticText* GetStaticTextATPFolder() { return m_staticTextATPFolder; }
     wxFilePickerCtrl* GetFilePickerATPFolder() { return m_filePickerATPFolder; }
-    wxCheckBox* GetCheckBoxElementsToolBar() { return m_checkBoxElementsToolBar; }
+    wxStaticText* GetStaticTextElelmentTool() { return m_staticTextElelmentTool; }
+    wxChoice* GetChoiceElementToolbar() { return m_choiceElementToolbar; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxCheckBox* GetCheckBoxUseBusColours() { return m_checkBoxUseBusColours; }
     wxListCtrl* GetListCtrlVoltages() { return m_listCtrlVoltages; }
@@ -484,9 +486,9 @@ public:
         ID_CL_INDMOTOR = 10002,
         ID_CL_INDUCTOR = 10003,
         ID_CL_TRANSFORMER = 10004,
-        ID_CL_LINE = 10005,
-        ID_CL_LOAD = 10006,
-        ID_CL_GENERATOR = 10007,
+        ID_CL_LOAD = 10005,
+        ID_CL_GENERATOR = 10006,
+        ID_CL_LINE = 10007,
         ID_CL_CAPACITOR = 10008,
         ID_CL_BUS = 10009,
     };

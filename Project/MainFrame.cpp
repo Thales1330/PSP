@@ -161,11 +161,14 @@ void MainFrame::Init()
 
 	this->Layout();
 
-	m_elementsToolBar = new ElementsToolBar(this);
-	m_elementsToolBar->EnableTools(false);
-	if (m_generalProperties && m_generalProperties->GetGeneralPropertiesData().showElementsToolBar) {
+	if (!m_generalProperties) return;
+
+	//m_elementsToolBar = new ElementsToolBar(this, m_generalProperties->GetGeneralPropertiesData().elementsToolbar == VERTICAL);
+	//m_elementsToolBar->EnableTools(false);
+	if (m_generalProperties->GetGeneralPropertiesData().elementsToolbar != NONE) {
 		CallAfter([this]() {
-			ShowElementsToolBar(true);
+			BuildElementsToolBar(m_generalProperties->GetGeneralPropertiesData().elementsToolbar);
+			m_elementsToolBar->EnableTools(false);
 			});
 	}
 }
@@ -804,7 +807,7 @@ void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 	GeneralPropertiesForm genPropForm(this, m_generalProperties);
 	genPropForm.SetInitialSize();
 	if (genPropForm.ShowModal() == wxID_OK) {
-		ShowElementsToolBar(m_generalProperties->GetGeneralPropertiesData().showElementsToolBar);
+		BuildElementsToolBar(m_generalProperties->GetGeneralPropertiesData().elementsToolbar);
 	}
 	for (auto& workspace : m_workspaceList) {
 		workspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
@@ -979,30 +982,34 @@ void MainFrame::OnLabelMngrClick(wxRibbonButtonBarEvent& event)
 void MainFrame::PositionElementsToolBar()
 {
 	if (!m_elementsToolBar) return;
-	wxRect frameRect = GetScreenRect();
-	wxSize tbSize = m_elementsToolBar->GetSize();
-	if (tbSize.GetWidth() <= 0 || tbSize.GetHeight() <= 0) {
-		tbSize = m_elementsToolBar->GetBestSize();
-	}
-	int x = frameRect.GetRight() - tbSize.GetWidth() - 25;
-	int y = frameRect.GetTop() + 165;
-	if (x < frameRect.GetLeft()) x = frameRect.GetLeft() + 10;
-	if (y < frameRect.GetTop()) y = frameRect.GetTop() + 10;
-	m_elementsToolBar->SetPosition(wxPoint(x, y));
+	//wxRect frameRect = GetScreenRect();
+	//wxSize tbSize = m_elementsToolBar->GetSize();
+	//if (tbSize.GetWidth() <= 0 || tbSize.GetHeight() <= 0) {
+	//	tbSize = m_elementsToolBar->GetBestSize();
+	//}
+	//int x = frameRect.GetRight() - tbSize.GetWidth() - 25;
+	//int y = frameRect.GetTop() + 165;
+	//if (x < frameRect.GetLeft()) x = frameRect.GetLeft() + 10;
+	//if (y < frameRect.GetTop()) y = frameRect.GetTop() + 10;
+	//m_elementsToolBar->SetPosition(wxPoint(x, y));
+	wxPoint pos = GetPosition() + wxPoint(20, m_ribbonBar->GetSize().GetHeight() + 70);
+	m_elementsToolBar->Move(pos);
 }
 
-void MainFrame::ShowElementsToolBar(bool show)
+void MainFrame::BuildElementsToolBar(ElementsToolbar style)
 {
-	if (!m_elementsToolBar) return;
-	if (show) {
-		if (!m_elementsToolBarPositioned) {
-			PositionElementsToolBar();
-			m_elementsToolBarPositioned = true;
-		}
+	if (style != NONE) {
+		delete m_elementsToolBar;
+		//if (!m_elementsToolBarPositioned) {
+		m_elementsToolBar = new ElementsToolBar(this, style == VERTICAL);
+		PositionElementsToolBar();
+		m_elementsToolBarPositioned = true;
+		//}
 		m_elementsToolBar->Show();
 		m_elementsToolBar->Raise();
 	}
 	else {
+		if (!m_elementsToolBar) return;
 		m_elementsToolBar->Hide();
 	}
 }
@@ -1011,7 +1018,7 @@ void MainFrame::OnElementsToolBarClosed()
 {
 	if (m_generalProperties) {
 		auto data = m_generalProperties->GetGeneralPropertiesData();
-		data.showElementsToolBar = false;
+		data.elementsToolbar = NONE;
 		m_generalProperties->SetGeneralPropertiesData(data);
 		PropertiesData::SaveConfigFile(data);
 	}

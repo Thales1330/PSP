@@ -160,7 +160,21 @@ bool PropertiesData::SaveConfigFile(const GeneralData& data)
 	line = "atpfile=" + data.atpPath.GetFullPath();
 	file.AddLine(line);
 
-	line = wxString("elementstoolbar=") + (data.showElementsToolBar ? "yes" : "no");
+	line = wxString("elementstoolbar=");
+	switch (data.elementsToolbar) {
+	case NONE:
+		line += "none";
+		break;
+	case VERTICAL:
+		line += "vertical";
+		break;
+	case HORIZONTAL:
+		line += "horizontal";
+		break;
+	default:
+		line += "vertical";
+		break;
+	}
 	file.AddLine(line);
 
 	line = wxString("usevoltagebuscolours=") + (data.useBusVoltageColours ? "yes" : "no");
