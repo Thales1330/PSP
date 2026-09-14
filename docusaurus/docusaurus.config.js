@@ -3,31 +3,16 @@ const rehypeKatex = require("rehype-katex").default;
 
 module.exports = {
   title: 'PSP-UFU',
+  future: {
+    v4: true,
+  },
   tagline: 'Power System Platform of Federal University of Uberlândia',
   url: 'https://thales1330.github.io',
   baseUrl: '/PSP/',
   favicon: 'img/favicon.ico',
   organizationName: 'thales1330', // Usually your GitHub org/user name.
-  projectName: 'PSP', // Usually your repo name.
-  //onBrokenLinks: 'warn',
+  projectName: 'PSP',
   themeConfig: {
-    //colorMode: {
-    //  defaultMode: 'dark',
-    //  disableSwitch: false,
-    //  respectPrefersColorScheme: true,
-    // // switchConfig: {
-    // //   darkIcon: '🌙',
-    // //   darkIconStyle: {
-    // //     // Style object passed to inline CSS
-    // //     // For more information about styling options visit: https://reactjs.org/docs/dom-elements.html#style
-    // //     marginLeft: '2px',
-    // //   },
-    // //   lightIcon: '☀',
-    // //   lightIconStyle: {
-    // //     marginLeft: '1px',
-    // //   },
-    //  },
-    //},
     navbar: {
       title: 'PSP-UFU',
       logo: {
@@ -125,11 +110,6 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        //sitemap: {
-        //    //cacheTime: 600 * 1000, // 600 sec - cache purge period
-        //    changefreq: 'weekly',
-        //    priority: 0.5,
-		    //},
       },
     ],
   ],
