@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpsp_ufu=self.webpackChunkpsp_ufu||[]).push([["3220"],{1912(s){s.exports=JSON.parse('{"blogBasePath":"/PSP/pt/blog","blogTitle":"Blog","authorsListPath":"/PSP/pt/blog/authors"}')}}]);

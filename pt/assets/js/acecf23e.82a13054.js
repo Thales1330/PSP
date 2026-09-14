@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkpsp_ufu=globalThis.webpackChunkpsp_ufu||[]).push([[1903],{1912(s){s.exports=JSON.parse('{"blogBasePath":"/PSP/pt/blog","blogTitle":"Blog","authorsListPath":"/PSP/pt/blog/authors"}')}}]);
