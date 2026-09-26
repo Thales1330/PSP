@@ -299,6 +299,10 @@ public:
 
 		wxLocale* locale = new wxLocale();
 		LoadCatalogs(locale, propertiesData);
+#ifdef __WXMSW__
+		// Ensure UTF-8 encoding for implicit narrow-string to wxString conversions on Windows.
+		wxConvLibcPtr = &wxConvUTF8;
+#endif
 
 		wxString openFilePath = "";
 

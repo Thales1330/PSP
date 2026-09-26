@@ -23,8 +23,10 @@
 #include <wx/choice.h>
 #include <wx/arrstr.h>
 #include <wx/checkbox.h>
+#include <wx/bmpcbox.h>
 #include <wx/button.h>
 #include <wx/statbox.h>
+#include <wx/statbmp.h>
 #include <wx/statline.h>
 #include <wx/propgrid/manager.h>
 #include <wx/propgrid/property.h>
@@ -33,6 +35,10 @@
 #include <wx/stc/stc.h>
 #include <wx/filepicker.h>
 #include <wx/spinctrl.h>
+#include <wx/splitter.h>
+#include <wx/dataview.h>
+#include <wx/grid.h>
+#include <wx/bmpbuttn.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -94,6 +100,26 @@ protected:
     wxStaticText* m_staticTextPU_4;
     wxPanel* m_panelPowerQuality;
     wxCheckBox* m_checkBoxPlotPQData;
+    wxPanel* m_panelArcFlash;
+    wxStaticText* m_staticConfig;
+    wxBitmapComboBox* m_bmpComboBoxConfig;
+    wxStaticText* m_staticTextGap;
+    wxTextCtrl* m_textCtrlGap;
+    wxStaticText* m_staticTextWorkDist;
+    wxTextCtrl* m_textCtrlWorkDist;
+    wxStaticText* m_staticTextHeight;
+    wxTextCtrl* m_textCtrlHeight;
+    wxStaticText* m_staticTextWidth;
+    wxTextCtrl* m_textCtrlWidth;
+    wxStaticText* m_staticTextDepth;
+    wxTextCtrl* m_textCtrlGap525558;
+    wxStaticText* m_staticTextWorkProtection;
+    wxButton* m_buttonConfigProtection;
+    wxStaticText* m_staticTextProtection;
+    wxButton* m_buttonCalcArcFlash;
+    wxStaticBitmap* m_staticBitmapWarning;
+    wxStaticText* m_staticTextEnergy;
+    wxStaticText* m_staticTextAFB;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
@@ -103,6 +129,10 @@ protected:
     virtual void OnInsertFaultClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnFaultTypeChoice(wxCommandEvent& event) { event.Skip(); }
     virtual void OnInsertStabFaultClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMouseEnterElectrodeConfig(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnMouseLeaveElectrodeConfig(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnMouseMotionElectrodeConfig(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnnConfigProtectionButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
 
@@ -146,6 +176,26 @@ public:
     wxPanel* GetPanelStability() { return m_panelStability; }
     wxCheckBox* GetCheckBoxPlotPQData() { return m_checkBoxPlotPQData; }
     wxPanel* GetPanelPowerQuality() { return m_panelPowerQuality; }
+    wxStaticText* GetStaticConfig() { return m_staticConfig; }
+    wxBitmapComboBox* GetBmpComboBoxConfig() { return m_bmpComboBoxConfig; }
+    wxStaticText* GetStaticTextGap() { return m_staticTextGap; }
+    wxTextCtrl* GetTextCtrlGap() { return m_textCtrlGap; }
+    wxStaticText* GetStaticTextWorkDist() { return m_staticTextWorkDist; }
+    wxTextCtrl* GetTextCtrlWorkDist() { return m_textCtrlWorkDist; }
+    wxStaticText* GetStaticTextHeight() { return m_staticTextHeight; }
+    wxTextCtrl* GetTextCtrlHeight() { return m_textCtrlHeight; }
+    wxStaticText* GetStaticTextWidth() { return m_staticTextWidth; }
+    wxTextCtrl* GetTextCtrlWidth() { return m_textCtrlWidth; }
+    wxStaticText* GetStaticTextDepth() { return m_staticTextDepth; }
+    wxTextCtrl* GetTextCtrlGap525558() { return m_textCtrlGap525558; }
+    wxStaticText* GetStaticTextWorkProtection() { return m_staticTextWorkProtection; }
+    wxButton* GetButtonConfigProtection() { return m_buttonConfigProtection; }
+    wxStaticText* GetStaticTextProtection() { return m_staticTextProtection; }
+    wxButton* GetButtonCalcArcFlash() { return m_buttonCalcArcFlash; }
+    wxStaticBitmap* GetStaticBitmapWarning() { return m_staticBitmapWarning; }
+    wxStaticText* GetStaticTextEnergy() { return m_staticTextEnergy; }
+    wxStaticText* GetStaticTextAFB() { return m_staticTextAFB; }
+    wxPanel* GetPanelArcFlash() { return m_panelArcFlash; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
@@ -1337,6 +1387,62 @@ public:
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
     ATPFileEditorFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Edit ATP file"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500,300), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
     virtual ~ATPFileEditorFormBase();
+};
+
+
+class BusFormArcFlashProtectionBase : public wxDialog
+{
+protected:
+    wxStaticText* m_staticTextIbf;
+    wxSplitterWindow* m_splitter2649;
+    wxPanel* m_splitterPage2654;
+    wxDataViewListCtrl* m_dvListCtrlDevices;
+    wxStaticText* m_staticTextType;
+    wxChoice* m_choiceType;
+    wxStaticText* m_staticTextType6;
+    wxChoice* m_choiceMethod;
+    wxStaticText* m_staticTextDelay;
+    wxTextCtrl* m_textCtrlDelay;
+    wxPanel* m_splitterPage2657;
+    wxGrid* m_gridTCC;
+    wxBitmapButton* m_bmpButtonAdd;
+    wxBitmapButton* m_bmpButtonRemove;
+    wxButton* m_buttonImport;
+    wxCheckBox* m_checkBoxIsMeltTime;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnDeviceChanged(wxDataViewEvent& event) { event.Skip(); }
+    virtual void OnTypeSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMethodSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnAddButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRemoveButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnImportButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextIbf() { return m_staticTextIbf; }
+    wxDataViewListCtrl* GetDvListCtrlDevices() { return m_dvListCtrlDevices; }
+    wxStaticText* GetStaticTextType() { return m_staticTextType; }
+    wxChoice* GetChoiceType() { return m_choiceType; }
+    wxStaticText* GetStaticTextType6() { return m_staticTextType6; }
+    wxChoice* GetChoiceMethod() { return m_choiceMethod; }
+    wxStaticText* GetStaticTextDelay() { return m_staticTextDelay; }
+    wxTextCtrl* GetTextCtrlDelay() { return m_textCtrlDelay; }
+    wxPanel* GetSplitterPage2654() { return m_splitterPage2654; }
+    wxGrid* GetGridTCC() { return m_gridTCC; }
+    wxBitmapButton* GetBmpButtonAdd() { return m_bmpButtonAdd; }
+    wxBitmapButton* GetBmpButtonRemove() { return m_bmpButtonRemove; }
+    wxButton* GetButtonImport() { return m_buttonImport; }
+    wxCheckBox* GetCheckBoxIsMeltTime() { return m_checkBoxIsMeltTime; }
+    wxPanel* GetSplitterPage2657() { return m_splitterPage2657; }
+    wxSplitterWindow* GetSplitter2649() { return m_splitter2649; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    BusFormArcFlashProtectionBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Configure protection"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~BusFormArcFlashProtectionBase();
 };
 
 #endif

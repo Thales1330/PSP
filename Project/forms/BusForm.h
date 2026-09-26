@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -18,8 +18,23 @@
 #ifndef BUSFORM_H
 #define BUSFORM_H
 
+#include <wx/popupwin.h>
+#include <wx/statbmp.h>
+
 #include "ElementFormBase.h"
 class Bus;
+
+
+class BitmapPopup : public wxPopupWindow
+{
+public:
+    BitmapPopup(wxWindow* parent);
+
+    void SetBitmap(const wxBitmap& bitmap);
+
+private:
+    wxStaticBitmap* m_bitmap;
+};
 
 /**
  * @class BusForm
@@ -31,10 +46,14 @@ class Bus;
 class BusForm : public BusFormBase
 {
    public:
-    BusForm(wxWindow* parent, Bus* bus);
+    BusForm(wxWindow* parent, Bus* bus, wxWindow* workspace);
     virtual ~BusForm();
 
    protected:
+    void OnnConfigProtectionButtonClick(wxCommandEvent& event) override;
+    void OnMouseMotionElectrodeConfig(wxMouseEvent& event) override;
+    void OnMouseEnterElectrodeConfig(wxMouseEvent& event) override;
+    void OnMouseLeaveElectrodeConfig(wxMouseEvent& event) override;
     virtual void OnFaultTypeChoice(wxCommandEvent& event);
     virtual void OnControlledVoltageClick(wxCommandEvent& event);
     virtual void OnInsertFaultClick(wxCommandEvent& event);
@@ -49,5 +68,7 @@ class BusForm : public BusFormBase
 
     Bus* m_bus = nullptr;
     wxWindow* m_parent = nullptr;
+    wxWindow* m_workspace = nullptr;
+    BitmapPopup* m_electrodePreview;
 };
 #endif  // BUSFORM_H

@@ -145,6 +145,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include\msvc;$(MSBuildThisFileDirectory)include;$(WXWIN)\include\msvc;$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -187,6 +188,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="editors\ChartWindowManager.cpp" />
+    <ClCompile Include="forms\BusFormArcFlashProtection.cpp" />
     <ClCompile Include="utils\ATPPSPBridge.cpp" />
     <ClCompile Include="editors\ControlEditorManager.cpp" />
     <ClCompile Include="elements\ControlElementDataObject.cpp" />
@@ -305,6 +307,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="editors\ChartWindowManager.h" />
+    <ClInclude Include="forms\BusFormArcFlashProtection.h" />
     <ClInclude Include="utils\ATPPSPBridge.h" />
     <ClInclude Include="editors\ControlEditorManager.h" />
     <ClInclude Include="elements\ControlElementDataObject.h" />

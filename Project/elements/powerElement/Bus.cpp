@@ -354,7 +354,7 @@ bool Bus::GetContextMenu(wxMenu& menu)
 
 bool Bus::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
-	BusForm busForm(parent, this);
+	BusForm busForm(parent, this, workspace);
 	busForm.CentreOnParent();
 	if (busForm.ShowModal() == wxID_OK) {
 		return true;
