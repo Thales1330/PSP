@@ -1,8 +1,10 @@
 ﻿#ifndef BUSFORMARCFLASHPROTECTION_H
 #define BUSFORMARCFLASHPROTECTION_H
 #include "ElementFormBase.h"
+#include <wx/popupwin.h>
 
 class Bus;
+class TCCPopup;
 
 class BusFormArcFlashProtection : public BusFormArcFlashProtectionBase
 {
@@ -22,7 +24,24 @@ protected:
     void OnTypeSelected(wxCommandEvent& event) override;
     void OnnCancelButtonClick(wxCommandEvent& event) override;
 
-    Bus* m_bus;
+    Bus* m_bus = nullptr;
 	double m_basePower = 100e6; // Default base power is 100 MVA
+    TCCPopup* m_tccPopup = nullptr;
 };
+
+class TCCPopup : public wxPopupTransientWindow
+{
+public:
+    TCCPopup(wxWindow* parent, wxGrid* grid);
+    ~TCCPopup();
+
+    void UpdateGraph();
+
+private:
+    void OnPaint(wxPaintEvent& event);
+    bool GetCellDouble(int row, int col, double& value) const;
+
+    wxGrid* m_grid = nullptr;
+};
+
 #endif // BUSFORMARCFLASHPROTECTION_H

@@ -1394,8 +1394,8 @@ class BusFormArcFlashProtectionBase : public wxDialog
 {
 protected:
     wxStaticText* m_staticTextIbf;
-    wxSplitterWindow* m_splitter2649;
-    wxPanel* m_splitterPage2654;
+    wxSplitterWindow* m_splitter;
+    wxPanel* m_splitterPageLeft;
     wxDataViewListCtrl* m_dvListCtrlDevices;
     wxStaticText* m_staticTextType;
     wxChoice* m_choiceType;
@@ -1403,7 +1403,7 @@ protected:
     wxChoice* m_choiceMethod;
     wxStaticText* m_staticTextDelay;
     wxTextCtrl* m_textCtrlDelay;
-    wxPanel* m_splitterPage2657;
+    wxPanel* m_splitterPageRight;
     wxGrid* m_gridTCC;
     wxBitmapButton* m_bmpButtonAdd;
     wxBitmapButton* m_bmpButtonRemove;
@@ -1431,14 +1431,14 @@ public:
     wxChoice* GetChoiceMethod() { return m_choiceMethod; }
     wxStaticText* GetStaticTextDelay() { return m_staticTextDelay; }
     wxTextCtrl* GetTextCtrlDelay() { return m_textCtrlDelay; }
-    wxPanel* GetSplitterPage2654() { return m_splitterPage2654; }
+    wxPanel* GetSplitterPageLeft() { return m_splitterPageLeft; }
     wxGrid* GetGridTCC() { return m_gridTCC; }
     wxBitmapButton* GetBmpButtonAdd() { return m_bmpButtonAdd; }
     wxBitmapButton* GetBmpButtonRemove() { return m_bmpButtonRemove; }
     wxButton* GetButtonImport() { return m_buttonImport; }
     wxCheckBox* GetCheckBoxIsMeltTime() { return m_checkBoxIsMeltTime; }
-    wxPanel* GetSplitterPage2657() { return m_splitterPage2657; }
-    wxSplitterWindow* GetSplitter2649() { return m_splitter2649; }
+    wxPanel* GetSplitterPageRight() { return m_splitterPageRight; }
+    wxSplitterWindow* GetSplitter() { return m_splitter; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
     BusFormArcFlashProtectionBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Configure protection"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
