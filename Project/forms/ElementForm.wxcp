@@ -72562,7 +72562,7 @@
                     {
                       "type": "font",
                       "m_label": "Font:",
-                      "m_value": ""
+                      "m_value": "wxSYS_DEFAULT_GUI_FONT,normal,bold,normal"
                     },
                     {
                       "type": "bool",
@@ -72641,7 +72641,7 @@
                     {
                       "type": "string",
                       "m_label": "Name:",
-                      "m_value": "m_splitter2649"
+                      "m_value": "m_splitter"
                     },
                     {
                       "type": "multi-string",
@@ -72755,7 +72755,7 @@
                         {
                           "type": "string",
                           "m_label": "Name:",
-                          "m_value": "m_splitterPage2654"
+                          "m_value": "m_splitterPageLeft"
                         },
                         {
                           "type": "multi-string",
@@ -72885,7 +72885,7 @@
                                 {
                                   "type": "string",
                                   "m_label": "Minimum Size:",
-                                  "m_value": "400,100"
+                                  "m_value": "-1,-1"
                                 },
                                 {
                                   "type": "string",
@@ -73097,7 +73097,7 @@
                                     {
                                       "type": "string",
                                       "m_label": "Name:",
-                                      "m_value": "Ibf (A)"
+                                      "m_value": "Ibf (kA)"
                                     },
                                     {
                                       "type": "string",
@@ -73161,11 +73161,6 @@
                               "gbPosition": "0,0",
                               "m_styles": [],
                               "m_sizerFlags": [
-                                "wxALL",
-                                "wxLEFT",
-                                "wxRIGHT",
-                                "wxTOP",
-                                "wxBOTTOM",
                                 "wxEXPAND"
                               ],
                               "m_properties": [
@@ -74003,7 +73998,7 @@
                         {
                           "type": "string",
                           "m_label": "Name:",
-                          "m_value": "m_splitterPage2657"
+                          "m_value": "m_splitterPageRight"
                         },
                         {
                           "type": "multi-string",
@@ -74113,7 +74108,9 @@
                               "gbSpan": "1,1",
                               "gbPosition": "0,0",
                               "m_styles": [
-                                "wxWANTS_CHARS"
+                                "wxWANTS_CHARS",
+                                "wxALWAYS_SHOW_SB",
+                                "wxVSCROLL"
                               ],
                               "m_sizerFlags": [
                                 "wxALL",
