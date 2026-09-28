@@ -23,10 +23,14 @@ protected:
     void OnRemoveButtonClick(wxCommandEvent& event) override;
     void OnTypeSelected(wxCommandEvent& event) override;
     void OnnCancelButtonClick(wxCommandEvent& event) override;
+    void OnGridKeyDown(wxKeyEvent& event);
+    void OnGridCornerPaint(wxPaintEvent& event);
+    bool ParseDouble(const wxString& text, double& value);
 
     Bus* m_bus = nullptr;
 	double m_basePower = 100e6; // Default base power is 100 MVA
     TCCPopup* m_tccPopup = nullptr;
+    bool m_gridCornerHover = false;
 };
 
 class TCCPopup : public wxPopupTransientWindow

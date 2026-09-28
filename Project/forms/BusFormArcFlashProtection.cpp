@@ -1,10 +1,12 @@
 ﻿#include "BusFormArcFlashProtection.h"
 
+#include <wx/clipbrd.h>
 #include <wx/dcbuffer.h>
 
 #include "../elements/powerElement/Bus.h"
 #include "../elements/powerElement/Line.h"
 #include "../elements/powerElement/Transformer.h"
+#include <wx/textfile.h>
 
 BusFormArcFlashProtection::BusFormArcFlashProtection(wxWindow* parent, Bus* bus, double basePower)
 	: BusFormArcFlashProtectionBase(parent), m_bus(bus), m_basePower(basePower)
@@ -53,7 +55,7 @@ BusFormArcFlashProtection::BusFormArcFlashProtection(wxWindow* parent, Bus* bus,
 
 	m_gridTCC->AppendCols(2);
 
-	
+
 	m_gridTCC->SetColLabelValue(0, _("Current (A)"));
 	m_gridTCC->SetColLabelValue(1, _("Time (s)"));
 
@@ -87,8 +89,11 @@ BusFormArcFlashProtection::BusFormArcFlashProtection(wxWindow* parent, Bus* bus,
 
 	m_splitter->SetSashPosition(sashPosition);
 
+	m_gridTCC->Bind(wxEVT_KEY_DOWN, &BusFormArcFlashProtection::OnGridKeyDown, this);
+
 	// Chart popup
 	wxWindow* corner = m_gridTCC->GetGridCornerLabelWindow();
+	corner->Bind(wxEVT_PAINT, &BusFormArcFlashProtection::OnGridCornerPaint, this);
 	corner->Bind(wxEVT_ENTER_WINDOW, [this](wxMouseEvent& event) {
 		if (!m_tccPopup)
 			m_tccPopup = new TCCPopup(this, m_gridTCC);
@@ -102,8 +107,23 @@ BusFormArcFlashProtection::BusFormArcFlashProtection(wxWindow* parent, Bus* bus,
 
 	corner->Bind(wxEVT_MOTION, [this](wxMouseEvent& event) {
 		if (m_tccPopup && m_tccPopup->IsShown()) {
-			wxPoint mousePos = wxGetMousePosition();
-			m_tccPopup->Move(mousePos + wxPoint(15, 15));
+			const wxPoint mouse = wxGetMousePosition();
+			const wxSize popupSize = m_tccPopup->GetSize();
+
+			wxPoint pos = mouse + FromDIP(wxPoint(10, 10));
+
+			const wxRect screen = wxGetClientDisplayRect();
+
+			if (pos.x + popupSize.x > screen.GetRight())
+				pos.x = mouse.x - popupSize.x - FromDIP(10);
+
+			if (pos.y + popupSize.y > screen.GetBottom())
+				pos.y = mouse.y - popupSize.y - FromDIP(10);
+
+			m_tccPopup->SetPosition(pos);
+
+			//wxPoint mousePos = wxGetMousePosition();
+			//m_tccPopup->Move(mousePos + wxPoint(15, 15));
 		}
 
 		event.Skip();
@@ -122,6 +142,8 @@ BusFormArcFlashProtection::BusFormArcFlashProtection(wxWindow* parent, Bus* bus,
 
 BusFormArcFlashProtection::~BusFormArcFlashProtection()
 {
+	wxWindow* corner = m_gridTCC->GetGridCornerLabelWindow();
+	corner->Unbind(wxEVT_PAINT, &BusFormArcFlashProtection::OnGridCornerPaint, this);
 }
 
 void BusFormArcFlashProtection::EnableFields()
@@ -174,7 +196,115 @@ void BusFormArcFlashProtection::OnDeviceChanged(wxDataViewEvent& event)
 
 void BusFormArcFlashProtection::OnImportButtonClick(wxCommandEvent& event)
 {
+	wxFileDialog dialog(
+		this,
+		_("Import TCC curve"),
+		"",
+		"",
+		_("CSV files (*.csv)|*.csv|All files (*.*)|*.*"),
+		wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+
+	if (dialog.ShowModal() != wxID_OK)
+		return;
+
+	wxTextFile file;
+
+	if (!file.Open(dialog.GetPath()))
+	{
+		wxMessageBox(_("Unable to open the selected file."), _("Import error"), wxOK | wxICON_ERROR, this);
+		return;
+	}
+
+
+	m_gridTCC->ClearGrid();
+
+	if (m_gridTCC->GetNumberRows() > 0)
+		m_gridTCC->DeleteRows(0, m_gridTCC->GetNumberRows());
+
+	int row = 0;
+
+	for (size_t i = 0; i < file.GetLineCount(); ++i)
+	{
+		wxString line = file.GetLine(i).Trim(true).Trim(false);
+
+		if (line.IsEmpty())
+			continue;
+
+		wxArrayString columns;
+
+		if (line.Find(';') != wxNOT_FOUND)
+		{
+			wxStringTokenizer tokenizer(line, ";");
+
+			while (tokenizer.HasMoreTokens())
+				columns.Add(tokenizer.GetNextToken());
+		}
+		else if (line.Find('\t') != wxNOT_FOUND)
+		{
+			wxStringTokenizer tokenizer(line, "\t");
+
+			while (tokenizer.HasMoreTokens())
+				columns.Add(tokenizer.GetNextToken());
+		}
+		else
+		{
+			wxStringTokenizer tokenizer(line, ",");
+
+			while (tokenizer.HasMoreTokens())
+				columns.Add(tokenizer.GetNextToken());
+		}
+
+		if (columns.size() < 2)
+			continue;
+
+		wxString currentString = columns[0].Trim(true).Trim(false);
+		wxString timeString = columns[1].Trim(true).Trim(false);
+
+		double current = 0.0;
+		double time = 0.0;
+
+		if (!ParseDouble(currentString, current) || !ParseDouble(timeString, time))
+		{
+			if (row == 0)
+				continue;
+
+			wxMessageBox(
+				wxString::Format(_("Invalid data at line %zu."), i + 1),
+				_("Import error"),
+				wxOK | wxICON_ERROR,
+				this);
+
+			file.Close();
+			return;
+		}
+
+		if (current <= 0.0 || time <= 0.0)
+		{
+			wxMessageBox(
+				wxString::Format(_("Invalid data at line %zu. Current and time must be greater than zero."), i + 1),
+				_("Import error"),
+				wxOK | wxICON_ERROR,
+				this);
+
+			file.Close();
+			return;
+		}
+
+		m_gridTCC->AppendRows(1);
+		m_gridTCC->SetCellValue(row, 0, currentString);
+		m_gridTCC->SetCellValue(row, 1, timeString);
+
+		++row;
+	}
+
+	file.Close();
+
+	m_gridTCC->ForceRefresh();
+
+	if (m_tccPopup && m_tccPopup->IsShown())
+		m_tccPopup->UpdateGraph();
 }
+
 void BusFormArcFlashProtection::OnMethodSelected(wxCommandEvent& event)
 {
 	EnableFields();
@@ -203,10 +333,157 @@ void BusFormArcFlashProtection::OnnCancelButtonClick(wxCommandEvent& event)
 {
 }
 
+void BusFormArcFlashProtection::OnGridKeyDown(wxKeyEvent& event)
+{
+	if (!event.ControlDown() || event.GetKeyCode() != 'V') {
+		event.Skip();
+		return;
+	}
+
+	if (!wxTheClipboard->Open()) {
+		event.Skip();
+		return;
+	}
+
+	wxTextDataObject data;
+
+	if (!wxTheClipboard->GetData(data)) {
+		wxTheClipboard->Close();
+		event.Skip();
+		return;
+	}
+
+	wxTheClipboard->Close();
+
+	wxString text = data.GetText();
+	text.Replace("\r\n", "\n");
+	text.Replace("\r", "\n");
+
+	wxArrayString rows;
+	wxStringTokenizer rowTokenizer(text, "\n");
+
+	while (rowTokenizer.HasMoreTokens())
+		rows.Add(rowTokenizer.GetNextToken());
+
+	int startRow = m_gridTCC->GetGridCursorRow();
+	int startCol = m_gridTCC->GetGridCursorCol();
+
+	if (startRow < 0)
+		startRow = 0;
+
+	if (startCol < 0)
+		startCol = 0;
+
+	int row = startRow;
+
+	for (const auto& rowText : rows) {
+		if (rowText.IsEmpty())
+			continue;
+
+		wxArrayString columns;
+		wxStringTokenizer columnTokenizer(rowText, "\t");
+
+		while (columnTokenizer.HasMoreTokens())
+			columns.Add(columnTokenizer.GetNextToken());
+
+		while (row >= m_gridTCC->GetNumberRows())
+			m_gridTCC->AppendRows(1);
+
+		for (size_t i = 0; i < columns.size() && startCol + static_cast<int>(i) < m_gridTCC->GetNumberCols(); ++i)
+			m_gridTCC->SetCellValue(row, startCol + static_cast<int>(i), columns[i]);
+
+		++row;
+	}
+
+	m_gridTCC->ForceRefresh();
+}
+
+void BusFormArcFlashProtection::OnGridCornerPaint(wxPaintEvent& event)
+{
+	wxWindow* corner = m_gridTCC->GetGridCornerLabelWindow();
+
+	wxAutoBufferedPaintDC dc(corner);
+	dc.SetBackground(wxBrush(corner->GetBackgroundColour()));
+	dc.Clear();
+
+	std::unique_ptr<wxGraphicsContext> gc(wxGraphicsContext::Create(dc));
+	if (!gc)
+		return;
+
+	gc->SetAntialiasMode(wxANTIALIAS_DEFAULT);
+
+	const wxSize size = corner->GetClientSize();
+
+	const double left = 2.0;
+	const double right = size.x - 2.0;
+	const double top = 2.0;
+	const double bottom = size.y - 2.0;
+
+	if (size.x <= 4 || size.y <= 4)
+		return;
+
+	const wxColour axisColour(90, 90, 90);
+	const wxColour curveColour(40, 100, 200);
+
+	// Draw axes.
+	gc->SetPen(wxPen(axisColour, 1.0));
+	gc->StrokeLine(left, top, left, bottom);
+	gc->StrokeLine(left, bottom, right, bottom);
+
+	// Define a TCC-like curve.
+	const double x0 = left + size.x * 0.23;
+	const double y0 = top + size.y * 0.12;
+
+	const double x1 = left + size.x * 0.42;
+	const double y1 = top + size.y * 0.50;
+
+	const double x2 = left + size.x * 0.63;
+	const double y2 = top + size.y * 0.72;
+
+	const double x3 = right - size.x * 0.08;
+	const double y3 = top + size.y * 0.80;
+
+	wxGraphicsPath path = gc->CreatePath();
+
+	path.MoveToPoint(x0, y0);
+
+	path.AddCurveToPoint(
+		x0 + size.x * 0.01, y0 + size.y * 0.12,
+		x1 - size.x * 0.10, y1 - size.y * 0.12,
+		x1, y1
+	);
+
+	path.AddCurveToPoint(
+		x1 + size.x * 0.08, y1 + size.y * 0.12,
+		x2 - size.x * 0.05, y2 - size.y * 0.03,
+		x2, y2
+	);
+
+	path.AddCurveToPoint(
+		x2 + size.x * 0.10, y2 + size.y * 0.06,
+		x3 - size.x * 0.08, y3,
+		x3, y3
+	);
+
+	// Draw the TCC curve.
+	gc->SetPen(wxPen(curveColour, m_gridCornerHover ? 2.0 : 1.5));
+	gc->StrokePath(path);
+}
+
+bool BusFormArcFlashProtection::ParseDouble(const wxString& text, double& value)
+{
+	wxString str = text;
+	str.Trim(true).Trim(false);
+	if (str.Find(',') != wxNOT_FOUND)
+		str.Replace(",", ".");
+
+	return str.ToCDouble(&value);
+}
+
 TCCPopup::TCCPopup(wxWindow* parent, wxGrid* grid) : wxPopupTransientWindow(parent, wxBORDER_SIMPLE), m_grid(grid)
 {
 	SetBackgroundStyle(wxBG_STYLE_PAINT);
-	SetSize(320, 220);
+	SetSize(500, 600);
 
 	Bind(wxEVT_PAINT, &TCCPopup::OnPaint, this);
 }
@@ -238,12 +515,19 @@ void TCCPopup::OnPaint(wxPaintEvent& event)
 	if (!m_grid)
 		return;
 
+	std::unique_ptr<wxGraphicsContext> gc(wxGraphicsContext::Create(dc));
+
+	if (!gc)
+		return;
+
+	gc->SetAntialiasMode(wxANTIALIAS_DEFAULT);
+
 	const wxSize size = GetClientSize();
 
-	const int left = 55;
-	const int right = 15;
-	const int top = 15;
-	const int bottom = 45;
+	const int left = 60;
+	const int right = 20;
+	const int top = 20;
+	const int bottom = 50;
 
 	const int graphWidth = size.x - left - right;
 	const int graphHeight = size.y - top - bottom;
@@ -251,7 +535,8 @@ void TCCPopup::OnPaint(wxPaintEvent& event)
 	if (graphWidth <= 0 || graphHeight <= 0)
 		return;
 
-	struct Point {
+	struct Point
+	{
 		double current;
 		double time;
 	};
@@ -285,133 +570,171 @@ void TCCPopup::OnPaint(wxPaintEvent& event)
 	if (data.size() < 2)
 		return;
 
-	double logMinCurrent = std::log10(minCurrent);
-	double logMaxCurrent = std::log10(maxCurrent);
-	double logMinTime = std::log10(minTime);
-	double logMaxTime = std::log10(maxTime);
+	// Use complete decades for both axes.
+	double logMinCurrent = std::floor(std::log10(minCurrent));
+	double logMaxCurrent = std::ceil(std::log10(maxCurrent));
+	double logMinTime = std::floor(std::log10(minTime));
+	double logMaxTime = std::ceil(std::log10(maxTime));
 
-	if (logMinCurrent == logMaxCurrent) {
-		logMinCurrent -= 0.5;
-		logMaxCurrent += 0.5;
+	if (logMinCurrent == logMaxCurrent)
+	{
+		--logMinCurrent;
+		++logMaxCurrent;
 	}
 
-	if (logMinTime == logMaxTime) {
-		logMinTime -= 0.5;
-		logMaxTime += 0.5;
+	if (logMinTime == logMaxTime)
+	{
+		--logMinTime;
+		++logMaxTime;
 	}
-
-	const double currentMargin = (logMaxCurrent - logMinCurrent) * 0.05;
-	const double timeMargin = (logMaxTime - logMinTime) * 0.05;
-
-	logMinCurrent -= currentMargin;
-	logMaxCurrent += currentMargin;
-	logMinTime -= timeMargin;
-	logMaxTime += timeMargin;
 
 	auto mapX = [&](double current) {
-		return left + static_cast<int>((std::log10(current) - logMinCurrent) / (logMaxCurrent - logMinCurrent) * graphWidth);
+		return left + (std::log10(current) - logMinCurrent) / (logMaxCurrent - logMinCurrent) * graphWidth;
 		};
 
 	auto mapY = [&](double time) {
-		return size.y - bottom - static_cast<int>((std::log10(time) - logMinTime) / (logMaxTime - logMinTime) * graphHeight);
+		return size.y - bottom - (std::log10(time) - logMinTime) / (logMaxTime - logMinTime) * graphHeight;
 		};
 
-	const int firstCurrentDecade = static_cast<int>(std::floor(logMinCurrent));
-	const int lastCurrentDecade = static_cast<int>(std::ceil(logMaxCurrent));
+	const int firstCurrentDecade = static_cast<int>(logMinCurrent);
+	const int lastCurrentDecade = static_cast<int>(logMaxCurrent);
 
-	const int firstTimeDecade = static_cast<int>(std::floor(logMinTime));
-	const int lastTimeDecade = static_cast<int>(std::ceil(logMaxTime));
+	const int firstTimeDecade = static_cast<int>(logMinTime);
+	const int lastTimeDecade = static_cast<int>(logMaxTime);
 
-	// Vertical grid lines: current
-	dc.SetPen(wxPen(wxColour(220, 220, 220), 1));
+	// Minor vertical grid lines: current.
+	gc->SetPen(wxPen(wxColour(230, 230, 230), 1));
+
+	for (int exponent = firstCurrentDecade; exponent <= lastCurrentDecade; ++exponent)
+	{
+		const double decade = std::pow(10.0, exponent);
+
+		for (int i = 2; i <= 9; ++i)
+		{
+			const double current = i * decade;
+			const double x = mapX(current);
+
+			if (x >= left && x <= size.x - right)
+				gc->StrokeLine(x, top, x, size.y - bottom);
+		}
+	}
+
+	// Minor horizontal grid lines: time.
+	for (int exponent = firstTimeDecade; exponent <= lastTimeDecade; ++exponent)
+	{
+		const double decade = std::pow(10.0, exponent);
+
+		for (int i = 2; i <= 9; ++i)
+		{
+			const double time = i * decade;
+			const double y = mapY(time);
+
+			if (y >= top && y <= size.y - bottom)
+				gc->StrokeLine(left, y, size.x - right, y);
+		}
+	}
+
+	// Major vertical grid lines: current.
+	gc->SetPen(wxPen(wxColour(190, 190, 190), 1));
 
 	for (int exponent = firstCurrentDecade; exponent <= lastCurrentDecade; ++exponent)
 	{
 		const double current = std::pow(10.0, exponent);
-		const int x = mapX(current);
+		const double x = mapX(current);
 
 		if (x >= left && x <= size.x - right)
-			dc.DrawLine(x, top, x, size.y - bottom);
+			gc->StrokeLine(x, top, x, size.y - bottom);
 	}
 
-	// Horizontal grid lines: time
+	// Major horizontal grid lines: time.
 	for (int exponent = firstTimeDecade; exponent <= lastTimeDecade; ++exponent)
 	{
 		const double time = std::pow(10.0, exponent);
-		const int y = mapY(time);
+		const double y = mapY(time);
 
 		if (y >= top && y <= size.y - bottom)
-			dc.DrawLine(left, y, size.x - right, y);
+			gc->StrokeLine(left, y, size.x - right, y);
 	}
 
-	// Axes
-	dc.SetPen(*wxBLACK_PEN);
-	dc.DrawLine(left, top, left, size.y - bottom);
-	dc.DrawLine(left, size.y - bottom, size.x - right, size.y - bottom);
+	// Axes.
+	gc->SetPen(wxPen(*wxBLACK, 1.5));
+	gc->StrokeLine(left, top, left, size.y - bottom);
+	gc->StrokeLine(left, size.y - bottom, size.x - right, size.y - bottom);
 
-	// X-axis values: current
-	dc.SetTextForeground(*wxBLACK);
+	// X-axis labels: current.
+	gc->SetFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT), *wxBLACK);
 
 	for (int exponent = firstCurrentDecade; exponent <= lastCurrentDecade; ++exponent)
 	{
 		const double current = std::pow(10.0, exponent);
-		const int x = mapX(current);
+		const double x = mapX(current);
 
 		if (x < left || x > size.x - right)
 			continue;
 
 		const wxString label = wxString::Format("1e%d", exponent);
 
-		int textWidth;
-		int textHeight;
-		dc.GetTextExtent(label, &textWidth, &textHeight);
+		double textWidth;
+		double textHeight;
+		gc->GetTextExtent(label, &textWidth, &textHeight);
 
-		dc.DrawText(label, x - textWidth / 2, size.y - bottom + 5);
+		gc->DrawText(label, x - textWidth / 2.0, size.y - bottom + 5);
 	}
 
-	// Y-axis values: time
+	// Y-axis labels: time.
 	for (int exponent = firstTimeDecade; exponent <= lastTimeDecade; ++exponent)
 	{
 		const double time = std::pow(10.0, exponent);
-		const int y = mapY(time);
+		const double y = mapY(time);
 
 		if (y < top || y > size.y - bottom)
 			continue;
 
 		const wxString label = wxString::Format("1e%d", exponent);
 
-		int textWidth;
-		int textHeight;
-		dc.GetTextExtent(label, &textWidth, &textHeight);
+		double textWidth;
+		double textHeight;
+		gc->GetTextExtent(label, &textWidth, &textHeight);
 
-		dc.DrawText(label, left - textWidth - 5, y - textHeight / 2);
+		gc->DrawText(label, left - textWidth - 5, y - textHeight / 2.0);
 	}
 
-	// TCC curve
-	std::vector<wxPoint> points;
-	points.reserve(data.size());
+	// TCC curve.
+	wxGraphicsPath path = gc->CreatePath();
 
-	for (const auto& point : data)
-		points.emplace_back(mapX(point.current), mapY(point.time));
+	for (size_t i = 0; i < data.size(); ++i)
+	{
+		const double x = mapX(data[i].current);
+		const double y = mapY(data[i].time);
 
-	dc.SetPen(wxPen(wxColour(40, 100, 200), 2));
+		if (i == 0)
+			path.MoveToPoint(x, y);
+		else
+			path.AddLineToPoint(x, y);
+	}
 
-	for (size_t i = 1; i < points.size(); ++i)
-		dc.DrawLine(points[i - 1], points[i]);
+	gc->SetPen(wxPen(wxColour(40, 100, 200), 2.0));
+	gc->StrokePath(path);
 
-	// X-axis title
+	// X-axis title.
 	const wxString xLabel = _("Current (A)");
-	int xLabelWidth;
-	int xLabelHeight;
-	dc.GetTextExtent(xLabel, &xLabelWidth, &xLabelHeight);
 
-	dc.DrawText(xLabel, left + (graphWidth - xLabelWidth) / 2, size.y - 20);
+	double xLabelWidth;
+	double xLabelHeight;
+	gc->GetTextExtent(xLabel, &xLabelWidth, &xLabelHeight);
 
-	// Y-axis title
+	gc->DrawText(xLabel, left + (graphWidth - xLabelWidth) / 2.0, size.y - 20);
+
+	// Y-axis title.
 	const wxString yLabel = _("Time (s)");
-	int yLabelWidth;
-	int yLabelHeight;
-	dc.GetTextExtent(yLabel, &yLabelWidth, &yLabelHeight);
 
-	dc.DrawRotatedText(yLabel, 15, top + (graphHeight + yLabelWidth) / 2, 90);
+	double yLabelWidth;
+	double yLabelHeight;
+	gc->GetTextExtent(yLabel, &yLabelWidth, &yLabelHeight);
+
+	gc->PushState();
+	gc->Translate(15, top + graphHeight / 2.0);
+	gc->Rotate(-M_PI / 2.0);
+	gc->DrawText(yLabel, -yLabelWidth / 2.0, -yLabelHeight / 2.0);
+	gc->PopState();
 }
