@@ -5087,7 +5087,18 @@ BusFormArcFlashProtectionBase::BusFormArcFlashProtectionBase(wxWindow* parent, w
     wxBoxSizer* boxSizer2647 = new wxBoxSizer(wxVERTICAL);
     m_splitterPageRight->SetSizer(boxSizer2647);
     
-    m_gridTCC = new wxGrid(m_splitterPageRight, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_splitterPageRight, wxSize(-1,-1)), wxWANTS_CHARS|wxALWAYS_SHOW_SB|wxVSCROLL);
+    m_notebook = new wxNotebook(m_splitterPageRight, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_splitterPageRight, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizer2647->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelTCC = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelTCC, _("TCC Curve"), false);
+    
+    wxBoxSizer* boxSizer2692 = new wxBoxSizer(wxVERTICAL);
+    m_panelTCC->SetSizer(boxSizer2692);
+    
+    m_gridTCC = new wxGrid(m_panelTCC, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTCC, wxSize(-1,-1)), wxWANTS_CHARS|wxALWAYS_SHOW_SB|wxVSCROLL);
     m_gridTCC->CreateGrid(0, 0);
     m_gridTCC->SetRowLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
     m_gridTCC->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
@@ -5097,37 +5108,43 @@ BusFormArcFlashProtectionBase::BusFormArcFlashProtectionBase(wxWindow* parent, w
     m_gridTCC->EnableEditing(true);
     m_gridTCC->SetRowLabelSize(25);
     
-    boxSizer2647->Add(m_gridTCC, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer2692->Add(m_gridTCC, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     m_gridTCC->SetMinSize(wxSize(100,100));
     
     wxBoxSizer* boxSizer2674 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer2647->Add(boxSizer2674, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer2692->Add(boxSizer2674, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_bmpButtonAdd = new wxBitmapButton(m_splitterPageRight, wxID_ANY, wxArtProvider::GetBitmap(wxART_PLUS, wxART_TOOLBAR, wxDefaultSize), wxDefaultPosition, wxDLG_UNIT(m_splitterPageRight, wxSize(-1,-1)), wxBU_AUTODRAW);
+    m_bmpButtonAdd = new wxBitmapButton(m_panelTCC, wxID_ANY, wxArtProvider::GetBitmap(wxART_PLUS, wxART_TOOLBAR, wxDefaultSize), wxDefaultPosition, wxDLG_UNIT(m_panelTCC, wxSize(-1,-1)), wxBU_AUTODRAW);
     m_bmpButtonAdd->SetToolTip(_("Add row"));
     
     boxSizer2674->Add(m_bmpButtonAdd, 0, wxALL, WXC_FROM_DIP(5));
     
-    m_bmpButtonRemove = new wxBitmapButton(m_splitterPageRight, wxID_ANY, wxArtProvider::GetBitmap(wxART_MINUS, wxART_TOOLBAR, wxDefaultSize), wxDefaultPosition, wxDLG_UNIT(m_splitterPageRight, wxSize(-1,-1)), wxBU_AUTODRAW);
+    m_bmpButtonRemove = new wxBitmapButton(m_panelTCC, wxID_ANY, wxArtProvider::GetBitmap(wxART_MINUS, wxART_TOOLBAR, wxDefaultSize), wxDefaultPosition, wxDLG_UNIT(m_panelTCC, wxSize(-1,-1)), wxBU_AUTODRAW);
     m_bmpButtonRemove->SetToolTip(_("Remove selected row"));
     
     boxSizer2674->Add(m_bmpButtonRemove, 0, wxALL, WXC_FROM_DIP(5));
     
     boxSizer2674->Add(0, 0, 1, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_buttonImport = new wxButton(m_splitterPageRight, wxID_ANY, _("Import..."), wxDefaultPosition, wxDLG_UNIT(m_splitterPageRight, wxSize(-1,-1)), 0);
+    m_buttonImport = new wxButton(m_panelTCC, wxID_ANY, _("Import..."), wxDefaultPosition, wxDLG_UNIT(m_panelTCC, wxSize(-1,-1)), 0);
     
     boxSizer2674->Add(m_buttonImport, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer2690 = new wxBoxSizer(wxVERTICAL);
     
-    boxSizer2647->Add(boxSizer2690, 0, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer2692->Add(boxSizer2690, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_checkBoxIsMeltTime = new wxCheckBox(m_splitterPageRight, wxID_ANY, _("The curve is melting time"), wxDefaultPosition, wxDLG_UNIT(m_splitterPageRight, wxSize(-1,-1)), 0);
+    m_checkBoxIsMeltTime = new wxCheckBox(m_panelTCC, wxID_ANY, _("The curve is melting time"), wxDefaultPosition, wxDLG_UNIT(m_panelTCC, wxSize(-1,-1)), 0);
     m_checkBoxIsMeltTime->SetValue(false);
     
-    boxSizer2647->Add(m_checkBoxIsMeltTime, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer2692->Add(m_checkBoxIsMeltTime, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_panelAI = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelAI, _("Appendix I"), false);
+    
+    m_panel2AH = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panel2AH, _("Appendix H"), false);
     
     wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
     
@@ -5142,6 +5159,15 @@ BusFormArcFlashProtectionBase::BusFormArcFlashProtectionBase(wxWindow* parent, w
     m_ButtonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
     boxSizerBottomButtons->Add(m_ButtonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
     
     SetName(wxT("BusFormArcFlashProtectionBase"));
     SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));

@@ -51,6 +51,9 @@ struct LineElectricalData {
     // Power Quality
     std::vector<int> harmonicOrder;
     std::vector< std::complex<double> > harmonicCurrent[2];
+
+    // Arc Flash
+    ArcFlashProtectionData arcFlashProtection;
 };
 
 /**

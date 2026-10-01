@@ -2,11 +2,13 @@
 
 #include <wx/clipbrd.h>
 #include <wx/dcbuffer.h>
+#include <wx/textfile.h>
+#include <wx/filedlg.h>
 
 #include "../elements/powerElement/Bus.h"
 #include "../elements/powerElement/Line.h"
 #include "../elements/powerElement/Transformer.h"
-#include <wx/textfile.h>
+
 
 BusFormArcFlashProtection::BusFormArcFlashProtection(wxWindow* parent, Bus* bus, double basePower)
 	: BusFormArcFlashProtectionBase(parent), m_bus(bus), m_basePower(basePower)
@@ -72,8 +74,13 @@ BusFormArcFlashProtection::BusFormArcFlashProtection(wxWindow* parent, Bus* bus,
 
 	int devicesWidth = 30;
 
-	for (unsigned int i = 0; i < m_dvListCtrlDevices->GetColumnCount(); ++i)
-		devicesWidth += m_dvListCtrlDevices->GetBestColumnWidth(i);
+	for (unsigned int i = 0; i < m_dvListCtrlDevices->GetColumnCount(); ++i) {
+#ifdef __WXMSW__
+		devicesWidth += static_cast<int>(m_dvListCtrlDevices->GetBestColumnWidth(static_cast<int>(i)));
+#else
+		devicesWidth += m_dvListCtrlDevices->GetColumn(i)->GetWidth();
+#endif
+	}
 
 	m_dvListCtrlDevices->SetMinSize(wxSize(devicesWidth, 100));
 
@@ -109,21 +116,22 @@ BusFormArcFlashProtection::BusFormArcFlashProtection(wxWindow* parent, Bus* bus,
 		if (m_tccPopup && m_tccPopup->IsShown()) {
 			const wxPoint mouse = wxGetMousePosition();
 			const wxSize popupSize = m_tccPopup->GetSize();
+			const int offset = FromDIP(10);
 
-			wxPoint pos = mouse + FromDIP(wxPoint(10, 10));
+			wxPoint pos = mouse + wxPoint(offset, offset);
 
 			const wxRect screen = wxGetClientDisplayRect();
 
 			if (pos.x + popupSize.x > screen.GetRight())
-				pos.x = mouse.x - popupSize.x - FromDIP(10);
+				pos.x -= pos.x + popupSize.x - screen.GetRight();
 
 			if (pos.y + popupSize.y > screen.GetBottom())
-				pos.y = mouse.y - popupSize.y - FromDIP(10);
+				pos.y -= pos.y + popupSize.y - screen.GetBottom();
+
+			if (pos.y < screen.GetTop())
+				pos.y = screen.GetTop();
 
 			m_tccPopup->SetPosition(pos);
-
-			//wxPoint mousePos = wxGetMousePosition();
-			//m_tccPopup->Move(mousePos + wxPoint(15, 15));
 		}
 
 		event.Skip();
@@ -291,8 +299,8 @@ void BusFormArcFlashProtection::OnImportButtonClick(wxCommandEvent& event)
 		}
 
 		m_gridTCC->AppendRows(1);
-		m_gridTCC->SetCellValue(row, 0, currentString);
-		m_gridTCC->SetCellValue(row, 1, timeString);
+		m_gridTCC->SetCellValue(row, 0, wxString::FromDouble(current));
+		m_gridTCC->SetCellValue(row, 1, wxString::FromDouble(time));
 
 		++row;
 	}

@@ -21,6 +21,27 @@
 #include "../../forms/BusForm.h"
 #include "PowerElement.h"
 
+enum class ArcFlashElectrodeConfig {
+	VCB,
+	VCBB,
+	HCB,
+	VOA,
+	HOA
+};
+
+struct ArcFlashData {
+	bool enabled = false;
+
+	ArcFlashElectrodeConfig electrodeConfig = ArcFlashElectrodeConfig::VCB;
+	double conductorGap = 0.0;
+	double workingDistance = 0.0;
+
+	bool enclosureClosed = true;
+	double enclosureHeight = 0.0;
+	double enclosureWidth = 0.0;
+	double enclosureDepth = 0.0;
+};
+
 struct BusElectricalData {
 	int number = 0;
 	wxString name = "";
@@ -74,6 +95,9 @@ struct BusElectricalData {
 
 	std::vector<double> absImpedanceVector;
 	std::vector< std::complex<double> > complexImpedanceVector;
+
+	// Arc Flash
+	ArcFlashData arcFlash;
 };
 
 /**

@@ -1404,11 +1404,15 @@ protected:
     wxStaticText* m_staticTextDelay;
     wxTextCtrl* m_textCtrlDelay;
     wxPanel* m_splitterPageRight;
+    wxNotebook* m_notebook;
+    wxPanel* m_panelTCC;
     wxGrid* m_gridTCC;
     wxBitmapButton* m_bmpButtonAdd;
     wxBitmapButton* m_bmpButtonRemove;
     wxButton* m_buttonImport;
     wxCheckBox* m_checkBoxIsMeltTime;
+    wxPanel* m_panelAI;
+    wxPanel* m_panel2AH;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
@@ -1437,6 +1441,10 @@ public:
     wxBitmapButton* GetBmpButtonRemove() { return m_bmpButtonRemove; }
     wxButton* GetButtonImport() { return m_buttonImport; }
     wxCheckBox* GetCheckBoxIsMeltTime() { return m_checkBoxIsMeltTime; }
+    wxPanel* GetPanelTCC() { return m_panelTCC; }
+    wxPanel* GetPanelAI() { return m_panelAI; }
+    wxPanel* GetPanel2AH() { return m_panel2AH; }
+    wxNotebook* GetNotebook() { return m_notebook; }
     wxPanel* GetSplitterPageRight() { return m_splitterPageRight; }
     wxSplitterWindow* GetSplitter() { return m_splitter; }
     wxButton* GetButtonOK() { return m_buttonOK; }
