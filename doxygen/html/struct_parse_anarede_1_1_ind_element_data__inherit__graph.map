@@ -1,5 +1,5 @@
 <map id="ParseAnarede::IndElementData" name="ParseAnarede::IndElementData">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,229,31"/>
-<area shape="rect" id="Node000002" href="$struct_parse_anarede_1_1_ind_gen_data.html" title=" " alt="" coords="19,79,215,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,44,120,79,115,79,115,44"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,229,33"/>
+<area shape="rect" id="Node000002" href="$struct_parse_anarede_1_1_ind_gen_data.html" title=" " alt="" coords="19,81,215,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,47,119,82,115,79,115,51"/>
 </map>

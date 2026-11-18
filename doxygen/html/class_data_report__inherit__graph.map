@@ -1,5 +1,5 @@
 <map id="DataReport" name="DataReport">
-<area shape="rect" id="Node000001" title="Form that shows the results of power flow and fault calculations." alt="" coords="21,79,117,104"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,133,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,44,72,79,67,79,67,44"/>
+<area shape="rect" id="Node000001" title="Form that shows the results of power flow and fault calculations." alt="" coords="21,81,117,109"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,133,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,47,72,81,66,80,67,51"/>
 </map>

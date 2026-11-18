@@ -1,5 +1,5 @@
 <map id="GraphAutoLayout::GraphLayoutEdge" name="GraphAutoLayout::GraphLayoutEdge">
-<area shape="rect" id="Node000001" title=" " alt="" coords="6,108,265,133"/>
-<area shape="rect" id="Node000002" href="$struct_graph_auto_layout_1_1_graph_layout_node.html" title=" " alt="" coords="5,5,265,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,45,138,108,133,108,133,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="6,128,264,156"/>
+<area shape="rect" id="Node000002" href="$struct_graph_auto_layout_1_1_graph_layout_node.html" title=" " alt="" coords="5,5,265,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,47,138,128,132,127,133,50"/>
 </map>

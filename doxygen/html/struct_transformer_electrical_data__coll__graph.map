@@ -1,0 +1,5 @@
+<map id="TransformerElectricalData" name="TransformerElectricalData">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,106,196,134"/>
+<area shape="rect" id="Node000002" href="$struct_arc_flash_protection_data.html" title=" " alt="" coords="13,5,188,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,47,103,106,98,105,98,50"/>
+</map>

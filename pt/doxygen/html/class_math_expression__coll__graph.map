@@ -1,13 +1,13 @@
 <map id="MathExpression" name="MathExpression">
-<area shape="rect" id="Node000001" title="A generic math expression block that can perform math and conditional operations with the inputs." alt="" coords="151,168,278,193"/>
-<area shape="rect" id="Node000002" href="$class_control_element.html" title=" " alt="" coords="5,80,128,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,110,196,165,193,170,97,114"/>
-<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="29,5,105,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="69,45,69,80,64,80,64,45"/>
-<area shape="rect" id="Node000004" href="$class_math_expr_parser.html" title=" " alt="" coords="153,80,277,105"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="217,119,217,167,212,167,212,119"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="156,5,273,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="217,45,217,80,212,80,212,45"/>
-<area shape="rect" id="Node000006" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="301,80,369,105"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="320,118,292,146,248,170,245,166,289,142,316,115"/>
+<area shape="rect" id="Node000001" title="A generic math expression block that can perform math and conditional operations with the inputs." alt="" coords="150,183,276,211"/>
+<area shape="rect" id="Node000002" href="$class_control_element.html" title=" " alt="" coords="5,82,128,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,116,196,181,191,184,97,121"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="29,5,104,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="67,46,69,82,64,82,66,51"/>
+<area shape="rect" id="Node000004" href="$class_math_expr_parser.html" title=" " alt="" coords="152,82,275,110"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="215,124,216,184,211,181,211,127"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="155,5,271,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="215,46,216,83,211,81,212,51"/>
+<area shape="rect" id="Node000006" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="300,82,367,110"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="323,122,311,144,295,161,275,175,254,185,252,180,273,170,291,157,306,141,318,125"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="MainFrameBase" name="MainFrameBase">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,132,104"/>
-<area shape="rect" id="Node000003" href="$class_main_frame.html" title="Main frame of the program. This class manage the ribbon menu and the notebook behavior." alt="" coords="21,152,116,177"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="71,118,71,152,66,152,66,118"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="27,5,110,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,44,71,79,66,79,66,44"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,81,132,109"/>
+<area shape="rect" id="Node000003" href="$class_main_frame.html" title="Main frame of the program. This class manage the ribbon menu and the notebook behavior." alt="" coords="21,157,116,184"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="70,123,71,157,66,155,67,126"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="28,5,109,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,46,71,81,66,80,68,51"/>
 </map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ufu_0',['PSP-UFU',['../index.html',1,'']]]
+  ['license_0',['Author and License',['../index.html#author',1,'']]]
 ];

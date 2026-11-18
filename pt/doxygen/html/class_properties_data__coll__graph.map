@@ -1,11 +1,11 @@
 <map id="PropertiesData" name="PropertiesData">
-<area shape="rect" id="Node000001" title="General and simulation data manager." alt="" coords="187,93,306,119"/>
-<area shape="rect" id="Node000002" href="$struct_g_u_i_colour.html" title=" " alt="" coords="5,5,93,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,40,80,55,96,67,141,86,188,97,187,102,140,91,93,72,76,59,63,43"/>
-<area shape="rect" id="Node000003" href="$struct_simulation_data.html" title=" " alt="" coords="117,5,240,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,43,197,68,210,81,225,91,222,96,206,85,192,71,181,45"/>
-<area shape="rect" id="Node000004" href="$struct_general_data.html" title=" " alt="" coords="264,5,368,31"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="307,44,289,71,264,95,260,91,285,68,302,41"/>
-<area shape="rect" id="Node000005" href="$struct_freq_response_data.html" title=" " alt="" coords="392,5,536,31"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="438,41,382,72,306,96,304,91,380,67,436,36"/>
+<area shape="rect" id="Node000001" title="General and simulation data manager." alt="" coords="187,106,306,134"/>
+<area shape="rect" id="Node000002" href="$struct_g_u_i_colour.html" title=" " alt="" coords="5,5,93,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,45,72,64,87,80,110,93,136,103,189,116,184,117,134,108,108,98,84,84,68,68,59,50"/>
+<area shape="rect" id="Node000003" href="$struct_simulation_data.html" title=" " alt="" coords="117,5,240,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,46,186,65,194,81,205,93,221,106,216,105,202,97,189,83,181,67,178,51"/>
+<area shape="rect" id="Node000004" href="$struct_general_data.html" title=" " alt="" coords="264,5,367,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="308,46,288,84,265,108,262,103,284,80,303,49"/>
+<area shape="rect" id="Node000005" href="$struct_freq_response_data.html" title=" " alt="" coords="392,5,535,33"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="443,43,419,66,390,84,349,101,307,112,306,107,347,96,388,80,415,62,438,45"/>
 </map>

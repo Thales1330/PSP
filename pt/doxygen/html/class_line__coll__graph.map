@@ -1,13 +1,15 @@
 <map id="Line" name="Line">
-<area shape="rect" id="Node000001" title="Power line element." alt="" coords="143,256,192,281"/>
-<area shape="rect" id="Node000002" href="$class_branch.html" title="Abstract class for branch power elements." alt="" coords="70,168,137,193"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,203,161,254,156,257,118,206"/>
-<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="45,93,161,119"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,133,106,168,101,168,101,133"/>
-<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="62,41,97,91,93,94,57,44"/>
-<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="105,5,221,31"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="149,44,114,94,110,91,145,41"/>
-<area shape="rect" id="Node000006" href="$struct_line_electrical_data.html" title=" " alt="" coords="161,168,301,193"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="217,206,178,257,174,254,212,203"/>
+<area shape="rect" id="Node000001" title="Power line element." alt="" coords="168,307,216,335"/>
+<area shape="rect" id="Node000002" href="$class_branch.html" title="Abstract class for branch power elements." alt="" coords="96,207,163,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,245,187,307,181,307,144,249"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="45,106,161,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="112,146,129,206,123,206,109,151"/>
+<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="59,44,98,105,92,106,59,49"/>
+<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="105,5,221,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="146,49,113,107,109,104,148,44"/>
+<area shape="rect" id="Node000006" href="$struct_line_electrical_data.html" title=" " alt="" coords="197,207,337,234"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="251,246,204,309,201,305,246,248"/>
+<area shape="rect" id="Node000007" href="$struct_arc_flash_protection_data.html" title=" " alt="" coords="185,106,360,134"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="273,147,270,207,265,205,269,151"/>
 </map>

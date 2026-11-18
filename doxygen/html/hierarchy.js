@@ -3,6 +3,9 @@ var hierarchy =
     [ "AboutFormBase", null, [
       [ "AboutForm", "class_about_form.html", null ]
     ] ],
+    [ "ArcFlashData", "struct_arc_flash_data.html", null ],
+    [ "ArcFlashProtectionData", "struct_arc_flash_protection_data.html", null ],
+    [ "ArcFlashTCCPoint", "struct_arc_flash_t_c_c_point.html", null ],
     [ "ATPFileEditorFormBase", null, [
       [ "ATPFileEditorForm", "class_a_t_p_file_editor_form.html", null ]
     ] ],
@@ -14,6 +17,9 @@ var hierarchy =
     [ "ParseAnarede::BusData", "struct_parse_anarede_1_1_bus_data.html", null ],
     [ "ParseMatpower::BusData", "struct_parse_matpower_1_1_bus_data.html", null ],
     [ "BusElectricalData", "struct_bus_electrical_data.html", null ],
+    [ "BusFormArcFlashProtectionBase", null, [
+      [ "BusFormArcFlashProtection", "class_bus_form_arc_flash_protection.html", null ]
+    ] ],
     [ "BusFormBase", null, [
       [ "BusForm", "class_bus_form.html", null ]
     ] ],
@@ -232,6 +238,12 @@ var hierarchy =
       [ "MainFrameBase", "class_main_frame_base.html", [
         [ "MainFrame", "class_main_frame.html", null ]
       ] ]
+    ] ],
+    [ "wxPopupTransientWindow", null, [
+      [ "TCCPopup", "class_t_c_c_popup.html", null ]
+    ] ],
+    [ "wxPopupWindow", null, [
+      [ "BitmapPopup", "class_bitmap_popup.html", null ]
     ] ],
     [ "wxTreeItemData", null, [
       [ "PlotData", "class_plot_data.html", null ]

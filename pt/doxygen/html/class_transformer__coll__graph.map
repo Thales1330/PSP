@@ -1,13 +1,15 @@
 <map id="Transformer" name="Transformer">
-<area shape="rect" id="Node000001" title="Two&#45;winding transformer power element with OLTC support." alt="" coords="129,256,229,281"/>
-<area shape="rect" id="Node000002" href="$class_branch.html" title="Abstract class for branch power elements." alt="" coords="70,168,137,193"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,202,171,254,167,257,121,206"/>
-<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="45,93,161,119"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,133,106,168,101,168,101,133"/>
-<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="62,41,97,91,93,94,57,44"/>
-<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="105,5,221,31"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="149,44,114,94,110,91,145,41"/>
-<area shape="rect" id="Node000006" href="$struct_transformer_electrical_data.html" title=" " alt="" coords="161,168,352,193"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="239,206,192,257,188,254,235,202"/>
+<area shape="rect" id="Node000001" title="Two&#45;winding transformer power element with OLTC support." alt="" coords="139,307,238,335"/>
+<area shape="rect" id="Node000002" href="$class_branch.html" title="Abstract class for branch power elements." alt="" coords="80,207,147,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,244,181,307,176,307,131,249"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="45,106,161,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,146,115,206,110,206,105,151"/>
+<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="59,44,98,105,92,106,59,49"/>
+<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="105,5,221,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="146,49,113,107,109,104,148,44"/>
+<area shape="rect" id="Node000006" href="$struct_transformer_electrical_data.html" title=" " alt="" coords="174,207,365,234"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="252,245,201,309,198,305,247,247"/>
+<area shape="rect" id="Node000007" href="$struct_arc_flash_protection_data.html" title=" " alt="" coords="185,106,360,134"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="273,147,272,207,268,205,270,151"/>
 </map>

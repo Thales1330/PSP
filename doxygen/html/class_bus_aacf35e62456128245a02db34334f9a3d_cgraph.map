@@ -1,0 +1,7 @@
+<map id="Bus::Bus" name="Bus::Bus">
+<area shape="rect" id="Node000001" title="Default constructor." alt="" coords="5,5,83,33"/>
+<area shape="rect" id="Node000002" href="$class_power_element.html#a382cdc0897802eb0a89692483fa7043e" title="Constructor." alt="" coords="131,5,348,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,17,117,19,112,20,83,22"/>
+<area shape="rect" id="Node000003" href="$class_element.html#ab0d0e20be9a36ae676202db753faeec9" title="Constructor." alt="" coords="396,5,533,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="348,17,383,19,378,19,348,22"/>
+</map>

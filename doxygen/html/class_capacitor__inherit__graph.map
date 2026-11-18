@@ -1,9 +1,9 @@
 <map id="Capacitor" name="Capacitor">
-<area shape="rect" id="Node000001" title="Shunt capactior power element." alt="" coords="21,225,105,251"/>
-<area shape="rect" id="Node000002" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="34,152,93,177"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,191,66,225,61,225,61,191"/>
-<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="5,79,121,104"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="66,118,66,152,61,152,61,118"/>
-<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="25,5,101,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="66,44,66,79,61,79,61,44"/>
+<area shape="rect" id="Node000001" title="Shunt capactior power element." alt="" coords="21,232,105,260"/>
+<area shape="rect" id="Node000002" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="34,157,92,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,198,66,233,60,231,61,202"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="5,81,121,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="64,122,66,157,60,156,62,127"/>
+<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="25,5,101,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="63,46,66,81,60,80,63,51"/>
 </map>

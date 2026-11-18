@@ -1,5 +1,7 @@
 <map id="Transformer::RotateNode" name="Transformer::RotateNode">
-<area shape="rect" id="Node000001" title="Rotate a node." alt="" coords="5,5,191,31"/>
-<area shape="rect" id="Node000002" href="$class_element.html#a99b213010776b34a27eb814aff288a34" title="Rotate a point as element position being the origin." alt="" coords="239,5,432,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,15,225,15,225,21,191,21"/>
+<area shape="rect" id="Node000001" title="Rotate a node." alt="" coords="5,32,190,60"/>
+<area shape="rect" id="Node000002" href="$class_element.html#ab0d0e20be9a36ae676202db753faeec9" title="Constructor." alt="" coords="265,5,402,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,33,252,28,247,29,191,38"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a99b213010776b34a27eb814aff288a34" title="Rotate a point as element position being the origin." alt="" coords="238,57,430,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,53,225,59,220,59,190,58"/>
 </map>

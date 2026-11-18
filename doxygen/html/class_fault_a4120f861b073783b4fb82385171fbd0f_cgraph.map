@@ -1,18 +1,18 @@
 <map id="Fault::RunFaultCalculation" name="Fault::RunFaultCalculation">
-<area shape="rect" id="Node000001" title="Calculate the fault of the system. Return true if was possible the calculation." alt="" coords="5,143,196,169"/>
-<area shape="rect" id="Node000002" href="$class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5" title="Get the admittance matrix from the list of elements (use GetElementsFromList first)." alt="" coords="273,79,415,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,141,259,116,260,121,156,146"/>
-<area shape="rect" id="Node000006" href="$class_electric_calculation.html#af00a6599f2b0b4e35bf0f8c70195447c" title="Invert a matrix." alt="" coords="273,193,415,233"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="156,166,260,191,259,196,155,171"/>
-<area shape="rect" id="Node000007" href="$class_fault.html#af1bb91359dfe8df0251a2031957d3ddf" title="Update the data of the elements." alt="" coords="244,143,444,169"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="196,153,230,153,230,159,196,159"/>
-<area shape="rect" id="Node000003" href="$class_electric_calculation.html#a7d88fcbba15c27dd2adbedc4fc374624" title="Recursively check if a bus is electrically connected to the slack bus." alt="" coords="499,29,656,69"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="415,81,484,66,486,71,416,86"/>
-<area shape="rect" id="Node000004" href="$class_element.html#a1150aef1610cdc2a28d96570dbac805a" title="Get the parent list." alt="" coords="492,143,663,169"/>
-<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="416,114,512,137,511,143,415,119"/>
-<area shape="rect" id="Node000005" href="$class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa" title="Checks if the element is online or offline." alt="" coords="509,94,646,119"/>
-<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="416,98,495,101,495,107,416,104"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="534,30,531,20,538,10,554,5,577,3,604,6,619,13,617,18,603,11,577,8,555,10,542,15,537,21,539,28"/>
-<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="444,153,478,153,478,159,444,159"/>
-<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="404,141,503,120,504,125,405,146"/>
+<area shape="rect" id="Node000001" title="Calculate the fault of the system. Return true if was possible the calculation." alt="" coords="5,150,195,178"/>
+<area shape="rect" id="Node000002" href="$class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5" title="Get the admittance matrix from the list of elements (use GetElementsFromList first)." alt="" coords="271,81,414,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,147,258,123,254,126,160,152"/>
+<area shape="rect" id="Node000006" href="$class_electric_calculation.html#af00a6599f2b0b4e35bf0f8c70195447c" title="Invert a matrix." alt="" coords="271,201,414,246"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="159,175,259,201,254,203,158,181"/>
+<area shape="rect" id="Node000007" href="$class_fault.html#af1bb91359dfe8df0251a2031957d3ddf" title="Update the data of the elements." alt="" coords="243,150,442,178"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="195,161,230,163,225,164,195,166"/>
+<area shape="rect" id="Node000003" href="$class_electric_calculation.html#a7d88fcbba15c27dd2adbedc4fc374624" title="Recursively check if a bus is electrically connected to the slack bus." alt="" coords="497,29,653,74"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="413,85,484,72,479,73,415,90"/>
+<area shape="rect" id="Node000004" href="$class_element.html#a1150aef1610cdc2a28d96570dbac805a" title="Get the parent list." alt="" coords="490,150,660,178"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="414,119,507,145,501,146,414,125"/>
+<area shape="rect" id="Node000005" href="$class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa" title="Checks if the element is online or offline." alt="" coords="507,98,643,126"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="414,103,494,108,489,109,414,109"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="531,28,529,19,537,10,552,5,575,3,600,5,617,14,612,14,599,10,575,8,553,10,540,15,534,21,536,30"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="442,161,477,163,472,164,443,166"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="407,147,497,129,492,130,408,152"/>
 </map>

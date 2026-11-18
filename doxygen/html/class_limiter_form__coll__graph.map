@@ -1,11 +1,11 @@
 <map id="LimiterForm" name="LimiterForm">
-<area shape="rect" id="Node000001" title="Form to edit the limit control data." alt="" coords="43,243,144,268"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,139,180"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,193,93,241,88,243,76,194"/>
-<area shape="rect" id="Node000003" href="$class_limiter.html" title="Limits the input value by superior and inferior values." alt="" coords="163,155,231,180"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,191,109,244,106,240,171,187"/>
-<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="136,80,259,105"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="200,120,200,154,195,154,195,120"/>
-<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="159,5,235,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="200,45,200,80,195,80,195,45"/>
+<area shape="rect" id="Node000001" title="Form to edit the limit control data." alt="" coords="43,260,143,288"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,159,138,187"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,200,93,260,87,259,76,204"/>
+<area shape="rect" id="Node000003" href="$class_limiter.html" title="Limits the input value by superior and inferior values." alt="" coords="162,159,229,187"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,198,108,261,105,257,169,198"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="134,82,257,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="197,123,198,160,193,158,194,128"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="158,5,233,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="197,46,198,83,193,81,194,51"/>
 </map>

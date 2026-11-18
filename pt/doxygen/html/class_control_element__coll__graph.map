@@ -1,5 +1,5 @@
 <map id="ControlElement" name="ControlElement">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,128,104"/>
-<area shape="rect" id="Node000002" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="29,5,105,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,44,69,79,64,79,64,44"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,81,128,109"/>
+<area shape="rect" id="Node000002" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="29,5,104,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,47,69,81,64,80,65,51"/>
 </map>

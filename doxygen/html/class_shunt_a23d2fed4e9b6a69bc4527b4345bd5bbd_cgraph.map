@@ -1,0 +1,5 @@
+<map id="Shunt::MoveNode" name="Shunt::MoveNode">
+<area shape="rect" id="Node000001" title="Move a node. StartMove(wxPoint2DDouble position) before start moving." alt="" coords="5,5,142,33"/>
+<area shape="rect" id="Node000002" href="$class_element.html#ab0d0e20be9a36ae676202db753faeec9" title="Constructor." alt="" coords="190,5,327,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,17,177,19,172,19,142,22"/>
+</map>

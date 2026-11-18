@@ -1,0 +1,9 @@
+<map id="PowerElement::PowerElement" name="PowerElement::PowerElement">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="288,32,505,60"/>
+<area shape="rect" id="Node000002" href="$class_bus.html#aacf35e62456128245a02db34334f9a3d" title="Default constructor." alt="" coords="163,5,240,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,30,241,27,241,22,279,29"/>
+<area shape="rect" id="Node000004" href="$class_bus.html#a66ef970dc1edfa02f96cf8820920ef37" title="Contructor of a new Busbar." alt="" coords="163,57,240,85"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="276,62,241,69,240,64,270,62"/>
+<area shape="rect" id="Node000003" href="$class_bus.html#a4288c4c84c8840705c3ce6ccd42e578c" title="Get a the element copy." alt="" coords="5,5,115,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="144,20,116,22,115,17,149,18"/>
+</map>

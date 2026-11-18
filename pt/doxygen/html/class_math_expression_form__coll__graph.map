@@ -1,17 +1,17 @@
 <map id="MathExpressionForm" name="MathExpressionForm">
-<area shape="rect" id="Node000001" title=" " alt="" coords="43,256,201,281"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,168,196,193"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,206,122,255,116,256,104,207"/>
-<area shape="rect" id="Node000003" href="$class_math_expression.html" title="A generic math expression block that can perform math and conditional operations with the inputs." alt="" coords="220,168,347,193"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="251,202,145,258,143,253,248,198"/>
-<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="74,80,197,105"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="168,110,265,165,262,170,166,114"/>
-<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="97,5,173,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="138,45,138,80,133,80,133,45"/>
-<area shape="rect" id="Node000006" href="$class_math_expr_parser.html" title=" " alt="" coords="221,80,345,105"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="286,119,286,167,281,167,281,119"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="225,5,342,31"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="286,45,286,80,281,80,281,45"/>
-<area shape="rect" id="Node000008" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="369,80,437,105"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="389,118,361,146,317,170,314,166,358,142,385,115"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="43,284,201,311"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,183,196,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,224,122,283,116,283,105,228"/>
+<area shape="rect" id="Node000003" href="$class_math_expression.html" title="A generic math expression block that can perform math and conditional operations with the inputs." alt="" coords="219,183,344,211"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="251,219,145,285,142,281,245,219"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="74,82,196,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="168,116,265,181,260,183,166,121"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="98,5,173,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="136,46,138,83,133,81,134,51"/>
+<area shape="rect" id="Node000006" href="$class_math_expr_parser.html" title=" " alt="" coords="220,82,344,110"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="283,124,284,183,279,181,280,128"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="224,5,340,33"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="283,46,284,83,279,81,281,51"/>
+<area shape="rect" id="Node000008" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="368,82,436,110"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="391,122,379,144,364,161,344,175,323,185,321,180,341,170,360,157,375,141,387,125"/>
 </map>

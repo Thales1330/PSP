@@ -1,5 +1,5 @@
 <map id="IndMotorElectricalData" name="IndMotorElectricalData">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,123,176,148"/>
-<area shape="rect" id="Node000002" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="15,5,166,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,44,93,123,88,123,88,44"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,151,176,178"/>
+<area shape="rect" id="Node000002" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="15,5,166,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,48,93,151,88,150,88,50"/>
 </map>

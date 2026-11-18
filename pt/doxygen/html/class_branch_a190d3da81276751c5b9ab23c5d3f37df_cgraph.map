@@ -1,5 +1,7 @@
 <map id="Branch::RotateNode" name="Branch::RotateNode">
-<area shape="rect" id="Node000001" title="Rotate a node." alt="" coords="5,5,157,31"/>
-<area shape="rect" id="Node000002" href="$class_element.html#a99b213010776b34a27eb814aff288a34" title="Rotate a point as element position being the origin." alt="" coords="205,5,399,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,15,192,15,192,21,158,21"/>
+<area shape="rect" id="Node000001" title="Rotate a node." alt="" coords="5,32,157,60"/>
+<area shape="rect" id="Node000002" href="$class_element.html#ab0d0e20be9a36ae676202db753faeec9" title="Constructor." alt="" coords="232,5,370,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,34,219,29,214,30,158,39"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a99b213010776b34a27eb814aff288a34" title="Rotate a point as element position being the origin." alt="" coords="205,57,397,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="157,52,192,58,187,59,157,57"/>
 </map>

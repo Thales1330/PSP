@@ -1,5 +1,7 @@
 <map id="IOControl::GetCopy" name="IOControl::GetCopy">
-<area shape="rect" id="Node000001" title="Get a the element copy." alt="" coords="5,5,152,31"/>
-<area shape="rect" id="Node000002" href="$class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406" title="Get a deep text copy." alt="" coords="200,5,332,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,15,186,15,186,21,152,21"/>
+<area shape="rect" id="Node000001" title="Get a the element copy." alt="" coords="5,32,152,60"/>
+<area shape="rect" id="Node000002" href="$class_element.html#ab0d0e20be9a36ae676202db753faeec9" title="Constructor." alt="" coords="200,5,337,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,33,187,30,182,32,153,38"/>
+<area shape="rect" id="Node000003" href="$class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406" title="Get a deep text copy." alt="" coords="203,57,334,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,53,190,60,184,61,152,58"/>
 </map>

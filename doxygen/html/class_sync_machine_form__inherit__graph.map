@@ -1,5 +1,5 @@
 <map id="SyncMachineForm" name="SyncMachineForm">
-<area shape="rect" id="Node000001" title="Form to edit the synchronous machine power data." alt="" coords="21,79,163,104"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,179,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,44,95,79,89,79,89,44"/>
+<area shape="rect" id="Node000001" title="Form to edit the synchronous machine power data." alt="" coords="21,81,162,109"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,178,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,47,94,82,89,80,90,51"/>
 </map>

@@ -1,5 +1,7 @@
 <map id="Constant::GetCopy" name="Constant::GetCopy">
-<area shape="rect" id="Node000001" title="Get a the element copy." alt="" coords="5,5,149,31"/>
-<area shape="rect" id="Node000002" href="$class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406" title="Get a deep text copy." alt="" coords="197,5,329,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,15,184,15,184,21,150,21"/>
+<area shape="rect" id="Node000001" title="Get a the element copy." alt="" coords="5,32,149,60"/>
+<area shape="rect" id="Node000002" href="$class_element.html#ab0d0e20be9a36ae676202db753faeec9" title="Constructor." alt="" coords="197,5,334,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,33,184,30,179,32,150,38"/>
+<area shape="rect" id="Node000003" href="$class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406" title="Get a deep text copy." alt="" coords="200,57,331,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,53,187,60,182,61,149,58"/>
 </map>

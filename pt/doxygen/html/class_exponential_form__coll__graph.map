@@ -1,11 +1,11 @@
 <map id="ExponentialForm" name="ExponentialForm">
-<area shape="rect" id="Node000001" title="Form to edit the exponential control data." alt="" coords="43,243,175,268"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,169,180"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,193,108,241,103,243,91,194"/>
-<area shape="rect" id="Node000003" href="$class_exponential.html" title="Generates an output following an exponential function." alt="" coords="194,155,293,180"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,190,128,245,126,240,212,185"/>
-<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="182,80,305,105"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="246,120,246,154,241,154,241,120"/>
-<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="205,5,281,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="246,45,246,80,241,80,241,45"/>
+<area shape="rect" id="Node000001" title="Form to edit the exponential control data." alt="" coords="71,260,202,288"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,159,169,187"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,199,132,259,127,259,99,203"/>
+<area shape="rect" id="Node000003" href="$class_exponential.html" title="Generates an output following an exponential function." alt="" coords="192,159,291,187"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,197,152,262,149,257,214,198"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="180,82,303,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="243,123,244,160,239,158,240,128"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="204,5,279,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="243,46,244,83,239,81,240,51"/>
 </map>

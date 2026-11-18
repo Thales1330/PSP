@@ -1,5 +1,5 @@
 <map id="GainForm" name="GainForm">
-<area shape="rect" id="Node000001" title="Form to edit the gain control data." alt="" coords="21,79,107,104"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,123,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,44,67,79,61,79,61,44"/>
+<area shape="rect" id="Node000001" title="Form to edit the gain control data." alt="" coords="21,81,106,109"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,122,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,47,66,81,61,80,62,51"/>
 </map>

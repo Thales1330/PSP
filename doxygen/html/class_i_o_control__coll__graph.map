@@ -1,11 +1,11 @@
 <map id="IOControl" name="IOControl">
-<area shape="rect" id="Node000001" title="Provides the communication with the power element." alt="" coords="163,168,245,193"/>
-<area shape="rect" id="Node000002" href="$class_control_element.html" title=" " alt="" coords="5,80,128,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,110,187,165,184,170,95,115"/>
-<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="29,5,105,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="69,45,69,80,64,80,64,45"/>
-<area shape="rect" id="Node000004" href="$struct_sim_test_data.html" title=" " alt="" coords="152,80,256,105"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,119,207,167,201,167,201,119"/>
-<area shape="rect" id="Node000005" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="306,80,374,105"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="332,120,312,146,280,165,246,175,245,170,278,160,309,142,328,116"/>
+<area shape="rect" id="Node000001" title="Provides the communication with the power element." alt="" coords="163,183,245,211"/>
+<area shape="rect" id="Node000002" href="$class_control_element.html" title=" " alt="" coords="5,82,128,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,117,188,181,183,184,96,122"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="29,5,104,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="67,46,69,82,64,82,66,51"/>
+<area shape="rect" id="Node000004" href="$struct_sim_test_data.html" title=" " alt="" coords="152,82,256,110"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,124,206,184,201,181,202,127"/>
+<area shape="rect" id="Node000005" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="310,82,378,110"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="338,123,330,145,316,161,282,181,246,192,245,187,280,176,313,157,325,142,334,127"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="ControlSystemTest" name="ControlSystemTest">
-<area shape="rect" id="Node000001" title="Form to edit properties to test the control system created." alt="" coords="21,79,165,104"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,181,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,44,96,79,91,79,91,44"/>
+<area shape="rect" id="Node000001" title="Form to edit properties to test the control system created." alt="" coords="21,81,165,109"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,181,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,47,95,82,91,80,91,51"/>
 </map>

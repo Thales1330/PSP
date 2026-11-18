@@ -1,58 +1,58 @@
 <map id="SyncMachineForm" name="SyncMachineForm">
-<area shape="rect" id="Node000001" title="Form to edit the synchronous machine power data." alt="" coords="1791,231,1932,256"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="1449,157,1623,183"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1637,180,1702,191,1767,206,1831,228,1829,233,1766,211,1701,196,1636,185"/>
-<area shape="rect" id="Node000003" href="$class_sync_generator.html" title="Synchronous generator power element." alt="" coords="1477,207,1595,232"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1609,222,1791,236,1790,241,1609,227"/>
-<area shape="rect" id="Node000004" href="$class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="1139,139,1223,164"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1236,142,1279,141,1328,143,1378,151,1427,168,1439,180,1451,192,1479,204,1476,209,1448,196,1436,183,1424,172,1377,157,1327,148,1279,146,1237,148"/>
-<area shape="rect" id="Node000011" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element." alt="" coords="1491,256,1581,281"/>
-<area shape="poly" id="edge11_Node000011_Node000004" title=" " alt="" coords="1237,155,1343,173,1393,186,1427,201,1436,212,1440,222,1443,232,1451,241,1470,252,1491,260,1490,265,1468,257,1448,245,1439,235,1435,224,1432,214,1424,205,1391,191,1342,178,1236,160"/>
-<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="775,23,891,48"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="905,43,977,58,1053,81,1113,108,1161,136,1158,141,1110,113,1051,86,976,63,904,48"/>
-<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,143,81,168"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="95,145,774,41,775,47,95,150"/>
-<area shape="rect" id="Node000015" href="$class_control_element.html" title=" " alt="" coords="131,228,253,253"/>
-<area shape="poly" id="edge19_Node000015_Node000006" title=" " alt="" coords="80,173,170,226,167,230,77,177"/>
-<area shape="rect" id="Node000007" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="442,5,558,31"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="572,19,774,30,774,35,572,24"/>
-<area shape="rect" id="Node000008" href="$struct_sync_generator_electrical_data.html" title=" " alt="" coords="1076,197,1285,223"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="1299,210,1476,215,1476,220,1299,216"/>
-<area shape="rect" id="Node000009" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="757,239,908,264"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="921,238,1076,220,1076,225,922,243"/>
-<area shape="rect" id="Node000012" href="$struct_sync_motor_electrical_data.html" title=" " alt="" coords="1089,339,1272,364"/>
-<area shape="poly" id="edge13_Node000012_Node000009" title=" " alt="" coords="857,272,894,303,940,329,976,340,1015,348,1089,353,1089,358,1014,353,975,345,938,334,891,307,854,276"/>
-<area shape="rect" id="Node000010" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="407,356,593,381"/>
-<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="526,345,594,296,693,234,750,203,811,174,874,149,938,130,997,116,1023,118,1053,130,1064,141,1067,152,1070,163,1078,173,1097,186,1118,195,1116,200,1094,190,1074,177,1065,166,1062,154,1059,143,1051,135,1022,123,998,121,939,135,876,154,813,178,752,207,695,239,597,301,530,350"/>
-<area shape="poly" id="edge14_Node000012_Node000010" title=" " alt="" coords="607,363,1089,351,1089,356,607,369"/>
-<area shape="rect" id="Node000013" href="$class_control_element_solver.html" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="751,417,915,443"/>
-<area shape="poly" id="edge16_Node000013_Node000010" title=" " alt="" coords="554,383,618,399,751,420,750,425,617,405,553,388"/>
-<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1595,264,1766,254,1790,251,1791,257,1767,259,1595,270"/>
-<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="1249,333,1490,276,1491,282,1250,338"/>
-<area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="928,434,990,431,1051,418,1063,411,1075,402,1151,362,1154,366,1077,407,1066,416,1053,423,991,436,929,440"/>
-<area shape="rect" id="Node000014" href="$class_i_o_control.html" title="Provides the communication with the power element." alt="" coords="459,428,541,453"/>
-<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="555,450,636,461,682,463,726,459,790,440,791,445,727,465,682,468,636,467,554,456"/>
-<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="222,260,304,321,408,390,473,426,471,430,405,395,301,325,219,264"/>
-<area shape="rect" id="Node000016" href="$struct_sim_test_data.html" title=" " alt="" coords="140,403,244,428"/>
-<area shape="poly" id="edge20_Node000014_Node000016" title=" " alt="" coords="258,418,459,435,458,440,258,423"/>
-<area shape="rect" id="Node000017" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="158,452,226,477"/>
-<area shape="poly" id="edge21_Node000014_Node000017" title=" " alt="" coords="240,462,382,457,458,446,459,451,383,462,240,468"/>
-<area shape="rect" id="Node000018" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="1489,467,1583,492"/>
-<area shape="poly" id="edge22_Node000001_Node000018" title=" " alt="" coords="1564,456,1841,254,1844,258,1567,461"/>
-<area shape="rect" id="Node000019" title=" " alt="" coords="1118,417,1243,443"/>
-<area shape="poly" id="edge23_Node000018_Node000019" title=" " alt="" coords="1258,435,1426,457,1489,468,1489,473,1425,462,1257,441"/>
-<area shape="rect" id="Node000020" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="1144,467,1217,492"/>
-<area shape="poly" id="edge24_Node000018_Node000020" title=" " alt="" coords="1231,477,1489,477,1489,482,1231,482"/>
-<area shape="rect" id="Node000021" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="1121,516,1240,541"/>
-<area shape="poly" id="edge25_Node000018_Node000021" title=" " alt="" coords="1254,519,1425,497,1489,486,1489,491,1426,502,1254,524"/>
-<area shape="rect" id="Node000022" href="$struct_g_u_i_colour.html" title=" " alt="" coords="789,565,877,591"/>
-<area shape="poly" id="edge26_Node000021_Node000022" title=" " alt="" coords="890,568,1052,546,1121,535,1121,541,1052,551,891,573"/>
-<area shape="rect" id="Node000023" href="$struct_simulation_data.html" title=" " alt="" coords="771,615,894,640"/>
-<area shape="poly" id="edge27_Node000021_Node000023" title=" " alt="" coords="907,622,980,610,1016,598,1051,581,1058,575,1062,567,1066,560,1074,552,1097,541,1120,534,1122,539,1099,546,1078,556,1070,563,1066,570,1062,578,1053,586,1018,603,981,615,908,627"/>
-<area shape="rect" id="Node000024" href="$struct_general_data.html" title=" " alt="" coords="781,467,885,492"/>
-<area shape="poly" id="edge28_Node000021_Node000024" title=" " alt="" coords="899,485,1052,506,1121,517,1121,522,1052,511,898,490"/>
-<area shape="rect" id="Node000025" href="$struct_freq_response_data.html" title=" " alt="" coords="761,516,905,541"/>
-<area shape="poly" id="edge29_Node000021_Node000025" title=" " alt="" coords="918,526,1121,526,1121,531,918,531"/>
-<area shape="rect" id="Node000026" href="$class_h_m_plane.html" title=" " alt="" coords="1141,565,1221,591"/>
-<area shape="poly" id="edge30_Node000018_Node000026" title=" " alt="" coords="1234,570,1324,557,1424,531,1472,511,1512,490,1515,494,1475,516,1426,537,1325,562,1235,576"/>
+<area shape="rect" id="Node000001" title="Form to edit the synchronous machine power data." alt="" coords="1807,300,1947,328"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="1463,220,1636,248"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1651,238,1717,248,1783,264,1822,280,1856,300,1851,300,1819,284,1782,269,1716,253,1651,243"/>
+<area shape="rect" id="Node000003" href="$class_sync_generator.html" title="Synchronous generator power element." alt="" coords="1491,272,1608,300"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1624,290,1809,308,1804,309,1624,295"/>
+<area shape="rect" id="Node000004" href="$class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="1150,194,1234,222"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1249,197,1293,194,1342,196,1393,205,1441,224,1450,232,1454,241,1458,250,1465,258,1493,274,1488,274,1462,262,1453,253,1449,243,1446,235,1438,229,1392,210,1342,201,1293,199,1250,202"/>
+<area shape="rect" id="Node000011" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element." alt="" coords="1504,328,1595,356"/>
+<area shape="poly" id="edge11_Node000011_Node000004" title=" " alt="" coords="1249,211,1358,228,1407,241,1441,258,1451,271,1454,285,1457,297,1465,310,1484,322,1507,334,1501,333,1481,327,1461,314,1452,300,1449,286,1446,273,1438,262,1405,246,1357,234,1250,216"/>
+<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="784,16,899,44"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="914,41,989,62,1028,77,1065,95,1101,118,1133,144,1181,194,1176,193,1129,148,1097,122,1063,99,1026,82,987,67,914,46"/>
+<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,184,81,212"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="95,185,784,40,783,45,97,190"/>
+<area shape="rect" id="Node000015" href="$class_control_element.html" title=" " alt="" coords="130,302,252,330"/>
+<area shape="poly" id="edge19_Node000015_Node000006" title=" " alt="" coords="73,219,175,300,170,303,74,225"/>
+<area shape="rect" id="Node000007" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="444,16,560,44"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="574,28,785,29,781,32,576,33"/>
+<area shape="rect" id="Node000008" href="$struct_sync_generator_electrical_data.html" title=" " alt="" coords="1088,259,1296,287"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="1311,275,1493,284,1488,285,1312,280"/>
+<area shape="rect" id="Node000009" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="766,322,916,350"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="895,314,946,300,1018,287,1090,280,1085,282,1018,292,948,305,897,319"/>
+<area shape="rect" id="Node000012" href="$struct_sync_motor_electrical_data.html" title=" " alt="" coords="1102,450,1283,478"/>
+<area shape="poly" id="edge13_Node000012_Node000009" title=" " alt="" coords="861,360,898,405,922,426,948,442,975,450,1013,455,1104,463,1099,464,1012,461,974,455,946,447,918,430,894,408,859,365"/>
+<area shape="rect" id="Node000010" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="409,471,595,499"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="523,457,587,388,685,298,744,251,807,208,875,169,946,140,980,128,1008,121,1036,124,1066,140,1076,151,1080,162,1081,186,1080,209,1083,220,1090,231,1107,246,1130,259,1124,259,1104,250,1086,235,1078,222,1075,210,1075,186,1075,163,1071,154,1062,144,1034,129,1009,127,981,133,948,145,878,174,810,212,747,255,688,302,591,392,527,461"/>
+<area shape="poly" id="edge14_Node000012_Node000010" title=" " alt="" coords="610,479,1103,465,1099,468,610,484"/>
+<area shape="rect" id="Node000013" href="$class_control_element_solver.html" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="760,539,923,567"/>
+<area shape="poly" id="edge16_Node000013_Node000010" title=" " alt="" coords="549,503,619,526,691,539,762,549,757,549,690,544,618,531,549,508"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1610,342,1692,341,1782,334,1826,328,1821,329,1783,339,1692,346,1611,347"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="1249,442,1504,357,1509,356,1251,447"/>
+<area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="938,564,1001,563,1033,558,1063,549,1075,539,1086,527,1163,479,1168,477,1090,531,1079,543,1065,553,1034,563,1002,568,939,570"/>
+<area shape="rect" id="Node000014" href="$class_i_o_control.html" title="Provides the communication with the power element." alt="" coords="461,559,543,587"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="548,590,590,604,637,614,687,615,711,612,734,605,746,594,758,582,790,568,795,567,761,586,750,598,737,609,712,617,687,621,636,619,588,609,548,596"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="218,338,303,416,411,508,481,558,475,559,408,512,300,420,218,343"/>
+<area shape="rect" id="Node000016" href="$struct_sim_test_data.html" title=" " alt="" coords="140,531,243,559"/>
+<area shape="poly" id="edge20_Node000014_Node000016" title=" " alt="" coords="258,548,463,568,458,571,259,554"/>
+<area shape="rect" id="Node000017" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="158,587,225,615"/>
+<area shape="poly" id="edge21_Node000014_Node000017" title=" " alt="" coords="240,598,385,590,463,580,458,582,386,595,241,603"/>
+<area shape="rect" id="Node000018" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="1503,592,1596,620"/>
+<area shape="poly" id="edge22_Node000001_Node000018" title=" " alt="" coords="1577,579,1857,329,1862,328,1580,584"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="1130,540,1254,568"/>
+<area shape="poly" id="edge23_Node000018_Node000019" title=" " alt="" coords="1270,555,1352,561,1440,573,1507,592,1501,592,1439,578,1351,566,1270,560"/>
+<area shape="rect" id="Node000020" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="1156,592,1228,620"/>
+<area shape="poly" id="edge24_Node000018_Node000020" title=" " alt="" coords="1244,604,1506,606,1500,607,1244,609"/>
+<area shape="rect" id="Node000021" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="1133,651,1251,679"/>
+<area shape="poly" id="edge25_Node000018_Node000021" title=" " alt="" coords="1266,657,1349,648,1439,634,1500,621,1506,620,1440,639,1350,653,1266,662"/>
+<area shape="rect" id="Node000022" href="$struct_g_u_i_colour.html" title=" " alt="" coords="798,707,885,735"/>
+<area shape="poly" id="edge26_Node000021_Node000022" title=" " alt="" coords="900,714,978,705,1064,693,1134,680,1139,679,1064,698,979,711,901,719"/>
+<area shape="rect" id="Node000023" href="$struct_simulation_data.html" title=" " alt="" coords="780,763,902,791"/>
+<area shape="poly" id="edge27_Node000021_Node000023" title=" " alt="" coords="918,779,954,777,992,771,1029,759,1062,740,1071,729,1074,717,1077,704,1086,691,1108,678,1130,672,1135,671,1110,682,1090,695,1082,706,1079,718,1076,732,1066,744,1031,764,993,776,955,782,918,784"/>
+<area shape="rect" id="Node000024" href="$struct_general_data.html" title=" " alt="" coords="790,595,893,623"/>
+<area shape="poly" id="edge28_Node000021_Node000024" title=" " alt="" coords="908,614,1064,636,1136,652,1130,652,1064,641,908,619"/>
+<area shape="rect" id="Node000025" href="$struct_freq_response_data.html" title=" " alt="" coords="770,651,913,679"/>
+<area shape="poly" id="edge29_Node000021_Node000025" title=" " alt="" coords="929,662,1135,665,1130,665,929,668"/>
+<area shape="rect" id="Node000026" href="$class_h_m_plane.html" title=" " alt="" coords="1152,704,1232,732"/>
+<area shape="poly" id="edge30_Node000018_Node000026" title=" " alt="" coords="1247,715,1339,707,1389,696,1438,681,1466,667,1491,651,1531,622,1535,620,1494,655,1468,672,1440,686,1391,702,1339,712,1248,721"/>
 </map>

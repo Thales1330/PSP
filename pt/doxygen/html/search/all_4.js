@@ -1,12 +1,12 @@
 var searchData=
 [
   ['ed_0',['ed',['../struct_sync_machine_model_data.html#ad2bda1ac696b664571e33f657f4a81b6',1,'SyncMachineModelData']]],
-  ['electricalid_1',['electricalid',['../struct_parse_anarede_1_1_power_line.html#ac623803e69933e51a92062f7850cb834',1,'ParseAnarede::PowerLine::electricalID'],['../struct_parse_anarede_1_1_component.html#a3c9a86b39ad81566811b5afb4eec3fa6',1,'ParseAnarede::Component::electricalID']]],
-  ['electriccalculation_2',['electriccalculation',['../class_electric_calculation.html#a6663e7a20e96ee975bd0f7d54b8a6f70',1,'ElectricCalculation::ElectricCalculation()'],['../class_electric_calculation.html',1,'ElectricCalculation']]],
+  ['electricalid_1',['electricalID',['../struct_parse_anarede_1_1_component.html#a3c9a86b39ad81566811b5afb4eec3fa6',1,'ParseAnarede::Component::electricalID'],['../struct_parse_anarede_1_1_power_line.html#ac623803e69933e51a92062f7850cb834',1,'ParseAnarede::PowerLine::electricalID']]],
+  ['electriccalculation_2',['ElectricCalculation',['../class_electric_calculation.html',1,'ElectricCalculation'],['../class_electric_calculation.html#a6663e7a20e96ee975bd0f7d54b8a6f70',1,'ElectricCalculation::ElectricCalculation()']]],
   ['electriccalculation_2eh_3',['ElectricCalculation.h',['../_electric_calculation_8h.html',1,'']]],
   ['electromechanical_4',['Electromechanical',['../class_electromechanical.html',1,'']]],
   ['electromechanical_2eh_5',['Electromechanical.h',['../_electromechanical_8h.html',1,'']]],
-  ['element_6',['element',['../class_element.html',1,'Element'],['../class_element.html#ab0d0e20be9a36ae676202db753faeec9',1,'Element::Element()']]],
+  ['element_6',['Element',['../class_element.html',1,'Element'],['../class_element.html#ab0d0e20be9a36ae676202db753faeec9',1,'Element::Element()']]],
   ['element_2eh_7',['Element.h',['../_element_8h.html',1,'']]],
   ['elementdataobject_8',['ElementDataObject',['../class_element_data_object.html',1,'']]],
   ['elementdataobject_2eh_9',['ElementDataObject.h',['../_element_data_object_8h.html',1,'']]],

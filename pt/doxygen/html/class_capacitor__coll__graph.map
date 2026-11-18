@@ -1,13 +1,13 @@
 <map id="Capacitor" name="Capacitor">
-<area shape="rect" id="Node000001" title="Shunt capactior power element." alt="" coords="132,256,216,281"/>
-<area shape="rect" id="Node000002" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="74,168,133,193"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,202,166,254,162,257,119,206"/>
-<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="45,93,161,119"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,133,106,168,101,168,101,133"/>
-<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="62,41,97,91,93,94,57,44"/>
-<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="105,5,221,31"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="149,44,114,94,110,91,145,41"/>
-<area shape="rect" id="Node000006" href="$struct_capacitor_electrical_data.html" title=" " alt="" coords="157,168,332,193"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="229,206,186,257,182,254,225,202"/>
+<area shape="rect" id="Node000001" title="Shunt capactior power element." alt="" coords="131,284,214,311"/>
+<area shape="rect" id="Node000002" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="74,183,132,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,221,166,283,160,283,120,226"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="45,106,161,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,147,106,183,100,182,102,152"/>
+<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="59,44,98,105,92,106,59,49"/>
+<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="105,5,221,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="146,49,113,107,109,104,148,44"/>
+<area shape="rect" id="Node000006" href="$struct_capacitor_electrical_data.html" title=" " alt="" coords="156,183,330,211"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="228,222,184,285,180,281,223,224"/>
 </map>

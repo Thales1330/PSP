@@ -1,11 +1,11 @@
 <map id="SumForm" name="SumForm">
-<area shape="rect" id="Node000001" title="Form to edit the sum control data." alt="" coords="43,243,127,268"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,121,180"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,193,84,241,79,243,67,194"/>
-<area shape="rect" id="Node000003" href="$class_sum.html" title="Sum the all inputs (can choose the input signal)." alt="" coords="146,155,197,180"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,191,99,244,95,240,148,188"/>
-<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="110,80,233,105"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="174,120,174,154,169,154,169,120"/>
-<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="133,5,209,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="174,45,174,80,169,80,169,45"/>
+<area shape="rect" id="Node000001" title="Form to edit the sum control data." alt="" coords="59,260,142,288"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,159,121,187"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,200,98,259,93,259,72,203"/>
+<area shape="rect" id="Node000003" href="$class_sum.html" title="Sum the all inputs (can choose the input signal)." alt="" coords="144,159,195,187"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,199,112,261,108,258,149,200"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="108,82,231,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="171,123,172,160,167,158,168,128"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="132,5,207,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="171,46,172,83,167,81,169,51"/>
 </map>

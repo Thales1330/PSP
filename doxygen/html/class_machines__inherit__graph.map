@@ -1,13 +1,13 @@
 <map id="Machines" name="Machines">
-<area shape="rect" id="Node000001" title="Abstract class for rotary machines power elements." alt="" coords="127,152,211,177"/>
-<area shape="rect" id="Node000004" href="$class_ind_motor.html" title="Induction motor power element." alt="" coords="5,225,85,251"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="139,186,67,227,64,223,136,182"/>
-<area shape="rect" id="Node000005" href="$class_sync_generator.html" title="Synchronous generator power element." alt="" coords="110,225,229,251"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="172,191,172,225,167,225,167,191"/>
-<area shape="rect" id="Node000006" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element." alt="" coords="253,225,344,251"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="204,182,279,223,276,227,201,186"/>
-<area shape="rect" id="Node000002" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="111,79,227,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,118,172,152,167,152,167,118"/>
-<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="131,5,207,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="172,44,172,79,167,79,167,44"/>
+<area shape="rect" id="Node000001" title="Abstract class for rotary machines power elements." alt="" coords="126,157,209,184"/>
+<area shape="rect" id="Node000004" href="$class_ind_motor.html" title="Induction motor power element." alt="" coords="5,232,85,260"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="135,194,68,234,65,230,131,191"/>
+<area shape="rect" id="Node000005" href="$class_sync_generator.html" title="Synchronous generator power element." alt="" coords="109,232,226,260"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="170,198,170,233,165,231,166,202"/>
+<area shape="rect" id="Node000006" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element." alt="" coords="250,232,341,260"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="204,190,276,232,270,232,203,195"/>
+<area shape="rect" id="Node000002" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="110,81,225,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,122,170,157,165,155,166,127"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="130,5,205,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="169,46,170,81,165,80,167,51"/>
 </map>

@@ -1,25 +1,25 @@
 <map id="Element::SetPosition" name="Element::SetPosition">
-<area shape="rect" id="Node000001" title="Set the element position and update the rectangle." alt="" coords="228,252,385,277"/>
-<area shape="rect" id="Node000002" href="$class_machines.html#aaa61e6c668a75d70ae7af0cd6469a03d" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="13,5,172,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="295,239,280,196,256,144,222,90,202,65,178,44,159,33,162,28,182,40,205,62,227,87,261,141,285,194,300,238"/>
-<area shape="rect" id="Node000003" href="$class_transformer.html#ac8efef04d254c8b5b700bbe4921aec3e" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,55,180,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="292,241,274,207,249,167,217,127,178,94,157,83,160,78,182,89,221,124,253,164,279,205,296,238"/>
-<area shape="rect" id="Node000004" href="$class_bus.html#a66ef970dc1edfa02f96cf8820920ef37" title="Contructor of a new Busbar." alt="" coords="53,104,132,129"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="286,243,240,192,211,165,179,143,155,132,131,125,133,120,157,127,181,138,214,161,244,188,290,239"/>
-<area shape="rect" id="Node000005" href="$class_bus.html#ae822df818deb09d54f6a3bf0794b6ffa" title="Contructor of a new Busbar." alt="" coords="53,153,132,179"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="275,247,231,219,179,192,132,177,133,172,181,188,233,214,278,242"/>
-<area shape="rect" id="Node000006" href="$class_control_element.html#ac8bd52ddb8eed51a217fecb2eed65708" title="Move the element other position." alt="" coords="9,203,176,228"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="237,251,148,231,149,225,238,246"/>
-<area shape="rect" id="Node000007" href="$class_gain.html#aa303bcc736ac5fad1f89c6cc87e859db" title="Move the element other position." alt="" coords="45,252,141,277"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="214,267,141,267,141,262,214,262"/>
-<area shape="rect" id="Node000008" href="$class_element.html#abe884d99d12d5252e18956162115b025" title="Move the element other position." alt="" coords="33,301,153,327"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="238,283,149,304,148,299,237,278"/>
-<area shape="rect" id="Node000009" href="$class_machines.html#a2f7450283dd36f4fc0847dfd50385c44" title="Move the element other position." alt="" coords="29,351,157,376"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="277,287,233,314,181,340,146,353,144,348,179,336,230,310,274,283"/>
-<area shape="rect" id="Node000010" href="$class_shunt.html#aa98b8a2f097fc02fee1ea874e19480f3" title="Move the element other position." alt="" coords="41,400,144,425"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="289,290,244,340,214,367,181,390,145,405,143,400,179,385,211,363,240,336,285,286"/>
-<area shape="rect" id="Node000011" href="$class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8" title="Move the element other position." alt="" coords="21,449,165,475"/>
-<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="296,291,278,325,253,364,220,405,182,439,157,452,154,447,178,434,216,401,248,361,273,322,291,289"/>
-<area shape="rect" id="Node000012" href="$class_bus.html#ad569e2192bf95efe668d401583382a04" title="Move the pickbox." alt="" coords="22,499,163,524"/>
-<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="300,291,285,334,260,387,226,441,205,466,182,488,160,501,157,496,178,484,201,463,222,438,256,385,280,332,295,290"/>
+<area shape="rect" id="Node000001" title="Set the element position and update the rectangle." alt="" coords="227,265,383,293"/>
+<area shape="rect" id="Node000002" href="$class_machines.html#aaa61e6c668a75d70ae7af0cd6469a03d" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="13,5,171,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,250,278,207,255,152,221,96,200,70,177,48,159,36,158,31,180,44,204,67,225,93,259,149,283,205,299,251"/>
+<area shape="rect" id="Node000003" href="$class_transformer.html#ac8efef04d254c8b5b700bbe4921aec3e" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,57,179,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="289,251,271,217,247,176,215,135,177,100,157,88,155,83,180,96,219,132,251,173,276,215,294,251"/>
+<area shape="rect" id="Node000004" href="$class_bus.html#a66ef970dc1edfa02f96cf8820920ef37" title="Contructor of a new Busbar." alt="" coords="53,109,131,137"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="282,253,238,202,209,175,177,152,154,141,132,133,130,128,156,136,180,148,212,171,242,199,287,252"/>
+<area shape="rect" id="Node000005" href="$class_bus.html#ae822df818deb09d54f6a3bf0794b6ffa" title="Contructor of a new Busbar." alt="" coords="53,161,131,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="269,257,227,231,178,204,132,187,130,182,180,199,230,226,274,256"/>
+<area shape="rect" id="Node000006" href="$class_control_element.html#ac8bd52ddb8eed51a217fecb2eed65708" title="Move the element other position." alt="" coords="9,213,175,241"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="228,262,153,244,151,239,232,260"/>
+<area shape="rect" id="Node000007" href="$class_element.html#abe884d99d12d5252e18956162115b025" title="Move the element other position." alt="" coords="32,265,152,293"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="209,281,153,282,151,277,213,278"/>
+<area shape="rect" id="Node000008" href="$class_gain.html#aa303bcc736ac5fad1f89c6cc87e859db" title="Move the element other position." alt="" coords="44,317,140,345"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="228,299,142,322,139,317,232,295"/>
+<area shape="rect" id="Node000009" href="$class_machines.html#a2f7450283dd36f4fc0847dfd50385c44" title="Move the element other position." alt="" coords="28,369,156,397"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="270,304,230,332,180,359,148,371,145,366,178,354,227,328,274,300"/>
+<area shape="rect" id="Node000010" href="$class_shunt.html#aa98b8a2f097fc02fee1ea874e19480f3" title="Move the element other position." alt="" coords="41,421,143,449"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="287,304,242,360,212,387,180,411,145,426,142,422,177,406,209,383,238,356,283,307"/>
+<area shape="rect" id="Node000011" href="$class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8" title="Move the element other position." alt="" coords="20,473,164,501"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="293,305,276,344,251,385,219,427,180,463,158,475,155,471,177,458,215,423,247,382,271,341,290,309"/>
+<area shape="rect" id="Node000012" href="$class_bus.html#ad569e2192bf95efe668d401583382a04" title="Move the pickbox." alt="" coords="22,525,162,553"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="298,306,283,354,259,409,225,466,204,492,180,515,160,527,158,522,177,510,200,488,221,463,255,407,278,352,294,310"/>
 </map>

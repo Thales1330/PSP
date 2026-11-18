@@ -1,21 +1,23 @@
 <map id="Line::DrawDC" name="Line::DrawDC">
-<area shape="rect" id="Node000001" title="Draw the element using GDI+." alt="" coords="5,141,116,167"/>
-<area shape="rect" id="Node000002" href="$class_element.html#af1fd54d12f61f461111697d11cf10b9c" title="Draw a circle using device context." alt="" coords="194,5,369,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,140,104,90,131,63,163,40,179,32,182,36,165,44,135,67,108,94,72,143"/>
-<area shape="rect" id="Node000003" href="$class_element.html#a9e0ee619f7429004eaeddb9040f6d70f" title="Draw a point." alt="" coords="187,55,375,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="78,139,116,114,163,90,191,81,193,86,165,95,118,119,81,144"/>
-<area shape="rect" id="Node000004" href="$class_power_element.html#a97c5d3482c58bc2f88a320ce2497b97f" title="Draw power flow arrows." alt="" coords="173,105,390,145"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="116,144,158,138,159,144,117,149"/>
-<area shape="rect" id="Node000006" href="$class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024" title="Draw switch." alt="" coords="164,169,399,195"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="117,158,168,165,167,170,116,164"/>
-<area shape="rect" id="Node000008" href="$class_power_element.html#aef6392c211caf557bdac287b174a1ea8" title="Get the correct switch position." alt="" coords="170,219,393,244"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="84,164,121,185,165,205,191,213,189,218,163,210,118,190,81,169"/>
-<area shape="rect" id="Node000010" href="$class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8" title="Convert the element position to screen position." alt="" coords="192,268,371,293"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="73,165,110,210,136,234,165,254,180,261,178,266,163,259,132,238,106,213,69,168"/>
-<area shape="rect" id="Node000005" href="$class_element.html#a9332ba7b4ce2051a3935081cc890c03c" title="Draw rectangle." alt="" coords="447,112,635,137"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="390,122,433,122,433,127,390,127"/>
-<area shape="rect" id="Node000007" href="$class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="461,169,620,195"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="399,179,448,179,448,185,399,185"/>
-<area shape="rect" id="Node000009" href="$class_element.html#a5c75d8a6e28326dd568104a4d9d3473f" title="Get the element angle." alt="" coords="469,219,613,244"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="393,229,455,229,455,234,393,234"/>
+<area shape="rect" id="Node000001" title="Draw the element using GDI+." alt="" coords="5,148,115,176"/>
+<area shape="rect" id="Node000002" href="$class_element.html#af1fd54d12f61f461111697d11cf10b9c" title="Draw a circle using device context." alt="" coords="193,5,366,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,146,103,95,130,67,161,44,180,36,177,40,164,48,134,71,108,99,72,149"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a9e0ee619f7429004eaeddb9040f6d70f" title="Draw a point." alt="" coords="186,57,374,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="77,146,115,119,162,94,183,88,179,92,164,99,118,124,81,149"/>
+<area shape="rect" id="Node000004" href="$class_power_element.html#a97c5d3482c58bc2f88a320ce2497b97f" title="Draw power flow arrows." alt="" coords="172,109,388,154"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="114,152,158,147,154,150,116,157"/>
+<area shape="rect" id="Node000006" href="$class_power_element.html#acaa2c9e5736ac6e38c4c6a9ebca78024" title="Draw switch." alt="" coords="163,177,397,205"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="114,166,159,173,154,176,116,172"/>
+<area shape="rect" id="Node000008" href="$class_power_element.html#aef6392c211caf557bdac287b174a1ea8" title="Get the correct switch position." alt="" coords="169,229,391,257"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="84,174,121,195,164,214,190,224,185,225,162,219,119,199,84,179"/>
+<area shape="rect" id="Node000011" href="$class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8" title="Convert the element position to screen position." alt="" coords="191,281,369,309"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="71,174,109,220,135,245,164,266,179,275,173,275,161,271,131,249,105,224,70,179"/>
+<area shape="rect" id="Node000005" href="$class_element.html#a9332ba7b4ce2051a3935081cc890c03c" title="Draw rectangle." alt="" coords="445,117,632,145"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="388,129,432,131,427,132,389,134"/>
+<area shape="rect" id="Node000007" href="$class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="460,177,618,205"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="397,189,446,191,441,192,398,194"/>
+<area shape="rect" id="Node000009" href="$class_element.html#ab0d0e20be9a36ae676202db753faeec9" title="Constructor." alt="" coords="470,229,607,257"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="391,241,457,243,452,243,392,246"/>
+<area shape="rect" id="Node000010" href="$class_element.html#a5c75d8a6e28326dd568104a4d9d3473f" title="Get the element angle." alt="" coords="467,281,610,309"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="353,255,454,278,449,278,352,260"/>
 </map>

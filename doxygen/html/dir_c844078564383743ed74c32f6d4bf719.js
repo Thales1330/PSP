@@ -6,6 +6,8 @@ var dir_c844078564383743ed74c32f6d4bf719 =
     [ "ATPFileEditorForm.h", "_a_t_p_file_editor_form_8h_source.html", null ],
     [ "BusForm.cpp", "_bus_form_8cpp_source.html", null ],
     [ "BusForm.h", "_bus_form_8h.html", "_bus_form_8h" ],
+    [ "BusFormArcFlashProtection.cpp", "_bus_form_arc_flash_protection_8cpp_source.html", null ],
+    [ "BusFormArcFlashProtection.h", "_bus_form_arc_flash_protection_8h_source.html", null ],
     [ "ConstantForm.cpp", "_constant_form_8cpp_source.html", null ],
     [ "ConstantForm.h", "_constant_form_8h.html", "_constant_form_8h" ],
     [ "DataReport.cpp", "_data_report_8cpp_source.html", null ],

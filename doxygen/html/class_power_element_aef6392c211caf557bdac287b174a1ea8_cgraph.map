@@ -1,5 +1,7 @@
 <map id="PowerElement::GetSwitchPoint" name="PowerElement::GetSwitchPoint">
-<area shape="rect" id="Node000001" title="Get the correct switch position." alt="" coords="5,5,228,31"/>
-<area shape="rect" id="Node000002" href="$class_element.html#a5c75d8a6e28326dd568104a4d9d3473f" title="Get the element angle." alt="" coords="276,5,420,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,15,263,15,263,21,228,21"/>
+<area shape="rect" id="Node000001" title="Get the correct switch position." alt="" coords="5,32,228,60"/>
+<area shape="rect" id="Node000002" href="$class_element.html#ab0d0e20be9a36ae676202db753faeec9" title="Constructor." alt="" coords="279,5,416,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,30,266,28,260,29,229,36"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a5c75d8a6e28326dd568104a4d9d3473f" title="Get the element angle." alt="" coords="276,57,419,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="228,55,263,62,257,62,228,61"/>
 </map>

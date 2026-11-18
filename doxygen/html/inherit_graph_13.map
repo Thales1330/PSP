@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$class_control_editor_manager.html" title="This class is responsible to manage the ControlEditor instances in the application." alt="" coords="5,5,169,31"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,126,33"/>
+<area shape="rect" id="Node000001" href="$class_chart_view.html" title="This class is responsible to manage the charts generated in the transient electromechanical studies." alt="" coords="174,5,262,33"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="141,17,176,19,170,19,141,22"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="SyncGeneratorElectricalData" name="SyncGeneratorElectricalData">
-<area shape="rect" id="Node000001" title=" " alt="" coords="72,167,281,192"/>
-<area shape="rect" id="Node000002" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="5,5,156,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,41,172,165,167,168,92,44"/>
-<area shape="rect" id="Node000003" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="181,5,367,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="268,45,247,92,216,144,193,168,189,165,212,141,242,90,263,43"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="72,218,281,245"/>
+<area shape="rect" id="Node000002" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="5,5,156,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,45,173,217,168,218,91,49"/>
+<area shape="rect" id="Node000003" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="180,5,365,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="272,46,261,118,248,158,228,195,202,220,199,215,224,192,243,156,256,117,269,50"/>
 </map>

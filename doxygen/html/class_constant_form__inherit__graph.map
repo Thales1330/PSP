@@ -1,5 +1,5 @@
 <map id="ConstantForm" name="ConstantForm">
-<area shape="rect" id="Node000001" title="Form to edit the constant control data." alt="" coords="21,79,135,104"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,151,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,44,81,79,75,79,75,44"/>
+<area shape="rect" id="Node000001" title="Form to edit the constant control data." alt="" coords="21,81,134,109"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,150,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,47,80,81,75,80,76,51"/>
 </map>

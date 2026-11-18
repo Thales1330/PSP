@@ -4,10 +4,62 @@
         <title>PSP-UFU Blog</title>
         <link>https://thales1330.github.io/PSP/pt/blog</link>
         <description>PSP-UFU Blog</description>
-        <lastBuildDate>Thu, 20 Aug 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 18 Nov 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>pt</language>
+        <item>
+            <title><![CDATA[PSP 2026w47a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta</link>
+            <guid>https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta</guid>
+            <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[🔥 Major Changes]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-major-changes">🔥 Major Changes<a href="https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta#-major-changes" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
+<ul>
+<li class="">Added comprehensive <strong>Arc Flash Protection</strong> configuration, including protection settings, TCC curves and support for IEEE 1584 Annexes I and H;</li>
+<li class="">Implemented <strong>On-Load Tap Changer (OLTC)</strong> voltage control for transformers, including automatic tap adjustment and configurable operating limits;</li>
+<li class="">Introduced a configurable <strong>floating Elements Toolbar</strong>, with horizontal, vertical and hidden modes;</li>
+<li class="">Added <strong>voltage-dependent bus coloring</strong> to improve visualization of voltage levels throughout the network;</li>
+<li class="">Introduced a <strong>Grid and Snap-to-Grid system</strong> for accurate positioning and alignment of network elements.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-new-features-and-improvements">✔️ New Features and Improvements<a href="https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta#%EF%B8%8F-new-features-and-improvements" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
+<ul>
+<li class="">Added <strong>TCC curve editor</strong> with CSV import, clipboard paste and logarithmic visualization;</li>
+<li class="">Added arc flash protection configuration for buses, lines and transformers;</li>
+<li class="">Added visualization of bolted fault current (Ibf) for individual protection devices;</li>
+<li class="">Added visual <strong>stability event indicators</strong> directly on network elements;</li>
+<li class="">Improved transformer tap visualization through the Label Manager;</li>
+<li class="">Added configurable voltage-level color palettes;</li>
+<li class="">Improved transformer, generator and shunt positioning, including support for rotated elements;</li>
+<li class="">Added element-specific icons to toolbars, menus and graphical interfaces;</li>
+<li class="">Improved transformer OLTC parameter validation and discrete tap operation;</li>
+<li class="">Updated wxCrafter-generated interfaces and Portuguese translations;</li>
+<li class="">Updated Docusaurus to <strong>v3.10</strong>, preparing the documentation platform for v4.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-power-system-analysis-improvements">⚡ Power System Analysis Improvements<a href="https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta#-power-system-analysis-improvements" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
+<ul>
+<li class="">Improved OLTC integration into the Newton-Raphson power flow solver;</li>
+<li class="">Improved transformer tap handling and voltage regulation;</li>
+<li class="">Added complex impedance calculation and visualization, including resistance and reactance frequency-response curves;</li>
+<li class="">Improved short-circuit power calculations with support for different system power bases and units;</li>
+<li class="">Improved fault current calculations and preservation of electrical fault data;</li>
+<li class="">Improved electrical element alignment and connection geometry.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes">🐛 Bug Fixes<a href="https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta#-bug-fixes" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
+<ul>
+<li class="">Fixed transformer and generator positioning when restoring projects;</li>
+<li class="">Fixed connection node misalignment for rotated buses and electrical elements;</li>
+<li class="">Fixed OLTC tap limits and discrete tap position validation;</li>
+<li class="">Fixed fault current data handling in lines and transformers;</li>
+<li class="">Fixed several power flow and short-circuit calculation inconsistencies;</li>
+<li class="">Fixed TCC CSV import and decimal separator handling;</li>
+<li class="">Improved UI rendering, popup positioning and workspace interaction;</li>
+<li class="">Various minor stability, usability and interface fixes.</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[2026w34a-beta]]></title>
             <link>https://thales1330.github.io/PSP/pt/blog/2026/08/20/2026w34a-beta</link>

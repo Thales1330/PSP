@@ -1,15 +1,15 @@
 <map id="ControlElementSolver" name="ControlElementSolver">
-<area shape="rect" id="Node000001" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="86,271,250,296"/>
-<area shape="rect" id="Node000002" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="5,168,192,193"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,207,104,227,112,245,124,258,140,268,137,273,121,262,107,248,98,228,95,208"/>
-<area shape="rect" id="Node000003" href="$class_i_o_control.html" title="Provides the communication with the power element." alt="" coords="216,168,299,193"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,207,221,248,190,273,187,269,217,245,244,204"/>
-<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="59,80,181,105"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="151,110,240,165,237,170,149,115"/>
-<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="82,5,158,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="123,45,123,80,117,80,117,45"/>
-<area shape="rect" id="Node000006" href="$struct_sim_test_data.html" title=" " alt="" coords="205,80,309,105"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="260,119,260,167,255,167,255,119"/>
-<area shape="rect" id="Node000007" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="359,80,427,105"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="386,120,366,146,333,165,299,175,298,170,331,160,362,142,382,116"/>
+<area shape="rect" id="Node000001" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="87,306,250,334"/>
+<area shape="rect" id="Node000002" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="5,183,191,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,224,99,254,108,281,120,293,136,306,131,305,117,297,104,283,93,255,93,228"/>
+<area shape="rect" id="Node000003" href="$class_i_o_control.html" title="Provides the communication with the power element." alt="" coords="214,183,296,211"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="249,224,238,255,220,284,193,308,190,303,216,280,233,253,245,227"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="57,82,179,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="149,116,239,181,234,183,148,122"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="80,5,156,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="119,46,121,82,115,82,117,51"/>
+<area shape="rect" id="Node000006" href="$struct_sim_test_data.html" title=" " alt="" coords="204,82,307,110"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="257,123,258,183,253,181,254,128"/>
+<area shape="rect" id="Node000007" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="362,82,429,110"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="390,123,381,145,368,161,334,181,298,192,296,187,332,176,364,157,377,142,386,127"/>
 </map>

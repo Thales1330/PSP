@@ -1,23 +1,23 @@
 <map id="ProjectPropertiesForm" name="ProjectPropertiesForm">
-<area shape="rect" id="Node000001" title=" " alt="" coords="43,269,209,295"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,181,204,207"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,219,126,268,120,269,108,221"/>
-<area shape="rect" id="Node000003" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="227,181,321,207"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="244,216,147,271,145,267,241,211"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="31,93,157,119"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="132,122,251,179,248,183,129,127"/>
-<area shape="rect" id="Node000005" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="181,93,255,119"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="222,132,230,156,241,169,254,179,251,183,237,173,225,159,217,134"/>
-<area shape="rect" id="Node000006" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="279,93,397,119"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="324,131,303,159,285,183,281,179,299,156,319,128"/>
-<area shape="rect" id="Node000007" href="$struct_g_u_i_colour.html" title=" " alt="" coords="95,5,183,31"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="152,41,162,56,174,67,213,78,279,92,278,97,212,84,171,72,158,59,148,44"/>
-<area shape="rect" id="Node000008" href="$struct_simulation_data.html" title=" " alt="" coords="207,5,330,31"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="267,45,268,57,272,68,285,81,301,91,298,95,281,85,268,71,263,58,262,45"/>
-<area shape="rect" id="Node000009" href="$struct_general_data.html" title=" " alt="" coords="354,5,458,31"/>
-<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="390,43,350,94,345,91,386,40"/>
-<area shape="rect" id="Node000010" href="$struct_freq_response_data.html" title=" " alt="" coords="482,5,626,31"/>
-<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="525,40,462,72,387,96,386,91,460,67,522,35"/>
-<area shape="rect" id="Node000011" href="$class_h_m_plane.html" title=" " alt="" coords="421,93,501,119"/>
-<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="443,131,407,160,364,177,322,188,321,183,363,172,405,155,440,127"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="43,307,208,335"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,207,203,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,248,125,307,120,306,108,251"/>
+<area shape="rect" id="Node000003" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="227,207,320,234"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="244,243,146,309,144,304,239,243"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="31,106,156,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="131,139,252,205,247,207,130,144"/>
+<area shape="rect" id="Node000005" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="180,106,252,134"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="216,147,219,166,225,181,236,194,250,206,244,206,232,198,221,184,214,167,213,152"/>
+<area shape="rect" id="Node000006" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="277,106,395,134"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="323,146,302,184,285,208,282,204,298,181,319,149"/>
+<area shape="rect" id="Node000007" href="$struct_g_u_i_colour.html" title=" " alt="" coords="94,5,181,33"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="144,45,154,65,166,80,279,106,274,109,163,84,149,68,143,51"/>
+<area shape="rect" id="Node000008" href="$struct_simulation_data.html" title=" " alt="" coords="206,5,328,33"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="262,46,263,65,269,81,280,94,296,105,291,106,277,98,264,83,258,66,259,51"/>
+<area shape="rect" id="Node000009" href="$struct_general_data.html" title=" " alt="" coords="352,5,456,33"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="391,45,369,84,350,107,346,103,365,80,387,49"/>
+<area shape="rect" id="Node000010" href="$struct_freq_response_data.html" title=" " alt="" coords="480,5,624,33"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="529,42,502,66,472,84,434,99,397,110,395,105,433,94,469,80,499,62,524,45"/>
+<area shape="rect" id="Node000011" href="$class_h_m_plane.html" title=" " alt="" coords="419,106,498,134"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="448,146,434,168,416,185,393,198,369,207,321,218,319,213,367,202,391,193,413,181,430,165,443,149"/>
 </map>
