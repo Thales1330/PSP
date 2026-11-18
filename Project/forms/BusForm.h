@@ -22,6 +22,7 @@
 #include <wx/statbmp.h>
 
 #include "ElementFormBase.h"
+struct ArcFlashData;
 class Bus;
 
 
@@ -50,6 +51,7 @@ class BusForm : public BusFormBase
     virtual ~BusForm();
 
    protected:
+    void OnCBArcFlashConfigSelected(wxCommandEvent& event) override;
     void OnnConfigProtectionButtonClick(wxCommandEvent& event) override;
     void OnMouseMotionElectrodeConfig(wxMouseEvent& event) override;
     void OnMouseEnterElectrodeConfig(wxMouseEvent& event) override;
@@ -65,6 +67,9 @@ class BusForm : public BusFormBase
     virtual void EnableFaultFields(bool enable = true);
     virtual void EnableStabFaultFields(bool enable = true);
     virtual void UpdateChoiceBoxes();
+    bool ValidateAndGetArcFlashData(ArcFlashData& data);
+    void LoadArcFlashData(const ArcFlashData& data);
+    void UpdateArcFlashEnclosureFields();
 
     Bus* m_bus = nullptr;
     wxWindow* m_parent = nullptr;

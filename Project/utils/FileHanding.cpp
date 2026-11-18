@@ -16,6 +16,8 @@
  */
 
 #include "FileHanding.h"
+#include <wx/ffile.h>
+#include <string>
 
 FileHanding::~FileHanding() {}
 FileHanding::FileHanding(Workspace* workspace) { m_workspace = workspace; }
@@ -24,12 +26,58 @@ FileHanding::FileHanding() {}
 void FileHanding::SaveProject(wxFileName path)
 {
 	// Erase the file (if exists or not) and write the initial data
-	std::ofstream writeProjectsFile(path.GetFullPath().mb_str());
-	writeProjectsFile.close();
+	//std::ofstream writeProjectsFile(path.GetFullPath().mb_str());
+	//writeProjectsFile.close();
+	//
+	//rapidxml::xml_document<> doc;
+	//rapidxml::file<> xmlFile(path.GetFullPath());
+	//doc.parse<0>(xmlFile.data());
+	// 1. Erase/create the file and write a minimal valid XML structure 
+// (Note: RapidXML throws an error if the file is completely empty)
+	wxFFile writeProjectsFile(path.GetFullPath(), "wb");
+	if (writeProjectsFile.IsOpened())
+	{
+		writeProjectsFile.Write("<Projects>\n</Projects>");
+		writeProjectsFile.Close();
+	}
+	else
+	{
+		wxMessageBox(_("Could not create or clear the file:\n") + path.GetFullPath(), _("Error"), wxICON_ERROR | wxOK);
+		return;
+	}
 
+	// 2. Open the file safely for reading (handling accented paths via wxFFile)
+	wxFFile readFile(path.GetFullPath(), "rb");
+	if (!readFile.IsOpened())
+	{
+		wxMessageBox(_("Could not open the file:\n") + path.GetFullPath(), _("Error"), wxICON_ERROR | wxOK);
+		return;
+	}
+
+	// 3. Read content with automatic encoding support
+	wxString fileContent;
+	if (!readFile.ReadAll(&fileContent))
+	{
+		wxMessageBox(_("Error reading the XML file:\n") + path.GetFullPath(), _("Error"), wxICON_ERROR | wxOK);
+		return;
+	}
+
+	// 4. Convert to a clean UTF-8 std::string buffer for RapidXML
+	std::string utf8Str = fileContent.ToStdString(wxConvUTF8);
+	std::vector<char> xmlData(utf8Str.begin(), utf8Str.end());
+	xmlData.push_back('\0'); // Ensure null-termination
+
+	// 5. Parse the document safely
 	rapidxml::xml_document<> doc;
-	rapidxml::file<> xmlFile(path.GetFullPath());
-	doc.parse<0>(xmlFile.data());
+	try
+	{
+		doc.parse<0>(xmlData.data());
+	}
+	catch (const std::exception& e)
+	{
+		wxMessageBox(_("XML Parsing Error: ") + wxString::FromUTF8(e.what()), _("Error"), wxICON_ERROR | wxOK);
+		return;
+	}
 
 	rapidxml::xml_node<>* decl = doc.allocate_node(rapidxml::node_declaration);
 	rapidxml::xml_attribute<>* ver = doc.allocate_attribute("version", "1.0");
@@ -292,17 +340,66 @@ void FileHanding::SaveProject(wxFileName path)
 	}
 	//}
 
-	std::ofstream writeXML(path.GetFullPath().mb_str());
-	writeXML << doc;
-	writeXML.close();
+	// 6. Serialize the modified DOM tree back to a std::string
+	std::string xmlOutput;
+	rapidxml::print(std::back_inserter(xmlOutput), doc, 0);
+
+	// 7. Save the final XML string back to the file safely (handling accented paths via wxFFile)
+	wxFFile saveFile(path.GetFullPath(), "wb");
+	if (!saveFile.IsOpened())
+	{
+		wxMessageBox(_("Could not save the file:\n") + path.GetFullPath(), _("Error"), wxICON_ERROR | wxOK);
+		return;
+	}
+
+	saveFile.Write(xmlOutput);
+	saveFile.Close();
 }
 
 bool FileHanding::OpenProject(wxFileName path)
 {
 	rapidxml::xml_document<> doc;
-	rapidxml::file<> xmlFile(path.GetFullPath().mb_str());
+	wxString fullPath = path.GetFullPath();
 
-	doc.parse<0>(xmlFile.data());
+	// 1. Open the file safely, supporting accented paths on Windows
+	wxFFile file(fullPath, "rb");
+	if (!file.IsOpened())
+	{
+		wxMessageBox(_("Could not open the file:\n") + fullPath, _("Error"), wxICON_ERROR | wxOK);
+		return false;
+	}
+
+	// 2. Read the entire content into a wxString with automatic encoding detection (UTF-8, UTF-16, BOM)
+	wxString fileContent;
+	if (!file.ReadAll(&fileContent, wxConvAuto()))
+	{
+		wxMessageBox(_("Error reading the XML file:\n") + fullPath, _("Error"), wxICON_ERROR | wxOK);
+		return false;
+	}
+
+	// 3. Convert the wxString content to a clean UTF-8 std::string buffer
+	std::string utf8Str = fileContent.ToStdString(wxConvUTF8);
+
+	// 4. Copy to a mutable std::vector<char> required by RapidXML (in-place parsing)
+	std::vector<char> xmlData(utf8Str.begin(), utf8Str.end());
+	xmlData.push_back('\0'); // Ensure null-termination
+
+	try
+	{
+		// 5. Parse the document safely
+		doc.parse<0>(xmlData.data());
+	}
+	catch (const std::exception& e)
+	{
+		wxMessageBox(_("XML Parsing Error: ") + wxString::FromUTF8(e.what()), _("Error"), wxICON_ERROR | wxOK);
+		return false;
+	}
+
+	// Parse the document
+	//doc.parse<0>(xmlData.data());
+
+	//rapidxml::file<> xmlFile(path.GetFullPath().mb_str());
+	//doc.parse<0>(xmlFile.data());
 
 	auto projectNode = doc.first_node("Project");
 	if (!projectNode) return false;

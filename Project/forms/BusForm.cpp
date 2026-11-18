@@ -15,11 +15,30 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <cmath>
+#include <wx/numformatter.h>
+
 #include "BusForm.h"
 #include "../elements/powerElement/Bus.h"
 #include "../utils/Path.h"
 #include "BusFormArcFlashProtection.h"
 #include "../editors/Workspace.h"
+
+namespace
+{
+	wxString FormatArcFlashNumber(double value)
+	{
+		return wxNumberFormatter::ToString(
+			value, 12,
+			wxNumberFormatter::Style_None |
+			wxNumberFormatter::Style_NoTrailingZeroes);
+	}
+
+	wxString FormatArcFlashInput(double value)
+	{
+		return value == 0.0 ? wxString() : FormatArcFlashNumber(value);
+	}
+}
 
 BusForm::BusForm(wxWindow* parent, Bus* bus, wxWindow* workspace) : BusFormBase(parent), m_bus(bus), m_parent(parent), m_workspace(workspace)
 {
@@ -120,6 +139,8 @@ BusForm::BusForm(wxWindow* parent, Bus* bus, wxWindow* workspace) : BusFormBase(
 
 	m_checkBoxPlotPQData->SetValue(bus->GetElectricalData().plotPQData);
 
+	LoadArcFlashData(m_bus->GetElectricalDataRef().arcFlash);
+
 	m_staticBitmapWarning->Hide();
 
 	GetSizer()->Layout();
@@ -146,7 +167,7 @@ void BusForm::OnButtonOKClick(wxCommandEvent& event)
 	}
 	data.slackBus = m_checkBoxSlackBus->GetValue();
 
-	data.hasFault = m_checkBoxFault->GetValue();
+	data.hasFault = m_checkBoxFault->GetValue(); 
 	switch (m_choiceFaultType->GetSelection()) {
 	case 0: {
 		data.faultType = FaultData::FAULT_THREEPHASE;
@@ -209,6 +230,15 @@ void BusForm::OnButtonOKClick(wxCommandEvent& event)
 		m_bus->SetDynamicEvent(true);
 	else
 		m_bus->SetDynamicEvent(false);
+
+	auto& arcFlash = m_bus->GetElectricalDataRef().arcFlash;
+
+	ArcFlashData afData = arcFlash;
+
+	if (!ValidateAndGetArcFlashData(afData))
+		return;
+
+	arcFlash = std::move(afData);
 
 	EndModal(wxID_OK);
 }
@@ -288,6 +318,191 @@ void BusForm::UpdateChoiceBoxes()
 	default:
 		break;
 	}
+}
+
+bool BusForm::ValidateAndGetArcFlashData(ArcFlashData& data)
+{
+	ArcFlashData result = data;
+
+	auto showError = [&](const wxString& message) {
+		wxMessageBox(message, _("Invalid data"),
+			wxOK | wxICON_WARNING, m_parent);
+		return false;
+		};
+
+	auto readPositiveValue = [&](wxTextCtrl* control, double& value,
+		const wxString& field) {
+			if (!m_bus->DoubleFromString(
+				m_parent, control->GetValue(), value,
+				wxString::Format(
+					_("Value entered incorrectly in the field \"%s.\""),
+					field)))
+				return false;
+
+			if (!std::isfinite(value) || value <= 0.0)
+				return showError(wxString::Format(
+					_("The field \"%s\" must be greater than zero."),
+					field));
+
+			return true;
+		};
+
+	// Electrode configuration.
+	const int configSelection = m_bmpComboBoxConfig->GetSelection();
+
+	if (configSelection < 0 ||
+		configSelection >= static_cast<int>(m_bmpComboBoxConfig->GetCount()) ||
+		configSelection > static_cast<int>(ArcFlashElectrodeConfig::HOA))
+		return showError(_("Select a valid electrode configuration."));
+
+	result.electrodeConfig =
+		static_cast<ArcFlashElectrodeConfig>(configSelection);
+
+	// Common input parameters.
+	if (!readPositiveValue(m_textCtrlGap, result.conductorGap,
+		_("Electrode gap (mm)")))
+		return false;
+
+	if (!readPositiveValue(m_textCtrlWorkDist, result.workingDistance,
+		_("Working distance (mm)")))
+		return false;
+
+	// Enclosure dimensions are required only for enclosed configurations.
+	if (IsEnclosedConfig(result.electrodeConfig)) {
+		if (!readPositiveValue(m_textCtrlHeight, result.enclosureHeight,
+			_("Height (mm)")))
+			return false;
+
+		if (!readPositiveValue(m_textCtrlWidth, result.enclosureWidth,
+			_("Width (mm)")))
+			return false;
+
+		if (!readPositiveValue(m_textCtrlGap525558, result.enclosureDepth,
+			_("Depth (mm)")))
+			return false;
+	}
+	else {
+		result.enclosureHeight = 0.0;
+		result.enclosureWidth = 0.0;
+		result.enclosureDepth = 0.0;
+	}
+
+	// Invalidate calculated results only if relevant inputs have changed.
+	const bool inputsChanged =
+		result.electrodeConfig != data.electrodeConfig ||
+		result.conductorGap != data.conductorGap ||
+		result.workingDistance != data.workingDistance ||
+		(IsEnclosedConfig(result.electrodeConfig) &&
+			(result.enclosureHeight != data.enclosureHeight ||
+				result.enclosureWidth != data.enclosureWidth ||
+				result.enclosureDepth != data.enclosureDepth));
+
+	if (inputsChanged) {
+		result.calculated = false;
+		result.iarc_kA = 0.0;
+		result.iarcMin_kA = 0.0;
+		result.incidentEnergy_Jcm2 = 0.0;
+		result.incidentEnergy_calcm2 = 0.0;
+		result.arcFlashBoundary_mm = 0.0;
+		result.usedReducedCurrent = false;
+		result.warnings.clear();
+	}
+
+	// Preserve data.enabled: there is no corresponding control in the
+	// interface shown.
+	data = std::move(result);
+
+	if (inputsChanged) {
+		m_staticTextEnergy->SetLabel(_("E = -- J/cm²"));
+		m_staticTextAFB->SetLabel(_("AFB = -- mm"));
+		m_staticBitmapWarning->Hide();
+		m_panelArcFlash->Layout();
+	}
+
+	return true;
+}
+
+void BusForm::LoadArcFlashData(const ArcFlashData& data)
+{
+	// Electrode configuration.
+	const int configSelection = static_cast<int>(data.electrodeConfig);
+
+	if (configSelection >= 0 &&
+		configSelection < static_cast<int>(m_bmpComboBoxConfig->GetCount()))
+		m_bmpComboBoxConfig->SetSelection(configSelection);
+	else if (m_bmpComboBoxConfig->GetCount() > 0)
+		m_bmpComboBoxConfig->SetSelection(0);
+
+	// Input parameters.
+	m_textCtrlGap->ChangeValue(FormatArcFlashInput(data.conductorGap));
+	m_textCtrlWorkDist->ChangeValue(FormatArcFlashInput(data.workingDistance));
+	m_textCtrlHeight->ChangeValue(FormatArcFlashInput(data.enclosureHeight));
+	m_textCtrlWidth->ChangeValue(FormatArcFlashInput(data.enclosureWidth));
+	m_textCtrlGap525558->ChangeValue(FormatArcFlashInput(data.enclosureDepth));
+
+	UpdateArcFlashEnclosureFields();
+
+	// Calculated results.
+	if (data.calculated) {
+		m_staticTextEnergy->SetLabel(wxString::Format(
+			_("E = %s J/cm²"),
+			FormatArcFlashNumber(data.incidentEnergy_Jcm2)));
+
+		m_staticTextAFB->SetLabel(wxString::Format(
+			_("AFB = %s mm"),
+			FormatArcFlashNumber(data.arcFlashBoundary_mm)));
+	}
+	else {
+		m_staticTextEnergy->SetLabel(_("E = -- J/cm²"));
+		m_staticTextAFB->SetLabel(_("AFB = -- mm"));
+	}
+
+	// Display the warning icon and its tooltip when applicable.
+	wxString warningText;
+
+	if (data.calculated) {
+		for (const auto& warning : data.warnings) {
+			if (!warningText.IsEmpty())
+				warningText += "\n";
+
+			warningText += warning;
+		}
+
+		if (data.usedReducedCurrent) {
+			if (!warningText.IsEmpty())
+				warningText += "\n";
+
+			warningText += _("Reduced-current calculation was used.");
+		}
+	}
+
+	m_staticBitmapWarning->SetToolTip(warningText);
+	m_staticBitmapWarning->Show(!warningText.IsEmpty());
+
+	m_panelArcFlash->Layout();
+	m_panelArcFlash->Refresh();
+}
+
+void BusForm::UpdateArcFlashEnclosureFields()
+{
+	const int selection = m_bmpComboBoxConfig->GetSelection();
+
+	const bool isValidSelection =
+		selection >= 0 &&
+		selection <= static_cast<int>(ArcFlashElectrodeConfig::HOA);
+
+	const bool isEnclosed = isValidSelection &&
+		IsEnclosedConfig(
+			static_cast<ArcFlashElectrodeConfig>(selection));
+
+	m_staticTextHeight->Enable(isEnclosed);
+	m_textCtrlHeight->Enable(isEnclosed);
+
+	m_staticTextWidth->Enable(isEnclosed);
+	m_textCtrlWidth->Enable(isEnclosed);
+
+	m_staticTextDepth->Enable(isEnclosed);
+	m_textCtrlGap525558->Enable(isEnclosed);
 }
 
 void BusForm::OnMouseEnterElectrodeConfig(wxMouseEvent& event)
@@ -383,4 +598,8 @@ void BusForm::OnnConfigProtectionButtonClick(wxCommandEvent& event)
 	{
 		// Handle the protection configuration here
 	}
+}
+void BusForm::OnCBArcFlashConfigSelected(wxCommandEvent& event)
+{
+	UpdateArcFlashEnclosureFields();
 }

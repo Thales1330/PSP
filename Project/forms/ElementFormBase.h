@@ -39,6 +39,7 @@
 #include <wx/dataview.h>
 #include <wx/grid.h>
 #include <wx/bmpbuttn.h>
+#include <wx/radiobox.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -132,6 +133,7 @@ protected:
     virtual void OnMouseEnterElectrodeConfig(wxMouseEvent& event) { event.Skip(); }
     virtual void OnMouseLeaveElectrodeConfig(wxMouseEvent& event) { event.Skip(); }
     virtual void OnMouseMotionElectrodeConfig(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnCBArcFlashConfigSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnnConfigProtectionButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
@@ -1412,7 +1414,26 @@ protected:
     wxButton* m_buttonImport;
     wxCheckBox* m_checkBoxIsMeltTime;
     wxPanel* m_panelAI;
-    wxPanel* m_panel2AH;
+    wxStaticText* m_staticTextCBType;
+    wxChoice* m_choiceCBType;
+    wxStaticText* m_staticTextCBCurrent;
+    wxChoice* m_choiceCBCurrent;
+    wxStaticText* m_staticTextTrip;
+    wxChoice* m_choiceCBTrip;
+    wxStaticText* m_staticTextVoltage;
+    wxChoice* m_choiceCBVoltage;
+    wxStaticText* m_staticTextI227;
+    wxTextCtrl* m_textCtrlI2;
+    wxRadioBox* m_radioBoxI1;
+    wxStaticText* m_staticTextIn;
+    wxTextCtrl* m_textCtrlIn;
+    wxStaticText* m_staticTextI1;
+    wxTextCtrl* m_textCtrl1;
+    wxPanel* m_panelAH;
+    wxStaticText* m_staticTextFuseClass;
+    wxChoice* m_choiceFuseClass;
+    wxStaticText* m_staticTextFuseCurrent;
+    wxChoice* m_choiceFuseCurrent;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
@@ -1423,6 +1444,12 @@ protected:
     virtual void OnAddButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRemoveButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnImportButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnChoiceCBType(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnChoiceCBCurrent(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnChoiceCBTrip(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRadioI1Selected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnNominalCurrentUpdated(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnChoiceFuseClass(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
@@ -1442,8 +1469,27 @@ public:
     wxButton* GetButtonImport() { return m_buttonImport; }
     wxCheckBox* GetCheckBoxIsMeltTime() { return m_checkBoxIsMeltTime; }
     wxPanel* GetPanelTCC() { return m_panelTCC; }
+    wxStaticText* GetStaticTextCBType() { return m_staticTextCBType; }
+    wxChoice* GetChoiceCBType() { return m_choiceCBType; }
+    wxStaticText* GetStaticTextCBCurrent() { return m_staticTextCBCurrent; }
+    wxChoice* GetChoiceCBCurrent() { return m_choiceCBCurrent; }
+    wxStaticText* GetStaticTextTrip() { return m_staticTextTrip; }
+    wxChoice* GetChoiceCBTrip() { return m_choiceCBTrip; }
+    wxStaticText* GetStaticTextVoltage() { return m_staticTextVoltage; }
+    wxChoice* GetChoiceCBVoltage() { return m_choiceCBVoltage; }
+    wxStaticText* GetStaticTextI227() { return m_staticTextI227; }
+    wxTextCtrl* GetTextCtrlI2() { return m_textCtrlI2; }
+    wxRadioBox* GetRadioBoxI1() { return m_radioBoxI1; }
+    wxStaticText* GetStaticTextIn() { return m_staticTextIn; }
+    wxTextCtrl* GetTextCtrlIn() { return m_textCtrlIn; }
+    wxStaticText* GetStaticTextI1() { return m_staticTextI1; }
+    wxTextCtrl* GetTextCtrl1() { return m_textCtrl1; }
     wxPanel* GetPanelAI() { return m_panelAI; }
-    wxPanel* GetPanel2AH() { return m_panel2AH; }
+    wxStaticText* GetStaticTextFuseClass() { return m_staticTextFuseClass; }
+    wxChoice* GetChoiceFuseClass() { return m_choiceFuseClass; }
+    wxStaticText* GetStaticTextFuseCurrent() { return m_staticTextFuseCurrent; }
+    wxChoice* GetChoiceFuseCurrent() { return m_choiceFuseCurrent; }
+    wxPanel* GetPanelAH() { return m_panelAH; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxPanel* GetSplitterPageRight() { return m_splitterPageRight; }
     wxSplitterWindow* GetSplitter() { return m_splitter; }

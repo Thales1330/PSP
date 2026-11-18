@@ -20,7 +20,10 @@
 
 #include "../../forms/BusForm.h"
 #include "PowerElement.h"
-
+ // ---------------------------------------------------------------------
+ // Arc Flash — electrode configuration mirrors arcflash::ElectrodeConfig
+ // 1:1 (VCB, VCBB, HCB = enclosed; VOA, HOA = open air).
+ // ---------------------------------------------------------------------
 enum class ArcFlashElectrodeConfig {
 	VCB,
 	VCBB,
@@ -29,17 +32,38 @@ enum class ArcFlashElectrodeConfig {
 	HOA
 };
 
+// Whether an enclosure applies to this electrode configuration. This is
+// NOT a user choice — it is fully derived from electrodeConfig, mirroring
+// arcflash::IsEnclosed().
+inline bool IsEnclosedConfig(ArcFlashElectrodeConfig config)
+{
+	return config == ArcFlashElectrodeConfig::VCB ||
+		config == ArcFlashElectrodeConfig::VCBB ||
+		config == ArcFlashElectrodeConfig::HCB;
+}
+
 struct ArcFlashData {
 	bool enabled = false;
 
+	// --- Input---
 	ArcFlashElectrodeConfig electrodeConfig = ArcFlashElectrodeConfig::VCB;
-	double conductorGap = 0.0;
-	double workingDistance = 0.0;
+	double conductorGap = 100.0;       // mm
+	double workingDistance = 100.0;    // mm
 
-	bool enclosureClosed = true;
-	double enclosureHeight = 0.0;
-	double enclosureWidth = 0.0;
-	double enclosureDepth = 0.0;
+	// Enclosure dimensions. Only meaningful when IsEnclosedConfig(electrodeConfig) is true
+	double enclosureHeight = 100.0;    // mm
+	double enclosureWidth = 100.0;     // mm
+	double enclosureDepth = 100.0;     // mm
+
+	// --- Result (mirrors arcflash::ArcFlashResult) ---
+	bool calculated = false;         // true once Calculate() has run successfully at least once
+	double iarc_kA = 0.0;
+	double iarcMin_kA = 0.0;
+	double incidentEnergy_Jcm2 = 0.0;
+	double incidentEnergy_calcm2 = 0.0;
+	double arcFlashBoundary_mm = 0.0;
+	bool usedReducedCurrent = false;
+	std::vector<wxString> warnings;
 };
 
 struct BusElectricalData {

@@ -43,27 +43,68 @@ enum class ArcFlashI1Source {
 	FROM_IT
 };
 
+// Fuse family (Annex H). Order MUST match arcflash::FuseFamily exactly
+enum class ArcFlashFuseFamily {
+	CLASS_L_601_800A,
+	CLASS_L_801_1200A,
+	CLASS_L_1201_1600A,
+	CLASS_L_1601_2000A,
+	CLASS_RK1_UPTO100A,
+	CLASS_RK1_101_200A,
+	CLASS_RK1_201_400A,
+	CLASS_RK1_401_600A
+};
+
+// Breaker family (Annex I). Order MUST match arcflash::BreakerFamily exactly.
+enum class ArcFlashBreakerFamily {
+	MCCB_100_400A,
+	MCCB_600_1200A_TM_OR_M,
+	MCCB_600_1200A_E_LI,
+	MCCB_OR_ICCB_1600_6000A,
+	LVPCB_800_6300A_E_LI,
+	LVPCB_800_6300A_E_LS
+};
+
+// Order MUST match arcflash::BreakerVoltageBand exactly.
+enum class ArcFlashBreakerVoltageBand {
+	V480_AND_LOWER,
+	V575_TO_690
+};
+
 struct ArcFlashProtectionData {
-	bool consider = false;
+	bool consider = false;    // whether this path's protection config participates 
 	bool configured = false;
 
 	ArcFlashProtectionType type = ArcFlashProtectionType::CIRCUIT_BREAKER;
 	ArcFlashProtectionMethod method = ArcFlashProtectionMethod::TCC_CURVE;
 
+	// --- TCC_CURVE method ---
 	std::vector<ArcFlashTCCPoint> tccPoints;
+	bool curveIsMeltTimeOnly = false;   // fuses only (6.9.2 melt->clearing adjustment)
+	double additionalDelay = 0.0;       // s; retrofit breaker opening time (6.9.3) or
+	// relay+breaker interrupting time (6.9.4)
 
-	bool curveIsMeltTimeOnly = false;
-	double additionalDelay = 0.0;
+// Reserved for future UI exposure
+	double floorSeconds = 0.01;
+	double practicalCapSeconds = -1.0;  // <=0 disables the cap
+	int belowRangePolicy = 0;           // 0 = ThrowError, 1 = ClampToNearest
+	int aboveRangePolicy = 1;           // 0 = ThrowError, 1 = ClampToNearest
 
-	int fuseFamily = 0;
-	int fuseCurrentRange = 0;
+	// --- ANNEX_H method (fuse) ---
+	ArcFlashFuseFamily fuseFamily = ArcFlashFuseFamily::CLASS_L_601_800A;
 
-	int breakerFamily = 0;
-	int breakerVoltageRange = 0;
-
+	// --- ANNEX_I method (breaker) ---
+	ArcFlashBreakerFamily breakerFamily = ArcFlashBreakerFamily::MCCB_100_400A;
+	ArcFlashBreakerVoltageBand breakerVoltageBand = ArcFlashBreakerVoltageBand::V480_AND_LOWER;
+	double i2_kA = 0.0;                 // interrupting rating — was missing, required by both
+	// CalcSpecialBreakerModel overloads
 	ArcFlashI1Source i1Source = ArcFlashI1Source::DIRECT;
 	double i1_kA = 0.0;
 	double it_A = 0.0;
+	double breakerNominalCurrent_A = 0.0; // A; optional, used to determine the default It
+
+	// --- Current distribution (6.8/6.10) ---
+	double faultCurrentContribution_kA = 0.0;
 };
 
 /**

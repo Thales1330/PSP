@@ -542,6 +542,7 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     m_bmpComboBoxConfig->Bind(wxEVT_ENTER_WINDOW, &BusFormBase::OnMouseEnterElectrodeConfig, this);
     m_bmpComboBoxConfig->Bind(wxEVT_LEAVE_WINDOW, &BusFormBase::OnMouseLeaveElectrodeConfig, this);
     m_bmpComboBoxConfig->Bind(wxEVT_MOTION, &BusFormBase::OnMouseMotionElectrodeConfig, this);
+    m_bmpComboBoxConfig->Bind(wxEVT_COMMAND_COMBOBOX_SELECTED, &BusFormBase::OnCBArcFlashConfigSelected, this);
     m_buttonConfigProtection->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormBase::OnnConfigProtectionButtonClick, this);
     m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormBase::OnButtonOKClick, this);
     m_ButtonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormBase::OnButtonCancelClick, this);
@@ -558,6 +559,7 @@ BusFormBase::~BusFormBase()
     m_bmpComboBoxConfig->Unbind(wxEVT_ENTER_WINDOW, &BusFormBase::OnMouseEnterElectrodeConfig, this);
     m_bmpComboBoxConfig->Unbind(wxEVT_LEAVE_WINDOW, &BusFormBase::OnMouseLeaveElectrodeConfig, this);
     m_bmpComboBoxConfig->Unbind(wxEVT_MOTION, &BusFormBase::OnMouseMotionElectrodeConfig, this);
+    m_bmpComboBoxConfig->Unbind(wxEVT_COMMAND_COMBOBOX_SELECTED, &BusFormBase::OnCBArcFlashConfigSelected, this);
     m_buttonConfigProtection->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormBase::OnnConfigProtectionButtonClick, this);
     m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormBase::OnButtonOKClick, this);
     m_ButtonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormBase::OnButtonCancelClick, this);
@@ -5143,8 +5145,181 @@ BusFormArcFlashProtectionBase::BusFormArcFlashProtectionBase(wxWindow* parent, w
     m_panelAI = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelAI, _("Appendix I"), false);
     
-    m_panel2AH = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
-    m_notebook->AddPage(m_panel2AH, _("Appendix H"), false);
+    wxBoxSizer* boxSizer2736 = new wxBoxSizer(wxVERTICAL);
+    m_panelAI->SetSizer(boxSizer2736);
+    
+    wxGridSizer* gridSizer2720 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizer2736->Add(gridSizer2720, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_5211 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2720->Add(boxSizerLvl4_5211, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextCBType = new wxStaticText(m_panelAI, wxID_ANY, _("Circuit breaker type"), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_5211->Add(m_staticTextCBType, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceCBTypeArr;
+    m_choiceCBTypeArr.Add(_("MCCB"));
+    m_choiceCBTypeArr.Add(_("ICCB"));
+    m_choiceCBTypeArr.Add(_("LVPCB"));
+    m_choiceCBType = new wxChoice(m_panelAI, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), m_choiceCBTypeArr, 0);
+    m_choiceCBType->SetSelection(0);
+    
+    boxSizerLvl4_5211->Add(m_choiceCBType, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_5214 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2720->Add(boxSizerLvl4_5214, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextCBCurrent = new wxStaticText(m_panelAI, wxID_ANY, _("Current range"), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_5214->Add(m_staticTextCBCurrent, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceCBCurrentArr;
+    m_choiceCBCurrentArr.Add(_("100–400A"));
+    m_choiceCBCurrentArr.Add(_("600–1200A"));
+    m_choiceCBCurrentArr.Add(_("1600–6000A"));
+    m_choiceCBCurrentArr.Add(_("800–6300A"));
+    m_choiceCBCurrent = new wxChoice(m_panelAI, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), m_choiceCBCurrentArr, 0);
+    m_choiceCBCurrent->SetSelection(0);
+    
+    boxSizerLvl4_5214->Add(m_choiceCBCurrent, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_521417 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2720->Add(boxSizerLvl4_521417, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTrip = new wxStaticText(m_panelAI, wxID_ANY, _("Trip unit"), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_521417->Add(m_staticTextTrip, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceCBTripArr;
+    m_choiceCBTripArr.Add(_("TM or M"));
+    m_choiceCBTripArr.Add(_("Electronic (E, LI)"));
+    m_choiceCBTripArr.Add(_("Electronic, short-time delay (E, LS)"));
+    m_choiceCBTrip = new wxChoice(m_panelAI, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), m_choiceCBTripArr, 0);
+    m_choiceCBTrip->SetSelection(0);
+    
+    boxSizerLvl4_521417->Add(m_choiceCBTrip, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_52141720 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2720->Add(boxSizerLvl4_52141720, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextVoltage = new wxStaticText(m_panelAI, wxID_ANY, _("Voltage range"), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_52141720->Add(m_staticTextVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceCBVoltageArr;
+    m_choiceCBVoltageArr.Add(_("≤ 480 V"));
+    m_choiceCBVoltageArr.Add(_("575–690V"));
+    m_choiceCBVoltage = new wxChoice(m_panelAI, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), m_choiceCBVoltageArr, 0);
+    m_choiceCBVoltage->SetSelection(0);
+    
+    boxSizerLvl4_52141720->Add(m_choiceCBVoltage, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_792326 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizer2736->Add(boxSizerLvl4_792326, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextI227 = new wxStaticText(m_panelAI, wxID_ANY, _("Interrupting Capacity (I₂) [kA]"), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_792326->Add(m_staticTextI227, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlI2 = new wxTextCtrl(m_panelAI, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlI2->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_792326->Add(m_textCtrlI2, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_radioBoxI1Arr;
+    m_radioBoxI1Arr.Add(_("Enter directly"));
+    m_radioBoxI1Arr.Add(_("Calculate from Iₜ"));
+    m_radioBoxI1 = new wxRadioBox(m_panelAI, wxID_ANY, _("Minimum model current (I₁)"), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), m_radioBoxI1Arr, 1, wxRA_SPECIFY_ROWS);
+    m_radioBoxI1->SetSelection(0);
+    
+    boxSizer2736->Add(m_radioBoxI1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_7923261 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer2736->Add(boxSizerLvl4_7923261, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizer2771 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl4_7923261->Add(boxSizer2771, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextIn = new wxStaticText(m_panelAI, wxID_ANY, _("Nominal current [A]"), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    
+    boxSizer2771->Add(m_staticTextIn, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlIn = new wxTextCtrl(m_panelAI, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlIn->SetHint(wxT(""));
+    #endif
+    
+    boxSizer2771->Add(m_textCtrlIn, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizer2772 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl4_7923261->Add(boxSizer2772, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextI1 = new wxStaticText(m_panelAI, wxID_ANY, _("Minimum current (I₁) [A]"), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    
+    boxSizer2772->Add(m_staticTextI1, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrl1 = new wxTextCtrl(m_panelAI, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelAI, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrl1->SetHint(wxT(""));
+    #endif
+    
+    boxSizer2772->Add(m_textCtrl1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_panelAH = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelAH, _("Appendix H"), false);
+    
+    wxBoxSizer* boxSizer2776 = new wxBoxSizer(wxVERTICAL);
+    m_panelAH->SetSizer(boxSizer2776);
+    
+    wxBoxSizer* boxSizerLvl4_52111 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizer2776->Add(boxSizerLvl4_52111, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextFuseClass = new wxStaticText(m_panelAH, wxID_ANY, _("Fuse class"), wxDefaultPosition, wxDLG_UNIT(m_panelAH, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_52111->Add(m_staticTextFuseClass, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceFuseClassArr;
+    m_choiceFuseClassArr.Add(_("Class L"));
+    m_choiceFuseClassArr.Add(_("Class RK1"));
+    m_choiceFuseClass = new wxChoice(m_panelAH, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelAH, wxSize(-1,-1)), m_choiceFuseClassArr, 0);
+    m_choiceFuseClass->SetSelection(0);
+    
+    boxSizerLvl4_52111->Add(m_choiceFuseClass, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_521114 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizer2776->Add(boxSizerLvl4_521114, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextFuseCurrent = new wxStaticText(m_panelAH, wxID_ANY, _("Current range"), wxDefaultPosition, wxDLG_UNIT(m_panelAH, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_521114->Add(m_staticTextFuseCurrent, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceFuseCurrentArr;
+    m_choiceFuseCurrentArr.Add(_("601–800A"));
+    m_choiceFuseCurrentArr.Add(_("801–1200A"));
+    m_choiceFuseCurrentArr.Add(_("1201–1600A"));
+    m_choiceFuseCurrentArr.Add(_("1601–2000A"));
+    m_choiceFuseCurrentArr.Add(_("≤ 100A"));
+    m_choiceFuseCurrentArr.Add(_("101–200A"));
+    m_choiceFuseCurrentArr.Add(_("201–400A"));
+    m_choiceFuseCurrentArr.Add(_("401–600A"));
+    m_choiceFuseCurrent = new wxChoice(m_panelAH, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelAH, wxSize(-1,-1)), m_choiceFuseCurrentArr, 0);
+    m_choiceFuseCurrent->SetSelection(0);
+    
+    boxSizerLvl4_521114->Add(m_choiceFuseCurrent, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
     
@@ -5191,6 +5366,12 @@ BusFormArcFlashProtectionBase::BusFormArcFlashProtectionBase(wxWindow* parent, w
     m_bmpButtonAdd->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnAddButtonClick, this);
     m_bmpButtonRemove->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnRemoveButtonClick, this);
     m_buttonImport->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnImportButtonClick, this);
+    m_choiceCBType->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &BusFormArcFlashProtectionBase::OnChoiceCBType, this);
+    m_choiceCBCurrent->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &BusFormArcFlashProtectionBase::OnChoiceCBCurrent, this);
+    m_choiceCBTrip->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &BusFormArcFlashProtectionBase::OnChoiceCBTrip, this);
+    m_radioBoxI1->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &BusFormArcFlashProtectionBase::OnRadioI1Selected, this);
+    m_textCtrlIn->Bind(wxEVT_COMMAND_TEXT_UPDATED, &BusFormArcFlashProtectionBase::OnNominalCurrentUpdated, this);
+    m_choiceFuseClass->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &BusFormArcFlashProtectionBase::OnChoiceFuseClass, this);
     m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnOKButtonClick, this);
     m_ButtonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnnCancelButtonClick, this);
     
@@ -5204,6 +5385,12 @@ BusFormArcFlashProtectionBase::~BusFormArcFlashProtectionBase()
     m_bmpButtonAdd->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnAddButtonClick, this);
     m_bmpButtonRemove->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnRemoveButtonClick, this);
     m_buttonImport->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnImportButtonClick, this);
+    m_choiceCBType->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &BusFormArcFlashProtectionBase::OnChoiceCBType, this);
+    m_choiceCBCurrent->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &BusFormArcFlashProtectionBase::OnChoiceCBCurrent, this);
+    m_choiceCBTrip->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &BusFormArcFlashProtectionBase::OnChoiceCBTrip, this);
+    m_radioBoxI1->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &BusFormArcFlashProtectionBase::OnRadioI1Selected, this);
+    m_textCtrlIn->Unbind(wxEVT_COMMAND_TEXT_UPDATED, &BusFormArcFlashProtectionBase::OnNominalCurrentUpdated, this);
+    m_choiceFuseClass->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &BusFormArcFlashProtectionBase::OnChoiceFuseClass, this);
     m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnOKButtonClick, this);
     m_ButtonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &BusFormArcFlashProtectionBase::OnnCancelButtonClick, this);
     
