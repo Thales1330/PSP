@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>pt</language>
         <item>
-            <title><![CDATA[PSP 2026w47a-beta]]></title>
+            <title><![CDATA[2026w47a-beta]]></title>
             <link>https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta</link>
             <guid>https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta</guid>
             <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
@@ -59,6 +59,8 @@
 <li class="">Improved UI rendering, popup positioning and workspace interaction;</li>
 <li class="">Various minor stability, usability and interface fixes.</li>
 </ul>]]></content:encoded>
+            <author>thaleslima.ufu@gmail.com (Thales Lima Oliveira)</author>
+            <category>psp-ufu</category>
         </item>
         <item>
             <title><![CDATA[2026w34a-beta]]></title>

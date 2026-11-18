@@ -8,7 +8,7 @@
     <subtitle>PSP-UFU Blog</subtitle>
     <icon>https://thales1330.github.io/PSP/pt/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[PSP 2026w47a-beta]]></title>
+        <title type="html"><![CDATA[2026w47a-beta]]></title>
         <id>https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta</id>
         <link href="https://thales1330.github.io/PSP/pt/blog/2026/11/18/2026w47a-beta"/>
         <updated>2026-11-18T00:00:00.000Z</updated>
@@ -58,6 +58,12 @@
 <li class="">Improved UI rendering, popup positioning and workspace interaction;</li>
 <li class="">Various minor stability, usability and interface fixes.</li>
 </ul>]]></content>
+        <author>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
+            <uri>https://github.com/thales1330</uri>
+        </author>
+        <category label="psp-ufu" term="psp-ufu"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[2026w34a-beta]]></title>
