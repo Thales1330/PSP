@@ -126,6 +126,8 @@ void ElementsToolBar::OnCharHook(wxKeyEvent& event)
 	wxLogMessage("Toolbar key: %d, modifiers: %d",
 		event.GetKeyCode(), event.GetModifiers());
 
+	wxLog::FlushActive();
+
 	if (m_mainFrame && m_mainFrame->ForwardElementsToolBarKeyEvent(event))
 		return;
 
