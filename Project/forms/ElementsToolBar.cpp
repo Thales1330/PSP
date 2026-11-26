@@ -6,7 +6,7 @@
 
 ElementsToolBar::ElementsToolBar(MainFrame* parent, bool vertical)
 	: wxFrame(parent, wxID_ANY, _("Power Elements"), wxDefaultPosition, wxDefaultSize,
-		wxCAPTION | wxCLOSE_BOX | wxFRAME_FLOAT_ON_PARENT | wxFRAME_TOOL_WINDOW | wxFRAME_NO_TASKBAR),
+		wxCAPTION | wxCLOSE_BOX | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR),
 	m_mainFrame(parent)
 {
 	InitToolBar(vertical);
