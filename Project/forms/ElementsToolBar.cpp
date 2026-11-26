@@ -26,28 +26,27 @@ void ElementsToolBar::InitToolBar(bool vertical)
 
 	wxString imgPath = Paths::GetDataPath() + "/images/elements/";
 
-	m_toolBar->AddTool(ID_ADDMENU_BUS, _("Bus"), wxBitmap(imgPath + "bus.png", wxBITMAP_TYPE_PNG), _("Add a bus at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_BUS, _("Bus"), LoadToolBitmap(imgPath + "bus.png"), _("Add a bus at the circuit"));
 	m_toolBar->AddSeparator();
 
-	m_toolBar->AddTool(ID_ADDMENU_LINE, _("Line"), wxBitmap(imgPath + "line.png", wxBITMAP_TYPE_PNG), _("Add a power line at the circuit"));
-	m_toolBar->AddTool(ID_ADDMENU_TRANSFORMER, _("Transformer"), wxBitmap(imgPath + "transformer.png", wxBITMAP_TYPE_PNG), _("Add a transformer at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_LINE, _("Line"), LoadToolBitmap(imgPath + "line.png"), _("Add a power line at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_TRANSFORMER, _("Transformer"), LoadToolBitmap(imgPath + "transformer.png"), _("Add a transformer at the circuit"));
 
-
-	m_toolBar->AddTool(ID_ADDMENU_GENERATOR, _("Generator"), wxBitmap(imgPath + "generator.png", wxBITMAP_TYPE_PNG), _("Add a generator at the circuit"));
-	m_toolBar->AddTool(ID_ADDMENU_INDMOTOR, _("Induction motor"), wxBitmap(imgPath + "indmotor.png", wxBITMAP_TYPE_PNG), _("Add an induction motor at the circuit"));
-	m_toolBar->AddTool(ID_ADDMENU_SYNCCOMP, _("Synchronous compensator"), wxBitmap(imgPath + "synccomp.png", wxBITMAP_TYPE_PNG), _("Add a synchronous compensator at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_GENERATOR, _("Generator"), LoadToolBitmap(imgPath + "generator.png"), _("Add a generator at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_INDMOTOR, _("Induction motor"), LoadToolBitmap(imgPath + "indmotor.png"), _("Add an induction motor at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_SYNCCOMP, _("Synchronous compensator"), LoadToolBitmap(imgPath + "synccomp.png"), _("Add a synchronous compensator at the circuit"));
 	m_toolBar->AddSeparator();
 
-	m_toolBar->AddTool(ID_ADDMENU_LOAD, _("Load"), wxBitmap(imgPath + "load.png", wxBITMAP_TYPE_PNG), _("Add a load at the circuit"));
-	m_toolBar->AddTool(ID_ADDMENU_CAPACITOR, _("Capacitor"), wxBitmap(imgPath + "capacitor.png", wxBITMAP_TYPE_PNG), _("Add a shunt capacitor at the circuit"));
-	m_toolBar->AddTool(ID_ADDMENU_INDUCTOR, _("Inductor"), wxBitmap(imgPath + "inductor.png", wxBITMAP_TYPE_PNG), _("Add a shunt inductor at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_LOAD, _("Load"), LoadToolBitmap(imgPath + "load.png"), _("Add a load at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_CAPACITOR, _("Capacitor"), LoadToolBitmap(imgPath + "capacitor.png"), _("Add a shunt capacitor at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_INDUCTOR, _("Inductor"), LoadToolBitmap(imgPath + "inductor.png"), _("Add a shunt inductor at the circuit"));
 	m_toolBar->AddSeparator();
 
-	m_toolBar->AddTool(ID_ADDMENU_HARMCURRENT, _("Harmonic current"), wxBitmap(imgPath + "harmcurrent.png", wxBITMAP_TYPE_PNG), _("Add a harmonic current source at the circuit"));
-	m_toolBar->AddTool(ID_ADDMENU_EMTELEMENT, _("EMT Element"), wxBitmap(imgPath + "emtelement.png", wxBITMAP_TYPE_PNG), _("Add an electromagnetic transient element"));
+	m_toolBar->AddTool(ID_ADDMENU_HARMCURRENT, _("Harmonic current"), LoadToolBitmap(imgPath + "harmcurrent.png"), _("Add a harmonic current source at the circuit"));
+	m_toolBar->AddTool(ID_ADDMENU_EMTELEMENT, _("EMT Element"), LoadToolBitmap(imgPath + "emtelement.png"), _("Add an electromagnetic transient element"));
 	m_toolBar->AddSeparator();
 
-	m_toolBar->AddTool(ID_ADDMENU_TEXT, _("Label"), wxBitmap(imgPath + "text.png", wxBITMAP_TYPE_PNG), _("Add a linked element label"));
+	m_toolBar->AddTool(ID_ADDMENU_TEXT, _("Label"), LoadToolBitmap(imgPath + "text.png"), _("Add a linked element label"));
 
 	m_toolBar->Realize();
 
@@ -56,6 +55,21 @@ void ElementsToolBar::InitToolBar(bool vertical)
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(m_toolBar, 1, wxEXPAND);
 	SetSizerAndFit(sizer);
+}
+
+wxBitmap ElementsToolBar::LoadToolBitmap(const wxString& path)
+{
+	wxImage image(path, wxBITMAP_TYPE_PNG);
+
+	if (!image.IsOk()) {
+		return wxNullBitmap;
+	}
+
+	wxSize size = FromDIP(wxSize(32, 32));
+
+	image.Rescale(size.x, size.y, wxIMAGE_QUALITY_HIGH);
+
+	return wxBitmap(image);
 }
 
 void ElementsToolBar::EnableTools(bool enable)

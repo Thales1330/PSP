@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -38,5 +38,6 @@ class AboutForm : public AboutFormBase
 
    protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { EndModal(wxID_OK); };
+    wxString GetBuildVersion();
 };
 #endif  // ABOUTFORM_H

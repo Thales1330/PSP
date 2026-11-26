@@ -21,6 +21,7 @@ public:
 
 protected:
 	void InitToolBar(bool vertical = true);
+	wxBitmap LoadToolBitmap(const wxString& path);
 	void OnToolClicked(wxCommandEvent& event);
 	void OnClose(wxCloseEvent& event);
 

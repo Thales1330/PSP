@@ -177,13 +177,7 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 
 		// HMPlane
 		if (m_hmPlane && m_showHM) {
-			//#ifdef __WXMSW__
-			//			const DWORD beforeHMPlane = GetWorkspaceGDIObjects();
-			//#endif
 			m_hmPlane->DrawDC(gc);
-			//#ifdef __WXMSW__
-			//			LogWorkspaceGDIDelta("Workspace::DrawScene HMPlane", beforeHMPlane);
-			//#endif
 		}
 
 		gc->Scale(m_camera->GetScale(), m_camera->GetScale());
@@ -193,59 +187,29 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 
 		// Elements
 		for (auto& element : m_elementList) {
-			//#ifdef __WXMSW__
-			//			const DWORD beforeElement = GetWorkspaceGDIObjects();
-			//#endif
 			element->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
-			//#ifdef __WXMSW__
-			//			LogWorkspaceGDIDelta(wxString::Format("Workspace::DrawScene element type %d", element->GetElementType()), beforeElement);
-			//#endif
 		}
 
 		// Dummy Text to set correct context
 		// TODO: Find a better way to do this.
-//#ifdef __WXMSW__
-//		const DWORD beforeDummyText = GetWorkspaceGDIObjects();
-//#endif
 		Text* text = new Text(wxPoint2DDouble(0.0, 0.0), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		text->SetText("");
 		text->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		delete text;
-		//#ifdef __WXMSW__
-		//		LogWorkspaceGDIDelta("Workspace::DrawScene dummy text", beforeDummyText);
-		//#endif
 
-				// Texts
+		// Texts
 		for (auto& text : m_textList) {
-			//#ifdef __WXMSW__
-			//			const DWORD beforeText = GetWorkspaceGDIObjects();
-			//#endif
 			text->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
-			//#ifdef __WXMSW__
-			//			LogWorkspaceGDIDelta("Workspace::DrawScene text", beforeText);
-			//#endif
 		}
 
 		// Selection rectangle
-//#ifdef __WXMSW__
-//		const DWORD beforeSelectionRect = GetWorkspaceGDIObjects();
-//#endif
 		wxColour selectionColour = m_properties->GetGUIColour()->selection;
 		gc->SetPen(wxPen(selectionColour));
 		gc->SetBrush(wxBrush(selectionColour));
 		gc->DrawRectangle(m_selectionRect.m_x, m_selectionRect.m_y, m_selectionRect.m_width, m_selectionRect.m_height);
-		//#ifdef __WXMSW__
-		//		LogWorkspaceGDIDelta("Workspace::DrawScene selection rectangle", beforeSelectionRect);
-		//#endif
 
 		if (m_hmPlane && m_showHM) {
-			//#ifdef __WXMSW__
-			//			const DWORD beforeHMLabel = GetWorkspaceGDIObjects();
-			//#endif
 			m_hmPlane->DrawLabelDC(gc);
-			//#ifdef __WXMSW__
-			//			LogWorkspaceGDIDelta("Workspace::DrawScene heatmap label", beforeHMLabel);
-			//#endif
 		}
 	}
 }
@@ -1204,6 +1168,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				}
 
 				m_elementList.pop_back();  // Removes the last element being inserted.
+				elementToDelete.reset(); // Free the last local reference to the element being inserted.
 				m_mode = WorkspaceMode::MODE_EDIT;
 				Redraw();
 			}
@@ -1243,7 +1208,16 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		} break;
 		case 'R':  // Rotate the selected elements.
 		{
-			RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
+			if (m_mode != WorkspaceMode::MODE_INSERT) {
+				RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
+			}
+			else { // If the user is inserting a bus, rotate the bus being inserted.
+				auto bus = std::dynamic_pointer_cast<Bus>(m_elementList.back());
+				if (bus) {
+					bus->Rotate(event.GetModifiers() != wxMOD_SHIFT);
+					Redraw();
+				}
+			}
 		} break;
 		case 'B':  // Insert a bus.
 		{
@@ -2581,67 +2555,24 @@ bool Workspace::Paste()
 
 void Workspace::SaveCurrentState()
 {
-	//return;
-//#ifdef __WXMSW__
-//	const DWORD beforeSaveState = GetWorkspaceGDIObjects();
-//#endif
 	// Setup current state
 	std::vector< std::shared_ptr<PowerElement> > currentStateElementList;
 	std::vector< std::shared_ptr<Text> > currentStateTextList;
 
 	GetStateListsCopy(m_elementList, m_textList, currentStateElementList, currentStateTextList);
-	//#ifdef __WXMSW__
-	//	LogWorkspaceGDIDelta("Workspace::SaveCurrentState after copy", beforeSaveState);
-	//#endif
-
-		// Delete all states after the current one
-		//auto itE = m_elementListState.begin();
-		//std::advance(itE, m_currenteState + 1);
-		//for (; itE != m_elementListState.end(); ++itE) {
-		//	auto& elementList = *itE;
-		//	for (auto& element : elementList) delete element;
-		//	elementList.clear();
-		//}
 	m_elementListState.resize(m_currenteState + 1);
-
-	//auto itT = m_textListState.begin();
-	//std::advance(itT, m_currenteState + 1);
-	//for (; itT != m_textListState.end(); ++itT) {
-	//	auto& textList = *itT;
-	//	for (auto& text : textList) delete text;
-	//	textList.clear();
-	//}
 	m_textListState.resize(m_currenteState + 1);
 
 	m_currenteState++;
 	if (m_currenteState >= m_maxStates) {
 		m_currenteState = m_maxStates - 1;
-		// Erase the first sate on the list
-		//auto itE = m_elementListState.begin();
-		////auto itT = m_textListState.begin();
-		//auto& elementList = *itE;
-		////auto& textList = *itT;
-		//for (auto& element : elementList) delete element;
-		//elementList.clear();
-		////for (auto& text : textList) delete text;
-		////textList.clear();
-		//
-		//m_elementListState.erase(itE);
-		//m_textListState.erase(itT);
+		// Erase the first state on the list
 		m_elementListState.erase(m_elementListState.begin());
 		m_textListState.erase(m_textListState.begin());
 	}
 
 	m_elementListState.emplace_back(currentStateElementList);
 	m_textListState.emplace_back(currentStateTextList);
-	//#ifdef __WXMSW__
-	//	LogWorkspaceGDIDelta(wxString::Format("Workspace::SaveCurrentState stored states=%zu elements=%zu texts=%zu",
-	//		m_elementListState.size(),
-	//		currentStateElementList.size(),
-	//		currentStateTextList.size()),
-	//		beforeSaveState);
-	//#endif
-
 #ifdef _DEBUG
 	wxString msg = "";
 	wxString pointerStr;
@@ -2669,8 +2600,6 @@ void Workspace::SetNextState()
 	if (m_currenteState >= 0 &&
 		static_cast<size_t>(m_currenteState) < m_elementListState.size() &&
 		static_cast<size_t>(m_currenteState) < m_textListState.size()) {
-		//m_elementList = m_elementListState[m_currenteState];
-		//m_textList = m_textListState[m_currenteState];
 		GetStateListsCopy(m_elementListState[m_currenteState], m_textListState[m_currenteState], m_elementList, m_textList);
 
 #ifdef _DEBUG
@@ -2700,8 +2629,6 @@ void Workspace::SetPreviousState()
 {
 	m_currenteState--;
 	if (m_currenteState >= 0) {
-		//m_elementList = m_elementListState[m_currenteState];
-		//m_textList = m_textListState[m_currenteState];
 		GetStateListsCopy(m_elementListState[m_currenteState], m_textListState[m_currenteState], m_elementList, m_textList);
 
 #ifdef _DEBUG

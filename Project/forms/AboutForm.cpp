@@ -16,6 +16,11 @@
  */
 
 #include "AboutForm.h"
+
+#include <iomanip>
+#include <sstream>
+#include <locale>
+
 #include "../utils/Path.h"
 
 AboutForm::AboutForm(wxWindow* parent) : AboutFormBase(parent) { Init(); }
@@ -23,7 +28,8 @@ AboutForm::~AboutForm() {}
 void AboutForm::Init()
 {
     // Set program version. Format: (Alpha/Beta/Release) (YEAR)w(WEEK)(a/b/c/...)
-    m_staticTextVersion->SetLabel("2026w47a-beta");
+    m_staticTextVersion->SetLabel(GetBuildVersion());
+    //m_staticTextVersion->SetLabel("2026w48a-beta");
     
     // Create developers table
     m_gridCredits->EnableGridLines(false);
@@ -101,4 +107,26 @@ void AboutForm::Init()
     m_richTextCtrlLicense->SetFont(font);
     m_richTextCtrlLicense->SetEditable(false);
     m_richTextCtrlLicense->AppendText(licenseStr);
+}
+
+wxString AboutForm::GetBuildVersion()
+{
+    std::tm tm = {};
+    std::istringstream dateStream(__DATE__);
+    dateStream.imbue(std::locale::classic());
+    dateStream >> std::get_time(&tm, "%b %d %Y");
+
+    if (dateStream.fail())
+        return "unknown-beta";
+
+    wxDateTime buildDate(
+        static_cast<wxDateTime::wxDateTime_t>(tm.tm_mday),
+        static_cast<wxDateTime::Month>(tm.tm_mon),
+        tm.tm_year + 1900
+    );
+
+    int year = buildDate.GetWeekBasedYear();
+    int week = buildDate.GetWeekOfYear(wxDateTime::Monday_First);
+
+    return wxString::Format("%04dw%02da-beta", year, week);
 }
