@@ -3,6 +3,7 @@
 #include "../utils/Path.h"
 #include <wx/sizer.h>
 #include <wx/bitmap.h>
+#include <wx/log.h>
 
 ElementsToolBar::ElementsToolBar(MainFrame* parent, bool vertical)
 	: wxFrame(parent, wxID_ANY, _("Power Elements"), wxDefaultPosition, wxDefaultSize, GetWindowStyle()),
@@ -122,6 +123,8 @@ void ElementsToolBar::OnClose(wxCloseEvent& event)
 
 void ElementsToolBar::OnCharHook(wxKeyEvent& event)
 {
+	wxMessageBox(wxString::Format("Toolbar key: %d, modifiers: %d", event.GetKeyCode(), event.GetModifiers()));
+
 	if (m_mainFrame && m_mainFrame->ForwardElementsToolBarKeyEvent(event))
 		return;
 
