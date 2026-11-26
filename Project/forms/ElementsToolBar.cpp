@@ -5,8 +5,7 @@
 #include <wx/bitmap.h>
 
 ElementsToolBar::ElementsToolBar(MainFrame* parent, bool vertical)
-	: wxFrame(parent, wxID_ANY, _("Power Elements"), wxDefaultPosition, wxDefaultSize,
-		wxCAPTION | wxCLOSE_BOX | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR),
+	: wxFrame(parent, wxID_ANY, _("Power Elements"), wxDefaultPosition, wxDefaultSize, GetWindowStyle()),
 	m_mainFrame(parent)
 {
 	InitToolBar(vertical);
@@ -70,6 +69,20 @@ wxBitmap ElementsToolBar::LoadToolBitmap(const wxString& path)
 	image.Rescale(size.x, size.y, wxIMAGE_QUALITY_HIGH);
 
 	return wxBitmap(image);
+}
+
+long ElementsToolBar::GetWindowStyle()
+{
+	long style = wxCAPTION |
+		wxCLOSE_BOX |
+		wxFRAME_FLOAT_ON_PARENT |
+		wxFRAME_NO_TASKBAR;
+
+#ifdef __WXMSW__
+	style |= wxFRAME_TOOL_WINDOW;
+#endif
+
+	return style;
 }
 
 void ElementsToolBar::EnableTools(bool enable)
