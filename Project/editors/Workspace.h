@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -165,6 +165,7 @@ public:
 	bool IsHeatMapAutoLabelEnable() const { return m_hmAutomaticLabel; }
 	ControlEditorManager& GetControlEditorManager() const { return *m_CEMngr; }
 	ChartWindowManager& GetChartWindowManager() const { return *m_CWMngr; }
+	bool OnKeyDownFromToolBar(wxKeyEvent& event);
 
 	void EnableGrid(bool enable = true) { m_showGrid = enable; }
 	bool IsGridEnabled() const { return m_showGrid; }
@@ -227,6 +228,7 @@ protected:
 		const std::vector< std::shared_ptr<Text> >& textList,
 		std::vector< std::shared_ptr<PowerElement> >& elementsListCopy,
 		std::vector< std::shared_ptr<Text> >& textListCopy);
+	bool ProcessKeyDown(wxKeyEvent& event, const wxPoint& mousePosition);
 
 	void DrawScene(wxGraphicsContext* gc);
 	void DrawScene(wxDC& dc);
@@ -273,16 +275,16 @@ protected:
 	float m_width = 0.0;
 	float m_height = 0.0;
 
-	// Modern OpenGL
+	// Heatmap plane
 	HMPlane* m_hmPlane = nullptr;
-
-	//glm::mat4 m_projMatrix;
 
 	bool m_showHM = false;
 	bool m_showHMTimer = false;
 	bool m_hmAutomaticLabel = false;
 	bool m_showGrid = false;
 	double m_gridSize = 20.0;
+
+	wxPoint m_lastMousePosition = wxPoint(0, 0);
 
 	std::unique_ptr<ControlEditorManager> m_CEMngr;
 	std::unique_ptr<ChartWindowManager> m_CWMngr;

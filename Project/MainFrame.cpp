@@ -1023,3 +1023,16 @@ void MainFrame::OnElementsToolBarClosed()
 		PropertiesData::SaveConfigFile(data);
 	}
 }
+
+bool MainFrame::ForwardElementsToolBarKeyEvent(wxKeyEvent& event)
+{
+	if (!m_auiNotebook)
+		return false;
+
+	auto* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+
+	if (!workspace)
+		return false;
+
+	return workspace->OnKeyDownFromToolBar(event);
+}

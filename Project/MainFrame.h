@@ -94,6 +94,7 @@ class MainFrame : public MainFrameBase
     void BuildElementsToolBar(ElementsToolbar style);
     void OnElementsToolBarClosed();
     ElementsToolBar* GetElementsToolBar() { return m_elementsToolBar; }
+    bool ForwardElementsToolBarKeyEvent(wxKeyEvent& event);
 
    protected:
     virtual void OnGridClick(wxRibbonButtonBarEvent& event) override;

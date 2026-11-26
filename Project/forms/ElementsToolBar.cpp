@@ -11,6 +11,9 @@ ElementsToolBar::ElementsToolBar(MainFrame* parent, bool vertical)
 	InitToolBar(vertical);
 	Bind(wxEVT_TOOL, &ElementsToolBar::OnToolClicked, this);
 	Bind(wxEVT_CLOSE_WINDOW, &ElementsToolBar::OnClose, this);
+#ifdef __WXGTK__
+	Bind(wxEVT_CHAR_HOOK, &ElementsToolBar::OnCharHook, this);
+#endif
 }
 
 ElementsToolBar::~ElementsToolBar()
@@ -115,4 +118,12 @@ void ElementsToolBar::OnClose(wxCloseEvent& event)
 	if (m_mainFrame) {
 		m_mainFrame->OnElementsToolBarClosed();
 	}
+}
+
+void ElementsToolBar::OnCharHook(wxKeyEvent& event)
+{
+	if (m_mainFrame && m_mainFrame->ForwardElementsToolBarKeyEvent(event))
+		return;
+
+	event.Skip();
 }

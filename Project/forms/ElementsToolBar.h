@@ -25,6 +25,7 @@ protected:
 	long GetWindowStyle();
 	void OnToolClicked(wxCommandEvent& event);
 	void OnClose(wxCloseEvent& event);
+	void OnCharHook(wxKeyEvent& event);
 
 private:
 	MainFrame* m_mainFrame = nullptr;

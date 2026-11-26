@@ -447,6 +447,7 @@ void Workspace::ExportAsSVG(wxString path)
 
 void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
+	m_lastMousePosition = event.GetPosition();
 	wxWindow* dialogParent = wxGetTopLevelParent(this);
 	if (!dialogParent) dialogParent = this;
 	//wxWindow* dialogParent = this;
@@ -886,6 +887,7 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
 
 void Workspace::OnMouseMotion(wxMouseEvent& event)
 {
+	m_lastMousePosition = event.GetPosition();
 	bool redraw = false;
 	switch (m_mode) {
 	case WorkspaceMode::MODE_INSERT: {
@@ -1148,12 +1150,30 @@ void Workspace::OnScroll(wxMouseEvent& event)
 	Redraw();
 }
 
-void Workspace::OnKeyDown(wxKeyEvent& event)
+bool Workspace::ProcessKeyDown(wxKeyEvent& event, const wxPoint& mousePosition)
 {
 	bool insertingElement = false;
 	if (m_mode == WorkspaceMode::MODE_INSERT || m_mode == WorkspaceMode::MODE_INSERT_TEXT) insertingElement = true;
 
 	int key = event.GetKeyCode();
+
+	const bool handled =
+		key == WXK_ESCAPE ||
+		key == WXK_DELETE ||
+		key == 'A' || key == 'F' || key == 'R' ||
+		key == 'B' || key == 'L' || key == 'T' ||
+		key == 'G' || key == 'I' || key == 'K' ||
+		key == 'C' || key == 'H' || key == 'V' ||
+		key == 'S' || key == 'Z' || key == 'Y' ||
+		key == 'E'
+#ifdef _DEBUG
+#ifdef SHOW_DEBUG_PANEL
+		|| key == 'D'
+#endif
+#endif
+		;
+
+
 	if (key != WXK_NONE) {
 		switch (key) {
 		case WXK_ESCAPE:  // Cancel operations.
@@ -1187,7 +1207,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 			if (!insertingElement) {
 				if (!event.ControlDown()) {
 					auto newText = std::make_shared<Text>(
-						m_camera->ScreenToWorld(event.GetPosition()),
+						m_camera->ScreenToWorld(mousePosition),
 						m_properties->GetGeneralPropertiesData().labelFont,
 						m_properties->GetGeneralPropertiesData().labelFontSize);
 					m_textList.push_back(newText);
@@ -1222,7 +1242,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'B':  // Insert a bus.
 		{
 			if (!insertingElement) {
-				auto newBus = std::make_shared<Bus>(m_camera->ScreenToWorld(event.GetPosition()),
+				auto newBus = std::make_shared<Bus>(m_camera->ScreenToWorld(mousePosition),
 					wxString::Format(_("Bus %d"), GetElementNumber(ID_BUS)));
 				IncrementElementNumber(ID_BUS);
 				m_elementList.push_back(newBus);
@@ -1384,7 +1404,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					else {
 						wxFileDialog saveFileDialog(this, _("Save PSP file"), "", "", "PSP files (*.psp)|*.psp",
 							wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-						if (saveFileDialog.ShowModal() == wxID_CANCEL) return;
+						if (saveFileDialog.ShowModal() == wxID_CANCEL) return false;
 
 						fileHandling.SaveProject(saveFileDialog.GetPath());
 						wxFileName fileName(saveFileDialog.GetPath());
@@ -1441,7 +1461,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 	}
 
 	UpdateStatusBar();
-	event.Skip();
+	return handled;
 }
 
 void Workspace::UpdateStatusBar()
@@ -3075,4 +3095,15 @@ void Workspace::OnHeatMapTime(wxTimerEvent& event)
 		Redraw();
 		m_showHMTimer = false;
 	}
+}
+
+void Workspace::OnKeyDown(wxKeyEvent& event)
+{
+	ProcessKeyDown(event, event.GetPosition());
+	event.Skip();
+}
+
+bool Workspace::OnKeyDownFromToolBar(wxKeyEvent& event)
+{
+	return ProcessKeyDown(event, m_lastMousePosition);
 }
