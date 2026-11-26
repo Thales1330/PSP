@@ -148,13 +148,6 @@ void ElementsToolBar::OnClose(wxCloseEvent& event)
 
 void ElementsToolBar::OnCharHook(wxKeyEvent& event)
 {
-    // Temporary diagnostic. Remove after testing.
-    wxMessageBox(wxString::Format(
-        "Toolbar key: %d, modifiers: %d",
-        event.GetKeyCode(),
-        event.GetModifiers()
-    ));
-
     if (m_mainFrame &&
         m_mainFrame->ForwardElementsToolBarKeyEvent(event))
         return;
