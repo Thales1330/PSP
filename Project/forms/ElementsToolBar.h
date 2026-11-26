@@ -3,6 +3,7 @@
 
 #include <wx/frame.h>
 #include <wx/toolbar.h>
+#include <wx/panel.h>
 
 class MainFrame;
 
@@ -13,23 +14,25 @@ class MainFrame;
 class ElementsToolBar : public wxFrame
 {
 public:
-	ElementsToolBar(MainFrame* parent, bool vertical = true);
-	virtual ~ElementsToolBar();
+    ElementsToolBar(MainFrame* parent, bool vertical = true);
+    virtual ~ElementsToolBar();
 
-	void EnableTools(bool enable);
-	wxToolBar* GetToolBar() { return m_toolBar; }
+    void EnableTools(bool enable);
+    wxToolBar* GetToolBar() { return m_toolBar; }
 
 protected:
-	void InitToolBar(bool vertical = true);
-	wxBitmap LoadToolBitmap(const wxString& path);
-	long GetWindowStyle();
-	void OnToolClicked(wxCommandEvent& event);
-	void OnClose(wxCloseEvent& event);
-	void OnCharHook(wxKeyEvent& event);
+    void InitToolBar(bool vertical = true);
+    wxBitmap LoadToolBitmap(const wxString& path);
+    long GetWindowStyle();
+
+    void OnToolClicked(wxCommandEvent& event);
+    void OnClose(wxCloseEvent& event);
+    void OnCharHook(wxKeyEvent& event);
 
 private:
-	MainFrame* m_mainFrame = nullptr;
-	wxToolBar* m_toolBar = nullptr;
+    MainFrame* m_mainFrame = nullptr;
+    wxPanel* m_panel = nullptr;
+    wxToolBar* m_toolBar = nullptr;
 };
 
 #endif // ELEMENTSTOOLBAR_H
