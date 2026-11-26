@@ -11,9 +11,6 @@ ElementsToolBar::ElementsToolBar(MainFrame* parent, bool vertical)
 	InitToolBar(vertical);
 	Bind(wxEVT_TOOL, &ElementsToolBar::OnToolClicked, this);
 	Bind(wxEVT_CLOSE_WINDOW, &ElementsToolBar::OnClose, this);
-#ifdef __WXGTK__
-	Bind(wxEVT_CHAR_HOOK, &ElementsToolBar::OnCharHook, this);
-#endif
 }
 
 ElementsToolBar::~ElementsToolBar()
@@ -51,6 +48,9 @@ void ElementsToolBar::InitToolBar(bool vertical)
 	m_toolBar->AddTool(ID_ADDMENU_TEXT, _("Label"), LoadToolBitmap(imgPath + "text.png"), _("Add a linked element label"));
 
 	m_toolBar->Realize();
+#ifdef __WXGTK__
+	Bind(wxEVT_CHAR_HOOK, &ElementsToolBar::OnCharHook, this);
+#endif
 
 	//m_toolBar->Bind(wxEVT_TOOL, &ElementsToolBar::OnToolClicked, this);
 
