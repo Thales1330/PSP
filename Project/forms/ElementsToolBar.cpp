@@ -50,7 +50,7 @@ void ElementsToolBar::InitToolBar(bool vertical)
 
 	m_toolBar->Realize();
 #ifdef __WXGTK__
-	Bind(wxEVT_CHAR_HOOK, &ElementsToolBar::OnCharHook, this);
+	m_toolBar->Bind(wxEVT_CHAR_HOOK, &ElementsToolBar::OnCharHook, this);
 #endif
 
 	//m_toolBar->Bind(wxEVT_TOOL, &ElementsToolBar::OnToolClicked, this);
@@ -123,7 +123,8 @@ void ElementsToolBar::OnClose(wxCloseEvent& event)
 
 void ElementsToolBar::OnCharHook(wxKeyEvent& event)
 {
-	wxMessageBox(wxString::Format("Toolbar key: %d, modifiers: %d", event.GetKeyCode(), event.GetModifiers()));
+	wxLogMessage("Toolbar key: %d, modifiers: %d",
+		event.GetKeyCode(), event.GetModifiers());
 
 	if (m_mainFrame && m_mainFrame->ForwardElementsToolBarKeyEvent(event))
 		return;
