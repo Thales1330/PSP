@@ -10,7 +10,7 @@ ElementsToolBar::ElementsToolBar(MainFrame* parent, bool vertical)
 	m_mainFrame(parent)
 {
 	InitToolBar(vertical);
-
+	Bind(wxEVT_TOOL, &ElementsToolBar::OnToolClicked, this);
 	Bind(wxEVT_CLOSE_WINDOW, &ElementsToolBar::OnClose, this);
 }
 
@@ -50,7 +50,7 @@ void ElementsToolBar::InitToolBar(bool vertical)
 
 	m_toolBar->Realize();
 
-	m_toolBar->Bind(wxEVT_TOOL, &ElementsToolBar::OnToolClicked, this);
+	//m_toolBar->Bind(wxEVT_TOOL, &ElementsToolBar::OnToolClicked, this);
 
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(m_toolBar, 1, wxEXPAND);
@@ -95,6 +95,9 @@ void ElementsToolBar::OnToolClicked(wxCommandEvent& event)
 
 void ElementsToolBar::OnClose(wxCloseEvent& event)
 {
+	if (event.CanVeto())
+		event.Veto();
+
 	Hide();
 	if (m_mainFrame) {
 		m_mainFrame->OnElementsToolBarClosed();
